@@ -30,7 +30,7 @@ export function Logo({
     variant === "full" ? (
       <span className={`inline-flex items-center gap-2.5 ${className}`}>
         <Image
-          src="/images/logo-icon.png"
+          src="/images/brand/logo-icon.png"
           alt=""
           width={iconSize}
           height={iconSize}
@@ -52,7 +52,7 @@ export function Logo({
       </span>
     ) : (
       <Image
-        src="/images/logo-icon.png"
+        src="/images/brand/logo-icon.png"
         alt="Researchvy"
         width={width ?? 36}
         height={width ?? 36}

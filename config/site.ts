@@ -5,7 +5,7 @@ export const siteConfig = {
     "A modern scholarly visibility and research intelligence ecosystem helping researchers and institutions navigate discoverability, communication, strategic visibility, and meaningful research impact.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://researchvy.com",
   domain: "researchvy.com",
-  ogImage: "/images/og-default.jpg",
+  ogImage: "/images/brand/og-default.png",
   twitterHandle: "@researchvy",
 
   contact: {
