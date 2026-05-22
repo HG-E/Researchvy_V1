@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   RESEARCHVY DESIGN SYSTEM — Tailwind v4 Theme
+   ───────────────────────────────────────────── */
+
+@theme {
+  /* Brand Colors */
+  --color-navy:           #0F172A;
+  --color-navy-light:     #1E293B;
+  --color-navy-dark:      #0A0F1A;
+  --color-navy-50:        #F0F4FF;
+  --color-navy-100:       #E0E8FF;
+
+  --color-blue:           #2563EB;
+  --color-blue-light:     #3B82F6;
+  --color-blue-dark:      #1D4ED8;
+  --color-blue-50:        #EFF6FF;
+  --color-blue-100:       #DBEAFE;
+
+  --color-gray:           #6B7280;
+  --color-gray-light:     #9CA3AF;
+  --color-gray-dark:      #4B5563;
+  --color-gray-50:        #F9FAFB;
+  --color-gray-100:       #F3F4F6;
+  --color-gray-200:       #E5E7EB;
+  --color-gray-800:       #1F2937;
+  --color-gray-900:       #111827;
+
+  --color-green:          #10B981;
+  --color-green-light:    #34D399;
+  --color-green-dark:     #059669;
+  --color-green-50:       #ECFDF5;
+  --color-green-100:      #D1FAE5;
+
+  --color-amber:          #F59E0B;
+  --color-red:            #EF4444;
+
+  /* Typography */
+  --font-serif:           "Lora", "Georgia", serif;
+  --font-sans:            "Inter", system-ui, sans-serif;
+  --font-mono:            "JetBrains Mono", monospace;
+
+  /* Font Sizes */
+  --text-xs:              0.75rem;
+  --text-sm:              0.875rem;
+  --text-base:            1rem;
+  --text-lg:              1.125rem;
+  --text-xl:              1.25rem;
+  --text-2xl:             1.5rem;
+  --text-3xl:             1.875rem;
+  --text-4xl:             2.25rem;
+  --text-5xl:             3rem;
+  --text-6xl:             3.75rem;
+  --text-7xl:             4.5rem;
+
+  /* Spacing / Grid */
+  --spacing-18:           4.5rem;
+  --spacing-22:           5.5rem;
+  --spacing-30:           7.5rem;
+  --spacing-section:      6rem;
+
+  /* Border radius */
+  --radius-sm:            0.25rem;
+  --radius:               0.5rem;
+  --radius-md:            0.75rem;
+  --radius-lg:            1rem;
+  --radius-xl:            1.5rem;
+  --radius-full:          9999px;
+
+  /* Shadows */
+  --shadow-card:          0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-elevated:      0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-overlay:       0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* Transitions */
+  --duration-fast:        150ms;
+  --duration-base:        250ms;
+  --duration-slow:        400ms;
+  --ease-out:             cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─────────────────────────────────────────────
+   CSS Custom Properties (runtime variables)
+   ───────────────────────────────────────────── */
+:root {
+  /* Semantic aliases */
+  --background:          #ffffff;
+  --foreground:          #0F172A;
+  --muted:               #F9FAFB;
+  --muted-foreground:    #6B7280;
+  --border:              #E5E7EB;
+  --input:               #E5E7EB;
+  --ring:                #2563EB;
+
+  --primary:             #0F172A;
+  --primary-foreground:  #ffffff;
+  --secondary:           #F3F4F6;
+  --secondary-foreground:#1F2937;
+  --accent:              #2563EB;
+  --accent-foreground:   #ffffff;
+  --destructive:         #EF4444;
+  --destructive-foreground: #ffffff;
+
+  --card:                #ffffff;
+  --card-foreground:     #0F172A;
+  --popover:             #ffffff;
+  --popover-foreground:  #0F172A;
+}
+
+.dark {
+  --background:          #0A0F1A;
+  --foreground:          #F9FAFB;
+  --muted:               #1E293B;
+  --muted-foreground:    #9CA3AF;
+  --border:              #1E293B;
+  --input:               #1E293B;
+  --ring:                #3B82F6;
+
+  --primary:             #F9FAFB;
+  --primary-foreground:  #0F172A;
+  --secondary:           #1E293B;
+  --secondary-foreground:#F9FAFB;
+  --accent:              #3B82F6;
+  --accent-foreground:   #ffffff;
+
+  --card:                #0F172A;
+  --card-foreground:     #F9FAFB;
+  --popover:             #0F172A;
+  --popover-foreground:  #F9FAFB;
+}
+
+/* ─────────────────────────────────────────────
+   Base Styles
+   ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus ring — institutional clarity */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Skip link for screen readers */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Heading hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+/* Scrollbar — minimal */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Selection */
+::selection {
+  background-color: #DBEAFE;
+  color: #1D4ED8;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
