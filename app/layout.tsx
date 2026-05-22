@@ -26,12 +26,9 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "1024x1024" },
-    ],
+    icon: [{ url: "/icon.png", type: "image/png", sizes: "1024x1024" }],
     apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "1024x1024" }],
-    shortcut: "/favicon.ico",
+    shortcut: "/icon.png",
   },
   keywords: [
     "research visibility",
