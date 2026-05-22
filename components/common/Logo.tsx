@@ -24,25 +24,40 @@ export function Logo({
   linkToHome = true,
   className = "",
 }: LogoProps) {
+  const iconSize = variant === "full" ? (width ? Math.round(width * 0.27) : 36) : (width ?? 36);
+
   const logoElement =
     variant === "full" ? (
-      <Image
-        src="/images/logo-full.png"
-        alt="Researchvy"
-        width={width ?? 160}
-        height={Math.round((width ?? 160) / 3.35)} // natural aspect ratio of the full logo
-        priority
-        style={{ objectFit: "contain", width: "auto", height: "auto", maxWidth: width ?? 160 }}
-        className={className}
-      />
+      <span className={`inline-flex items-center gap-2.5 ${className}`}>
+        <Image
+          src="/images/logo-icon.png"
+          alt=""
+          width={iconSize}
+          height={iconSize}
+          priority
+          style={{ objectFit: "contain", width: iconSize, height: iconSize, borderRadius: "22%" }}
+        />
+        <span
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontWeight: 600,
+            fontSize: width ? Math.round(width * 0.115) : 15,
+            color: "#F9FAFB",
+            letterSpacing: "-0.01em",
+            lineHeight: 1,
+          }}
+        >
+          Researchvy
+        </span>
+      </span>
     ) : (
       <Image
         src="/images/logo-icon.png"
         alt="Researchvy"
-        width={width ?? 40}
-        height={width ?? 40} // icon is 1:1 square
+        width={width ?? 36}
+        height={width ?? 36}
         priority
-        style={{ objectFit: "contain" }}
+        style={{ objectFit: "contain", borderRadius: "22%" }}
         className={className}
       />
     );
