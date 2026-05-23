@@ -1,14 +1,84 @@
-﻿import { generatePageMetadata } from "@/lib/seo/metadata";
+import { Suspense } from "react";
+import { generatePageMetadata } from "@/lib/seo/metadata";
+import { getInsights } from "@/lib/cms/mdx";
+import { InsightCard } from "@/components/insights/InsightCard";
+import { CategoryFilter } from "@/components/insights/CategoryFilter";
+import type { InsightCategory } from "@/types";
 
-export const metadata = generatePageMetadata({ title: "Insights" });
+export const metadata = generatePageMetadata({
+  title: "Insights",
+  description: "Institutional articles on scholarly visibility, research intelligence, and academic discoverability from the Researchvy team.",
+  path: "/insights",
+});
 
-export default function InsightsPage() {
-  return (
-    <section className="flex flex-col items-center justify-center min-h-[60vh] text-center px-6" style={{ backgroundColor: "#0F172A", color: "#F9FAFB" }}>
-      <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>Phase 1D</p>
-      <h1 className="text-4xl font-bold mb-4" style={{ fontFamily: "var(--font-serif)" }}>Insights</h1>
-      <p className="text-base max-w-lg" style={{ color: "#9CA3AF" }}>Institutional articles on scholarly visibility and research intelligence.</p>
-    </section>
-  );
+interface PageProps {
+  searchParams: Promise<{ category?: string }>;
 }
 
+export default async function InsightsPage({ searchParams }: PageProps) {
+  const { category } = await searchParams;
+
+  const insights = await getInsights({
+    category: category as InsightCategory | undefined,
+    limit: 24,
+  });
+
+  return (
+    <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+
+        {/* Page header */}
+        <div className="max-w-2xl mb-12">
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
+            Researchvy Insights
+          </p>
+          <h1
+            className="text-4xl sm:text-5xl font-bold mb-4"
+            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+          >
+            Research Intelligence<br />
+            <span style={{ color: "#60A5FA" }}>& Visibility</span>
+          </h1>
+          <p className="text-base leading-relaxed" style={{ color: "#6B7280" }}>
+            Institutional-grade articles on scholarly visibility, bibliometrics, research communication,
+            and the systems that shape academic impact.
+          </p>
+        </div>
+
+        {/* Category filter */}
+        <div className="mb-10">
+          <Suspense fallback={null}>
+            <CategoryFilter />
+          </Suspense>
+        </div>
+
+        {/* Results count */}
+        <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
+          {insights.length} {insights.length === 1 ? "article" : "articles"}
+          {category ? ` in "${category.replace(/-/g, " ")}"` : ""}
+        </p>
+
+        {/* Grid */}
+        {insights.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {insights.map((insight) => (
+              <InsightCard key={insight.id} insight={insight} />
+            ))}
+          </div>
+        ) : (
+          <div
+            className="rounded-2xl border p-16 flex flex-col items-center text-center"
+            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          >
+            <p className="text-2xl mb-3" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+              No articles yet
+            </p>
+            <p className="text-sm" style={{ color: "#6B7280" }}>
+              Articles in this category are coming soon.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
