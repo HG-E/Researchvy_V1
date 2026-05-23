@@ -4,6 +4,7 @@ import "./globals.css";
 import "@/styles/animations.css";
 import { siteConfig } from "@/config/site";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
+import { PostHogProvider } from "@/components/analytics/PostHogProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -98,12 +99,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
+        <PostHogProvider>
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+        </PostHogProvider>
       </body>
     </html>
   );
