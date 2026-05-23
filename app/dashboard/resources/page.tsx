@@ -70,10 +70,7 @@ export default function ResourcesPage() {
         </p>
         <Link
           href="/resources"
-          className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200"
-          style={{ backgroundColor: "#10B981" }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#059669")}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#10B981")}
+          className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 bg-[#10B981] hover:bg-[#059669]"
         >
           Browse Resources <ArrowRight className="h-4 w-4" />
         </Link>
@@ -91,8 +88,6 @@ export default function ResourcesPage() {
               href="/resources"
               className="group flex items-center gap-4 rounded-2xl border p-4 transition-all duration-200"
               style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = resource.color)}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#1E293B")}
             >
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
