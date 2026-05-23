@@ -3,6 +3,7 @@ import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 import "@/styles/animations.css";
 import { siteConfig } from "@/config/site";
+import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -89,6 +90,14 @@ export default function RootLayout({
       className={`${inter.variable} ${lora.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
+        />
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>

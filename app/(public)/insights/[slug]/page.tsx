@@ -10,6 +10,7 @@ import { TableOfContents, type TocHeading } from "@/components/insights/TableOfC
 import { ShareButtons } from "@/components/insights/ShareButtons";
 import { InsightCard } from "@/components/insights/InsightCard";
 import { siteConfig } from "@/config/site";
+import { articleSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import type { InsightCategory } from "@/types";
 
 const CATEGORY_LABELS: Record<InsightCategory, string> = {
@@ -82,6 +83,18 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
   return (
     <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema(insight)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+          { name: "Home",     url: siteConfig.url },
+          { name: "Insights", url: `${siteConfig.url}/insights` },
+          { name: insight.title, url: `${siteConfig.url}/insights/${slug}` },
+        ])) }}
+      />
       <ReadingProgressBar />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">

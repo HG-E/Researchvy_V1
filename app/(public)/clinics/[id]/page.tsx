@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle, Award, Users, Monitor, Clock } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { courseSchema, breadcrumbSchema } from "@/lib/seo/schemas";
+import { siteConfig } from "@/config/site";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { SessionAccordion } from "@/components/clinics/SessionAccordion";
 import { EnquiryCard } from "@/components/clinics/EnquiryCard";
@@ -32,6 +34,18 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
 
   return (
     <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+          { name: "Home",    url: siteConfig.url },
+          { name: "Clinics", url: `${siteConfig.url}/clinics` },
+          { name: clinic.name, url: `${siteConfig.url}/clinics/${id}` },
+        ])) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
 
         {/* Back */}
