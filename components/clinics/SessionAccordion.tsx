@@ -1,0 +1,75 @@
+"use client";
+
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+
+type Session = {
+  number: number;
+  title: string;
+  description: string;
+  topics: readonly string[];
+};
+
+export function SessionAccordion({ sessions }: { sessions: readonly Session[] }) {
+  const [open, setOpen] = useState<number | null>(1);
+
+  return (
+    <div className="space-y-3">
+      {sessions.map((session) => {
+        const isOpen = open === session.number;
+        return (
+          <div
+            key={session.number}
+            className="rounded-2xl border overflow-hidden transition-colors duration-200"
+            style={{ backgroundColor: "#0F172A", borderColor: isOpen ? "#2563EB" : "#1E293B" }}
+          >
+            <button
+              onClick={() => setOpen(isOpen ? null : session.number)}
+              className="w-full flex items-center justify-between px-5 py-4 text-left"
+            >
+              <div className="flex items-center gap-4">
+                <span
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+                  style={{ backgroundColor: isOpen ? "#2563EB" : "#1E293B", color: isOpen ? "#fff" : "#60A5FA" }}
+                >
+                  {session.number}
+                </span>
+                <div>
+                  <p className="text-xs font-medium" style={{ color: "#6B7280" }}>
+                    Session {session.number}
+                  </p>
+                  <p className="text-sm font-semibold mt-0.5" style={{ color: "#F9FAFB" }}>
+                    {session.title}
+                  </p>
+                </div>
+              </div>
+              <ChevronDown
+                className="h-4 w-4 flex-shrink-0 transition-transform duration-200"
+                style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#4B5563" }}
+              />
+            </button>
+
+            {isOpen && (
+              <div className="px-5 pb-5 border-t" style={{ borderColor: "#1E293B" }}>
+                <p className="text-sm mt-4 mb-4 leading-relaxed" style={{ color: "#9CA3AF" }}>
+                  {session.description}
+                </p>
+                <ul className="space-y-2">
+                  {session.topics.map((topic) => (
+                    <li key={topic} className="flex items-start gap-2.5 text-sm" style={{ color: "#6B7280" }}>
+                      <span
+                        className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: "#2563EB" }}
+                      />
+                      {topic}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}

@@ -1,0 +1,75 @@
+"use client";
+
+import { MessageCircle, Clock, Monitor, Users, Award } from "lucide-react";
+import { buildWhatsAppUrl } from "@/config/site";
+
+interface EnquiryCardProps {
+  clinicName: string;
+  duration:   string;
+  format:     string;
+  capacity:   number;
+}
+
+export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryCardProps) {
+  const waUrl = buildWhatsAppUrl(clinicName);
+
+  return (
+    <div
+      className="rounded-2xl border p-6 space-y-6"
+      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+    >
+      <div>
+        <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
+          Enrol Now
+        </p>
+        <p className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+          Enquire for Pricing
+        </p>
+        <p className="text-xs mt-1.5 leading-relaxed" style={{ color: "#6B7280" }}>
+          Pricing is shared directly via WhatsApp. We tailor pricing to your context and needs.
+        </p>
+      </div>
+
+      {/* Stats */}
+      <div className="space-y-3">
+        {[
+          { Icon: Clock,   label: "Duration",  value: duration },
+          { Icon: Monitor, label: "Format",    value: format },
+          { Icon: Users,   label: "Cohort size", value: `Up to ${capacity} participants` },
+          { Icon: Award,   label: "Certificate", value: "Included on completion" },
+        ].map(({ Icon, label, value }) => (
+          <div key={label} className="flex items-center gap-3">
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+              style={{ backgroundColor: "#1E293B" }}
+            >
+              <Icon className="h-4 w-4" style={{ color: "#60A5FA" }} />
+            </div>
+            <div>
+              <p className="text-xs" style={{ color: "#4B5563" }}>{label}</p>
+              <p className="text-sm font-medium" style={{ color: "#F9FAFB" }}>{value}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <a
+        href={waUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold text-white transition-all duration-200"
+        style={{ backgroundColor: "#25D366" }}
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1DAE54")}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#25D366")}
+      >
+        <MessageCircle className="h-4 w-4" />
+        Enquire via WhatsApp
+      </a>
+
+      <p className="text-xs text-center" style={{ color: "#374151" }}>
+        Typically respond within 24 hours
+      </p>
+    </div>
+  );
+}

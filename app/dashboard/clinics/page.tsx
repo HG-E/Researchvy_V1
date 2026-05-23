@@ -55,10 +55,7 @@ export default function MyClinicsPage() {
         </p>
         <Link
           href="/clinics"
-          className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200"
-          style={{ backgroundColor: "#2563EB" }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+          className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] transition-all duration-200"
         >
           Browse Clinics <ArrowRight className="h-4 w-4" />
         </Link>
@@ -78,10 +75,8 @@ export default function MyClinicsPage() {
             <Link
               key={clinic.name}
               href={clinic.href}
-              className="group flex items-center justify-between rounded-2xl border p-5 transition-all duration-200"
+              className="group flex items-center justify-between rounded-2xl border p-5 transition-all duration-200 hover:border-[#2563EB]"
               style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#2563EB")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#1E293B")}
             >
               <div>
                 <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
