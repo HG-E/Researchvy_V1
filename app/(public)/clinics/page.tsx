@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircle, CheckCircle, GraduationCap } from "lucide-react";
+import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Bell } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -43,12 +43,12 @@ export default function ClinicsPage() {
             className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
-            Practical Transformation<br />
-            <span style={{ color: "#10B981" }}>Experiences</span>
+            Stop Being Invisible.<br />
+            <span style={{ color: "#10B981" }}>Start Being Found.</span>
           </h1>
           <p className="text-base leading-relaxed" style={{ color: "#6B7280" }}>
-            Structured, hands-on clinics that move researchers from invisible to strategically visible —
-            across all major scholarly discovery systems.
+            Live, structured clinics that take researchers from overlooked to globally discoverable —
+            with a personal strategy, a verified certificate, and results you can measure.
           </p>
         </div>
 
@@ -174,7 +174,7 @@ export default function ClinicsPage() {
         {/* Coming soon */}
         <div>
           <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: "#4B5563" }}>
-            Expanding Programme
+            More Clinics Launching — Register Interest Now
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {COMING_SOON.map(({ name, tagline, icon }) => (
@@ -186,12 +186,16 @@ export default function ClinicsPage() {
                 <p className="text-2xl mb-3">{icon}</p>
                 <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>{name}</p>
                 <p className="text-xs leading-relaxed mb-4" style={{ color: "#6B7280" }}>{tagline}</p>
-                <span
-                  className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
-                  style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
+                <a
+                  href={buildWhatsAppUrl(`${name} — register interest`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors hover:bg-[#1E3A2F]"
+                  style={{ backgroundColor: "#1E293B", color: "#10B981", border: "1px solid rgba(16,185,129,0.2)" }}
                 >
-                  Coming Soon
-                </span>
+                  <Bell className="h-3 w-3" />
+                  Notify Me
+                </a>
               </div>
             ))}
           </div>

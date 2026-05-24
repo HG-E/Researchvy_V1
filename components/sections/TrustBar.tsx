@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 
 const PILLARS = [
-  { number: "7", label: "Framework Steps" },
-  { number: "5", label: "Ecosystem Divisions" },
-  { number: "5+", label: "Transformation Emotions" },
-  { number: "100%", label: "Scholarly Integrity" },
+  { number: "≤20",  label: "Researchers Per Cohort" },
+  { number: "6",    label: "Sessions to Transform" },
+  { number: "5",    label: "Divisions. One Ecosystem." },
+  { number: "100%", label: "Verified on Completion" },
 ];
 
 export function TrustBar() {

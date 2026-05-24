@@ -54,17 +54,17 @@ export function CTA() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/ecosystem"
+              href="/clinics"
               className="group inline-flex items-center gap-2 rounded-lg px-8 py-3.5 text-base font-semibold text-white transition-all duration-200"
               style={{ backgroundColor: "#2563EB" }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
             >
-              Explore the Ecosystem
+              Secure My Spot
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
-              href="/clinics"
+              href="/ecosystem"
               className="inline-flex items-center gap-2 rounded-lg px-8 py-3.5 text-base font-semibold border transition-all duration-200"
               style={{ color: "#F9FAFB", borderColor: "#1E293B" }}
               onMouseEnter={(e) => {
@@ -76,7 +76,7 @@ export function CTA() {
                 e.currentTarget.style.color = "#F9FAFB";
               }}
             >
-              Join a Clinic
+              Explore the Ecosystem
             </Link>
           </div>
 
