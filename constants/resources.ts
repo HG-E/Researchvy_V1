@@ -15,13 +15,13 @@ export interface StaticResource {
 
 export const RESOURCES: StaticResource[] = [
   {
-    id:          "visibility-audit-checklist",
-    title:       "Researcher Visibility Audit Checklist",
-    description: "A comprehensive 50-point checklist to audit and optimise your entire digital scholarly presence — ORCID, Google Scholar, Scopus, institutional profiles, and more.",
+    id:          "visibility-scorecard",
+    title:       "The Researcher Visibility Scorecard",
+    description: "A 12-point interactive self-assessment that calculates your exact visibility score across Scholar Identity, Discoverability, Citation Health, and Research Communication — and shows you precisely what every gap is costing your h-index, citations, and career right now.",
     category:    "checklist",
     access:      "newsletter",
     featured:    true,
-    tags:        ["ORCID", "Google Scholar", "Scopus", "audit"],
+    tags:        ["h-index", "citations", "ORCID", "Google Scholar", "Scopus", "audit"],
     icon:        "CheckSquare",
     color:       "#10B981",
   },

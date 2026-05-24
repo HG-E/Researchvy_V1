@@ -6,9 +6,10 @@ import { Loader2, CheckCircle2, Mail } from "lucide-react";
 interface NewsletterFormProps {
   variant?: "inline" | "card";
   resourceTitle?: string;
+  redirectTo?: string;
 }
 
-export function NewsletterForm({ variant = "inline", resourceTitle }: NewsletterFormProps) {
+export function NewsletterForm({ variant = "inline", resourceTitle, redirectTo }: NewsletterFormProps) {
   const [email,   setEmail]   = useState("");
   const [status,  setStatus]  = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -41,9 +42,20 @@ export function NewsletterForm({ variant = "inline", resourceTitle }: Newsletter
 
   if (status === "success") {
     return (
-      <div className="flex items-start gap-3 rounded-xl p-4" style={{ backgroundColor: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.2)" }}>
-        <CheckCircle2 className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: "#10B981" }} />
-        <p className="text-sm leading-relaxed" style={{ color: "#10B981" }}>{message}</p>
+      <div className="flex flex-col gap-3 rounded-xl p-4" style={{ backgroundColor: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.2)" }}>
+        <div className="flex items-start gap-3">
+          <CheckCircle2 className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: "#10B981" }} />
+          <p className="text-sm leading-relaxed" style={{ color: "#10B981" }}>{message}</p>
+        </div>
+        {redirectTo && (
+          <a
+            href={redirectTo}
+            className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white w-fit transition-all duration-200"
+            style={{ backgroundColor: "#10B981" }}
+          >
+            Open Your Scorecard Now →
+          </a>
+        )}
       </div>
     );
   }

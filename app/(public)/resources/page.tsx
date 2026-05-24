@@ -68,10 +68,17 @@ export default function ResourceLibraryPage() {
                 {featured.description}
               </p>
               <div>
-                <p className="text-sm mb-3 font-medium" style={{ color: "#9CA3AF" }}>
-                  Get it free — enter your email:
+                <p className="text-sm mb-1 font-medium" style={{ color: "#9CA3AF" }}>
+                  Free — enter your email to access instantly:
                 </p>
-                <NewsletterForm variant="inline" resourceTitle={featured.title} />
+                <p className="text-xs mb-3 leading-relaxed" style={{ color: "#4B5563" }}>
+                  Most researchers score between 25–45. See exactly where you stand.
+                </p>
+                <NewsletterForm
+                  variant="inline"
+                  resourceTitle={featured.title}
+                  redirectTo="/resources/visibility-scorecard"
+                />
               </div>
             </div>
 

@@ -129,6 +129,7 @@ export function welcomeEmail(email: string): { subject: string; html: string } {
           <p style="margin:0;font-size:13px;line-height:1.6;color:#6B7280;font-style:italic;">
             Over the next few days, we'll send you a full 5-point visibility self-check and
             a breakdown of exactly what the Digital Visibility Clinic covers — session by session.
+            In the meantime, take the full Researcher Visibility Scorecard below.
           </p>
         </td>
       </tr>
@@ -138,9 +139,14 @@ export function welcomeEmail(email: string): { subject: string; html: string } {
     <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 40px;">
       <tr>
         <td>
+          <a href="https://researchvy.com/resources/visibility-scorecard"
+             style="display:inline-block;background:#10B981;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;margin-bottom:12px;">
+            Take the Researcher Visibility Scorecard →
+          </a>
+          <br/>
           <a href="https://researchvy.com/clinics/digital-visibility-clinic"
-             style="display:inline-block;background:#2563EB;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">
-            See What the Clinic Delivers →
+             style="display:inline-block;color:#2563EB;font-size:13px;font-weight:600;text-decoration:none;">
+            Or see the Digital Visibility Clinic →
           </a>
           <p style="margin:16px 0 0;font-size:13px;color:#9CA3AF;">
             Or reply to this email with your biggest visibility challenge.
