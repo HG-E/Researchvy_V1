@@ -87,7 +87,7 @@ export default function AboutPage() {
                 className="text-3xl font-bold mb-6"
                 style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
               >
-                The Researchvy Framework™
+                The Researchvy Framework
               </h2>
               <div className="space-y-3">
                 {siteConfig.framework.map((step, i) => (

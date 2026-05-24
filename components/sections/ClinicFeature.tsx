@@ -66,7 +66,7 @@ export function ClinicFeature() {
                 {copy.clinic.cta}
               </Link>
               <WhatsAppButton
-                context="Digital Visibility Clinic™"
+                context="Digital Visibility Clinic"
                 variant="outline"
                 label="Enquire via WhatsApp"
               />

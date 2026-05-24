@@ -51,7 +51,7 @@ export const siteConfig = {
   divisions: [
     {
       id: "intelligence",
-      name: "Researchvy Intelligence™",
+      name: "Researchvy Intelligence",
       slug: "intelligence",
       tagline: "Research intelligence, bibliometrics, visibility analytics",
       description:
@@ -60,7 +60,7 @@ export const siteConfig = {
     },
     {
       id: "academy",
-      name: "Researchvy Academy™",
+      name: "Researchvy Academy",
       slug: "academy",
       tagline: "Structured learning, clinics, certifications",
       description:
@@ -69,7 +69,7 @@ export const siteConfig = {
     },
     {
       id: "media",
-      name: "Researchvy Media™",
+      name: "Researchvy Media",
       slug: "media",
       tagline: "Educational visuals, scholarly communication",
       description:
@@ -78,7 +78,7 @@ export const siteConfig = {
     },
     {
       id: "clinics",
-      name: "Researchvy Clinics™",
+      name: "Researchvy Clinics",
       slug: "clinics",
       tagline: "Practical transformation experiences",
       description:
@@ -87,7 +87,7 @@ export const siteConfig = {
     },
     {
       id: "network",
-      name: "Researchvy Network™",
+      name: "Researchvy Network",
       slug: "network",
       tagline: "Community, fellows, ambassadors, partnerships",
       description:

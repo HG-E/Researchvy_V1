@@ -46,7 +46,7 @@ export function VisibilityGap() {
               style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
             >
               <p className="text-sm font-semibold mb-2" style={{ color: "#F9FAFB" }}>
-                The Researchvy Framework™ bridges every gap:
+                The Researchvy Framework bridges every gap:
               </p>
               <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
                 Research → Visibility → Discoverability → Connection → Communication → Application →{" "}

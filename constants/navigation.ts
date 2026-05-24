@@ -6,11 +6,11 @@ export const mainNav: NavigationItem[] = [
     label: "Ecosystem",
     href: "/ecosystem",
     children: [
-      { label: "Intelligence™", href: "/intelligence", description: "Research analytics & visibility insights" },
-      { label: "Academy™",      href: "/academy",      description: "Learning programs & certifications" },
-      { label: "Media™",        href: "/media",        description: "Scholarly communication & visuals" },
-      { label: "Clinics™",      href: "/clinics",      description: "Practical transformation experiences" },
-      { label: "Network™",      href: "/network",      description: "Community, fellows & partnerships" },
+      { label: "Intelligence", href: "/intelligence", description: "Research analytics & visibility insights" },
+      { label: "Academy",      href: "/academy",      description: "Learning programs & certifications" },
+      { label: "Media",        href: "/media",        description: "Scholarly communication & visuals" },
+      { label: "Clinics",      href: "/clinics",      description: "Practical transformation experiences" },
+      { label: "Network",      href: "/network",      description: "Community, fellows & partnerships" },
     ],
   },
   { label: "Clinics",        href: "/clinics" },
@@ -20,11 +20,11 @@ export const mainNav: NavigationItem[] = [
 
 export const footerNav = {
   ecosystem: [
-    { label: "Intelligence™", href: "/intelligence" },
-    { label: "Academy™",      href: "/academy" },
-    { label: "Media™",        href: "/media" },
-    { label: "Clinics™",      href: "/clinics" },
-    { label: "Network™",      href: "/network" },
+    { label: "Intelligence", href: "/intelligence" },
+    { label: "Academy",      href: "/academy" },
+    { label: "Media",        href: "/media" },
+    { label: "Clinics",      href: "/clinics" },
+    { label: "Network",      href: "/network" },
   ],
   learn: [
     { label: "Insights",       href: "/insights" },

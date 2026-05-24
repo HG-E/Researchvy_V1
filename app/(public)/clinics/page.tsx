@@ -6,7 +6,7 @@ import { buildWhatsAppUrl } from "@/config/site";
 
 export const metadata = generatePageMetadata({
   title: "Clinics",
-  description: "Practical scholarly visibility transformation clinics. Join the Digital Visibility Clinic™ and develop the skills, systems, and strategy for global research impact.",
+  description: "Practical scholarly visibility transformation clinics. Join the Digital Visibility Clinic and develop the skills, systems, and strategy for global research impact.",
   path: "/clinics",
 });
 
@@ -38,8 +38,7 @@ export default function ClinicsPage() {
         {/* Header */}
         <div className="max-w-2xl mb-16">
           <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
-            Researchvy Clinics™
-          </p>
+            Researchvy Clinics          </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}

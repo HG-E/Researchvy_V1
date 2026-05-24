@@ -78,7 +78,7 @@ export function courseSchema() {
   return {
     "@context":   "https://schema.org",
     "@type":      "Course",
-    name:         "Digital Visibility Clinic™",
+    name:         "Digital Visibility Clinic",
     description:  "A structured, practical transformation experience for researchers who want to move from invisible to strategically visible across all major scholarly discovery systems.",
     url:          `${base}/clinics/digital-visibility-clinic`,
     provider: {
@@ -92,7 +92,7 @@ export function courseSchema() {
       courseWorkload:       "PT6H",
       instructor: {
         "@type": "Organization",
-        name:    "Researchvy Clinics™",
+        name:    "Researchvy Clinics",
       },
     },
     educationalLevel:     "professional",

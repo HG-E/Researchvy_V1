@@ -1,5 +1,5 @@
 /**
- * Digital Visibility Clinic™ — static programme data.
+ * Digital Visibility Clinic — static programme data.
  *
  * PRICING POLICY:
  * Price is not displayed publicly. All pricing enquiries are handled via
@@ -10,7 +10,7 @@
 export const digitalVisibilityClinic = {
   id:      "digital-visibility-clinic",
   slug:    "digital-visibility-clinic",
-  name:    "Digital Visibility Clinic™",
+  name:    "Digital Visibility Clinic",
   tagline: "A scholarly visibility and discoverability transformation experience",
   description:
     "A structured, practical transformation experience for researchers who want to move from invisible to strategically visible — across all major scholarly discovery systems.",
@@ -106,8 +106,8 @@ export const digitalVisibilityClinic = {
 
   certificate: {
     name:        "Certificate of Scholarly Visibility Practice",
-    issuer:      "Researchvy Clinics™",
-    description: "Awarded upon successful completion of the Digital Visibility Clinic™",
+    issuer:      "Researchvy Clinics",
+    description: "Awarded upon successful completion of the Digital Visibility Clinic",
     features: [
       "Unique certificate number",
       "QR verification code",

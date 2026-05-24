@@ -6,7 +6,7 @@ export const metadata = generatePageMetadata({ title: "My Clinics", noIndex: tru
 
 const UPCOMING_CLINICS = [
   {
-    name: "Digital Visibility Clinic™",
+    name: "Digital Visibility Clinic",
     tagline: "A scholarly visibility and discoverability transformation experience",
     status: "Scheduling soon",
     href: "/clinics",

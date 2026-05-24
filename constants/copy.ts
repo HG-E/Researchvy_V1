@@ -9,7 +9,7 @@ export const copy = {
     body: "Researchvy is a modern scholarly visibility and research intelligence ecosystem helping researchers and institutions navigate discoverability, communication, strategic visibility, and meaningful research impact.",
     cta: {
       primary:   "Explore the Ecosystem",
-      secondary: "Join Digital Visibility Clinic™",
+      secondary: "Join Digital Visibility Clinic",
     },
     rotatingMessages: [
       "Visibility",
@@ -33,7 +33,7 @@ export const copy = {
   },
 
   framework: {
-    title: "The Researchvy Framework™",
+    title: "The Researchvy Framework",
     subtitle: "Every step from research creation to societal impact — made visible, connected, and strategic.",
     steps: [
       { label: "Research",        description: "The scholarly work begins" },
@@ -47,7 +47,7 @@ export const copy = {
   },
 
   clinic: {
-    name:     "Digital Visibility Clinic™",
+    name:     "Digital Visibility Clinic",
     tagline:  "A scholarly visibility and discoverability transformation experience",
     outcomes: [
       "Develop a complete digital scholarly identity",
