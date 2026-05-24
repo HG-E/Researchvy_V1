@@ -1,14 +1,12 @@
 -- ─────────────────────────────────────────────────────────────────────────────
 -- RESEARCHVY — Initial Database Schema
--- Run this in Supabase SQL Editor to create all Phase 1 tables.
+-- Safe to re-run: uses IF NOT EXISTS + DROP TRIGGER IF EXISTS throughout.
 -- ─────────────────────────────────────────────────────────────────────────────
 
--- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- 1. USERS
--- Extends Supabase Auth — created via trigger on auth.users insert.
 -- ─────────────────────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS public.users (
   id                        UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -25,17 +23,16 @@ CREATE TABLE IF NOT EXISTS public.users (
   updated_at                TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
--- Auto-update updated_at
 CREATE OR REPLACE FUNCTION update_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN NEW.updated_at = NOW(); RETURN NEW; END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS users_updated_at ON public.users;
 CREATE TRIGGER users_updated_at
   BEFORE UPDATE ON public.users
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
--- Auto-create user profile on auth signup
 CREATE OR REPLACE FUNCTION handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -50,6 +47,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION handle_new_user();
@@ -75,10 +73,11 @@ CREATE TABLE IF NOT EXISTS public.clinics (
   updated_at       TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX idx_clinics_status  ON public.clinics(status);
-CREATE INDEX idx_clinics_slug    ON public.clinics(slug);
-CREATE INDEX idx_clinics_start   ON public.clinics(start_date);
+CREATE INDEX IF NOT EXISTS idx_clinics_status ON public.clinics(status);
+CREATE INDEX IF NOT EXISTS idx_clinics_slug   ON public.clinics(slug);
+CREATE INDEX IF NOT EXISTS idx_clinics_start  ON public.clinics(start_date);
 
+DROP TRIGGER IF EXISTS clinics_updated_at ON public.clinics;
 CREATE TRIGGER clinics_updated_at
   BEFORE UPDATE ON public.clinics
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
@@ -99,12 +98,11 @@ CREATE TABLE IF NOT EXISTS public.clinic_registrations (
   UNIQUE (clinic_id, user_id)
 );
 
-CREATE INDEX idx_reg_clinic ON public.clinic_registrations(clinic_id);
-CREATE INDEX idx_reg_user   ON public.clinic_registrations(user_id);
+CREATE INDEX IF NOT EXISTS idx_reg_clinic ON public.clinic_registrations(clinic_id);
+CREATE INDEX IF NOT EXISTS idx_reg_user   ON public.clinic_registrations(user_id);
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- 4. INSIGHTS
--- Primary content for blog/articles (may also be managed in Sanity CMS).
 -- ─────────────────────────────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS public.insights (
   id              UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -131,11 +129,12 @@ CREATE TABLE IF NOT EXISTS public.insights (
   updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX idx_insights_published  ON public.insights(published);
-CREATE INDEX idx_insights_category   ON public.insights(category);
-CREATE INDEX idx_insights_slug       ON public.insights(slug);
-CREATE INDEX idx_insights_author     ON public.insights(author_id);
+CREATE INDEX IF NOT EXISTS idx_insights_published ON public.insights(published);
+CREATE INDEX IF NOT EXISTS idx_insights_category  ON public.insights(category);
+CREATE INDEX IF NOT EXISTS idx_insights_slug      ON public.insights(slug);
+CREATE INDEX IF NOT EXISTS idx_insights_author    ON public.insights(author_id);
 
+DROP TRIGGER IF EXISTS insights_updated_at ON public.insights;
 CREATE TRIGGER insights_updated_at
   BEFORE UPDATE ON public.insights
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
@@ -159,9 +158,10 @@ CREATE TABLE IF NOT EXISTS public.resources (
   updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX idx_resources_category ON public.resources(category);
-CREATE INDEX idx_resources_featured ON public.resources(featured);
+CREATE INDEX IF NOT EXISTS idx_resources_category ON public.resources(category);
+CREATE INDEX IF NOT EXISTS idx_resources_featured ON public.resources(featured);
 
+DROP TRIGGER IF EXISTS resources_updated_at ON public.resources;
 CREATE TRIGGER resources_updated_at
   BEFORE UPDATE ON public.resources
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS public.newsletters (
   unsubscribed_at  TIMESTAMPTZ
 );
 
-CREATE INDEX idx_newsletters_subscribed ON public.newsletters(subscribed);
+CREATE INDEX IF NOT EXISTS idx_newsletters_subscribed ON public.newsletters(subscribed);
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- 7. CERTIFICATES
@@ -194,9 +194,9 @@ CREATE TABLE IF NOT EXISTS public.certificates (
   UNIQUE (user_id, clinic_id)
 );
 
-CREATE INDEX idx_certs_user   ON public.certificates(user_id);
-CREATE INDEX idx_certs_clinic ON public.certificates(clinic_id);
-CREATE INDEX idx_certs_code   ON public.certificates(verification_code);
+CREATE INDEX IF NOT EXISTS idx_certs_user   ON public.certificates(user_id);
+CREATE INDEX IF NOT EXISTS idx_certs_clinic ON public.certificates(clinic_id);
+CREATE INDEX IF NOT EXISTS idx_certs_code   ON public.certificates(verification_code);
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- ROW-LEVEL SECURITY
@@ -209,32 +209,36 @@ ALTER TABLE public.resources            ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.newsletters          ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.certificates         ENABLE ROW LEVEL SECURITY;
 
--- Users: read own profile; admins read all
-CREATE POLICY "users_read_own"    ON public.users FOR SELECT USING (auth.uid() = id);
-CREATE POLICY "users_update_own"  ON public.users FOR UPDATE USING (auth.uid() = id);
+-- Drop and recreate all policies so re-runs don't fail
+DROP POLICY IF EXISTS "users_read_own"        ON public.users;
+DROP POLICY IF EXISTS "users_update_own"      ON public.users;
+DROP POLICY IF EXISTS "clinics_public_read"   ON public.clinics;
+DROP POLICY IF EXISTS "reg_read_own"          ON public.clinic_registrations;
+DROP POLICY IF EXISTS "reg_insert_own"        ON public.clinic_registrations;
+DROP POLICY IF EXISTS "insights_public_read"  ON public.insights;
+DROP POLICY IF EXISTS "resources_public_read" ON public.resources;
+DROP POLICY IF EXISTS "newsletter_insert"     ON public.newsletters;
+DROP POLICY IF EXISTS "certs_read_own"        ON public.certificates;
 
--- Clinics: public read published; admin full access
+CREATE POLICY "users_read_own"   ON public.users FOR SELECT USING (auth.uid() = id);
+CREATE POLICY "users_update_own" ON public.users FOR UPDATE USING (auth.uid() = id);
+
 CREATE POLICY "clinics_public_read"
   ON public.clinics FOR SELECT USING (status = 'published');
 
--- Registrations: users manage their own
 CREATE POLICY "reg_read_own"
   ON public.clinic_registrations FOR SELECT USING (auth.uid() = user_id);
 CREATE POLICY "reg_insert_own"
   ON public.clinic_registrations FOR INSERT WITH CHECK (auth.uid() = user_id);
 
--- Insights: public read published
 CREATE POLICY "insights_public_read"
   ON public.insights FOR SELECT USING (published = TRUE);
 
--- Resources: public read all
 CREATE POLICY "resources_public_read"
   ON public.resources FOR SELECT USING (TRUE);
 
--- Newsletters: insert open; read own
 CREATE POLICY "newsletter_insert"
   ON public.newsletters FOR INSERT WITH CHECK (TRUE);
 
--- Certificates: read own
 CREATE POLICY "certs_read_own"
   ON public.certificates FOR SELECT USING (auth.uid() = user_id);
