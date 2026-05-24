@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Lock, GraduationCap, ArrowRight } from "lucide-react";
+import { GraduationCap, ArrowRight, FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 import { buildWhatsAppUrl } from "@/config/site";
-import type { StaticResource } from "@/constants/resources";
+import type { StaticResource, ResourceIconName } from "@/constants/resources";
+
+const ICON_MAP: Record<ResourceIconName, LucideIcon> = {
+  FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers,
+};
 
 const CATEGORY_LABELS: Record<StaticResource["category"], string> = {
   guide:     "Guide",
@@ -18,7 +22,7 @@ const CATEGORY_LABELS: Record<StaticResource["category"], string> = {
 
 export function ResourceCard({ resource }: { resource: StaticResource }) {
   const [expanded, setExpanded] = useState(false);
-  const Icon = resource.icon;
+  const Icon = ICON_MAP[resource.icon];
 
   return (
     <div

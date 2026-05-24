@@ -1,7 +1,13 @@
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { RESOURCES } from "@/constants/resources";
+import { FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers, type LucideIcon } from "lucide-react";
 import { ResourceCard } from "@/components/resources/ResourceCard";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
+import type { ResourceIconName } from "@/constants/resources";
+
+const ICON_MAP: Record<ResourceIconName, LucideIcon> = {
+  FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers,
+};
 
 export const metadata = generatePageMetadata({
   title:       "Resource Library",
@@ -13,7 +19,7 @@ const featured = RESOURCES.find((r) => r.featured)!;
 const rest      = RESOURCES.filter((r) => !r.featured);
 
 export default function ResourceLibraryPage() {
-  const FeaturedIcon = featured.icon;
+  const FeaturedIcon = ICON_MAP[featured.icon];
 
   return (
     <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>

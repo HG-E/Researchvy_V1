@@ -120,10 +120,7 @@ export default function ClinicsPage() {
                     href={waUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all duration-200 border"
-                    style={{ backgroundColor: "transparent", borderColor: "#25D366", color: "#25D366" }}
-                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(37,211,102,0.1)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all duration-200 border border-[#25D366] text-[#25D366] hover:bg-[rgba(37,211,102,0.1)]"
                   >
                     <MessageCircle className="h-4 w-4" />
                     Enquire via WhatsApp

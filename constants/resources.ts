@@ -1,6 +1,5 @@
-import { FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers } from "lucide-react";
-
 export type ResourceAccess = "free" | "newsletter" | "clinic";
+export type ResourceIconName = "FileText" | "CheckSquare" | "Layout" | "BarChart2" | "BookOpen" | "Layers";
 
 export interface StaticResource {
   id:          string;
@@ -10,7 +9,7 @@ export interface StaticResource {
   access:      ResourceAccess;
   featured:    boolean;
   tags:        string[];
-  icon:        typeof FileText;
+  icon:        ResourceIconName;
   color:       string;
 }
 
@@ -23,7 +22,7 @@ export const RESOURCES: StaticResource[] = [
     access:      "newsletter",
     featured:    true,
     tags:        ["ORCID", "Google Scholar", "Scopus", "audit"],
-    icon:        CheckSquare,
+    icon:        "CheckSquare",
     color:       "#10B981",
   },
   {
@@ -34,7 +33,7 @@ export const RESOURCES: StaticResource[] = [
     access:      "newsletter",
     featured:    false,
     tags:        ["ORCID", "scholarly identity", "disambiguation"],
-    icon:        BookOpen,
+    icon:        "BookOpen",
     color:       "#2563EB",
   },
   {
@@ -45,7 +44,7 @@ export const RESOURCES: StaticResource[] = [
     access:      "newsletter",
     featured:    false,
     tags:        ["Google Scholar", "profile", "discoverability"],
-    icon:        FileText,
+    icon:        "FileText",
     color:       "#2563EB",
   },
   {
@@ -56,7 +55,7 @@ export const RESOURCES: StaticResource[] = [
     access:      "free",
     featured:    false,
     tags:        ["framework", "visibility", "impact"],
-    icon:        Layers,
+    icon:        "Layers",
     color:       "#8B5CF6",
   },
   {
@@ -67,7 +66,7 @@ export const RESOURCES: StaticResource[] = [
     access:      "clinic",
     featured:    false,
     tags:        ["bibliometrics", "h-index", "citations", "Scopus"],
-    icon:        BarChart2,
+    icon:        "BarChart2",
     color:       "#F59E0B",
   },
   {
@@ -78,7 +77,7 @@ export const RESOURCES: StaticResource[] = [
     access:      "clinic",
     featured:    false,
     tags:        ["strategy", "planning", "visibility roadmap"],
-    icon:        Layout,
+    icon:        "Layout",
     color:       "#EC4899",
   },
 ];
