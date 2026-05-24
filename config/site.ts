@@ -9,8 +9,9 @@ export const siteConfig = {
   twitterHandle: "@researchvy",
 
   contact: {
-    email: "hello@researchvy.com",
-    support: "support@researchvy.com",
+    email:   "info@researchvy.com",
+    gmail:   "researchvy@gmail.com",
+    support: "info@researchvy.com",
   },
 
   social: {

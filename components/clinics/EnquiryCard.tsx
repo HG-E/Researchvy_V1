@@ -26,7 +26,7 @@ export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryC
           Enquire for Pricing
         </p>
         <p className="text-xs mt-1.5 leading-relaxed" style={{ color: "#6B7280" }}>
-          Pricing is shared directly via WhatsApp. We tailor pricing to your context and needs.
+          Pricing is shared directly. We tailor pricing to your context and needs.
         </p>
       </div>
 
@@ -65,6 +65,14 @@ export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryC
       >
         <MessageCircle className="h-4 w-4" />
         Enquire via WhatsApp
+      </a>
+
+      <a
+        href="mailto:info@researchvy.com?subject=Clinic%20Pricing%20Enquiry"
+        className="flex items-center justify-center gap-2 w-full rounded-xl py-2.5 text-xs font-medium border transition-colors hover:bg-[#1E293B]"
+        style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+      >
+        Or email info@researchvy.com
       </a>
 
       <p className="text-xs text-center" style={{ color: "#374151" }}>

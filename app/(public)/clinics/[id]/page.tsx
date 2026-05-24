@@ -228,8 +228,16 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
                 Researchvy does not display fixed pricing publicly. Pricing is contextual — based on
                 your institution, cohort size, and whether you are registering as an individual or
-                through an institution. Reach out via WhatsApp and we will respond with a tailored
-                proposal, usually within 24 hours.
+                through an institution. Reach out via{" "}
+                <span style={{ color: "#9CA3AF" }}>WhatsApp</span> or email{" "}
+                <a
+                  href="mailto:info@researchvy.com?subject=Clinic%20Pricing%20Enquiry"
+                  className="transition-colors hover:text-[#60A5FA]"
+                  style={{ color: "#9CA3AF" }}
+                >
+                  info@researchvy.com
+                </a>{" "}
+                and we will respond with a tailored proposal within 24 hours.
               </p>
             </div>
 

@@ -20,14 +20,15 @@ export async function POST(req: Request) {
     await Promise.all([
       // Notify admin
       resend.emails.send({
-        from:    "Researchvy Website <hello@researchvy.com>",
-        to:      ["hello@researchvy.com"],
+        from:    "Researchvy Website <info@researchvy.com>",
+        to:      ["info@researchvy.com"],
+        cc:      ["researchvy@gmail.com"],
         subject: `New newsletter subscriber: ${email}`,
         html:    `<p>New subscriber signed up: <strong>${email}</strong></p>`,
       }),
       // Welcome email to subscriber
       resend.emails.send({
-        from:    "Researchvy <hello@researchvy.com>",
+        from:    "Researchvy <info@researchvy.com>",
         to:      [email],
         subject: "Welcome to Researchvy Insights",
         html: `

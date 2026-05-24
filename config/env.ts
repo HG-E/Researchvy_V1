@@ -26,6 +26,6 @@ export function getServerEnv() {
   return {
     supabaseServiceKey: requireEnv("SUPABASE_SERVICE_ROLE_KEY"),
     resendApiKey:       requireEnv("RESEND_API_KEY"),
-    resendFromEmail:    optionalEnv("RESEND_FROM_EMAIL", "hello@researchvy.com"),
+    resendFromEmail:    optionalEnv("RESEND_FROM_EMAIL", "info@researchvy.com"),
   };
 }

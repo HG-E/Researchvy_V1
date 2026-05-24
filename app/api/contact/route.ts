@@ -23,8 +23,9 @@ export async function POST(req: Request) {
     const { name, email, subject, message } = parsed.data;
 
     await resend.emails.send({
-      from:    "Researchvy Website <hello@researchvy.com>",
-      to:      ["hello@researchvy.com"],
+      from:    "Researchvy Website <info@researchvy.com>",
+      to:      ["info@researchvy.com"],
+      cc:      ["researchvy@gmail.com"],
       replyTo: email,
       subject: `[Contact] ${subject}`,
       html: `
