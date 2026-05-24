@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Researchvy",
   tagline: "Research Beyond Publication",
   description:
-    "A modern scholarly visibility and research intelligence ecosystem helping researchers and institutions navigate discoverability, communication, strategic visibility, and meaningful research impact.",
+    "Millions of researchers publish every year. Most are never found. Researchvy exists to change that — transforming scholars into globally visible, citable, and discoverable researchers through intelligence, training, and strategic visibility.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://researchvy.com",
   domain: "researchvy.com",
   ogImage: "/images/brand/og-default.png",

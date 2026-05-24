@@ -39,10 +39,13 @@ export default function AboutPage() {
             className="text-5xl sm:text-6xl font-bold mb-6 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
           >
-            Research Beyond Publication
+            Built for Researchers<br />
+            <span style={{ color: "#2563EB" }}>Who Refuse to Stay Invisible.</span>
           </h1>
           <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#9CA3AF" }}>
-            {siteConfig.description}
+            Researchvy exists because great research deserves to be found — not buried in
+            platforms nobody searches, cited by no one, reaching no one. We are the system
+            that changes that.
           </p>
         </div>
       </section>
@@ -63,19 +66,19 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
                 <p>
-                  Millions of valuable research outputs are published each year but remain invisible
-                  to the audiences that need them most. Scholars toil in isolation, producing work
-                  that never reaches its full potential for societal impact.
+                  You spent years learning how to produce rigorous research. Nobody taught you how
+                  to make it findable. That gap — between what researchers produce and what the world
+                  can discover — is the problem Researchvy was built to close.
                 </p>
                 <p>
-                  Researchvy exists to change this. We are a scholarly visibility and research
-                  intelligence ecosystem that helps researchers, academics, and institutions navigate
-                  the complex landscape of digital discoverability, strategic communication, and
-                  meaningful research impact.
+                  We are a scholarly visibility and research intelligence ecosystem. We work with
+                  individual researchers, postgraduate scholars, and institutions to measure
+                  visibility gaps, build the skills to close them, and communicate research in ways
+                  that reach the people who need it most.
                 </p>
                 <p>
-                  We believe every piece of research has the potential to change something — but
-                  only if the right people can find it, understand it, and apply it.
+                  Your research has the potential to change something. But only if the right
+                  people can find it, understand it, and act on it. That starts here.
                 </p>
               </div>
             </div>

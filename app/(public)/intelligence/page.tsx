@@ -13,25 +13,25 @@ const SERVICES = [
   {
     icon:  BarChart2,
     title: "Visibility Analytics",
-    desc:  "Comprehensive analysis of your research visibility profile across Scopus, Google Scholar, Web of Science, and ORCID. Understand where you stand and what needs attention.",
+    desc:  "Find out exactly where you stand across Scopus, Google Scholar, Web of Science, and ORCID — and what's preventing your visibility score from reflecting the quality of your work.",
     color: "#60A5FA",
   },
   {
     icon:  FileSearch,
     title: "Citation Intelligence",
-    desc:  "Deep dive into your citation profile — h-index analysis, citation patterns, co-citation mapping, and strategic recommendations for ethical citation growth.",
+    desc:  "Your citation count is lower than it should be. We dig into exactly why — mapping patterns, identifying gaps, and giving you a strategic roadmap for ethical citation growth.",
     color: "#A78BFA",
   },
   {
     icon:  Building2,
     title: "Institutional Audits",
-    desc:  "Full-scale visibility audit for research offices and universities. Benchmark your institution's scholarly presence and build a roadmap for collective impact.",
+    desc:  "Your institution is publishing more research than ever. If that work isn't being found, the reputation and funding impact disappears with it. We audit, benchmark, and build you a roadmap.",
     color: "#34D399",
   },
   {
     icon:  Search,
     title: "Discoverability Reports",
-    desc:  "Assess how discoverable your research is across all major scholarly discovery systems. Get a prioritised action plan to improve your reach and indexing.",
+    desc:  "If your research isn't ranking in major discovery systems, it doesn't exist to most audiences. We find every gap and give you a prioritised plan to fix them — fast.",
     color: "#FCD34D",
   },
 ];
@@ -59,12 +59,13 @@ export default function IntelligencePage() {
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
-            Research Visibility<br />
-            <span style={{ color: "#60A5FA" }}>Analytics & Audits</span>
+            You Can&apos;t Fix What<br />
+            <span style={{ color: "#60A5FA" }}>You Can&apos;t Measure.</span>
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
-            Data-driven intelligence for researchers and institutions who want to understand,
-            measure, and strategically improve their scholarly visibility and research impact.
+            Most researchers have never seen an honest, complete picture of their scholarly
+            visibility. They don&apos;t know their score across platforms, why citations are lagging,
+            or which discovery systems are missing them entirely. One audit changes all of that.
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -75,14 +76,14 @@ export default function IntelligencePage() {
               style={{ backgroundColor: "#25D366" }}
             >
               <MessageCircle className="h-4 w-4" />
-              Request an Audit
+              Get My Visibility Audit
             </a>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
               style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
             >
-              Ask a Question
+              I Have a Question
             </Link>
           </div>
         </div>
@@ -148,9 +149,10 @@ export default function IntelligencePage() {
               Request Your Visibility Audit
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              Audits are conducted by our research intelligence team. Pricing is contextual
-              — based on scope, whether individual or institutional, and your specific needs.
-              Reach out to start the conversation.
+              Researchers who&apos;ve had a visibility audit consistently report the same thing:
+              they had no idea how much they were missing. Pricing is contextual — based on your
+              scope and whether individual or institutional. Reach out and we&apos;ll tell you exactly
+              what your audit will cover.
             </p>
             <div className="space-y-3">
               <a

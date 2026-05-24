@@ -59,12 +59,13 @@ export default function MediaPage() {
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
-            Scholarly Communication<br />
-            <span style={{ color: "#F472B6" }}>Beyond the Journal</span>
+            Your Research Is Published.<br />
+            <span style={{ color: "#F472B6" }}>The World Still Can&apos;t Read It.</span>
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
-            We help researchers tell their story — translating complex findings into content
-            that reaches broader audiences, informs policy, and builds lasting public impact.
+            Journals reach other researchers. The policymakers, practitioners, and public who
+            could act on your findings read something else entirely. We translate your research
+            into formats that actually reach the people who need it.
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -148,9 +149,9 @@ export default function MediaPage() {
               Start a Media Project
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              Every project is scoped to your specific output and audience. Whether you have
-              a single paper to promote or need an ongoing dissemination strategy, we build
-              around your research and your goals.
+              Your research took years to produce. It deserves more than a PDF that nobody
+              outside your field will open. Tell us what you&apos;ve published and who should
+              be reading it — we&apos;ll build the content that gets it there.
             </p>
             <div className="space-y-3">
               <a

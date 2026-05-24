@@ -26,12 +26,13 @@ export default function AcademyPage() {
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
-            Professional Development<br />
-            <span style={{ color: "#A78BFA" }}>for Researchers</span>
+            The Skills Nobody<br />
+            <span style={{ color: "#A78BFA" }}>Taught You.</span>
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
-            Five structured learning levels — from foundational visibility concepts to advanced
-            research intelligence — designed to build lasting scholarly expertise.
+            You were taught to publish. Nobody taught you to be found. Researchvy Academy fills
+            that gap — five structured levels that take you from foundational visibility principles
+            to advanced research intelligence strategy.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
@@ -50,7 +51,7 @@ export default function AcademyPage() {
               style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
             >
               <MessageCircle className="h-4 w-4" />
-              Ask About Programmes
+              I Have a Question
             </a>
           </div>
         </div>
@@ -134,8 +135,9 @@ export default function AcademyPage() {
               Enrolling Soon
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              Individual and cohort-based programmes across all five levels are being scheduled.
-              Join the waitlist or enquire about your institution bringing Academy programmes to your team.
+              Cohorts are small and deliberately limited. Early access goes to researchers
+              who register interest first — before public enrolment opens. Don&apos;t wait
+              until there are no spots.
             </p>
             <a
               href={buildWhatsAppUrl("Researchvy Academy waitlist")}
@@ -145,7 +147,7 @@ export default function AcademyPage() {
               style={{ backgroundColor: "#7C3AED" }}
             >
               <MessageCircle className="h-4 w-4" />
-              Join the Waitlist
+              Get Early Access
             </a>
           </div>
 

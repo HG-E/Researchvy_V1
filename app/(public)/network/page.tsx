@@ -59,13 +59,13 @@ export default function NetworkPage() {
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
-            A Community of<br />
-            <span style={{ color: "#34D399" }}>Visibility Champions</span>
+            You Don&apos;t Have to<br />
+            <span style={{ color: "#34D399" }}>Figure This Out Alone.</span>
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
-            Researchers who take their visibility seriously do not have to go it alone. The
-            Researchvy Network connects you with peers, mentors, and opportunities to grow
-            your scholarly presence collectively.
+            The researchers gaining ground fastest are the ones connected to others doing the
+            same work — sharing what&apos;s working, holding each other accountable, and learning
+            from strategies already proven to move the needle on visibility and impact.
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -149,9 +149,9 @@ export default function NetworkPage() {
               Join the Waitlist
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              Network membership and the Fellows Programme are currently being structured.
+              The Network is being built deliberately — small, serious, and focused.
               Express your interest now to be among the first researchers invited when
-              membership opens.
+              membership opens. Spots will be limited.
             </p>
             <div className="space-y-3">
               <a

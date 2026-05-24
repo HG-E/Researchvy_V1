@@ -22,11 +22,12 @@ export default function EcosystemPage() {
             className="text-5xl sm:text-6xl font-bold mb-6"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
           >
-            Five Divisions. One Mission.
+            Every Dimension of Visibility.<br />
+            <span style={{ color: "#2563EB" }}>One Ecosystem.</span>
           </h1>
           <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#9CA3AF" }}>
-            From research intelligence to community building, every dimension of scholarly
-            visibility is covered within the Researchvy ecosystem.
+            Most researchers address one piece of the visibility problem. Researchvy addresses
+            all of it — five specialised divisions working together so nothing gets left behind.
           </p>
         </div>
       </section>
@@ -59,21 +60,12 @@ export default function EcosystemPage() {
                 <p className="text-base leading-relaxed mb-8" style={{ color: "#9CA3AF" }}>
                   {division.description}
                 </p>
-                {division.id !== "network" ? (
-                  <Link
-                    href={`/${division.slug}`}
-                    className="inline-flex items-center rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200 bg-[#2563EB] hover:bg-[#1D4ED8]"
-                  >
-                    Explore {division.name}
-                  </Link>
-                ) : (
-                  <span
-                    className="inline-flex items-center rounded-lg px-6 py-3 text-sm font-semibold border"
-                    style={{ color: "#4B5563", borderColor: "#1E293B" }}
-                  >
-                    Coming Soon
-                  </span>
-                )}
+                <Link
+                  href={`/${division.slug}`}
+                  className="inline-flex items-center rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200 bg-[#2563EB] hover:bg-[#1D4ED8]"
+                >
+                  Explore {division.name}
+                </Link>
               </div>
 
               {/* Visual card */}

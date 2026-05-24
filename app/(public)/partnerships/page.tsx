@@ -59,12 +59,13 @@ export default function PartnershipsPage() {
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
-            Bringing Visibility<br />
-            <span style={{ color: "#60A5FA" }}>to Your Institution</span>
+            Your Researchers Are Publishing.<br />
+            <span style={{ color: "#60A5FA" }}>Is Anyone Finding Their Work?</span>
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
-            Researchvy partners with universities, research offices, learned societies, and
-            platforms to embed scholarly visibility into the fabric of institutional research culture.
+            Publication output is rising everywhere. Discovery rates aren&apos;t keeping pace.
+            If your institution&apos;s research isn&apos;t visible, it isn&apos;t driving the reputation,
+            funding, or impact you need — regardless of how much is being published.
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -148,9 +149,9 @@ export default function PartnershipsPage() {
               Let&apos;s Build Together
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              Every institutional partnership is shaped around your context — your researchers,
-              your goals, and your timelines. Reach out to start a conversation about what
-              a Researchvy partnership could look like for your organisation.
+              Every partnership starts with an honest conversation about where your institution
+              stands and what would move the needle. Tell us about your researchers, your
+              goals, and your timeline — we&apos;ll tell you what a partnership would deliver.
             </p>
             <div className="space-y-3">
               <a
