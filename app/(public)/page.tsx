@@ -4,6 +4,7 @@ import { VisibilityGap } from "@/components/sections/VisibilityGap";
 import { Framework } from "@/components/sections/Framework";
 import { EcosystemOverview } from "@/components/sections/EcosystemOverview";
 import { ClinicFeature } from "@/components/sections/ClinicFeature";
+import { CaseStudy } from "@/components/sections/CaseStudy";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { CTA } from "@/components/sections/CTA";
@@ -22,6 +23,7 @@ export default function HomePage() {
       <Framework />
       <EcosystemOverview />
       <ClinicFeature />
+      <CaseStudy />
       <SocialProof />
       <TrustBar />
       <CTA />

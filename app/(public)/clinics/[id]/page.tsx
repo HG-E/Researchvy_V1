@@ -7,6 +7,7 @@ import { siteConfig } from "@/config/site";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { SessionAccordion } from "@/components/clinics/SessionAccordion";
 import { EnquiryCard } from "@/components/clinics/EnquiryCard";
+import { CaseStudy } from "@/components/sections/CaseStudy";
 
 const CLINICS: Record<string, typeof digitalVisibilityClinic> = {
   [digitalVisibilityClinic.slug]: digitalVisibilityClinic,
@@ -140,6 +141,11 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 ))}
               </div>
             </section>
+
+            {/* Case study — full width, breaks out of the content column */}
+            <div className="-mx-4 sm:-mx-6 lg:mx-0">
+              <CaseStudy />
+            </div>
 
             {/* Curriculum */}
             <section>
