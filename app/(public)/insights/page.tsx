@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getInsights } from "@/lib/cms/mdx";
-import { InsightCard } from "@/components/insights/InsightCard";
+import { InsightGrid } from "@/components/insights/InsightGrid";
 import { CategoryFilter } from "@/components/insights/CategoryFilter";
 import type { InsightCategory } from "@/types";
 
@@ -20,7 +20,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
 
   const insights = await getInsights({
     category: category as InsightCategory | undefined,
-    limit: 24,
+    limit: 100,
   });
 
   return (
@@ -52,32 +52,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
           </Suspense>
         </div>
 
-        {/* Results count */}
-        <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
-          {insights.length} {insights.length === 1 ? "article" : "articles"}
-          {category ? ` in "${category.replace(/-/g, " ")}"` : ""}
-        </p>
-
-        {/* Grid */}
-        {insights.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {insights.map((insight) => (
-              <InsightCard key={insight.id} insight={insight} />
-            ))}
-          </div>
-        ) : (
-          <div
-            className="rounded-2xl border p-16 flex flex-col items-center text-center"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-          >
-            <p className="text-2xl mb-3" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-              No articles yet
-            </p>
-            <p className="text-sm" style={{ color: "#6B7280" }}>
-              Articles in this category are coming soon.
-            </p>
-          </div>
-        )}
+        <InsightGrid insights={insights} />
       </div>
     </div>
   );
