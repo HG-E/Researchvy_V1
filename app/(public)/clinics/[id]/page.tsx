@@ -63,7 +63,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
             className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold mb-5"
             style={{ backgroundColor: "rgba(16,185,129,0.1)", color: "#10B981", border: "1px solid rgba(16,185,129,0.2)" }}
           >
-            Flagship Programme
+            Flagship Programme · ≤{clinic.capacity} Researchers Per Cohort
           </span>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
@@ -71,8 +71,13 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
           >
             {clinic.name}
           </h1>
-          <p className="text-lg leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-3" style={{ color: "#6B7280" }}>
             {clinic.tagline}
+          </p>
+          <p className="text-base leading-relaxed" style={{ color: "#4B5563" }}>
+            Most researchers finish this clinic and say the same thing: they had no idea how
+            invisible they were — or how fixable it was. In 6 sessions, you get a complete
+            scholarly identity overhaul, a personal visibility strategy, and a verified certificate.
           </p>
 
           {/* Stat pills */}

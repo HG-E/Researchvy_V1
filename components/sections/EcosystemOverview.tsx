@@ -78,24 +78,15 @@ export function EcosystemOverview() {
                 <p className="text-sm leading-relaxed mb-5" style={{ color: "#9CA3AF" }}>
                   {division.description}
                 </p>
-                {isNetwork ? (
-                  <span
-                    className="inline-flex items-center gap-1 text-xs font-medium px-3 py-1 rounded-full"
-                    style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
-                  >
-                    Coming Soon
-                  </span>
-                ) : (
-                  <Link
-                    href={`/${division.slug}`}
-                    className="inline-flex items-center gap-1 text-sm font-semibold transition-colors"
-                    style={{ color: "#2563EB" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#3B82F6")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#2563EB")}
-                  >
-                    Explore <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                )}
+                <Link
+                  href={`/${division.slug}`}
+                  className="inline-flex items-center gap-1 text-sm font-semibold transition-colors"
+                  style={{ color: "#2563EB" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#3B82F6")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#2563EB")}
+                >
+                  Explore <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
               </motion.div>
             );
           })}

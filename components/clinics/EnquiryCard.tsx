@@ -19,14 +19,14 @@ export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryC
       style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
     >
       <div>
-        <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
-          Enrol Now
+        <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#10B981" }}>
+          Limited Cohort — ≤{capacity} Researchers
         </p>
         <p className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-          Enquire for Pricing
+          Claim Your Spot
         </p>
         <p className="text-xs mt-1.5 leading-relaxed" style={{ color: "#6B7280" }}>
-          Pricing is shared directly. We tailor pricing to your context and needs.
+          Pricing is tailored to your context and shared directly. Reach out — we respond within 24 hours.
         </p>
       </div>
 
@@ -64,7 +64,7 @@ export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryC
         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#25D366")}
       >
         <MessageCircle className="h-4 w-4" />
-        Enquire via WhatsApp
+        Claim My Spot via WhatsApp
       </a>
 
       <a
@@ -76,7 +76,7 @@ export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryC
       </a>
 
       <p className="text-xs text-center" style={{ color: "#374151" }}>
-        Typically respond within 24 hours
+        Spots fill fast. Respond within 24 hours.
       </p>
     </div>
   );
