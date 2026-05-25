@@ -2,17 +2,18 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60 * 60 * 24 * 365,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
     remotePatterns: [
-      // Cloudinary — all dynamic media
       { protocol: "https", hostname: "res.cloudinary.com" },
-      // Supabase Storage — user uploads if any
       { protocol: "https", hostname: "*.supabase.co" },
-      // Unsplash — placeholder/stock images during development
       { protocol: "https", hostname: "images.unsplash.com" },
     ],
   },
   experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion"],
+    optimizePackageImports: ["lucide-react", "framer-motion", "date-fns"],
   },
   async headers() {
     return [

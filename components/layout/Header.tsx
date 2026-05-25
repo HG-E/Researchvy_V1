@@ -1,17 +1,21 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { mainNav } from "@/constants/navigation";
+
+const MobileDrawer = dynamic(
+  () => import("./MobileDrawer").then((m) => ({ default: m.MobileDrawer })),
+  { ssr: false }
+);
 
 export function Header() {
   const [mobileOpen, setMobileOpen]       = useState(false);
   const [scrolled, setScrolled]           = useState(false);
   const [ecosystemOpen, setEcosystemOpen] = useState(false);
-  const [mobileEcoOpen, setMobileEcoOpen] = useState(false);
   const ecosystemRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -20,7 +24,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -35,11 +38,6 @@ export function Header() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  function closeMobile() {
-    setMobileOpen(false);
-    setMobileEcoOpen(false);
-  }
 
   return (
     <>
@@ -74,38 +72,38 @@ export function Header() {
                       />
                     </button>
 
-                    <AnimatePresence>
-                      {ecosystemOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 8, scale: 0.97 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 8, scale: 0.97 }}
-                          transition={{ duration: 0.18 }}
-                          className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 rounded-xl border p-2 shadow-2xl"
-                          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-                          onMouseLeave={() => setEcosystemOpen(false)}
+                    {/* CSS-transition dropdown — no framer-motion */}
+                    <div
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 rounded-xl border p-2 shadow-2xl"
+                      style={{
+                        backgroundColor: "#0F172A",
+                        borderColor: "#1E293B",
+                        opacity: ecosystemOpen ? 1 : 0,
+                        transform: `translateX(-50%) translateY(${ecosystemOpen ? "0px" : "8px"}) scale(${ecosystemOpen ? 1 : 0.97})`,
+                        pointerEvents: ecosystemOpen ? "auto" : "none",
+                        transition: "opacity 0.18s ease, transform 0.18s ease",
+                      }}
+                      onMouseLeave={() => setEcosystemOpen(false)}
+                    >
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-[#1E293B]"
+                          style={{ color: "#9CA3AF" }}
+                          onMouseEnter={(e) => (e.currentTarget.style.color = "#F9FAFB")}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = "#9CA3AF")}
+                          onClick={() => setEcosystemOpen(false)}
                         >
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-[#1E293B]"
-                              style={{ color: "#9CA3AF" }}
-                              onMouseEnter={(e) => (e.currentTarget.style.color = "#F9FAFB")}
-                              onMouseLeave={(e) => (e.currentTarget.style.color = "#9CA3AF")}
-                              onClick={() => setEcosystemOpen(false)}
-                            >
-                              <span className="block text-sm font-semibold">{child.label}</span>
-                              {child.description && (
-                                <span className="block text-xs mt-0.5" style={{ color: "#4B5563" }}>
-                                  {child.description}
-                                </span>
-                              )}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                          <span className="block text-sm font-semibold">{child.label}</span>
+                          {child.description && (
+                            <span className="block text-xs mt-0.5" style={{ color: "#4B5563" }}>
+                              {child.description}
+                            </span>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 );
               }
@@ -154,146 +152,7 @@ export function Header() {
         </div>
       </header>
 
-      {/* Full-screen mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 md:hidden"
-              style={{ backgroundColor: "rgba(8,14,26,0.6)", backdropFilter: "blur(4px)" }}
-              onClick={closeMobile}
-            />
-
-            {/* Drawer — slides in from right */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-[85vw] max-w-sm md:hidden flex flex-col"
-              style={{ backgroundColor: "#0A0F1A", borderLeft: "1px solid #1E293B" }}
-            >
-              {/* Drawer header */}
-              <div
-                className="flex items-center justify-between px-5 h-16 border-b flex-shrink-0"
-                style={{ borderColor: "#1E293B" }}
-              >
-                <Logo variant="full" width={120} />
-                <button
-                  onClick={closeMobile}
-                  className="flex items-center justify-center w-10 h-10 rounded-lg active:bg-[#1E293B] transition-colors"
-                  style={{ color: "#6B7280" }}
-                  aria-label="Close menu"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-
-              {/* Nav links */}
-              <nav
-                className="flex-1 overflow-y-auto scroll-contain px-4 py-5 space-y-1"
-                aria-label="Mobile navigation"
-              >
-                {mainNav.map((item) => {
-                  if (item.children) {
-                    return (
-                      <div key={item.href}>
-                        <button
-                          onClick={() => setMobileEcoOpen(!mobileEcoOpen)}
-                          className="w-full flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#1E293B]"
-                          style={{ color: mobileEcoOpen ? "#F9FAFB" : "#9CA3AF" }}
-                        >
-                          {item.label}
-                          <ChevronRight
-                            className="h-4 w-4 transition-transform duration-200"
-                            style={{ transform: mobileEcoOpen ? "rotate(90deg)" : "rotate(0deg)" }}
-                          />
-                        </button>
-                        <AnimatePresence>
-                          {mobileEcoOpen && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="ml-2 mt-1 space-y-1 pb-1">
-                                {item.children.map((child) => (
-                                  <Link
-                                    key={child.href}
-                                    href={child.href}
-                                    onClick={closeMobile}
-                                    className="flex items-start gap-3 rounded-xl px-4 py-3 transition-colors active:bg-[#1E293B]"
-                                  >
-                                    <div>
-                                      <p className="text-sm font-semibold" style={{ color: "#D1D5DB" }}>
-                                        {child.label}
-                                      </p>
-                                      {child.description && (
-                                        <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
-                                          {child.description}
-                                        </p>
-                                      )}
-                                    </div>
-                                  </Link>
-                                ))}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={closeMobile}
-                      className="block rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#1E293B]"
-                      style={{ color: "#9CA3AF" }}
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </nav>
-
-              {/* Auth CTAs at bottom */}
-              <div
-                className="px-5 py-5 border-t space-y-3 flex-shrink-0"
-                style={{
-                  borderColor: "#1E293B",
-                  paddingBottom: "max(20px, env(safe-area-inset-bottom))",
-                }}
-              >
-                <Link
-                  href="/signin"
-                  onClick={closeMobile}
-                  className="block w-full rounded-xl px-4 py-3.5 text-sm font-semibold text-center border transition-colors active:bg-[#1E293B]"
-                  style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/clinics"
-                  onClick={closeMobile}
-                  className="block w-full rounded-xl px-4 py-3.5 text-sm font-bold text-white text-center transition-colors active:opacity-90"
-                  style={{ backgroundColor: "#2563EB" }}
-                >
-                  Join a Clinic →
-                </Link>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      <MobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </>
   );
 }
