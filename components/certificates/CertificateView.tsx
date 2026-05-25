@@ -62,7 +62,7 @@ export function CertificateView({ cert }: { cert: Certificate }) {
             position: fixed !important;
             inset: 0 !important;
             width: 100vw !important;
-            height: 100vh !important;
+            height: 100dvh !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;

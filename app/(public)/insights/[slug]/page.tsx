@@ -82,7 +82,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
     .slice(0, 3);
 
   return (
-    <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema(insight)) }}

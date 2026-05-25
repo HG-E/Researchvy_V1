@@ -56,7 +56,7 @@ export default async function ClinicsPage() {
   const isFull        = cohort.status === "full" || spotsLeft === 0;
 
   return (
-    <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
 
         {/* Hero header */}

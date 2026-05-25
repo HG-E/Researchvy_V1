@@ -34,7 +34,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
   if (!clinic) notFound();
 
   return (
-    <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema()) }}
