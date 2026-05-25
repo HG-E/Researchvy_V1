@@ -297,7 +297,7 @@ export default async function ClinicsPage() {
               <span className="font-bold" style={{ color: "#F9FAFB" }}>
                 Early bird pricing ends June 20, 2026
               </span>
-              <span style={{ color: "#4B5563" }}>·</span>
+              <span className="hidden sm:inline" style={{ color: "#4B5563" }}>·</span>
               <span style={{ color: "#6B7280" }}>
                 Next cohort: July 1 – 28, 2026 · {spotsLeft} spots remaining
               </span>
@@ -339,7 +339,7 @@ export default async function ClinicsPage() {
               return (
                 <div
                   key={tier.id}
-                  className="rounded-2xl border overflow-hidden flex flex-col relative"
+                  className="rounded-2xl border overflow-hidden flex flex-col"
                   style={{
                     backgroundColor: "#0F172A",
                     borderColor: tier.recommended ? `${accent}60` : "#1E293B",
@@ -349,25 +349,25 @@ export default async function ClinicsPage() {
                   {/* Top accent bar */}
                   <div className="h-1" style={{ backgroundColor: accent }} />
 
-                  {/* Most Popular badge */}
-                  {tier.recommended && (
-                    <div
-                      className="absolute top-5 right-5 text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
-                      style={{ backgroundColor: `${accent}20`, color: accent, border: `1px solid ${accent}40` }}
-                    >
-                      Most Popular
-                    </div>
-                  )}
-
                   <div className="p-7 flex flex-col flex-1">
-                    {/* Tier label + name */}
-                    <div className="mb-5">
-                      <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: accent }}>
-                        {tier.tagline}
-                      </p>
-                      <h3 className="text-xl font-bold" style={{ color: "#F9FAFB" }}>
-                        {tier.name}
-                      </h3>
+                    {/* Header row: tagline + name left, badge right — in-flow, no overlap */}
+                    <div className="flex items-start justify-between gap-3 mb-5">
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: accent }}>
+                          {tier.tagline}
+                        </p>
+                        <h3 className="text-xl font-bold" style={{ color: "#F9FAFB" }}>
+                          {tier.name}
+                        </h3>
+                      </div>
+                      {tier.recommended && (
+                        <span
+                          className="flex-shrink-0 text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full whitespace-nowrap"
+                          style={{ backgroundColor: `${accent}20`, color: accent, border: `1px solid ${accent}40` }}
+                        >
+                          ★ Most Popular
+                        </span>
+                      )}
                     </div>
 
                     {/* Pricing block */}
@@ -410,12 +410,12 @@ export default async function ClinicsPage() {
                     {/* Feature list */}
                     <ul className="space-y-2.5 mb-8 flex-1">
                       {tier.includes.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+                        <li key={i} className="flex items-start gap-2.5 text-xs leading-relaxed">
                           <CheckCircle
                             className="h-3.5 w-3.5 flex-shrink-0 mt-0.5"
-                            style={{ color: i < 4 ? "#6B7280" : accent }}
+                            style={{ color: accent }}
                           />
-                          <span style={{ color: i >= 4 ? "#D1D5DB" : "#9CA3AF", fontWeight: i >= 4 ? 500 : 400 }}>
+                          <span style={{ color: "#D1D5DB" }}>
                             {item}
                           </span>
                         </li>
@@ -495,11 +495,11 @@ export default async function ClinicsPage() {
                 <Users className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
                 <span className="text-xs font-semibold" style={{ color: "#6B7280" }}>Group discounts:</span>
               </div>
-              <div className="flex flex-wrap gap-3 text-xs" style={{ color: "#6B7280" }}>
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-1.5 sm:gap-x-4 sm:gap-y-1 text-xs" style={{ color: "#6B7280" }}>
                 <span>5–10 researchers → <strong style={{ color: "#F9FAFB" }}>20% off</strong></span>
-                <span style={{ color: "#374151" }}>·</span>
+                <span className="hidden sm:inline" style={{ color: "#374151" }}>·</span>
                 <span>11–20 researchers → <strong style={{ color: "#F9FAFB" }}>30% off</strong></span>
-                <span style={{ color: "#374151" }}>·</span>
+                <span className="hidden sm:inline" style={{ color: "#374151" }}>·</span>
                 <span>Institutional → <a href={buildWhatsAppUrl("institutional group enrollment for Digital Visibility Clinic")} target="_blank" rel="noopener noreferrer" style={{ color: "#2563EB" }}>enquire via WhatsApp</a></span>
               </div>
             </div>

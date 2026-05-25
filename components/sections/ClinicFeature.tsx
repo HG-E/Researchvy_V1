@@ -161,10 +161,20 @@ export function ClinicFeature() {
               ))}
 
               <div className="mt-6 pt-6 border-t" style={{ borderColor: "#334155" }}>
-                <p className="text-xs" style={{ color: "#6B7280" }}>
-                  Pricing is communicated upon enquiry. Use the WhatsApp button to get tailored
-                  information for your specific needs.
+                <p className="text-xs mb-2" style={{ color: "#6B7280" }}>
+                  From{" "}
+                  <strong style={{ color: "#F9FAFB" }}>$59 USD</strong>
+                  {" / "}
+                  <strong style={{ color: "#10B981" }}>₦38,000 NGN</strong>
+                  {" "}early bird · Early bird closes June 20.
                 </p>
+                <a
+                  href="/clinics#pricing"
+                  className="text-xs font-semibold"
+                  style={{ color: "#2563EB" }}
+                >
+                  See full pricing & tiers →
+                </a>
               </div>
             </div>
           </motion.div>
