@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { format } from "date-fns";
@@ -156,6 +157,23 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             </div>
           </address>
         </header>
+
+        {/* Featured image hero */}
+        {insight.featured_image && (
+          <div
+            className="relative max-w-3xl mb-10 rounded-2xl overflow-hidden"
+            style={{ aspectRatio: "16/9" }}
+          >
+            <Image
+              src={insight.featured_image}
+              alt={insight.title}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 768px"
+            />
+          </div>
+        )}
 
         {/* Content + TOC */}
         <div className="flex gap-16 items-start">
