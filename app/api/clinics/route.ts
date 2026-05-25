@@ -56,8 +56,28 @@ export async function POST(req: NextRequest) {
     from:    "Researchvy Website <info@researchvy.com>",
     to:      ["info@researchvy.com"],
     cc:      ["researchvy@gmail.com"],
-    subject: `New clinic interest: ${clinicSlug} — ${user.email}`,
-    html: `<p><strong>New clinic interest registered</strong></p><p>Email: ${user.email}</p><p>Name: ${fullName || "(not set)"}</p><p>Clinic: ${clinicSlug}</p><p>Registered at: ${new Date().toISOString()}</p>`,
+    replyTo: user.email!,
+    subject: `🎓 New clinic interest: ${clinicLabel} — ${user.email}`,
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;">
+        <div style="background:#0F172A;padding:16px 20px;border-radius:8px;margin-bottom:20px;">
+          <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#2563EB;">Researchvy Clinics</p>
+          <h2 style="margin:6px 0 0;color:#F9FAFB;font-size:18px;">New Clinic Interest Registered</h2>
+        </div>
+        <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
+          <tr><td style="padding:10px 0;color:#6B7280;width:140px;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Name</td>
+              <td style="padding:10px 0;color:#0F172A;font-weight:600;border-bottom:1px solid #F3F4F6;font-size:14px;">${fullName || "(not set)"}</td></tr>
+          <tr><td style="padding:10px 0;color:#6B7280;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Email</td>
+              <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;"><a href="mailto:${user.email}" style="color:#2563EB;">${user.email}</a></td></tr>
+          <tr><td style="padding:10px 0;color:#6B7280;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Clinic</td>
+              <td style="padding:10px 0;color:#0F172A;border-bottom:1px solid #F3F4F6;font-size:14px;">${clinicLabel}</td></tr>
+          <tr><td style="padding:10px 0;color:#6B7280;vertical-align:top;font-size:14px;">Registered at</td>
+              <td style="padding:10px 0;color:#0F172A;font-size:14px;">${new Date().toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })} UTC</td></tr>
+        </table>
+        <a href="https://researchvy.com/admin/enquiries" style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;">View in Admin Panel →</a>
+        <p style="margin-top:16px;font-size:12px;color:#9CA3AF;">Reply to this email to contact ${user.email} directly.</p>
+      </div>
+    `,
   }).catch(() => {});
 
   // Send confirmation to the user (non-blocking)

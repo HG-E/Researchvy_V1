@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { GraduationCap, ArrowRight, CheckCircle2, Clock } from "lucide-react";
+import { GraduationCap, ArrowRight, CheckCircle2, Clock, Calendar, Users } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getServerUser } from "@/lib/auth/supabase";
-import { createSupabaseServerClient } from "@/lib/auth/supabase";
+import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { ClinicEnrollButton } from "@/components/dashboard/ClinicEnrollButton";
+import { digitalVisibilityClinic } from "@/constants/clinics";
 
 export const metadata = generatePageMetadata({ title: "My Clinics", noIndex: true });
 
@@ -13,6 +14,10 @@ const CLINIC = {
   tagline: "6 sessions. One complete scholarly visibility transformation.",
   href:    "/clinics/digital-visibility-clinic",
 };
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+}
 
 async function getEnquiryStatus(userId: string): Promise<"pending" | "contacted" | "enrolled" | null> {
   const supabase = await createSupabaseServerClient();
@@ -31,11 +36,33 @@ const STATUS_LABELS: Record<string, string> = {
   enrolled:  "Enrolled",
 };
 
+async function getSpotsTaken(): Promise<number> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const { count } = await admin
+      .from("clinic_enquiries")
+      .select("*", { count: "exact", head: true })
+      .eq("clinic_slug", CLINIC.slug)
+      .neq("status", "declined");
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
 export default async function MyClinicsPage() {
   const user = await getServerUser();
   if (!user) return null;
 
-  const enquiryStatus = await getEnquiryStatus(user.id);
+  const [enquiryStatus, spotsTaken] = await Promise.all([
+    getEnquiryStatus(user.id),
+    getSpotsTaken(),
+  ]);
+
+  const cohort        = digitalVisibilityClinic.nextCohort;
+  const spotsLeft     = Math.max(0, digitalVisibilityClinic.capacity - spotsTaken);
+  const isClosingSoon = spotsLeft <= 8;
+  const isFull        = cohort.status === "full" || spotsLeft === 0;
   const hasRegistered  = enquiryStatus !== null;
 
   return (
@@ -97,8 +124,41 @@ export default async function MyClinicsPage() {
           </p>
         )}
 
+        {/* Next cohort info */}
+        {cohort.status !== "tba" && (
+          <div
+            className="rounded-xl border p-4 mb-5 flex flex-wrap items-center gap-x-5 gap-y-2"
+            style={{
+              backgroundColor: isFull ? "rgba(239,68,68,0.05)" : isClosingSoon ? "rgba(245,158,11,0.05)" : "rgba(16,185,129,0.05)",
+              borderColor:     isFull ? "rgba(239,68,68,0.15)"  : isClosingSoon ? "rgba(245,158,11,0.2)"   : "rgba(16,185,129,0.15)",
+            }}
+          >
+            <div className="flex items-center gap-2">
+              <Calendar className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#10B981" }} />
+              <span className="text-xs font-semibold" style={{ color: "#F9FAFB" }}>
+                Next cohort: {formatDate(cohort.startDate)}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
+              <span className="text-xs" style={{ color: "#9CA3AF" }}>{cohort.schedule}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="h-3.5 w-3.5 flex-shrink-0" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#6B7280" }} />
+              <span className="text-xs font-semibold" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#9CA3AF" }}>
+                {isFull ? "Cohort full" : `${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} remaining`}
+              </span>
+            </div>
+          </div>
+        )}
+
         <div className="flex items-center gap-3 flex-wrap">
-          {!hasRegistered && <ClinicEnrollButton clinicSlug={CLINIC.slug} />}
+          {!hasRegistered && !isFull && <ClinicEnrollButton clinicSlug={CLINIC.slug} />}
+          {!hasRegistered && isFull && (
+            <span className="text-xs font-semibold px-4 py-2.5 rounded-xl" style={{ backgroundColor: "rgba(239,68,68,0.1)", color: "#F87171" }}>
+              This cohort is full — check back for the next one
+            </span>
+          )}
           <Link
             href={CLINIC.href}
             className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200"

@@ -123,6 +123,17 @@ export const digitalVisibilityClinic = {
     "Certificate shareable on LinkedIn",
     "Continued learning pathway recommendations",
   ],
+
+  nextCohort: {
+    id:                   "cohort-2026-02",
+    startDate:            "2026-06-15",
+    registrationDeadline: "2026-06-08",
+    schedule:             "Mondays, 6:00–8:00 PM WAT",
+    timezone:             "West Africa Time (UTC+1)",
+    // "open" | "closing-soon" | "full" | "tba"
+    // Update this manually if the cohort fills or is postponed
+    status:               "open" as "open" | "closing-soon" | "full" | "tba",
+  },
 } as const;
 
 export type DigitalVisibilityClinic = typeof digitalVisibilityClinic;

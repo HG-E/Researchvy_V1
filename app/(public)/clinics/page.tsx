@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Bell } from "lucide-react";
+import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Bell, Calendar, Clock, Users } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { buildWhatsAppUrl } from "@/config/site";
+import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 
 export const metadata = generatePageMetadata({
   title: "Clinics",
@@ -28,8 +29,31 @@ const COMING_SOON = [
   },
 ];
 
-export default function ClinicsPage() {
-  const waUrl = buildWhatsAppUrl(digitalVisibilityClinic.name);
+function formatCohortDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+}
+
+async function getSpotsTaken(): Promise<number> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const { count } = await admin
+      .from("clinic_enquiries")
+      .select("*", { count: "exact", head: true })
+      .eq("clinic_slug", digitalVisibilityClinic.slug)
+      .neq("status", "declined");
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
+export default async function ClinicsPage() {
+  const waUrl      = buildWhatsAppUrl(digitalVisibilityClinic.name);
+  const cohort     = digitalVisibilityClinic.nextCohort;
+  const spotsTaken = await getSpotsTaken();
+  const spotsLeft  = Math.max(0, digitalVisibilityClinic.capacity - spotsTaken);
+  const isClosingSoon = spotsLeft <= 8;
+  const isFull        = cohort.status === "full" || spotsLeft === 0;
 
   return (
     <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
@@ -51,6 +75,50 @@ export default function ClinicsPage() {
             with a personal strategy, a verified certificate, and results you can measure.
           </p>
         </div>
+
+        {/* Next cohort urgency bar */}
+        {cohort.status !== "tba" && (
+          <div
+            className="rounded-2xl border p-5 mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+            style={{
+              backgroundColor: isFull ? "rgba(239,68,68,0.05)" : isClosingSoon ? "rgba(245,158,11,0.06)" : "rgba(16,185,129,0.06)",
+              borderColor:     isFull ? "rgba(239,68,68,0.2)"  : isClosingSoon ? "rgba(245,158,11,0.25)"  : "rgba(16,185,129,0.2)",
+            }}
+          >
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 flex-shrink-0" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#10B981" }} />
+                <span className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+                  Next cohort: {formatCohortDate(cohort.startDate)}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
+                <span className="text-sm" style={{ color: "#9CA3AF" }}>{cohort.schedule}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="h-3.5 w-3.5 flex-shrink-0" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#6B7280" }} />
+                <span className="text-sm font-semibold" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#9CA3AF" }}>
+                  {isFull ? "Cohort full" : `${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} remaining`}
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              <p className="text-xs" style={{ color: "#6B7280" }}>
+                Registration closes {formatCohortDate(cohort.registrationDeadline)}
+              </p>
+              {!isFull && (
+                <Link
+                  href="/auth/signup"
+                  className="rounded-xl px-4 py-2 text-xs font-bold text-white whitespace-nowrap"
+                  style={{ backgroundColor: isClosingSoon ? "#D97706" : "#2563EB" }}
+                >
+                  {isClosingSoon ? "Reserve My Spot" : "Join This Cohort"}
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Featured clinic */}
         <div
