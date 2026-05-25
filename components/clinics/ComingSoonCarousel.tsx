@@ -40,7 +40,7 @@ export function ComingSoonCarousel() {
             <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>{name}</p>
             <p className="text-xs leading-relaxed mb-4" style={{ color: "#6B7280" }}>{tagline}</p>
             <a
-              href={buildWhatsAppUrl(`${name} — register interest`)}
+              href={buildWhatsAppUrl(`${name}, register interest`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors hover:bg-[#1E3A2F]"
@@ -75,7 +75,7 @@ export function ComingSoonCarousel() {
             <p className="text-sm font-semibold mb-1.5" style={{ color: "#F9FAFB" }}>{name}</p>
             <p className="text-xs leading-relaxed mb-5" style={{ color: "#6B7280" }}>{tagline}</p>
             <a
-              href={buildWhatsAppUrl(`${name} — register interest`)}
+              href={buildWhatsAppUrl(`${name}, register interest`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium"

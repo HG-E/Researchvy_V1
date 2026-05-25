@@ -42,7 +42,7 @@ export default async function ManageClinicsPage() {
           Clinics
         </h1>
         <p className="mt-1 text-sm" style={{ color: "#6B7280" }}>
-          {CLINICS.length} programme{CLINICS.length !== 1 ? "s" : ""} — managed via <code className="text-xs px-1 py-0.5 rounded" style={{ backgroundColor: "#1E293B", color: "#60A5FA" }}>constants/clinics.ts</code>
+          {CLINICS.length} programme{CLINICS.length !== 1 ? "s" : ""}, managed via <code className="text-xs px-1 py-0.5 rounded" style={{ backgroundColor: "#1E293B", color: "#60A5FA" }}>constants/clinics.ts</code>
         </p>
       </div>
 
@@ -147,7 +147,7 @@ export default async function ManageClinicsPage() {
               <div className="flex items-center gap-2 mb-4">
                 <BookOpen className="h-4 w-4" style={{ color: "#8B5CF6" }} />
                 <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#4B5563" }}>
-                  Session Unlocks — July 2026 Cohort
+                  Session Unlocks: July 2026 Cohort
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">

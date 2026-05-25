@@ -34,8 +34,8 @@ async function getEnquiryStatus(userId: string): Promise<"pending" | "contacted"
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  pending:   "Interest Registered — we'll be in touch",
-  contacted: "Contacted — check your inbox",
+  pending:   "Interest Registered, we'll be in touch",
+  contacted: "Contacted, check your inbox",
   enrolled:  "Enrolled",
 };
 
@@ -153,7 +153,7 @@ export default async function AcademyPage() {
         </h3>
         <ul className="space-y-3">
           {[
-            "Self-paced with structured weekly milestones — fits around your research schedule",
+            "Self-paced with structured weekly milestones, fits around your research schedule",
             "Built on the Researchvy 7-Step Framework, validated across 100+ researchers",
             "Lifetime access to all materials, templates, and workbooks",
             "Private cohort community with peer accountability",
@@ -175,7 +175,7 @@ export default async function AcademyPage() {
         <div>
           <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Want faster, guided results?</p>
           <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
-            The Digital Visibility Clinic gives you 6 live sessions with expert guidance — faster than self-paced.
+            The Digital Visibility Clinic gives you live sessions with expert guidance, faster than self-paced.
           </p>
         </div>
         <Link

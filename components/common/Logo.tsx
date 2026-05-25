@@ -58,7 +58,7 @@ export function Logo({
   if (!linkToHome) return logoElement;
 
   return (
-    <Link href="/" aria-label="Researchvy — Home">
+    <Link href="/" aria-label="Researchvy Home">
       {logoElement}
     </Link>
   );

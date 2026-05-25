@@ -17,7 +17,7 @@ export const RESOURCES: StaticResource[] = [
   {
     id:          "visibility-scorecard",
     title:       "The Researcher Visibility Scorecard",
-    description: "A 12-point interactive self-assessment that calculates your exact visibility score across Scholar Identity, Discoverability, Citation Health, and Research Communication — and shows you precisely what every gap is costing your h-index, citations, and career right now.",
+    description: "A 12-point interactive self-assessment that calculates your exact visibility score across Scholar Identity, Discoverability, Citation Health, and Research Communication, showing you precisely what every gap is costing your h-index, citations, and career right now.",
     category:    "checklist",
     access:      "newsletter",
     featured:    true,
@@ -39,7 +39,7 @@ export const RESOURCES: StaticResource[] = [
   {
     id:          "google-scholar-framework",
     title:       "Google Scholar Optimisation Framework",
-    description: "How to structure your Google Scholar profile for maximum discoverability — author merging, article verification, citation tracking setup.",
+    description: "How to structure your Google Scholar profile for maximum discoverability, covering author merging, article verification, and citation tracking setup.",
     category:    "guide",
     access:      "newsletter",
     featured:    false,

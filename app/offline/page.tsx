@@ -30,7 +30,7 @@ export default function OfflinePage() {
 
         <p className="text-base leading-relaxed mb-8" style={{ color: "#6B7280" }}>
           It looks like you&apos;ve lost your internet connection. Previously visited pages are
-          available from your cache — or come back when you&apos;re back online.
+          available from your cache, or come back when you&apos;re back online.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">

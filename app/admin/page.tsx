@@ -238,7 +238,7 @@ export default async function AdminOverviewPage() {
             </div>
             <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
               {process.env.NEXT_PUBLIC_POSTHOG_KEY
-                ? "Connected — tracking active."
+                ? "Connected, tracking active."
                 : "Not configured. Add NEXT_PUBLIC_POSTHOG_KEY to .env.local."}
             </p>
           </div>

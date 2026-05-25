@@ -73,7 +73,7 @@ export function NewsletterForm({ variant = "inline", resourceTitle, redirectTo }
           </div>
           <div>
             <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>Free Resources by Email</p>
-            <p className="text-xs" style={{ color: "#6B7280" }}>No spam — scholarly visibility insights only</p>
+            <p className="text-xs" style={{ color: "#6B7280" }}>No spam, scholarly visibility insights only</p>
           </div>
         </div>
         <form onSubmit={handleSubmit} className="flex gap-2">

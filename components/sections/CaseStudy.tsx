@@ -11,7 +11,7 @@ import { MobileCarousel } from "@/components/ui/MobileCarousel";
 const BEFORE_METRICS = [
   { label: "h-index",                                  value: "3",           note: "After 8 years of publishing" },
   { label: "Total citations",                           value: "28",          note: "Across all platforms" },
-  { label: "Publications on Google Scholar",            value: "34 of 51",    note: "17 missing — never claimed" },
+  { label: "Publications on Google Scholar",            value: "34 of 51",    note: "17 missing, never claimed" },
   { label: "ORCID status",                              value: "Unclaimed",   note: "Works not linked to profile" },
   { label: "Scopus profiles",                           value: "2 duplicates",note: "Citations split across two IDs" },
   { label: "International collaborations",              value: "0",           note: "In the previous 3 years" },
@@ -27,12 +27,12 @@ const AFTER_METRICS = [
 ];
 
 const AUDIT_FINDINGS = [
-  "17 publications not appearing on her Google Scholar profile — never discovered by the field",
+  "17 publications not appearing on her Google Scholar profile, never discovered by the field",
   "2 conflicting Scopus author IDs splitting her citation count in half",
-  "ORCID iD unverified — journals couldn't programmatically link her work",
+  "ORCID iD unverified, journals couldn't programmatically link her work",
   "No institutional repository record updated since 2020",
   "Research keywords not matching the terms her field actually searches for",
-  "Zero presence on ResearchGate — where 20M+ researchers find related work",
+  "Zero presence on ResearchGate, where 20M+ researchers find related work",
 ];
 
 const TURNING_POINTS = [
@@ -145,7 +145,7 @@ export function CaseStudy() {
           </div>
           <p className="text-sm mt-6 pt-5 border-t leading-relaxed" style={{ borderColor: "rgba(239,68,68,0.15)", color: "#6B7280" }}>
             The problem wasn&apos;t her research quality. It was that the discovery systems her field
-            uses couldn&apos;t find her — because her identity across platforms was fragmented,
+            uses couldn&apos;t find her, because her identity across platforms was fragmented,
             incomplete, and unverified. None of this was visible to her until the audit.
           </p>
         </motion.div>
@@ -166,7 +166,7 @@ export function CaseStudy() {
               }}
               onClick={() => setActiveTab("before")}
             >
-              Before — Week 1
+              Before, Week 1
             </button>
             <button
               className="flex-1 py-3.5 text-sm font-bold transition-all duration-200"
@@ -176,7 +176,7 @@ export function CaseStudy() {
               }}
               onClick={() => setActiveTab("after")}
             >
-              After — 4 Months
+              After, 4 Months
             </button>
           </div>
 
@@ -192,7 +192,7 @@ export function CaseStudy() {
                 style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
               >
                 <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#EF4444" }}>
-                  Before — Week 1 of Clinic
+                  Before, Week 1
                 </p>
                 <div className="space-y-4">
                   {BEFORE_METRICS.map(({ label, value, note }) => (
@@ -217,7 +217,7 @@ export function CaseStudy() {
                 style={{ backgroundColor: "#0F172A", borderColor: "rgba(16,185,129,0.3)" }}
               >
                 <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#10B981" }}>
-                  After — 4 Months Post-Clinic
+                  After, 4 Months
                 </p>
                 <div className="space-y-4">
                   {AFTER_METRICS.map(({ label, value, delta, note }) => (
@@ -254,7 +254,7 @@ export function CaseStudy() {
             style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
           >
             <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#EF4444" }}>
-              Before — Week 1 of Clinic
+              Before, Week 1
             </p>
             <div className="space-y-4">
               {BEFORE_METRICS.map(({ label, value, note }) => (
@@ -278,7 +278,7 @@ export function CaseStudy() {
             style={{ backgroundColor: "#0F172A", borderColor: "rgba(16,185,129,0.3)" }}
           >
             <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#10B981" }}>
-              After — 4 Months Post-Clinic
+              After, 4 Months
             </p>
             <div className="space-y-4">
               {AFTER_METRICS.map(({ label, value, delta, note }) => (
@@ -362,7 +362,7 @@ export function CaseStudy() {
             because public health in my region isn&apos;t well represented in global databases.
             The audit showed me the real reason: my work wasn&apos;t discoverable. Half my publications
             weren&apos;t even showing up when someone searched my name. That was the moment I understood
-            that visibility isn&apos;t automatic — it&apos;s a skill. The clinic taught me that skill.
+            that visibility isn&apos;t automatic, it&apos;s a skill. The clinic taught me that skill.
             Four months later, my h-index has moved for the first time since I started publishing.&rdquo;
           </p>
           <div className="pt-5 border-t" style={{ borderColor: "rgba(37,99,235,0.15)" }}>

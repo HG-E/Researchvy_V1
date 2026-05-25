@@ -45,7 +45,7 @@ export function WhatsAppButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${label} — opens WhatsApp`}
+      aria-label={`${label} (opens WhatsApp)`}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3",
         "text-sm font-semibold transition-all duration-200",

@@ -13,11 +13,11 @@ Researchvy is a scholarly visibility and research intelligence ecosystem that he
 
 ## Core Services
 
-- **Researchvy Clinics** — Live 6-session Digital Visibility Clinic™ in cohorts of ≤20. Researchers leave with a fully optimised scholarly identity, personal visibility strategy, and verified certificate. ${base}/clinics
-- **Researchvy Academy** — A 5-level structured curriculum teaching visibility skills academia never taught: from foundation to advanced citation strategy. ${base}/academy
-- **Researchvy Intelligence** — Visibility audits, citation intelligence, and institutional benchmarking — measuring your discoverability gaps and building a prioritised plan to close them. ${base}/ecosystem
-- **Researchvy Media** — Research storytelling, visual abstracts, and policy translation — making research findings accessible to policymakers, practitioners, and the public. ${base}/ecosystem
-- **Researchvy Network** — Peer community and fellows programme for researchers building global visibility together. ${base}/ecosystem
+- **Researchvy Clinics**: Live Digital Visibility Clinic in cohorts of up to 20. Researchers leave with a fully optimised scholarly identity, personal visibility strategy, and verified certificate. ${base}/clinics
+- **Researchvy Academy**: A 5-level structured curriculum teaching visibility skills academia never taught, from foundation to advanced citation strategy. ${base}/academy
+- **Researchvy Intelligence**: Visibility audits, citation intelligence, and institutional benchmarking, measuring your discoverability gaps and building a prioritised plan to close them. ${base}/ecosystem
+- **Researchvy Media**: Research storytelling, visual abstracts, and policy translation, making research findings accessible to policymakers, practitioners, and the public. ${base}/ecosystem
+- **Researchvy Network**: Peer community and fellows programme for researchers building global visibility together. ${base}/ecosystem
 
 ## Key Pages
 

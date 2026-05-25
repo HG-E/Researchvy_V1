@@ -6,20 +6,20 @@ export const metadata = generatePageMetadata({ title: "Analytics" });
 const isConnected = !!process.env.NEXT_PUBLIC_POSTHOG_KEY;
 
 const TRACKED_EVENTS = [
-  { icon: Eye,          label: "$pageview",             desc: "Every page visited — path, referrer, device" },
+  { icon: Eye,          label: "$pageview",             desc: "Every page visited: path, referrer, device" },
   { icon: MousePointer, label: "$autocapture",           desc: "Clicks, form interactions, rage clicks" },
   { icon: BookOpen,     label: "insight_read",           desc: "When a reader opens an article (auto via pageview)" },
-  { icon: BarChart2,    label: "$pageleave",             desc: "When a visitor leaves — dwell time" },
+  { icon: BarChart2,    label: "$pageleave",             desc: "When a visitor leaves, dwell time" },
   { icon: Mail,         label: "newsletter_subscribed",  desc: "Successful newsletter form submission" },
 ];
 
 const SETUP_STEPS = [
   { step: 1, text: "Create a free account at posthog.com" },
-  { step: 2, text: "Create a new project — choose US or EU cloud" },
+  { step: 2, text: "Create a new project, choose US or EU cloud" },
   { step: 3, text: "Copy your Project API Key from Project Settings" },
   { step: 4, text: "Add NEXT_PUBLIC_POSTHOG_KEY=phc_xxx to .env.local" },
   { step: 5, text: "Add NEXT_PUBLIC_POSTHOG_KEY and NEXT_PUBLIC_POSTHOG_HOST to Vercel environment variables" },
-  { step: 6, text: "Redeploy — tracking activates on the next visit" },
+  { step: 6, text: "Redeploy, tracking activates on the next visit" },
 ];
 
 export default function AnalyticsPage() {

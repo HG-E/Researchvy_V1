@@ -35,7 +35,7 @@ export default function GlobalError({
           Unexpected error
         </h1>
         <p className="text-base leading-relaxed mb-10" style={{ color: "#6B7280" }}>
-          An error occurred while loading this page. This has been logged — please try again
+          An error occurred while loading this page. This has been logged, please try again
           or return home.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">

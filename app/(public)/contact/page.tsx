@@ -31,7 +31,7 @@ export default function ContactPage() {
             Contact Us
           </h1>
           <p className="text-lg" style={{ color: "#9CA3AF" }}>
-            Questions, partnerships, or just curious about what we do — we&apos;d love to hear
+            Questions, partnerships, or just curious about what we do, we&apos;d love to hear
             from you.
           </p>
         </div>

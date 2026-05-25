@@ -69,7 +69,7 @@ export default function ResourceLibraryPage() {
               </p>
               <div>
                 <p className="text-sm mb-1 font-medium" style={{ color: "#9CA3AF" }}>
-                  Free — enter your email to access instantly:
+                  Free, enter your email to access instantly:
                 </p>
                 <p className="text-xs mb-3 leading-relaxed" style={{ color: "#4B5563" }}>
                   Most researchers score between 25–45. See exactly where you stand.
@@ -130,7 +130,7 @@ export default function ResourceLibraryPage() {
           </h2>
           <p className="text-sm mb-8 max-w-lg mx-auto" style={{ color: "#6B7280" }}>
             New resources, articles, and clinic announcements delivered to your inbox.
-            No spam — scholarly intelligence only.
+            No spam, scholarly intelligence only.
           </p>
           <div className="flex justify-center">
             <NewsletterForm variant="inline" />

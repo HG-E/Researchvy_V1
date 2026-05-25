@@ -110,7 +110,7 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
             <strong style={{ color: "#BFDBFE" }}>6 live sessions</strong> × 3 hrs +{" "}
             <strong style={{ color: "#BFDBFE" }}>6 weekly task sets</strong> × 2 hrs ={" "}
             <strong style={{ color: "#BFDBFE" }}>30 hours total</strong> over 6 weeks.
-            Tasks unlock after each session — complete them at your own pace that week.
+            Tasks unlock after each session, complete them at your own pace that week.
           </p>
         </div>
       )}
@@ -125,7 +125,7 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
         {state === "loading" ? (
           <><Loader2 className="h-4 w-4 animate-spin" /> Registering…</>
         ) : state === "error" ? (
-          "Something went wrong — try again"
+          "Something went wrong, try again"
         ) : selected ? (
           `Register for ${tracks[selected].label} Track`
         ) : (

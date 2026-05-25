@@ -16,7 +16,7 @@ const INTEREST_AREAS = [
   "Staff Development Programme (Academy)",
   "Discounted Clinic Access for Staff/Students",
   "Strategic Partnership (full scope)",
-  "Not sure — want to discuss",
+  "Not sure, want to discuss",
 ];
 
 const INPUT_STYLE: React.CSSProperties = {

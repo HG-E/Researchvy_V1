@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
     to:      ["info@researchvy.com"],
     cc:      ["researchvy@gmail.com"],
     replyTo: user.email!,
-    subject: `🎓 New clinic interest: ${clinicLabel} — ${user.email}`,
+    subject: `🎓 New clinic interest: ${clinicLabel}, ${user.email}`,
     html: `
       <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;">
         <div style="background:#0F172A;padding:16px 20px;border-radius:8px;margin-bottom:20px;">

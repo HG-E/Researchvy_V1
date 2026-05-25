@@ -31,8 +31,8 @@ async function getEnquiryStatus(userId: string): Promise<"pending" | "contacted"
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  pending:   "Interest Registered — we'll be in touch",
-  contacted: "Contacted — check your inbox",
+  pending:   "Interest Registered, we'll be in touch",
+  contacted: "Contacted, check your inbox",
   enrolled:  "Enrolled",
 };
 
@@ -136,7 +136,7 @@ export default async function MyClinicsPage() {
             <p className="text-sm leading-relaxed" style={{ color: "#93C5FD" }}>
               Your interest has been registered. Our team will reach out to{" "}
               <strong style={{ color: "#BFDBFE" }}>{user.email}</strong> with cohort details and scheduling.
-              Spots are limited — we typically contact registered members within 3–5 business days.
+              Spots are limited, we typically contact registered members within 3–5 business days.
             </p>
           </div>
         ) : !hasRegistered ? (
@@ -178,7 +178,7 @@ export default async function MyClinicsPage() {
           {!hasRegistered && !isFull && <ClinicEnrollButton clinicSlug={CLINIC.slug} />}
           {!hasRegistered && isFull && (
             <span className="text-xs font-semibold px-4 py-2.5 rounded-xl" style={{ backgroundColor: "rgba(239,68,68,0.1)", color: "#F87171" }}>
-              This cohort is full — check back for the next one
+              This cohort is full, check back for the next one
             </span>
           )}
           <Link

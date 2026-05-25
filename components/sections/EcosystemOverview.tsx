@@ -84,7 +84,7 @@ export function EcosystemOverview() {
             Five Divisions. One Mission.
           </h2>
           <p className="text-base max-w-2xl mx-auto" style={{ color: "#9CA3AF" }}>
-            From intelligence and analytics to community and clinics — every dimension of scholarly
+            From intelligence and analytics to community and clinics, every dimension of scholarly
             visibility is covered.
           </p>
         </motion.div>

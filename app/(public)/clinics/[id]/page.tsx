@@ -81,7 +81,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
           </p>
           <p className="text-base leading-relaxed" style={{ color: "#4B5563" }}>
             Most researchers finish this clinic and say the same thing: they had no idea how
-            invisible they were — or how fixable it was. In 6 sessions, you get a complete
+            invisible they were, and how fixable it was. In our sessions, you get a complete
             scholarly identity overhaul, a personal visibility strategy, and a verified certificate.
           </p>
 
@@ -280,7 +280,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 About Pricing
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-                Researchvy does not display fixed pricing publicly. Pricing is contextual — based on
+                Researchvy does not display fixed pricing publicly. Pricing is contextual, based on
                 your institution, cohort size, and whether you are registering as an individual or
                 through an institution. Reach out via{" "}
                 <span style={{ color: "#9CA3AF" }}>WhatsApp</span> or email{" "}

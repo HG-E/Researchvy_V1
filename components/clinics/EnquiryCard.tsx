@@ -23,13 +23,13 @@ export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryC
     >
       <div>
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#10B981" }}>
-          Limited Cohort — ≤{capacity} Researchers
+          Limited Cohort, ≤{capacity} Researchers
         </p>
         <p className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
           Claim Your Spot
         </p>
         <p className="text-xs mt-1.5 leading-relaxed" style={{ color: "#6B7280" }}>
-          Pricing is tailored to your context and shared directly. Reach out — we respond within 24 hours.
+          Pricing is tailored to your context and shared directly. Reach out, we respond within 24 hours.
         </p>
       </div>
 

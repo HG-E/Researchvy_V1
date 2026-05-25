@@ -26,7 +26,7 @@ const PILLARS = [
   {
     icon:  Globe,
     title: "Global Reach",
-    desc:  "Members across Africa, Europe, Asia, and the Americas — a genuinely international network that reflects the global nature of research and scholarly communication.",
+    desc:  "Members across Africa, Europe, Asia, and the Americas, a genuinely international network that reflects the global nature of research and scholarly communication.",
     color: "#A78BFA",
   },
   {
@@ -65,7 +65,7 @@ export default function NetworkPage() {
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
             The researchers gaining ground fastest are the ones connected to others doing the
-            same work — sharing what&apos;s working, holding each other accountable, and learning
+            same work, sharing what&apos;s working, holding each other accountable, and learning
             from strategies already proven to move the needle on visibility and impact.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -146,7 +146,7 @@ export default function NetworkPage() {
               Join the Waitlist
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              The Network is being built deliberately — small, serious, and focused.
+              The Network is being built deliberately: small, serious, and focused.
               Express your interest now to be among the first researchers invited when
               membership opens. Spots will be limited.
             </p>

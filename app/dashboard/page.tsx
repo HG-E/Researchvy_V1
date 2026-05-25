@@ -131,7 +131,7 @@ export default async function DashboardPage() {
             <Link href="/clinics" className="underline underline-offset-2 hover:text-white transition-colors" style={{ color: "#60A5FA" }}>
               Digital Visibility Clinic
             </Link>
-            {" "}— our flagship 6-session live programme that takes researchers from overlooked to globally discoverable.
+            {" "}our flagship live programme that takes researchers from overlooked to globally discoverable.
           </p>
         </div>
       )}

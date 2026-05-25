@@ -111,7 +111,7 @@ export function ProfileForm({
           <label className={LABEL_STYLE} style={{ color: "#6B7280" }}>
             Bio{" "}
             <span className="normal-case font-normal" style={{ color: "#374151" }}>
-              (optional — max 500 characters)
+              (optional, max 500 characters)
             </span>
           </label>
           <textarea

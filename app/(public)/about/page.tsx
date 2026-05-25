@@ -9,7 +9,7 @@ import { DivisionsCarousel } from "@/components/about/DivisionsCarousel";
 export const metadata = generatePageMetadata({
   title: "About Researchvy",
   description:
-    "Learn about Researchvy — our mission to transform scholarly visibility, our framework, and our commitment to research impact.",
+    "Learn about Researchvy, our mission to transform scholarly visibility, our framework, and our commitment to research impact.",
   path: "/about",
 });
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
             <span style={{ color: "#2563EB" }}>Who Refuse to Stay Invisible.</span>
           </h1>
           <p className="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#9CA3AF" }}>
-            Researchvy exists because great research deserves to be found — not buried in
+            Researchvy exists because great research deserves to be found, not buried in
             platforms nobody searches, cited by no one, reaching no one. We are the system
             that changes that.
           </p>
@@ -143,8 +143,8 @@ export default function AboutPage() {
                 <div className="pl-4 lg:pl-0 space-y-4 text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
                   <p>
                     You spent years learning how to produce rigorous research. Nobody taught you how
-                    to make it findable. That gap — between what researchers produce and what the world
-                    can discover — is the problem Researchvy was built to close.
+                    to make it findable. That gap between what researchers produce and what the world
+                    can discover is the problem Researchvy was built to close.
                   </p>
                   <p>
                     We are a scholarly visibility and research intelligence ecosystem. We work with
@@ -201,7 +201,7 @@ export default function AboutPage() {
               Five Specialised Divisions
             </h2>
             <p className="text-sm max-w-xl mx-auto leading-relaxed" style={{ color: "#6B7280" }}>
-              Each division addresses a distinct dimension of scholarly visibility —
+              Each division addresses a distinct dimension of scholarly visibility,
               from intelligence and training to storytelling, community, and real-world impact.
             </p>
           </div>
@@ -280,7 +280,7 @@ export default function AboutPage() {
           </h2>
           <p className="text-base mb-8 leading-relaxed" style={{ color: "#9CA3AF" }}>
             Join a Researchvy Clinic and leave with a personal visibility strategy, verified
-            certificate, and measurable results — in 6 structured live sessions.
+            certificate, and measurable results across our structured live sessions.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link

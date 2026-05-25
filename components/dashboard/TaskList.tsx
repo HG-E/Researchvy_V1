@@ -79,7 +79,7 @@ function SessionRow({
       // Revert
       setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: task.is_completed } : t));
       onDelta(newCompleted ? -1 : 1);
-      setApiError(err instanceof Error ? err.message : "Failed to save — please try again");
+      setApiError(err instanceof Error ? err.message : "Failed to save, please try again");
     }
     setLoading(null);
   }
@@ -99,7 +99,7 @@ function SessionRow({
       // Revert — restore original state (not yet completed, original reflection)
       setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: false, reflection: task.reflection } : t));
       onDelta(-1);
-      setApiError(err instanceof Error ? err.message : "Failed to save — please try again");
+      setApiError(err instanceof Error ? err.message : "Failed to save, please try again");
     }
     setLoading(null);
   }
@@ -120,7 +120,7 @@ function SessionRow({
       setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: true, reflection: task.reflection } : t));
       setReflections((prev) => ({ ...prev, [task.id]: "" }));
       onDelta(1);
-      setApiError(err instanceof Error ? err.message : "Failed to update — please try again");
+      setApiError(err instanceof Error ? err.message : "Failed to update, please try again");
     }
     setLoading(null);
   }

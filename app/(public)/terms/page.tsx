@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata = generatePageMetadata({
   title: "Terms of Service",
-  description: "The terms governing your use of Researchvy — our platform, clinics, and services.",
+  description: "The terms governing your use of Researchvy, our platform, clinics, and services.",
   path: "/terms",
 });
 
@@ -101,7 +101,7 @@ export default function TermsPage() {
               {[
                 "Participate actively and respectfully in all sessions.",
                 "Not share session recordings, materials, or resources outside your cohort without our written consent.",
-                "Honour the scheduled session times — we cannot offer makeup sessions for missed classes without prior arrangement.",
+                "Honour the scheduled session times, we cannot offer makeup sessions for missed classes without prior arrangement.",
                 "Maintain confidentiality of discussions shared by other participants.",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2">
@@ -131,8 +131,8 @@ export default function TermsPage() {
 
           <Section title="5. Intellectual Property">
             <p>
-              All content on Researchvy — including but not limited to course materials, scorecard tools,
-              articles, templates, and branding — is owned by Researchvy or its licensors and is
+              All content on Researchvy, including but not limited to course materials, scorecard tools,
+              articles, templates, and branding, is owned by Researchvy or its licensors and is
               protected by copyright.
             </p>
             <p>
@@ -185,8 +185,8 @@ export default function TermsPage() {
           <Section title="8. Disclaimers">
             <p>
               Researchvy provides training, tools, and guidance to improve scholarly visibility. We do
-              not guarantee specific outcomes — including citation increases, h-index growth, or career
-              advancement — as these depend on factors outside our control.
+              not guarantee specific outcomes, including citation increases, h-index growth, or career
+              advancement, as these depend on factors outside our control.
             </p>
             <p>
               The platform is provided &ldquo;as is&rdquo; without warranties of any kind, either express or

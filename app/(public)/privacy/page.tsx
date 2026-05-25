@@ -137,12 +137,12 @@ export default function PrivacyPage() {
             <p>Depending on your location, you may have the following rights over your personal data:</p>
             <ul className="space-y-2 mt-2">
               {[
-                "Access — request a copy of the personal data we hold about you.",
-                "Correction — request that we correct inaccurate or incomplete data.",
-                "Deletion — request that we delete your personal data.",
-                "Objection — object to us processing your data for direct marketing.",
-                "Portability — request your data in a machine-readable format.",
-                "Withdrawal — withdraw consent at any time where processing is based on consent.",
+                "Access: request a copy of the personal data we hold about you.",
+                "Correction: request that we correct inaccurate or incomplete data.",
+                "Deletion: request that we delete your personal data.",
+                "Objection: object to us processing your data for direct marketing.",
+                "Portability: request your data in a machine-readable format.",
+                "Withdrawal: withdraw consent at any time where processing is based on consent.",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <span style={{ color: "#2563EB" }}>—</span>

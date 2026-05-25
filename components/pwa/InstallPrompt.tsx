@@ -60,7 +60,7 @@ export function InstallPrompt() {
           Install Researchvy
         </p>
         <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#6B7280" }}>
-          Add to your home screen for quick access — works offline too.
+          Add to your home screen for quick access, works offline too.
         </p>
         <button
           onClick={handleInstall}

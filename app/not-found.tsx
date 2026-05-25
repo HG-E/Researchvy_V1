@@ -12,7 +12,7 @@ export default function NotFound() {
           className="text-xs font-semibold tracking-widest uppercase mb-4"
           style={{ color: "#2563EB" }}
         >
-          404 — Page Not Found
+          404: Page Not Found
         </p>
         <h1
           className="text-5xl font-bold mb-4 leading-tight"

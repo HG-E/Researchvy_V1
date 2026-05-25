@@ -67,7 +67,7 @@ export default function EcosystemPage() {
           </h1>
           <p className="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#9CA3AF" }}>
             Most researchers address one piece of the visibility problem. Researchvy addresses
-            all of it — five specialised divisions working together so nothing gets left behind.
+            all of it, five specialised divisions working together so nothing gets left behind.
           </p>
 
           {/* Division count badges */}

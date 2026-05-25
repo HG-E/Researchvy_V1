@@ -3,7 +3,7 @@ import { VisibilityScorecard } from "@/components/resources/VisibilityScorecard"
 
 export const metadata = generatePageMetadata({
   title: "Researcher Visibility Scorecard",
-  description: "A 12-point self-assessment that calculates your exact scholarly visibility score — and reveals what it's costing you in citations, h-index, and career advancement.",
+  description: "A 12-point self-assessment that calculates your exact scholarly visibility score and reveals what it's costing you in citations, h-index, and career advancement.",
   path: "/resources/visibility-scorecard",
 });
 

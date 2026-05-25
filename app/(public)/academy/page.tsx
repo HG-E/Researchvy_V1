@@ -32,7 +32,7 @@ export default function AcademyPage() {
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
             You were taught to publish. Nobody taught you to be found. Researchvy Academy fills
-            that gap — five structured levels that take you from foundational visibility principles
+            that gap, five structured levels that take you from foundational visibility principles
             to advanced research intelligence strategy.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -137,7 +137,7 @@ export default function AcademyPage() {
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               Cohorts are small and deliberately limited. Early access goes to researchers
-              who register interest first — before public enrolment opens. Don&apos;t wait
+              who register interest first, before public enrolment opens. Don&apos;t wait
               until there are no spots.
             </p>
             <a
@@ -166,7 +166,7 @@ export default function AcademyPage() {
               Begin with a Clinic
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              The Digital Visibility Clinic is our flagship live programme — the fastest way to
+              The Digital Visibility Clinic is our flagship live programme, the fastest way to
               develop practical scholarly visibility skills right now.
             </p>
             <Link

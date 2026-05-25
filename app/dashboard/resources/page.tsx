@@ -61,7 +61,7 @@ export default async function ResourcesPage() {
           </h2>
           <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
             A 12-point interactive self-assessment across Scholar Identity, Discoverability, Citation Health,
-            and Research Communication. See exactly where you stand — and what every gap is costing your h-index right now.
+            and Research Communication. See exactly where you stand and what every gap is costing your h-index right now.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
@@ -190,7 +190,7 @@ export default async function ResourcesPage() {
       >
         <div>
           <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Explore the full resource library</p>
-          <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>Guides, checklists, templates, and workbooks — all free.</p>
+          <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>Guides, checklists, templates, and workbooks, all free.</p>
         </div>
         <Link
           href="/resources"

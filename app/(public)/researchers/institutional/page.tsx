@@ -5,7 +5,7 @@ import { buildWhatsAppUrl } from "@/config/site";
 import { HoverCard } from "@/components/ui/HoverCard";
 
 export const metadata = generatePageMetadata({
-  title: "Institutional Research Visibility — For Universities & Research Offices",
+  title: "Institutional Research Visibility: For Universities & Research Offices",
   description: "Your institution's research is being published. Is it being found, cited, and converting into reputation, funding, and international collaboration? Researchvy builds the infrastructure for institutional visibility at scale.",
   path: "/researchers/institutional",
 });
@@ -20,7 +20,7 @@ const PROBLEMS = [
   {
     stat:   "47%",
     label:  "of institutional publications are below citation benchmark",
-    detail: "Not because the research isn't valuable — because it isn't discoverable. Most institutions have no systematic approach to publication-level discoverability.",
+    detail: "Not because the research isn't valuable, but because it isn't discoverable. Most institutions have no systematic approach to publication-level discoverability.",
     color:  "#F59E0B",
   },
   {
@@ -44,28 +44,28 @@ const AUDIT_DIMENSIONS = [
 const PARTNERSHIP_TYPES = [
   {
     title:   "Institutional Visibility Audit",
-    desc:    "A comprehensive baseline assessment of your institution's research visibility infrastructure — by department, by discipline, benchmarked against comparable institutions.",
+    desc:    "A comprehensive baseline assessment of your institution's research visibility infrastructure, by department, by discipline, benchmarked against comparable institutions.",
     icon:    BarChart2,
     color:   "#60A5FA",
     cta:     "Discuss an Audit",
   },
   {
     title:   "Staff Development Programme",
-    desc:    "Researchvy Academy delivered to cohorts of academic staff — from early-career to senior faculty. Customised content, institutional branding, and dedicated expert facilitation.",
+    desc:    "Researchvy Academy delivered to cohorts of academic staff, from early-career to senior faculty. Customised content, institutional branding, and dedicated expert facilitation.",
     icon:    Users,
     color:   "#A78BFA",
     cta:     "Discuss a Programme",
   },
   {
     title:   "Discounted Clinic Access",
-    desc:    "Preferred-rate Digital Visibility Clinic places for postgraduate students, postdocs, and junior faculty — with cohort scheduling coordinated around your academic calendar.",
+    desc:    "Preferred-rate Digital Visibility Clinic places for postgraduate students, postdocs, and junior faculty, with cohort scheduling coordinated around your academic calendar.",
     icon:    TrendingUp,
     color:   "#34D399",
     cta:     "Discuss Clinic Access",
   },
   {
     title:   "Strategic Partnership",
-    desc:    "An ongoing research visibility partnership covering audit, training, intelligence, and impact tracking — with quarterly reporting to your research office.",
+    desc:    "An ongoing research visibility partnership covering audit, training, intelligence, and impact tracking, with quarterly reporting to your research office.",
     icon:    Building2,
     color:   "#FCD34D",
     cta:     "Discuss a Partnership",
@@ -92,7 +92,7 @@ export default function InstitutionalPage() {
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
             Publication output has never been higher. Discovery rates haven&apos;t kept pace.
             If your institution&apos;s research isn&apos;t visible in the systems that funding bodies,
-            ranking agencies, and international collaborators rely on — it isn&apos;t driving the
+            ranking agencies, and international collaborators rely on, it isn&apos;t driving the
             reputation, impact, or competitive position you need.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -140,7 +140,7 @@ export default function InstitutionalPage() {
             </h2>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               The Researchvy Institutional Visibility Audit produces a full baseline across every
-              dimension of your research discovery infrastructure — benchmarked against comparable
+              dimension of your research discovery infrastructure, benchmarked against comparable
               institutions and broken down by department, career stage, and discipline.
             </p>
             <ul className="space-y-2.5">
@@ -230,7 +230,7 @@ export default function InstitutionalPage() {
               QS, Times Higher Education, and ARWU all use citation-based metrics that depend
               directly on the quality of your researchers&apos; visibility infrastructure. An institution
               with 200 academics each recovering an average of 15 lost citations produces 3,000
-              additional attributed citations — enough to move measurably in most ranking bands.
+              additional attributed citations, enough to move measurably in most ranking bands.
             </p>
             <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
               This is infrastructure investment, not training spend. The effect compounds
@@ -249,7 +249,7 @@ export default function InstitutionalPage() {
               Start with a conversation
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              Tell us about your institution — researcher count, current challenges, and where
+              Tell us about your institution: researcher count, current challenges, and where
               you&apos;d like to be in 18 months. We&apos;ll tell you exactly what a partnership would deliver.
             </p>
             <a
@@ -271,7 +271,7 @@ export default function InstitutionalPage() {
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               Researchvy Intelligence provides institutional bibliometric audits, researcher
-              profile assessments, and department-level visibility benchmarking — as a
+              profile assessments, and department-level visibility benchmarking, as a
               standalone service or as the first phase of a full partnership.
             </p>
             <Link

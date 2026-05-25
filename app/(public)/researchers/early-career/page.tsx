@@ -11,7 +11,7 @@ export const metadata = generatePageMetadata({
 });
 
 const FEARS = [
-  "Publishing consistently — but citations are slow and h-index isn't moving",
+  "Publishing consistently, but citations are slow and h-index isn't moving",
   "Applying for funding and positions where bibliometric scores matter",
   "Watching peers with fewer publications appear more 'visible' in your field",
   "Not knowing if your online profiles are helping or quietly hurting you",
@@ -28,7 +28,7 @@ const STAGES = [
   {
     stage:  "PhD / Doctoral candidate",
     urgency: "Establish your identity before you publish",
-    actions: ["Register and verify your ORCID now — before your first paper", "Set up a Google Scholar profile at submission", "Choose a consistent author name and use it everywhere"],
+    actions: ["Register and verify your ORCID now, before your first paper", "Set up a Google Scholar profile at submission", "Choose a consistent author name and use it everywhere"],
     color:  "#10B981",
   },
   {
@@ -40,7 +40,7 @@ const STAGES = [
   {
     stage:  "Junior faculty / Lecturer",
     urgency: "Compete on metrics before tenure review",
-    actions: ["Run a full bibliometric audit — h-index, citation gaps, platform coverage", "Build a 12-month visibility strategy tied to promotion criteria", "Translate research into policy briefs and media-ready abstracts"],
+    actions: ["Run a full bibliometric audit: h-index, citation gaps, platform coverage", "Build a 12-month visibility strategy tied to promotion criteria", "Translate research into policy briefs and media-ready abstracts"],
     color:  "#8B5CF6",
   },
 ];
@@ -65,7 +65,7 @@ export default function EarlyCareerPage() {
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
             The early career window is the highest-leverage moment for building scholarly visibility.
             The researchers who establish strong discovery profiles now will outperform peers with
-            equivalent output for the rest of their careers — in citations, funding success, and
+            equivalent output for the rest of their careers, in citations, funding success, and
             academic opportunity.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -74,7 +74,7 @@ export default function EarlyCareerPage() {
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white"
               style={{ backgroundColor: "#10B981" }}
             >
-              Check Your Visibility Score — Free <ArrowRight className="h-4 w-4" />
+              Check Your Visibility Score, Free <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/clinics/digital-visibility-clinic"
@@ -112,7 +112,7 @@ export default function EarlyCareerPage() {
             >
               <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
                 These aren't signs that your research isn't good enough. They're signs that
-                your <strong style={{ color: "#F9FAFB" }}>discovery infrastructure is broken</strong> —
+                your <strong style={{ color: "#F9FAFB" }}>discovery infrastructure is broken</strong>,
                 and nobody in academia ever taught you how to fix it.
               </p>
             </div>
@@ -191,7 +191,7 @@ export default function EarlyCareerPage() {
             </h2>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               Citation compounding is real. A researcher who fixes their discovery infrastructure
-              early sees citations accumulate faster — and those citations attract more citations.
+              early sees citations accumulate faster, and those citations attract more citations.
               The h-index gap between a researcher with optimal visibility and one with equivalent
               output but poor visibility widens by roughly 1-2 points per year. Over a career,
               that's a different funding bracket, a different promotion track, and a different
@@ -214,7 +214,7 @@ export default function EarlyCareerPage() {
               className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold mb-4"
               style={{ backgroundColor: "rgba(16,185,129,0.12)", color: "#10B981", border: "1px solid rgba(16,185,129,0.25)" }}
             >
-              Free — Start Here
+              Free · Start Here
             </span>
             <h3 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>
               The Researcher Visibility Scorecard
@@ -250,7 +250,7 @@ export default function EarlyCareerPage() {
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               Six expert-guided sessions that fix your entire visibility system from the ground up.
-              Profiles, disambiguation, citations, communication, strategy — all covered.
+              Profiles, disambiguation, citations, communication, strategy, all covered.
               Designed specifically for researchers at a critical career stage.
             </p>
             <Link
@@ -269,7 +269,7 @@ export default function EarlyCareerPage() {
           style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
         >
           <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-            Visibility intelligence — built for early-career researchers
+            Visibility intelligence, built for early-career researchers
           </h2>
           <p className="text-sm mb-8 max-w-lg mx-auto" style={{ color: "#6B7280" }}>
             Weekly insights on building strategic scholarly presence at every stage. Free.

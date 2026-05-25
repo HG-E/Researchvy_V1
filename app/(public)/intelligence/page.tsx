@@ -14,13 +14,13 @@ const SERVICES = [
   {
     icon:  BarChart2,
     title: "Visibility Analytics",
-    desc:  "Find out exactly where you stand across Scopus, Google Scholar, Web of Science, and ORCID — and what's preventing your visibility score from reflecting the quality of your work.",
+    desc:  "Find out exactly where you stand across Scopus, Google Scholar, Web of Science, and ORCID, and what's preventing your visibility score from reflecting the quality of your work.",
     color: "#60A5FA",
   },
   {
     icon:  FileSearch,
     title: "Citation Intelligence",
-    desc:  "Your citation count is lower than it should be. We dig into exactly why — mapping patterns, identifying gaps, and giving you a strategic roadmap for ethical citation growth.",
+    desc:  "Your citation count is lower than it should be. We dig into exactly why, mapping patterns, identifying gaps, and giving you a strategic roadmap for ethical citation growth.",
     color: "#A78BFA",
   },
   {
@@ -32,7 +32,7 @@ const SERVICES = [
   {
     icon:  Search,
     title: "Discoverability Reports",
-    desc:  "If your research isn't ranking in major discovery systems, it doesn't exist to most audiences. We find every gap and give you a prioritised plan to fix them — fast.",
+    desc:  "If your research isn't ranking in major discovery systems, it doesn't exist to most audiences. We find every gap and give you a prioritised plan to fix them fast.",
     color: "#FCD34D",
   },
 ];
@@ -147,7 +147,7 @@ export default function IntelligencePage() {
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               Researchers who&apos;ve had a visibility audit consistently report the same thing:
-              they had no idea how much they were missing. Pricing is contextual — based on your
+              they had no idea how much they were missing. Pricing is contextual, based on your
               scope and whether individual or institutional. Reach out and we&apos;ll tell you exactly
               what your audit will cover.
             </p>

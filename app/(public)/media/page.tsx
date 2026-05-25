@@ -6,7 +6,7 @@ import { HoverCard } from "@/components/ui/HoverCard";
 
 export const metadata = generatePageMetadata({
   title: "Researchvy Media",
-  description: "Scholarly communication, knowledge translation, and educational content for researchers — from visual abstracts to podcast appearances and research storytelling.",
+  description: "Scholarly communication, knowledge translation, and educational content for researchers, from visual abstracts to podcast appearances and research storytelling.",
   path: "/media",
 });
 
@@ -148,7 +148,7 @@ export default function MediaPage() {
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               Your research took years to produce. It deserves more than a PDF that nobody
               outside your field will open. Tell us what you&apos;ve published and who should
-              be reading it — we&apos;ll build the content that gets it there.
+              be reading it, we&apos;ll build the content that gets it there.
             </p>
             <div className="space-y-3">
               <a

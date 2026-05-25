@@ -30,7 +30,7 @@ export function ScorecardBridge() {
               Not sure how bad your visibility gap actually is?
             </p>
             <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-              The free Visibility Scorecard gives you a score out of 100 in 4 minutes — and shows
+              The free Visibility Scorecard gives you a score out of 100 in 4 minutes, showing
               exactly what each gap is costing your citations, h-index, and career.
             </p>
           </div>
@@ -40,7 +40,7 @@ export function ScorecardBridge() {
             className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold whitespace-nowrap flex-shrink-0 transition-transform group-hover:translate-x-0.5"
             style={{ backgroundColor: "#10B981", color: "#fff" }}
           >
-            Check My Score — Free
+            Check My Score, Free
             <ArrowRight className="h-4 w-4" />
           </span>
         </Link>

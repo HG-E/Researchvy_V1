@@ -2,7 +2,7 @@ import { generatePageMetadata } from "@/lib/seo/metadata";
 import { PrintButton } from "@/components/resources/PrintButton";
 
 export const metadata = generatePageMetadata({
-  title: "Institutional Support Letter — Digital Visibility Clinic",
+  title: "Institutional Support Letter: Digital Visibility Clinic",
   description: "A formal professional development letter for researchers seeking departmental or institutional funding for the Digital Visibility Clinic, July 2026 cohort.",
   path: "/resources/institutional-letter",
 });
@@ -137,7 +137,7 @@ export default function InstitutionalLetterPage() {
 
               <p>
                 These competencies directly support the researcher&apos;s institutional impact metrics,
-                grant eligibility, promotion criteria, and international research standing — benefiting
+                grant eligibility, promotion criteria, and international research standing, benefiting
                 both the individual and the institution&apos;s research reputation profile.
               </p>
 

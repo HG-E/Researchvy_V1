@@ -7,7 +7,7 @@ import { HoverCard } from "@/components/ui/HoverCard";
 
 export const metadata = generatePageMetadata({
   title: "Researchvy Partnerships",
-  description: "Institutional and organisational partnerships with Researchvy — bringing research visibility training, intelligence, and media services to universities and research institutions.",
+  description: "Institutional and organisational partnerships with Researchvy, bringing research visibility training, intelligence, and media services to universities and research institutions.",
   path: "/partnerships",
 });
 
@@ -21,13 +21,13 @@ const PARTNER_TYPES = [
   {
     icon:  GraduationCap,
     title: "Postgraduate Colleges & Schools",
-    desc:  "Doctoral and postdoctoral programmes that embed Researchvy Academy content into their professional development curriculum — from orientation to graduation and beyond.",
+    desc:  "Doctoral and postdoctoral programmes that embed Researchvy Academy content into their professional development curriculum, from orientation to graduation and beyond.",
     color: "#A78BFA",
   },
   {
     icon:  BookOpen,
     title: "Learned Societies & Associations",
-    desc:  "Collaborations with professional and learned societies to provide members with access to visibility resources, clinics, and intelligence — at preferred rates.",
+    desc:  "Collaborations with professional and learned societies to provide members with access to visibility resources, clinics, and intelligence at preferred rates.",
     color: "#34D399",
   },
   {
@@ -65,7 +65,7 @@ export default function PartnershipsPage() {
             <span style={{ color: "#60A5FA" }}>A Shared Institutional Asset.</span>
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
-            Individual researchers can&apos;t build visibility infrastructure alone — institutions can.
+            Individual researchers can&apos;t build visibility infrastructure alone, but institutions can.
             We partner with universities, learned societies, and publishers to embed
             scholarly visibility training, audits, and intelligence into the workflows your researchers already use.
           </p>

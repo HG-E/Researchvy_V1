@@ -57,7 +57,7 @@ export async function POST(req: Request) {
       to:      ["info@researchvy.com"],
       cc:      ["researchvy@gmail.com"],
       replyTo: contact_email,
-      subject: `New partnership enquiry — ${institution}`,
+      subject: `New partnership enquiry: ${institution}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px">
           <h2 style="color:#0F172A;margin-bottom:16px">New Partnership Enquiry</h2>
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from:    "Researchvy <info@researchvy.com>",
       to:      [contact_email],
-      subject: "Your partnership enquiry — Researchvy",
+      subject: "Your partnership enquiry, Researchvy",
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#ffffff;">
           <h2 style="color:#0F172A;margin-bottom:16px">Thank you, ${contact_name}.</h2>

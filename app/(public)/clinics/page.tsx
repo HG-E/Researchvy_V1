@@ -105,7 +105,7 @@ export default async function ClinicsPage() {
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-3 mb-5">
                   <p className="text-base font-bold" style={{ color: "#F9FAFB" }}>
-                    July 2026 Cohort — Now Open
+                    July 2026 Cohort: Now Open
                   </p>
                   <span
                     className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
@@ -606,7 +606,7 @@ export default async function ClinicsPage() {
             </p>
             <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
               Groups of 5+ receive 20–30% off. We also provide a formal institutional letter for
-              department-funded attendance — ready to present to your finance officer or head of department.
+              department-funded attendance, ready to present to your finance officer or head of department.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">

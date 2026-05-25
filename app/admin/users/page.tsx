@@ -68,7 +68,7 @@ export default async function ManageUsersPage() {
           Users
         </h1>
         <p className="mt-1 text-sm" style={{ color: "#6B7280" }}>
-          {error ? "Could not load users — check Supabase configuration." : `${users.length} registered account${users.length !== 1 ? "s" : ""}.`}
+          {error ? "Could not load users, check Supabase configuration." : `${users.length} registered account${users.length !== 1 ? "s" : ""}.`}
         </p>
       </div>
 
