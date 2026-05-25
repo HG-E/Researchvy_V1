@@ -10,14 +10,15 @@ export const metadata = generatePageMetadata({ title: "Manage Enquiries" });
 type EnquiryStatus = "pending" | "contacted" | "enrolled" | "declined";
 
 interface ClinicEnquiry {
-  id:          string;
-  user_id:     string | null;
-  email:       string;
-  full_name:   string;
-  clinic_slug: string;
-  status:      EnquiryStatus;
-  created_at:  string;
-  notes:       string | null;
+  id:              string;
+  user_id:         string | null;
+  email:           string;
+  full_name:       string;
+  clinic_slug:     string;
+  status:          EnquiryStatus;
+  created_at:      string;
+  notes:           string | null;
+  preferred_track: "wednesday" | "saturday" | null;
 }
 
 interface AcademyEnquiry {
@@ -46,7 +47,7 @@ async function getData(): Promise<{
     ] = await Promise.all([
       admin
         .from("clinic_enquiries")
-        .select("id, user_id, email, full_name, clinic_slug, status, created_at, notes")
+        .select("id, user_id, email, full_name, clinic_slug, status, created_at, notes, preferred_track")
         .order("created_at", { ascending: false }),
       admin
         .from("academy_enquiries")
@@ -193,6 +194,17 @@ export default async function EnquiriesPage() {
                           <p className="text-xs mt-0.5 pl-4" style={{ color: "#4B5563" }}>
                             {row.full_name}
                           </p>
+                        )}
+                        {row.preferred_track && (
+                          <span
+                            className="inline-flex items-center mt-1 ml-4 text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                            style={{
+                              backgroundColor: row.preferred_track === "wednesday" ? "rgba(37,99,235,0.12)" : "rgba(139,92,246,0.12)",
+                              color:           row.preferred_track === "wednesday" ? "#60A5FA"               : "#A78BFA",
+                            }}
+                          >
+                            {row.preferred_track === "wednesday" ? "Wed track" : "Sat track"}
+                          </span>
                         )}
                         {/* Issue certificate button — only for enrolled */}
                         {row.status === "enrolled" && (

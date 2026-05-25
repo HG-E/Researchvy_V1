@@ -76,45 +76,72 @@ export default async function ClinicsPage() {
           </p>
         </div>
 
-        {/* Next cohort urgency bar */}
+        {/* Next cohort urgency banner */}
         {cohort.status !== "tba" && (
           <div
-            className="rounded-2xl border p-5 mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+            className="rounded-2xl border p-6 mb-10"
             style={{
-              backgroundColor: isFull ? "rgba(239,68,68,0.05)" : isClosingSoon ? "rgba(245,158,11,0.06)" : "rgba(16,185,129,0.06)",
-              borderColor:     isFull ? "rgba(239,68,68,0.2)"  : isClosingSoon ? "rgba(245,158,11,0.25)"  : "rgba(16,185,129,0.2)",
+              backgroundColor: isFull ? "rgba(239,68,68,0.05)" : "rgba(16,185,129,0.05)",
+              borderColor:     isFull ? "rgba(239,68,68,0.2)"  : "rgba(16,185,129,0.18)",
             }}
           >
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 flex-shrink-0" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#10B981" }} />
-                <span className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
-                  Next cohort: {formatCohortDate(cohort.startDate)}
-                </span>
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-5">
+
+              {/* Left — headline + tracks */}
+              <div className="flex-1">
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>
+                    July 2026 Cohort — Now Open
+                  </p>
+                  <span
+                    className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
+                    style={{ backgroundColor: isFull ? "rgba(239,68,68,0.15)" : isClosingSoon ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.15)", color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#10B981" }}
+                  >
+                    {isFull ? "Full" : isClosingSoon ? `${spotsLeft} spots left` : `${spotsLeft} spots remaining`}
+                  </span>
+                </div>
+
+                {/* Two tracks */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {(["wednesday", "saturday"] as const).map((key) => {
+                    const track = cohort.tracks[key];
+                    return (
+                      <div key={key} className="rounded-xl border px-4 py-3" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+                        <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: "#4B5563" }}>{track.label} track</p>
+                        <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{track.day}s · {cohort.sessionTime}</p>
+                        <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>Starts {formatCohortDate(track.startDate)}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-4 mt-4 text-xs" style={{ color: "#6B7280" }}>
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="h-3.5 w-3.5" />3 hrs/session · 2 hrs/week tasks · 30 hrs total
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Users className="h-3.5 w-3.5" />≤ {digitalVisibilityClinic.capacity} per cohort
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5" />Registration closes {formatCohortDate(cohort.registrationDeadline)}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
-                <span className="text-sm" style={{ color: "#9CA3AF" }}>{cohort.schedule}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="h-3.5 w-3.5 flex-shrink-0" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#6B7280" }} />
-                <span className="text-sm font-semibold" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#9CA3AF" }}>
-                  {isFull ? "Cohort full" : `${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} remaining`}
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 shrink-0">
-              <p className="text-xs" style={{ color: "#6B7280" }}>
-                Registration closes {formatCohortDate(cohort.registrationDeadline)}
-              </p>
+
+              {/* Right — CTA */}
               {!isFull && (
-                <Link
-                  href="/auth/signup"
-                  className="rounded-xl px-4 py-2 text-xs font-bold text-white whitespace-nowrap"
-                  style={{ backgroundColor: isClosingSoon ? "#D97706" : "#2563EB" }}
-                >
-                  {isClosingSoon ? "Reserve My Spot" : "Join This Cohort"}
-                </Link>
+                <div className="shrink-0 flex flex-col items-start sm:items-end gap-2 justify-center">
+                  <Link
+                    href="/auth/signup"
+                    className="rounded-xl px-5 py-3 text-sm font-bold text-white whitespace-nowrap"
+                    style={{ backgroundColor: isClosingSoon ? "#D97706" : "#2563EB" }}
+                  >
+                    {isClosingSoon ? "Reserve My Spot Now" : "Join July Cohort"}
+                  </Link>
+                  <p className="text-xs" style={{ color: "#4B5563" }}>
+                    Choose your track after sign-up
+                  </p>
+                </div>
               )}
             </div>
           </div>

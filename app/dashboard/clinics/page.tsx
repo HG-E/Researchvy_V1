@@ -125,30 +125,30 @@ export default async function MyClinicsPage() {
         )}
 
         {/* Next cohort info */}
-        {cohort.status !== "tba" && (
-          <div
-            className="rounded-xl border p-4 mb-5 flex flex-wrap items-center gap-x-5 gap-y-2"
-            style={{
-              backgroundColor: isFull ? "rgba(239,68,68,0.05)" : isClosingSoon ? "rgba(245,158,11,0.05)" : "rgba(16,185,129,0.05)",
-              borderColor:     isFull ? "rgba(239,68,68,0.15)"  : isClosingSoon ? "rgba(245,158,11,0.2)"   : "rgba(16,185,129,0.15)",
-            }}
-          >
-            <div className="flex items-center gap-2">
-              <Calendar className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#10B981" }} />
-              <span className="text-xs font-semibold" style={{ color: "#F9FAFB" }}>
-                Next cohort: {formatDate(cohort.startDate)}
+        {cohort.status !== "tba" && !hasRegistered && (
+          <div className="rounded-xl border p-4 mb-5 space-y-3" style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}>
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <p className="text-xs font-bold" style={{ color: "#F9FAFB" }}>July 2026 Cohort</p>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: isFull ? "rgba(239,68,68,0.15)" : isClosingSoon ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.12)", color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#10B981" }}>
+                {isFull ? "Full" : `${spotsLeft} spots left`}
               </span>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
-              <span className="text-xs" style={{ color: "#9CA3AF" }}>{cohort.schedule}</span>
+            <div className="grid grid-cols-2 gap-2">
+              {(["wednesday", "saturday"] as const).map((key) => {
+                const track = cohort.tracks[key];
+                return (
+                  <div key={key} className="rounded-lg border px-3 py-2" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
+                    <p className="text-[9px] font-bold tracking-widest uppercase" style={{ color: "#4B5563" }}>{track.label}</p>
+                    <p className="text-xs font-semibold mt-0.5" style={{ color: "#F9FAFB" }}>{track.day}s</p>
+                    <p className="text-[10px]" style={{ color: "#6B7280" }}>{cohort.sessionTime}</p>
+                    <p className="text-[10px]" style={{ color: "#4B5563" }}>Starts {formatDate(track.startDate)}</p>
+                  </div>
+                );
+              })}
             </div>
-            <div className="flex items-center gap-2">
-              <Users className="h-3.5 w-3.5 flex-shrink-0" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#6B7280" }} />
-              <span className="text-xs font-semibold" style={{ color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#9CA3AF" }}>
-                {isFull ? "Cohort full" : `${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} remaining`}
-              </span>
-            </div>
+            <p className="text-[10px]" style={{ color: "#4B5563" }}>
+              3 hrs live · 2 hrs tasks/week · 30 hrs total · Registration closes {formatDate(cohort.registrationDeadline)}
+            </p>
           </div>
         )}
 

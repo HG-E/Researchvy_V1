@@ -25,8 +25,9 @@ export async function POST(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const body = await req.json().catch(() => ({}));
-  const clinicSlug = (body.clinic_slug as string) || "digital-visibility-clinic";
+  const body           = await req.json().catch(() => ({}));
+  const clinicSlug     = (body.clinic_slug     as string) || "digital-visibility-clinic";
+  const preferredTrack = (body.preferred_track as string) || null;
 
   const admin = createSupabaseAdminClient();
 
@@ -43,7 +44,13 @@ export async function POST(req: NextRequest) {
   const { error } = await admin
     .from("clinic_enquiries")
     .upsert(
-      { user_id: user.id, clinic_slug: clinicSlug, email: user.email!, full_name: fullName },
+      {
+        user_id:         user.id,
+        clinic_slug:     clinicSlug,
+        email:           user.email!,
+        full_name:       fullName,
+        preferred_track: preferredTrack,
+      },
       { onConflict: "user_id,clinic_slug" }
     );
 
@@ -71,6 +78,8 @@ export async function POST(req: NextRequest) {
               <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;"><a href="mailto:${user.email}" style="color:#2563EB;">${user.email}</a></td></tr>
           <tr><td style="padding:10px 0;color:#6B7280;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Clinic</td>
               <td style="padding:10px 0;color:#0F172A;border-bottom:1px solid #F3F4F6;font-size:14px;">${clinicLabel}</td></tr>
+          <tr><td style="padding:10px 0;color:#6B7280;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Track</td>
+              <td style="padding:10px 0;color:#0F172A;border-bottom:1px solid #F3F4F6;font-size:14px;">${preferredTrack === "wednesday" ? "Mid-week (Wednesdays)" : preferredTrack === "saturday" ? "Weekend (Saturdays)" : "Not selected"}</td></tr>
           <tr><td style="padding:10px 0;color:#6B7280;vertical-align:top;font-size:14px;">Registered at</td>
               <td style="padding:10px 0;color:#0F172A;font-size:14px;">${new Date().toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })} UTC</td></tr>
         </table>

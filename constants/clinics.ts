@@ -125,14 +125,28 @@ export const digitalVisibilityClinic = {
   ],
 
   nextCohort: {
-    id:                   "cohort-2026-02",
-    startDate:            "2026-06-15",
-    registrationDeadline: "2026-06-08",
-    schedule:             "Mondays, 6:00–8:00 PM WAT",
+    id:                   "cohort-2026-july",
+    registrationDeadline: "2026-06-25",
+    sessionTime:          "6:00–9:00 PM WAT",
     timezone:             "West Africa Time (UTC+1)",
+    sessionDuration:      "3 hours",
+    weeklyTaskHours:      2,
+    totalCommitment:      "30 hours over 6 weeks",
     // "open" | "closing-soon" | "full" | "tba"
-    // Update this manually if the cohort fills or is postponed
+    // Set to "tba" to hide the urgency banner until dates are confirmed
     status:               "open" as "open" | "closing-soon" | "full" | "tba",
+    tracks: {
+      wednesday: {
+        label:     "Mid-week",
+        day:       "Wednesday",
+        startDate: "2026-07-02",
+      },
+      saturday: {
+        label:     "Weekend",
+        day:       "Saturday",
+        startDate: "2026-07-05",
+      },
+    },
   },
 } as const;
 
