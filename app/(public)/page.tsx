@@ -1,10 +1,11 @@
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { Hero } from "@/components/sections/Hero";
 import { VisibilityGap } from "@/components/sections/VisibilityGap";
+import { ScorecardBridge } from "@/components/sections/ScorecardBridge";
 import { Framework } from "@/components/sections/Framework";
-import { EcosystemOverview } from "@/components/sections/EcosystemOverview";
 import { ClinicFeature } from "@/components/sections/ClinicFeature";
 import { CaseStudy } from "@/components/sections/CaseStudy";
+import { EcosystemOverview } from "@/components/sections/EcosystemOverview";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { CTA } from "@/components/sections/CTA";
 
@@ -19,10 +20,11 @@ export default function HomePage() {
     <>
       <Hero />
       <VisibilityGap />
+      <ScorecardBridge />
       <Framework />
-      <EcosystemOverview />
       <ClinicFeature />
       <CaseStudy />
+      <EcosystemOverview />
       <SocialProof />
       <CTA />
     </>

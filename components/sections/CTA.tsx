@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { copy } from "@/constants/copy";
-import { siteConfig } from "@/config/site";
+import { siteConfig, buildWhatsAppUrl } from "@/config/site";
 
 export function CTA() {
   return (
@@ -50,8 +50,10 @@ export function CTA() {
           </p>
 
           <div className="flex flex-col items-stretch sm:flex-row sm:items-center sm:justify-center gap-3 w-full max-w-xs mx-auto sm:max-w-none">
-            <Link
-              href="/clinics"
+            <a
+              href={buildWhatsAppUrl("Digital Visibility Clinic enrollment")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white active:scale-[0.97] active:opacity-90"
               style={{
                 backgroundColor: "#2563EB",
@@ -60,9 +62,9 @@ export function CTA() {
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
             >
+              <MessageCircle className="h-4 w-4" />
               Secure My Spot
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
+            </a>
             <Link
               href="/ecosystem"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border active:scale-[0.97] active:opacity-80"

@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, MessageCircle } from "lucide-react";
 import { WhatsAppButton } from "@/components/common/WhatsAppButton";
 import { copy } from "@/constants/copy";
-import { siteConfig } from "@/config/site";
+import { siteConfig, buildWhatsAppUrl } from "@/config/site";
 
 export function ClinicFeature() {
   return (
@@ -67,9 +67,11 @@ export function ClinicFeature() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link
-                href="/clinics"
-                className="inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-sm font-semibold text-white active:scale-[0.97] active:opacity-90"
+              <a
+                href={buildWhatsAppUrl("Digital Visibility Clinic enrollment")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold text-white active:scale-[0.97] active:opacity-90"
                 style={{
                   backgroundColor: "#2563EB",
                   transition: "background-color 150ms ease, transform 100ms ease, opacity 100ms ease",
@@ -77,13 +79,28 @@ export function ClinicFeature() {
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
               >
+                <MessageCircle className="h-4 w-4" />
                 {copy.clinic.cta}
+              </a>
+              <Link
+                href="/clinics"
+                className="inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-sm font-semibold border active:scale-[0.97] active:opacity-80"
+                style={{
+                  color: "#F9FAFB",
+                  borderColor: "#1E293B",
+                  transition: "border-color 150ms ease, color 150ms ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#2563EB";
+                  e.currentTarget.style.color = "#60A5FA";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "#1E293B";
+                  e.currentTarget.style.color = "#F9FAFB";
+                }}
+              >
+                View Full Programme
               </Link>
-              <WhatsAppButton
-                context="Digital Visibility Clinic"
-                variant="outline"
-                label="Enquire via WhatsApp"
-              />
             </div>
           </motion.div>
 
