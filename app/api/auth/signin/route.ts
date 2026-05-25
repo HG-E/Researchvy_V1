@@ -1,6 +1,7 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-// TODO: Implement signin route (Phase 1C-1F)
+// Auth is handled client-side via the Supabase JS SDK.
+// This route is not in use.
 export async function GET() {
-  return NextResponse.json({ message: "Route stub — implementation in upcoming phase" }, { status: 501 });
+  return NextResponse.json({ error: "Not found" }, { status: 404 });
 }

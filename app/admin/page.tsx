@@ -12,7 +12,7 @@ async function getUserCount(): Promise<number> {
   try {
     const admin = createSupabaseAdminClient();
     const { data } = await admin.auth.admin.listUsers({ page: 1, perPage: 1 });
-    return data?.total ?? 0;
+    return (data as { total?: number } | null)?.total ?? 0;
   } catch {
     return 0;
   }
