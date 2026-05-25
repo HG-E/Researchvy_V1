@@ -60,7 +60,7 @@ const SESSION_TITLES: Record<number, string> = {
 
 export default async function TasksPage() {
   const user = await getServerUser();
-  if (!user) redirect("/auth/login");
+  if (!user) redirect("/signin?next=/dashboard/clinics/tasks");
 
   const { enquiry, rawTasks, unlocks, progress } = await getPageData(user.id);
 

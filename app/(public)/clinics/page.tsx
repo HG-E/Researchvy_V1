@@ -57,20 +57,21 @@ export default async function ClinicsPage() {
 
   return (
     <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
 
-        {/* Header */}
-        <div className="max-w-2xl mb-16">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
-            Researchvy Clinics          </p>
+        {/* Hero header */}
+        <div className="max-w-3xl mb-14">
+          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#2563EB" }}>
+            Researchvy Clinics
+          </p>
           <h1
-            className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 leading-[1.1]"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
             Stop Being Invisible.<br />
             <span style={{ color: "#10B981" }}>Start Being Found.</span>
           </h1>
-          <p className="text-base leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-base sm:text-lg leading-relaxed max-w-2xl" style={{ color: "#6B7280" }}>
             Live, structured clinics that take researchers from overlooked to globally discoverable —
             with a personal strategy, a verified certificate, and results you can measure.
           </p>
@@ -79,61 +80,77 @@ export default async function ClinicsPage() {
         {/* Next cohort urgency banner */}
         {cohort.status !== "tba" && (
           <div
-            className="rounded-2xl border p-6 mb-10"
+            className="rounded-2xl border p-6 sm:p-8 mb-12"
             style={{
-              backgroundColor: isFull ? "rgba(239,68,68,0.05)" : "rgba(16,185,129,0.05)",
+              backgroundColor: isFull ? "rgba(239,68,68,0.05)" : "rgba(16,185,129,0.04)",
               borderColor:     isFull ? "rgba(239,68,68,0.2)"  : "rgba(16,185,129,0.18)",
             }}
           >
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-5">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
 
               {/* Left — headline + tracks */}
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-3 mb-5">
+                  <p className="text-base font-bold" style={{ color: "#F9FAFB" }}>
                     July 2026 Cohort — Now Open
                   </p>
                   <span
                     className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
-                    style={{ backgroundColor: isFull ? "rgba(239,68,68,0.15)" : isClosingSoon ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.15)", color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#10B981" }}
+                    style={{
+                      backgroundColor: isFull ? "rgba(239,68,68,0.15)" : isClosingSoon ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.15)",
+                      color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#10B981",
+                    }}
                   >
                     {isFull ? "Full" : isClosingSoon ? `${spotsLeft} spots left` : `${spotsLeft} spots remaining`}
                   </span>
                 </div>
 
                 {/* Two tracks */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
                   {(["wednesday", "saturday"] as const).map((key) => {
                     const track = cohort.tracks[key];
                     return (
-                      <div key={key} className="rounded-xl border px-4 py-3" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-                        <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: "#4B5563" }}>{track.label} track</p>
-                        <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{track.day}s · {cohort.sessionTime}</p>
-                        <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>Starts {formatCohortDate(track.startDate)}</p>
+                      <div
+                        key={key}
+                        className="rounded-xl border px-4 py-3.5"
+                        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                      >
+                        <p className="text-[10px] font-bold tracking-widest uppercase mb-1.5" style={{ color: "#4B5563" }}>
+                          {track.label} Track
+                        </p>
+                        <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+                          {track.day}s · {cohort.sessionTime}
+                        </p>
+                        <p className="text-xs mt-1" style={{ color: "#6B7280" }}>
+                          Starts {formatCohortDate(track.startDate)}
+                        </p>
                       </div>
                     );
                   })}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-4 mt-4 text-xs" style={{ color: "#6B7280" }}>
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs" style={{ color: "#6B7280" }}>
                   <span className="flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5" />3 hrs/session · 2 hrs/week tasks · 30 hrs total
+                    <Clock className="h-3.5 w-3.5 flex-shrink-0" />
+                    3 hrs/session · 2 hrs/week tasks · 30 hrs total
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Users className="h-3.5 w-3.5" />≤ {digitalVisibilityClinic.capacity} per cohort
+                    <Users className="h-3.5 w-3.5 flex-shrink-0" />
+                    ≤ {digitalVisibilityClinic.capacity} per cohort
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5" />Registration closes {formatCohortDate(cohort.registrationDeadline)}
+                    <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
+                    Registration closes {formatCohortDate(cohort.registrationDeadline)}
                   </span>
                 </div>
               </div>
 
               {/* Right — CTA */}
               {!isFull && (
-                <div className="shrink-0 flex flex-col items-start sm:items-end gap-2 justify-center">
+                <div className="shrink-0 flex flex-col items-start lg:items-end gap-2">
                   <Link
-                    href="/auth/signup"
-                    className="rounded-xl px-5 py-3 text-sm font-bold text-white whitespace-nowrap"
+                    href="/signup"
+                    className="inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-sm font-bold text-white whitespace-nowrap transition-opacity hover:opacity-90"
                     style={{ backgroundColor: isClosingSoon ? "#D97706" : "#2563EB" }}
                   >
                     {isClosingSoon ? "Reserve My Spot Now" : "Join July Cohort"}
@@ -149,14 +166,14 @@ export default async function ClinicsPage() {
 
         {/* Featured clinic */}
         <div
-          className="rounded-3xl border overflow-hidden mb-16"
+          className="rounded-3xl border overflow-hidden mb-14"
           style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
         >
           {/* Top accent */}
           <div className="h-1" style={{ background: "linear-gradient(90deg, #2563EB, #10B981)" }} />
 
           <div className="p-8 lg:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16">
 
               {/* Left */}
               <div>
