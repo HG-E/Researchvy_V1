@@ -3,33 +3,34 @@
 import { motion } from "framer-motion";
 import { AlertCircle } from "lucide-react";
 import { copy } from "@/constants/copy";
+import { MobileCarousel } from "@/components/ui/MobileCarousel";
 
 const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  hidden:   {},
+  visible:  { transition: { staggerChildren: 0.12 } },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
+  hidden:  { opacity: 0, x: -20 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
 };
 
 export function VisibilityGap() {
+  const problems = copy.visibilityGap.problems;
+
   return (
     <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Left */}
+
+          {/* Left — intro copy */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
           >
-            <p
-              className="text-xs font-semibold tracking-widest uppercase mb-3"
-              style={{ color: "#2563EB" }}
-            >
+            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
               The Problem
             </p>
             <h2
@@ -55,31 +56,50 @@ export function VisibilityGap() {
             </div>
           </motion.div>
 
-          {/* Right */}
-          <motion.ul
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="space-y-4"
-          >
-            {copy.visibilityGap.problems.map((problem, i) => (
-              <motion.li
-                key={i}
-                variants={itemVariants}
-                className="flex items-start gap-4 rounded-xl p-5 border"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              >
-                <AlertCircle
-                  className="h-5 w-5 mt-0.5 flex-shrink-0"
-                  style={{ color: "#EF4444" }}
-                />
-                <span className="text-sm font-medium leading-relaxed" style={{ color: "#D1D5DB" }}>
-                  {problem}
-                </span>
-              </motion.li>
-            ))}
-          </motion.ul>
+          {/* Right — mobile: swipe carousel | desktop: staggered list */}
+          <div>
+            {/* Mobile carousel */}
+            <MobileCarousel
+              className="lg:hidden"
+              dotColor="#EF4444"
+              items={problems.map((problem, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-4 rounded-xl p-5 border mx-0.5"
+                  style={{ backgroundColor: "#0F172A", borderColor: "#1E293B", minHeight: 90 }}
+                >
+                  <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "#EF4444" }} />
+                  <span className="text-sm font-medium leading-relaxed" style={{ color: "#D1D5DB" }}>
+                    {problem}
+                  </span>
+                </div>
+              ))}
+            />
+
+            {/* Desktop animated list */}
+            <motion.ul
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="space-y-4 hidden lg:block"
+            >
+              {problems.map((problem, i) => (
+                <motion.li
+                  key={i}
+                  variants={itemVariants}
+                  className="flex items-start gap-4 rounded-xl p-5 border"
+                  style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                >
+                  <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "#EF4444" }} />
+                  <span className="text-sm font-medium leading-relaxed" style={{ color: "#D1D5DB" }}>
+                    {problem}
+                  </span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
+
         </div>
       </div>
     </section>

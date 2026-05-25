@@ -194,6 +194,11 @@ select {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Hide scrollbar in swipe carousels while preserving scroll functionality */
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Focus ring — institutional clarity */
 :focus-visible {
   outline: 2px solid var(--ring);

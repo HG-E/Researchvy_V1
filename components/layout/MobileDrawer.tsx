@@ -44,10 +44,10 @@ export function MobileDrawer({ open, onClose }: Props) {
             className="fixed top-0 right-0 bottom-0 z-50 w-[85vw] max-w-sm md:hidden flex flex-col"
             style={{ backgroundColor: "#0A0F1A", borderLeft: "1px solid #1E293B" }}
           >
-            {/* Drawer header */}
+            {/* Drawer header — padded for notch/status bar */}
             <div
               className="flex items-center justify-between px-5 h-16 border-b flex-shrink-0"
-              style={{ borderColor: "#1E293B" }}
+              style={{ borderColor: "#1E293B", paddingTop: "env(safe-area-inset-top)", height: "calc(64px + env(safe-area-inset-top))" }}
             >
               <Logo variant="full" width={120} />
               <button

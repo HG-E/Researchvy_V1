@@ -2,31 +2,32 @@
 
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
+import { MobileCarousel } from "@/components/ui/MobileCarousel";
 
 const TESTIMONIALS = [
   {
     quote:
       "Before the clinic, I had no idea my Google Scholar profile was missing half my publications. Within two weeks of applying what I learned, my h-index moved. That had never happened in three years.",
-    name: "Dr. A. Mensah",
-    role: "Senior Lecturer, West Africa",
+    name:     "Dr. A. Mensah",
+    role:     "Senior Lecturer, West Africa",
     initials: "AM",
-    color: "#60A5FA",
+    color:    "#60A5FA",
   },
   {
     quote:
       "I published consistently for six years and barely got cited outside my department. The visibility audit showed me exactly why — and gave me a step-by-step fix. Six months later, the difference is measurable.",
-    name: "Dr. O. Adeyemi",
-    role: "Postdoctoral Researcher",
+    name:     "Dr. O. Adeyemi",
+    role:     "Postdoctoral Researcher",
     initials: "OA",
-    color: "#A78BFA",
+    color:    "#A78BFA",
   },
   {
     quote:
       "As a research director, I needed something I could bring to the whole team — not another generic workshop. The institutional programme was built around our specific gaps. Our researchers finally understand how visibility works.",
-    name: "Prof. R. Nkosi",
-    role: "Director of Research, South Africa",
+    name:     "Prof. R. Nkosi",
+    role:     "Director of Research, South Africa",
     initials: "RN",
-    color: "#34D399",
+    color:    "#34D399",
   },
 ];
 
@@ -37,12 +38,38 @@ const STATS = [
   { value: "100%", label: "Certified on completion" },
 ];
 
+function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
+  return (
+    <div
+      className="rounded-2xl border p-6 flex flex-col h-full"
+      style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}
+    >
+      <Quote className="h-5 w-5 mb-4 flex-shrink-0" style={{ color: t.color }} />
+      <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: "#D1D5DB" }}>
+        &ldquo;{t.quote}&rdquo;
+      </p>
+      <div className="flex items-center gap-3">
+        <div
+          className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+          style={{ backgroundColor: `${t.color}20`, color: t.color }}
+        >
+          {t.initials}
+        </div>
+        <div>
+          <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{t.name}</p>
+          <p className="text-xs" style={{ color: "#4B5563" }}>{t.role}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function SocialProof() {
   return (
     <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#0F172A" }}>
       <div className="mx-auto max-w-6xl">
 
-        {/* Section header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -67,36 +94,33 @@ export function SocialProof() {
           </p>
         </motion.div>
 
-        {/* Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {TESTIMONIALS.map((t, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="rounded-2xl border p-6 flex flex-col"
-              style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}
-            >
-              <Quote className="h-5 w-5 mb-4 flex-shrink-0" style={{ color: t.color }} />
-              <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: "#D1D5DB" }}>
-                &ldquo;{t.quote}&rdquo;
-              </p>
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-                  style={{ backgroundColor: `${t.color}20`, color: t.color }}
-                >
-                  {t.initials}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{t.name}</p>
-                  <p className="text-xs" style={{ color: "#4B5563" }}>{t.role}</p>
-                </div>
+        {/* Testimonials — desktop: 3-col grid | mobile: swipe carousel */}
+        <div className="mb-12 sm:mb-16">
+          {/* Desktop */}
+          <div className="hidden md:grid grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+              >
+                <TestimonialCard t={t} />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Mobile carousel */}
+          <MobileCarousel
+            className="md:hidden"
+            dotColor="#60A5FA"
+            items={TESTIMONIALS.map((t) => (
+              <div key={t.initials} className="px-0.5">
+                <TestimonialCard t={t} />
               </div>
-            </motion.div>
-          ))}
+            ))}
+          />
         </div>
 
         {/* Stats bar */}
@@ -105,7 +129,7 @@ export function SocialProof() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl border p-8 grid grid-cols-2 lg:grid-cols-4 gap-8"
+          className="rounded-2xl border p-6 sm:p-8 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
           style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}
         >
           {STATS.map((stat, i) => (

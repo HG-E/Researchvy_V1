@@ -55,10 +55,11 @@ export function Header() {
       <header
         className="sticky top-0 z-50 w-full border-b transition-all duration-300"
         style={{
-          backgroundColor: scrolled ? "rgba(15, 23, 42, 0.97)" : "#0F172A",
-          borderColor: "#1E293B",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
+          paddingTop:          "env(safe-area-inset-top)",
+          backgroundColor:     scrolled ? "rgba(15, 23, 42, 0.97)" : "#0F172A",
+          borderColor:         "#1E293B",
+          backdropFilter:      scrolled ? "blur(12px)" : "none",
+          WebkitBackdropFilter:scrolled ? "blur(12px)" : "none",
         }}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">

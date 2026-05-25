@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { copy } from "@/constants/copy";
+import { MobileCarousel } from "@/components/ui/MobileCarousel";
 
 export function Framework() {
   const steps = copy.framework.steps;
@@ -14,12 +15,9 @@ export function Framework() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <p
-            className="text-xs font-semibold tracking-widest uppercase mb-3"
-            style={{ color: "#2563EB" }}
-          >
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
             The Framework
           </p>
           <h2
@@ -35,10 +33,7 @@ export function Framework() {
 
         {/* Desktop: horizontal chain */}
         <div className="hidden lg:flex items-start justify-between relative">
-          <div
-            className="absolute top-8 left-8 right-8 h-px"
-            style={{ backgroundColor: "#1E293B" }}
-          />
+          <div className="absolute top-8 left-8 right-8 h-px" style={{ backgroundColor: "#1E293B" }} />
           {steps.map((step, i) => (
             <motion.div
               key={step.label}
@@ -53,26 +48,13 @@ export function Framework() {
                 className="relative z-10 w-16 h-16 rounded-full flex items-center justify-center text-sm font-bold mb-4 border-2"
                 style={{
                   backgroundColor: i === steps.length - 1 ? "#10B981" : "#0F172A",
-                  borderColor:
-                    i === steps.length - 1
-                      ? "#10B981"
-                      : i === 0
-                      ? "#2563EB"
-                      : "#1E293B",
-                  color:
-                    i === steps.length - 1
-                      ? "#fff"
-                      : i === 0
-                      ? "#2563EB"
-                      : "#9CA3AF",
+                  borderColor: i === steps.length - 1 ? "#10B981" : i === 0 ? "#2563EB" : "#1E293B",
+                  color: i === steps.length - 1 ? "#fff" : i === 0 ? "#2563EB" : "#9CA3AF",
                 }}
               >
                 {i + 1}
               </div>
-              <p
-                className="text-sm font-semibold mb-1"
-                style={{ color: i === steps.length - 1 ? "#10B981" : "#F9FAFB" }}
-              >
+              <p className="text-sm font-semibold mb-1" style={{ color: i === steps.length - 1 ? "#10B981" : "#F9FAFB" }}>
                 {step.label}
               </p>
               <p className="text-xs leading-snug px-1" style={{ color: "#9CA3AF" }}>
@@ -82,41 +64,45 @@ export function Framework() {
           ))}
         </div>
 
-        {/* Mobile: vertical list */}
-        <div className="lg:hidden space-y-3">
-          {steps.map((step, i) => (
-            <motion.div
+        {/* Mobile: one-step-at-a-time swipe carousel */}
+        <MobileCarousel
+          className="lg:hidden"
+          items={steps.map((step, i) => (
+            <div
               key={step.label}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="flex items-center gap-4 rounded-xl p-4 border"
+              className="mx-0.5 rounded-2xl border p-6 flex flex-col items-center text-center"
               style={{ backgroundColor: "#1E293B", borderColor: "#334155" }}
             >
+              {/* Step position */}
+              <p className="text-xs font-semibold mb-4" style={{ color: "#4B5563" }}>
+                Step {i + 1} of {steps.length}
+              </p>
+              {/* Circle */}
               <div
-                className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                className="w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold mb-5 border-2"
                 style={{
-                  backgroundColor: i === steps.length - 1 ? "#10B981" : "#2563EB",
-                  color: "#fff",
+                  backgroundColor: i === steps.length - 1 ? "#10B981" : "#0F172A",
+                  borderColor: i === steps.length - 1 ? "#10B981" : i === 0 ? "#2563EB" : "#334155",
+                  color: i === steps.length - 1 ? "#fff" : i === 0 ? "#2563EB" : "#9CA3AF",
                 }}
               >
                 {i + 1}
               </div>
-              <div>
-                <p
-                  className="font-semibold text-sm"
-                  style={{ color: i === steps.length - 1 ? "#10B981" : "#F9FAFB" }}
-                >
-                  {step.label}
-                </p>
-                <p className="text-xs" style={{ color: "#9CA3AF" }}>
-                  {step.description}
-                </p>
-              </div>
-            </motion.div>
+              <p
+                className="text-xl font-bold mb-3"
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  color: i === steps.length - 1 ? "#10B981" : "#F9FAFB",
+                }}
+              >
+                {step.label}
+              </p>
+              <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+                {step.description}
+              </p>
+            </div>
           ))}
-        </div>
+        />
       </div>
     </section>
   );
