@@ -1,5 +1,4 @@
 import { generatePageMetadata } from "@/lib/seo/metadata";
-import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
 import { Hero } from "@/components/sections/Hero";
 import { VisibilityGap } from "@/components/sections/VisibilityGap";
 import { Framework } from "@/components/sections/Framework";
@@ -18,14 +17,6 @@ export const metadata = generatePageMetadata({
 export default function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
-      />
       <Hero />
       <VisibilityGap />
       <Framework />
