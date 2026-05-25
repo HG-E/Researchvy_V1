@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, BarChart2, Building2, Users, TrendingUp, CheckCircle2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
+import { HoverCard } from "@/components/ui/HoverCard";
 
 export const metadata = generatePageMetadata({
   title: "Institutional Research Visibility — For Universities & Research Offices",
@@ -117,15 +118,11 @@ export default function InstitutionalPage() {
         {/* The scale problem */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
           {PROBLEMS.map(({ stat, label, detail, color }) => (
-            <div
-              key={label}
-              className="rounded-2xl border p-6"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-            >
+            <HoverCard key={label} accentColor={color} className="p-6">
               <p className="text-4xl font-bold mb-2" style={{ color }}>{stat}</p>
               <p className="text-sm font-semibold mb-3" style={{ color: "#F9FAFB" }}>{label}</p>
               <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
-            </div>
+            </HoverCard>
           ))}
         </div>
 
@@ -190,11 +187,7 @@ export default function InstitutionalPage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {PARTNERSHIP_TYPES.map(({ title, desc, icon: Icon, color, cta }) => (
-              <div
-                key={title}
-                className="rounded-2xl border p-6"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              >
+              <HoverCard key={title} accentColor={color} className="p-6">
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
                   style={{ backgroundColor: `${color}18` }}
@@ -212,7 +205,7 @@ export default function InstitutionalPage() {
                 >
                   {cta} <ArrowRight className="h-3.5 w-3.5" />
                 </a>
-              </div>
+              </HoverCard>
             ))}
           </div>
         </div>

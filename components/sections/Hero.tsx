@@ -74,7 +74,7 @@ export function Hero() {
         >
           Research Beyond
           <br />
-          <span className="relative inline-block min-w-[220px] sm:min-w-[360px]">
+          <span className="relative inline-block min-w-[160px] sm:min-w-[360px]">
             <AnimatePresence mode="wait">
               <motion.span
                 key={wordIndex}
@@ -171,7 +171,6 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-8 hidden sm:flex flex-wrap items-center justify-center gap-6 text-sm"
           style={{ color: "#9CA3AF" }}
-          aria-hidden="true"
         >
           {["Research Intelligence", "Scholarly Visibility", "Digital Discoverability"].map((item) => (
             <span key={item} className="flex items-center gap-2">

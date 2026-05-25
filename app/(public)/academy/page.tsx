@@ -3,6 +3,7 @@ import { ArrowRight, GraduationCap, MessageCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { learningPathways } from "@/constants/programs";
 import { buildWhatsAppUrl } from "@/config/site";
+import { HoverCard } from "@/components/ui/HoverCard";
 
 export const metadata = generatePageMetadata({
   title: "Researchvy Academy",
@@ -65,10 +66,10 @@ export default function AcademyPage() {
             {learningPathways.map((pathway, idx) => {
               const color = LEVEL_COLORS[idx];
               return (
-                <div
+                <HoverCard
                   key={pathway.level}
-                  className="rounded-2xl border overflow-hidden"
-                  style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                  accentColor={color}
+                  className="overflow-hidden"
                 >
                   <div className="flex items-start gap-5 p-6">
                     {/* Level badge */}
@@ -113,7 +114,7 @@ export default function AcademyPage() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </HoverCard>
               );
             })}
           </div>

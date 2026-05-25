@@ -365,20 +365,40 @@ export function CaseStudy() {
             that visibility isn&apos;t automatic — it&apos;s a skill. The clinic taught me that skill.
             Four months later, my h-index has moved for the first time since I started publishing.&rdquo;
           </p>
-          <div className="flex items-start sm:items-center gap-4 pt-5 border-t flex-wrap sm:flex-nowrap" style={{ borderColor: "rgba(37,99,235,0.15)" }}>
+          <div className="pt-5 border-t" style={{ borderColor: "rgba(37,99,235,0.15)" }}>
+            {/* Identity row — avatar + name + title always on one line */}
+            <div className="flex items-center gap-3">
+              <div
+                className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                style={{ backgroundColor: "rgba(37,99,235,0.15)", color: "#60A5FA" }}
+              >
+                AO
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold leading-snug" style={{ color: "#F9FAFB" }}>Dr. Amara Osei</p>
+                <p className="text-xs mt-0.5 leading-snug" style={{ color: "#4B5563" }}>
+                  Senior Lecturer · Public Health
+                </p>
+                <p className="text-xs leading-snug" style={{ color: "#4B5563" }}>
+                  Digital Visibility Clinic alumna
+                </p>
+              </div>
+              {/* Desktop only: cert badge inline */}
+              <div className="hidden sm:flex items-center gap-1.5 flex-shrink-0">
+                <CheckCircle2 className="h-4 w-4" style={{ color: "#10B981" }} />
+                <span className="text-xs font-medium" style={{ color: "#10B981" }}>Certificate Holder</span>
+              </div>
+            </div>
+            {/* Mobile only: cert badge as full-width pill below identity */}
             <div
-              className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
-              style={{ backgroundColor: "rgba(37,99,235,0.15)", color: "#60A5FA" }}
+              className="sm:hidden flex items-center justify-center gap-2 rounded-xl py-2.5 mt-3 border"
+              style={{
+                backgroundColor: "rgba(16,185,129,0.08)",
+                borderColor: "rgba(16,185,129,0.25)",
+              }}
             >
-              AO
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>Dr. Amara Osei</p>
-              <p className="text-xs" style={{ color: "#4B5563" }}>Senior Lecturer · Public Health · Digital Visibility Clinic alumna</p>
-            </div>
-            <div className="flex items-center gap-1.5 flex-shrink-0">
-              <CheckCircle2 className="h-4 w-4" style={{ color: "#10B981" }} />
-              <span className="text-xs font-medium" style={{ color: "#10B981" }}>Certificate Holder</span>
+              <CheckCircle2 className="h-4 w-4 flex-shrink-0" style={{ color: "#10B981" }} />
+              <span className="text-xs font-semibold" style={{ color: "#10B981" }}>Certificate Holder</span>
             </div>
           </div>
         </motion.div>

@@ -3,6 +3,7 @@ import { Building2, GraduationCap, BookOpen, Handshake, ArrowRight, MessageCircl
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
 import { PartnershipForm } from "@/components/partnerships/PartnershipForm";
+import { HoverCard } from "@/components/ui/HoverCard";
 
 export const metadata = generatePageMetadata({
   title: "Researchvy Partnerships",
@@ -92,11 +93,7 @@ export default function PartnershipsPage() {
         {/* Partner types */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-16">
           {PARTNER_TYPES.map(({ icon: Icon, title, desc, color }) => (
-            <div
-              key={title}
-              className="rounded-2xl border p-6"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-            >
+            <HoverCard key={title} accentColor={color} className="p-6">
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
                 style={{ backgroundColor: `${color}18` }}
@@ -105,7 +102,7 @@ export default function PartnershipsPage() {
               </div>
               <h2 className="text-base font-bold mb-2" style={{ color: "#F9FAFB" }}>{title}</h2>
               <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
-            </div>
+            </HoverCard>
           ))}
         </div>
 

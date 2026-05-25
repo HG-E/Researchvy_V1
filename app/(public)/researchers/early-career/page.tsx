@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, AlertTriangle, TrendingUp, Clock } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
+import { HoverCard } from "@/components/ui/HoverCard";
 
 export const metadata = generatePageMetadata({
   title: "Research Visibility for Early-Career Researchers",
@@ -122,17 +123,13 @@ export default function EarlyCareerPage() {
               What fixing it looks like
             </p>
             {WINS.map(({ metric, detail }) => (
-              <div
-                key={metric}
-                className="flex items-start gap-4 rounded-xl border p-4"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              >
+              <HoverCard key={metric} accentColor="#10B981" className="flex items-start gap-4 p-4">
                 <TrendingUp className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: "#10B981" }} />
                 <div>
                   <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>{metric}</p>
                   <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
                 </div>
-              </div>
+              </HoverCard>
             ))}
           </div>
         </div>
@@ -150,11 +147,7 @@ export default function EarlyCareerPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {STAGES.map(({ stage, urgency, actions, color }) => (
-              <div
-                key={stage}
-                className="rounded-2xl border overflow-hidden"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              >
+              <HoverCard key={stage} accentColor={color} className="overflow-hidden">
                 <div className="h-1" style={{ backgroundColor: color }} />
                 <div className="p-6">
                   <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color }}>
@@ -172,7 +165,7 @@ export default function EarlyCareerPage() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </HoverCard>
             ))}
           </div>
         </div>

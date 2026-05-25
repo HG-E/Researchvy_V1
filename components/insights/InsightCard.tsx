@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Calendar } from "lucide-react";
@@ -24,14 +25,22 @@ const CATEGORY_COLORS: Record<InsightCategory, { bg: string; text: string; borde
 
 export function InsightCard({ insight }: { insight: InsightListItem }) {
   const colors = CATEGORY_COLORS[insight.category];
+  const [over, setOver] = useState(false);
 
   return (
+    // group is kept for the image zoom effect only
     <Link href={`/insights/${insight.slug}`} className="group block h-full">
       <article
-        className="h-full rounded-2xl border flex flex-col overflow-hidden transition-all duration-200 group-hover:border-[#2563EB]/40 group-hover:-translate-y-1"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        className="h-full rounded-2xl border flex flex-col overflow-hidden transition-all duration-200"
+        style={{
+          backgroundColor: "#0F172A",
+          borderColor:     over ? `${colors.accent}55` : "#1E293B",
+          transform:       over ? "translateY(-4px)"   : "translateY(0)",
+        }}
+        onMouseEnter={() => setOver(true)}
+        onMouseLeave={() => setOver(false)}
       >
-        {/* Featured image — 16:9 with gradient fallback */}
+        {/* Featured image — 16:9 with per-category gradient fallback */}
         <div className="relative overflow-hidden flex-shrink-0" style={{ aspectRatio: "16/9" }}>
           {insight.featured_image ? (
             <Image
@@ -55,11 +64,11 @@ export function InsightCard({ insight }: { insight: InsightListItem }) {
             <span
               className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold"
               style={{
-                backgroundColor: "rgba(8,14,26,0.82)",
-                color:           colors.text,
-                backdropFilter:  "blur(6px)",
+                backgroundColor:      "rgba(8,14,26,0.82)",
+                color:                colors.text,
+                backdropFilter:       "blur(6px)",
                 WebkitBackdropFilter: "blur(6px)",
-                border:          `1px solid ${colors.border}`,
+                border:               `1px solid ${colors.border}`,
               }}
             >
               {CATEGORY_LABELS[insight.category]}
@@ -75,10 +84,13 @@ export function InsightCard({ insight }: { insight: InsightListItem }) {
             {insight.reading_time} min read
           </span>
 
-          {/* Title */}
+          {/* Title — color shifts to category accent on hover */}
           <h2
-            className="text-base font-bold leading-snug flex-1 group-hover:text-[#60A5FA] transition-colors duration-200"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            className="text-base font-bold leading-snug flex-1 transition-colors duration-200"
+            style={{
+              fontFamily: "var(--font-serif)",
+              color:      over ? colors.text : "#F9FAFB",
+            }}
           >
             {insight.title}
           </h2>

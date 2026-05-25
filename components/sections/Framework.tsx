@@ -3,6 +3,15 @@
 import { motion } from "framer-motion";
 import { copy } from "@/constants/copy";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
+import {
+  Search,
+  Eye,
+  Compass,
+  Share2,
+  MessageSquare,
+  Zap,
+  TrendingUp,
+} from "lucide-react";
 
 // Blue → indigo → purple → green journey through the 7 steps
 const STEP_COLORS = [
@@ -13,6 +22,16 @@ const STEP_COLORS = [
   "#A78BFA", // Communication
   "#34D399", // Application
   "#10B981", // Impact
+];
+
+const STEP_CONFIG = [
+  { Icon: Search,        tags: ["Literature", "Databases", "Citation"] },
+  { Icon: Eye,           tags: ["Open Access", "Indexing", "SEO"] },
+  { Icon: Compass,       tags: ["Metadata", "Keywords", "Algorithms"] },
+  { Icon: Share2,        tags: ["Networks", "Collaboration", "Communities"] },
+  { Icon: MessageSquare, tags: ["Plain Language", "Outreach", "Narrative"] },
+  { Icon: Zap,           tags: ["Policy", "Practice", "Innovation"] },
+  { Icon: TrendingUp,    tags: ["Citations", "Legacy", "Change"] },
 ];
 
 export function Framework() {
@@ -87,36 +106,92 @@ export function Framework() {
           className="lg:hidden"
           items={steps.map((step, i) => {
             const color = STEP_COLORS[i] ?? "#10B981";
+            const { Icon, tags } = STEP_CONFIG[i] ?? { Icon: Search, tags: [] };
             return (
               <div
                 key={step.label}
-                className="mx-0.5 rounded-2xl border p-6 flex flex-col items-center text-center"
+                className="mx-0.5 rounded-2xl border overflow-hidden flex flex-col text-center"
                 style={{ backgroundColor: "#1E293B", borderColor: `${color}40` }}
               >
-                {/* Step position */}
-                <p className="text-xs font-semibold mb-4" style={{ color: "#4B5563" }}>
-                  Step {i + 1} of {steps.length}
-                </p>
-                {/* Colored circle */}
+                {/* Visual header */}
                 <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold mb-5 border-2"
+                  className="relative flex items-center justify-center"
                   style={{
-                    backgroundColor: `${color}18`,
-                    borderColor: color,
-                    color,
+                    height: 168,
+                    background: `linear-gradient(135deg, ${color}28 0%, ${color}08 100%)`,
                   }}
                 >
-                  {i + 1}
+                  {/* Large watermark number */}
+                  <span
+                    className="absolute inset-0 flex items-end justify-end pr-4 pb-2 text-8xl font-black select-none pointer-events-none"
+                    style={{ color: `${color}14`, lineHeight: 1 }}
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </span>
+                  {/* Ghost background icon */}
+                  <Icon
+                    className="absolute"
+                    style={{ width: 88, height: 88, color: `${color}12` }}
+                    aria-hidden="true"
+                  />
+                  {/* Main icon container */}
+                  <div
+                    className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center border"
+                    style={{
+                      backgroundColor: `${color}20`,
+                      borderColor: `${color}55`,
+                    }}
+                  >
+                    <Icon className="w-8 h-8" style={{ color }} />
+                  </div>
+                  {/* Top-left corner accent */}
+                  <div
+                    className="absolute top-0 left-0 w-16 h-16 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle at 0% 0%, ${color}22 0%, transparent 70%)`,
+                    }}
+                    aria-hidden="true"
+                  />
                 </div>
-                <p
-                  className="text-xl font-bold mb-3"
-                  style={{ fontFamily: "var(--font-serif)", color }}
-                >
-                  {step.label}
-                </p>
-                <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
-                  {step.description}
-                </p>
+
+                {/* Gradient separator */}
+                <div
+                  className="h-px w-full"
+                  style={{ background: `linear-gradient(90deg, transparent, ${color}40, transparent)` }}
+                />
+
+                {/* Content */}
+                <div className="p-5 flex flex-col items-center flex-1">
+                  <p className="text-xs font-semibold mb-3 tracking-widest uppercase" style={{ color: "#4B5563" }}>
+                    Step {i + 1} of {steps.length}
+                  </p>
+                  <p
+                    className="text-xl font-bold mb-2"
+                    style={{ fontFamily: "var(--font-serif)", color }}
+                  >
+                    {step.label}
+                  </p>
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: "#9CA3AF" }}>
+                    {step.description}
+                  </p>
+                  {/* Keyword tags */}
+                  <div className="flex flex-wrap gap-1.5 justify-center mt-auto">
+                    {tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2.5 py-0.5 rounded-full"
+                        style={{
+                          backgroundColor: `${color}15`,
+                          color: `${color}CC`,
+                          border: `1px solid ${color}25`,
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             );
           })}

@@ -55,6 +55,17 @@ export function ClinicFeature() {
               ))}
             </ul>
 
+            {/* Urgency signal */}
+            <div className="flex items-center gap-2 mb-4">
+              <span
+                className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse"
+                style={{ backgroundColor: "#EF4444" }}
+              />
+              <span className="text-xs font-medium" style={{ color: "#EF4444" }}>
+                Limited to 20 participants per cohort — spots fill fast
+              </span>
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/clinics"

@@ -4,16 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { copy } from "@/constants/copy";
-
-const FRAMEWORK_STEPS = [
-  "Research",
-  "Visibility",
-  "Discoverability",
-  "Connection",
-  "Communication",
-  "Application",
-  "Impact",
-];
+import { siteConfig } from "@/config/site";
 
 export function CTA() {
   return (
@@ -93,25 +84,41 @@ export function CTA() {
             </Link>
           </div>
 
-          {/* Framework chain — hidden on mobile */}
-          <div className="mt-16 hidden sm:flex flex-wrap items-center justify-center gap-2">
-            {FRAMEWORK_STEPS.map((step, i) => (
-              <span key={i} className="flex items-center gap-2">
-                <span
-                  className="text-xs font-medium px-3 py-1.5 rounded-full border"
-                  style={{
-                    backgroundColor: "#0F172A",
-                    borderColor: i === FRAMEWORK_STEPS.length - 1 ? "#10B981" : "#1E293B",
-                    color: i === FRAMEWORK_STEPS.length - 1 ? "#10B981" : "#9CA3AF",
-                  }}
-                >
-                  {step}
+          {/* Framework chain — scrollable on mobile, centered on desktop */}
+          <div className="mt-16 relative">
+            {/* Fade masks — mobile scroll affordance */}
+            <div
+              className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none z-10 sm:hidden"
+              style={{ background: "linear-gradient(90deg, #080E1A, transparent)" }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none z-10 sm:hidden"
+              style={{ background: "linear-gradient(270deg, #080E1A, transparent)" }}
+              aria-hidden="true"
+            />
+            <div
+              className="flex items-center gap-2 overflow-x-auto sm:flex-wrap sm:justify-center pb-1"
+              style={{ scrollbarWidth: "none" } as React.CSSProperties}
+            >
+              {(siteConfig.framework as readonly string[]).map((step, i) => (
+                <span key={i} className="flex items-center gap-2 flex-shrink-0">
+                  <span
+                    className="text-xs font-medium px-3 py-1.5 rounded-full border whitespace-nowrap"
+                    style={{
+                      backgroundColor: "#0F172A",
+                      borderColor: i === siteConfig.framework.length - 1 ? "#10B981" : "#1E293B",
+                      color: i === siteConfig.framework.length - 1 ? "#10B981" : "#9CA3AF",
+                    }}
+                  >
+                    {step}
+                  </span>
+                  {i < siteConfig.framework.length - 1 && (
+                    <span className="text-sm flex-shrink-0" style={{ color: "#2563EB" }}>→</span>
+                  )}
                 </span>
-                {i < FRAMEWORK_STEPS.length - 1 && (
-                  <span className="text-sm" style={{ color: "#2563EB" }}>→</span>
-                )}
-              </span>
-            ))}
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

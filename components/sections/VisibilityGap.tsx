@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, ArrowRight } from "lucide-react";
 import { copy } from "@/constants/copy";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
 
@@ -44,12 +44,16 @@ export function VisibilityGap() {
             </p>
             <div
               className="rounded-xl p-6 border"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              style={{
+                backgroundColor: "rgba(16,185,129,0.04)",
+                borderColor: "rgba(16,185,129,0.28)",
+              }}
             >
-              <p className="text-sm font-semibold mb-2" style={{ color: "#F9FAFB" }}>
+              <p className="flex items-center gap-2 text-sm font-semibold mb-2" style={{ color: "#F9FAFB" }}>
+                <ArrowRight className="h-4 w-4 flex-shrink-0" style={{ color: "#10B981" }} />
                 The Researchvy Framework bridges every gap:
               </p>
-              <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+              <p className="text-sm leading-relaxed pl-6" style={{ color: "#9CA3AF" }}>
                 Research → Visibility → Discoverability → Connection → Communication → Application →{" "}
                 <span style={{ color: "#10B981" }}>Impact</span>
               </p>
