@@ -54,12 +54,12 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-5xl sm:text-6xl md:text-7xl font-bold mb-4 leading-tight"
+          className="text-4xl sm:text-6xl md:text-7xl font-bold mb-4 leading-tight"
           style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
         >
           Research Beyond
           <br />
-          <span className="relative inline-block min-w-[280px] sm:min-w-[360px]">
+          <span className="relative inline-block min-w-[220px] sm:min-w-[360px]">
             <AnimatePresence mode="wait">
               <motion.span
                 key={wordIndex}
@@ -80,7 +80,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed"
+          className="text-base sm:text-xl max-w-xl mx-auto mb-10 leading-relaxed"
           style={{ color: "#9CA3AF" }}
         >
           {copy.hero.body}
@@ -90,11 +90,11 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col items-stretch sm:flex-row sm:items-center sm:justify-center gap-3 w-full max-w-xs mx-auto sm:max-w-none"
         >
           <Link
             href="/clinics"
-            className="group inline-flex items-center gap-2 rounded-lg px-8 py-3.5 text-base font-semibold text-white transition-all duration-200"
+            className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white transition-all duration-200 active:scale-[0.97]"
             style={{ backgroundColor: "#2563EB" }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
@@ -104,7 +104,7 @@ export function Hero() {
           </Link>
           <Link
             href="/ecosystem"
-            className="inline-flex items-center gap-2 rounded-lg px-8 py-3.5 text-base font-semibold border transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border transition-all duration-200 active:scale-[0.97]"
             style={{ color: "#F9FAFB", borderColor: "#1E293B" }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = "#2563EB";
@@ -123,7 +123,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-6 text-sm"
+          className="mt-12 hidden sm:flex flex-wrap items-center justify-center gap-6 text-sm"
           style={{ color: "#4B5563" }}
         >
           {["Research Intelligence", "Scholarly Visibility", "Digital Discoverability"].map((item) => (
@@ -136,7 +136,7 @@ export function Hero() {
       </div>
 
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}

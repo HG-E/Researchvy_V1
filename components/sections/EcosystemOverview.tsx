@@ -18,7 +18,7 @@ const cardVariants = {
 
 export function EcosystemOverview() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
+    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -75,7 +75,7 @@ export function EcosystemOverview() {
                 <p className="text-xs font-medium mb-3" style={{ color: "#2563EB" }}>
                   {division.tagline}
                 </p>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: "#9CA3AF" }}>
+                <p className="text-sm leading-relaxed mb-5 line-clamp-3 sm:line-clamp-none" style={{ color: "#9CA3AF" }}>
                   {division.description}
                 </p>
                 <Link

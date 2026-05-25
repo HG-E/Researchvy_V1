@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { FileText, BookOpen, Layers, Users, ArrowRight, Clock, BarChart2 } from "lucide-react";
+import { FileText, BookOpen, Layers, Users, ArrowRight, Clock, BarChart2, Inbox, Handshake } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getInsights } from "@/lib/cms/mdx";
 import { RESOURCES } from "@/constants/resources";
-import { digitalVisibilityClinic } from "@/constants/clinics";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { format } from "date-fns";
 
@@ -19,10 +18,32 @@ async function getUserCount(): Promise<number> {
   }
 }
 
+async function getEnquiryCounts() {
+  try {
+    const admin = createSupabaseAdminClient();
+    const [clinicRes, academyRes, partnerRes] = await Promise.all([
+      admin.from("clinic_enquiries").select("status"),
+      admin.from("academy_enquiries").select("status"),
+      admin.from("partnership_enquiries").select("status"),
+    ]);
+    const clinicPending   = (clinicRes.data   ?? []).filter((r: { status: string }) => r.status === "pending").length;
+    const academyPending  = (academyRes.data  ?? []).filter((r: { status: string }) => r.status === "pending").length;
+    const partnerNew      = (partnerRes.data  ?? []).filter((r: { status: string }) => r.status === "new").length;
+    return {
+      clinic:   { total: clinicRes.data?.length  ?? 0, pending: clinicPending },
+      academy:  { total: academyRes.data?.length  ?? 0, pending: academyPending },
+      partner:  { total: partnerRes.data?.length  ?? 0, newCount: partnerNew },
+    };
+  } catch {
+    return { clinic: { total: 0, pending: 0 }, academy: { total: 0, pending: 0 }, partner: { total: 0, newCount: 0 } };
+  }
+}
+
 export default async function AdminOverviewPage() {
-  const [insights, userCount] = await Promise.all([
+  const [insights, userCount, enquiries] = await Promise.all([
     getInsights({ limit: 100 }),
     getUserCount(),
+    getEnquiryCounts(),
   ]);
 
   const recent = insights.slice(0, 5);
@@ -34,11 +55,41 @@ export default async function AdminOverviewPage() {
     { label: "Registered Users",    value: userCount,                 icon: Users,    color: "#F472B6" },
   ];
 
+  const enquiryCards = [
+    {
+      label: "Clinic Enquiries",
+      href:  "/admin/enquiries",
+      total: enquiries.clinic.total,
+      badge: enquiries.clinic.pending,
+      badgeLabel: "pending",
+      icon: Inbox,
+      color: "#60A5FA",
+    },
+    {
+      label: "Academy Enquiries",
+      href:  "/admin/enquiries",
+      total: enquiries.academy.total,
+      badge: enquiries.academy.pending,
+      badgeLabel: "pending",
+      icon: BookOpen,
+      color: "#A78BFA",
+    },
+    {
+      label: "Partnership Enquiries",
+      href:  "/admin/partnerships",
+      total: enquiries.partner.total,
+      badge: enquiries.partner.newCount,
+      badgeLabel: "new",
+      icon: Handshake,
+      color: "#34D399",
+    },
+  ];
+
   const quickLinks = [
-    { label: "Manage Content",   href: "/admin/content",   desc: "View and manage insights" },
-    { label: "Manage Clinics",   href: "/admin/clinics",   desc: "Programme details and sessions" },
-    { label: "Manage Users",     href: "/admin/users",     desc: "User accounts and roles" },
-    { label: "Analytics",        href: "/admin/analytics", desc: "Traffic and engagement metrics" },
+    { label: "Manage Content",   href: "/admin/content",      desc: "View and manage insights" },
+    { label: "Manage Clinics",   href: "/admin/clinics",      desc: "Programme details and sessions" },
+    { label: "Manage Users",     href: "/admin/users",        desc: "User accounts and roles" },
+    { label: "Analytics",        href: "/admin/analytics",    desc: "Traffic and engagement metrics" },
   ];
 
   return (
@@ -73,6 +124,37 @@ export default async function AdminOverviewPage() {
             </div>
             <p className="text-3xl font-bold" style={{ color: "#F9FAFB" }}>{value}</p>
           </div>
+        ))}
+      </div>
+
+      {/* Enquiry Pipeline */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        {enquiryCards.map(({ label, href, total, badge, badgeLabel, icon: Icon, color }) => (
+          <Link
+            key={label}
+            href={href}
+            className="rounded-2xl border p-5 flex items-center gap-4 transition-all hover:border-[#334155]"
+            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          >
+            <div
+              className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+              style={{ backgroundColor: `${color}1A` }}
+            >
+              <Icon className="h-5 w-5" style={{ color }} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-2xl font-bold" style={{ color: "#F9FAFB" }}>{total}</p>
+              <p className="text-xs truncate" style={{ color: "#6B7280" }}>{label}</p>
+            </div>
+            {badge > 0 && (
+              <span
+                className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0"
+                style={{ backgroundColor: "rgba(245,158,11,0.15)", color: "#FCD34D" }}
+              >
+                {badge} {badgeLabel}
+              </span>
+            )}
+          </Link>
         ))}
       </div>
 

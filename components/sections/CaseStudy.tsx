@@ -35,7 +35,7 @@ const AUDIT_FINDINGS = [
 
 export function CaseStudy() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
+    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
       <div className="mx-auto max-w-6xl">
 
         {/* Header */}

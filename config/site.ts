@@ -97,6 +97,13 @@ export const siteConfig = {
     },
   ],
 
+  certificates: {
+    signatory: {
+      name:  "Hillary Goodness",
+      title: "Founder & Director, Researchvy",
+    },
+  },
+
   framework: [
     "Research",
     "Visibility",

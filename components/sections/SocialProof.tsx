@@ -31,15 +31,15 @@ const TESTIMONIALS = [
 ];
 
 const STATS = [
-  { value: "≤20",   label: "Researchers per cohort — intentionally small" },
-  { value: "6",     label: "Sessions from invisible to globally discoverable" },
-  { value: "100%",  label: "Of completers receive a verified certificate" },
-  { value: "24hrs", label: "Response time to every enquiry" },
+  { value: "≤20",  label: "Researchers per cohort" },
+  { value: "6",    label: "Sessions to visibility" },
+  { value: "5",    label: "Ecosystem divisions" },
+  { value: "100%", label: "Certified on completion" },
 ];
 
 export function SocialProof() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#0F172A" }}>
+    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#0F172A" }}>
       <div className="mx-auto max-w-6xl">
 
         {/* Section header */}
@@ -48,7 +48,7 @@ export function SocialProof() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
             Researcher Results
@@ -111,7 +111,7 @@ export function SocialProof() {
           {STATS.map((stat, i) => (
             <div key={i} className="text-center">
               <p
-                className="text-4xl font-bold mb-1"
+                className="text-3xl sm:text-4xl font-bold mb-1"
                 style={{ fontFamily: "var(--font-serif)", color: "#2563EB" }}
               >
                 {stat.value}

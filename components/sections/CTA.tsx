@@ -18,7 +18,7 @@ const FRAMEWORK_STEPS = [
 export function CTA() {
   return (
     <section
-      className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       style={{ backgroundColor: "#080E1A" }}
     >
       <div
@@ -52,10 +52,10 @@ export function CTA() {
             {copy.cta.body}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col items-stretch sm:flex-row sm:items-center sm:justify-center gap-3 w-full max-w-xs mx-auto sm:max-w-none">
             <Link
               href="/clinics"
-              className="group inline-flex items-center gap-2 rounded-lg px-8 py-3.5 text-base font-semibold text-white transition-all duration-200"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white transition-all duration-200 active:scale-[0.97]"
               style={{ backgroundColor: "#2563EB" }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
@@ -65,7 +65,7 @@ export function CTA() {
             </Link>
             <Link
               href="/ecosystem"
-              className="inline-flex items-center gap-2 rounded-lg px-8 py-3.5 text-base font-semibold border transition-all duration-200"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border transition-all duration-200 active:scale-[0.97]"
               style={{ color: "#F9FAFB", borderColor: "#1E293B" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "#2563EB";
@@ -80,8 +80,8 @@ export function CTA() {
             </Link>
           </div>
 
-          {/* Framework chain */}
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-2">
+          {/* Framework chain — hidden on mobile, wraps messily at small widths */}
+          <div className="mt-16 hidden sm:flex flex-wrap items-center justify-center gap-2">
             {FRAMEWORK_STEPS.map((step, i) => (
               <span key={i} className="flex items-center gap-2">
                 <span

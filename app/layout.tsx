@@ -5,6 +5,8 @@ import "@/styles/animations.css";
 import { siteConfig } from "@/config/site";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
 import { PostHogProvider } from "@/components/analytics/PostHogProvider";
+import { ServiceWorkerRegistration } from "@/components/pwa/ServiceWorkerRegistration";
+import { InstallPrompt } from "@/components/pwa/InstallPrompt";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -100,6 +102,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
         />
         <PostHogProvider>
+          <ServiceWorkerRegistration />
+          <InstallPrompt />
           <a href="#main-content" className="skip-link">
             Skip to main content
           </a>

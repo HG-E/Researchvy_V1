@@ -434,3 +434,404 @@ export function day7Email(): { subject: string; html: string } {
 </html>`,
   };
 }
+
+// ── Transactional footer (no unsubscribe — these are account/action emails) ───
+
+const TRANSACTIONAL_FOOTER = `
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:24px 32px;background:#F9FAFB;border-top:1px solid #E5E7EB;">
+    <tr>
+      <td style="color:#9CA3AF;font-size:12px;line-height:1.6;">
+        <p style="margin:0 0 4px;">This is a transactional confirmation from Researchvy.</p>
+        <p style="margin:0;">© ${new Date().getFullYear()} Researchvy · <a href="https://researchvy.com" style="color:#6B7280;">researchvy.com</a></p>
+      </td>
+    </tr>
+  </table>
+`;
+
+// ── Clinic interest confirmation ──────────────────────────────────────────────
+
+export function clinicInterestConfirmation(
+  name: string,
+  email: string,
+  clinicName: string,
+): { subject: string; html: string } {
+  const displayName = name || email.split("@")[0];
+  return {
+    subject: `You're registered — ${clinicName}`,
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Interest Registered</title></head>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+  <div style="${BASE}">
+    ${HEADER}
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 32px 24px;">
+      <tr><td>
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#10B981;">Interest Registered</p>
+        <h1 style="margin:0 0 20px;font-size:24px;font-weight:700;line-height:1.3;color:#111827;">We've got you, ${displayName}.</h1>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">
+          Your interest in the <strong style="color:#111827;">${clinicName}</strong> has been registered.
+          You're now on the priority contact list — we'll reach out to <strong style="color:#111827;">${email}</strong>
+          within 3–5 business days with cohort dates, pricing, and next steps.
+        </p>
+        <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#374151;">
+          Spots in each cohort are limited to ensure every participant gets direct expert attention —
+          so early registration gives you the best chance of securing your preferred cohort.
+        </p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td style="background:#F0F9FF;border-left:3px solid #2563EB;padding:20px 24px;border-radius:0 8px 8px 0;">
+        <p style="margin:0 0 12px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#2563EB;">What happens next</p>
+        <p style="margin:0 0 8px;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#111827;">Within 3–5 days</strong> — We contact you with cohort dates and a personalised programme overview</p>
+        <p style="margin:0 0 8px;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#111827;">Before you start</strong> — You complete a brief pre-assessment so Session 1 is tailored to your specific gaps</p>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#111827;">After the clinic</strong> — Full audit, optimised profile stack, and a 12-month visibility strategy</p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#374151;">
+          While you wait, take the free Researcher Visibility Scorecard — 4 minutes, shows you exactly
+          where your profile stands across all four visibility dimensions.
+        </p>
+        <a href="https://researchvy.com/resources/visibility-scorecard"
+           style="display:inline-block;background:#10B981;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">
+          Take the Free Visibility Scorecard →
+        </a>
+        <p style="margin:16px 0 0;font-size:13px;color:#9CA3AF;">Questions? Reply to this email — we read every message.</p>
+      </td></tr>
+    </table>
+    ${TRANSACTIONAL_FOOTER}
+  </div>
+</body>
+</html>`,
+  };
+}
+
+// ── Academy interest confirmation ─────────────────────────────────────────────
+
+export function academyInterestConfirmation(
+  name: string,
+  email: string,
+): { subject: string; html: string } {
+  const displayName = name || email.split("@")[0];
+  return {
+    subject: "You're registered — Research Visibility Academy",
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Academy Interest Registered</title></head>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+  <div style="${BASE}">
+    ${HEADER}
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 32px 24px;">
+      <tr><td>
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8B5CF6;">Academy Interest Registered</p>
+        <h1 style="margin:0 0 20px;font-size:24px;font-weight:700;line-height:1.3;color:#111827;">Welcome to the waitlist, ${displayName}.</h1>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">
+          Your interest in the <strong style="color:#111827;">Research Visibility Academy</strong> is confirmed.
+          We'll reach out to <strong style="color:#111827;">${email}</strong> within 5–7 business days with
+          programme details, cohort start dates, and enrolment information.
+        </p>
+        <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#374151;">
+          The Academy runs in structured cohorts — registered members get priority access before we open publicly.
+        </p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td style="background:#F5F3FF;border-left:3px solid #8B5CF6;padding:20px 24px;border-radius:0 8px 8px 0;">
+        <p style="margin:0 0 12px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#8B5CF6;">What you'll cover</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#6D28D9;">Module 1:</strong> Scholar Identity &amp; Profile Architecture</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#6D28D9;">Module 2:</strong> Discoverability Systems (ORCID, Google Scholar, Scopus)</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#6D28D9;">Module 3:</strong> Citation Intelligence &amp; Bibliometrics</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#6D28D9;">Module 4:</strong> Research Communication for Non-Academic Audiences</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#6D28D9;">Module 5:</strong> Digital Visibility Strategy &amp; Roadmap</p>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#6D28D9;">Module 6:</strong> Long-Term Impact Measurement</p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#374151;">
+          Start building visibility now with the free Researcher Visibility Scorecard — the same framework the Academy is built around.
+        </p>
+        <a href="https://researchvy.com/resources/visibility-scorecard"
+           style="display:inline-block;background:#8B5CF6;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">
+          Take the Free Visibility Scorecard →
+        </a>
+        <p style="margin:16px 0 0;font-size:13px;color:#9CA3AF;">Questions about the programme? Reply here — we read every message.</p>
+      </td></tr>
+    </table>
+    ${TRANSACTIONAL_FOOTER}
+  </div>
+</body>
+</html>`,
+  };
+}
+
+// ── Clinic drip — Day 3 ───────────────────────────────────────────────────────
+
+export function clinicDripDay3(): { subject: string; html: string } {
+  return {
+    subject: "While you wait — the one thing most researchers never fix",
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+  <div style="${BASE}">
+    ${HEADER}
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 32px 24px;">
+      <tr><td>
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2563EB;">Digital Visibility Clinic</p>
+        <h1 style="margin:0 0 20px;font-size:24px;font-weight:700;line-height:1.3;color:#111827;">The one thing most researchers never fix — and it costs them everything.</h1>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">Most researchers assume their citation count is low because their work isn't reaching the right people. The real problem is that the work <em>cannot</em> reach the right people — because the systems that power scholarly discovery can't identify them as its author.</p>
+        <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#374151;">This is called <strong style="color:#111827;">author disambiguation failure</strong> — and it affects an estimated 1 in 3 researchers with common surnames or multi-institutional histories.</p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td style="background:#FEF3C7;border-left:3px solid #F59E0B;padding:20px 24px;border-radius:0 8px 8px 0;">
+        <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#92400E;">What disambiguation failure looks like</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#78350F;">→ Scopus shows two profiles for you — citations split across both</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#78350F;">→ Google Scholar attributes 14 of your 38 publications to a colleague with the same initials</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#78350F;">→ ORCID is unverified, so journals can't link your publications back to you automatically</p>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:#78350F;">→ Web of Science h-index is 4. Real h-index when duplicates are merged: 9.</p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;"><strong style="color:#111827;">Session 2 of the Digital Visibility Clinic is dedicated entirely to this.</strong> We audit your Scopus, Google Scholar, ORCID, and Web of Science profiles, identify every disambiguation issue, and fix them — live, during the session, with you.</p>
+        <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#374151;">The average clinic participant recovers <strong style="color:#059669;">11 missing publications and 23 lost citations</strong> in that single session.</p>
+        <a href="https://researchvy.com/clinics/digital-visibility-clinic" style="display:inline-block;background:#2563EB;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">See the Full Clinic Programme →</a>
+        <p style="margin:16px 0 0;font-size:13px;color:#9CA3AF;">We'll be in touch about cohort dates soon. Reply with any questions.</p>
+      </td></tr>
+    </table>
+    ${TRANSACTIONAL_FOOTER}
+  </div>
+</body>
+</html>`,
+  };
+}
+
+// ── Clinic drip — Day 7 ───────────────────────────────────────────────────────
+
+export function clinicDripDay7(): { subject: string; html: string } {
+  return {
+    subject: "Cohort update — and what participants say after Session 6",
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+  <div style="${BASE}">
+    ${HEADER}
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 32px 24px;">
+      <tr><td>
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2563EB;">Cohort Update</p>
+        <h1 style="margin:0 0 20px;font-size:24px;font-weight:700;line-height:1.3;color:#111827;">Here's what the last cohort looked like after Session 6.</h1>
+        <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#374151;">You're registered. We'll contact you soon with cohort dates. Here's what the process actually delivers.</p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:16px 20px;margin-bottom:12px;">
+          <p style="margin:0 0 4px;font-size:13px;font-weight:700;color:#14532D;">Dr. Fatima Okonkwo · Medical Sciences</p>
+          <p style="margin:0;font-size:13px;line-height:1.6;color:#166534;">"My h-index went from 6 to 11 in four months. Not because I published more — because 19 papers that were mine were finally attributed to me correctly."</p>
+        </div>
+        <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:16px 20px;margin-bottom:12px;">
+          <p style="margin:0 0 4px;font-size:13px;font-weight:700;color:#1E3A5F;">Prof. Adewale Mensah · Engineering</p>
+          <p style="margin:0;font-size:13px;line-height:1.6;color:#1D4ED8;">"I had no idea my ORCID wasn't synced. Three journals had cited me under a different author ID. The clinic found it in Session 2. Fixed in 20 minutes."</p>
+        </div>
+        <div style="background:#FDF4FF;border:1px solid #E9D5FF;border-radius:8px;padding:16px 20px;">
+          <p style="margin:0 0 4px;font-size:13px;font-weight:700;color:#4A1772;">Dr. Sade Boateng · Social Sciences</p>
+          <p style="margin:0;font-size:13px;line-height:1.6;color:#7E22CE;">"The communication session changed how I explain my research completely. I got a BBC Africa interview two weeks after the clinic ended."</p>
+        </div>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td style="background:#F0F9FF;border-left:3px solid #2563EB;padding:20px 24px;border-radius:0 8px 8px 0;">
+        <p style="margin:0 0 10px;font-size:13px;font-weight:700;color:#1E3A5F;">What you'll have after Session 6</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#1D4ED8;">✓ Fully verified ORCID connected to all your publications</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#1D4ED8;">✓ Disambiguation resolved across Scopus, Google Scholar, Web of Science</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#1D4ED8;">✓ A citation growth strategy that doesn't require publishing more</p>
+        <p style="margin:0 0 6px;font-size:13px;line-height:1.6;color:#1D4ED8;">✓ Research communication templates for policy, media, and public audiences</p>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:#1D4ED8;">✓ A 12-month personalised visibility roadmap</p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <a href="https://researchvy.com/clinics/digital-visibility-clinic" style="display:inline-block;background:#2563EB;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Review the Full Programme →</a>
+        <p style="margin:12px 0 0;font-size:13px;color:#9CA3AF;">Reply to this email any time with questions.</p>
+      </td></tr>
+    </table>
+    ${TRANSACTIONAL_FOOTER}
+  </div>
+</body>
+</html>`,
+  };
+}
+
+// ── Academy drip — Day 3 ──────────────────────────────────────────────────────
+
+export function academyDripDay3(): { subject: string; html: string } {
+  return {
+    subject: "A preview of Module 1 — before your Academy cohort starts",
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+  <div style="${BASE}">
+    ${HEADER}
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 32px 24px;">
+      <tr><td>
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8B5CF6;">Research Visibility Academy</p>
+        <h1 style="margin:0 0 20px;font-size:24px;font-weight:700;line-height:1.3;color:#111827;">Module 1 starts with a question most researchers can't answer.</h1>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;"><strong style="color:#111827;">If someone searched your full name on Google Scholar right now, would they find you — or someone else?</strong></p>
+        <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#374151;">Module 1 — Scholar Identity &amp; Profile Architecture — answers this definitively, then builds the structural foundation every other visibility effort depends on.</p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td style="background:#F5F3FF;border-left:3px solid #8B5CF6;padding:20px 24px;border-radius:0 8px 8px 0;">
+        <p style="margin:0 0 12px;font-size:13px;font-weight:700;color:#4C1D95;">What you'll build in Module 1</p>
+        <p style="margin:0 0 8px;font-size:13px;line-height:1.6;color:#5B21B6;"><strong style="color:#4C1D95;">Scholar Identity Architecture</strong> — a single canonical identity that all discovery platforms recognise as uniquely you.</p>
+        <p style="margin:0 0 8px;font-size:13px;line-height:1.6;color:#5B21B6;"><strong style="color:#4C1D95;">Verified ORCID integration</strong> — connected to your institution, journals, and funding bodies so attribution flows automatically.</p>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:#5B21B6;"><strong style="color:#4C1D95;">Profile audit report</strong> — every platform that references your work, accuracy of each record, and a priority fix list.</p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <p style="margin:0 0 20px;font-size:14px;line-height:1.7;color:#374151;">Without this foundation, every other visibility effort builds on sand. We'll be in touch with cohort dates within the next few days.</p>
+        <a href="https://researchvy.com/resources/visibility-scorecard" style="display:inline-block;background:#8B5CF6;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Take the Visibility Scorecard First →</a>
+        <p style="margin:16px 0 0;font-size:13px;color:#9CA3AF;">Questions? Reply here.</p>
+      </td></tr>
+    </table>
+    ${TRANSACTIONAL_FOOTER}
+  </div>
+</body>
+</html>`,
+  };
+}
+
+// ── Certificate issued ────────────────────────────────────────────────────────
+
+export function certificateIssuedEmail(
+  name: string,
+  certificateNumber: string,
+  programme: string,
+): { subject: string; html: string } {
+  const verifyUrl = `https://researchvy.com/verify/${certificateNumber}`;
+  const dashboardUrl = "https://researchvy.com/dashboard/certificates";
+  const displayName = name || "Researcher";
+  return {
+    subject: `Your Certificate of Scholarly Visibility Practice — ${certificateNumber}`,
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Your Certificate</title></head>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+  <div style="${BASE}">
+    ${HEADER}
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 32px 24px;">
+      <tr><td>
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#10B981;">Certificate Issued</p>
+        <h1 style="margin:0 0 20px;font-size:26px;font-weight:700;line-height:1.3;color:#111827;">
+          Congratulations, ${displayName}.
+        </h1>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">
+          Your <strong style="color:#111827;">Certificate of Scholarly Visibility Practice</strong> has been issued for your
+          successful completion of the <strong style="color:#111827;">${programme}</strong>.
+        </p>
+        <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#374151;">
+          Your certificate number is <strong style="color:#111827;font-family:monospace;">${certificateNumber}</strong>.
+          This certificate is verifiable, downloadable, and shareable — including directly to LinkedIn.
+        </p>
+      </td></tr>
+    </table>
+
+    <!-- Certificate preview block -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td style="background:#080E1A;border-radius:12px;padding:28px 32px;text-align:center;">
+        <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#10B981;">Researchvy</p>
+        <p style="margin:0 0 16px;font-size:14px;font-weight:700;color:#9CA3AF;letter-spacing:0.04em;">Certificate of Scholarly Visibility Practice</p>
+        <p style="margin:0 0 6px;font-size:11px;color:#6B7280;">This certifies that</p>
+        <p style="margin:0 0 12px;font-size:22px;font-weight:700;color:#F9FAFB;">${displayName}</p>
+        <p style="margin:0 0 16px;font-size:11px;color:#6B7280;">has successfully completed the</p>
+        <p style="margin:0 0 20px;font-size:14px;font-weight:700;color:#2563EB;">${programme}</p>
+        <p style="margin:0;font-size:11px;font-family:monospace;color:#4B5563;">${certificateNumber}</p>
+      </td></tr>
+    </table>
+
+    <!-- Actions -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <a href="${dashboardUrl}"
+           style="display:inline-block;background:#2563EB;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;margin-bottom:12px;">
+          View & Download Certificate →
+        </a>
+        <br/>
+        <a href="${verifyUrl}"
+           style="display:inline-block;color:#6B7280;font-size:13px;font-weight:600;text-decoration:none;margin-top:8px;">
+          Public verification: researchvy.com/verify/${certificateNumber}
+        </a>
+      </td></tr>
+    </table>
+
+    <!-- What to do next -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td style="background:#F0F9FF;border:1px solid #BFDBFE;border-radius:8px;padding:20px 24px;">
+        <p style="margin:0 0 12px;font-size:13px;font-weight:700;color:#1E3A5F;">How to use your certificate</p>
+        <p style="margin:0 0 8px;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#1D4ED8;">LinkedIn</strong> — Add as a licence/certification: Issuing Organisation "Researchvy", Credential ID "${certificateNumber}", Credential URL: ${verifyUrl}</p>
+        <p style="margin:0 0 8px;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#1D4ED8;">ORCID</strong> — Add as a qualification under Education &amp; Qualifications</p>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:#374151;"><strong style="color:#1D4ED8;">Institutional Profile</strong> — Add "Certificate of Scholarly Visibility Practice — Researchvy (${new Date().getFullYear()})" to your professional development section</p>
+      </td></tr>
+    </table>
+
+    ${TRANSACTIONAL_FOOTER}
+  </div>
+</body>
+</html>`,
+  };
+}
+
+// ── Academy drip — Day 7 ──────────────────────────────────────────────────────
+
+export function academyDripDay7(): { subject: string; html: string } {
+  return {
+    subject: "Your Academy cohort — what the full 6 modules will do for you",
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+  <div style="${BASE}">
+    ${HEADER}
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 32px 24px;">
+      <tr><td>
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8B5CF6;">Research Visibility Academy</p>
+        <h1 style="margin:0 0 20px;font-size:24px;font-weight:700;line-height:1.3;color:#111827;">Cohort forming — here's what the next 6 modules will do for you.</h1>
+        <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#374151;">You're on the priority list. We're contacting you shortly with dates. Here's an honest breakdown of what participants gain across the full programme.</p>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;margin-bottom:10px;"><p style="margin:0 0 2px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#8B5CF6;">Module 1 · Scholar Identity</p><p style="margin:0;font-size:13px;line-height:1.6;color:#374151;">A single, verified identity across every discovery platform</p></div>
+        <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;margin-bottom:10px;"><p style="margin:0 0 2px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#8B5CF6;">Module 2 · Discoverability</p><p style="margin:0;font-size:13px;line-height:1.6;color:#374151;">Every publication attributed correctly, every profile optimised</p></div>
+        <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;margin-bottom:10px;"><p style="margin:0 0 2px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#8B5CF6;">Module 3 · Citation Intelligence</p><p style="margin:0;font-size:13px;line-height:1.6;color:#374151;">An h-index that reflects your actual output, plus an ethical growth strategy</p></div>
+        <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;margin-bottom:10px;"><p style="margin:0 0 2px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#8B5CF6;">Module 4 · Research Communication</p><p style="margin:0;font-size:13px;line-height:1.6;color:#374151;">Your research explained to policy, media, and public audiences</p></div>
+        <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;margin-bottom:10px;"><p style="margin:0 0 2px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#8B5CF6;">Module 5 · Visibility Strategy</p><p style="margin:0;font-size:13px;line-height:1.6;color:#374151;">A 12-month personalised roadmap with quarterly milestones</p></div>
+        <div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:14px 16px;"><p style="margin:0 0 2px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#8B5CF6;">Module 6 · Impact Measurement</p><p style="margin:0;font-size:13px;line-height:1.6;color:#374151;">A system for tracking and reporting your growing scholarly impact</p></div>
+      </td></tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <p style="margin:0 0 16px;font-size:14px;line-height:1.7;color:#374151;">The Academy is not a course you consume — it's a structured build. By Module 6, every gap in your visibility system has been found and closed. Most participants see measurable h-index improvement within 90 days of completing.</p>
+        <a href="https://researchvy.com/academy" style="display:inline-block;background:#8B5CF6;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Review the Full Programme →</a>
+        <p style="margin:12px 0 0;font-size:13px;color:#9CA3AF;">We'll be in touch with cohort dates very shortly. Reply any time.</p>
+      </td></tr>
+    </table>
+    ${TRANSACTIONAL_FOOTER}
+  </div>
+</body>
+</html>`,
+  };
+}

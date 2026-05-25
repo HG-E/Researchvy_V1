@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -13,6 +14,12 @@ const schema = z.object({
 
 export async function POST(req: Request) {
   try {
+    // 3 contact form submissions per IP per hour
+    const { allowed } = checkRateLimit(getRateLimitKey(req, "contact"), 3, 60 * 60 * 1000);
+    if (!allowed) {
+      return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+    }
+
     const body = await req.json();
     const parsed = schema.safeParse(body);
 

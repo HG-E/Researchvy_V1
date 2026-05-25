@@ -31,9 +31,15 @@ export const footerNav = {
     { label: "Resources",      href: "/resources" },
     { label: "Partnerships",   href: "/partnerships" },
   ],
+  for_researchers: [
+    { label: "Early-Career Researchers",       href: "/researchers/early-career" },
+    { label: "Institutions & Research Offices", href: "/researchers/institutional" },
+    { label: "Visibility Scorecard (Free)",     href: "/resources/visibility-scorecard" },
+    { label: "Digital Visibility Clinic",       href: "/clinics/digital-visibility-clinic" },
+  ],
   company: [
-    { label: "About",          href: "/about" },
-    { label: "Contact",        href: "/contact" },
+    { label: "About",   href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
 };
 

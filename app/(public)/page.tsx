@@ -6,7 +6,6 @@ import { EcosystemOverview } from "@/components/sections/EcosystemOverview";
 import { ClinicFeature } from "@/components/sections/ClinicFeature";
 import { CaseStudy } from "@/components/sections/CaseStudy";
 import { SocialProof } from "@/components/sections/SocialProof";
-import { TrustBar } from "@/components/sections/TrustBar";
 import { CTA } from "@/components/sections/CTA";
 
 export const metadata = generatePageMetadata({
@@ -25,7 +24,6 @@ export default function HomePage() {
       <ClinicFeature />
       <CaseStudy />
       <SocialProof />
-      <TrustBar />
       <CTA />
     </>
   );

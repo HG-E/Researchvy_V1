@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Building2, GraduationCap, BookOpen, Handshake, ArrowRight, MessageCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
+import { PartnershipForm } from "@/components/partnerships/PartnershipForm";
 
 export const metadata = generatePageMetadata({
   title: "Researchvy Partnerships",
@@ -48,7 +49,7 @@ const WHAT_WE_OFFER = [
 export default function PartnershipsPage() {
   return (
     <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
         <div className="max-w-3xl mb-16">
@@ -59,13 +60,13 @@ export default function PartnershipsPage() {
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
-            Your Researchers Are Publishing.<br />
-            <span style={{ color: "#60A5FA" }}>Is Anyone Finding Their Work?</span>
+            Make Research Visibility<br />
+            <span style={{ color: "#60A5FA" }}>A Shared Institutional Asset.</span>
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
-            Publication output is rising everywhere. Discovery rates aren&apos;t keeping pace.
-            If your institution&apos;s research isn&apos;t visible, it isn&apos;t driving the reputation,
-            funding, or impact you need — regardless of how much is being published.
+            Individual researchers can&apos;t build visibility infrastructure alone — institutions can.
+            We partner with universities, learned societies, and publishers to embed
+            scholarly visibility training, audits, and intelligence into the workflows your researchers already use.
           </p>
           <div className="flex flex-wrap gap-3">
             <a
@@ -134,48 +135,8 @@ export default function PartnershipsPage() {
             </div>
           </div>
 
-          {/* CTA panel */}
-          <div
-            className="rounded-2xl border p-8"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-          >
-            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#60A5FA" }}>
-              Partner With Us
-            </p>
-            <h3
-              className="text-2xl font-bold mb-3"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
-            >
-              Let&apos;s Build Together
-            </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              Every partnership starts with an honest conversation about where your institution
-              stands and what would move the needle. Tell us about your researchers, your
-              goals, and your timeline — we&apos;ll tell you what a partnership would deliver.
-            </p>
-            <div className="space-y-3">
-              <a
-                href={buildWhatsAppUrl("Researchvy institutional partnership")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1DAE54]"
-                style={{ backgroundColor: "#25D366" }}
-              >
-                <MessageCircle className="h-4 w-4" />
-                Chat on WhatsApp
-              </a>
-              <Link
-                href="/contact"
-                className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
-              >
-                Send an Email
-              </Link>
-            </div>
-            <p className="text-xs text-center mt-4" style={{ color: "#374151" }}>
-              Typically respond within 24 hours
-            </p>
-          </div>
+          {/* CTA panel — real enquiry form */}
+          <PartnershipForm />
         </div>
 
         {/* Bridge to Intelligence */}

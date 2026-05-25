@@ -15,7 +15,7 @@ const LEVEL_COLORS = ["#60A5FA", "#A78BFA", "#34D399", "#FCD34D", "#F472B6"];
 export default function AcademyPage() {
   return (
     <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
         <div className="max-w-3xl mb-16">

@@ -30,13 +30,13 @@ export default function AboutPage() {
   return (
     <div style={{ backgroundColor: "#0F172A", color: "#F9FAFB" }}>
       {/* Hero */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 text-center" style={{ backgroundColor: "#080E1A" }}>
+      <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8 text-center" style={{ backgroundColor: "#080E1A" }}>
         <div className="mx-auto max-w-4xl">
           <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#2563EB" }}>
             Our Mission
           </p>
           <h1
-            className="text-5xl sm:text-6xl font-bold mb-6 leading-tight"
+            className="text-4xl sm:text-6xl font-bold mb-5 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
           >
             Built for Researchers<br />
@@ -51,9 +51,9 @@ export default function AboutPage() {
       </section>
 
       {/* Mission + Framework */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             <div>
               <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
                 Why We Exist
@@ -125,7 +125,7 @@ export default function AboutPage() {
       </section>
 
       {/* Divisions */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
+      <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
@@ -161,7 +161,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
             Our Values

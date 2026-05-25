@@ -23,7 +23,7 @@ export default function ResourceLibraryPage() {
 
   return (
     <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
         <div className="max-w-2xl mb-14">
@@ -45,7 +45,7 @@ export default function ResourceLibraryPage() {
 
         {/* Featured resource */}
         <div
-          className="rounded-3xl border p-8 lg:p-10 mb-14 overflow-hidden relative"
+          className="rounded-3xl border p-5 sm:p-8 lg:p-10 mb-14 overflow-hidden relative"
           style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
         >
           <div className="absolute top-0 left-0 right-0 h-1" style={{ background: `linear-gradient(90deg, ${featured.color}, #2563EB)` }} />
@@ -82,12 +82,12 @@ export default function ResourceLibraryPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-center">
+            <div className="hidden sm:flex items-center justify-center">
               <div
-                className="w-48 h-48 rounded-3xl flex items-center justify-center"
+                className="w-36 h-36 lg:w-48 lg:h-48 rounded-3xl flex items-center justify-center"
                 style={{ backgroundColor: `${featured.color}15`, border: `2px solid ${featured.color}30` }}
               >
-                <FeaturedIcon className="h-24 w-24" style={{ color: featured.color, opacity: 0.8 }} />
+                <FeaturedIcon className="h-16 w-16 lg:h-24 lg:w-24" style={{ color: featured.color, opacity: 0.8 }} />
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@ export default function ResourceLibraryPage() {
 
         {/* Newsletter banner */}
         <div
-          className="rounded-3xl border p-10 text-center"
+          className="rounded-3xl border p-6 sm:p-10 text-center"
           style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
         >
           <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>

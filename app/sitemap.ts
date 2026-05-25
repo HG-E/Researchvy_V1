@@ -17,9 +17,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/contact`,     lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/intelligence`,lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/academy`,     lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/media`,       lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/network`,     lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/partnerships`,lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${base}/media`,                            lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${base}/network`,                          lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${base}/partnerships`,                     lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${base}/researchers/early-career`,         lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/researchers/institutional`,        lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/resources/visibility-scorecard`,  lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/privacy`,                         lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
+    { url: `${base}/terms`,                           lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
   ];
 
   const insights = await getInsights({ limit: 100 });

@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut } from "lucide-react";
+import { LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { supabase } from "@/lib/db/client";
 
 const NAV_ITEMS = [
   { href: "/dashboard",               label: "Overview",     Icon: LayoutDashboard },
   { href: "/dashboard/clinics",        label: "My Clinics",   Icon: GraduationCap },
+  { href: "/dashboard/academy",        label: "Academy",      Icon: Layers },
   { href: "/dashboard/resources",      label: "Resources",    Icon: BookOpen },
   { href: "/dashboard/certificates",   label: "Certificates", Icon: Award },
   { href: "/dashboard/profile",        label: "Profile",      Icon: User },

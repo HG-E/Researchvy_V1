@@ -9,9 +9,9 @@ import { siteConfig } from "@/config/site";
 
 export function ClinicFeature() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#0F172A" }}>
+    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#0F172A" }}>
       <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left: content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -55,10 +55,10 @@ export function ClinicFeature() {
               ))}
             </ul>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/clinics"
-                className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200"
+                className="inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97]"
                 style={{ backgroundColor: "#2563EB" }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}

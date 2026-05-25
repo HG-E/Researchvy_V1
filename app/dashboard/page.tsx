@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { GraduationCap, BookOpen, Award, ArrowRight, ChevronRight } from "lucide-react";
+import { GraduationCap, Layers, Award, ArrowRight, ChevronRight, CheckCircle2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
-import { getServerUser } from "@/lib/auth/supabase";
+import { getServerUser, createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { siteConfig } from "@/config/site";
 
 export const metadata = generatePageMetadata({ title: "Dashboard", noIndex: true });
@@ -33,18 +33,44 @@ const QUICK_ACTIONS = [
   },
 ];
 
-const STATS = [
-  { label: "Clinics Registered", value: "0", Icon: GraduationCap, color: "#2563EB" },
-  { label: "Resources Saved",    value: "0", Icon: BookOpen,       color: "#10B981" },
-  { label: "Certificates",       value: "0", Icon: Award,          color: "#F59E0B" },
-];
-
 export default async function DashboardPage() {
   const user = await getServerUser();
+  const userId = user?.id;
+
   const displayName =
     (user?.user_metadata?.full_name as string | undefined)?.split(" ")[0] ??
     user?.email?.split("@")[0] ??
     "Scholar";
+
+  const meta = user?.user_metadata ?? {};
+  const profileDone = !!(meta.full_name && String(meta.full_name).trim());
+
+  let clinicCount = 0;
+  let academyEnrolled = false;
+
+  if (userId) {
+    const admin = createSupabaseAdminClient();
+    const [clinicRes, academyRes] = await Promise.all([
+      admin.from("clinic_enquiries").select("id", { count: "exact", head: true }).eq("user_id", userId),
+      admin.from("academy_enquiries").select("id", { count: "exact", head: true }).eq("user_id", userId),
+    ]);
+    clinicCount = clinicRes.count ?? 0;
+    academyEnrolled = (academyRes.count ?? 0) > 0;
+  }
+
+  const STATS = [
+    { label: "Clinics Registered", value: String(clinicCount), Icon: GraduationCap, color: "#2563EB" },
+    { label: "Academy",            value: academyEnrolled ? "Waitlisted" : "—",     Icon: Layers,       color: "#8B5CF6" },
+    { label: "Certificates",       value: "0",                                        Icon: Award,        color: "#F59E0B" },
+  ];
+
+  const steps = [
+    { label: "Complete your scholar profile",     href: "/dashboard/profile",  done: profileDone },
+    { label: "Register for your first clinic",    href: "/clinics",            done: clinicCount > 0 },
+    { label: "Enrol in the Academy",              href: "/dashboard/academy",  done: academyEnrolled },
+    { label: "Read a research visibility insight",href: "/insights",           done: false },
+  ];
+  const doneCount = steps.filter((s) => s.done).length;
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">
@@ -108,31 +134,36 @@ export default async function DashboardPage() {
           </div>
           <span
             className="text-xs font-semibold px-2.5 py-1 rounded-full"
-            style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
+            style={{
+              backgroundColor: doneCount === steps.length ? "rgba(16,185,129,0.15)" : "#1E293B",
+              color: doneCount === steps.length ? "#10B981" : "#6B7280",
+            }}
           >
-            0 / 4
+            {doneCount} / {steps.length}
           </span>
         </div>
         <div className="space-y-3">
-          {[
-            { label: "Complete your scholar profile", href: "/dashboard/profile", done: false },
-            { label: "Register for your first clinic", href: "/clinics", done: false },
-            { label: "Read a research visibility insight", href: "/insights", done: false },
-            { label: "Download a resource", href: "/resources", done: false },
-          ].map((step, i) => (
+          {steps.map((step, i) => (
             <Link
               key={i}
               href={step.href}
               className="flex items-center gap-3 rounded-xl p-3.5 border transition-all duration-150"
-              style={{ backgroundColor: "#1E293B", borderColor: "#334155" }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#2563EB")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#334155")}
+              style={{
+                backgroundColor: step.done ? "rgba(16,185,129,0.05)" : "#1E293B",
+                borderColor: step.done ? "rgba(16,185,129,0.2)" : "#334155",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = step.done ? "rgba(16,185,129,0.4)" : "#2563EB")}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = step.done ? "rgba(16,185,129,0.2)" : "#334155")}
             >
-              <div
-                className="w-5 h-5 rounded-full border-2 flex-shrink-0"
-                style={{ borderColor: "#334155" }}
-              />
-              <span className="text-sm flex-1" style={{ color: "#D1D5DB" }}>
+              {step.done ? (
+                <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: "#10B981" }} />
+              ) : (
+                <div className="w-5 h-5 rounded-full border-2 flex-shrink-0" style={{ borderColor: "#334155" }} />
+              )}
+              <span
+                className="text-sm flex-1"
+                style={{ color: step.done ? "#6B7280" : "#D1D5DB", textDecoration: step.done ? "line-through" : "none" }}
+              >
                 {step.label}
               </span>
               <ChevronRight className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />

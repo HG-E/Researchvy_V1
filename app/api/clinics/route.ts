@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { Resend } from "resend";
+import { clinicInterestConfirmation } from "@/lib/email/templates";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -48,19 +49,24 @@ export async function POST(req: NextRequest) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  // Notify admin (non-blocking — don't fail the request if email fails)
+  const clinicLabel = "Digital Visibility Clinic";
+
+  // Notify admin (non-blocking)
   resend.emails.send({
     from:    "Researchvy Website <info@researchvy.com>",
     to:      ["info@researchvy.com"],
     cc:      ["researchvy@gmail.com"],
     subject: `New clinic interest: ${clinicSlug} — ${user.email}`,
-    html: `
-      <p><strong>New clinic interest registered</strong></p>
-      <p>Email: ${user.email}</p>
-      <p>Name: ${fullName || "(not set)"}</p>
-      <p>Clinic: ${clinicSlug}</p>
-      <p>Registered at: ${new Date().toISOString()}</p>
-    `,
+    html: `<p><strong>New clinic interest registered</strong></p><p>Email: ${user.email}</p><p>Name: ${fullName || "(not set)"}</p><p>Clinic: ${clinicSlug}</p><p>Registered at: ${new Date().toISOString()}</p>`,
+  }).catch(() => {});
+
+  // Send confirmation to the user (non-blocking)
+  const { subject, html } = clinicInterestConfirmation(fullName, user.email!, clinicLabel);
+  resend.emails.send({
+    from:    "Researchvy <info@researchvy.com>",
+    to:      [user.email!],
+    subject,
+    html,
   }).catch(() => {});
 
   return NextResponse.json({ ok: true });

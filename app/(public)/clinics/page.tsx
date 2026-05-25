@@ -33,7 +33,7 @@ export default function ClinicsPage() {
 
   return (
     <div style={{ backgroundColor: "#080E1A", minHeight: "100vh" }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
         <div className="max-w-2xl mb-16">
