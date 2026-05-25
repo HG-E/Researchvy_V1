@@ -2,21 +2,31 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function StickyMobileCTA() {
   const [visible, setVisible] = useState(false);
+  const pathname = usePathname();
+
+  // Don't show on clinics pages — that's where the button leads
+  const isClinicPage = pathname === "/clinics" || pathname.startsWith("/clinics/");
 
   useEffect(() => {
+    if (isClinicPage) {
+      setVisible(false);
+      return;
+    }
     const onScroll = () => {
       const scrollY = window.scrollY;
       const docH    = document.documentElement.scrollHeight;
       const winH    = window.innerHeight;
-      // Show after scrolling past the hero, hide in the last 200px (near the CTA section)
       setVisible(scrollY > 500 && scrollY < docH - winH - 200);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isClinicPage]);
+
+  if (isClinicPage) return null;
 
   return (
     <div
@@ -29,16 +39,19 @@ export function StickyMobileCTA() {
       <div
         className="px-4 py-3 border-t"
         style={{
-          backgroundColor: "rgba(10, 15, 26, 0.97)",
-          borderColor: "#1E293B",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
+          backgroundColor:     "rgba(10,15,26,0.97)",
+          borderColor:         "#1E293B",
+          backdropFilter:      "blur(12px)",
+          WebkitBackdropFilter:"blur(12px)",
         }}
       >
         <Link
           href="/clinics"
-          className="block w-full rounded-xl py-3.5 text-sm font-bold text-white text-center transition-all active:scale-[0.97] active:opacity-90"
-          style={{ backgroundColor: "#2563EB" }}
+          className="block w-full rounded-xl py-3.5 text-sm font-bold text-white text-center active:scale-[0.97] active:opacity-90"
+          style={{
+            backgroundColor: "#2563EB",
+            transition: "transform 100ms ease, opacity 100ms ease, background-color 150ms ease",
+          }}
         >
           Join a Clinic →
         </Link>

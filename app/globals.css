@@ -146,6 +146,8 @@ html {
   /* Prevent iOS font-size inflation in landscape */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* clip (not hidden) so sticky headers still work while blocking horizontal bleed */
+  overflow-x: clip;
 }
 
 /* Dynamic viewport height — fixes iOS Safari browser chrome cutting off min-h-screen */
@@ -192,6 +194,16 @@ select {
 .scroll-contain {
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Snap active-state transitions to feel instant on touch.
+   Only shortens transition-duration so scale/color changes fire in 100ms.
+   No opacity override here — each element has its own active:opacity-* class
+   so a blanket override would silently break those values. */
+@media (pointer: coarse) {
+  a, button, [role="button"] {
+    transition-duration: 100ms;
+  }
 }
 
 /* Hide scrollbar in swipe carousels while preserving scroll functionality */

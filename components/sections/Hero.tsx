@@ -8,6 +8,13 @@ import { copy } from "@/constants/copy";
 
 const ROTATE_INTERVAL = 2800;
 
+const STAT_BADGES = [
+  { value: "38+",  label: "Countries" },
+  { value: "≤20",  label: "Per cohort" },
+  { value: "6",    label: "Sessions" },
+  { value: "100%", label: "Certified" },
+];
+
 export function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
   const words = copy.hero.rotatingMessages;
@@ -34,11 +41,17 @@ export function Hero() {
         }}
       />
 
-      {/* Radial glow */}
+      {/* Primary radial glow — blue → purple gradient */}
       <div
         aria-hidden="true"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10 blur-3xl pointer-events-none"
-        style={{ backgroundColor: "#2563EB" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.13] blur-3xl pointer-events-none"
+        style={{ background: "radial-gradient(circle, #2563EB 0%, #7C3AED 55%, transparent 80%)" }}
+      />
+      {/* Secondary accent glow — green, upper-right */}
+      <div
+        aria-hidden="true"
+        className="absolute top-[30%] right-[5%] w-[280px] h-[280px] rounded-full opacity-[0.06] blur-3xl pointer-events-none"
+        style={{ backgroundColor: "#10B981" }}
       />
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -96,8 +109,11 @@ export function Hero() {
         >
           <Link
             href="/clinics"
-            className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white transition-all duration-200 active:scale-[0.97]"
-            style={{ backgroundColor: "#2563EB" }}
+            className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white active:scale-[0.97] active:opacity-90"
+            style={{
+              backgroundColor: "#2563EB",
+              transition: "background-color 150ms ease, transform 100ms ease, opacity 100ms ease",
+            }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
           >
@@ -106,8 +122,12 @@ export function Hero() {
           </Link>
           <Link
             href="/ecosystem"
-            className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border transition-all duration-200 active:scale-[0.97]"
-            style={{ color: "#F9FAFB", borderColor: "#1E293B" }}
+            className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border active:scale-[0.97] active:opacity-80"
+            style={{
+              color: "#F9FAFB",
+              borderColor: "#1E293B",
+              transition: "border-color 150ms ease, color 150ms ease, transform 100ms ease, opacity 100ms ease",
+            }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = "#2563EB";
               e.currentTarget.style.color = "#60A5FA";
@@ -121,11 +141,35 @@ export function Hero() {
           </Link>
         </motion.div>
 
+        {/* Social proof stat badges — visible on all screen sizes */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="mt-7 flex flex-wrap items-center justify-center gap-2.5"
+        >
+          {STAT_BADGES.map(({ value, label }) => (
+            <div
+              key={label}
+              className="flex items-center gap-2 rounded-full px-3.5 py-1.5 border"
+              style={{
+                backgroundColor: "rgba(15,23,42,0.7)",
+                borderColor: "#1E293B",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+              }}
+            >
+              <span className="text-sm font-bold tabular-nums" style={{ color: "#60A5FA" }}>{value}</span>
+              <span className="text-xs" style={{ color: "#6B7280" }}>{label}</span>
+            </div>
+          ))}
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="mt-12 hidden sm:flex flex-wrap items-center justify-center gap-6 text-sm"
+          className="mt-8 hidden sm:flex flex-wrap items-center justify-center gap-6 text-sm"
           style={{ color: "#9CA3AF" }}
           aria-hidden="true"
         >

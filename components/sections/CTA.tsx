@@ -21,9 +21,15 @@ export function CTA() {
       className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       style={{ backgroundColor: "#080E1A" }}
     >
+      {/* Multi-color radial glow — blue → purple → green */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-10 blur-3xl pointer-events-none"
-        style={{ backgroundColor: "#2563EB" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-[0.09] blur-3xl pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at center, #7C3AED 0%, #2563EB 40%, #10B981 80%, transparent 100%)" }}
+      />
+      {/* Subtle right-side accent */}
+      <div
+        className="absolute right-0 top-0 bottom-0 w-[300px] opacity-[0.04] blur-3xl pointer-events-none"
+        style={{ background: "linear-gradient(180deg, #10B981, transparent)" }}
       />
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
@@ -55,8 +61,11 @@ export function CTA() {
           <div className="flex flex-col items-stretch sm:flex-row sm:items-center sm:justify-center gap-3 w-full max-w-xs mx-auto sm:max-w-none">
             <Link
               href="/clinics"
-              className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white transition-all duration-200 active:scale-[0.97]"
-              style={{ backgroundColor: "#2563EB" }}
+              className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white active:scale-[0.97] active:opacity-90"
+              style={{
+                backgroundColor: "#2563EB",
+                transition: "background-color 150ms ease, transform 100ms ease, opacity 100ms ease",
+              }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
             >
@@ -65,8 +74,12 @@ export function CTA() {
             </Link>
             <Link
               href="/ecosystem"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border transition-all duration-200 active:scale-[0.97]"
-              style={{ color: "#F9FAFB", borderColor: "#1E293B" }}
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border active:scale-[0.97] active:opacity-80"
+              style={{
+                color: "#F9FAFB",
+                borderColor: "#1E293B",
+                transition: "border-color 150ms ease, color 150ms ease, transform 100ms ease, opacity 100ms ease",
+              }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "#2563EB";
                 e.currentTarget.style.color = "#60A5FA";
@@ -80,7 +93,7 @@ export function CTA() {
             </Link>
           </div>
 
-          {/* Framework chain — hidden on mobile, wraps messily at small widths */}
+          {/* Framework chain — hidden on mobile */}
           <div className="mt-16 hidden sm:flex flex-wrap items-center justify-center gap-2">
             {FRAMEWORK_STEPS.map((step, i) => (
               <span key={i} className="flex items-center gap-2">
@@ -95,9 +108,7 @@ export function CTA() {
                   {step}
                 </span>
                 {i < FRAMEWORK_STEPS.length - 1 && (
-                  <span className="text-sm" style={{ color: "#2563EB" }}>
-                    →
-                  </span>
+                  <span className="text-sm" style={{ color: "#2563EB" }}>→</span>
                 )}
               </span>
             ))}

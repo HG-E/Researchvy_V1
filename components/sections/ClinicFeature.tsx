@@ -58,8 +58,11 @@ export function ClinicFeature() {
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/clinics"
-                className="inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97]"
-                style={{ backgroundColor: "#2563EB" }}
+                className="inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-sm font-semibold text-white active:scale-[0.97] active:opacity-90"
+                style={{
+                  backgroundColor: "#2563EB",
+                  transition: "background-color 150ms ease, transform 100ms ease, opacity 100ms ease",
+                }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
               >
@@ -79,39 +82,62 @@ export function ClinicFeature() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="rounded-2xl border p-8"
+            className="rounded-2xl border overflow-hidden"
             style={{ backgroundColor: "#1E293B", borderColor: "#334155" }}
           >
-            <p
-              className="text-xs font-semibold tracking-widest uppercase mb-6"
-              style={{ color: "#2563EB" }}
-            >
-              5-Emotion Transformation
-            </p>
-            {siteConfig.transformationSequence.map((item, i) => (
-              <div key={i} className="flex gap-4 mb-5 last:mb-0">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
-                  style={{ backgroundColor: "#2563EB", color: "#fff" }}
-                >
-                  {item.step}
-                </div>
-                <div>
-                  <p className="font-semibold text-sm mb-0.5" style={{ color: "#F9FAFB" }}>
-                    {item.label}
-                  </p>
-                  <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+            {/* Gradient top accent bar */}
+            <div className="h-0.5" style={{ background: "linear-gradient(90deg, #2563EB, #10B981)" }} />
 
-            <div className="mt-6 pt-6 border-t" style={{ borderColor: "#334155" }}>
-              <p className="text-xs" style={{ color: "#6B7280" }}>
-                Pricing is communicated upon enquiry. Use the WhatsApp button to get tailored
-                information for your specific needs.
-              </p>
+            <div className="p-8">
+              {/* Card header with "Enrolling Now" badge */}
+              <div className="flex items-center justify-between mb-6">
+                <p
+                  className="text-xs font-semibold tracking-widest uppercase"
+                  style={{ color: "#2563EB" }}
+                >
+                  5-Emotion Transformation
+                </p>
+                <span
+                  className="flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full flex-shrink-0"
+                  style={{
+                    backgroundColor: "rgba(16,185,129,0.12)",
+                    color: "#10B981",
+                    border: "1px solid rgba(16,185,129,0.25)",
+                  }}
+                >
+                  <span
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0 animate-pulse"
+                    style={{ backgroundColor: "#10B981" }}
+                  />
+                  Enrolling Now
+                </span>
+              </div>
+
+              {siteConfig.transformationSequence.map((item, i) => (
+                <div key={i} className="flex gap-4 mb-5 last:mb-0">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
+                    style={{ backgroundColor: "#2563EB", color: "#fff" }}
+                  >
+                    {item.step}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm mb-0.5" style={{ color: "#F9FAFB" }}>
+                      {item.label}
+                    </p>
+                    <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+
+              <div className="mt-6 pt-6 border-t" style={{ borderColor: "#334155" }}>
+                <p className="text-xs" style={{ color: "#6B7280" }}>
+                  Pricing is communicated upon enquiry. Use the WhatsApp button to get tailored
+                  information for your specific needs.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>

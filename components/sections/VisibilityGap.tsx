@@ -58,25 +58,37 @@ export function VisibilityGap() {
 
           {/* Right — mobile: swipe carousel | desktop: staggered list */}
           <div>
-            {/* Mobile carousel */}
+            {/* Mobile carousel — numbered + accent-striped cards */}
             <MobileCarousel
               className="lg:hidden"
               dotColor="#EF4444"
               items={problems.map((problem, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-4 rounded-xl p-5 border mx-0.5"
+                  className="relative flex items-start gap-4 rounded-xl p-5 border mx-0.5 overflow-hidden"
                   style={{ backgroundColor: "#0F172A", borderColor: "#1E293B", minHeight: 90 }}
                 >
+                  {/* Left accent stripe */}
+                  <div
+                    className="absolute left-0 top-0 bottom-0 w-0.5"
+                    style={{ backgroundColor: "#EF4444" }}
+                  />
+                  {/* Problem number */}
+                  <span
+                    className="absolute top-3 right-3 text-xs font-bold tabular-nums"
+                    style={{ color: "#374151" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "#EF4444" }} />
-                  <span className="text-sm font-medium leading-relaxed" style={{ color: "#D1D5DB" }}>
+                  <span className="text-sm font-medium leading-relaxed pr-6" style={{ color: "#D1D5DB" }}>
                     {problem}
                   </span>
                 </div>
               ))}
             />
 
-            {/* Desktop animated list */}
+            {/* Desktop animated list — with accent left border */}
             <motion.ul
               variants={containerVariants}
               initial="hidden"
@@ -88,9 +100,13 @@ export function VisibilityGap() {
                 <motion.li
                   key={i}
                   variants={itemVariants}
-                  className="flex items-start gap-4 rounded-xl p-5 border"
+                  className="relative flex items-start gap-4 rounded-xl p-5 border overflow-hidden"
                   style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
                 >
+                  <div
+                    className="absolute left-0 top-0 bottom-0 w-0.5"
+                    style={{ backgroundColor: "#EF4444" }}
+                  />
                   <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "#EF4444" }} />
                   <span className="text-sm font-medium leading-relaxed" style={{ color: "#D1D5DB" }}>
                     {problem}

@@ -8,6 +8,15 @@ import { MobileCarousel } from "@/components/ui/MobileCarousel";
 
 const ICONS = { BarChart2, GraduationCap, FileImage, Stethoscope, Network } as const;
 
+// Unique accent per division for visual richness
+const DIVISION_ACCENTS: Record<string, string> = {
+  intelligence: "#2563EB",
+  academy:      "#A78BFA",
+  media:        "#FCD34D",
+  clinics:      "#34D399",
+  network:      "#F472B6",
+};
+
 const cardVariants = {
   hidden:  { opacity: 0, y: 30 },
   visible: (i: number) => ({
@@ -18,22 +27,26 @@ const cardVariants = {
 };
 
 function DivisionCard({ division }: { division: (typeof siteConfig.divisions)[number] }) {
-  const Icon = ICONS[division.icon as keyof typeof ICONS];
+  const Icon   = ICONS[division.icon as keyof typeof ICONS];
+  const accent = DIVISION_ACCENTS[division.id] ?? "#2563EB";
+
   return (
     <div
       className="rounded-2xl p-6 border h-full flex flex-col"
       style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
     >
+      {/* Gradient icon container — unique per division */}
       <div
         className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-        style={{ backgroundColor: "#1E293B" }}
+        style={{ background: `linear-gradient(135deg, ${accent}30 0%, ${accent}0D 100%)` }}
       >
-        {Icon && <Icon className="h-6 w-6" style={{ color: "#2563EB" }} />}
+        {Icon && <Icon className="h-6 w-6" style={{ color: accent }} />}
       </div>
+
       <h3 className="text-lg font-bold mb-1" style={{ color: "#F9FAFB" }}>
         {division.name}
       </h3>
-      <p className="text-xs font-medium mb-3" style={{ color: "#2563EB" }}>
+      <p className="text-xs font-medium mb-3" style={{ color: accent }}>
         {division.tagline}
       </p>
       <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: "#9CA3AF" }}>
@@ -41,8 +54,8 @@ function DivisionCard({ division }: { division: (typeof siteConfig.divisions)[nu
       </p>
       <Link
         href={`/${division.slug}`}
-        className="inline-flex items-center gap-1 text-sm font-semibold"
-        style={{ color: "#2563EB" }}
+        className="inline-flex items-center gap-1 text-sm font-semibold active:opacity-70"
+        style={{ color: accent, transition: "opacity 100ms ease" }}
       >
         Explore <ArrowRight className="h-3.5 w-3.5" />
       </Link>
@@ -76,24 +89,33 @@ export function EcosystemOverview() {
           </p>
         </motion.div>
 
-        {/* Desktop: 3-column grid */}
+        {/* Desktop: 3-column grid with per-division accent hover */}
         <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-6">
-          {siteConfig.divisions.map((division, i) => (
-            <motion.div
-              key={division.id}
-              custom={i}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="group rounded-2xl border transition-all duration-300"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#2563EB")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#1E293B")}
-            >
-              <DivisionCard division={division} />
-            </motion.div>
-          ))}
+          {siteConfig.divisions.map((division, i) => {
+            const accent = DIVISION_ACCENTS[division.id] ?? "#2563EB";
+            return (
+              <motion.div
+                key={division.id}
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="group rounded-2xl border transition-all duration-300"
+                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = accent;
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "#1E293B";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <DivisionCard division={division} />
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Mobile: auto-advancing swipe carousel */}
@@ -117,8 +139,12 @@ export function EcosystemOverview() {
         >
           <Link
             href="/ecosystem"
-            className="inline-flex items-center gap-2 text-sm font-semibold rounded-lg px-6 py-3 border transition-all duration-200"
-            style={{ color: "#F9FAFB", borderColor: "#1E293B" }}
+            className="inline-flex items-center gap-2 text-sm font-semibold rounded-lg px-6 py-3 border active:opacity-70"
+            style={{
+              color: "#F9FAFB",
+              borderColor: "#1E293B",
+              transition: "border-color 150ms ease, color 150ms ease, opacity 100ms ease",
+            }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = "#2563EB";
               e.currentTarget.style.color = "#60A5FA";

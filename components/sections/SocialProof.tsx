@@ -32,11 +32,26 @@ const TESTIMONIALS = [
 ];
 
 const STATS = [
-  { value: "≤20",  label: "Researchers per cohort" },
-  { value: "6",    label: "Sessions to visibility" },
-  { value: "5",    label: "Ecosystem divisions" },
-  { value: "100%", label: "Certified on completion" },
+  { value: "≤20",  label: "Researchers per cohort",  accent: "#60A5FA" },
+  { value: "6",    label: "Sessions to visibility",  accent: "#A78BFA" },
+  { value: "5",    label: "Ecosystem divisions",     accent: "#34D399" },
+  { value: "100%", label: "Certified on completion", accent: "#FCD34D" },
 ];
+
+function StarRating({ color }: { color: string }) {
+  return (
+    <div className="flex gap-0.5 mb-3" aria-label="5 out of 5 stars">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg key={i} className="w-3.5 h-3.5" viewBox="0 0 20 20" aria-hidden="true">
+          <path
+            fill={color}
+            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+          />
+        </svg>
+      ))}
+    </div>
+  );
+}
 
 function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
   return (
@@ -44,14 +59,15 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
       className="rounded-2xl border p-6 flex flex-col h-full"
       style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}
     >
-      <Quote className="h-5 w-5 mb-4 flex-shrink-0" style={{ color: t.color }} />
+      <StarRating color={t.color} />
+      <Quote className="h-5 w-5 mb-3 flex-shrink-0" style={{ color: t.color }} />
       <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: "#D1D5DB" }}>
         &ldquo;{t.quote}&rdquo;
       </p>
       <div className="flex items-center gap-3">
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-          style={{ backgroundColor: `${t.color}20`, color: t.color }}
+          style={{ background: `linear-gradient(135deg, ${t.color}30, ${t.color}10)`, color: t.color }}
         >
           {t.initials}
         </div>
@@ -105,6 +121,16 @@ export function SocialProof() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="rounded-2xl border transition-all duration-300"
+                style={{ borderColor: "#1E293B" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = t.color;
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "#1E293B";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
               >
                 <TestimonialCard t={t} />
               </motion.div>
@@ -123,7 +149,7 @@ export function SocialProof() {
           />
         </div>
 
-        {/* Stats bar */}
+        {/* Stats bar — with per-stat accent colors */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -135,8 +161,8 @@ export function SocialProof() {
           {STATS.map((stat, i) => (
             <div key={i} className="text-center">
               <p
-                className="text-3xl sm:text-4xl font-bold mb-1"
-                style={{ fontFamily: "var(--font-serif)", color: "#2563EB" }}
+                className="text-3xl sm:text-4xl font-bold mb-1 tabular-nums"
+                style={{ fontFamily: "var(--font-serif)", color: stat.accent }}
               >
                 {stat.value}
               </p>

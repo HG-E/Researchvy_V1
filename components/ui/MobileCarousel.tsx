@@ -68,7 +68,7 @@ export function MobileCarousel({
   }, [autoPlay, autoPlayDelay, count, goTo]);
 
   return (
-    <div className={className}>
+    <div className={className} style={{ overflow: "hidden" }}>
       {/* Scroll track */}
       <div
         ref={trackRef}
