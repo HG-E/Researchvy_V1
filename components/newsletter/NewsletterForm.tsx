@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Loader2, CheckCircle2, Mail } from "lucide-react";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 interface NewsletterFormProps {
   variant?: "inline" | "card";
@@ -10,6 +12,7 @@ interface NewsletterFormProps {
 }
 
 export function NewsletterForm({ variant = "inline", resourceTitle, redirectTo }: NewsletterFormProps) {
+  const { track } = useAnalytics();
   const [email,   setEmail]   = useState("");
   const [status,  setStatus]  = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -26,6 +29,7 @@ export function NewsletterForm({ variant = "inline", resourceTitle, redirectTo }
         body:    JSON.stringify({ email }),
       });
       if (res.ok) {
+        track(EVENTS.NEWSLETTER_SUBSCRIBED, { resource: resourceTitle ?? "general" });
         setStatus("success");
         setMessage(resourceTitle
           ? `We'll send "${resourceTitle}" to ${email} within 24 hours.`

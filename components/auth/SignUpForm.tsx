@@ -10,6 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Logo } from "@/components/common/Logo";
 import { supabase } from "@/lib/db/client";
 import { signUpSchema, type SignUpInput } from "@/lib/validation/schemas";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 const INPUT_BASE =
   "w-full rounded-xl px-4 py-3 text-sm border outline-none transition-all duration-200 placeholder:text-[#374151]";
@@ -56,6 +58,7 @@ function PasswordStrengthBar({ password }: { password: string }) {
 
 export function SignUpForm() {
   const router = useRouter();
+  const { track } = useAnalytics();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [authError, setAuthError] = useState("");
@@ -99,6 +102,7 @@ export function SignUpForm() {
       return;
     }
 
+    track(EVENTS.SIGN_UP_COMPLETED);
     setSuccess(true);
   }
 

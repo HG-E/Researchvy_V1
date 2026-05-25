@@ -10,6 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Logo } from "@/components/common/Logo";
 import { supabase } from "@/lib/db/client";
 import { signInSchema, type SignInInput } from "@/lib/validation/schemas";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 const INPUT_BASE =
   "w-full rounded-xl px-4 py-3 text-sm border outline-none transition-all duration-200 placeholder:text-[#374151]";
@@ -49,6 +51,7 @@ function Field({
 export function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { track } = useAnalytics();
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
   const [shake, setShake] = useState(false);
@@ -77,6 +80,7 @@ export function SignInForm() {
       return;
     }
 
+    track(EVENTS.SIGN_IN_COMPLETED);
     const next = searchParams.get("next") ?? "/dashboard";
     router.push(next);
     router.refresh();

@@ -2,6 +2,8 @@
 
 import { MessageCircle, Clock, Monitor, Users, Award } from "lucide-react";
 import { buildWhatsAppUrl } from "@/config/site";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 interface EnquiryCardProps {
   clinicName: string;
@@ -12,6 +14,7 @@ interface EnquiryCardProps {
 
 export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryCardProps) {
   const waUrl = buildWhatsAppUrl(clinicName);
+  const { track } = useAnalytics();
 
   return (
     <div
@@ -62,6 +65,7 @@ export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryC
         style={{ backgroundColor: "#25D366" }}
         onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1DAE54")}
         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#25D366")}
+        onClick={() => track(EVENTS.WHATSAPP_CTA_CLICKED, { clinic: clinicName, location: "enquiry_card" })}
       >
         <MessageCircle className="h-4 w-4" />
         Claim My Spot via WhatsApp
