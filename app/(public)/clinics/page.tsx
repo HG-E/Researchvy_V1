@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, Quote, Building2, ChevronDown } from "lucide-react";
+import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, Building2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { courseSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import { siteConfig, buildWhatsAppUrl } from "@/config/site";
@@ -7,6 +7,8 @@ import { digitalVisibilityClinic } from "@/constants/clinics";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { SessionsCarousel } from "@/components/clinics/SessionsCarousel";
 import { ComingSoonCarousel } from "@/components/clinics/ComingSoonCarousel";
+import { TestimonialsCarousel } from "@/components/clinics/TestimonialsCarousel";
+import { ClinicFAQ } from "@/components/clinics/ClinicFAQ";
 
 export const metadata = generatePageMetadata({
   title: "Clinics",
@@ -48,7 +50,6 @@ export default async function ClinicsPage() {
   const isFull        = cohort.status === "full" || spotsLeft === 0;
 
   const { tiers } = digitalVisibilityClinic.pricing;
-  const { testimonials } = digitalVisibilityClinic;
 
   const TIER_ACCENTS: Record<string, string> = {
     pro:     "#8B5CF6",
@@ -520,34 +521,7 @@ export default async function ClinicsPage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {testimonials.map((t) => (
-              <div
-                key={t.name}
-                className="rounded-2xl border p-6 flex flex-col"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              >
-                <Quote className="h-5 w-5 mb-4 flex-shrink-0" style={{ color: "#1E3A5F" }} />
-                <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: "#D1D5DB" }}>
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="border-t pt-4" style={{ borderColor: "#1E293B" }}>
-                  <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
-                    {t.name}
-                  </p>
-                  <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
-                    {t.institution}
-                  </p>
-                  <span
-                    className="inline-block mt-2 text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                    style={{ backgroundColor: "rgba(16,185,129,0.1)", color: "#10B981", border: "1px solid rgba(16,185,129,0.2)" }}
-                  >
-                    {t.cohort}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TestimonialsCarousel />
         </div>
 
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
@@ -564,30 +538,8 @@ export default async function ClinicsPage() {
             </h2>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-3">
-            {digitalVisibilityClinic.faq.map((item) => (
-              <details
-                key={item.question}
-                className="group rounded-xl border overflow-hidden"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              >
-                <summary
-                  className="flex items-center justify-between gap-4 p-5 cursor-pointer list-none"
-                  style={{ color: "#F9FAFB" }}
-                >
-                  <span className="text-sm font-semibold">{item.question}</span>
-                  <ChevronDown
-                    className="h-4 w-4 flex-shrink-0 transition-transform duration-200 group-open:rotate-180"
-                    style={{ color: "#4B5563" }}
-                  />
-                </summary>
-                <div className="px-5 pb-5">
-                  <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-                    {item.answer}
-                  </p>
-                </div>
-              </details>
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <ClinicFAQ items={digitalVisibilityClinic.faq} />
           </div>
         </div>
 

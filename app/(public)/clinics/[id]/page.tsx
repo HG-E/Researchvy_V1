@@ -8,6 +8,7 @@ import { digitalVisibilityClinic } from "@/constants/clinics";
 import { SessionAccordion } from "@/components/clinics/SessionAccordion";
 import { EnquiryCard } from "@/components/clinics/EnquiryCard";
 import { CaseStudy } from "@/components/sections/CaseStudy";
+import { ClinicFAQ } from "@/components/clinics/ClinicFAQ";
 
 const CLINICS: Record<string, typeof digitalVisibilityClinic> = {
   [digitalVisibilityClinic.slug]: digitalVisibilityClinic,
@@ -160,7 +161,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 className="text-2xl font-bold mb-6"
                 style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
               >
-                6-Session Agenda
+                {clinic.sessions.length}-Session Agenda
               </h2>
               <SessionAccordion sessions={clinic.sessions} />
             </section>
@@ -243,32 +244,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               >
                 Frequently Asked Questions
               </h2>
-              <div className="space-y-3">
-                {clinic.faq.map((item) => (
-                  <details
-                    key={item.question}
-                    className="group rounded-xl border overflow-hidden"
-                    style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-                  >
-                    <summary
-                      className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none text-sm font-semibold select-none"
-                      style={{ color: "#F9FAFB" }}
-                    >
-                      {item.question}
-                      <span
-                        className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs transition-transform group-open:rotate-45"
-                        style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
-                        aria-hidden="true"
-                      >
-                        +
-                      </span>
-                    </summary>
-                    <p className="px-5 pb-4 text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
-                      {item.answer}
-                    </p>
-                  </details>
-                ))}
-              </div>
+              <ClinicFAQ items={clinic.faq} />
             </section>
 
             {/* Pricing note */}
