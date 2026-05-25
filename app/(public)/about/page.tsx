@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { siteConfig } from "@/config/site";
 
@@ -187,6 +189,45 @@ export default function AboutPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA — converts interested visitors */}
+      <section
+        className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 text-center"
+        style={{ backgroundColor: "#080E1A" }}
+      >
+        <div className="mx-auto max-w-2xl">
+          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#2563EB" }}>
+            Ready to Begin?
+          </p>
+          <h2
+            className="text-3xl sm:text-4xl font-bold mb-4 leading-tight"
+            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+          >
+            Your Research Deserves<br />
+            <span style={{ color: "#10B981" }}>to Be Found.</span>
+          </h2>
+          <p className="text-base mb-8 leading-relaxed" style={{ color: "#9CA3AF" }}>
+            Join a Researchvy Clinic and leave with a personal visibility strategy, verified
+            certificate, and measurable results — in 6 structured live sessions.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/clinics"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+              style={{ backgroundColor: "#2563EB" }}
+            >
+              Join a Clinic <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <Link
+              href="/ecosystem"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold border transition-all duration-200 hover:border-[#2563EB] hover:text-white active:scale-[0.97]"
+              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+            >
+              Explore the Ecosystem
+            </Link>
           </div>
         </div>
       </section>

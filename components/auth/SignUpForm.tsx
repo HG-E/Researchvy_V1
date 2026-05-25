@@ -267,12 +267,12 @@ export function SignUpForm() {
               />
               <button
                 type="button"
-                tabIndex={-1}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 transition-colors"
-                style={{ color: "#4B5563" }}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                style={{ color: "#6B7280" }}
                 onClick={() => setShowPassword(!showPassword)}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4B5563")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -309,12 +309,12 @@ export function SignUpForm() {
               />
               <button
                 type="button"
-                tabIndex={-1}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 transition-colors"
-                style={{ color: "#4B5563" }}
+                aria-label={showConfirm ? "Hide confirm password" : "Show confirm password"}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+                style={{ color: "#6B7280" }}
                 onClick={() => setShowConfirm(!showConfirm)}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#4B5563")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
               >
                 {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>

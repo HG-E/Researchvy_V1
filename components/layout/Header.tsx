@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { mainNav } from "@/constants/navigation";
@@ -17,6 +18,16 @@ export function Header() {
   const [scrolled, setScrolled]           = useState(false);
   const [ecosystemOpen, setEcosystemOpen] = useState(false);
   const ecosystemRef = useRef<HTMLDivElement>(null);
+  const pathname     = usePathname();
+
+  // Check if any ecosystem child is active (highlights the Ecosystem button)
+  const ecosystemActive = mainNav
+    .find((i) => i.children)
+    ?.children?.some((c) => pathname.startsWith(c.href)) ?? false;
+
+  function isNavActive(href: string) {
+    return pathname === href || pathname.startsWith(href + "/");
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -58,20 +69,31 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
             {mainNav.map((item) => {
               if (item.children) {
+                const isActive = ecosystemActive || ecosystemOpen;
                 return (
                   <div key={item.href} className="relative" ref={ecosystemRef}>
                     <button
                       className="flex items-center gap-1 text-sm font-medium transition-colors"
-                      style={{ color: ecosystemOpen ? "#F9FAFB" : "#9CA3AF" }}
+                      style={{ color: isActive ? "#F9FAFB" : "#9CA3AF" }}
                       onMouseEnter={() => setEcosystemOpen(true)}
                       onClick={() => setEcosystemOpen(!ecosystemOpen)}
+                      aria-expanded={ecosystemOpen}
+                      aria-haspopup="true"
                     >
                       {item.label}
                       <ChevronDown
                         className="h-3.5 w-3.5 transition-transform duration-200"
                         style={{ transform: ecosystemOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                        aria-hidden="true"
                       />
                     </button>
+                    {/* Active underline indicator */}
+                    {isActive && !ecosystemOpen && (
+                      <span
+                        className="absolute -bottom-[19px] left-0 right-0 h-px"
+                        style={{ backgroundColor: "#2563EB" }}
+                      />
+                    )}
 
                     {/* CSS-transition dropdown — no framer-motion */}
                     <div
@@ -84,39 +106,52 @@ export function Header() {
                         pointerEvents: ecosystemOpen ? "auto" : "none",
                         transition: "opacity 0.18s ease, transform 0.18s ease",
                       }}
+                      role="menu"
                       onMouseLeave={() => setEcosystemOpen(false)}
                     >
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-[#1E293B]"
-                          style={{ color: "#9CA3AF" }}
-                          onMouseEnter={(e) => (e.currentTarget.style.color = "#F9FAFB")}
-                          onMouseLeave={(e) => (e.currentTarget.style.color = "#9CA3AF")}
-                          onClick={() => setEcosystemOpen(false)}
-                        >
-                          <span className="block text-sm font-semibold">{child.label}</span>
-                          {child.description && (
-                            <span className="block text-xs mt-0.5" style={{ color: "#4B5563" }}>
-                              {child.description}
-                            </span>
-                          )}
-                        </Link>
-                      ))}
+                      {item.children.map((child) => {
+                        const childActive = pathname.startsWith(child.href);
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            role="menuitem"
+                            className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-[#1E293B]"
+                            style={{ color: childActive ? "#F9FAFB" : "#9CA3AF" }}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = "#F9FAFB")}
+                            onMouseLeave={(e) => (e.currentTarget.style.color = childActive ? "#F9FAFB" : "#9CA3AF")}
+                            onClick={() => setEcosystemOpen(false)}
+                          >
+                            <span className="block text-sm font-semibold">{child.label}</span>
+                            {child.description && (
+                              <span className="block text-xs mt-0.5" style={{ color: "#6B7280" }}>
+                                {child.description}
+                              </span>
+                            )}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 );
               }
 
+              const active = isNavActive(item.href);
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium transition-colors hover:text-white"
-                  style={{ color: "#9CA3AF" }}
+                  className="relative text-sm font-medium transition-colors hover:text-white"
+                  style={{ color: active ? "#F9FAFB" : "#9CA3AF" }}
+                  aria-current={active ? "page" : undefined}
                 >
                   {item.label}
+                  {active && (
+                    <span
+                      className="absolute -bottom-[19px] left-0 right-0 h-px"
+                      style={{ backgroundColor: "#2563EB" }}
+                    />
+                  )}
                 </Link>
               );
             })}
@@ -127,7 +162,7 @@ export function Header() {
             <Link
               href="/signin"
               className="text-sm font-medium transition-colors hover:text-white"
-              style={{ color: "#9CA3AF" }}
+              style={{ color: isNavActive("/signin") ? "#F9FAFB" : "#9CA3AF" }}
             >
               Sign In
             </Link>

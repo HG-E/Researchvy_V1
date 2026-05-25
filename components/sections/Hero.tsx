@@ -26,6 +26,7 @@ export function Hero() {
     >
       {/* Subtle background grid */}
       <div
+        aria-hidden="true"
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `linear-gradient(#2563EB 1px, transparent 1px), linear-gradient(90deg, #2563EB 1px, transparent 1px)`,
@@ -35,6 +36,7 @@ export function Hero() {
 
       {/* Radial glow */}
       <div
+        aria-hidden="true"
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10 blur-3xl pointer-events-none"
         style={{ backgroundColor: "#2563EB" }}
       />
@@ -124,7 +126,8 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-12 hidden sm:flex flex-wrap items-center justify-center gap-6 text-sm"
-          style={{ color: "#4B5563" }}
+          style={{ color: "#9CA3AF" }}
+          aria-hidden="true"
         >
           {["Research Intelligence", "Scholarly Visibility", "Digital Discoverability"].map((item) => (
             <span key={item} className="flex items-center gap-2">
@@ -136,11 +139,12 @@ export function Hero() {
       </div>
 
       <motion.div
+        aria-hidden="true"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
-        style={{ color: "#4B5563" }}
+        style={{ color: "#6B7280" }}
       >
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
           <ChevronDown className="h-6 w-6" />

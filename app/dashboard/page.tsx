@@ -86,7 +86,7 @@ export default async function DashboardPage() {
           >
             Welcome back, {displayName}
           </h1>
-          <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
+          <p className="text-sm mt-1" style={{ color: "#9CA3AF" }}>
             Your scholarly visibility command centre
           </p>
         </div>
@@ -110,13 +110,31 @@ export default async function DashboardPage() {
               <p className="text-2xl font-bold" style={{ color: "#F9FAFB" }}>
                 {value}
               </p>
-              <p className="text-xs" style={{ color: "#6B7280" }}>
+              <p className="text-xs" style={{ color: "#9CA3AF" }}>
                 {label}
               </p>
             </div>
           </div>
         ))}
       </div>
+
+      {/* New-user nudge — only shown when no clinic registered */}
+      {clinicCount === 0 && (
+        <div
+          className="flex items-start gap-3 rounded-xl px-4 py-3.5 border-l-4"
+          style={{ backgroundColor: "rgba(37,99,235,0.06)", borderColor: "#2563EB" }}
+        >
+          <span className="text-base mt-px flex-shrink-0">👋</span>
+          <p className="text-sm leading-relaxed" style={{ color: "#D1D5DB" }}>
+            <strong style={{ color: "#60A5FA" }}>Welcome to Researchvy.</strong>{" "}
+            The fastest way to start is to register for the{" "}
+            <Link href="/clinics" className="underline underline-offset-2 hover:text-white transition-colors" style={{ color: "#60A5FA" }}>
+              Digital Visibility Clinic
+            </Link>
+            {" "}— our flagship 6-session live programme that takes researchers from overlooked to globally discoverable.
+          </p>
+        </div>
+      )}
 
       {/* Getting Started */}
       <div
@@ -128,7 +146,7 @@ export default async function DashboardPage() {
             <h2 className="font-bold text-base" style={{ color: "#F9FAFB" }}>
               Getting Started
             </h2>
-            <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>
               Complete these steps to maximise your visibility
             </p>
           </div>
@@ -166,7 +184,7 @@ export default async function DashboardPage() {
               >
                 {step.label}
               </span>
-              <ChevronRight className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
+              <ChevronRight className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} aria-hidden="true" />
             </Link>
           ))}
         </div>
@@ -195,13 +213,14 @@ export default async function DashboardPage() {
                 <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
                   {label}
                 </p>
-                <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+                <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>
                   {description}
                 </p>
               </div>
               <ArrowRight
                 className="h-4 w-4 flex-shrink-0 transition-transform group-hover:translate-x-1"
-                style={{ color: "#4B5563" }}
+                style={{ color: "#6B7280" }}
+                aria-hidden="true"
               />
             </Link>
           ))}
@@ -224,14 +243,14 @@ export default async function DashboardPage() {
               style={{
                 backgroundColor: "#0F172A",
                 borderColor: i === siteConfig.framework.length - 1 ? "#10B981" : "#1E293B",
-                color: i === siteConfig.framework.length - 1 ? "#10B981" : "#6B7280",
+                color: i === siteConfig.framework.length - 1 ? "#10B981" : "#9CA3AF",
               }}
             >
               {step}
             </span>
           ))}
         </div>
-        <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
+        <p className="text-xs mt-3" style={{ color: "#9CA3AF" }}>
           Researchvy guides you from research creation to measurable societal impact.
         </p>
       </div>

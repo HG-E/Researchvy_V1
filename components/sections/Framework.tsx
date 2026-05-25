@@ -75,7 +75,7 @@ export function Framework() {
               >
                 {step.label}
               </p>
-              <p className="text-xs leading-snug px-1" style={{ color: "#6B7280" }}>
+              <p className="text-xs leading-snug px-1" style={{ color: "#9CA3AF" }}>
                 {step.description}
               </p>
             </motion.div>

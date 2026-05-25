@@ -2,6 +2,7 @@
 
 import { useEffect, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { MotionConfig } from "framer-motion";
 import { initPostHog, posthog } from "@/lib/analytics/posthog";
 
 function PageViewTracker() {
@@ -22,11 +23,13 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <>
-      <Suspense fallback={null}>
-        <PageViewTracker />
-      </Suspense>
-      {children}
-    </>
+    <MotionConfig reducedMotion="user">
+      <>
+        <Suspense fallback={null}>
+          <PageViewTracker />
+        </Suspense>
+        {children}
+      </>
+    </MotionConfig>
   );
 }
