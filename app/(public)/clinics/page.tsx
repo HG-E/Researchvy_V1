@@ -149,7 +149,7 @@ export default async function ClinicsPage() {
               {!isFull && (
                 <div className="shrink-0 flex flex-col items-start lg:items-end gap-2">
                   <Link
-                    href="/signup"
+                    href="/signup?next=/dashboard/clinics"
                     className="inline-flex items-center justify-center rounded-xl px-6 py-3.5 text-sm font-bold text-white whitespace-nowrap transition-opacity hover:opacity-90"
                     style={{ backgroundColor: isClosingSoon ? "#D97706" : "#2563EB" }}
                   >

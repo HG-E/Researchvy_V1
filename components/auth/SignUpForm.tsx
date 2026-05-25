@@ -61,6 +61,12 @@ export function SignUpForm() {
   const [authError, setAuthError] = useState("");
   const [success, setSuccess] = useState(false);
 
+  // Read ?next= param (e.g. /signup?next=/dashboard/clinics)
+  const nextPath =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("next") ?? "/dashboard"
+      : "/dashboard";
+
   const {
     register,
     handleSubmit,
@@ -80,7 +86,7 @@ export function SignUpForm() {
           full_name: data.full_name,
           institutional_affiliation: data.institutional_affiliation ?? "",
         },
-        emailRedirectTo: `${window.location.origin}/dashboard`,
+        emailRedirectTo: `${window.location.origin}${nextPath}`,
       },
     });
 

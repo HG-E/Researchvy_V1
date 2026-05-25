@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle2, Circle, Lock, ChevronDown, ChevronUp, Loader2, BookOpen, Zap } from "lucide-react";
+import { CheckCircle2, Circle, Lock, ChevronDown, ChevronUp, Loader2, BookOpen, Zap, AlertCircle } from "lucide-react";
 
 export interface TaskItem {
   id:           string;
@@ -31,31 +31,55 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
 }
 
-function SessionRow({ session, defaultOpen }: { session: SessionData; defaultOpen: boolean }) {
-  const [open,    setOpen]    = useState(defaultOpen);
-  const [tasks,   setTasks]   = useState<TaskItem[]>(session.tasks);
-  const [loading, setLoading] = useState<string | null>(null);
+async function callApi(body: object): Promise<void> {
+  const res = await fetch("/api/clinic-tasks/complete", {
+    method:  "POST",
+    headers: { "Content-Type": "application/json" },
+    body:    JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const json = await res.json().catch(() => ({}));
+    throw new Error((json as { error?: string }).error ?? `HTTP ${res.status}`);
+  }
+}
+
+function SessionRow({
+  session,
+  defaultOpen,
+  onDelta,
+}: {
+  session:     SessionData;
+  defaultOpen: boolean;
+  onDelta:     (delta: number) => void;
+}) {
+  const [open,        setOpen]        = useState(defaultOpen);
+  const [tasks,       setTasks]       = useState<TaskItem[]>(session.tasks);
+  const [loading,     setLoading]     = useState<string | null>(null);
+  const [apiError,    setApiError]    = useState<string | null>(null);
   const [reflections, setReflections] = useState<Record<string, string>>(
     Object.fromEntries(session.tasks.map((t) => [t.id, t.reflection ?? ""]))
   );
 
   const doneTasks  = tasks.filter((t) => t.is_completed).length;
   const totalTasks = tasks.length;
-  const allDone    = doneTasks === totalTasks;
+  const allDone    = totalTasks > 0 && doneTasks === totalTasks;
 
   async function toggleAction(task: TaskItem) {
-    setLoading(task.id);
     const newCompleted = !task.is_completed;
+    setLoading(task.id);
+    setApiError(null);
+
+    // Optimistic
     setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: newCompleted } : t));
+    onDelta(newCompleted ? 1 : -1);
 
     try {
-      await fetch("/api/clinic-tasks/complete", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ task_id: task.id, completed: newCompleted }),
-      });
-    } catch {
+      await callApi({ task_id: task.id, completed: newCompleted });
+    } catch (err) {
+      // Revert
       setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: task.is_completed } : t));
+      onDelta(newCompleted ? -1 : 1);
+      setApiError(err instanceof Error ? err.message : "Failed to save — please try again");
     }
     setLoading(null);
   }
@@ -63,32 +87,40 @@ function SessionRow({ session, defaultOpen }: { session: SessionData; defaultOpe
   async function saveReflection(task: TaskItem) {
     const text = reflections[task.id] ?? "";
     setLoading(task.id);
+    setApiError(null);
+
+    // Optimistic
     setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: true, reflection: text } : t));
+    onDelta(1);
 
     try {
-      await fetch("/api/clinic-tasks/complete", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ task_id: task.id, completed: true, reflection: text }),
-      });
-    } catch {
-      setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: false } : t));
+      await callApi({ task_id: task.id, completed: true, reflection: text });
+    } catch (err) {
+      // Revert — restore original state (not yet completed, original reflection)
+      setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: false, reflection: task.reflection } : t));
+      onDelta(-1);
+      setApiError(err instanceof Error ? err.message : "Failed to save — please try again");
     }
     setLoading(null);
   }
 
   async function clearReflection(task: TaskItem) {
     setLoading(task.id);
+    setApiError(null);
+
+    // Optimistic — show textarea pre-filled with existing text so user can edit it
     setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: false, reflection: null } : t));
-    setReflections((prev) => ({ ...prev, [task.id]: "" }));
+    setReflections((prev) => ({ ...prev, [task.id]: task.reflection ?? "" }));
+    onDelta(-1);
+
     try {
-      await fetch("/api/clinic-tasks/complete", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ task_id: task.id, completed: false }),
-      });
-    } catch {
-      setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: true } : t));
+      await callApi({ task_id: task.id, completed: false });
+    } catch (err) {
+      // Revert — restore saved state
+      setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: true, reflection: task.reflection } : t));
+      setReflections((prev) => ({ ...prev, [task.id]: "" }));
+      onDelta(1);
+      setApiError(err instanceof Error ? err.message : "Failed to update — please try again");
     }
     setLoading(null);
   }
@@ -145,12 +177,11 @@ function SessionRow({ session, defaultOpen }: { session: SessionData; defaultOpe
           </div>
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
-          {/* Progress bar */}
           <div className="hidden sm:flex w-24 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "#1E293B" }}>
             <div
               className="h-full rounded-full transition-all"
               style={{
-                width:           `${(doneTasks / totalTasks) * 100}%`,
+                width:           `${totalTasks > 0 ? (doneTasks / totalTasks) * 100 : 0}%`,
                 backgroundColor: allDone ? "#10B981" : "#2563EB",
               }}
             />
@@ -162,7 +193,18 @@ function SessionRow({ session, defaultOpen }: { session: SessionData; defaultOpe
       {/* Task list */}
       {open && (
         <div className="border-t" style={{ borderColor: "#1E293B" }}>
-          {tasks.map((task, i) => (
+          {/* API error banner */}
+          {apiError && (
+            <div
+              className="mx-6 mt-4 flex items-center gap-2 rounded-xl border px-4 py-3 text-xs"
+              style={{ backgroundColor: "rgba(239,68,68,0.06)", borderColor: "rgba(239,68,68,0.2)", color: "#FCA5A5" }}
+            >
+              <AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
+              {apiError}
+            </div>
+          )}
+
+          {tasks.map((task) => (
             <div
               key={task.id}
               className="px-6 py-4 border-b last:border-0"
@@ -179,7 +221,7 @@ function SessionRow({ session, defaultOpen }: { session: SessionData; defaultOpe
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-3">
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-sm font-semibold" style={{ color: task.is_completed ? "#6B7280" : "#F9FAFB" }}>
                         {task.title}
                       </p>
@@ -224,15 +266,15 @@ function SessionRow({ session, defaultOpen }: { session: SessionData; defaultOpe
                           )}
                           <div className="flex items-center justify-between">
                             <span className="text-[10px] font-semibold flex items-center gap-1" style={{ color: "#8B5CF6" }}>
-                              <CheckCircle2 className="h-3 w-3" />Saved
+                              <CheckCircle2 className="h-3 w-3" /> Saved
                             </span>
                             <button
                               onClick={() => clearReflection(task)}
                               disabled={loading === task.id}
-                              className="text-[10px]"
+                              className="text-[10px] transition-colors hover:text-[#9CA3AF] disabled:opacity-50"
                               style={{ color: "#4B5563" }}
                             >
-                              Edit
+                              {loading === task.id ? "Updating…" : "Edit"}
                             </button>
                           </div>
                         </div>
@@ -243,7 +285,7 @@ function SessionRow({ session, defaultOpen }: { session: SessionData; defaultOpe
                             placeholder="Write your response here…"
                             value={reflections[task.id] ?? ""}
                             onChange={(e) => setReflections((prev) => ({ ...prev, [task.id]: e.target.value }))}
-                            className="w-full rounded-xl border px-3 py-2.5 text-sm resize-none"
+                            className="w-full rounded-xl border px-3 py-2.5 text-sm resize-none focus:ring-1 focus:ring-[#8B5CF6]"
                             style={{
                               backgroundColor: "#0A0F1A",
                               borderColor:     "#1E293B",
@@ -254,7 +296,7 @@ function SessionRow({ session, defaultOpen }: { session: SessionData; defaultOpe
                           <button
                             onClick={() => saveReflection(task)}
                             disabled={loading === task.id || !(reflections[task.id] ?? "").trim()}
-                            className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold text-white disabled:opacity-40"
+                            className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold text-white disabled:opacity-40 transition-opacity hover:opacity-80"
                             style={{ backgroundColor: "#8B5CF6" }}
                           >
                             {loading === task.id ? <Loader2 className="h-3 w-3 animate-spin" /> : null}
@@ -275,7 +317,13 @@ function SessionRow({ session, defaultOpen }: { session: SessionData; defaultOpe
 }
 
 export function TaskList({ sessions, totalTasks, doneTasks }: Props) {
-  const progressPct = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
+  const [liveCompleted, setLiveCompleted] = useState(doneTasks);
+
+  function handleDelta(delta: number) {
+    setLiveCompleted((prev) => Math.max(0, Math.min(totalTasks, prev + delta)));
+  }
+
+  const progressPct = totalTasks > 0 ? Math.round((liveCompleted / totalTasks) * 100) : 0;
 
   const currentSessionIndex = sessions.findIndex(
     (s) => s.is_unlocked && s.tasks.some((t) => !t.is_completed)
@@ -291,7 +339,7 @@ export function TaskList({ sessions, totalTasks, doneTasks }: Props) {
         <div className="flex items-center justify-between mb-2">
           <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Overall Progress</p>
           <p className="text-sm font-bold" style={{ color: progressPct === 100 ? "#10B981" : "#60A5FA" }}>
-            {doneTasks}/{totalTasks} tasks · {progressPct}%
+            {liveCompleted}/{totalTasks} tasks · {progressPct}%
           </p>
         </div>
         <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#1E293B" }}>
@@ -319,6 +367,7 @@ export function TaskList({ sessions, totalTasks, doneTasks }: Props) {
           key={session.session_number}
           session={session}
           defaultOpen={i === currentSessionIndex}
+          onDelta={handleDelta}
         />
       ))}
     </div>
