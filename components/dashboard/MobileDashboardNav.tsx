@@ -64,7 +64,7 @@ export function MobileDashboardNav({ userEmail }: { userEmail: string }) {
       {open && (
         <div
           className="fixed inset-0 z-40 md:hidden"
-          style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(2px)" }}
+          style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(2px)", WebkitBackdropFilter: "blur(2px)" }}
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />

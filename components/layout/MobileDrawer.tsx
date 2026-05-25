@@ -31,7 +31,7 @@ export function MobileDrawer({ open, onClose }: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 md:hidden"
-            style={{ backgroundColor: "rgba(8,14,26,0.6)", backdropFilter: "blur(4px)" }}
+            style={{ backgroundColor: "rgba(8,14,26,0.6)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
             onClick={close}
           />
 

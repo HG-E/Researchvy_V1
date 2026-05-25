@@ -32,6 +32,7 @@ export function StickyMobileCTA() {
           backgroundColor: "rgba(10, 15, 26, 0.97)",
           borderColor: "#1E293B",
           backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
         }}
       >
         <Link

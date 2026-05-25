@@ -78,7 +78,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t pb-20 md:pb-0" style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}>
+    <footer className="border-t" style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
 
         {/* Brand + socials — always full width on mobile, 2-col span on lg */}
@@ -208,6 +208,13 @@ export function Footer() {
             </Link>
           </div>
         </div>
+
+        {/* Mobile spacer: clears fixed StickyMobileCTA bar + Android system-nav safe area */}
+        <div
+          className="md:hidden"
+          aria-hidden="true"
+          style={{ height: "max(80px, calc(64px + env(safe-area-inset-bottom, 0px)))" }}
+        />
       </div>
     </footer>
   );
