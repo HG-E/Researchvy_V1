@@ -50,6 +50,7 @@ export async function getInsights(params?: {
           tags:          (data.tags as string[]) ?? [],
           reading_time:  (data.reading_time as number) ?? 5,
           published_at:  (data.published_at as string) ?? new Date().toISOString(),
+          updated_at:    (data.updated_at as string) ?? (data.published_at as string) ?? new Date().toISOString(),
           author:        data.author as InsightListItem["author"],
         } satisfies InsightListItem)
     )

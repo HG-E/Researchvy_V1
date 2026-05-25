@@ -3,43 +3,51 @@ import { siteConfig } from "@/config/site";
 import { getInsights } from "@/lib/cms/mdx";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 
+// Stable deploy date — update this when a page's content meaningfully changes.
+// Never use `new Date()` here: telling Google every page changed today on every
+// deploy causes crawlers to stop trusting the lastModified signal entirely.
+const SITE_LAUNCH    = "2025-11-01";
+const COHORT_UPDATED = "2026-05-01"; // July 2026 cohort info added
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url;
-  const now  = new Date().toISOString();
-
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: base,                  lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
-    { url: `${base}/about`,       lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/insights`,    lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
-    { url: `${base}/clinics`,     lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
-    { url: `${base}/resources`,   lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
-    { url: `${base}/ecosystem`,   lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/contact`,     lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/intelligence`,lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/academy`,     lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/media`,                            lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/network`,                          lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/partnerships`,                     lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/researchers/early-career`,         lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/researchers/institutional`,        lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/resources/visibility-scorecard`,  lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/privacy`,                         lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
-    { url: `${base}/terms`,                           lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
-  ];
 
   const insights = await getInsights({ limit: 100 });
+  // Use the most recent insight date to signal freshness on the listing page
+  const latestInsight = insights[0]?.updated_at ?? insights[0]?.published_at ?? SITE_LAUNCH;
+
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { url: base,                                       lastModified: COHORT_UPDATED, changeFrequency: "weekly",  priority: 1.0 },
+    { url: `${base}/clinics`,                          lastModified: COHORT_UPDATED, changeFrequency: "weekly",  priority: 0.9 },
+    { url: `${base}/insights`,                         lastModified: latestInsight,  changeFrequency: "weekly",  priority: 0.9 },
+    { url: `${base}/about`,                            lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/resources`,                        lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/researchers/early-career`,         lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/researchers/institutional`,        lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/resources/visibility-scorecard`,   lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/ecosystem`,                        lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/academy`,                          lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/intelligence`,                     lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/contact`,                          lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/media`,                            lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.5 },
+    { url: `${base}/network`,                          lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.5 },
+    { url: `${base}/partnerships`,                     lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.5 },
+    { url: `${base}/privacy`,                          lastModified: "2025-06-01",   changeFrequency: "yearly",  priority: 0.3 },
+    { url: `${base}/terms`,                            lastModified: "2025-06-01",   changeFrequency: "yearly",  priority: 0.3 },
+  ];
+
   const insightRoutes: MetadataRoute.Sitemap = insights.map((insight) => ({
     url:             `${base}/insights/${insight.slug}`,
-    lastModified:    insight.published_at,
-    changeFrequency: "monthly",
+    lastModified:    insight.updated_at ?? insight.published_at,
+    changeFrequency: "monthly" as const,
     priority:        0.8,
   }));
 
   const clinicRoutes: MetadataRoute.Sitemap = [
     {
       url:             `${base}/clinics/${digitalVisibilityClinic.slug}`,
-      lastModified:    now,
-      changeFrequency: "monthly",
+      lastModified:    COHORT_UPDATED,
+      changeFrequency: "monthly" as const,
       priority:        0.9,
     },
   ];

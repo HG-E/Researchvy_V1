@@ -39,7 +39,7 @@ export interface Insight {
 export interface InsightListItem
   extends Pick<
     Insight,
-    "id" | "title" | "slug" | "excerpt" | "featured_image" | "category" | "tags" | "reading_time" | "published_at"
+    "id" | "title" | "slug" | "excerpt" | "featured_image" | "category" | "tags" | "reading_time" | "published_at" | "updated_at"
   > {
   author?: Pick<InsightAuthor, "name" | "avatar_url">;
 }
