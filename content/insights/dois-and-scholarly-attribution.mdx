@@ -1,4 +1,4 @@
----
+﻿---
 id: "insight-020"
 title: "DOIs, Crossref, and the Infrastructure of Scholarly Attribution"
 excerpt: "Every citation that counts, counts because of a DOI. Understanding how scholarly attribution infrastructure works gives researchers the ability to protect and track every piece of credit they are owed."
@@ -8,8 +8,8 @@ reading_time: 6
 published: true
 published_at: "2026-05-01T00:00:00Z"
 featured_image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=420&q=80&auto=format&fit=crop"
-seo_title: "DOIs, Crossref, and Scholarly Attribution — Researchvy"
-seo_description: "How DOIs and Crossref form the backbone of scholarly attribution — and what researchers need to know to ensure every citation is tracked and credited correctly."
+seo_title: "DOIs, Crossref, and Scholarly Attribution | Researchvy"
+seo_description: "How DOIs and Crossref form the backbone of scholarly attribution, and what researchers need to know to ensure every citation is tracked and credited correctly."
 seo_keywords: "DOI, Crossref, scholarly attribution, citation tracking, persistent identifier, academic attribution"
 author:
   name: "Researchvy Editorial"
@@ -18,27 +18,27 @@ author:
 
 ## Why Attribution Infrastructure Matters
 
-Every citation to your work that shows up in Scopus, Web of Science, or Google Scholar exists because a chain of technical infrastructure tracked it correctly. When that infrastructure works, your h-index, citation count, and i10-index reflect your actual scholarly output. When it breaks — when a DOI is incorrectly registered, when author metadata is wrong, when an organisation is not a Crossref member — citations fall into a gap and simply disappear from your record.
+Every citation to your work that shows up in Scopus, Web of Science, or Google Scholar exists because a chain of technical infrastructure tracked it correctly. When that infrastructure works, your h-index, citation count, and i10-index reflect your actual scholarly output. When it breaks, when a DOI is incorrectly registered, when author metadata is wrong, when an organisation is not a Crossref member, citations fall into a gap and simply disappear from your record.
 
 Most researchers have no visibility into this infrastructure. They publish, and wait to see their numbers update. But for researchers who understand how attribution is built, it is possible to verify, protect, and sometimes recover citation credit that the system would otherwise lose.
 
 ## What a DOI Actually Is
 
-A Digital Object Identifier (DOI) is a standardised, persistent identifier for a digital object — a paper, dataset, report, book chapter, presentation, or piece of software. It looks like: `10.1038/s41586-021-03819-2`
+A Digital Object Identifier (DOI) is a standardised, persistent identifier for a digital object, a paper, dataset, report, book chapter, presentation, or piece of software. It looks like: `10.1038/s41586-021-03819-2`
 
 The structure is:
-- `10.` — the DOI system prefix, always present
-- `1038` — the registrant prefix, assigned to the publisher or repository
-- `/s41586-021-03819-2` — the unique suffix, assigned by the registrant
+- `10.`, the DOI system prefix, always present
+- `1038`, the registrant prefix, assigned to the publisher or repository
+- `/s41586-021-03819-2`, the unique suffix, assigned by the registrant
 
-A DOI is registered through a DOI registration agency — most commonly **Crossref** (for publications) or **DataCite** (for research data). The agency maintains the pointer between the DOI and the current URL of the resource. If the publisher moves the paper to a new URL, they update the Crossref record and the DOI continues to resolve correctly.
+A DOI is registered through a DOI registration agency, most commonly **Crossref** (for publications) or **DataCite** (for research data). The agency maintains the pointer between the DOI and the current URL of the resource. If the publisher moves the paper to a new URL, they update the Crossref record and the DOI continues to resolve correctly.
 
 ## Crossref: The Publication Attribution Registry
 
-Crossref is a non-profit membership organisation that serves as the primary DOI registration agency for scholarly publications. Its members are publishers, universities, and preprint servers — about 20,000 organisations worldwide.
+Crossref is a non-profit membership organisation that serves as the primary DOI registration agency for scholarly publications. Its members are publishers, universities, and preprint servers, about 20,000 organisations worldwide.
 
 When a Crossref member publishes a paper:
-1. They register the paper's metadata with Crossref — title, authors, abstract, funding, references, ORCID iDs
+1. They register the paper's metadata with Crossref, title, authors, abstract, funding, references, ORCID iDs
 2. Crossref assigns and registers the DOI
 3. The metadata is immediately available via Crossref's API
 4. Citation databases (Scopus, Web of Science, OpenAlex) ingest the metadata and use it to track citations
@@ -63,15 +63,15 @@ Each step is a potential failure point.
 
 **Non-Crossref journals:** Research published in journals or conference proceedings that are not Crossref members will not generate trackable citations. Citations to such papers may appear in Google Scholar (which uses broader web crawling) but will not appear in Scopus or Web of Science. Before submitting, check whether the venue is a Crossref member.
 
-**Incorrect DOI in reference lists:** When a citing paper includes the wrong DOI — or no DOI, just a title — the Crossref link is broken. This is particularly common with older papers and those from non-Crossref publishers. You cannot fix this retroactively, but you can ensure your own papers are always cited with their correct DOI by including it prominently in the PDF and in any materials you share.
+**Incorrect DOI in reference lists:** When a citing paper includes the wrong DOI, or no DOI, just a title, the Crossref link is broken. This is particularly common with older papers and those from non-Crossref publishers. You cannot fix this retroactively, but you can ensure your own papers are always cited with their correct DOI by including it prominently in the PDF and in any materials you share.
 
 **Missing ORCID in submission metadata:** If your ORCID iD was not included when the paper was submitted, the automatic Crossref–ORCID link was not created. You can manually add the publication to your ORCID record, but the verified link (shown with a green Crossref badge in ORCID) only exists if the publisher submitted it.
 
-**Fragmented author metadata:** If your name appears differently across Crossref registrations — "A. B. Smith," "Anna Smith," "Smith AB" — citation databases struggle to consolidate them. This is the root cause of the Scopus fragmentation problem described in our guide on [Scopus author profile optimisation](/insights/scopus-author-profile-optimisation).
+**Fragmented author metadata:** If your name appears differently across Crossref registrations, "A. B. Smith," "Anna Smith," "Smith AB", citation databases struggle to consolidate them. This is the root cause of the Scopus fragmentation problem described in our guide on [Scopus author profile optimisation](/insights/scopus-author-profile-optimisation).
 
 ## DataCite: Attribution for Data and Software
 
-DataCite is the equivalent of Crossref for research data, software, and other non-publication research outputs. Repositories like Zenodo, Dryad, and Figshare are DataCite members — when you deposit a dataset, they register the DOI through DataCite.
+DataCite is the equivalent of Crossref for research data, software, and other non-publication research outputs. Repositories like Zenodo, Dryad, and Figshare are DataCite members, when you deposit a dataset, they register the DOI through DataCite.
 
 DataCite citation tracking works the same way as Crossref: when a paper cites a dataset by its DOI, that citation link is tracked. DataCite statistics are increasingly included in institutional research dashboards and funder reporting.
 
@@ -80,7 +80,7 @@ DataCite citation tracking works the same way as Crossref: when a paper cites a 
 Once a year, run this basic check on your attribution infrastructure:
 
 1. **Check a sample of your DOIs resolve correctly:** Paste `doi.org/YOUR-DOI` for five or six of your papers and verify they reach the correct page
-2. **Check your Crossref metadata:** Use `api.crossref.org/works/YOUR-DOI` to see what Crossref has registered — verify your name and ORCID are present and correct
+2. **Check your Crossref metadata:** Use `api.crossref.org/works/YOUR-DOI` to see what Crossref has registered, verify your name and ORCID are present and correct
 3. **Check your ORCID works section:** Verify that your publications show the green "Crossref" badge (meaning the publisher submitted your ORCID with the paper metadata)
 4. **Check your Scopus and Web of Science profiles:** Verify all papers are present and attributed to a single consolidated profile
 
@@ -88,4 +88,4 @@ Any gaps identified here represent citation credit that is potentially being los
 
 ---
 
-**Citation credit that is owed to you should reach you.** A [Researchvy Intelligence visibility audit](/intelligence) includes a full attribution infrastructure check — verifying your Crossref metadata, Scopus consolidation, ORCID links, and citation tracking across every major database. For a complete profile overhaul, the [Digital Visibility Clinic](/clinics/digital-visibility-clinic) covers attribution infrastructure alongside identity, strategy, and communication. Read our guide on [bibliometrics and citation intelligence](/insights/bibliometrics-and-citation-intelligence) for how attribution flows into your career metrics.
+**Citation credit that is owed to you should reach you.** A [Researchvy Intelligence visibility audit](/intelligence) includes a full attribution infrastructure check, verifying your Crossref metadata, Scopus consolidation, ORCID links, and citation tracking across every major database. For a complete profile overhaul, the [Digital Visibility Clinic](/clinics/digital-visibility-clinic) covers attribution infrastructure alongside identity, strategy, and communication. Read our guide on [bibliometrics and citation intelligence](/insights/bibliometrics-and-citation-intelligence) for how attribution flows into your career metrics.
