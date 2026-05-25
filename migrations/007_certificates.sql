@@ -4,12 +4,12 @@
 
 CREATE TABLE IF NOT EXISTS certificates (
   id                 UUID         PRIMARY KEY DEFAULT gen_random_uuid(),
-  certificate_number TEXT         UNIQUE NOT NULL,          -- e.g. RVC-2025-00001
+  certificate_number TEXT         UNIQUE NOT NULL,          -- e.g. CSVP-2026-00001
   user_id            UUID         REFERENCES auth.users(id) ON DELETE SET NULL,
   enquiry_id         UUID,                                   -- loose FK to clinic_enquiries
   recipient_name     TEXT         NOT NULL,
   recipient_email    TEXT         NOT NULL,
-  programme          TEXT         NOT NULL DEFAULT 'Digital Visibility Clinic',
+  programme          TEXT         NOT NULL DEFAULT 'Certificate of Scholarly Visibility Practice',
   clinic_slug        TEXT         NOT NULL DEFAULT 'digital-visibility-clinic',
   issued_by          TEXT,                                   -- admin email
   issued_at          TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
