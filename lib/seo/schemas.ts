@@ -107,6 +107,21 @@ export function courseSchema() {
   };
 }
 
+export function faqSchema(faqs: readonly { readonly question: string; readonly answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type":    "FAQPage",
+    mainEntity: faqs.map(({ question, answer }) => ({
+      "@type": "Question",
+      name:    question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:    answer,
+      },
+    })),
+  };
+}
+
 export function breadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     "@context":        "https://schema.org",

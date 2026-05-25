@@ -124,6 +124,37 @@ export const digitalVisibilityClinic = {
     "Continued learning pathway recommendations",
   ],
 
+  faq: [
+    {
+      question: "Who is the Digital Visibility Clinic designed for?",
+      answer:   "The clinic is designed for postgraduate researchers, early-career academics, established scholars, and institutional research staff who want to improve how their research is found, cited, and applied. It is relevant across all disciplines.",
+    },
+    {
+      question: "Do I have to attend sessions live?",
+      answer:   "Sessions are held live online in small cohorts of up to 30 researchers. All sessions are recorded and provided to enrolled participants, so you can review them at your own pace after each live session.",
+    },
+    {
+      question: "What is the total time commitment?",
+      answer:   "The clinic runs over 6 weeks: 3 hours of live session per week plus approximately 2 hours of practical tasks between sessions — around 30 hours total commitment.",
+    },
+    {
+      question: "What will I have when I complete the clinic?",
+      answer:   "You will leave with a fully optimised digital scholarly identity, a personal research visibility strategy tailored to your discipline, and a verified Certificate of Scholarly Visibility Practice — downloadable and shareable on LinkedIn.",
+    },
+    {
+      question: "How much does the clinic cost?",
+      answer:   "Researchvy does not publish fixed pricing. Fees are contextual — based on your institution, registration type (individual or institutional), and cohort. Contact us via WhatsApp or email info@researchvy.com for a tailored proposal within 24 hours.",
+    },
+    {
+      question: "How many participants are in each cohort?",
+      answer:   "Each cohort is deliberately limited to a maximum of 30 researchers to ensure every participant receives personal attention, peer interaction, and a high-quality learning experience.",
+    },
+    {
+      question: "What do I need to participate?",
+      answer:   "A stable internet connection, an active research profile (or the desire to build one), and a commitment to completing the inter-session tasks. No special software is required.",
+    },
+  ],
+
   nextCohort: {
     id:                   "cohort-2026-july",
     registrationDeadline: "2026-06-25",

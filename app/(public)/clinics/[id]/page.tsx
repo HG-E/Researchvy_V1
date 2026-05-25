@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle, Award, Users, Monitor, Clock } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
-import { courseSchema, breadcrumbSchema } from "@/lib/seo/schemas";
+import { courseSchema, breadcrumbSchema, faqSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/config/site";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { SessionAccordion } from "@/components/clinics/SessionAccordion";
@@ -38,6 +38,10 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(clinic.faq)) }}
       />
       <script
         type="application/ld+json"
@@ -224,6 +228,45 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                     <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: "#2563EB" }} />
                     <p className="text-sm" style={{ color: "#D1D5DB" }}>{benefit}</p>
                   </div>
+                ))}
+              </div>
+            </section>
+
+            {/* FAQ */}
+            <section>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
+                Common Questions
+              </p>
+              <h2
+                className="text-2xl font-bold mb-6"
+                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              >
+                Frequently Asked Questions
+              </h2>
+              <div className="space-y-3">
+                {clinic.faq.map((item) => (
+                  <details
+                    key={item.question}
+                    className="group rounded-xl border overflow-hidden"
+                    style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                  >
+                    <summary
+                      className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer list-none text-sm font-semibold select-none"
+                      style={{ color: "#F9FAFB" }}
+                    >
+                      {item.question}
+                      <span
+                        className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs transition-transform group-open:rotate-45"
+                        style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
+                        aria-hidden="true"
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <p className="px-5 pb-4 text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+                      {item.answer}
+                    </p>
+                  </details>
                 ))}
               </div>
             </section>

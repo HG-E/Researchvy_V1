@@ -123,7 +123,9 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             </span>
             <span className="flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
               <Calendar className="h-3 w-3" />
-              {format(new Date(insight.published_at), "MMMM d, yyyy")}
+              <time dateTime={insight.published_at}>
+                {format(new Date(insight.published_at), "MMMM d, yyyy")}
+              </time>
             </span>
           </div>
 
@@ -138,20 +140,21 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             {insight.excerpt}
           </p>
 
-          <div className="flex items-center gap-3 pt-5 border-t" style={{ borderColor: "#1E293B" }}>
+          <address className="not-italic flex items-center gap-3 pt-5 border-t" style={{ borderColor: "#1E293B" }}>
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
               style={{ backgroundColor: "#1E293B", color: "#60A5FA" }}
+              aria-hidden="true"
             >
               {(insight.author?.name ?? "R")[0]}
             </div>
             <div>
-              <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+              <p className="text-sm font-semibold" rel="author" style={{ color: "#F9FAFB" }}>
                 {insight.author?.name ?? "Researchvy Editorial"}
               </p>
               <p className="text-xs" style={{ color: "#4B5563" }}>Researchvy</p>
             </div>
-          </div>
+          </address>
         </header>
 
         {/* Content + TOC */}
