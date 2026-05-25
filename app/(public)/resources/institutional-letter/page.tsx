@@ -75,7 +75,7 @@ export default function InstitutionalLetterPage() {
 
             {/* Subject */}
             <p className="text-sm font-bold mb-8 pb-4 border-b" style={{ color: "#F9FAFB", borderColor: "#1E293B" }}>
-              Re: Professional Development Funding Request — Digital Visibility Clinic, July 2026 Cohort
+              Re: Professional Development Funding Request, Digital Visibility Clinic, July 2026 Cohort
             </p>
 
             {/* Body */}
@@ -85,7 +85,7 @@ export default function InstitutionalLetterPage() {
               <p>
                 We write to confirm that <strong style={{ color: "#F9FAFB" }}>[Researcher&apos;s Full Name]</strong>,
                 of <strong style={{ color: "#F9FAFB" }}>[Department / Faculty, Institution]</strong>, has applied
-                for enrolment in the <strong style={{ color: "#F9FAFB" }}>Digital Visibility Clinic — July 2026 Cohort</strong>,
+                for enrolment in the <strong style={{ color: "#F9FAFB" }}>Digital Visibility Clinic, July 2026 Cohort</strong>,
                 facilitated by Researchvy. This letter is provided to support a formal request for
                 institutional professional development funding.
               </p>
@@ -124,7 +124,7 @@ export default function InstitutionalLetterPage() {
                 {[
                   "Establish and fully optimise their scholarly digital identity across Google Scholar, ORCID, and Scopus",
                   "Understand and improve their citation metrics, h-index trajectory, and bibliometric profile",
-                  "Develop skills in research communication for diverse audiences — including policymakers, practitioners, and the public",
+                  "Develop skills in research communication for diverse audiences, including policymakers, practitioners, and the public",
                   "Build a personalised 12-month scholarly visibility strategy aligned with their career stage and discipline",
                   "Receive a verified Certificate of Scholarly Visibility Practice upon successful completion",
                 ].map((item) => (
@@ -171,11 +171,12 @@ export default function InstitutionalLetterPage() {
               </div>
 
               <p>
-                We confirm that the programme has been delivered previously in partnership with the
-                American Society for Microbiology (ASM), Nigeria Chapter, where researchers across
-                disciplines — including early-career and established academics — reported measurable
-                improvements in their scholarly visibility, citation profiles, and research communication
-                capacity within weeks of completing the programme.
+                We confirm that this programme has been delivered in partnership with the American Society
+                for Microbiology (ASM), Nigeria Chapter, and the Department of Environmental Science (EHS),
+                Federal University of Technology, Owerri (FUTO). Researchers across disciplines, including
+                early-career and established academics, reported measurable improvements in their scholarly
+                visibility, citation profiles, and research communication capacity within weeks of completing
+                the programme.
               </p>
 
               <p>

@@ -15,7 +15,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "I published consistently for six years and barely got cited outside my department. The visibility audit showed me exactly why — and gave me a step-by-step fix. Six months later, the difference is measurable.",
+      "I published consistently for six years and barely got cited outside my department. The visibility audit showed me exactly why, giving me a step-by-step fix. Six months later, the difference is measurable.",
     name:     "Dr. O. Adeyemi",
     role:     "Postdoctoral Researcher",
     initials: "OA",
@@ -23,7 +23,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "As a research director, I needed something I could bring to the whole team — not another generic workshop. The institutional programme was built around our specific gaps. Our researchers finally understand how visibility works.",
+      "As a research director, I needed something I could bring to the whole team, not another generic workshop. The institutional programme was built around our specific gaps. Our researchers finally understand how visibility works.",
     name:     "Prof. R. Nkosi",
     role:     "Director of Research, South Africa",
     initials: "RN",
@@ -105,7 +105,7 @@ export function SocialProof() {
             <span style={{ color: "#10B981" }}>When You Get Found.</span>
           </h2>
           <p className="text-base max-w-xl mx-auto" style={{ color: "#6B7280" }}>
-            Researchers across disciplines and continents — from postdocs to research directors —
+            Researchers across disciplines and continents, from postdocs to research directors,
             on what shifted after working with Researchvy.
           </p>
         </motion.div>

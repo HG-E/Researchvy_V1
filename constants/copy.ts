@@ -6,7 +6,7 @@ export const copy = {
   hero: {
     headline:   "Research Beyond Publication",
     subheadline:"From Invisible to Globally Discovered",
-    body: "You've done the work. Most of the world still can't find it. Researchvy transforms researchers into globally visible, citable, and discoverable scholars — through intelligence, training, and strategic visibility.",
+    body: "You've done the work. Most of the world still can't find it. Researchvy transforms researchers into globally visible, citable, and discoverable scholars, through intelligence, training, and strategic visibility.",
     cta: {
       primary:   "Get My Research Found",
       secondary: "See How It Works",
@@ -22,9 +22,9 @@ export const copy = {
 
   visibilityGap: {
     title:    "Your Research Is Better Than Your Visibility Suggests",
-    subtitle: "It's not the quality of your work holding you back. It's visibility — and almost no one in academia ever taught you this.",
+    subtitle: "It's not the quality of your work holding you back. It's visibility, and almost no one in academia ever taught you this.",
     problems: [
-      "Your papers are published — but your citation count doesn't reflect your output",
+      "Your papers are published, but your citation count doesn't reflect your output",
       "You're invisible outside your institution, even in your own field",
       "Policymakers and practitioners who need your findings can't find them",
       "Your h-index is lower than your publication record deserves",
@@ -34,7 +34,7 @@ export const copy = {
 
   framework: {
     title: "The Researchvy Framework",
-    subtitle: "A complete system — from research creation to measurable global impact.",
+    subtitle: "A complete system, from research creation to measurable global impact.",
     steps: [
       { label: "Research",        description: "The scholarly work begins" },
       { label: "Visibility",      description: "Making research findable" },
@@ -48,12 +48,12 @@ export const copy = {
 
   clinic: {
     name:     "Digital Visibility Clinic",
-    tagline:  "4 live sessions. One complete transformation. You leave visible, optimised, and ready to be found — globally.",
+    tagline:  "4 live sessions. One complete transformation. You leave visible, optimised, and ready to be found globally.",
     outcomes: [
       "Walk away with a fully optimised digital scholarly identity",
       "Get your research ranking across Scopus, Google Scholar, and ORCID",
       "Understand exactly what's holding back your h-index and citation count",
-      "Leave with a personal visibility strategy — not just knowledge",
+      "Leave with a personal visibility strategy, not just knowledge",
       "Communicate your research to audiences who can actually use it",
       "Position yourself for global relevance, not just institutional recognition",
     ],

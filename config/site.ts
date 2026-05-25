@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Researchvy",
   tagline: "Research Beyond Publication",
   description:
-    "Millions of researchers publish every year. Most are never found. Researchvy exists to change that — transforming scholars into globally visible, citable, and discoverable researchers through intelligence, training, and strategic visibility.",
+    "Millions of researchers publish every year. Most are never found. Researchvy exists to change that, transforming scholars into globally visible, citable, and discoverable researchers through intelligence, training, and strategic visibility.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://researchvy.com",
   domain: "researchvy.com",
   ogImage: "/images/brand/og-default.png",
@@ -56,7 +56,7 @@ export const siteConfig = {
       slug: "intelligence",
       tagline: "Visibility audits · Citation intelligence · Institutional benchmarking",
       description:
-        "You can't fix what you can't measure. We give researchers and institutions a complete, honest picture of where they stand — and a prioritised plan to close every gap.",
+        "You can't fix what you can't measure. We give researchers and institutions a complete, honest picture of where they stand, and a prioritised plan to close every gap.",
       icon: "BarChart2",
     },
     {
@@ -65,7 +65,7 @@ export const siteConfig = {
       slug: "academy",
       tagline: "5-level curriculum · Certifications · Structured learning",
       description:
-        "Publishing was one skill. Being found is another. Academy teaches the visibility skills that academia never did — five structured levels from foundation to advanced strategy.",
+        "Publishing was one skill. Being found is another. Academy teaches the visibility skills that academia never did, five structured levels from foundation to advanced strategy.",
       icon: "GraduationCap",
     },
     {
@@ -83,7 +83,7 @@ export const siteConfig = {
       slug: "clinics",
       tagline: "Live training · ≤20 per cohort · Verified certificate",
       description:
-        "4 live sessions. One complete transformation. You leave with a fully optimised scholarly identity, a personal visibility strategy, and a verified certificate — not just notes.",
+        "4 live sessions. One complete transformation. You leave with a fully optimised scholarly identity, a personal visibility strategy, and a verified certificate, not just notes.",
       icon: "Stethoscope",
     },
     {
@@ -92,7 +92,7 @@ export const siteConfig = {
       slug: "network",
       tagline: "Peer community · Fellows programme · Global reach",
       description:
-        "The researchers gaining ground fastest aren't doing it alone. The Network connects you with peers who are building visibility seriously — and holding each other accountable.",
+        "The researchers gaining ground fastest aren't doing it alone. The Network connects you with peers who are building visibility seriously, and holding each other accountable.",
       icon: "Network",
     },
   ],

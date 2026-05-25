@@ -62,7 +62,7 @@ export function ClinicFeature() {
                 style={{ backgroundColor: "#EF4444" }}
               />
               <span className="text-xs font-medium" style={{ color: "#EF4444" }}>
-                Limited to 20 participants per cohort — spots fill fast
+                Limited to 20 participants per cohort, spots fill fast
               </span>
             </div>
 

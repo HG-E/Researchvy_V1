@@ -85,7 +85,7 @@ export default async function ClinicsPage() {
             <span style={{ color: "#10B981" }}>Start Being Found.</span>
           </h1>
           <p className="text-base sm:text-lg leading-relaxed max-w-2xl" style={{ color: "#6B7280" }}>
-            Live, structured clinics that take researchers from overlooked to globally discoverable —
+            Live, structured clinics that take researchers from overlooked to globally discoverable,
             with a personal strategy, a verified certificate, and results you can measure.
           </p>
         </div>
@@ -273,7 +273,7 @@ export default async function ClinicsPage() {
                 >
                   <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
                     🏆 Earn the <strong style={{ color: "#F9FAFB" }}>Certificate of Scholarly Visibility Practice</strong> upon
-                    successful completion — downloadable, shareable on LinkedIn, and verifiable.
+                    successful completion, downloadable, shareable on LinkedIn, and verifiable.
                   </p>
                 </div>
               </div>
@@ -325,7 +325,7 @@ export default async function ClinicsPage() {
               Choose Your Transformation
             </h2>
             <p className="text-sm max-w-xl mx-auto" style={{ color: "#6B7280" }}>
-              All prices shown in USD and NGN. Early bird saves up to $70 / ₦31,000 — closes June 20.
+              All prices shown in USD and NGN. Early bird saves up to $70 / ₦31,000, closes June 20.
             </p>
           </div>
 
@@ -510,7 +510,7 @@ export default async function ClinicsPage() {
         <div className="mb-20">
           <div className="text-center mb-10">
             <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#10B981" }}>
-              From the ASM Nigeria Cohort
+              From Our Cohort Alumni
             </p>
             <h2
               className="text-3xl font-bold"
@@ -633,7 +633,7 @@ export default async function ClinicsPage() {
         {/* Coming soon */}
         <div>
           <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: "#4B5563" }}>
-            More Clinics Launching — Register Interest Now
+            More Clinics Launching, Register Interest Now
           </p>
           <ComingSoonCarousel />
         </div>
