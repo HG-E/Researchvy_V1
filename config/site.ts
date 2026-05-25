@@ -99,7 +99,7 @@ export const siteConfig = {
 
   certificates: {
     signatory: {
-      name:  "Hillary Goodness",
+      name:  "Ekene Hillary",
       title: "Founder & Director, Researchvy",
     },
   },
