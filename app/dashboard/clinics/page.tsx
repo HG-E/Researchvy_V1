@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GraduationCap, ArrowRight, CheckCircle2, Clock, Calendar, Users } from "lucide-react";
+import { GraduationCap, ArrowRight, CheckCircle2, Clock, Calendar, Users, ListChecks } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getServerUser } from "@/lib/auth/supabase";
 import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
@@ -106,7 +106,29 @@ export default async function MyClinicsPage() {
         <h2 className="text-lg font-bold mb-1" style={{ color: "#F9FAFB" }}>{CLINIC.name}</h2>
         <p className="text-sm mb-6 leading-relaxed" style={{ color: "#6B7280" }}>{CLINIC.tagline}</p>
 
-        {hasRegistered ? (
+        {enquiryStatus === "enrolled" && (
+          <Link
+            href="/dashboard/clinics/tasks"
+            className="flex items-center justify-between gap-4 rounded-xl border p-4 mb-4 transition-colors hover:border-[#2563EB]"
+            style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.2)" }}
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: "rgba(37,99,235,0.12)" }}
+              >
+                <ListChecks className="h-5 w-5" style={{ color: "#60A5FA" }} />
+              </div>
+              <div>
+                <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>My Tasks</p>
+                <p className="text-xs" style={{ color: "#6B7280" }}>Weekly clinic tasks &amp; reflections</p>
+              </div>
+            </div>
+            <ArrowRight className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
+          </Link>
+        )}
+
+        {hasRegistered && enquiryStatus !== "enrolled" ? (
           <div
             className="rounded-xl border p-5 mb-4"
             style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.2)" }}
@@ -117,12 +139,12 @@ export default async function MyClinicsPage() {
               Spots are limited — we typically contact registered members within 3–5 business days.
             </p>
           </div>
-        ) : (
+        ) : !hasRegistered ? (
           <p className="text-sm mb-6 leading-relaxed" style={{ color: "#4B5563" }}>
             Cohorts are forming now. Register your interest below and we&apos;ll reach out to you
             directly when a spot becomes available.
           </p>
-        )}
+        ) : null}
 
         {/* Next cohort info */}
         {cohort.status !== "tba" && !hasRegistered && (

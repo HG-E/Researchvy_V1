@@ -1,14 +1,33 @@
 import Link from "next/link";
-import { ExternalLink, Clock, Monitor, Users, CheckCircle, Award } from "lucide-react";
+import { ExternalLink, Clock, Monitor, Users, CheckCircle, Award, BookOpen } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { buildWhatsAppUrl } from "@/config/site";
+import { createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { UnlockSessionButton } from "@/components/admin/UnlockSessionButton";
 
 export const metadata = generatePageMetadata({ title: "Manage Clinics" });
 
+const CLINIC_SLUG = "digital-visibility-clinic";
+const COHORT_ID   = "cohort-2026-july";
 const CLINICS = [digitalVisibilityClinic];
 
-export default function ManageClinicsPage() {
+async function getUnlockedSessions(): Promise<Set<number>> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const { data } = await admin
+      .from("clinic_session_unlocks")
+      .select("session_number")
+      .eq("clinic_slug", CLINIC_SLUG)
+      .eq("cohort_id", COHORT_ID);
+    return new Set((data ?? []).map((r: { session_number: number }) => r.session_number));
+  } catch {
+    return new Set();
+  }
+}
+
+export default async function ManageClinicsPage() {
+  const unlockedSessions = await getUnlockedSessions();
   return (
     <div>
       {/* Header */}
@@ -120,6 +139,40 @@ export default function ManageClinicsPage() {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+
+            {/* Session unlock controls */}
+            <div className="px-6 py-5 border-t" style={{ borderColor: "#1E293B" }}>
+              <div className="flex items-center gap-2 mb-4">
+                <BookOpen className="h-4 w-4" style={{ color: "#8B5CF6" }} />
+                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#4B5563" }}>
+                  Session Unlocks — July 2026 Cohort
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {clinic.sessions.map((s) => (
+                  <div
+                    key={s.number}
+                    className="flex items-center justify-between gap-3 rounded-xl border px-4 py-3"
+                    style={{
+                      backgroundColor: unlockedSessions.has(s.number) ? "rgba(16,185,129,0.04)" : "#080E1A",
+                      borderColor:     unlockedSessions.has(s.number) ? "rgba(16,185,129,0.2)"  : "#1E293B",
+                    }}
+                  >
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold truncate" style={{ color: "#F9FAFB" }}>
+                        S{s.number}: {s.title}
+                      </p>
+                    </div>
+                    <UnlockSessionButton
+                      clinicSlug={CLINIC_SLUG}
+                      cohortId={COHORT_ID}
+                      sessionNumber={s.number}
+                      isUnlocked={unlockedSessions.has(s.number)}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
