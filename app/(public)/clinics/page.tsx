@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Bell, Calendar, Clock, Users } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { courseSchema, breadcrumbSchema } from "@/lib/seo/schemas";
+import { siteConfig, buildWhatsAppUrl } from "@/config/site";
 import { digitalVisibilityClinic } from "@/constants/clinics";
-import { buildWhatsAppUrl } from "@/config/site";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 
 export const metadata = generatePageMetadata({
@@ -57,6 +58,17 @@ export default async function ClinicsPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+          { name: "Home",    url: siteConfig.url },
+          { name: "Clinics", url: `${siteConfig.url}/clinics` },
+        ])) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
 
         {/* Hero header */}

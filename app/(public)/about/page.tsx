@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { organizationSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/config/site";
 
 export const metadata = generatePageMetadata({
@@ -31,6 +32,17 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <div style={{ backgroundColor: "#0F172A", color: "#F9FAFB" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+          { name: "Home",  url: siteConfig.url },
+          { name: "About", url: `${siteConfig.url}/about` },
+        ])) }}
+      />
       {/* Hero */}
       <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8 text-center" style={{ backgroundColor: "#080E1A" }}>
         <div className="mx-auto max-w-4xl">
