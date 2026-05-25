@@ -13,8 +13,8 @@ export async function PATCH(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const { table, id, status } = body as { table: string; id: string; status: string };
 
-  const validTables  = ["clinic_enquiries", "academy_enquiries"];
-  const validStatuses = ["pending", "contacted", "enrolled", "declined"];
+  const validTables  = ["clinic_enquiries", "academy_enquiries", "partnership_enquiries"];
+  const validStatuses = ["pending", "contacted", "enrolled", "declined", "new", "in_progress", "closed"];
 
   if (!validTables.includes(table))   return NextResponse.json({ error: "Invalid table" },  { status: 400 });
   if (!validStatuses.includes(status)) return NextResponse.json({ error: "Invalid status" }, { status: 400 });
