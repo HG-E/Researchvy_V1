@@ -6,10 +6,8 @@ import { digitalVisibilityClinic } from "@/constants/clinics";
 const SESSION_COLORS = [
   "#2563EB", // Session 1
   "#4F46E5", // Session 2
-  "#6366F1", // Session 3
-  "#8B5CF6", // Session 4
-  "#A78BFA", // Session 5
-  "#10B981", // Session 6
+  "#8B5CF6", // Session 3
+  "#10B981", // Session 4
 ];
 
 export function SessionsCarousel() {

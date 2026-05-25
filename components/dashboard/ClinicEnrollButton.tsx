@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CheckCircle, Loader2, Calendar } from "lucide-react";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 
-type Track = "wednesday" | "saturday";
+type Track = "wednesday" | "sunday";
 
 interface Props {
   clinicSlug: string;
@@ -49,7 +49,7 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
           <p className="text-sm font-semibold" style={{ color: "#22C55E" }}>Interest Registered</p>
           {track && (
             <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
-              {track.day} track · starts {formatDate(track.startDate)} · 6:00–9:00 PM WAT
+              {track.day} track · starts {formatDate(track.startDate)} · 5:00–7:00 PM EST / 10:00 PM WAT
             </p>
           )}
           <p className="text-xs mt-1" style={{ color: "#4B5563" }}>
@@ -69,7 +69,7 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
           Choose your schedule track
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {(["wednesday", "saturday"] as Track[]).map((key) => {
+          {(["wednesday", "sunday"] as Track[]).map((key) => {
             const track     = tracks[key];
             const isChosen  = selected === key;
             return (

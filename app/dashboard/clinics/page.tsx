@@ -156,7 +156,7 @@ export default async function MyClinicsPage() {
               </span>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              {(["wednesday", "saturday"] as const).map((key) => {
+              {(["wednesday", "sunday"] as const).map((key) => {
                 const track = cohort.tracks[key];
                 return (
                   <div key={key} className="rounded-lg border px-3 py-2" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
@@ -169,7 +169,7 @@ export default async function MyClinicsPage() {
               })}
             </div>
             <p className="text-[10px]" style={{ color: "#4B5563" }}>
-              3 hrs live · 2 hrs tasks/week · 30 hrs total · Registration closes {formatDate(cohort.registrationDeadline)}
+              2 hrs/session · platform activities between sessions · Registration closes {formatDate(cohort.registrationDeadline)}
             </p>
           </div>
         )}

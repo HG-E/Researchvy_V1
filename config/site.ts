@@ -83,7 +83,7 @@ export const siteConfig = {
       slug: "clinics",
       tagline: "Live training · ≤20 per cohort · Verified certificate",
       description:
-        "6 sessions. One complete transformation. You leave with a fully optimised scholarly identity, a personal visibility strategy, and a verified certificate — not just notes.",
+        "4 live sessions. One complete transformation. You leave with a fully optimised scholarly identity, a personal visibility strategy, and a verified certificate — not just notes.",
       icon: "Stethoscope",
     },
     {

@@ -243,7 +243,7 @@ export default function EarlyCareerPage() {
               className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold mb-4"
               style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#2563EB", border: "1px solid rgba(37,99,235,0.25)" }}
             >
-              Guided · 6 Sessions
+              Guided · 4 Live Sessions
             </span>
             <h3 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>
               Digital Visibility Clinic
