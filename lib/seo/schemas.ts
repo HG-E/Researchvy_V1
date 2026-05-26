@@ -87,15 +87,15 @@ export function courseSchema() {
       url:     base,
     },
     hasCourseInstance: {
-      "@type":              "CourseInstance",
-      courseMode:           ["online"],
-      courseWorkload:       "PT6H",
+      "@type":        "CourseInstance",
+      courseMode:     ["online"],
+      courseWorkload: "PT6H",
       instructor: {
         "@type": "Organization",
         name:    "Researchvy Clinics",
       },
     },
-    educationalLevel:     "professional",
+    educationalLevel: "professional",
     teaches: [
       "Scholarly visibility systems",
       "Digital scholarly identity",
@@ -103,6 +103,48 @@ export function courseSchema() {
       "Research discoverability",
       "Scholarly communication",
     ],
+    inLanguage: "en-US",
+  };
+}
+
+export function academyCourseSchema(opts: {
+  title:       string;
+  description: string | null;
+  slug:        string;
+  level:       number;
+  durationMinutes: number;
+  lessonCount: number;
+  isFree:      boolean;
+}) {
+  const LEVEL_LABELS = [
+    "Beginner", "Elementary", "Intermediate", "Advanced", "Expert",
+  ];
+  return {
+    "@context": "https://schema.org",
+    "@type":    "Course",
+    name:       opts.title,
+    description: opts.description ?? `Level ${opts.level} course on scholarly visibility — Researchvy Academy`,
+    url:        `${base}/academy/courses/${opts.slug}`,
+    provider: {
+      "@type": "Organization",
+      name:    siteConfig.name,
+      url:     base,
+    },
+    hasCourseInstance: {
+      "@type":        "CourseInstance",
+      courseMode:     ["online", "asynchronous"],
+      courseWorkload: opts.durationMinutes > 0 ? `PT${opts.durationMinutes}M` : undefined,
+      instructor: {
+        "@type": "Organization",
+        name:    siteConfig.name,
+      },
+      offers: opts.isFree
+        ? { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock" }
+        : { "@type": "Offer", availability: "https://schema.org/InStock" },
+    },
+    numberOfCredits: opts.lessonCount,
+    educationalLevel: LEVEL_LABELS[Math.min(opts.level - 1, 4)],
+    teaches:    ["Research visibility", "Scholarly identity", "Academic discoverability"],
     inLanguage: "en-US",
   };
 }

@@ -5,14 +5,14 @@ import { learningPathways } from "@/constants/programs";
 import { buildWhatsAppUrl } from "@/config/site";
 import { HoverCard } from "@/components/ui/HoverCard";
 import { EarlyBirdCountdown } from "@/components/clinics/EarlyBirdCountdown";
+import { digitalVisibilityClinic } from "@/constants/clinics";
+import { levelColor } from "@/constants/academy";
 
 export const metadata = generatePageMetadata({
   title: "Researchvy Academy",
   description: "Five-level professional development pathways covering every dimension of scholarly visibility, from foundational concepts to advanced research intelligence.",
   path: "/academy",
 });
-
-const LEVEL_COLORS = ["#60A5FA", "#A78BFA", "#34D399", "#FCD34D", "#F472B6"];
 
 export default function AcademyPage() {
   return (
@@ -38,12 +38,12 @@ export default function AcademyPage() {
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/clinics"
+              href="/academy/courses"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
               style={{ backgroundColor: "#2563EB" }}
             >
               <GraduationCap className="h-4 w-4" />
-              Start with a Clinic
+              Browse Courses
             </Link>
             <a
               href={buildWhatsAppUrl("Researchvy Academy programmes")}
@@ -65,7 +65,7 @@ export default function AcademyPage() {
           </p>
           <div className="space-y-4">
             {learningPathways.map((pathway, idx) => {
-              const color = LEVEL_COLORS[idx];
+              const color = levelColor(pathway.level);
               return (
                 <HoverCard
                   key={pathway.level}
@@ -170,7 +170,7 @@ export default function AcademyPage() {
             {/* Countdown */}
             <div className="flex items-center gap-2 rounded-xl px-4 py-2.5 mb-5 border text-sm" style={{ backgroundColor: "rgba(15,23,42,0.6)", borderColor: "#1E293B" }}>
               <span style={{ color: "#6B7280" }}>Early bird closes in:</span>
-              <EarlyBirdCountdown deadline="2026-06-20" />
+              <EarlyBirdCountdown deadline={digitalVisibilityClinic.pricing.earlyBirdDeadline} />
             </div>
 
             <div className="flex flex-wrap gap-3">

@@ -1,5 +1,10 @@
 export type { User, UserProfile, UserRole, AuthSession } from "./user";
 export type {
+  Course, CourseModule, Lesson, LessonType, VideoProvider,
+  Enrollment, EnrollmentTier, EnrollmentSource, LessonProgress,
+  LessonListItem, ModuleWithLessons, CourseWithModules, ProgressMap, CourseStats,
+} from "./academy";
+export type {
   Clinic, ClinicRegistration, Certificate, ClinicWithRegistration,
   ClinicStatus, RegistrationStatus,
 } from "./clinic";

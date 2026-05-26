@@ -12,6 +12,15 @@ const schema = z.object({
   message: z.string().min(20),
 });
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 export async function POST(req: Request) {
   try {
     // 3 contact form submissions per IP per hour
@@ -29,6 +38,11 @@ export async function POST(req: Request) {
 
     const { name, email, subject, message } = parsed.data;
 
+    const safeName    = escapeHtml(name);
+    const safeEmail   = escapeHtml(email);
+    const safeSubject = escapeHtml(subject);
+    const safeMessage = escapeHtml(message);
+
     await resend.emails.send({
       from:    "Researchvy Website <info@researchvy.com>",
       to:      ["info@researchvy.com"],
@@ -40,14 +54,14 @@ export async function POST(req: Request) {
           <h2 style="color:#0F172A;margin-bottom:16px">New Contact Message</h2>
           <table style="width:100%;border-collapse:collapse">
             <tr><td style="padding:8px 0;color:#6B7280;width:100px">From</td>
-                <td style="padding:8px 0;color:#0F172A;font-weight:600">${name}</td></tr>
+                <td style="padding:8px 0;color:#0F172A;font-weight:600">${safeName}</td></tr>
             <tr><td style="padding:8px 0;color:#6B7280">Email</td>
-                <td style="padding:8px 0"><a href="mailto:${email}" style="color:#2563EB">${email}</a></td></tr>
+                <td style="padding:8px 0"><a href="mailto:${safeEmail}" style="color:#2563EB">${safeEmail}</a></td></tr>
             <tr><td style="padding:8px 0;color:#6B7280">Subject</td>
-                <td style="padding:8px 0;color:#0F172A">${subject}</td></tr>
+                <td style="padding:8px 0;color:#0F172A">${safeSubject}</td></tr>
           </table>
           <hr style="border:none;border-top:1px solid #E5E7EB;margin:16px 0"/>
-          <p style="color:#374151;line-height:1.7;white-space:pre-wrap">${message}</p>
+          <p style="color:#374151;line-height:1.7;white-space:pre-wrap">${safeMessage}</p>
         </div>
       `,
     });

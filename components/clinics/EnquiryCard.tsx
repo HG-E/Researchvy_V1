@@ -1,18 +1,20 @@
 "use client";
 
-import { MessageCircle, Clock, Monitor, Users, Award } from "lucide-react";
+import Link from "next/link";
+import { MessageCircle, Clock, Monitor, Users, Award, Zap } from "lucide-react";
 import { buildWhatsAppUrl } from "@/config/site";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { EVENTS } from "@/lib/analytics/events";
 
 interface EnquiryCardProps {
-  clinicName: string;
-  duration:   string;
-  format:     string;
-  capacity:   number;
+  clinicName:    string;
+  duration:      string;
+  format:        string;
+  capacity:      number;
+  earlyBirdFrom?: string;
 }
 
-export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryCardProps) {
+export function EnquiryCard({ clinicName, duration, format, capacity, earlyBirdFrom }: EnquiryCardProps) {
   const waUrl = buildWhatsAppUrl(clinicName);
   const { track } = useAnalytics();
 
@@ -26,11 +28,23 @@ export function EnquiryCard({ clinicName, duration, format, capacity }: EnquiryC
           Limited Cohort, ≤{capacity} Researchers
         </p>
         <p className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-          Claim Your Spot
+          Secure Your Place
         </p>
-        <p className="text-xs mt-1.5 leading-relaxed" style={{ color: "#6B7280" }}>
-          Pricing is tailored to your context and shared directly. Reach out, we respond within 24 hours.
-        </p>
+        {earlyBirdFrom && (
+          <div className="flex items-center gap-1.5 mt-2">
+            <Zap className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#FCD34D" }} />
+            <p className="text-xs font-semibold" style={{ color: "#FCD34D" }}>
+              {earlyBirdFrom}
+            </p>
+          </div>
+        )}
+        <Link
+          href="/clinics#pricing"
+          className="inline-block text-xs mt-1 transition-colors hover:text-[#60A5FA]"
+          style={{ color: "#4B5563" }}
+        >
+          View all tiers &amp; pricing →
+        </Link>
       </div>
 
       {/* Stats */}

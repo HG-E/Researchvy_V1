@@ -10,16 +10,18 @@ import {
   BarChart2,
   Inbox,
   Handshake,
+  GraduationCap,
 } from "lucide-react";
 
 const NAV = [
-  { label: "Overview",   href: "/admin",             icon: LayoutDashboard, exact: true  },
-  { label: "Enquiries",     href: "/admin/enquiries",    icon: Inbox,           exact: false },
-  { label: "Partnerships",  href: "/admin/partnerships", icon: Handshake,       exact: false },
-  { label: "Content",       href: "/admin/content",      icon: FileText,        exact: false },
-  { label: "Clinics",       href: "/admin/clinics",      icon: BookOpen,        exact: false },
-  { label: "Users",         href: "/admin/users",        icon: Users,           exact: false },
-  { label: "Analytics",     href: "/admin/analytics",    icon: BarChart2,       exact: false },
+  { label: "Overview",    href: "/admin",               icon: LayoutDashboard, exact: true  },
+  { label: "Enquiries",   href: "/admin/enquiries",      icon: Inbox,           exact: false },
+  { label: "Partnerships",href: "/admin/partnerships",   icon: Handshake,       exact: false },
+  { label: "Content",     href: "/admin/content",        icon: FileText,        exact: false },
+  { label: "Clinics",     href: "/admin/clinics",        icon: BookOpen,        exact: false },
+  { label: "Enrollments", href: "/admin/enrollments",    icon: GraduationCap,   exact: false },
+  { label: "Users",       href: "/admin/users",          icon: Users,           exact: false },
+  { label: "Analytics",   href: "/admin/analytics",      icon: BarChart2,       exact: false },
 ];
 
 export function AdminNav() {

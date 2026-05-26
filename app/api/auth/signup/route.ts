@@ -1,8 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/auth/supabase";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
+    // 5 registrations per hour per IP
+    const { allowed } = checkRateLimit(getRateLimitKey(req, "signup"), 5, 60 * 60 * 1000);
+    if (!allowed) {
+      return NextResponse.json(
+        { error: "Too many registration attempts. Please try again in an hour." },
+        { status: 429 }
+      );
+    }
+
     const { email, password, full_name, institutional_affiliation, redirectTo } = await req.json();
 
     if (!email || !password || !full_name) {
@@ -28,6 +38,12 @@ export async function POST(req: NextRequest) {
         : error.message;
       return NextResponse.json({ error: msg }, { status: 400 });
     }
+
+    // Fire-and-forget welcome email — never block the signup response
+    const firstName = full_name.split(" ")[0] ?? full_name;
+    import("@/lib/email").then(({ sendWelcomeEmail }) =>
+      sendWelcomeEmail({ to: email, firstName }).catch(console.error)
+    ).catch(console.error);
 
     return NextResponse.json({ ok: true });
   } catch (e: unknown) {

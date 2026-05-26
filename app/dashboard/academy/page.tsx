@@ -1,50 +1,21 @@
 import Link from "next/link";
-import { BookOpen, ArrowRight, CheckCircle2, Clock, Star } from "lucide-react";
+import {
+  BookOpen, ArrowRight, PlayCircle, CheckCircle2,
+  GraduationCap, Star, MessageCircle,
+} from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getServerUser } from "@/lib/auth/supabase";
-import { createSupabaseServerClient } from "@/lib/auth/supabase";
-import { AcademyEnrollButton } from "@/components/dashboard/AcademyEnrollButton";
+import { getEnrolledCoursesWithProgress } from "@/lib/academy/courses";
+import { buildWhatsAppUrl } from "@/config/site";
+import { levelColor } from "@/constants/academy";
 
 export const metadata = generatePageMetadata({ title: "Academy", noIndex: true });
-
-const PROGRAMME = {
-  slug:    "research-visibility-academy",
-  name:    "Research Visibility Academy",
-  tagline: "A structured, self-paced programme to build lasting scholarly presence.",
-  href:    "/academy",
-  modules: [
-    "Scholar Identity & Profile Architecture",
-    "Discoverability Systems (ORCID, Google Scholar, Scopus)",
-    "Citation Intelligence & Bibliometrics",
-    "Research Communication for Non-Academic Audiences",
-    "Digital Visibility Strategy & Roadmap",
-    "Long-Term Impact Measurement",
-  ],
-};
-
-async function getEnquiryStatus(userId: string): Promise<"pending" | "contacted" | "enrolled" | null> {
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("academy_enquiries")
-    .select("status")
-    .eq("user_id", userId)
-    .eq("programme_slug", PROGRAMME.slug)
-    .maybeSingle();
-  return (data?.status as "pending" | "contacted" | "enrolled") ?? null;
-}
-
-const STATUS_LABELS: Record<string, string> = {
-  pending:   "Interest Registered, we'll be in touch",
-  contacted: "Contacted, check your inbox",
-  enrolled:  "Enrolled",
-};
 
 export default async function AcademyPage() {
   const user = await getServerUser();
   if (!user) return null;
 
-  const enquiryStatus = await getEnquiryStatus(user.id);
-  const hasRegistered  = enquiryStatus !== null;
+  const entries = await getEnrolledCoursesWithProgress(user.id);
 
   return (
     <div className="max-w-3xl mx-auto space-y-8">
@@ -58,91 +29,170 @@ export default async function AcademyPage() {
           Academy
         </h1>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
-          Structured programmes for building long-term scholarly visibility
+          Your enrolled courses and learning progress
         </p>
       </div>
 
-      {/* Programme card */}
-      <div
-        className="rounded-2xl border overflow-hidden relative"
-        style={{ backgroundColor: "#0F172A", borderColor: hasRegistered ? "#8B5CF6" : "#1E293B" }}
-      >
-        <div className="absolute top-0 left-0 right-0 h-1" style={{ background: "linear-gradient(90deg, #8B5CF6, #2563EB)" }} />
-        <div className="p-8">
-          <div className="flex items-start justify-between gap-4 mb-6">
-            <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-              style={{ backgroundColor: "rgba(139,92,246,0.1)" }}
-            >
-              <BookOpen className="h-7 w-7" style={{ color: "#8B5CF6" }} />
-            </div>
-            {hasRegistered && (
-              <span
-                className="text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5"
-                style={{ backgroundColor: "rgba(34,197,94,0.1)", color: "#22C55E" }}
+      {/* Enrolled courses */}
+      {entries.length > 0 ? (
+        <div className="space-y-4">
+          {entries.map(({ course, stats, nextLesson }) => {
+            const color = levelColor(course.level);
+            const isComplete = stats.percent_complete === 100;
+
+            return (
+              <div
+                key={course.id}
+                className="rounded-2xl border overflow-hidden"
+                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
               >
-                <CheckCircle2 className="h-3.5 w-3.5" />
-                {STATUS_LABELS[enquiryStatus!] ?? "Registered"}
-              </span>
-            )}
+                {/* Color accent bar */}
+                <div className="h-1" style={{ backgroundColor: color }} />
+
+                <div className="p-6">
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span
+                          className="text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full"
+                          style={{ backgroundColor: `${color}18`, color, border: `1px solid ${color}30` }}
+                        >
+                          Level {course.level}
+                        </span>
+                        {isComplete && (
+                          <span
+                            className="text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full flex items-center gap-1"
+                            style={{ backgroundColor: "rgba(16,185,129,0.12)", color: "#10B981" }}
+                          >
+                            <CheckCircle2 className="h-3 w-3" />
+                            Complete
+                          </span>
+                        )}
+                      </div>
+                      <h2 className="text-base font-bold leading-snug" style={{ color: "#F9FAFB" }}>
+                        {course.title}
+                      </h2>
+                      {course.subtitle && (
+                        <p className="text-xs mt-0.5 line-clamp-1" style={{ color: "#6B7280" }}>
+                          {course.subtitle}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Progress stat */}
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-2xl font-bold" style={{ color }}>
+                        {stats.percent_complete}%
+                      </p>
+                      <p className="text-[10px]" style={{ color: "#4B5563" }}>
+                        {stats.completed_lessons}/{stats.total_lessons} lessons
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="h-1.5 rounded-full overflow-hidden mb-4" style={{ backgroundColor: "#1E293B" }}>
+                    <div
+                      className="h-full rounded-full transition-all duration-500"
+                      style={{ width: `${stats.percent_complete}%`, backgroundColor: color }}
+                    />
+                  </div>
+
+                  {/* CTA row */}
+                  <div className="flex items-center gap-3 flex-wrap">
+                    {nextLesson && !isComplete && (
+                      <Link
+                        href={`/academy/courses/${course.slug}/lessons/${nextLesson.id}`}
+                        className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                        style={{ backgroundColor: color }}
+                      >
+                        <PlayCircle className="h-4 w-4" />
+                        {stats.completed_lessons === 0 ? "Start Course" : "Continue Learning"}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    )}
+                    {isComplete && (
+                      <Link
+                        href={`/academy/courses/${course.slug}`}
+                        className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold"
+                        style={{ backgroundColor: "rgba(16,185,129,0.12)", color: "#10B981", border: "1px solid rgba(16,185,129,0.25)" }}
+                      >
+                        <CheckCircle2 className="h-4 w-4" />
+                        View Certificate
+                      </Link>
+                    )}
+                    <Link
+                      href={`/academy/courses/${course.slug}`}
+                      className="text-xs transition-colors"
+                      style={{ color: "#4B5563" }}
+                    >
+                      View curriculum →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        /* Empty state — not enrolled in any course */
+        <div
+          className="rounded-2xl border p-10 text-center"
+          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        >
+          <div
+            className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5"
+            style={{ backgroundColor: "rgba(139,92,246,0.1)" }}
+          >
+            <BookOpen className="h-7 w-7" style={{ color: "#8B5CF6" }} />
           </div>
-
-          <h2 className="text-xl font-bold mb-1" style={{ color: "#F9FAFB" }}>{PROGRAMME.name}</h2>
-          <p className="text-sm mb-6 leading-relaxed" style={{ color: "#6B7280" }}>{PROGRAMME.tagline}</p>
-
-          {/* Module list */}
-          <div className="mb-6">
-            <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#4B5563" }}>
-              Programme Modules
-            </p>
-            <ul className="space-y-2">
-              {PROGRAMME.modules.map((module, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm" style={{ color: "#9CA3AF" }}>
-                  <span
-                    className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-                    style={{ backgroundColor: "rgba(139,92,246,0.12)", color: "#8B5CF6" }}
-                  >
-                    {i + 1}
-                  </span>
-                  {module}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {hasRegistered ? (
-            <div
-              className="rounded-xl border p-5 mb-4"
-              style={{ backgroundColor: "rgba(139,92,246,0.05)", borderColor: "rgba(139,92,246,0.2)" }}
-            >
-              <p className="text-sm leading-relaxed" style={{ color: "#C4B5FD" }}>
-                Your interest has been registered. Our team will reach out to{" "}
-                <strong style={{ color: "#DDD6FE" }}>{user.email}</strong> with programme details,
-                cohort dates, and enrolment information. We typically contact registered members within
-                5–7 business days.
-              </p>
-            </div>
-          ) : (
-            <p className="text-sm mb-6 leading-relaxed" style={{ color: "#4B5563" }}>
-              The academy opens in cohorts. Register your interest and we&apos;ll contact you
-              directly with programme details, pricing, and the next available start date.
-            </p>
-          )}
-
-          <div className="flex items-center gap-3 flex-wrap">
-            {!hasRegistered && <AcademyEnrollButton programmeSlug={PROGRAMME.slug} />}
+          <h2 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>
+            No courses yet
+          </h2>
+          <p className="text-sm mb-6 leading-relaxed max-w-sm mx-auto" style={{ color: "#6B7280" }}>
+            Browse the Academy catalog and enroll in a course to start building your
+            scholarly visibility, step by step.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href={PROGRAMME.href}
-              className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200"
-              style={{ color: "#A78BFA" }}
+              href="/academy/courses"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:opacity-90"
+              style={{ backgroundColor: "#8B5CF6" }}
             >
-              View Programme Details <ArrowRight className="h-4 w-4" />
+              <GraduationCap className="h-4 w-4" />
+              Browse Courses
             </Link>
+            <a
+              href={buildWhatsAppUrl("Researchvy Academy — course enrolment")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
+              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+            >
+              <MessageCircle className="h-4 w-4" />
+              Enroll via WhatsApp
+            </a>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Why the Academy section */}
+      {/* Browse catalog link — always visible when enrolled */}
+      {entries.length > 0 && (
+        <div className="flex items-center justify-between">
+          <p className="text-xs" style={{ color: "#4B5563" }}>
+            {entries.length} course{entries.length !== 1 ? "s" : ""} enrolled
+          </p>
+          <Link
+            href="/academy/courses"
+            className="text-xs font-semibold transition-colors hover:text-white"
+            style={{ color: "#6B7280" }}
+          >
+            Browse all courses →
+          </Link>
+        </div>
+      )}
+
+      {/* Why the Academy */}
       <div
         className="rounded-2xl border p-6"
         style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
@@ -153,7 +203,7 @@ export default async function AcademyPage() {
         </h3>
         <ul className="space-y-3">
           {[
-            "Self-paced with structured weekly milestones, fits around your research schedule",
+            "Self-paced with structured milestones — fits around your research schedule",
             "Built on the Researchvy 7-Step Framework, validated across 100+ researchers",
             "Lifetime access to all materials, templates, and workbooks",
             "Private cohort community with peer accountability",
@@ -167,41 +217,26 @@ export default async function AcademyPage() {
         </ul>
       </div>
 
-      {/* Also see: Clinics teaser */}
+      {/* Clinics teaser */}
       <div
         className="rounded-2xl border p-5 flex flex-col sm:flex-row items-center justify-between gap-4"
         style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
       >
         <div>
-          <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Want faster, guided results?</p>
+          <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+            Want faster, guided results?
+          </p>
           <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
-            The Digital Visibility Clinic gives you live sessions with expert guidance, faster than self-paced.
+            The Digital Visibility Clinic delivers live sessions with expert guidance.
           </p>
         </div>
         <Link
           href="/dashboard/clinics"
-          className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap transition-colors"
+          className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap transition-colors hover:opacity-90"
           style={{ backgroundColor: "#2563EB" }}
         >
           View Clinics <ArrowRight className="h-4 w-4" />
         </Link>
-      </div>
-
-      {/* Coming soon note */}
-      <div>
-        <h2 className="text-sm font-semibold mb-3 flex items-center gap-2" style={{ color: "#9CA3AF" }}>
-          <Clock className="h-4 w-4" />
-          Upcoming programmes
-        </h2>
-        <div
-          className="rounded-2xl border p-5"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-        >
-          <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
-            Specialised tracks for institutional researchers, ECR cohorts, and discipline-specific
-            visibility strategy are in development. Academy members are notified first.
-          </p>
-        </div>
       </div>
 
     </div>

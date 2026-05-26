@@ -5,12 +5,14 @@ import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { format } from "date-fns";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getInsightBySlug, getInsightSlugs, getInsights, getArticleMetaSingle } from "@/lib/cms/mdx";
+import { getServerUser } from "@/lib/auth/supabase";
 import { MdxContent } from "@/components/insights/MdxContent";
 import { ReadingProgressBar } from "@/components/insights/ReadingProgressBar";
 import { TableOfContents, type TocHeading } from "@/components/insights/TableOfContents";
 import { ShareButtons } from "@/components/insights/ShareButtons";
 import { InsightCard } from "@/components/insights/InsightCard";
 import { ArticleViewTracker } from "@/components/insights/ArticleViewTracker";
+import { LeadCaptureWidget } from "@/components/insights/LeadCaptureWidget";
 import { siteConfig } from "@/config/site";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import type { InsightCategory } from "@/types";
@@ -76,9 +78,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const [base, meta] = await Promise.all([
+  const [base, meta, user] = await Promise.all([
     getInsightBySlug(slug),
     getArticleMetaSingle(slug),
+    getServerUser(),
   ]);
 
   if (!base) notFound();
@@ -227,6 +230,13 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             <div className="mt-8">
               <ShareButtons title={insight.title} url={articleUrl} slug={slug} />
             </div>
+
+            {/* Lead capture — shown only to non-logged-in readers */}
+            {!user && (
+              <div className="mt-12">
+                <LeadCaptureWidget articleTitle={insight.title} />
+              </div>
+            )}
           </article>
 
           {/* TOC sidebar — desktop only */}

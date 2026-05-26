@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle, Award, Users, Monitor, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Award, Users, Monitor, Clock, Zap } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { courseSchema, breadcrumbSchema, faqSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/config/site";
@@ -9,6 +9,7 @@ import { SessionAccordion } from "@/components/clinics/SessionAccordion";
 import { EnquiryCard } from "@/components/clinics/EnquiryCard";
 import { CaseStudy } from "@/components/sections/CaseStudy";
 import { ClinicFAQ } from "@/components/clinics/ClinicFAQ";
+import { EarlyBirdCountdown } from "@/components/clinics/EarlyBirdCountdown";
 
 const CLINICS: Record<string, typeof digitalVisibilityClinic> = {
   [digitalVisibilityClinic.slug]: digitalVisibilityClinic,
@@ -119,6 +120,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 duration={clinic.duration}
                 format={clinic.format}
                 capacity={clinic.capacity}
+                earlyBirdFrom="From ₦38,000 / $59 · early bird ends Jun 20"
               />
             </div>
 
@@ -247,29 +249,76 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               <ClinicFAQ items={clinic.faq} />
             </section>
 
-            {/* Pricing note */}
-            <div
-              className="rounded-2xl border p-6"
-              style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.2)" }}
-            >
-              <h3 className="text-sm font-semibold mb-2" style={{ color: "#F9FAFB" }}>
-                About Pricing
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-                Researchvy does not display fixed pricing publicly. Pricing is contextual, based on
-                your institution, cohort size, and whether you are registering as an individual or
-                through an institution. Reach out via{" "}
-                <span style={{ color: "#9CA3AF" }}>WhatsApp</span> or email{" "}
-                <a
-                  href="mailto:info@researchvy.com?subject=Clinic%20Pricing%20Enquiry"
-                  className="transition-colors hover:text-[#60A5FA]"
-                  style={{ color: "#9CA3AF" }}
-                >
-                  info@researchvy.com
-                </a>{" "}
-                and we will respond with a tailored proposal within 24 hours.
+            {/* Pricing summary */}
+            <section>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
+                Investment
               </p>
-            </div>
+              <h2
+                className="text-2xl font-bold mb-6"
+                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              >
+                Pricing
+              </h2>
+              <div
+                className="rounded-2xl border p-6"
+                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              >
+                {/* Early bird strip */}
+                <div
+                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 mb-5 border"
+                  style={{ backgroundColor: "rgba(252,211,77,0.05)", borderColor: "rgba(252,211,77,0.2)" }}
+                >
+                  <Zap className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#FCD34D" }} />
+                  <span className="text-xs font-semibold" style={{ color: "#FCD34D" }}>
+                    Early bird closes in:
+                  </span>
+                  <EarlyBirdCountdown deadline={clinic.pricing.earlyBirdDeadline} />
+                </div>
+
+                {/* Three tiers at a glance */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+                  {clinic.pricing.tiers.map((tier) => {
+                    const ACCENTS: Record<string, string> = { pro: "#8B5CF6", builder: "#2563EB", starter: "#10B981" };
+                    const accent = ACCENTS[tier.id] ?? "#2563EB";
+                    return (
+                      <div
+                        key={tier.id}
+                        className="rounded-xl border p-4"
+                        style={{
+                          backgroundColor: "#080E1A",
+                          borderColor: tier.recommended ? `${accent}50` : "#1E293B",
+                        }}
+                      >
+                        {tier.recommended && (
+                          <span
+                            className="text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full mb-2 inline-block"
+                            style={{ backgroundColor: `${accent}20`, color: accent }}
+                          >
+                            Most popular
+                          </span>
+                        )}
+                        <p className="text-xs font-semibold mb-0.5" style={{ color: accent }}>{tier.name}</p>
+                        <p className="text-lg font-bold" style={{ color: "#F9FAFB" }}>
+                          ₦{tier.ngn.earlyBird.toLocaleString("en-NG")}
+                        </p>
+                        <p className="text-xs" style={{ color: "#4B5563" }}>
+                          ${tier.usd.earlyBird} USD · early bird
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <Link
+                  href="/clinics#pricing"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors hover:text-[#1D4ED8]"
+                  style={{ color: "#2563EB" }}
+                >
+                  See full tier comparison &amp; group pricing <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </section>
 
           </div>
 
@@ -281,6 +330,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 duration={clinic.duration}
                 format={clinic.format}
                 capacity={clinic.capacity}
+                earlyBirdFrom="From ₦38,000 / $59 · early bird ends Jun 20"
               />
             </div>
           </aside>
