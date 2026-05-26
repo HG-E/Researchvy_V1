@@ -90,6 +90,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Inject public env vars at request time so they work even if not baked at build time.
+  // These are public keys — safe to expose to the browser.
+  const runtimeEnv = {
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL ?? "",
+  };
+
   return (
     <html
       lang="en"
@@ -97,6 +105,12 @@ export default function RootLayout({
       className={`${inter.variable} ${lora.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased">
+        {/* Runtime env injection — runs before the JS bundle, overrides baked-in build values */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__ENV__=${JSON.stringify(runtimeEnv)};`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
