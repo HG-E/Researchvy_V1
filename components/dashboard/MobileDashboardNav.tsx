@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  Menu, X, LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers,
-} from "lucide-react";
+import { Menu, X, LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
+import { UserAvatar } from "@/components/common/UserAvatar";
+import type { DashUser } from "@/app/dashboard/layout";
 
 const NAV_ITEMS = [
-  { href: "/dashboard",             label: "Overview",     Icon: LayoutDashboard },
+  { href: "/dashboard",              label: "Overview",     Icon: LayoutDashboard },
   { href: "/dashboard/clinics",      label: "My Clinics",   Icon: GraduationCap },
   { href: "/dashboard/academy",      label: "Academy",      Icon: Layers },
   { href: "/dashboard/resources",    label: "Resources",    Icon: BookOpen },
@@ -17,12 +17,11 @@ const NAV_ITEMS = [
   { href: "/dashboard/profile",      label: "Profile",      Icon: User },
 ];
 
-export function MobileDashboardNav({ userEmail }: { userEmail: string }) {
+export function MobileDashboardNav({ user }: { user: DashUser }) {
   const [open, setOpen] = useState(false);
-  const pathname         = usePathname();
-  const router           = useRouter();
+  const pathname        = usePathname();
+  const router          = useRouter();
 
-  // Lock body scroll when drawer is open — prevents background scroll on iOS + Android
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -35,19 +34,16 @@ export function MobileDashboardNav({ userEmail }: { userEmail: string }) {
     router.refresh();
   }
 
+  const displayName = user.full_name?.split(" ")[0] || user.email.split("@")[0];
+
   return (
     <>
       {/* Top bar */}
       <header
         className="md:hidden flex items-center justify-between px-4 border-b"
-        style={{
-          backgroundColor: "#0A0F1A",
-          borderColor: "#1E293B",
-          height: "56px",
-        }}
+        style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B", height: "56px" }}
       >
         <Logo variant="icon" width={28} linkToHome />
-        {/* 44×44 minimum touch target (iOS HIG) */}
         <button
           onClick={() => setOpen(true)}
           className="flex items-center justify-center w-11 h-11 rounded-xl active:bg-[#1E293B] transition-colors"
@@ -69,25 +65,22 @@ export function MobileDashboardNav({ userEmail }: { userEmail: string }) {
         />
       )}
 
-      {/* Drawer — slides from RIGHT to avoid iOS left-edge swipe-back conflict */}
+      {/* Drawer */}
       <div
         className="fixed top-0 right-0 bottom-0 z-50 w-[80vw] max-w-xs flex flex-col md:hidden"
         style={{
           backgroundColor: "#0A0F1A",
-          borderLeft: "1px solid #1E293B",
-          transform: open ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)",
-          paddingBottom: "env(safe-area-inset-bottom)",
+          borderLeft:      "1px solid #1E293B",
+          transform:       open ? "translateX(0)" : "translateX(100%)",
+          transition:      "transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)",
+          paddingBottom:   "env(safe-area-inset-bottom)",
         }}
         role="dialog"
         aria-modal={open ? true : undefined}
         aria-label="Dashboard navigation"
       >
         {/* Drawer header */}
-        <div
-          className="flex items-center justify-between px-5 h-14 border-b flex-shrink-0"
-          style={{ borderColor: "#1E293B" }}
-        >
+        <div className="flex items-center justify-between px-5 h-14 border-b flex-shrink-0" style={{ borderColor: "#1E293B" }}>
           <Logo variant="full" width={110} linkToHome />
           <button
             onClick={() => setOpen(false)}
@@ -99,14 +92,28 @@ export function MobileDashboardNav({ userEmail }: { userEmail: string }) {
           </button>
         </div>
 
-        {/* Nav items — scroll-contain prevents rubber-band bleed (iOS) */}
-        <nav
-          className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto scroll-contain"
-          aria-label="Dashboard navigation"
+        {/* User identity */}
+        <Link
+          href="/dashboard/profile"
+          onClick={() => setOpen(false)}
+          className="flex items-center gap-3 px-5 py-3.5 border-b transition-colors active:bg-[#1E293B]"
+          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
         >
+          <UserAvatar name={user.full_name} email={user.email} avatarUrl={user.avatar_url} size="sm" />
+          <div className="min-w-0">
+            <p className="text-sm font-semibold truncate" style={{ color: "#F9FAFB" }}>
+              {displayName}
+            </p>
+            <p className="text-xs truncate" style={{ color: "#6B7280" }}>
+              {user.email}
+            </p>
+          </div>
+        </Link>
+
+        {/* Nav items */}
+        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto scroll-contain" aria-label="Dashboard navigation">
           {NAV_ITEMS.map(({ href, label, Icon }) => {
-            const isActive =
-              href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(href);
+            const isActive = href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(href);
             return (
               <Link
                 key={href}
@@ -115,45 +122,22 @@ export function MobileDashboardNav({ userEmail }: { userEmail: string }) {
                 className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-medium transition-colors relative active:opacity-75"
                 style={{
                   backgroundColor: isActive ? "#1E293B" : "transparent",
-                  color: isActive ? "#F9FAFB" : "#6B7280",
-                  minHeight: "48px",
+                  color:           isActive ? "#F9FAFB" : "#6B7280",
+                  minHeight:       "48px",
                 }}
               >
                 {isActive && (
-                  <span
-                    className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full"
-                    style={{ backgroundColor: "#2563EB" }}
-                  />
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full" style={{ backgroundColor: "#2563EB" }} />
                 )}
-                <Icon
-                  className="h-4 w-4 flex-shrink-0"
-                  style={{ color: isActive ? "#60A5FA" : "#4B5563" }}
-                />
+                <Icon className="h-4 w-4 flex-shrink-0" style={{ color: isActive ? "#60A5FA" : "#4B5563" }} />
                 {label}
               </Link>
             );
           })}
         </nav>
 
-        {/* User + sign out */}
-        <div
-          className="px-3 py-4 border-t flex-shrink-0"
-          style={{ borderColor: "#1E293B" }}
-        >
-          <div
-            className="flex items-center gap-3 px-4 py-3 rounded-xl mb-1"
-            style={{ backgroundColor: "#0F172A" }}
-          >
-            <div
-              className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-              style={{ backgroundColor: "#2563EB", color: "#fff" }}
-            >
-              {userEmail.charAt(0).toUpperCase()}
-            </div>
-            <span className="text-xs truncate flex-1" style={{ color: "#6B7280" }}>
-              {userEmail}
-            </span>
-          </div>
+        {/* Sign out */}
+        <div className="px-3 py-4 border-t flex-shrink-0" style={{ borderColor: "#1E293B" }}>
           <button
             onClick={handleSignOut}
             className="flex items-center gap-3 w-full rounded-xl px-4 py-3.5 text-sm font-medium transition-colors active:bg-[#1E293B]"

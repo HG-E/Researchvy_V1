@@ -7,20 +7,21 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { mainNav } from "@/constants/navigation";
+import { UserButton } from "./UserButton";
+import type { HeaderUser } from "./UserButton";
 
 const MobileDrawer = dynamic(
   () => import("./MobileDrawer").then((m) => ({ default: m.MobileDrawer })),
   { ssr: false }
 );
 
-export function Header() {
+export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
   const [mobileOpen, setMobileOpen]       = useState(false);
   const [scrolled, setScrolled]           = useState(false);
   const [ecosystemOpen, setEcosystemOpen] = useState(false);
   const ecosystemRef = useRef<HTMLDivElement>(null);
   const pathname     = usePathname();
 
-  // Check if any ecosystem child is active (highlights the Ecosystem button)
   const ecosystemActive = mainNav
     .find((i) => i.children)
     ?.children?.some((c) => pathname.startsWith(c.href)) ?? false;
@@ -55,11 +56,11 @@ export function Header() {
       <header
         className="sticky top-0 z-50 w-full border-b transition-all duration-300"
         style={{
-          paddingTop:          "env(safe-area-inset-top)",
-          backgroundColor:     scrolled ? "rgba(15, 23, 42, 0.97)" : "#0F172A",
-          borderColor:         "#1E293B",
-          backdropFilter:      scrolled ? "blur(12px)" : "none",
-          WebkitBackdropFilter:scrolled ? "blur(12px)" : "none",
+          paddingTop:           "env(safe-area-inset-top)",
+          backgroundColor:      scrolled ? "rgba(15, 23, 42, 0.97)" : "#0F172A",
+          borderColor:          "#1E293B",
+          backdropFilter:       scrolled ? "blur(12px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
         }}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -88,24 +89,21 @@ export function Header() {
                         aria-hidden="true"
                       />
                     </button>
-                    {/* Active underline indicator */}
                     {isActive && !ecosystemOpen && (
                       <span
                         className="absolute -bottom-[19px] left-0 right-0 h-px"
                         style={{ backgroundColor: "#2563EB" }}
                       />
                     )}
-
-                    {/* CSS-transition dropdown — no framer-motion */}
                     <div
                       className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 rounded-xl border p-2 shadow-2xl"
                       style={{
                         backgroundColor: "#0F172A",
-                        borderColor: "#1E293B",
-                        opacity: ecosystemOpen ? 1 : 0,
-                        transform: `translateX(-50%) translateY(${ecosystemOpen ? "0px" : "8px"}) scale(${ecosystemOpen ? 1 : 0.97})`,
-                        pointerEvents: ecosystemOpen ? "auto" : "none",
-                        transition: "opacity 0.18s ease, transform 0.18s ease",
+                        borderColor:     "#1E293B",
+                        opacity:         ecosystemOpen ? 1 : 0,
+                        transform:       `translateX(-50%) translateY(${ecosystemOpen ? "0px" : "8px"}) scale(${ecosystemOpen ? 1 : 0.97})`,
+                        pointerEvents:   ecosystemOpen ? "auto" : "none",
+                        transition:      "opacity 0.18s ease, transform 0.18s ease",
                       }}
                       role="menu"
                       onMouseLeave={() => setEcosystemOpen(false)}
@@ -158,25 +156,31 @@ export function Header() {
             })}
           </nav>
 
-          {/* Desktop CTAs */}
+          {/* Desktop right-side: UserButton when signed in, else Sign In + CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/signin"
-              className="text-sm font-medium transition-colors hover:text-white"
-              style={{ color: isNavActive("/signin") ? "#F9FAFB" : "#9CA3AF" }}
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/clinics"
-              className="rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
-              style={{ backgroundColor: "#2563EB" }}
-            >
-              Join a Clinic
-            </Link>
+            {serverUser ? (
+              <UserButton user={serverUser} />
+            ) : (
+              <>
+                <Link
+                  href="/signin"
+                  className="text-sm font-medium transition-colors hover:text-white"
+                  style={{ color: isNavActive("/signin") ? "#F9FAFB" : "#9CA3AF" }}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/clinics"
+                  className="rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
+                  style={{ backgroundColor: "#2563EB" }}
+                >
+                  Join a Clinic
+                </Link>
+              </>
+            )}
           </div>
 
-          {/* Mobile toggle — 44px touch target */}
+          {/* Mobile toggle */}
           <button
             className="md:hidden flex items-center justify-center w-11 h-11 rounded-lg -mr-1.5 active:bg-[#1E293B] transition-colors"
             style={{ color: "#9CA3AF" }}
@@ -189,7 +193,7 @@ export function Header() {
         </div>
       </header>
 
-      <MobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)} serverUser={serverUser} />
     </>
   );
 }

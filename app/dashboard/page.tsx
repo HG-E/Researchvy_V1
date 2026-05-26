@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { GraduationCap, Layers, Award, ArrowRight, ChevronRight, CheckCircle2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
-import { getServerUser, createSupabaseServerClient } from "@/lib/auth/supabase";
+import { getServerUser, createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { UserAvatar } from "@/components/common/UserAvatar";
 import { siteConfig } from "@/config/site";
 
 export const metadata = generatePageMetadata({ title: "Dashboard", noIndex: true });
@@ -37,10 +38,18 @@ export default async function DashboardPage() {
   const user = await getServerUser();
   const userId = user?.id;
 
-  const displayName =
-    (user?.user_metadata?.full_name as string | undefined)?.split(" ")[0] ??
-    user?.email?.split("@")[0] ??
-    "Scholar";
+  let profile: { full_name: string; avatar_url: string | null } | null = null;
+  if (userId) {
+    try {
+      const admin = createSupabaseAdminClient();
+      const { data } = await admin.from("users").select("full_name, avatar_url").eq("id", userId).single();
+      profile = data ?? null;
+    } catch { /* non-fatal */ }
+  }
+
+  const fullName    = profile?.full_name || (user?.user_metadata?.full_name as string) || "";
+  const avatarUrl   = profile?.avatar_url ?? null;
+  const displayName = fullName.split(" ")[0] || user?.email?.split("@")[0] || "Scholar";
 
   const meta = user?.user_metadata ?? {};
   const profileDone = !!(meta.full_name && String(meta.full_name).trim());
@@ -79,19 +88,20 @@ export default async function DashboardPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-8">
       {/* Welcome header */}
-      <div className="flex items-start justify-between">
+      <div className="flex items-center gap-4">
+        <UserAvatar name={fullName} email={user?.email} avatarUrl={avatarUrl} size="lg" />
         <div>
           <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
             Your Dashboard
           </p>
           <h1
-            className="text-3xl font-bold"
+            className="text-3xl font-bold leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
           >
             Welcome back, {displayName}
           </h1>
           <p className="text-sm mt-1" style={{ color: "#9CA3AF" }}>
-            Your scholarly visibility command centre
+            {fullName || user?.email} · Your scholarly visibility command centre
           </p>
         </div>
       </div>
