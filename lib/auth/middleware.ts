@@ -48,13 +48,16 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  // Redirect authenticated users away from auth pages
+  // Redirect authenticated users away from auth pages, honouring ?next
   const isAuthPage =
     pathname.startsWith("/signin") || pathname.startsWith("/signup");
 
   if (user && isAuthPage) {
+    const next = request.nextUrl.searchParams.get("next");
+    const dest  = next && next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = "/dashboard";
+    redirectUrl.pathname = dest;
+    redirectUrl.search   = "";
     return NextResponse.redirect(redirectUrl);
   }
 

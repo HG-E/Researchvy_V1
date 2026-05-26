@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { LogOut } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { AdminNav } from "@/components/admin/AdminNav";
+import { AdminSignOutButton } from "@/components/admin/AdminSignOutButton";
+import { AdminMobileNav } from "@/components/admin/AdminMobileNav";
 import { getServerUser } from "@/lib/auth/supabase";
 import { requireRole } from "@/lib/auth/permissions";
 import { redirect } from "next/navigation";
@@ -18,8 +18,11 @@ export default async function AdminLayout({
   if (!allowed) redirect("/dashboard");
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: "#080E1A" }}>
-      {/* Sidebar */}
+    <div className="min-h-screen flex flex-col md:flex-row" style={{ backgroundColor: "#080E1A" }}>
+      {/* Mobile top bar + drawer */}
+      <AdminMobileNav email={user.email ?? ""} />
+
+      {/* Desktop sidebar */}
       <aside
         className="hidden md:flex flex-col w-60 shrink-0 border-r"
         style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}
@@ -36,21 +39,14 @@ export default async function AdminLayout({
         <AdminNav />
 
         {/* Footer: email + sign out */}
-        <div className="px-4 py-3 border-t space-y-2" style={{ borderColor: "#1E293B" }}>
-          <p className="text-[11px] truncate" style={{ color: "#4B5563" }}>{user.email}</p>
-          <Link
-            href="/api/auth/signout"
-            className="flex items-center gap-1.5 text-xs transition-colors"
-            style={{ color: "#6B7280" }}
-          >
-            <LogOut className="h-3.5 w-3.5" />
-            Sign out
-          </Link>
+        <div className="px-4 py-3 border-t space-y-1" style={{ borderColor: "#1E293B" }}>
+          <p className="text-[11px] truncate px-2 py-1" style={{ color: "#4B5563" }}>{user.email}</p>
+          <AdminSignOutButton />
         </div>
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 p-6 lg:p-10" style={{ backgroundColor: "#080E1A" }}>
+      <main className="flex-1 p-4 md:p-6 lg:p-10 min-w-0" style={{ backgroundColor: "#080E1A" }}>
         {children}
       </main>
     </div>

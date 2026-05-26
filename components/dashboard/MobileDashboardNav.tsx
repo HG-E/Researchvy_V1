@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X, LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers } from "lucide-react";
+import { Menu, X, LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers, Shield } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { UserAvatar } from "@/components/common/UserAvatar";
 import type { DashUser } from "@/app/dashboard/layout";
@@ -135,6 +135,22 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
             );
           })}
         </nav>
+
+        {/* Admin Panel link */}
+        {user.role === "admin" && (
+          <div className="px-3 pb-2 flex-shrink-0">
+            <div className="h-px mb-2" style={{ backgroundColor: "#1E293B" }} />
+            <Link
+              href="/admin"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-medium transition-colors active:opacity-75"
+              style={{ color: "#FCA5A5", backgroundColor: "rgba(239,68,68,0.06)", minHeight: "48px" }}
+            >
+              <Shield className="h-4 w-4 flex-shrink-0" />
+              Admin Panel
+            </Link>
+          </div>
+        )}
 
         {/* Sign out */}
         <div className="px-3 py-4 border-t flex-shrink-0" style={{ borderColor: "#1E293B" }}>
