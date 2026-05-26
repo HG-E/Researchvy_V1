@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { supabase } from "@/lib/db/client";
 import { profileSchema, type ProfileInput } from "@/lib/validation/schemas";
 
 const LABEL_STYLE = "block text-xs font-semibold tracking-wide uppercase mb-2";
@@ -43,24 +42,32 @@ export function ProfileForm({
     setServerError("");
     setSaved(false);
 
-    const { error } = await supabase.auth.updateUser({
-      data: {
-        full_name:                 data.full_name,
-        bio:                       data.bio ?? "",
-        orcid:                     data.orcid ?? "",
-        google_scholar:            data.google_scholar ?? "",
-        institutional_affiliation: data.institutional_affiliation ?? "",
-      },
-    });
+    try {
+      const res = await fetch("/api/auth/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          full_name:                 data.full_name,
+          bio:                       data.bio ?? "",
+          orcid:                     data.orcid ?? "",
+          google_scholar:            data.google_scholar ?? "",
+          institutional_affiliation: data.institutional_affiliation ?? "",
+        }),
+      });
 
-    if (error) {
-      setServerError(error.message);
-      return;
+      const json = await res.json();
+      if (!res.ok) {
+        setServerError(json.error ?? "Failed to save profile. Please try again.");
+        return;
+      }
+
+      setSaved(true);
+      router.refresh();
+      setTimeout(() => setSaved(false), 3000);
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Unknown error";
+      setServerError(`Connection failed: ${msg}`);
     }
-
-    setSaved(true);
-    router.refresh();
-    setTimeout(() => setSaved(false), 3000);
   }
 
   return (

@@ -7,7 +7,6 @@ import {
   Menu, X, LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers,
 } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
-import { supabase } from "@/lib/db/client";
 
 const NAV_ITEMS = [
   { href: "/dashboard",             label: "Overview",     Icon: LayoutDashboard },
@@ -30,7 +29,7 @@ export function MobileDashboardNav({ userEmail }: { userEmail: string }) {
   }, [open]);
 
   async function handleSignOut() {
-    await supabase.auth.signOut();
+    await fetch("/api/auth/signout", { method: "POST" });
     setOpen(false);
     router.push("/");
     router.refresh();

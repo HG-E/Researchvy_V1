@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
-import { supabase } from "@/lib/db/client";
 
 const NAV_ITEMS = [
   { href: "/dashboard",               label: "Overview",     Icon: LayoutDashboard },
@@ -20,7 +19,7 @@ export function DashboardSidebar({ userEmail }: { userEmail: string }) {
   const router = useRouter();
 
   async function handleSignOut() {
-    await supabase.auth.signOut();
+    await fetch("/api/auth/signout", { method: "POST" });
     router.push("/");
     router.refresh();
   }
