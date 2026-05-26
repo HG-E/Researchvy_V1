@@ -81,18 +81,26 @@ export function SignUpForm() {
 
   async function onSubmit(data: SignUpInput) {
     setAuthError("");
-    const { error } = await supabase.auth.signUp({
-      email: data.email,
-      password: data.password,
-      options: {
-        data: {
-          full_name: data.full_name,
-          institutional_affiliation: data.institutional_affiliation ?? "",
+    let signUpResult: Awaited<ReturnType<typeof supabase.auth.signUp>>;
+    try {
+      signUpResult = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          data: {
+            full_name: data.full_name,
+            institutional_affiliation: data.institutional_affiliation ?? "",
+          },
+          emailRedirectTo: `${window.location.origin}${nextPath}`,
         },
-        emailRedirectTo: `${window.location.origin}${nextPath}`,
-      },
-    });
+      });
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Unknown error";
+      setAuthError(`Connection failed: ${msg}. Please try again or contact support@researchvy.com`);
+      return;
+    }
 
+    const { error } = signUpResult;
     if (error) {
       setAuthError(
         error.message.includes("already registered")

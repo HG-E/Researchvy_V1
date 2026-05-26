@@ -64,11 +64,21 @@ export function SignInForm() {
 
   async function onSubmit(data: SignInInput) {
     setAuthError("");
-    const { error } = await supabase.auth.signInWithPassword({
-      email: data.email,
-      password: data.password,
-    });
+    let result: Awaited<ReturnType<typeof supabase.auth.signInWithPassword>>;
+    try {
+      result = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Unknown error";
+      setAuthError(`Connection failed: ${msg}. Please try again or contact support@researchvy.com`);
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
+      return;
+    }
 
+    const { error } = result;
     if (error) {
       const msg =
         error.message === "Invalid login credentials"
