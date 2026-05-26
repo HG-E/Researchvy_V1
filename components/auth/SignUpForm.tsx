@@ -8,7 +8,6 @@ import { Eye, EyeOff, Loader2, CheckCircle2 } from "lucide-react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Logo } from "@/components/common/Logo";
-import { supabase } from "@/lib/db/client";
 import { signUpSchema, type SignUpInput } from "@/lib/validation/schemas";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { EVENTS } from "@/lib/analytics/events";
@@ -64,7 +63,6 @@ export function SignUpForm() {
   const [authError, setAuthError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  // Read ?next= param (e.g. /signup?next=/dashboard/clinics)
   const nextPath =
     typeof window !== "undefined"
       ? new URLSearchParams(window.location.search).get("next") ?? "/dashboard"
@@ -81,37 +79,32 @@ export function SignUpForm() {
 
   async function onSubmit(data: SignUpInput) {
     setAuthError("");
-    let signUpResult: Awaited<ReturnType<typeof supabase.auth.signUp>>;
     try {
-      signUpResult = await supabase.auth.signUp({
-        email: data.email,
-        password: data.password,
-        options: {
-          data: {
-            full_name: data.full_name,
-            institutional_affiliation: data.institutional_affiliation ?? "",
-          },
-          emailRedirectTo: `${window.location.origin}${nextPath}`,
-        },
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+          full_name: data.full_name,
+          institutional_affiliation: data.institutional_affiliation ?? "",
+          redirectTo: `${window.location.origin}${nextPath}`,
+        }),
       });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        setAuthError(json.error ?? "Account creation failed. Please try again.");
+        return;
+      }
+
+      track(EVENTS.SIGN_UP_COMPLETED);
+      setSuccess(true);
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Unknown error";
       setAuthError(`Connection failed: ${msg}. Please try again or contact support@researchvy.com`);
-      return;
     }
-
-    const { error } = signUpResult;
-    if (error) {
-      setAuthError(
-        error.message.includes("already registered")
-          ? "An account with this email already exists. Try signing in instead."
-          : error.message
-      );
-      return;
-    }
-
-    track(EVENTS.SIGN_UP_COMPLETED);
-    setSuccess(true);
   }
 
   if (success) {

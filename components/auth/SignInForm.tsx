@@ -8,7 +8,6 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Logo } from "@/components/common/Logo";
-import { supabase } from "@/lib/db/client";
 import { signInSchema, type SignInInput } from "@/lib/validation/schemas";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { EVENTS } from "@/lib/analytics/events";
@@ -64,36 +63,32 @@ export function SignInForm() {
 
   async function onSubmit(data: SignInInput) {
     setAuthError("");
-    let result: Awaited<ReturnType<typeof supabase.auth.signInWithPassword>>;
     try {
-      result = await supabase.auth.signInWithPassword({
-        email: data.email,
-        password: data.password,
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.email, password: data.password }),
       });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        setAuthError(json.error ?? "Sign in failed. Please try again.");
+        setShake(true);
+        setTimeout(() => setShake(false), 500);
+        return;
+      }
+
+      track(EVENTS.SIGN_IN_COMPLETED);
+      const next = searchParams.get("next") ?? "/dashboard";
+      router.push(next);
+      router.refresh();
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Unknown error";
       setAuthError(`Connection failed: ${msg}. Please try again or contact support@researchvy.com`);
       setShake(true);
       setTimeout(() => setShake(false), 500);
-      return;
     }
-
-    const { error } = result;
-    if (error) {
-      const msg =
-        error.message === "Invalid login credentials"
-          ? "Incorrect email or password. Please check and try again."
-          : error.message;
-      setAuthError(msg);
-      setShake(true);
-      setTimeout(() => setShake(false), 500);
-      return;
-    }
-
-    track(EVENTS.SIGN_IN_COMPLETED);
-    const next = searchParams.get("next") ?? "/dashboard";
-    router.push(next);
-    router.refresh();
   }
 
   return (
