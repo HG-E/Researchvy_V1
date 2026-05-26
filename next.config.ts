@@ -15,6 +15,15 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion", "date-fns"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/pricing",
+        destination: "/clinics#pricing",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {
