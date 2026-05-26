@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Quote } from "lucide-react";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
 import { digitalVisibilityClinic } from "@/constants/clinics";
@@ -40,14 +41,54 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 
 export function TestimonialsCarousel() {
   const { testimonials } = digitalVisibilityClinic;
+  const [paused, setPaused] = useState(false);
+
+  // 7 cards, 3 visible at a time.
+  // Cards use no CSS gap — only inner px-2 (8px each side = 16px between adjacent cards).
+  // Track width = 7 × cardWidth exactly, so translateX(-4/7 × 100%) = -57.14% moves
+  // precisely 4 card widths, revealing cards 5–7.
+  // Keyframe-level timing-function overrides let us apply ease-in-out to each slide
+  // while holding clean pauses at both ends (purely with linear overall timing).
 
   return (
     <>
-      {/* Desktop (sm+): static grid — unchanged */}
-      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {testimonials.map((t) => (
-          <TestimonialCard key={t.name} t={t} />
-        ))}
+      <style>{`
+        @keyframes testimonials-slide {
+          0%   { transform: translateX(0);        animation-timing-function: ease-in-out; }
+          12%  { transform: translateX(0);        animation-timing-function: ease-in-out; }
+          50%  { transform: translateX(-57.14%);  animation-timing-function: linear;      }
+          62%  { transform: translateX(-57.14%);  animation-timing-function: ease-in-out; }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
+
+      {/* Desktop (sm+): auto-sliding ping-pong carousel */}
+      <div
+        className="hidden sm:block overflow-hidden"
+        style={{ containerType: "inline-size" } as React.CSSProperties}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div
+          className="flex"
+          style={{
+            animation: "testimonials-slide 20s linear infinite",
+            animationPlayState: paused ? "paused" : "running",
+          }}
+        >
+          {testimonials.map((t) => (
+            <div
+              key={t.name}
+              style={{
+                flexShrink: 0,
+                width: "calc(33.3333cqw)",
+                padding: "0 8px",
+              } as React.CSSProperties}
+            >
+              <TestimonialCard t={t} />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Mobile (< sm): auto-playing swipe carousel */}
