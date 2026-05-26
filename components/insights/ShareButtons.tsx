@@ -3,12 +3,30 @@
 import { useState } from "react";
 import { Link2, Twitter, Linkedin, Check } from "lucide-react";
 
-export function ShareButtons({ title, url }: { title: string; url: string }) {
+export function ShareButtons({
+  title,
+  url,
+  slug,
+}: {
+  title: string;
+  url:   string;
+  slug?: string;
+}) {
   const [copied, setCopied] = useState(false);
+
+  function trackShare() {
+    if (!slug) return;
+    fetch("/api/article-shares", {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify({ slug }),
+    }).catch(() => {});
+  }
 
   function copyLink() {
     navigator.clipboard.writeText(url).then(() => {
       setCopied(true);
+      trackShare();
       setTimeout(() => setCopied(false), 2000);
     });
   }
@@ -17,7 +35,7 @@ export function ShareButtons({ title, url }: { title: string; url: string }) {
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 
   const btnStyle = {
-    base: "flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all duration-150 border",
+    base:    "flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all duration-150 border",
     default: { backgroundColor: "#1E293B", borderColor: "#334155", color: "#9CA3AF" },
   };
 
@@ -42,6 +60,7 @@ export function ShareButtons({ title, url }: { title: string; url: string }) {
         href={twitterUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={trackShare}
         className={btnStyle.base}
         style={btnStyle.default}
       >
@@ -53,6 +72,7 @@ export function ShareButtons({ title, url }: { title: string; url: string }) {
         href={linkedinUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={trackShare}
         className={btnStyle.base}
         style={btnStyle.default}
       >

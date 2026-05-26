@@ -102,6 +102,7 @@ export function UserButton({ user }: { user: HeaderUser }) {
               label="Admin Panel"
               onClose={() => setOpen(false)}
               color="#FCA5A5"
+              prefetch={false}
             />
           </>
         )}
@@ -128,17 +129,20 @@ function MenuItem({
   label,
   color,
   onClose,
+  prefetch,
 }: {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   color?: string;
   onClose: () => void;
+  prefetch?: boolean;
 }) {
   return (
     <Link
       href={href}
       onClick={onClose}
+      prefetch={prefetch}
       className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-[#1E293B]"
       style={{ color: color ?? "#9CA3AF" }}
       role="menuitem"

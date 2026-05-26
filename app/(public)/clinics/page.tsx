@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, Building2 } from "lucide-react";
+import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, Building2, TrendingUp, Award, FileText } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { courseSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import { siteConfig, buildWhatsAppUrl } from "@/config/site";
@@ -9,6 +9,7 @@ import { SessionsCarousel } from "@/components/clinics/SessionsCarousel";
 import { ComingSoonCarousel } from "@/components/clinics/ComingSoonCarousel";
 import { TestimonialsCarousel } from "@/components/clinics/TestimonialsCarousel";
 import { ClinicFAQ } from "@/components/clinics/ClinicFAQ";
+import { EarlyBirdCountdown } from "@/components/clinics/EarlyBirdCountdown";
 
 export const metadata = generatePageMetadata({
   title: "Clinics",
@@ -83,12 +84,23 @@ export default async function ClinicsPage() {
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
             Stop Being Invisible.<br />
-            <span style={{ color: "#10B981" }}>Start Being Found.</span>
+            <span style={{ color: "#10B981" }}>Start Getting Cited.</span>
           </h1>
-          <p className="text-base sm:text-lg leading-relaxed max-w-2xl" style={{ color: "#6B7280" }}>
+          <p className="text-base sm:text-lg leading-relaxed max-w-2xl mb-4" style={{ color: "#6B7280" }}>
             Live, structured clinics that take researchers from overlooked to globally discoverable,
             with a personal strategy, a verified certificate, and results you can measure.
           </p>
+          {/* Nigerian career context */}
+          <div
+            className="rounded-xl border-l-4 px-5 py-4 max-w-2xl"
+            style={{ backgroundColor: "rgba(16,185,129,0.04)", borderLeftColor: "#10B981" }}
+          >
+            <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+              <strong style={{ color: "#F9FAFB" }}>Every promotion cycle evaluates your Scopus profile, h-index, and citation record.</strong>{" "}
+              Most researchers publish without ever optimising how that work is found, attributed, or cited.
+              Nobody taught you the system. This clinic does — in four live sessions, with your actual profile.
+            </p>
+          </div>
         </div>
 
         {/* Next cohort urgency banner */}
@@ -285,33 +297,40 @@ export default async function ClinicsPage() {
         {/* ── PRICING ──────────────────────────────────────────────────── */}
         <div className="mb-20" id="pricing">
 
-          {/* Early bird urgency strip */}
+          {/* Early bird urgency strip with live countdown */}
           <div
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 rounded-xl border px-5 py-4 mb-10"
+            className="rounded-xl border px-5 py-4 mb-10"
             style={{ backgroundColor: "rgba(245,158,11,0.04)", borderColor: "rgba(245,158,11,0.18)" }}
           >
-            <span
-              className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse mt-1 sm:mt-0"
-              style={{ backgroundColor: "#F59E0B" }}
-            />
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-sm flex-1">
-              <span className="font-bold" style={{ color: "#F9FAFB" }}>
-                Early bird pricing ends June 20, 2026
-              </span>
-              <span className="hidden sm:inline" style={{ color: "#4B5563" }}>·</span>
-              <span style={{ color: "#6B7280" }}>
-                Next cohort: July 1 – 28, 2026 · {spotsLeft} spots remaining
-              </span>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6">
+              <span
+                className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse mt-1 sm:mt-0"
+                style={{ backgroundColor: "#F59E0B" }}
+              />
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-sm flex-1">
+                <span className="font-bold" style={{ color: "#F9FAFB" }}>
+                  Early bird pricing ends June 20, 2026
+                </span>
+                <span className="hidden sm:inline" style={{ color: "#4B5563" }}>·</span>
+                <span style={{ color: "#6B7280" }}>
+                  July cohort · {spotsLeft} spots remaining
+                </span>
+              </div>
+              <a
+                href={buildWhatsAppUrl("Digital Visibility Clinic July 2026 early bird enrollment")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0"
+                style={{ color: "#F59E0B" }}
+              >
+                Claim early bird <ArrowRight className="h-3.5 w-3.5" />
+              </a>
             </div>
-            <a
-              href={buildWhatsAppUrl("Digital Visibility Clinic July 2026 early bird enrollment")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0"
-              style={{ color: "#F59E0B" }}
-            >
-              Claim early bird <ArrowRight className="h-3.5 w-3.5" />
-            </a>
+            {/* Live countdown */}
+            <div className="mt-3 pt-3 border-t flex items-center gap-3" style={{ borderColor: "rgba(245,158,11,0.15)" }}>
+              <span className="text-xs" style={{ color: "#6B7280" }}>Early bird closes in:</span>
+              <EarlyBirdCountdown deadline={digitalVisibilityClinic.pricing.earlyBirdDeadline} />
+            </div>
           </div>
 
           {/* Section header */}
@@ -524,6 +543,150 @@ export default async function ClinicsPage() {
           <TestimonialsCarousel />
         </div>
 
+        {/* ── FOR INSTITUTIONS & DEPARTMENTS ──────────────────────────── */}
+        <div className="mb-20" id="institutional">
+          <div className="mb-10">
+            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
+              For Institutions &amp; Research Departments
+            </p>
+            <h2
+              className="text-3xl sm:text-4xl font-bold mb-4"
+              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            >
+              Book Your Department&apos;s Seats
+            </h2>
+            <p className="text-base max-w-2xl leading-relaxed" style={{ color: "#6B7280" }}>
+              HODs, DVCs Research, and department coordinators: we make institutional booking
+              straightforward. One group investment improves your department&apos;s collective
+              research metrics, staff confidence, and institutional visibility profile.
+            </p>
+          </div>
+
+          {/* Trust anchor: delivery partners */}
+          <div
+            className="rounded-2xl border px-6 py-5 mb-8"
+            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          >
+            <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+              Previously delivered in partnership with
+            </p>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+              {[
+                { name: "ASM Nigeria",           sub: "American Society for Microbiology, Nigeria Chapter" },
+                { name: "FUTO EHS Dept",          sub: "Federal University of Technology, Owerri" },
+                { name: "Bingham University",     sub: "Bingham University, Nigeria" },
+                { name: "Olabisi Onabanjo Univ.", sub: "Ogun State, Nigeria" },
+              ].map(({ name, sub }) => (
+                <div key={name}>
+                  <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>{name}</p>
+                  <p className="text-[10px]" style={{ color: "#4B5563" }}>{sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Three reasons */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            {[
+              {
+                icon: TrendingUp,
+                color: "#10B981",
+                title: "Improve Research Rankings",
+                body:  "Higher citation counts and h-index scores directly improve your institution's NUC evaluation, Times Higher Education, and Scopus SIR rankings.",
+              },
+              {
+                icon: Award,
+                color: "#8B5CF6",
+                title: "Staff Development for Accreditation",
+                body:  "Demonstrable CPD investment in research skills development is a recognised criterion in NUC programme accreditation and institutional audit cycles.",
+              },
+              {
+                icon: FileText,
+                color: "#F59E0B",
+                title: "Ready for Finance Approval",
+                body:  "We issue a formal institutional letter within 24 hours — formatted for your finance officer or Head of Department, with full programme details and your institutional quote.",
+              },
+            ].map(({ icon: Icon, color, title, body }) => (
+              <div
+                key={title}
+                className="rounded-2xl border p-6"
+                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+                  style={{ backgroundColor: `${color}18` }}
+                >
+                  <Icon className="h-5 w-5" style={{ color }} />
+                </div>
+                <h3 className="text-sm font-bold mb-2" style={{ color: "#F9FAFB" }}>{title}</h3>
+                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{body}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Group pricing + CTAs */}
+          <div
+            className="rounded-2xl border p-7"
+            style={{ backgroundColor: "rgba(37,99,235,0.04)", borderColor: "rgba(37,99,235,0.2)" }}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              <div>
+                <p className="text-sm font-bold mb-4" style={{ color: "#F9FAFB" }}>Group pricing — per seat</p>
+                <div className="space-y-3">
+                  {[
+                    { range: "5–10 researchers",  saving: "20% off every seat",  example: `Builder: ${formatNGN(65000 * 0.80)} / seat` },
+                    { range: "11–20 researchers", saving: "30% off every seat",  example: `Builder: ${formatNGN(65000 * 0.70)} / seat` },
+                    { range: "20+ / full dept",   saving: "Custom institutional rate", example: "Contact us for a tailored quote" },
+                  ].map(({ range, saving, example }) => (
+                    <div
+                      key={range}
+                      className="flex items-center justify-between gap-4 rounded-xl px-4 py-3 border"
+                      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                    >
+                      <div>
+                        <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{range}</p>
+                        <p className="text-[11px]" style={{ color: "#4B5563" }}>{example}</p>
+                      </div>
+                      <span
+                        className="text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap"
+                        style={{ backgroundColor: "rgba(16,185,129,0.12)", color: "#10B981" }}
+                      >
+                        {saving}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-3">
+                <p className="text-sm font-bold mb-4" style={{ color: "#F9FAFB" }}>Get your department started</p>
+                <a
+                  href={buildWhatsAppUrl("institutional group enrollment for Digital Visibility Clinic — requesting dept quote")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white"
+                  style={{ backgroundColor: "#2563EB" }}
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Request a Department Quote
+                </a>
+                <a
+                  href={buildWhatsAppUrl("institutional letter request for Digital Visibility Clinic")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-semibold border"
+                  style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                >
+                  <FileText className="h-4 w-4" />
+                  Request Institutional Letter
+                </a>
+                <p className="text-[11px] text-center" style={{ color: "#4B5563" }}>
+                  Letter issued within 24 hours · Formatted for HOD or finance office
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
         <div className="mb-20">
           <div className="text-center mb-10">
@@ -540,45 +703,6 @@ export default async function ClinicsPage() {
 
           <div className="max-w-3xl mx-auto">
             <ClinicFAQ items={digitalVisibilityClinic.faq} />
-          </div>
-        </div>
-
-        {/* ── INSTITUTIONAL ENQUIRY ────────────────────────────────────── */}
-        <div
-          className="rounded-2xl border p-8 sm:p-10 mb-20 flex flex-col sm:flex-row items-start sm:items-center gap-6"
-          style={{ backgroundColor: "rgba(37,99,235,0.04)", borderColor: "rgba(37,99,235,0.18)" }}
-        >
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-            style={{ background: "linear-gradient(135deg, rgba(37,99,235,0.25), rgba(37,99,235,0.08))", border: "1px solid rgba(37,99,235,0.3)" }}>
-            <Building2 className="h-5 w-5" style={{ color: "#2563EB" }} />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
-              Attending as a department or research group?
-            </p>
-            <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-              Groups of 5+ receive 20–30% off. We also provide a formal institutional letter for
-              department-funded attendance, ready to present to your finance officer or head of department.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-            <a
-              href={buildWhatsAppUrl("institutional group enrollment for Digital Visibility Clinic")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap"
-              style={{ backgroundColor: "#2563EB" }}
-            >
-              <MessageCircle className="h-4 w-4" />
-              Enquire for Group
-            </a>
-            <Link
-              href="/resources/institutional-letter"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border whitespace-nowrap"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
-            >
-              Get Institutional Letter <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
         </div>
 

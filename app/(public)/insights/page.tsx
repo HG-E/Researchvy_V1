@@ -5,6 +5,8 @@ import { InsightGrid } from "@/components/insights/InsightGrid";
 import { CategoryFilter } from "@/components/insights/CategoryFilter";
 import type { InsightCategory } from "@/types";
 
+export const revalidate = 3600;
+
 export const metadata = generatePageMetadata({
   title: "Insights",
   description: "Institutional articles on scholarly visibility, research intelligence, and academic discoverability from the Researchvy team.",

@@ -104,3 +104,53 @@ export function getInsightSlugs(): string[] {
 }
 
 export { getContentDir };
+
+// ── Supabase article_meta helpers ─────────────────────────────────────────────
+
+export type ArticleMeta = {
+  slug:           string;
+  title:          string | null;
+  excerpt:        string | null;
+  featured_image: string | null;
+  body_md:        string | null;
+  category:       string | null;
+  tags:           string[] | null;
+  reading_time:   number | null;
+  published_at:   string | null;
+  is_published:   boolean;
+  view_count:     number;
+  share_count:    number;
+  updated_at:     string;
+};
+
+/** Fetch article_meta rows for the given slugs. Returns [] on error. */
+export async function getArticleMeta(slugs: string[]): Promise<ArticleMeta[]> {
+  if (slugs.length === 0) return [];
+  try {
+    const { createSupabaseAdminClient } = await import("../auth/supabase");
+    const admin = createSupabaseAdminClient();
+    const { data } = await admin
+      .from("article_meta")
+      .select("slug,title,excerpt,featured_image,body_md,category,tags,reading_time,published_at,is_published,view_count,share_count,updated_at")
+      .in("slug", slugs);
+    return (data ?? []) as ArticleMeta[];
+  } catch {
+    return [];
+  }
+}
+
+/** Fetch a single article_meta row by slug. Returns null on error or not found. */
+export async function getArticleMetaSingle(slug: string): Promise<ArticleMeta | null> {
+  try {
+    const { createSupabaseAdminClient } = await import("../auth/supabase");
+    const admin = createSupabaseAdminClient();
+    const { data } = await admin
+      .from("article_meta")
+      .select("slug,title,excerpt,featured_image,body_md,category,tags,reading_time,published_at,is_published,view_count,share_count,updated_at")
+      .eq("slug", slug)
+      .maybeSingle();
+    return (data as ArticleMeta | null);
+  } catch {
+    return null;
+  }
+}

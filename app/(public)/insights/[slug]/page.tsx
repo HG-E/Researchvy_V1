@@ -4,15 +4,19 @@ import Link from "next/link";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { format } from "date-fns";
 import { generatePageMetadata } from "@/lib/seo/metadata";
-import { getInsightBySlug, getInsightSlugs, getInsights } from "@/lib/cms/mdx";
+import { getInsightBySlug, getInsightSlugs, getInsights, getArticleMetaSingle } from "@/lib/cms/mdx";
 import { MdxContent } from "@/components/insights/MdxContent";
 import { ReadingProgressBar } from "@/components/insights/ReadingProgressBar";
 import { TableOfContents, type TocHeading } from "@/components/insights/TableOfContents";
 import { ShareButtons } from "@/components/insights/ShareButtons";
 import { InsightCard } from "@/components/insights/InsightCard";
+import { ArticleViewTracker } from "@/components/insights/ArticleViewTracker";
 import { siteConfig } from "@/config/site";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import type { InsightCategory } from "@/types";
+
+// Revalidate every hour; admin saves also trigger on-demand revalidation
+export const revalidate = 3600;
 
 const CATEGORY_LABELS: Record<InsightCategory, string> = {
   "scholarly-visibility":     "Scholarly Visibility",
@@ -71,8 +75,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const insight = await getInsightBySlug(slug);
-  if (!insight) notFound();
+
+  const [base, meta] = await Promise.all([
+    getInsightBySlug(slug),
+    getArticleMetaSingle(slug),
+  ]);
+
+  if (!base) notFound();
+  if (meta?.is_published === false) notFound();
+
+  // Merge: Supabase overrides win over MDX defaults
+  const insight = meta
+    ? {
+        ...base,
+        title:          meta.title          ?? base.title,
+        excerpt:        meta.excerpt         ?? base.excerpt,
+        featured_image: meta.featured_image  ?? base.featured_image,
+        category:       (meta.category as InsightCategory) ?? base.category,
+        tags:           meta.tags            ?? base.tags,
+        reading_time:   meta.reading_time    ?? base.reading_time,
+        published_at:   meta.published_at    ?? base.published_at,
+        content:        meta.body_md         ?? base.content,
+      }
+    : base;
 
   const toc         = extractToc(insight.content);
   const colors      = CATEGORY_COLORS[insight.category];
@@ -97,6 +122,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
         ])) }}
       />
       <ReadingProgressBar />
+      <ArticleViewTracker slug={slug} />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
 
@@ -199,7 +225,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
             {/* Share */}
             <div className="mt-8">
-              <ShareButtons title={insight.title} url={articleUrl} />
+              <ShareButtons title={insight.title} url={articleUrl} slug={slug} />
             </div>
           </article>
 

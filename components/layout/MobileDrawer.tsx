@@ -168,7 +168,7 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
                     Profile Settings
                   </Link>
                   {serverUser.role === "admin" && (
-                    <Link href="/admin" onClick={close} className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors active:bg-[#1E293B]" style={{ color: "#FCA5A5" }}>
+                    <Link href="/admin" onClick={close} prefetch={false} className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors active:bg-[#1E293B]" style={{ color: "#FCA5A5" }}>
                       <Shield className="h-4 w-4 flex-shrink-0" />
                       Admin Panel
                     </Link>
