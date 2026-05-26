@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { GraduationCap, Layers, Award, ArrowRight, ChevronRight, CheckCircle2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
-import { getServerUser, createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { getServerUser, createSupabaseServerClient } from "@/lib/auth/supabase";
 import { siteConfig } from "@/config/site";
 
 export const metadata = generatePageMetadata({ title: "Dashboard", noIndex: true });
@@ -49,13 +49,17 @@ export default async function DashboardPage() {
   let academyEnrolled = false;
 
   if (userId) {
-    const admin = createSupabaseAdminClient();
-    const [clinicRes, academyRes] = await Promise.all([
-      admin.from("clinic_enquiries").select("id", { count: "exact", head: true }).eq("user_id", userId),
-      admin.from("academy_enquiries").select("id", { count: "exact", head: true }).eq("user_id", userId),
-    ]);
-    clinicCount = clinicRes.count ?? 0;
-    academyEnrolled = (academyRes.count ?? 0) > 0;
+    try {
+      const db = await createSupabaseServerClient();
+      const [clinicRes, academyRes] = await Promise.all([
+        db.from("clinic_enquiries").select("id", { count: "exact", head: true }).eq("user_id", userId),
+        db.from("academy_enquiries").select("id", { count: "exact", head: true }).eq("user_id", userId),
+      ]);
+      clinicCount = clinicRes.count ?? 0;
+      academyEnrolled = (academyRes.count ?? 0) > 0;
+    } catch {
+      // Non-fatal — counts default to 0
+    }
   }
 
   const STATS = [

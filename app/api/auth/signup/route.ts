@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
           full_name,
           institutional_affiliation: institutional_affiliation ?? "",
         },
-        emailRedirectTo: redirectTo ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/dashboard`,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://researchvy.com"}/auth/callback?next=${encodeURIComponent(redirectTo ?? "/dashboard")}`,
       },
     });
 
