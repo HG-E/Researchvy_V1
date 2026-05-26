@@ -18,6 +18,16 @@ export const isPartner    = (role: UserRole) => hasRole(role, "partner");
 export const isResearcher = (role: UserRole) => hasRole(role, "researcher");
 
 /**
+ * Super admin is designated by SUPER_ADMIN_EMAIL env var.
+ * No DB role change needed — email match grants full platform ownership.
+ * Only the super admin can assign/revoke admin roles.
+ */
+export function isSuperAdmin(email: string | null | undefined): boolean {
+  const sa = process.env.SUPER_ADMIN_EMAIL;
+  return !!sa && !!email && email.toLowerCase() === sa.toLowerCase();
+}
+
+/**
  * Server-side role check — reads the user profile from the DB.
  * Use in Route Handlers or Server Actions that need role enforcement.
  */

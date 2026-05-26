@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   MoreHorizontal, ShieldOff, ShieldCheck, Flag, FlagOff,
-  Trash2, ChevronDown, Loader2,
+  Trash2, ChevronDown, Loader2, CheckCircle2,
 } from "lucide-react";
 
 type UserStatus = {
@@ -23,11 +23,19 @@ const ROLE_OPTIONS = [
 export function UserActionsMenu({
   userId,
   currentRole,
+  targetEmail,
+  targetIsSuper,
+  callerIsSuper,
+  emailConfirmed,
   status,
 }: {
-  userId:      string;
-  currentRole: string;
-  status:      UserStatus;
+  userId:        string;
+  currentRole:   string;
+  targetEmail:   string;
+  targetIsSuper: boolean;
+  callerIsSuper: boolean;
+  emailConfirmed:boolean;
+  status:        UserStatus;
 }) {
   const [open,    setOpen]    = useState(false);
   const [loading, setLoading] = useState<string | null>(null);
@@ -45,6 +53,14 @@ export function UserActionsMenu({
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
+
+  // Don't render actions for self, or for super admin unless caller is also super admin
+  if (status.isSelf) return null;
+  if (targetIsSuper && !callerIsSuper) return (
+    <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ color: "#4B5563", backgroundColor: "rgba(107,114,128,0.08)" }}>
+      Owner
+    </span>
+  );
 
   async function doAction(action: string, extra?: Record<string, unknown>) {
     setLoading(action);
@@ -83,9 +99,14 @@ export function UserActionsMenu({
     }
   }
 
-  if (status.isSelf) return null;
-
   const busy = loading !== null;
+
+  // Which role options are available depends on caller privilege
+  const availableRoles = ROLE_OPTIONS.filter((r) => {
+    if (r.value === currentRole) return false;
+    if (r.value === "admin" && !callerIsSuper) return false;
+    return true;
+  });
 
   return (
     <div ref={ref} className="relative">
@@ -101,64 +122,58 @@ export function UserActionsMenu({
 
       {open && (
         <div
-          className="absolute right-0 z-50 mt-1 w-52 rounded-xl border p-1.5 shadow-2xl"
+          className="absolute right-0 z-50 mt-1 w-56 rounded-xl border p-1.5 shadow-2xl"
           style={{ backgroundColor: "#0F172A", borderColor: "#1E293B", top: "100%" }}
         >
           {/* Suspend / Unsuspend */}
           {status.isSuspended ? (
-            <ActionItem
-              icon={ShieldCheck}
-              label="Unsuspend account"
-              color="#10B981"
-              onClick={() => doAction("unsuspend")}
-            />
+            <ActionItem icon={ShieldCheck} label="Unsuspend account" color="#10B981" onClick={() => doAction("unsuspend")} />
           ) : (
-            <ActionItem
-              icon={ShieldOff}
-              label="Suspend account"
-              color="#F59E0B"
-              onClick={() => doAction("suspend")}
-            />
+            <ActionItem icon={ShieldOff} label="Suspend account" color="#F59E0B" onClick={() => doAction("suspend")} />
           )}
 
           {/* Flag / Unflag */}
           {status.isFlagged ? (
-            <ActionItem
-              icon={FlagOff}
-              label="Remove flag"
-              color="#9CA3AF"
-              onClick={() => doAction("unflag")}
-            />
+            <ActionItem icon={FlagOff} label="Remove flag" color="#9CA3AF" onClick={() => doAction("unflag")} />
           ) : (
+            <ActionItem icon={Flag} label="Flag account" color="#F59E0B" onClick={() => doAction("flag", { reason: "Flagged for review" })} />
+          )}
+
+          {/* Verify email — only shown if unconfirmed */}
+          {!emailConfirmed && (
             <ActionItem
-              icon={Flag}
-              label="Flag account"
-              color="#F59E0B"
-              onClick={() => doAction("flag", { reason: "Flagged for review" })}
+              icon={CheckCircle2}
+              label="Verify email"
+              color="#10B981"
+              onClick={() => doAction("verify")}
             />
           )}
 
           {/* Change role */}
-          <div className="my-1 h-px" style={{ backgroundColor: "#1E293B" }} />
-          <p className="px-3 py-1 text-[10px] font-semibold tracking-widest uppercase" style={{ color: "#4B5563" }}>
-            Change role
-          </p>
-          {ROLE_OPTIONS.filter((r) => r.value !== currentRole).map((r) => (
-            <ActionItem
-              key={r.value}
-              icon={ChevronDown}
-              label={`Set as ${r.label}`}
-              color={r.color}
-              onClick={() => doAction("set_role", { role: r.value })}
-            />
-          ))}
+          {availableRoles.length > 0 && (
+            <>
+              <div className="my-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+              <p className="px-3 py-1 text-[10px] font-semibold tracking-widest uppercase" style={{ color: "#4B5563" }}>
+                Change role
+              </p>
+              {availableRoles.map((r) => (
+                <ActionItem
+                  key={r.value}
+                  icon={ChevronDown}
+                  label={`Set as ${r.label}`}
+                  color={r.color}
+                  onClick={() => doAction("set_role", { role: r.value })}
+                />
+              ))}
+            </>
+          )}
 
           {/* Delete */}
           <div className="my-1 h-px" style={{ backgroundColor: "#1E293B" }} />
           {confirm === "delete" ? (
             <div className="px-3 py-2">
               <p className="text-xs mb-2" style={{ color: "#F87171" }}>
-                This permanently deletes the account. Are you sure?
+                Permanently deletes this account. Irreversible.
               </p>
               <div className="flex gap-2">
                 <button
@@ -178,12 +193,7 @@ export function UserActionsMenu({
               </div>
             </div>
           ) : (
-            <ActionItem
-              icon={Trash2}
-              label="Delete account"
-              color="#F87171"
-              onClick={() => setConfirm("delete")}
-            />
+            <ActionItem icon={Trash2} label="Delete account" color="#F87171" onClick={() => setConfirm("delete")} />
           )}
         </div>
       )}

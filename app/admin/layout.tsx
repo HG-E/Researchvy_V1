@@ -3,8 +3,9 @@ import { AdminNav } from "@/components/admin/AdminNav";
 import { AdminSignOutButton } from "@/components/admin/AdminSignOutButton";
 import { AdminMobileNav } from "@/components/admin/AdminMobileNav";
 import { getServerUser } from "@/lib/auth/supabase";
-import { requireRole } from "@/lib/auth/permissions";
+import { requireRole, isSuperAdmin } from "@/lib/auth/permissions";
 import { redirect } from "next/navigation";
+import { Crown } from "lucide-react";
 
 export default async function AdminLayout({
   children,
@@ -38,9 +39,19 @@ export default async function AdminLayout({
 
         <AdminNav />
 
-        {/* Footer: email + sign out */}
+        {/* Footer: identity + sign out */}
         <div className="px-4 py-3 border-t space-y-1" style={{ borderColor: "#1E293B" }}>
-          <p className="text-[11px] truncate px-2 py-1" style={{ color: "#4B5563" }}>{user.email}</p>
+          <div className="flex items-center gap-1.5 px-2 py-1 min-w-0">
+            {isSuperAdmin(user.email) && (
+              <Crown className="h-3 w-3 flex-shrink-0" style={{ color: "#FCD34D" }} />
+            )}
+            <p className="text-[11px] truncate" style={{ color: isSuperAdmin(user.email) ? "#FCD34D" : "#4B5563" }}>
+              {isSuperAdmin(user.email) ? "Super Admin" : user.email}
+            </p>
+          </div>
+          {isSuperAdmin(user.email) && (
+            <p className="text-[10px] truncate px-2" style={{ color: "#4B5563" }}>{user.email}</p>
+          )}
           <AdminSignOutButton />
         </div>
       </aside>

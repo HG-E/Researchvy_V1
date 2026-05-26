@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
-import { requireRole } from "@/lib/auth/permissions";
+import { requireRole, isSuperAdmin } from "@/lib/auth/permissions";
 
 async function getCallerAdmin() {
   const supabase = await createSupabaseServerClient();
@@ -10,7 +10,7 @@ async function getCallerAdmin() {
   return allowed ? user : null;
 }
 
-// PATCH — suspend | unsuspend | flag | unflag | set_role
+// PATCH — suspend | unsuspend | flag | unflag | set_role | verify
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -18,18 +18,33 @@ export async function PATCH(
   const caller = await getCallerAdmin();
   if (!caller) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
+  const callerIsSuper = isSuperAdmin(caller.email);
   const { id: targetId } = await params;
   const body = await req.json().catch(() => ({}));
   const { action, role, reason } = body as {
-    action: "suspend" | "unsuspend" | "flag" | "unflag" | "set_role";
+    action: "suspend" | "unsuspend" | "flag" | "unflag" | "set_role" | "verify";
     role?:   string;
     reason?: string;
   };
 
   const admin = createSupabaseAdminClient();
 
+  // Fetch target user to enforce super-admin protection
+  const { data: targetData } = await admin.auth.admin.getUserById(targetId);
+  const targetEmail = targetData?.user?.email ?? "";
+  const targetIsSuper = isSuperAdmin(targetEmail);
+
+  // Regular admins cannot touch the super admin account
+  if (targetIsSuper && !callerIsSuper) {
+    return NextResponse.json({ error: "Cannot modify the platform owner account." }, { status: 403 });
+  }
+
+  // Only super admin can assign admin role
+  if (action === "set_role" && role === "admin" && !callerIsSuper) {
+    return NextResponse.json({ error: "Only the platform owner can assign admin roles." }, { status: 403 });
+  }
+
   if (action === "suspend") {
-    // 100 years = effectively permanent until manually lifted
     const { error } = await admin.auth.admin.updateUserById(targetId, {
       ban_duration: "876000h",
     });
@@ -44,8 +59,7 @@ export async function PATCH(
   }
 
   else if (action === "flag") {
-    const { data: existing } = await admin.auth.admin.getUserById(targetId);
-    const prevMeta = existing?.user?.user_metadata ?? {};
+    const prevMeta = targetData?.user?.user_metadata ?? {};
     const { error } = await admin.auth.admin.updateUserById(targetId, {
       user_metadata: {
         ...prevMeta,
@@ -59,9 +73,8 @@ export async function PATCH(
   }
 
   else if (action === "unflag") {
-    const { data: existing } = await admin.auth.admin.getUserById(targetId);
     const { flagged: _f, flagged_reason: _r, flagged_at: _a, flagged_by: _b, ...rest } =
-      existing?.user?.user_metadata ?? {};
+      targetData?.user?.user_metadata ?? {};
     const { error } = await admin.auth.admin.updateUserById(targetId, {
       user_metadata: rest,
     });
@@ -77,6 +90,13 @@ export async function PATCH(
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  else if (action === "verify") {
+    const { error } = await admin.auth.admin.updateUserById(targetId, {
+      email_confirm: true,
+    });
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
   else {
     return NextResponse.json({ error: "Unknown action" }, { status: 400 });
   }
@@ -84,7 +104,7 @@ export async function PATCH(
   return NextResponse.json({ ok: true });
 }
 
-// DELETE — permanently remove user (cascades to public.users via FK)
+// DELETE — permanently remove user
 export async function DELETE(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -94,12 +114,18 @@ export async function DELETE(
 
   const { id: targetId } = await params;
 
-  // Prevent self-deletion
   if (targetId === caller.id) {
-    return NextResponse.json({ error: "You cannot delete your own account" }, { status: 400 });
+    return NextResponse.json({ error: "You cannot delete your own account." }, { status: 400 });
   }
 
   const admin = createSupabaseAdminClient();
+  const { data: targetData } = await admin.auth.admin.getUserById(targetId);
+  const targetEmail = targetData?.user?.email ?? "";
+
+  if (isSuperAdmin(targetEmail) && !isSuperAdmin(caller.email)) {
+    return NextResponse.json({ error: "Cannot delete the platform owner account." }, { status: 403 });
+  }
+
   const { error } = await admin.auth.admin.deleteUser(targetId);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
