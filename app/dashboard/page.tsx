@@ -169,13 +169,11 @@ export default async function DashboardPage() {
             <Link
               key={i}
               href={step.href}
-              className="flex items-center gap-3 rounded-xl p-3.5 border transition-all duration-150"
+              className={`flex items-center gap-3 rounded-xl p-3.5 border transition-all duration-150 ${step.done ? "hover:border-[rgba(16,185,129,0.4)]" : "hover:border-[#2563EB]"}`}
               style={{
                 backgroundColor: step.done ? "rgba(16,185,129,0.05)" : "#1E293B",
                 borderColor: step.done ? "rgba(16,185,129,0.2)" : "#334155",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = step.done ? "rgba(16,185,129,0.4)" : "#2563EB")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = step.done ? "rgba(16,185,129,0.2)" : "#334155")}
             >
               {step.done ? (
                 <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: "#10B981" }} />
@@ -204,10 +202,8 @@ export default async function DashboardPage() {
             <Link
               key={href}
               href={href}
-              className="group flex items-center gap-4 rounded-2xl border p-5 transition-all duration-200"
+              className="group flex items-center gap-4 rounded-2xl border p-5 transition-all duration-200 hover:border-[#2563EB]"
               style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = color)}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#1E293B")}
             >
               <div
                 className="w-2 h-2 rounded-full flex-shrink-0"
