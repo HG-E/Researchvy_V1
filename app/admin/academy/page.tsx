@@ -2,7 +2,7 @@ import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { requireRole } from "@/lib/auth/permissions";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { BookOpen, Users, GraduationCap, Pencil } from "lucide-react";
+import { BookOpen, Users, GraduationCap, Pencil, BarChart2 } from "lucide-react";
 import { NewCourseForm } from "@/components/admin/academy/NewCourseForm";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +11,8 @@ const LEVEL_LABELS: Record<number, string> = {
   1: "Foundations",
   2: "Intermediate",
   3: "Advanced",
+  4: "Expert",
+  5: "Master",
 };
 
 type CourseRow = {
@@ -72,7 +74,7 @@ export default async function AdminAcademyPage() {
         </div>
       )}
 
-      {([1, 2, 3] as const).map(level => {
+      {([1, 2, 3, 4, 5] as const).map(level => {
         const levelCourses = grouped[level];
         if (!levelCourses?.length) return null;
         return (
@@ -123,11 +125,20 @@ export default async function AdminAcademyPage() {
                       </span>
                     </div>
 
-                    <Link href={`/admin/academy/courses/${course.id}`}
-                      className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg flex-shrink-0"
-                      style={{ backgroundColor: "#1E293B", color: "#94A3B8" }}>
-                      <Pencil className="h-3.5 w-3.5" /> Edit
-                    </Link>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      {enrolled > 0 && (
+                        <Link href={`/admin/academy/courses/${course.id}/progress`}
+                          className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg"
+                          style={{ backgroundColor: "rgba(37,99,235,0.1)", color: "#60A5FA" }}>
+                          <BarChart2 className="h-3.5 w-3.5" /> Students
+                        </Link>
+                      )}
+                      <Link href={`/admin/academy/courses/${course.id}`}
+                        className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg"
+                        style={{ backgroundColor: "#1E293B", color: "#94A3B8" }}>
+                        <Pencil className="h-3.5 w-3.5" /> Edit
+                      </Link>
+                    </div>
                   </div>
                 );
               })}

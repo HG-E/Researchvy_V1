@@ -123,6 +123,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
           title={lesson.title}
           lessonId={lesson.id}
           initialSeconds={initialSeconds}
+          onVideoEnd={enrolled ? markComplete : undefined}
         />
       )}
 

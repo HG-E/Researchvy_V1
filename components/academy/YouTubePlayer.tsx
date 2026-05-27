@@ -64,17 +64,20 @@ interface YouTubePlayerProps {
   title:          string;
   lessonId:       string;
   initialSeconds: number;
+  onVideoEnd?:    () => void;
 }
 
-export function YouTubePlayer({ videoId, title, lessonId, initialSeconds }: YouTubePlayerProps) {
+export function YouTubePlayer({ videoId, title, lessonId, initialSeconds, onVideoEnd }: YouTubePlayerProps) {
   const containerRef  = useRef<HTMLDivElement>(null);
   const playerRef     = useRef<YTPlayerInstance | null>(null);
   const intervalRef   = useRef<ReturnType<typeof setInterval> | null>(null);
   // Keep refs in sync without causing re-renders
   const lessonIdRef   = useRef(lessonId);
   const initialSecRef = useRef(initialSeconds);
+  const onVideoEndRef = useRef(onVideoEnd);
   useEffect(() => { lessonIdRef.current   = lessonId;       }, [lessonId]);
   useEffect(() => { initialSecRef.current = initialSeconds; }, [initialSeconds]);
+  useEffect(() => { onVideoEndRef.current = onVideoEnd;     }, [onVideoEnd]);
 
   function stopHeartbeat() {
     if (intervalRef.current) {
@@ -121,11 +124,15 @@ export function YouTubePlayer({ videoId, title, lessonId, initialSeconds }: YouT
           },
           onStateChange: ({ data }) => {
             const PLAYING = window.YT?.PlayerState.PLAYING ?? 1;
+            const ENDED   = window.YT?.PlayerState.ENDED   ?? 0;
             if (data === PLAYING) {
               startHeartbeat();
             } else {
               stopHeartbeat();
               sendProgress(); // flush current position on pause/end
+              if (data === ENDED) {
+                onVideoEndRef.current?.();
+              }
             }
           },
         },
