@@ -1,34 +1,13 @@
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
-import { format } from "date-fns";
-import { GraduationCap, CheckCircle2, XCircle, AlertCircle } from "lucide-react";
+import { GraduationCap, AlertCircle, TrendingUp, Users, Award } from "lucide-react";
 import { EnrollmentForm } from "@/components/admin/EnrollmentForm";
-import { EnrollmentActions } from "@/components/admin/EnrollmentActions";
+import { EnrollmentsTable } from "@/components/admin/EnrollmentsTable";
 import type { Course } from "@/types/academy";
+import type { EnrollmentRow } from "@/components/admin/EnrollmentsTable";
 
+export const dynamic = "force-dynamic";
 export const metadata = generatePageMetadata({ title: "Enrollments — Admin" });
-
-const TIER_COLORS: Record<string, { bg: string; text: string }> = {
-  pro:           { bg: "rgba(139,92,246,0.12)", text: "#A78BFA" },
-  institutional: { bg: "rgba(239,68,68,0.12)",  text: "#FCA5A5" },
-  builder:       { bg: "rgba(245,158,11,0.12)", text: "#FCD34D" },
-  starter:       { bg: "rgba(37,99,235,0.12)",  text: "#60A5FA" },
-  complimentary: { bg: "rgba(16,185,129,0.12)", text: "#34D399" },
-};
-
-type EnrollmentRow = {
-  id:          string;
-  user_id:     string;
-  user_email:  string;
-  user_name:   string;
-  course_id:   string;
-  tier:        string;
-  source:      string;
-  enrolled_at: string;
-  expires_at:  string | null;
-  completed_at: string | null;
-  courses: { id: string; title: string; level: number; slug: string } | null;
-};
 
 async function getEnrollments(): Promise<{ rows: EnrollmentRow[]; error: boolean }> {
   try {
@@ -49,13 +28,19 @@ async function getEnrollments(): Promise<{ rows: EnrollmentRow[]; error: boolean
 
     const [{ data: profiles }, { data: authData }] = await Promise.all([
       admin.from("users").select("id, full_name").in("id", userIds),
-      admin.auth.admin.listUsers({ page: 1, perPage: 1000 }),
+      userIds.length > 0
+        ? admin.auth.admin.listUsers({ page: 1, perPage: 1000 })
+        : Promise.resolve({ data: { users: [] } }),
     ]);
 
     const emailMap: Record<string, string> = {};
-    for (const u of authData?.users ?? []) emailMap[u.id] = u.email ?? "";
+    for (const u of (authData as { users: { id: string; email?: string }[] } | null)?.users ?? []) {
+      emailMap[u.id] = u.email ?? "";
+    }
     const nameMap: Record<string, string> = {};
-    for (const p of profiles ?? []) nameMap[(p as { id: string; full_name: string }).id] = (p as { id: string; full_name: string }).full_name ?? "";
+    for (const p of profiles ?? []) {
+      nameMap[(p as { id: string; full_name: string }).id] = (p as { id: string; full_name: string }).full_name ?? "";
+    }
 
     const rows: EnrollmentRow[] = (enrollments ?? []).map((e: Record<string, unknown>) => ({
       ...(e as Omit<EnrollmentRow, "user_email" | "user_name">),
@@ -90,12 +75,13 @@ export default async function EnrollmentsPage() {
     getAllCoursesForAdmin(),
   ]);
 
-  const active    = rows.filter((r) => !r.expires_at || new Date(r.expires_at) > new Date());
+  const now       = new Date();
+  const active    = rows.filter((r) => !r.expires_at || new Date(r.expires_at) > now);
   const completed = rows.filter((r) => r.completed_at);
-
-  function isActive(r: EnrollmentRow) {
-    return !r.expires_at || new Date(r.expires_at) > new Date();
-  }
+  const thisMonth = rows.filter((r) => {
+    const d = new Date(r.enrolled_at);
+    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+  });
 
   return (
     <div>
@@ -125,14 +111,39 @@ export default async function EnrollmentsPage() {
         >
           <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" style={{ color: "#FCA5A5" }} />
           <p className="text-sm" style={{ color: "#9CA3AF" }}>
-            Could not load enrollments. Check your environment configuration.
+            Could not load enrollments. Ensure <code className="text-xs px-1 rounded" style={{ backgroundColor: "#1E293B", color: "#60A5FA" }}>SUPABASE_SERVICE_ROLE_KEY</code> is set in your environment.
           </p>
+        </div>
+      )}
+
+      {/* KPI strip */}
+      {!error && rows.length > 0 && (
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          {[
+            { icon: Users,     label: "Active Learners",    value: active.length,    color: "#60A5FA" },
+            { icon: Award,     label: "Completions",        value: completed.length, color: "#10B981" },
+            { icon: TrendingUp,label: "Enrolled This Month",value: thisMonth.length, color: "#A78BFA" },
+          ].map(({ icon: Icon, label, value, color }) => (
+            <div
+              key={label}
+              className="rounded-2xl border px-5 py-4"
+              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <Icon className="h-3.5 w-3.5" style={{ color }} />
+                <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
+              </div>
+              <p className="text-2xl font-bold" style={{ color: "#F9FAFB" }}>{value}</p>
+            </div>
+          ))}
         </div>
       )}
 
       {/* Create enrollment form */}
       {!error && coursesForForm.length > 0 && (
-        <EnrollmentForm courses={coursesForForm} onSuccess={() => {}} />
+        <div className="mb-6">
+          <EnrollmentForm courses={coursesForForm} onSuccess={() => {}} />
+        </div>
       )}
 
       {/* Empty state */}
@@ -149,119 +160,9 @@ export default async function EnrollmentsPage() {
         </div>
       )}
 
-      {/* Table */}
+      {/* Filterable table */}
       {!error && rows.length > 0 && (
-        <div
-          className="rounded-2xl border overflow-hidden"
-          style={{ borderColor: "#1E293B" }}
-        >
-          {/* Table head */}
-          <div
-            className="hidden md:grid gap-4 px-5 py-3 text-xs font-semibold tracking-wider uppercase border-b"
-            style={{
-              gridTemplateColumns: "minmax(0,2fr) minmax(0,2fr) auto auto auto auto auto",
-              backgroundColor:     "#0F172A",
-              borderColor:         "#1E293B",
-              color:               "#4B5563",
-            }}
-          >
-            <span>Researcher</span>
-            <span>Course</span>
-            <span>Tier</span>
-            <span>Status</span>
-            <span>Enrolled</span>
-            <span>Expires</span>
-            <span />
-          </div>
-
-          <div style={{ backgroundColor: "#0F172A" }}>
-            {rows.map((row, i) => {
-              const tierStyle  = TIER_COLORS[row.tier] ?? TIER_COLORS.starter;
-              const active     = isActive(row);
-
-              return (
-                <div
-                  key={row.id}
-                  className="grid gap-4 items-center px-5 py-4 border-b last:border-0"
-                  style={{
-                    gridTemplateColumns: "minmax(0,2fr) minmax(0,2fr) auto auto auto auto auto",
-                    borderColor:         "#1E293B",
-                    backgroundColor:     i % 2 === 0 ? "#0F172A" : "#0A1120",
-                    opacity:             active ? 1 : 0.55,
-                  }}
-                >
-                  {/* Researcher */}
-                  <div className="min-w-0">
-                    {row.user_name && (
-                      <p className="text-sm font-medium truncate" style={{ color: "#F9FAFB" }}>
-                        {row.user_name}
-                      </p>
-                    )}
-                    <p className="text-xs truncate" style={{ color: "#6B7280" }}>
-                      {row.user_email || row.user_id}
-                    </p>
-                  </div>
-
-                  {/* Course */}
-                  <div className="min-w-0">
-                    <p className="text-xs truncate" style={{ color: "#D1D5DB" }}>
-                      {row.courses?.title ?? row.course_id}
-                    </p>
-                    {row.courses && (
-                      <p className="text-[10px]" style={{ color: "#4B5563" }}>
-                        Level {row.courses.level}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Tier */}
-                  <span
-                    className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold whitespace-nowrap capitalize"
-                    style={{ backgroundColor: tierStyle.bg, color: tierStyle.text }}
-                  >
-                    {row.tier}
-                  </span>
-
-                  {/* Status */}
-                  <div className="flex items-center justify-center">
-                    {row.completed_at ? (
-                      <span title="Course completed">
-                        <CheckCircle2 className="h-4 w-4" style={{ color: "#10B981" }} />
-                      </span>
-                    ) : active ? (
-                      <span
-                        className="text-[10px] font-bold rounded-full px-2 py-0.5"
-                        style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#60A5FA" }}
-                      >
-                        Active
-                      </span>
-                    ) : (
-                      <span title="Revoked">
-                        <XCircle className="h-4 w-4" style={{ color: "#374151" }} />
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Enrolled at */}
-                  <span className="text-xs whitespace-nowrap" style={{ color: "#6B7280" }}>
-                    {format(new Date(row.enrolled_at), "MMM d, yyyy")}
-                  </span>
-
-                  {/* Expires at */}
-                  <span className="text-xs whitespace-nowrap" style={{ color: "#4B5563" }}>
-                    {row.expires_at
-                      ? format(new Date(row.expires_at), "MMM d, yyyy")
-                      : "—"}
-                  </span>
-
-                  {/* Actions */}
-                  {active && <EnrollmentActions enrollmentId={row.id} />}
-                  {!active && <div />}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <EnrollmentsTable rows={rows} courseOptions={coursesForForm} />
       )}
     </div>
   );

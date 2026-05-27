@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { FileText, BookOpen, Layers, Users, ArrowRight, Clock, BarChart2, Inbox, Handshake } from "lucide-react";
+import { FileText, BookOpen, Layers, Users, ArrowRight, Clock, BarChart2, Inbox, Handshake, GraduationCap, TrendingUp, Award } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getInsights } from "@/lib/cms/mdx";
 import { RESOURCES } from "@/constants/resources";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { format } from "date-fns";
 
+export const dynamic = "force-dynamic";
 export const metadata = generatePageMetadata({ title: "Admin Overview" });
 
 async function getUserCount(): Promise<number> {
@@ -30,29 +31,70 @@ async function getEnquiryCounts() {
     const academyPending  = (academyRes.data  ?? []).filter((r: { status: string }) => r.status === "pending").length;
     const partnerNew      = (partnerRes.data  ?? []).filter((r: { status: string }) => r.status === "new").length;
     return {
-      clinic:   { total: clinicRes.data?.length  ?? 0, pending: clinicPending },
-      academy:  { total: academyRes.data?.length  ?? 0, pending: academyPending },
-      partner:  { total: partnerRes.data?.length  ?? 0, newCount: partnerNew },
+      clinic:  { total: clinicRes.data?.length  ?? 0, pending: clinicPending },
+      academy: { total: academyRes.data?.length ?? 0, pending: academyPending },
+      partner: { total: partnerRes.data?.length ?? 0, newCount: partnerNew },
     };
   } catch {
     return { clinic: { total: 0, pending: 0 }, academy: { total: 0, pending: 0 }, partner: { total: 0, newCount: 0 } };
   }
 }
 
+async function getAcademyStats(): Promise<{
+  totalEnrolled: number;
+  activeEnrolled: number;
+  completions: number;
+  publishedCourses: number;
+}> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const now = new Date().toISOString();
+    const [enrollRes, completedRes, courseRes] = await Promise.all([
+      admin
+        .from("enrollments")
+        .select("id, expires_at")
+        .or(`expires_at.is.null,expires_at.gt.${now}`),
+      admin
+        .from("enrollments")
+        .select("id")
+        .not("completed_at", "is", null),
+      admin
+        .from("courses")
+        .select("id")
+        .eq("is_published", true),
+    ]);
+    return {
+      totalEnrolled:   enrollRes.data?.length   ?? 0,
+      activeEnrolled:  enrollRes.data?.length   ?? 0,
+      completions:     completedRes.data?.length ?? 0,
+      publishedCourses: courseRes.data?.length  ?? 0,
+    };
+  } catch {
+    return { totalEnrolled: 0, activeEnrolled: 0, completions: 0, publishedCourses: 0 };
+  }
+}
+
 export default async function AdminOverviewPage() {
-  const [insights, userCount, enquiries] = await Promise.all([
+  const [insights, userCount, enquiries, academy] = await Promise.all([
     getInsights({ limit: 100 }),
     getUserCount(),
     getEnquiryCounts(),
+    getAcademyStats(),
   ]);
 
   const recent = insights.slice(0, 5);
 
-  const stats = [
-    { label: "Insights Published",  value: insights.length,          icon: FileText, color: "#60A5FA" },
-    { label: "Active Clinics",      value: 1,                         icon: BookOpen, color: "#34D399" },
-    { label: "Resources Available", value: RESOURCES.length,          icon: Layers,   color: "#A78BFA" },
-    { label: "Registered Users",    value: userCount,                 icon: Users,    color: "#F472B6" },
+  const platformStats = [
+    { label: "Insights Published",  value: insights.length,             icon: FileText,      color: "#60A5FA" },
+    { label: "Active Clinics",      value: 1,                            icon: BookOpen,      color: "#34D399" },
+    { label: "Resources Available", value: RESOURCES.length,             icon: Layers,        color: "#A78BFA" },
+    { label: "Registered Users",    value: userCount,                    icon: Users,         color: "#F472B6" },
+  ];
+
+  const academyStats = [
+    { label: "Enrolled Learners",  value: academy.activeEnrolled,  icon: GraduationCap, color: "#60A5FA" },
+    { label: "Course Completions", value: academy.completions,     icon: Award,         color: "#10B981" },
+    { label: "Published Courses",  value: academy.publishedCourses,icon: BookOpen,      color: "#A78BFA" },
   ];
 
   const enquiryCards = [
@@ -88,6 +130,7 @@ export default async function AdminOverviewPage() {
   const quickLinks = [
     { label: "Manage Content",   href: "/admin/content",      desc: "View and manage insights" },
     { label: "Manage Clinics",   href: "/admin/clinics",      desc: "Programme details and sessions" },
+    { label: "Enrollments",      href: "/admin/enrollments",  desc: "Manage course enrollments" },
     { label: "Manage Users",     href: "/admin/users",        desc: "User accounts and roles" },
     { label: "Analytics",        href: "/admin/analytics",    desc: "Traffic and engagement metrics" },
   ];
@@ -110,9 +153,9 @@ export default async function AdminOverviewPage() {
         </p>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-        {stats.map(({ label, value, icon: Icon, color }) => (
+      {/* Platform stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {platformStats.map(({ label, value, icon: Icon, color }) => (
           <div
             key={label}
             className="rounded-2xl border p-5"
@@ -125,6 +168,55 @@ export default async function AdminOverviewPage() {
             <p className="text-3xl font-bold" style={{ color: "#F9FAFB" }}>{value}</p>
           </div>
         ))}
+      </div>
+
+      {/* Academy LMS KPIs */}
+      <div
+        className="rounded-2xl border p-5 mb-8"
+        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <GraduationCap className="h-4 w-4" style={{ color: "#60A5FA" }} />
+            <h2 className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Academy</h2>
+          </div>
+          <Link
+            href="/admin/academy"
+            className="flex items-center gap-1 text-xs transition-colors hover:text-[#93C5FD]"
+            style={{ color: "#2563EB" }}
+          >
+            Manage <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-3 gap-4">
+          {academyStats.map(({ label, value, icon: Icon, color }) => (
+            <div key={label}>
+              <div className="flex items-center gap-1.5 mb-1">
+                <Icon className="h-3.5 w-3.5" style={{ color }} />
+                <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
+              </div>
+              <p className="text-2xl font-bold" style={{ color: "#F9FAFB" }}>{value}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 flex gap-3 flex-wrap">
+          <Link
+            href="/admin/enrollments"
+            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border transition-colors hover:bg-[#1E293B]"
+            style={{ borderColor: "#1E293B", color: "#60A5FA" }}
+          >
+            <TrendingUp className="h-3.5 w-3.5" />
+            View Enrollments
+          </Link>
+          <Link
+            href="/admin/academy"
+            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border transition-colors hover:bg-[#1E293B]"
+            style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+          >
+            <BookOpen className="h-3.5 w-3.5" />
+            Manage Courses
+          </Link>
+        </div>
       </div>
 
       {/* Enquiry Pipeline */}
