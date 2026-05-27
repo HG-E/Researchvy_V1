@@ -1,0 +1,47 @@
+import { NextRequest, NextResponse } from "next/server";
+import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
+
+async function getUser() {
+  const supabase = await createSupabaseServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  return user;
+}
+
+// GET /api/academy/notes?lesson_id=xxx
+export async function GET(req: NextRequest) {
+  const user = await getUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const lesson_id = req.nextUrl.searchParams.get("lesson_id");
+  if (!lesson_id) return NextResponse.json({ error: "lesson_id required" }, { status: 400 });
+
+  const admin = createSupabaseAdminClient();
+  const { data } = await admin
+    .from("lesson_notes")
+    .select("content, updated_at")
+    .eq("user_id", user.id)
+    .eq("lesson_id", lesson_id)
+    .maybeSingle();
+
+  return NextResponse.json({ note: data ?? null });
+}
+
+// PUT /api/academy/notes  { lesson_id, content }
+export async function PUT(req: NextRequest) {
+  const user = await getUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { lesson_id, content } = await req.json() as { lesson_id?: string; content?: string };
+  if (!lesson_id || typeof content !== "string") {
+    return NextResponse.json({ error: "lesson_id and content required" }, { status: 400 });
+  }
+
+  const admin = createSupabaseAdminClient();
+  const { error } = await admin.from("lesson_notes").upsert(
+    { user_id: user.id, lesson_id, content, updated_at: new Date().toISOString() },
+    { onConflict: "user_id,lesson_id" }
+  );
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json({ ok: true });
+}

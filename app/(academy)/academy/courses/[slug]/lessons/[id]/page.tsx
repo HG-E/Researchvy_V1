@@ -6,7 +6,7 @@ import {
   getCourseBySlug, getLessonById, getUserEnrollment,
   getLessonProgress, isEnrollmentActive, getLessonProgressForCourse,
 } from "@/lib/academy/courses";
-import { getServerUser } from "@/lib/auth/supabase";
+import { getServerUser, createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { buildWhatsAppUrl } from "@/config/site";
 import { LessonPlayer } from "@/components/academy/LessonPlayer";
 import { LessonSidebar } from "@/components/academy/LessonSidebar";
@@ -121,12 +121,15 @@ export default async function LessonPage({
   const prevLesson = currentIdx > 0 ? allLessons[currentIdx - 1] : null;
   const nextLesson = currentIdx < allLessons.length - 1 ? allLessons[currentIdx + 1] : null;
 
-  // Load progress
+  // Load progress + lesson note
   const allLessonIds = allLessons.map((l) => l.id);
-  const [lessonProg, progressMap] = await Promise.all([
+  const admin = createSupabaseAdminClient();
+  const [lessonProg, progressMap, noteRow] = await Promise.all([
     user && canAccess ? getLessonProgress(user.id, id) : Promise.resolve(null),
     user && enrolled  ? getLessonProgressForCourse(user.id, allLessonIds) : Promise.resolve({}),
+    user && enrolled  ? admin.from("lesson_notes").select("content").eq("user_id", user.id).eq("lesson_id", id).maybeSingle() : Promise.resolve(null),
   ]);
+  const initialNote = (noteRow as { data?: { content?: string } | null } | null)?.data?.content ?? "";
 
   return (
     <div className="flex min-h-screen" style={{ backgroundColor: "#080E1A" }}>
@@ -148,6 +151,7 @@ export default async function LessonPage({
           initialDone={!!lessonProg?.completed_at}
           initialSeconds={lessonProg?.last_watched_seconds ?? 0}
           enrolled={enrolled}
+          initialNote={initialNote}
         />
       ) : (
         <AccessGate courseSlug={slug} courseName={course.title} />

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CheckCircle, ArrowLeft, ArrowRight, Loader2, PlayCircle } from "lucide-react";
 import { MdxContent } from "@/components/insights/MdxContent";
 import { YouTubePlayer } from "@/components/academy/YouTubePlayer";
+import { LessonNotes } from "@/components/academy/LessonNotes";
 import { posthog } from "@/lib/analytics/posthog";
 import { buildWhatsAppUrl } from "@/config/site";
 import type { Lesson } from "@/types/academy";
@@ -24,6 +25,7 @@ interface LessonPlayerProps {
   initialDone:    boolean;
   initialSeconds: number;
   enrolled:       boolean;
+  initialNote:    string;
 }
 
 function getNonYouTubeEmbedUrl(lesson: Lesson): string | null {
@@ -32,7 +34,7 @@ function getNonYouTubeEmbedUrl(lesson: Lesson): string | null {
   return null;
 }
 
-export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextLesson, initialDone, initialSeconds, enrolled }: LessonPlayerProps) {
+export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextLesson, initialDone, initialSeconds, enrolled, initialNote }: LessonPlayerProps) {
   const router = useRouter();
   const [done, setDone]             = useState(initialDone);
   const [loading, setLoading]       = useState(false);
@@ -228,6 +230,11 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
             <div className="prose-invert mb-10">
               <MdxContent source={lesson.content_md} />
             </div>
+          )}
+
+          {/* Lesson notes — enrolled users only */}
+          {enrolled && (
+            <LessonNotes lessonId={lesson.id} initialNote={initialNote} />
           )}
 
           {/* Lesson navigation */}
