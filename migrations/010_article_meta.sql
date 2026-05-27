@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS article_meta (
 ALTER TABLE article_meta ENABLE ROW LEVEL SECURITY;
 
 -- Public can read (view counts show on public article pages)
+DROP POLICY IF EXISTS "article_meta_public_read" ON article_meta;
 CREATE POLICY "article_meta_public_read" ON article_meta
   FOR SELECT USING (true);
 

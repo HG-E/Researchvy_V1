@@ -142,7 +142,7 @@ export default async function EnrollmentsPage() {
       {/* Create enrollment form */}
       {!error && coursesForForm.length > 0 && (
         <div className="mb-6">
-          <EnrollmentForm courses={coursesForForm} onSuccess={() => {}} />
+          <EnrollmentForm courses={coursesForForm} />
         </div>
       )}
 

@@ -2,9 +2,10 @@ import { generatePageMetadata } from "@/lib/seo/metadata";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { EnquiryStatusSelect } from "@/components/admin/EnquiryStatusSelect";
 import { IssueCertificateButton } from "@/components/admin/IssueCertificateButton";
-import { format } from "date-fns";
-import { GraduationCap, BookOpen, AlertCircle } from "lucide-react";
+import { format, differenceInDays } from "date-fns";
+import { GraduationCap, BookOpen, AlertCircle, ChevronRight, Clock } from "lucide-react";
 
+export const dynamic  = "force-dynamic";
 export const metadata = generatePageMetadata({ title: "Manage Enquiries" });
 
 type EnquiryStatus = "pending" | "contacted" | "enrolled" | "declined";
@@ -18,7 +19,7 @@ interface ClinicEnquiry {
   status:          EnquiryStatus;
   created_at:      string;
   notes:           string | null;
-  preferred_track: "wednesday" | "saturday" | null;
+  preferred_track: "wednesday" | "sunday" | null;
 }
 
 interface AcademyEnquiry {
@@ -32,18 +33,18 @@ interface AcademyEnquiry {
 }
 
 async function getData(): Promise<{
-  clinics:         ClinicEnquiry[];
-  academy:         AcademyEnquiry[];
+  clinics:          ClinicEnquiry[];
+  academy:          AcademyEnquiry[];
   issuedEnquiryIds: Set<string>;
-  error:           boolean;
+  error:            boolean;
 }> {
   try {
     const admin = createSupabaseAdminClient();
 
     const [
-      { data: clinics,  error: e1 },
-      { data: academy,  error: e2 },
-      { data: certs,    error: e3 },
+      { data: clinics, error: e1 },
+      { data: academy, error: e2 },
+      { data: certs },
     ] = await Promise.all([
       admin
         .from("clinic_enquiries")
@@ -66,8 +67,8 @@ async function getData(): Promise<{
     );
 
     return {
-      clinics:  (clinics ?? []) as ClinicEnquiry[],
-      academy:  (academy ?? []) as AcademyEnquiry[],
+      clinics:  (clinics  ?? []) as ClinicEnquiry[],
+      academy:  (academy  ?? []) as AcademyEnquiry[],
       issuedEnquiryIds,
       error:    false,
     };
@@ -76,12 +77,26 @@ async function getData(): Promise<{
   }
 }
 
-const STATUS_DOT: Record<EnquiryStatus, string> = {
+const STATUS_COLOR: Record<EnquiryStatus, string> = {
   pending:   "#F59E0B",
   contacted: "#2563EB",
   enrolled:  "#10B981",
   declined:  "#6B7280",
 };
+
+const PIPELINE = [
+  { key: "pending"   as EnquiryStatus, label: "Pending",   color: "#F59E0B" },
+  { key: "contacted" as EnquiryStatus, label: "Contacted", color: "#2563EB" },
+  { key: "enrolled"  as EnquiryStatus, label: "Enrolled",  color: "#10B981" },
+  { key: "declined"  as EnquiryStatus, label: "Declined",  color: "#6B7280" },
+];
+
+function stageCounts(items: { status: string }[]): Record<EnquiryStatus, number> {
+  return PIPELINE.reduce((acc, s) => {
+    acc[s.key] = items.filter((r) => r.status === s.key).length;
+    return acc;
+  }, {} as Record<EnquiryStatus, number>);
+}
 
 export default async function EnquiriesPage() {
   const { clinics, academy, issuedEnquiryIds, error } = await getData();
@@ -89,9 +104,13 @@ export default async function EnquiriesPage() {
   const clinicPending  = clinics.filter((c) => c.status === "pending").length;
   const academyPending = academy.filter((a) => a.status === "pending").length;
   const totalPending   = clinicPending + academyPending;
+  const clinicCounts   = stageCounts(clinics);
+  const academyCounts  = stageCounts(academy);
+  const now            = new Date();
 
   return (
     <div>
+      {/* Header */}
       <div className="mb-8">
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
           Admin › Enquiries
@@ -110,7 +129,7 @@ export default async function EnquiriesPage() {
           )}
         </div>
         <p className="mt-1 text-sm" style={{ color: "#6B7280" }}>
-          {clinics.length + academy.length} total registrations. Update status inline · Issue certificates for enrolled participants.
+          {clinics.length + academy.length} total registrations · update status inline · issue certificates for enrolled participants
         </p>
       </div>
 
@@ -129,9 +148,9 @@ export default async function EnquiriesPage() {
       {!error && (
         <div className="space-y-10">
 
-          {/* Clinic enquiries */}
+          {/* ── Clinic Enquiries ── */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3">
               <GraduationCap className="h-4 w-4" style={{ color: "#2563EB" }} />
               <h2 className="text-sm font-semibold" style={{ color: "#9CA3AF" }}>
                 Clinic Interest ({clinics.length})
@@ -146,6 +165,36 @@ export default async function EnquiriesPage() {
               )}
             </div>
 
+            {/* Pipeline funnel */}
+            {clinics.length > 0 && (
+              <div className="flex items-center gap-1 mb-4 flex-wrap">
+                {PIPELINE.map((stage, i) => (
+                  <div key={stage.key} className="flex items-center gap-1">
+                    <div
+                      className="flex items-center gap-1.5 rounded-lg px-3 py-1.5"
+                      style={{ backgroundColor: `${stage.color}14` }}
+                    >
+                      <span
+                        className="text-base font-bold tabular-nums leading-none"
+                        style={{ color: stage.color }}
+                      >
+                        {clinicCounts[stage.key]}
+                      </span>
+                      <span className="text-[11px] font-medium" style={{ color: stage.color }}>
+                        {stage.label}
+                      </span>
+                    </div>
+                    {i < 2 && (
+                      <ChevronRight className="h-3 w-3 flex-shrink-0" style={{ color: "#1E3A5F" }} />
+                    )}
+                    {i === 2 && (
+                      <span className="text-xs mx-0.5" style={{ color: "#1E3A5F" }}>·</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
             {clinics.length === 0 ? (
               <div
                 className="rounded-2xl border p-10 text-center"
@@ -158,7 +207,7 @@ export default async function EnquiriesPage() {
                 <div
                   className="grid gap-4 px-6 py-3 text-xs font-semibold tracking-wider uppercase border-b"
                   style={{
-                    gridTemplateColumns: "1fr auto auto auto",
+                    gridTemplateColumns: "1fr 160px 160px 100px",
                     backgroundColor: "#0F172A",
                     borderColor: "#1E293B",
                     color: "#4B5563",
@@ -170,73 +219,88 @@ export default async function EnquiriesPage() {
                   <span>Date</span>
                 </div>
                 <div style={{ backgroundColor: "#0F172A" }}>
-                  {clinics.map((row, i) => (
-                    <div
-                      key={row.id}
-                      className="grid gap-4 items-start px-6 py-4 border-b last:border-0"
-                      style={{
-                        gridTemplateColumns: "1fr auto auto auto",
-                        borderColor: "#1E293B",
-                        backgroundColor: i % 2 === 0 ? "#0F172A" : "#0A1120",
-                      }}
-                    >
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className="w-2 h-2 rounded-full shrink-0"
-                            style={{ backgroundColor: STATUS_DOT[row.status] }}
-                          />
+                  {clinics.map((row, i) => {
+                    const daysPending = row.status === "pending"
+                      ? differenceInDays(now, new Date(row.created_at))
+                      : 0;
+                    return (
+                      <div
+                        key={row.id}
+                        className="grid gap-4 items-start px-6 py-4 border-b last:border-b-0"
+                        style={{
+                          gridTemplateColumns: "1fr 160px 160px 100px",
+                          borderBottomColor:   "#1E293B",
+                          borderLeftWidth:     "3px",
+                          borderLeftStyle:     "solid",
+                          borderLeftColor:     STATUS_COLOR[row.status],
+                          backgroundColor:     i % 2 === 0 ? "#0F172A" : "#0A1120",
+                        }}
+                      >
+                        <div className="min-w-0">
                           <p className="text-sm font-medium truncate" style={{ color: "#F9FAFB" }}>
-                            {row.email}
+                            {row.full_name || row.email}
                           </p>
+                          {row.full_name && (
+                            <p className="text-xs mt-0.5 truncate" style={{ color: "#4B5563" }}>
+                              {row.email}
+                            </p>
+                          )}
+                          {row.preferred_track && (
+                            <span
+                              className="inline-flex items-center mt-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                              style={{
+                                backgroundColor: row.preferred_track === "wednesday"
+                                  ? "rgba(37,99,235,0.12)"
+                                  : "rgba(139,92,246,0.12)",
+                                color: row.preferred_track === "wednesday" ? "#60A5FA" : "#A78BFA",
+                              }}
+                            >
+                              {row.preferred_track === "wednesday" ? "Wed track" : "Sun track"}
+                            </span>
+                          )}
+                          {daysPending >= 2 && (
+                            <span
+                              className="flex items-center gap-1 mt-1 text-[10px]"
+                              style={{ color: daysPending > 5 ? "#F87171" : "#F59E0B" }}
+                            >
+                              <Clock className="h-2.5 w-2.5" />
+                              {daysPending}d waiting
+                            </span>
+                          )}
+                          {row.status === "enrolled" && (
+                            <div className="mt-2">
+                              <IssueCertificateButton
+                                enquiryId={row.id}
+                                recipientName={row.full_name || row.email}
+                                recipientEmail={row.email}
+                                userId={row.user_id ?? undefined}
+                                clinicSlug={row.clinic_slug}
+                                alreadyIssued={issuedEnquiryIds.has(row.id)}
+                              />
+                            </div>
+                          )}
                         </div>
-                        {row.full_name && (
-                          <p className="text-xs mt-0.5 pl-4" style={{ color: "#4B5563" }}>
-                            {row.full_name}
-                          </p>
-                        )}
-                        {row.preferred_track && (
-                          <span
-                            className="inline-flex items-center mt-1 ml-4 text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                            style={{
-                              backgroundColor: row.preferred_track === "wednesday" ? "rgba(37,99,235,0.12)" : "rgba(139,92,246,0.12)",
-                              color:           row.preferred_track === "wednesday" ? "#60A5FA"               : "#A78BFA",
-                            }}
-                          >
-                            {row.preferred_track === "wednesday" ? "Wed track" : "Sat track"}
-                          </span>
-                        )}
-                        {/* Issue certificate button — only for enrolled */}
-                        {row.status === "enrolled" && (
-                          <div className="mt-2 pl-4">
-                            <IssueCertificateButton
-                              enquiryId={row.id}
-                              recipientName={row.full_name || row.email}
-                              recipientEmail={row.email}
-                              userId={row.user_id ?? undefined}
-                              clinicSlug={row.clinic_slug}
-                              alreadyIssued={issuedEnquiryIds.has(row.id)}
-                            />
-                          </div>
-                        )}
+
+                        <span className="hidden md:block text-xs truncate max-w-[140px]" style={{ color: "#6B7280" }}>
+                          {row.clinic_slug}
+                        </span>
+
+                        <EnquiryStatusSelect id={row.id} table="clinic_enquiries" current={row.status} />
+
+                        <span className="text-xs whitespace-nowrap" style={{ color: "#6B7280" }}>
+                          {format(new Date(row.created_at), "MMM d, yyyy")}
+                        </span>
                       </div>
-                      <span className="hidden md:block text-xs truncate max-w-[140px]" style={{ color: "#6B7280" }}>
-                        {row.clinic_slug}
-                      </span>
-                      <EnquiryStatusSelect id={row.id} table="clinic_enquiries" current={row.status} />
-                      <span className="text-xs whitespace-nowrap" style={{ color: "#6B7280" }}>
-                        {format(new Date(row.created_at), "MMM d, yyyy")}
-                      </span>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
           </div>
 
-          {/* Academy enquiries */}
+          {/* ── Academy Enquiries ── */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3">
               <BookOpen className="h-4 w-4" style={{ color: "#8B5CF6" }} />
               <h2 className="text-sm font-semibold" style={{ color: "#9CA3AF" }}>
                 Academy Interest ({academy.length})
@@ -251,6 +315,36 @@ export default async function EnquiriesPage() {
               )}
             </div>
 
+            {/* Pipeline funnel */}
+            {academy.length > 0 && (
+              <div className="flex items-center gap-1 mb-4 flex-wrap">
+                {PIPELINE.map((stage, i) => (
+                  <div key={stage.key} className="flex items-center gap-1">
+                    <div
+                      className="flex items-center gap-1.5 rounded-lg px-3 py-1.5"
+                      style={{ backgroundColor: `${stage.color}14` }}
+                    >
+                      <span
+                        className="text-base font-bold tabular-nums leading-none"
+                        style={{ color: stage.color }}
+                      >
+                        {academyCounts[stage.key]}
+                      </span>
+                      <span className="text-[11px] font-medium" style={{ color: stage.color }}>
+                        {stage.label}
+                      </span>
+                    </div>
+                    {i < 2 && (
+                      <ChevronRight className="h-3 w-3 flex-shrink-0" style={{ color: "#1E3A5F" }} />
+                    )}
+                    {i === 2 && (
+                      <span className="text-xs mx-0.5" style={{ color: "#1E3A5F" }}>·</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+
             {academy.length === 0 ? (
               <div
                 className="rounded-2xl border p-10 text-center"
@@ -263,7 +357,7 @@ export default async function EnquiriesPage() {
                 <div
                   className="grid gap-4 px-6 py-3 text-xs font-semibold tracking-wider uppercase border-b"
                   style={{
-                    gridTemplateColumns: "1fr auto auto auto",
+                    gridTemplateColumns: "1fr 160px 160px 100px",
                     backgroundColor: "#0F172A",
                     borderColor: "#1E293B",
                     color: "#4B5563",
@@ -275,41 +369,55 @@ export default async function EnquiriesPage() {
                   <span>Date</span>
                 </div>
                 <div style={{ backgroundColor: "#0F172A" }}>
-                  {academy.map((row, i) => (
-                    <div
-                      key={row.id}
-                      className="grid gap-4 items-center px-6 py-4 border-b last:border-0"
-                      style={{
-                        gridTemplateColumns: "1fr auto auto auto",
-                        borderColor: "#1E293B",
-                        backgroundColor: i % 2 === 0 ? "#0F172A" : "#0A1120",
-                      }}
-                    >
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className="w-2 h-2 rounded-full shrink-0"
-                            style={{ backgroundColor: STATUS_DOT[row.status] }}
-                          />
+                  {academy.map((row, i) => {
+                    const daysPending = row.status === "pending"
+                      ? differenceInDays(now, new Date(row.created_at))
+                      : 0;
+                    return (
+                      <div
+                        key={row.id}
+                        className="grid gap-4 items-center px-6 py-4 border-b last:border-b-0"
+                        style={{
+                          gridTemplateColumns: "1fr 160px 160px 100px",
+                          borderBottomColor:   "#1E293B",
+                          borderLeftWidth:     "3px",
+                          borderLeftStyle:     "solid",
+                          borderLeftColor:     STATUS_COLOR[row.status],
+                          backgroundColor:     i % 2 === 0 ? "#0F172A" : "#0A1120",
+                        }}
+                      >
+                        <div className="min-w-0">
                           <p className="text-sm font-medium truncate" style={{ color: "#F9FAFB" }}>
-                            {row.email}
+                            {row.full_name || row.email}
                           </p>
+                          {row.full_name && (
+                            <p className="text-xs mt-0.5 truncate" style={{ color: "#4B5563" }}>
+                              {row.email}
+                            </p>
+                          )}
+                          {daysPending >= 2 && (
+                            <span
+                              className="flex items-center gap-1 mt-1 text-[10px]"
+                              style={{ color: daysPending > 5 ? "#F87171" : "#F59E0B" }}
+                            >
+                              <Clock className="h-2.5 w-2.5" />
+                              {daysPending}d waiting
+                            </span>
+                          )}
                         </div>
-                        {row.full_name && (
-                          <p className="text-xs mt-0.5 pl-4" style={{ color: "#4B5563" }}>
-                            {row.full_name}
-                          </p>
-                        )}
+
+                        <span className="hidden md:block text-xs truncate max-w-[140px]" style={{ color: "#6B7280" }}>
+                          {row.programme_slug}
+                        </span>
+
+                        <EnquiryStatusSelect id={row.id} table="academy_enquiries" current={row.status} />
+
+                        <span className="text-xs whitespace-nowrap" style={{ color: "#6B7280" }}>
+                          {format(new Date(row.created_at), "MMM d, yyyy")}
+                        </span>
                       </div>
-                      <span className="hidden md:block text-xs truncate max-w-[140px]" style={{ color: "#6B7280" }}>
-                        {row.programme_slug}
-                      </span>
-                      <EnquiryStatusSelect id={row.id} table="academy_enquiries" current={row.status} />
-                      <span className="text-xs whitespace-nowrap" style={{ color: "#6B7280" }}>
-                        {format(new Date(row.created_at), "MMM d, yyyy")}
-                      </span>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}

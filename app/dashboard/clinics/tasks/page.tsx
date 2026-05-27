@@ -48,14 +48,12 @@ async function getPageData(userId: string) {
   return { enquiry, rawTasks, unlocks, progress };
 }
 
-// Session titles matching constants/clinics.ts
+// Session titles — must match constants/clinics.ts sessions array
 const SESSION_TITLES: Record<number, string> = {
-  1: "Visibility Foundations",
-  2: "Digital Identity Systems",
-  3: "Discoverability Optimisation",
-  4: "Citation Intelligence",
-  5: "Research Communication",
-  6: "Strategic Positioning & Impact",
+  1: "Visibility Foundations & Digital Identity",
+  2: "Discoverability & Citation Intelligence",
+  3: "Research Communication & Public Engagement",
+  4: "Strategic Positioning & Your 12-Month Visibility Plan",
 };
 
 export default async function TasksPage() {

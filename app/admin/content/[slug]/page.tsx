@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+
+export const dynamic = "force-dynamic";
 import { getInsightBySlug, getArticleMetaSingle } from "@/lib/cms/mdx";
 import { ArticleEditor } from "@/components/admin/ArticleEditor";
 import type { ArticleEditorDefaults, ArticleEditorSaved } from "@/components/admin/ArticleEditor";

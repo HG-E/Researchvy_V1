@@ -118,7 +118,7 @@ export function UsersTable({ users, currentUserId, callerIsSuper }: Props) {
           <div
             className="grid gap-4 px-5 py-3 text-xs font-semibold tracking-wider uppercase border-b"
             style={{
-              gridTemplateColumns: "1fr auto auto auto auto auto auto",
+              gridTemplateColumns: "1fr 110px 50px 90px 100px 90px 40px",
               backgroundColor:     "#0F172A",
               borderColor:         "#1E293B",
               color:               "#4B5563",
@@ -144,7 +144,7 @@ export function UsersTable({ users, currentUserId, callerIsSuper }: Props) {
                   key={user.id}
                   className="grid gap-4 items-center px-5 py-3.5 border-b last:border-0"
                   style={{
-                    gridTemplateColumns: "1fr auto auto auto auto auto auto",
+                    gridTemplateColumns: "1fr 110px 50px 90px 100px 90px 40px",
                     borderColor:         "#1E293B",
                     backgroundColor:     i % 2 === 0 ? "#0F172A" : "#0A1120",
                     opacity:             suspended ? 0.65 : 1,

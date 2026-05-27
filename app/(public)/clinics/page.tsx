@@ -11,6 +11,8 @@ import { TestimonialsCarousel } from "@/components/clinics/TestimonialsCarousel"
 import { ClinicFAQ } from "@/components/clinics/ClinicFAQ";
 import { EarlyBirdCountdown } from "@/components/clinics/EarlyBirdCountdown";
 
+export const revalidate = 300; // Revalidate every 5 min so spot counts stay fresh
+
 export const metadata = generatePageMetadata({
   title: "Clinics",
   description: "Practical scholarly visibility transformation clinics. Join the Digital Visibility Clinic and develop the skills, systems, and strategy for global research impact.",

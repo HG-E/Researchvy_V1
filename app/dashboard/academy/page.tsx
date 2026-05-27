@@ -113,7 +113,7 @@ export default async function AcademyPage() {
                     )}
                     {isComplete && (
                       <Link
-                        href={`/academy/courses/${course.slug}`}
+                        href={`/academy/courses/${course.slug}/complete`}
                         className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold"
                         style={{ backgroundColor: "rgba(16,185,129,0.12)", color: "#10B981", border: "1px solid rgba(16,185,129,0.25)" }}
                       >

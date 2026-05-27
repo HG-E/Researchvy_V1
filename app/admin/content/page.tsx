@@ -5,6 +5,7 @@ import { getInsights, getArticleMeta } from "@/lib/cms/mdx";
 import { format } from "date-fns";
 import type { InsightCategory } from "@/types";
 
+export const dynamic  = "force-dynamic";
 export const metadata = generatePageMetadata({ title: "Manage Content" });
 
 const CATEGORY_COLORS: Record<InsightCategory, { bg: string; text: string }> = {
@@ -47,7 +48,7 @@ export default async function ManageContentPage() {
         <div
           className="grid gap-4 px-6 py-3 text-xs font-semibold tracking-wider uppercase border-b"
           style={{
-            gridTemplateColumns: "1fr auto auto auto auto",
+            gridTemplateColumns: "1fr 170px 80px 100px 60px",
             backgroundColor:     "#0F172A",
             borderColor:         "#1E293B",
             color:               "#4B5563",
@@ -80,7 +81,7 @@ export default async function ManageContentPage() {
                   key={insight.slug}
                   className="grid gap-4 items-center px-6 py-4 border-b last:border-0"
                   style={{
-                    gridTemplateColumns: "1fr auto auto auto auto",
+                    gridTemplateColumns: "1fr 170px 80px 100px 60px",
                     borderColor:         "#1E293B",
                     backgroundColor:     i % 2 === 0 ? "#0F172A" : "#0A1120",
                   }}

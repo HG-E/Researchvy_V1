@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, ArrowLeft, ArrowRight, Loader2, PlayCircle } from "lucide-react";
-import { MdxContent } from "@/components/insights/MdxContent";
 import { YouTubePlayer } from "@/components/academy/YouTubePlayer";
 import { LessonNotes } from "@/components/academy/LessonNotes";
 import { posthog } from "@/lib/analytics/posthog";
@@ -26,6 +25,7 @@ interface LessonPlayerProps {
   initialSeconds: number;
   enrolled:       boolean;
   initialNote:    string;
+  contentNode:    ReactNode;
 }
 
 function getNonYouTubeEmbedUrl(lesson: Lesson): string | null {
@@ -34,7 +34,7 @@ function getNonYouTubeEmbedUrl(lesson: Lesson): string | null {
   return null;
 }
 
-export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextLesson, initialDone, initialSeconds, enrolled, initialNote }: LessonPlayerProps) {
+export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextLesson, initialDone, initialSeconds, enrolled, initialNote, contentNode }: LessonPlayerProps) {
   const router = useRouter();
   const [done, setDone]             = useState(initialDone);
   const [loading, setLoading]       = useState(false);
@@ -153,38 +153,40 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
             </h1>
           </div>
 
-          {/* Mark complete button — explicit user action only */}
-          <div className="mb-8">
-            {done ? (
-              <div
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold"
-                style={{
-                  backgroundColor: "rgba(16,185,129,0.12)",
-                  color: "#10B981",
-                  border: "1px solid rgba(16,185,129,0.25)",
-                }}
-                role="status"
-              >
-                <CheckCircle className="h-4 w-4" />
-                Lesson complete
-              </div>
-            ) : (
-              <button
-                onClick={markComplete}
-                disabled={loading}
-                aria-label="Mark this lesson as complete"
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-60 hover:bg-[#1E293B]"
-                style={{ backgroundColor: "#161D2E", color: "#D1D5DB", border: "1px solid #334155" }}
-              >
-                {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <CheckCircle className="h-4 w-4" style={{ color: "#4B5563" }} />
-                )}
-                Mark as complete
-              </button>
-            )}
-          </div>
+          {/* Mark complete button — enrolled users only */}
+          {enrolled && (
+            <div className="mb-8">
+              {done ? (
+                <div
+                  className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold"
+                  style={{
+                    backgroundColor: "rgba(16,185,129,0.12)",
+                    color: "#10B981",
+                    border: "1px solid rgba(16,185,129,0.25)",
+                  }}
+                  role="status"
+                >
+                  <CheckCircle className="h-4 w-4" />
+                  Lesson complete
+                </div>
+              ) : (
+                <button
+                  onClick={markComplete}
+                  disabled={loading}
+                  aria-label="Mark this lesson as complete"
+                  className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-60 hover:bg-[#1E293B]"
+                  style={{ backgroundColor: "#161D2E", color: "#D1D5DB", border: "1px solid #334155" }}
+                >
+                  {loading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <CheckCircle className="h-4 w-4" style={{ color: "#4B5563" }} />
+                  )}
+                  Mark as complete
+                </button>
+              )}
+            </div>
+          )}
 
           {/* Enroll nudge — shown to non-enrolled users after viewing a free preview */}
           {!enrolled && lesson.is_free_preview && (
@@ -227,9 +229,9 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
           )}
 
           {/* Lesson content */}
-          {lesson.content_md && (
+          {contentNode && (
             <div className="prose-invert mb-10">
-              <MdxContent source={lesson.content_md} />
+              {contentNode}
             </div>
           )}
 
@@ -265,7 +267,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
                 <span className="truncate">{nextLesson.title}</span>
                 <ArrowRight className="h-4 w-4 flex-shrink-0" />
               </Link>
-            ) : done ? (
+            ) : enrolled && done ? (
               /* Completion redirect is handled by markComplete; this is the fallback */
               <Link
                 href={`/academy/courses/${courseSlug}/complete`}
@@ -274,7 +276,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
               >
                 View your certificate <ArrowRight className="h-4 w-4" />
               </Link>
-            ) : (
+            ) : enrolled ? (
               <button
                 onClick={markComplete}
                 disabled={loading}
@@ -288,6 +290,14 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
                 )}
                 Complete &amp; Finish Course
               </button>
+            ) : (
+              <Link
+                href={`/academy/courses/${courseSlug}`}
+                className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "#25D366" }}
+              >
+                Enroll to continue <ArrowRight className="h-4 w-4" />
+              </Link>
             )}
           </div>
 

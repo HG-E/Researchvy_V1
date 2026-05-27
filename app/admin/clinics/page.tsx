@@ -6,6 +6,7 @@ import { buildWhatsAppUrl } from "@/config/site";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { UnlockSessionButton } from "@/components/admin/UnlockSessionButton";
 
+export const dynamic  = "force-dynamic";
 export const metadata = generatePageMetadata({ title: "Manage Clinics" });
 
 const CLINIC_SLUG = "digital-visibility-clinic";

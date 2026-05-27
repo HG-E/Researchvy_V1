@@ -15,7 +15,7 @@ const TIERS = [
 
 interface EnrollmentFormProps {
   courses: Pick<Course, "id" | "title" | "level">[];
-  onSuccess: () => void;
+  onSuccess?: () => void;
 }
 
 export function EnrollmentForm({ courses, onSuccess }: EnrollmentFormProps) {
@@ -51,7 +51,7 @@ export function EnrollmentForm({ courses, onSuccess }: EnrollmentFormProps) {
         setMessage({ type: "ok", text: "Enrollment created successfully." });
         setEmail("");
         setExpiresAt("");
-        onSuccess();
+        onSuccess?.();
         router.refresh();
         setTimeout(() => { setOpen(false); setMessage(null); }, 1800);
       }

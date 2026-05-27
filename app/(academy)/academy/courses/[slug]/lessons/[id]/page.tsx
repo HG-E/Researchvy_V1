@@ -8,9 +8,15 @@ import {
 } from "@/lib/academy/courses";
 import { getServerUser, createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { buildWhatsAppUrl } from "@/config/site";
-import { LessonPlayer } from "@/components/academy/LessonPlayer";
+import dynamic from "next/dynamic";
 import { LessonSidebar } from "@/components/academy/LessonSidebar";
+import { MdxContent } from "@/components/insights/MdxContent";
 import type { Lesson } from "@/types/academy";
+
+const LessonPlayer = dynamic(
+  () => import("@/components/academy/LessonPlayer").then((m) => m.LessonPlayer),
+  { ssr: false }
+);
 
 export async function generateMetadata({
   params,
@@ -152,6 +158,7 @@ export default async function LessonPage({
           initialSeconds={lessonProg?.last_watched_seconds ?? 0}
           enrolled={enrolled}
           initialNote={initialNote}
+          contentNode={lesson.content_md ? <MdxContent source={lesson.content_md} /> : null}
         />
       ) : (
         <AccessGate courseSlug={slug} courseName={course.title} />

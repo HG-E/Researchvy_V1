@@ -162,7 +162,7 @@ export function EnrollmentsTable({ rows, courseOptions }: Props) {
           <div
             className="hidden md:grid gap-4 px-5 py-3 text-xs font-semibold tracking-wider uppercase border-b"
             style={{
-              gridTemplateColumns: "minmax(0,2fr) minmax(0,2fr) auto auto auto auto auto",
+              gridTemplateColumns: "minmax(0,2fr) minmax(0,2fr) 90px 70px 100px 100px 56px",
               backgroundColor:     "#0F172A",
               borderColor:         "#1E293B",
               color:               "#4B5563",
@@ -187,7 +187,7 @@ export function EnrollmentsTable({ rows, courseOptions }: Props) {
                   key={row.id}
                   className="grid gap-4 items-center px-5 py-4 border-b last:border-0"
                   style={{
-                    gridTemplateColumns: "minmax(0,2fr) minmax(0,2fr) auto auto auto auto auto",
+                    gridTemplateColumns: "minmax(0,2fr) minmax(0,2fr) 90px 70px 100px 100px 56px",
                     borderColor:         "#1E293B",
                     backgroundColor:     i % 2 === 0 ? "#0F172A" : "#0A1120",
                     opacity:             active ? 1 : 0.55,

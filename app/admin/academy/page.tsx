@@ -56,12 +56,17 @@ export default async function AdminAcademyPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="max-w-5xl space-y-8">
+      <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-xl font-bold" style={{ color: "#F9FAFB" }}>Academy</h1>
-          <p className="text-sm mt-0.5" style={{ color: "#6B7280" }}>
-            {typedCourses.length} course{typedCourses.length !== 1 ? "s" : ""} &mdash; manage content and curriculum
+          <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
+            Admin › Academy
+          </p>
+          <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+            Academy
+          </h1>
+          <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
+            {typedCourses.length} course{typedCourses.length !== 1 ? "s" : ""} · manage content and curriculum
           </p>
         </div>
         <NewCourseForm />
@@ -117,7 +122,7 @@ export default async function AdminAcademyPage() {
                     <div className="hidden sm:flex items-center gap-5 text-xs flex-shrink-0" style={{ color: "#6B7280" }}>
                       <span className="flex items-center gap-1.5">
                         <BookOpen className="h-3.5 w-3.5" />
-                        {moduleCount}m / {lessonCount}l
+                        {moduleCount} mod · {lessonCount} lessons
                       </span>
                       <span className="flex items-center gap-1.5">
                         <Users className="h-3.5 w-3.5" />

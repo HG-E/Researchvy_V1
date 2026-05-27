@@ -41,7 +41,6 @@ async function getEnquiryCounts() {
 }
 
 async function getAcademyStats(): Promise<{
-  totalEnrolled: number;
   activeEnrolled: number;
   completions: number;
   publishedCourses: number;
@@ -52,7 +51,7 @@ async function getAcademyStats(): Promise<{
     const [enrollRes, completedRes, courseRes] = await Promise.all([
       admin
         .from("enrollments")
-        .select("id, expires_at")
+        .select("id")
         .or(`expires_at.is.null,expires_at.gt.${now}`),
       admin
         .from("enrollments")
@@ -64,13 +63,12 @@ async function getAcademyStats(): Promise<{
         .eq("is_published", true),
     ]);
     return {
-      totalEnrolled:   enrollRes.data?.length   ?? 0,
-      activeEnrolled:  enrollRes.data?.length   ?? 0,
-      completions:     completedRes.data?.length ?? 0,
-      publishedCourses: courseRes.data?.length  ?? 0,
+      activeEnrolled:   enrollRes.data?.length   ?? 0,
+      completions:      completedRes.data?.length ?? 0,
+      publishedCourses: courseRes.data?.length   ?? 0,
     };
   } catch {
-    return { totalEnrolled: 0, activeEnrolled: 0, completions: 0, publishedCourses: 0 };
+    return { activeEnrolled: 0, completions: 0, publishedCourses: 0 };
   }
 }
 
