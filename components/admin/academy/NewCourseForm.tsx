@@ -81,6 +81,8 @@ export function NewCourseForm() {
             <option value="1">1 — Foundations</option>
             <option value="2">2 — Intermediate</option>
             <option value="3">3 — Advanced</option>
+            <option value="4">4 — Expert</option>
+            <option value="5">5 — Master</option>
           </select>
         </div>
         <div className="flex items-center gap-2 pt-5">

@@ -17,9 +17,8 @@ export async function POST(req: NextRequest) {
     const allowed = await checkLessonAccess(user.id, lesson_id);
     if (!allowed) return NextResponse.json({ error: "Not enrolled" }, { status: 403 });
 
-    const { createSupabaseAdminClient } = await import("@/lib/auth/supabase");
-    const admin = createSupabaseAdminClient();
-    await admin.rpc("save_lesson_progress", {
+    // Must use the server client (user JWT) so auth.uid() resolves inside the RPC
+    await supabase.rpc("save_lesson_progress", {
       p_lesson_id:     lesson_id,
       p_seconds:       Math.max(0, Math.floor(seconds)),
       p_watch_percent: Math.min(100, Math.max(0, Math.floor(watch_percent))) as number,

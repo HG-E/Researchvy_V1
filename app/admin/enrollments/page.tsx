@@ -1,6 +1,5 @@
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
-import { getCourses } from "@/lib/academy/courses";
 import { format } from "date-fns";
 import { GraduationCap, CheckCircle2, XCircle, AlertCircle } from "lucide-react";
 import { EnrollmentForm } from "@/components/admin/EnrollmentForm";
@@ -71,17 +70,25 @@ async function getEnrollments(): Promise<{ rows: EnrollmentRow[]; error: boolean
   }
 }
 
-export default async function EnrollmentsPage() {
-  const [{ rows, error }, allCourses] = await Promise.all([
-    getEnrollments(),
-    getCourses(),
-  ]);
+async function getAllCoursesForAdmin(): Promise<Pick<Course, "id" | "title" | "level">[]> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const { data } = await admin
+      .from("courses")
+      .select("id, title, level")
+      .order("level")
+      .order("position");
+    return (data ?? []) as Pick<Course, "id" | "title" | "level">[];
+  } catch {
+    return [];
+  }
+}
 
-  const coursesForForm: Pick<Course, "id" | "title" | "level">[] = allCourses.map((c) => ({
-    id:    c.id,
-    title: c.title,
-    level: c.level,
-  }));
+export default async function EnrollmentsPage() {
+  const [{ rows, error }, coursesForForm] = await Promise.all([
+    getEnrollments(),
+    getAllCoursesForAdmin(),
+  ]);
 
   const active    = rows.filter((r) => !r.expires_at || new Date(r.expires_at) > new Date());
   const completed = rows.filter((r) => r.completed_at);

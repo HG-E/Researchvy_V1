@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { PlusCircle, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import type { Course } from "@/types/academy";
 
@@ -18,6 +19,7 @@ interface EnrollmentFormProps {
 }
 
 export function EnrollmentForm({ courses, onSuccess }: EnrollmentFormProps) {
+  const router = useRouter();
   const [open,      setOpen]      = useState(false);
   const [loading,   setLoading]   = useState(false);
   const [message,   setMessage]   = useState<{ type: "ok" | "err"; text: string } | null>(null);
@@ -50,6 +52,7 @@ export function EnrollmentForm({ courses, onSuccess }: EnrollmentFormProps) {
         setEmail("");
         setExpiresAt("");
         onSuccess();
+        router.refresh();
         setTimeout(() => { setOpen(false); setMessage(null); }, 1800);
       }
     } catch {
