@@ -6,29 +6,38 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, ArrowRight, Share2, BookOpen } from "lucide-react";
 
 const CONFETTI_COLORS = ["#60A5FA", "#A78BFA", "#34D399", "#FCD34D", "#F472B6", "#F87171", "#FBBF24"];
-const PIECES = Array.from({ length: 48 }, (_, i) => ({
-  id:       i,
-  x:        Math.random() * 100,          // vw
-  size:     5 + Math.random() * 7,        // px
-  color:    CONFETTI_COLORS[i % CONFETTI_COLORS.length],
-  delay:    Math.random() * 0.8,          // s
-  duration: 2.4 + Math.random() * 1.6,   // s
-  rotate:   Math.random() * 360,
-  shape:    i % 3 === 0 ? "circle" : "rect",
-}));
+
+type Piece = { id: number; x: number; size: number; color: string; delay: number; duration: number; rotate: number; shape: "circle" | "rect" };
+
+function makePieces(): Piece[] {
+  return Array.from({ length: 48 }, (_, i) => ({
+    id:       i,
+    x:        Math.random() * 100,
+    size:     5 + Math.random() * 7,
+    color:    CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+    delay:    Math.random() * 0.8,
+    duration: 2.4 + Math.random() * 1.6,
+    rotate:   Math.random() * 360,
+    shape:    (i % 3 === 0 ? "circle" : "rect") as "circle" | "rect",
+  }));
+}
 
 function Confetti() {
-  const [visible, setVisible] = useState(true);
+  const [pieces, setPieces] = useState<Piece[]>([]);
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
+    setPieces(makePieces());
+    setVisible(true);
     const t = setTimeout(() => setVisible(false), 4500);
     return () => clearTimeout(t);
   }, []);
 
-  if (!visible) return null;
+  if (!visible || pieces.length === 0) return null;
 
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden z-0" aria-hidden="true">
-      {PIECES.map((p) => (
+      {pieces.map((p) => (
         <motion.div
           key={p.id}
           initial={{ y: -20, x: `${p.x}vw`, opacity: 1, rotate: 0 }}

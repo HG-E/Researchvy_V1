@@ -34,26 +34,47 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
     setCollapsed((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
+  const allPublished  = course.modules.flatMap((m) => m.lessons.filter((l) => l.is_published));
+  const completedCount = enrolled ? allPublished.filter((l) => progress[l.id]?.completed_at).length : 0;
+  const pct            = allPublished.length > 0 && enrolled
+    ? Math.round((completedCount / allPublished.length) * 100)
+    : 0;
+
   const inner = (
     <div className="flex flex-col h-full" style={{ backgroundColor: "#0A0F1A" }}>
-      {/* Course title */}
-      <div className="px-4 py-4 border-b flex items-start justify-between gap-3" style={{ borderColor: "#1E293B" }}>
-        <Link
-          href={`/academy/courses/${courseSlug}`}
-          className="text-xs font-bold leading-snug hover:text-white transition-colors line-clamp-2"
-          style={{ color: "#D1D5DB" }}
-        >
-          {course.title}
-        </Link>
-        {/* Close button — mobile only */}
-        <button
-          onClick={() => setOpen(false)}
-          className="lg:hidden flex-shrink-0 p-1 rounded"
-          style={{ color: "#4B5563" }}
-          aria-label="Close sidebar"
-        >
-          <X className="h-4 w-4" />
-        </button>
+      {/* Course title + progress */}
+      <div className="px-4 py-4 border-b" style={{ borderColor: "#1E293B" }}>
+        <div className="flex items-start justify-between gap-3 mb-2">
+          <Link
+            href={`/academy/courses/${courseSlug}`}
+            className="text-xs font-bold leading-snug hover:text-white transition-colors line-clamp-2"
+            style={{ color: "#D1D5DB" }}
+          >
+            {course.title}
+          </Link>
+          <button
+            onClick={() => setOpen(false)}
+            className="lg:hidden flex-shrink-0 p-1 rounded"
+            style={{ color: "#4B5563" }}
+            aria-label="Close sidebar"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+        {enrolled && allPublished.length > 0 && (
+          <div>
+            <div className="flex items-center justify-between text-[10px] mb-1" style={{ color: "#4B5563" }}>
+              <span>{completedCount}/{allPublished.length} lessons</span>
+              <span style={{ color: pct === 100 ? "#10B981" : "#2563EB" }}>{pct}%</span>
+            </div>
+            <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: "#1E293B" }}>
+              <div
+                className="h-full rounded-full transition-all duration-300"
+                style={{ width: `${pct}%`, backgroundColor: pct === 100 ? "#10B981" : "#2563EB" }}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Module + lesson list */}

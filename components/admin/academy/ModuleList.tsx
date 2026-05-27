@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { ModuleSection } from "./ModuleSection";
 import { AddModuleForm } from "./AddModuleForm";
 
@@ -24,33 +24,24 @@ export function ModuleList({ modules: initialModules, courseId }: {
     [...initialModules].sort((a, b) => a.position - b.position)
   );
 
-  const move = useCallback(async (id: string, dir: "up" | "down") => {
-    setModules(prev => {
-      const idx = prev.findIndex(m => m.id === id);
-      if (dir === "up" && idx === 0) return prev;
-      if (dir === "down" && idx === prev.length - 1) return prev;
+  function move(id: string, dir: "up" | "down") {
+    const idx = modules.findIndex(m => m.id === id);
+    if (dir === "up" && idx === 0) return;
+    if (dir === "down" && idx === modules.length - 1) return;
 
-      const next = [...prev];
-      const swapIdx = dir === "up" ? idx - 1 : idx + 1;
-      // Swap positions
-      const temp = next[idx].position;
-      next[idx] = { ...next[idx], position: next[swapIdx].position };
-      next[swapIdx] = { ...next[swapIdx], position: temp };
-      // Re-sort
-      return next.sort((a, b) => a.position - b.position);
-    });
+    const next = [...modules];
+    const swapIdx = dir === "up" ? idx - 1 : idx + 1;
+    [next[idx], next[swapIdx]] = [next[swapIdx], next[idx]];
+    const sorted = next.map((m, i) => ({ ...m, position: i + 1 }));
 
-    // Get fresh state after update
-    setModules(prev => {
-      const items = prev.map((m, i) => ({ id: m.id, position: i + 1 }));
-      fetch("/api/admin/academy/reorder", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "module", items }),
-      }).catch(console.error);
-      return prev.map((m, i) => ({ ...m, position: i + 1 }));
-    });
-  }, []);
+    setModules(sorted);
+
+    fetch("/api/admin/academy/reorder", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "module", items: sorted.map(m => ({ id: m.id, position: m.position })) }),
+    }).catch(console.error);
+  }
 
   return (
     <div className="space-y-3">

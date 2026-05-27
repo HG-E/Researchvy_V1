@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { Building2, AlertCircle } from "lucide-react";
 import { PartnershipStatusSelect } from "@/components/admin/PartnershipStatusSelect";
 
+export const dynamic = "force-dynamic";
 export const metadata = generatePageMetadata({ title: "Partnership Enquiries" });
 
 type PartnershipEnquiry = {

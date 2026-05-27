@@ -61,27 +61,22 @@ export function ModuleSection({ mod, isFirst, isLast, onMoveUp, onMoveDown }: Pr
   }
 
   function moveLesson(id: string, dir: "up" | "down") {
-    setLessons(prev => {
-      const idx = prev.findIndex(l => l.id === id);
-      if (dir === "up" && idx === 0) return prev;
-      if (dir === "down" && idx === prev.length - 1) return prev;
+    const idx = lessons.findIndex(l => l.id === id);
+    if (dir === "up" && idx === 0) return;
+    if (dir === "down" && idx === lessons.length - 1) return;
 
-      const next = [...prev];
-      const swapIdx = dir === "up" ? idx - 1 : idx + 1;
-      const temp = next[idx].position;
-      next[idx] = { ...next[idx], position: next[swapIdx].position };
-      next[swapIdx] = { ...next[swapIdx], position: temp };
-      const sorted = next.sort((a, b) => a.position - b.position).map((l, i) => ({ ...l, position: i + 1 }));
+    const next = [...lessons];
+    const swapIdx = dir === "up" ? idx - 1 : idx + 1;
+    [next[idx], next[swapIdx]] = [next[swapIdx], next[idx]];
+    const sorted = next.map((l, i) => ({ ...l, position: i + 1 }));
 
-      // Persist to API
-      fetch("/api/admin/academy/reorder", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "lesson", items: sorted.map(l => ({ id: l.id, position: l.position })) }),
-      }).catch(console.error);
+    setLessons(sorted);
 
-      return sorted;
-    });
+    fetch("/api/admin/academy/reorder", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "lesson", items: sorted.map(l => ({ id: l.id, position: l.position })) }),
+    }).catch(console.error);
   }
 
   return (

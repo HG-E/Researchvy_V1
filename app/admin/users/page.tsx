@@ -1,37 +1,17 @@
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { isSuperAdmin } from "@/lib/auth/permissions";
-import { format } from "date-fns";
-import { Users, Shield, AlertCircle, Flag, CheckCircle2, XCircle, Crown } from "lucide-react";
-import { UserActionsMenu } from "@/components/admin/UserActionsMenu";
+import { Users, AlertCircle } from "lucide-react";
+import { UsersTable } from "@/components/admin/UsersTable";
+import type { UserRow } from "@/components/admin/UsersTable";
 
+export const dynamic = "force-dynamic";
 export const metadata = generatePageMetadata({ title: "Manage Users" });
-
-const ROLE_COLORS: Record<string, { bg: string; text: string }> = {
-  admin:      { bg: "rgba(239,68,68,0.12)",   text: "#FCA5A5" },
-  partner:    { bg: "rgba(245,158,11,0.12)",  text: "#FCD34D" },
-  researcher: { bg: "rgba(37,99,235,0.12)",   text: "#60A5FA" },
-  user:       { bg: "rgba(107,114,128,0.12)", text: "#9CA3AF" },
-};
-
-type UserRow = {
-  id:              string;
-  email:           string;
-  full_name:       string;
-  role:            string;
-  created_at:      string;
-  last_sign_in_at: string | null;
-  banned_until:    string | null;
-  flagged:         boolean;
-  flagged_reason:  string | null;
-  email_confirmed: boolean;
-  is_super:        boolean;
-};
 
 async function getUsers(): Promise<{ users: UserRow[]; error: boolean }> {
   try {
     const admin = createSupabaseAdminClient();
-    const { data, error } = await admin.auth.admin.listUsers({ page: 1, perPage: 100 });
+    const { data, error } = await admin.auth.admin.listUsers({ page: 1, perPage: 500 });
     if (error) return { users: [], error: true };
 
     const ids = data.users.map((u: { id: string }) => u.id);
@@ -76,12 +56,15 @@ async function getUsers(): Promise<{ users: UserRow[]; error: boolean }> {
 }
 
 export default async function ManageUsersPage() {
-  const { users, error } = await getUsers();
-  const currentUser      = await getServerUser();
-  const callerIsSuper    = isSuperAdmin(currentUser?.email);
+  const [{ users, error }, currentUser] = await Promise.all([
+    getUsers(),
+    getServerUser(),
+  ]);
+  const callerIsSuper = isSuperAdmin(currentUser?.email);
 
-  const isSuspended = (u: UserRow) =>
-    !!(u.banned_until && new Date(u.banned_until) > new Date());
+  const suspendedCount  = users.filter(u => !!(u.banned_until && new Date(u.banned_until) > new Date())).length;
+  const flaggedCount    = users.filter(u => u.flagged).length;
+  const unverifiedCount = users.filter(u => !u.email_confirmed).length;
 
   return (
     <div>
@@ -96,7 +79,7 @@ export default async function ManageUsersPage() {
         <p className="mt-1 text-sm" style={{ color: "#6B7280" }}>
           {error
             ? "Could not load users."
-            : `${users.length} account${users.length !== 1 ? "s" : ""} · ${users.filter(isSuspended).length} suspended · ${users.filter((u) => u.flagged).length} flagged · ${users.filter((u) => !u.email_confirmed).length} unverified`}
+            : `${users.length} account${users.length !== 1 ? "s" : ""} · ${suspendedCount} suspended · ${flaggedCount} flagged · ${unverifiedCount} unverified`}
         </p>
       </div>
 
@@ -120,143 +103,11 @@ export default async function ManageUsersPage() {
       )}
 
       {!error && users.length > 0 && (
-        <div className="rounded-2xl border overflow-hidden" style={{ borderColor: "#1E293B" }}>
-          {/* Table head */}
-          <div
-            className="grid gap-4 px-5 py-3 text-xs font-semibold tracking-wider uppercase border-b"
-            style={{
-              gridTemplateColumns: "1fr auto auto auto auto auto auto",
-              backgroundColor:     "#0F172A",
-              borderColor:         "#1E293B",
-              color:               "#4B5563",
-            }}
-          >
-            <span>User</span>
-            <span>Role</span>
-            <span className="hidden lg:block">Verified</span>
-            <span className="hidden lg:block">Status</span>
-            <span className="hidden md:block">Last sign in</span>
-            <span>Joined</span>
-            <span />
-          </div>
-
-          <div style={{ backgroundColor: "#0F172A" }}>
-            {users.map((user, i) => {
-              const roleStyle  = ROLE_COLORS[user.role] ?? ROLE_COLORS.user;
-              const suspended  = isSuspended(user);
-              const isSelf     = user.id === currentUser?.id;
-
-              return (
-                <div
-                  key={user.id}
-                  className="grid gap-4 items-center px-5 py-3.5 border-b last:border-0"
-                  style={{
-                    gridTemplateColumns: "1fr auto auto auto auto auto auto",
-                    borderColor:         "#1E293B",
-                    backgroundColor:     i % 2 === 0 ? "#0F172A" : "#0A1120",
-                    opacity:             suspended ? 0.65 : 1,
-                  }}
-                >
-                  {/* Email + name + super badge */}
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5 min-w-0">
-                      <p className="text-sm font-medium truncate" style={{ color: "#F9FAFB" }}>
-                        {user.full_name || user.email}
-                      </p>
-                      {user.is_super && (
-                        <span title="Platform Owner · Super Admin">
-                          <Crown className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#FCD34D" }} />
-                        </span>
-                      )}
-                    </div>
-                    {user.full_name && (
-                      <p className="text-xs truncate" style={{ color: "#6B7280" }}>
-                        {user.email}
-                      </p>
-                    )}
-                    <p className="text-[10px] font-mono mt-0.5 truncate" style={{ color: "#1E3A5F" }}>
-                      {user.id}
-                    </p>
-                  </div>
-
-                  {/* Role badge */}
-                  <span
-                    className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap"
-                    style={{ backgroundColor: roleStyle.bg, color: roleStyle.text }}
-                  >
-                    {user.is_super
-                      ? <Crown className="h-3 w-3" />
-                      : user.role === "admin"
-                        ? <Shield className="h-3 w-3" />
-                        : null}
-                    {user.is_super ? "Super Admin" : user.role}
-                  </span>
-
-                  {/* Email verified */}
-                  <div className="hidden lg:flex items-center justify-center">
-                    {user.email_confirmed ? (
-                      <span title="Email verified">
-                        <CheckCircle2 className="h-4 w-4" style={{ color: "#10B981" }} />
-                      </span>
-                    ) : (
-                      <span title="Email not verified">
-                        <XCircle className="h-4 w-4" style={{ color: "#F59E0B" }} />
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Status badges */}
-                  <div className="hidden lg:flex items-center gap-1.5">
-                    {suspended && (
-                      <span
-                        className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold whitespace-nowrap"
-                        style={{ backgroundColor: "rgba(239,68,68,0.12)", color: "#F87171" }}
-                      >
-                        Suspended
-                      </span>
-                    )}
-                    {user.flagged && (
-                      <span
-                        className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold whitespace-nowrap"
-                        title={user.flagged_reason ?? ""}
-                        style={{ backgroundColor: "rgba(245,158,11,0.12)", color: "#FCD34D" }}
-                      >
-                        <Flag className="h-2.5 w-2.5" />
-                        Flagged
-                      </span>
-                    )}
-                    {!suspended && !user.flagged && (
-                      <span className="text-xs" style={{ color: "#1E3A5F" }}>Active</span>
-                    )}
-                  </div>
-
-                  {/* Last sign in */}
-                  <span className="hidden md:block text-xs whitespace-nowrap" style={{ color: "#4B5563" }}>
-                    {user.last_sign_in_at
-                      ? format(new Date(user.last_sign_in_at), "MMM d, yyyy")
-                      : "Never"}
-                  </span>
-
-                  {/* Joined */}
-                  <span className="text-xs whitespace-nowrap" style={{ color: "#6B7280" }}>
-                    {format(new Date(user.created_at), "MMM d, yyyy")}
-                  </span>
-
-                  {/* Actions */}
-                  <UserActionsMenu
-                    userId={user.id}
-                    currentRole={user.role}
-                    targetEmail={user.email}
-                    targetIsSuper={user.is_super}
-                    callerIsSuper={callerIsSuper}
-                    emailConfirmed={user.email_confirmed}
-                    status={{ isSuspended: suspended, isFlagged: user.flagged, isSelf }}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <UsersTable
+          users={users}
+          currentUserId={currentUser?.id ?? ""}
+          callerIsSuper={callerIsSuper}
+        />
       )}
     </div>
   );

@@ -178,9 +178,10 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
   if (!course) notFound();
 
   const color  = LEVEL_COLORS[(course.level - 1) as 0 | 1 | 2 | 3 | 4];
-  const allLessons = course.modules.flatMap((m) => m.lessons.filter((l) => l.is_published));
-  const allLessonIds = allLessons.map((l) => l.id);
-  const totalDuration = allLessons.reduce((sum, l) => sum + l.duration_seconds, 0);
+  const allLessons     = course.modules.flatMap((m) => m.lessons.filter((l) => l.is_published));
+  const freeLessons    = allLessons.filter((l) => l.is_free_preview);
+  const allLessonIds   = allLessons.map((l) => l.id);
+  const totalDuration  = allLessons.reduce((sum, l) => sum + l.duration_seconds, 0);
 
   const [enrollment, progress] = await Promise.all([
     user ? getUserEnrollment(user.id, course.id) : Promise.resolve(null),
@@ -192,11 +193,10 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
   const enrolled = isEnrollmentActive(enrollment);
   const stats    = enrolled ? getCourseStats(course, progress) : null;
 
-  // Find the first incomplete (or first) lesson for "Continue" / "Start" CTA
   const firstLesson = allLessons[0];
   const nextLesson  = enrolled
     ? (allLessons.find((l) => !progress[l.id]?.completed_at) ?? firstLesson)
-    : allLessons.find((l) => l.is_free_preview) ?? null;
+    : freeLessons[0] ?? null;
 
   const jsonLd = academyCourseSchema({
     title:           course.title,
@@ -250,6 +250,14 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
                 Free
               </span>
             )}
+            {!enrolled && freeLessons.length > 0 && (
+              <span
+                className="text-[10px] font-semibold px-2.5 py-1 rounded-full"
+                style={{ backgroundColor: "rgba(245,158,11,0.12)", color: "#FCD34D" }}
+              >
+                {freeLessons.length} free preview{freeLessons.length !== 1 ? "s" : ""} inside
+              </span>
+            )}
           </div>
 
           <h1
@@ -269,12 +277,17 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
           <div className="flex flex-wrap gap-4 mt-5 text-xs" style={{ color: "#6B7280" }}>
             <span className="flex items-center gap-1.5">
               <BookOpen className="h-3.5 w-3.5" />
-              {allLessons.length} lesson{allLessons.length !== 1 ? "s" : ""}
+              {course.modules.length} module{course.modules.length !== 1 ? "s" : ""} · {allLessons.length} lesson{allLessons.length !== 1 ? "s" : ""}
             </span>
             {totalDuration > 0 && (
               <span className="flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5" />
                 {formatDuration(totalDuration)} total
+              </span>
+            )}
+            {!enrolled && freeLessons.length > 0 && (
+              <span className="flex items-center gap-1.5" style={{ color: "#FCD34D" }}>
+                ✦ Start free — no payment required
               </span>
             )}
           </div>
@@ -292,6 +305,11 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
                   style={{ width: `${stats.percent_complete}%`, backgroundColor: color }}
                 />
               </div>
+              {stats.percent_complete < 100 && stats.total_lessons > 0 && (
+                <p className="text-xs mt-1.5" style={{ color: "#4B5563" }}>
+                  {stats.total_lessons - stats.completed_lessons} lesson{stats.total_lessons - stats.completed_lessons !== 1 ? "s" : ""} remaining
+                </p>
+              )}
             </div>
           )}
 
@@ -301,7 +319,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
               nextLesson && (
                 <Link
                   href={`/academy/courses/${slug}/lessons/${nextLesson.id}`}
-                  className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:opacity-90"
+                  className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                   style={{ backgroundColor: color }}
                 >
                   <PlayCircle className="h-4 w-4" />
@@ -314,20 +332,21 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
                 {nextLesson && (
                   <Link
                     href={`/academy/courses/${slug}/lessons/${nextLesson.id}`}
-                    className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-colors"
+                    className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
                     style={{ backgroundColor: "#2563EB" }}
                   >
                     <PlayCircle className="h-4 w-4" />
-                    {course.is_free ? "Start Free" : "Preview Free Lesson"}
+                    {course.is_free ? "Start Free Now" : "Try a Free Lesson"}
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 )}
                 {!course.is_free && (
                   <a
-                    href={buildWhatsAppUrl(`Researchvy Academy — enroll in ${course.title}`)}
+                    href={buildWhatsAppUrl(`Hi, I want to enroll in ${course.title} on Researchvy Academy`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-                    style={{ borderColor: "#25D366", color: "#25D366" }}
+                    className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                    style={{ backgroundColor: "#25D366" }}
                   >
                     <MessageCircle className="h-4 w-4" />
                     Enroll via WhatsApp
@@ -336,7 +355,32 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
               </>
             )}
           </div>
+
+          {/* Enroll nudge for non-enrolled with free previews exhausted — compact reminder */}
+          {!enrolled && !course.is_free && (
+            <p className="mt-3 text-xs" style={{ color: "#4B5563" }}>
+              Full access · Completion certificate · Enroll in under 2 minutes via WhatsApp
+            </p>
+          )}
         </div>
+
+        {/* What you'll learn — module overview for non-enrolled visitors */}
+        {!enrolled && course.modules.length > 0 && (
+          <div
+            className="rounded-2xl border p-6 mb-10"
+            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          >
+            <h2 className="text-sm font-bold mb-4" style={{ color: "#F9FAFB" }}>What you&apos;ll cover</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {course.modules.map((mod) => (
+                <div key={mod.id} className="flex items-start gap-2.5">
+                  <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: color }} />
+                  <span className="text-sm leading-snug" style={{ color: "#9CA3AF" }}>{mod.title}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Curriculum */}
         <div>
@@ -354,6 +398,31 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
               />
             ))}
           </div>
+
+          {/* Bottom enroll CTA for non-enrolled */}
+          {!enrolled && !course.is_free && (
+            <div
+              className="mt-8 rounded-2xl border p-6 text-center"
+              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B", borderTop: `3px solid ${color}` }}
+            >
+              <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
+                Ready to get found?
+              </p>
+              <p className="text-xs mb-5" style={{ color: "#6B7280" }}>
+                Enroll in {course.title} and start building real scholarly visibility — certificate included.
+              </p>
+              <a
+                href={buildWhatsAppUrl(`Hi, I want to enroll in ${course.title} on Researchvy Academy`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "#25D366" }}
+              >
+                <MessageCircle className="h-4 w-4" />
+                Enroll via WhatsApp — 2 minutes
+              </a>
+            </div>
+          )}
         </div>
 
       </div>
