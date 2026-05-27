@@ -11,6 +11,7 @@ import {
   Inbox,
   Handshake,
   GraduationCap,
+  Layers,
 } from "lucide-react";
 
 const NAV = [
@@ -19,6 +20,7 @@ const NAV = [
   { label: "Partnerships",href: "/admin/partnerships",   icon: Handshake,       exact: false },
   { label: "Content",     href: "/admin/content",        icon: FileText,        exact: false },
   { label: "Clinics",     href: "/admin/clinics",        icon: BookOpen,        exact: false },
+  { label: "Academy",     href: "/admin/academy",        icon: Layers,          exact: false },
   { label: "Enrollments", href: "/admin/enrollments",    icon: GraduationCap,   exact: false },
   { label: "Users",       href: "/admin/users",          icon: Users,           exact: false },
   { label: "Analytics",   href: "/admin/analytics",      icon: BarChart2,       exact: false },
