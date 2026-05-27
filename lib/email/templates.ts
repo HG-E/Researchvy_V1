@@ -305,7 +305,7 @@ export function day3Email(): { subject: string; html: string } {
 
 export function day7Email(): { subject: string; html: string } {
   return {
-    subject: "6 sessions. Here's what changes.",
+    subject: "3 modules. One complete digital presence. Here's what changes.",
     html: `
 <!DOCTYPE html>
 <html lang="en">
@@ -336,15 +336,15 @@ export function day7Email(): { subject: string; html: string } {
             Digital Visibility Clinic
           </p>
           <h1 style="margin:0 0 20px;font-size:26px;font-weight:700;line-height:1.3;color:#111827;">
-            Six sessions.<br/>One complete transformation.
+            Three tools.<br/>One complete digital presence.
           </h1>
           <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">
-            Dr. Amara Osei had 51 publications and an h-index of 3. After 6 sessions:
+            Dr. Amara Osei had 51 publications and an h-index of 3. After the clinic:
             <strong style="color:#059669;">h-index 3 → 7. Citations 28 → 94.</strong>
             Four months. The research didn't change. The visibility did.
           </p>
           <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:#374151;">
-            Here's exactly what those 6 sessions cover:
+            Here's exactly what the three core modules cover:
           </p>
         </td>
       </tr>
@@ -355,10 +355,10 @@ export function day7Email(): { subject: string; html: string } {
       <tr>
         <td>
           ${[
-            { n: "01", title: "Visibility Foundations & Digital Identity", desc: "Your scholarly identity audit, Google Scholar, ORCID, and Scopus fully set up." },
-            { n: "02", title: "Discoverability & Citation Intelligence", desc: "Keyword strategy, indexing, and h-index improvement, get your work ranked." },
-            { n: "03", title: "Research Communication", desc: "Translate your findings for policymakers, practitioners, and the public." },
-            { n: "04", title: "Strategic Positioning & 12-Month Plan", desc: "Your personalised visibility roadmap, built to run from Day 1." },
+            { n: "M1", title: "ORCID — Your Research Passport", desc: "Create or reclaim your ORCID iD, import all publications, and connect it to Scopus, Google Scholar, and your institution." },
+            { n: "M2", title: "LinkedIn — Your Global Academic Presence", desc: "Rewrite your profile for discoverability, build your Featured section, and publish your first research post." },
+            { n: "M3", title: "WordPress — Your Permanent Academic Home", desc: "Register a domain, launch your WordPress academic site, and build the five essential pages every researcher needs." },
+            { n: "+B", title: "Pro Bonuses: Indexing + Publishing Strategy", desc: "Deep-dives into Google Scholar, Scopus, WoS optimisation — and a frank publishing strategy session for Nigerian and African researchers." },
           ].map(({ n, title, desc }) => `
             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
               <tr>

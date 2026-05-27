@@ -52,12 +52,12 @@ export default async function ClinicsPage() {
   const isClosingSoon = spotsLeft <= 5;
   const isFull        = cohort.status === "full" || spotsLeft === 0;
 
-  const { tiers } = digitalVisibilityClinic.pricing;
+  const { bundles } = digitalVisibilityClinic.pricing;
 
-  const TIER_ACCENTS: Record<string, string> = {
-    pro:     "#8B5CF6",
-    builder: "#2563EB",
-    starter: "#10B981",
+  const BUNDLE_ACCENTS: Record<string, string> = {
+    solo: "#10B981",
+    core: "#2563EB",
+    pro:  "#8B5CF6",
   };
 
   return (
@@ -278,7 +278,7 @@ export default async function ClinicsPage() {
               {/* Right — sessions preview */}
               <div>
                 <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
-                  4-Session Curriculum
+                  5-Module Curriculum
                 </p>
                 <SessionsCarousel />
 
@@ -347,42 +347,42 @@ export default async function ClinicsPage() {
               Choose Your Transformation
             </h2>
             <p className="text-sm max-w-xl mx-auto" style={{ color: "#6B7280" }}>
-              All prices shown in USD and NGN. Early bird saves up to $70 / ₦31,000, closes June 20.
+              All prices shown in USD and NGN. Early bird saves up to $90 / ₦45,000 on the Pro Bundle, closes June 20.
             </p>
           </div>
 
-          {/* Tier cards — Pro first (anchor), Builder centre (recommended), Starter last */}
+          {/* Bundle cards — Solo, Core (recommended), Pro */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-10">
-            {tiers.map((tier) => {
-              const accent = TIER_ACCENTS[tier.id] ?? "#2563EB";
-              const usdSave = tier.usd.regular - tier.usd.earlyBird;
-              const ngnSave = tier.ngn.regular - tier.ngn.earlyBird;
+            {bundles.map((bundle) => {
+              const accent  = BUNDLE_ACCENTS[bundle.id] ?? "#2563EB";
+              const usdSave = bundle.usd.regular - bundle.usd.earlyBird;
+              const ngnSave = bundle.ngn.regular - bundle.ngn.earlyBird;
 
               return (
                 <div
-                  key={tier.id}
+                  key={bundle.id}
                   className="rounded-2xl border overflow-hidden flex flex-col"
                   style={{
                     backgroundColor: "#0F172A",
-                    borderColor: tier.recommended ? `${accent}60` : "#1E293B",
-                    boxShadow: tier.recommended ? `0 0 0 1px ${accent}40` : "none",
+                    borderColor: bundle.recommended ? `${accent}60` : "#1E293B",
+                    boxShadow: bundle.recommended ? `0 0 0 1px ${accent}40` : "none",
                   }}
                 >
                   {/* Top accent bar */}
                   <div className="h-1" style={{ backgroundColor: accent }} />
 
                   <div className="p-7 flex flex-col flex-1">
-                    {/* Header row: tagline + name left, badge right — in-flow, no overlap */}
+                    {/* Header row: tagline + name left, badge right */}
                     <div className="flex items-start justify-between gap-3 mb-5">
                       <div className="min-w-0">
                         <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: accent }}>
-                          {tier.tagline}
+                          {bundle.tagline}
                         </p>
                         <h3 className="text-xl font-bold" style={{ color: "#F9FAFB" }}>
-                          {tier.name}
+                          {bundle.name}
                         </h3>
                       </div>
-                      {tier.recommended && (
+                      {bundle.recommended && (
                         <span
                           className="flex-shrink-0 text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full whitespace-nowrap"
                           style={{ backgroundColor: `${accent}20`, color: accent, border: `1px solid ${accent}40` }}
@@ -400,38 +400,46 @@ export default async function ClinicsPage() {
                       {/* Early bird price */}
                       <div className="mb-3">
                         <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: "#F59E0B" }}>
-                          Early bird · ends Jun 20
+                          {bundle.isSolo ? "From · per module" : "Early bird · ends Jun 20"}
                         </p>
                         <div className="flex items-baseline gap-2">
                           <span className="text-3xl font-bold" style={{ color: "#F9FAFB" }}>
-                            {formatUSD(tier.usd.earlyBird)}
+                            {bundle.isSolo ? "from " : ""}{formatUSD(bundle.usd.earlyBird)}
                           </span>
                           <span className="text-base font-semibold" style={{ color: "#6B7280" }}>
                             USD
                           </span>
                         </div>
                         <p className="text-sm font-semibold mt-0.5" style={{ color: accent }}>
-                          {formatNGN(tier.ngn.earlyBird)} NGN
+                          {bundle.isSolo ? "from " : ""}{formatNGN(bundle.ngn.earlyBird)} NGN
                         </p>
                       </div>
 
-                      {/* Regular price strikethrough */}
+                      {/* Regular price / savings */}
                       <div className="pt-3 border-t" style={{ borderColor: "#334155" }}>
-                        <p className="text-xs" style={{ color: "#4B5563" }}>
-                          After June 20:{" "}
-                          <span style={{ textDecoration: "line-through", color: "#374151" }}>
-                            {formatUSD(tier.usd.regular)} / {formatNGN(tier.ngn.regular)}
-                          </span>
-                        </p>
-                        <p className="text-xs font-semibold mt-0.5" style={{ color: "#10B981" }}>
-                          Save {formatUSD(usdSave)} · {formatNGN(ngnSave)}
-                        </p>
+                        {bundle.isSolo ? (
+                          <p className="text-xs" style={{ color: "#4B5563" }}>
+                            Prices vary per module · see FAQ
+                          </p>
+                        ) : (
+                          <>
+                            <p className="text-xs" style={{ color: "#4B5563" }}>
+                              After June 20:{" "}
+                              <span style={{ textDecoration: "line-through", color: "#374151" }}>
+                                {formatUSD(bundle.usd.regular)} / {formatNGN(bundle.ngn.regular)}
+                              </span>
+                            </p>
+                            <p className="text-xs font-semibold mt-0.5" style={{ color: "#10B981" }}>
+                              {bundle.savingsLabel} · Save {formatUSD(usdSave)} · {formatNGN(ngnSave)}
+                            </p>
+                          </>
+                        )}
                       </div>
                     </div>
 
                     {/* Feature list */}
                     <ul className="space-y-2.5 mb-8 flex-1">
-                      {tier.includes.map((item, i) => (
+                      {bundle.includes.map((item, i) => (
                         <li key={i} className="flex items-start gap-2.5 text-xs leading-relaxed">
                           <CheckCircle
                             className="h-3.5 w-3.5 flex-shrink-0 mt-0.5"
@@ -446,14 +454,14 @@ export default async function ClinicsPage() {
 
                     {/* CTA */}
                     <a
-                      href={buildWhatsAppUrl(tier.whatsappContext)}
+                      href={buildWhatsAppUrl(bundle.whatsappContext)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white"
                       style={{ backgroundColor: accent }}
                     >
                       <MessageCircle className="h-4 w-4" />
-                      {tier.cta}
+                      {bundle.cta}
                     </a>
                   </div>
                 </div>
@@ -461,35 +469,35 @@ export default async function ClinicsPage() {
             })}
           </div>
 
-          {/* Which tier guide */}
+          {/* Which bundle guide */}
           <div
             className="rounded-2xl border p-7"
             style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
           >
             <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#6B7280" }}>
-              Not sure which tier is right for you?
+              Not sure which bundle is right for you?
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 {
-                  signal: "You've never set up ORCID, Google Scholar, or Scopus properly",
-                  tier: "Visibility Starter",
+                  signal: "You need one specific platform right now — ORCID, LinkedIn, or WordPress — and want to start there",
+                  bundle: "Single Module",
                   color: "#10B981",
                 },
                 {
-                  signal: "You have profiles but citations are fragmented and h-index isn't moving",
-                  tier: "Visibility Builder",
+                  signal: "You want the complete foundation: ORCID, LinkedIn, and WordPress built together as a connected system",
+                  bundle: "DVC Core Bundle",
                   color: "#2563EB",
                   badge: "← most researchers",
                 },
                 {
-                  signal: "You're publishing steadily and want strategic depth plus a 1:1 session",
-                  tier: "Visibility Pro",
+                  signal: "You want full depth: Core modules plus citation database strategy and a publishing intelligence masterclass",
+                  bundle: "DVC Pro Bundle",
                   color: "#8B5CF6",
                 },
-              ].map(({ signal, tier, color, badge }) => (
+              ].map(({ signal, bundle, color, badge }) => (
                 <div
-                  key={tier}
+                  key={bundle}
                   className="rounded-xl border p-4"
                   style={{ backgroundColor: "#080E1A", borderColor: `${color}25` }}
                 >
@@ -497,7 +505,7 @@ export default async function ClinicsPage() {
                     {signal}
                   </p>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-xs font-bold" style={{ color }}>→ {tier}</span>
+                    <span className="text-xs font-bold" style={{ color }}>→ {bundle}</span>
                     {badge && (
                       <span
                         className="text-[10px] font-semibold px-1.5 py-0.5 rounded"
@@ -518,9 +526,9 @@ export default async function ClinicsPage() {
                 <span className="text-xs font-semibold" style={{ color: "#6B7280" }}>Group discounts:</span>
               </div>
               <div className="flex flex-col sm:flex-row sm:flex-wrap gap-1.5 sm:gap-x-4 sm:gap-y-1 text-xs" style={{ color: "#6B7280" }}>
-                <span>5–10 researchers → <strong style={{ color: "#F9FAFB" }}>20% off</strong></span>
+                <span>5–10 researchers → <strong style={{ color: "#F9FAFB" }}>15% off</strong></span>
                 <span className="hidden sm:inline" style={{ color: "#374151" }}>·</span>
-                <span>11–20 researchers → <strong style={{ color: "#F9FAFB" }}>30% off</strong></span>
+                <span>11–20 researchers → <strong style={{ color: "#F9FAFB" }}>25% off</strong></span>
                 <span className="hidden sm:inline" style={{ color: "#374151" }}>·</span>
                 <span>Institutional → <a href={buildWhatsAppUrl("institutional group enrollment for Digital Visibility Clinic")} target="_blank" rel="noopener noreferrer" style={{ color: "#2563EB" }}>enquire via WhatsApp</a></span>
               </div>
@@ -636,8 +644,8 @@ export default async function ClinicsPage() {
                 <p className="text-sm font-bold mb-4" style={{ color: "#F9FAFB" }}>Group pricing — per seat</p>
                 <div className="space-y-3">
                   {[
-                    { range: "5–10 researchers",  saving: "20% off every seat",  example: `Builder: ${formatNGN(65000 * 0.80)} / seat` },
-                    { range: "11–20 researchers", saving: "30% off every seat",  example: `Builder: ${formatNGN(65000 * 0.70)} / seat` },
+                    { range: "3–10 researchers",  saving: "15% off every seat",  example: `Core Bundle: ${formatNGN(Math.round(85000 * 0.85))} / seat` },
+                    { range: "11–20 researchers", saving: "25% off every seat",  example: `Core Bundle: ${formatNGN(Math.round(85000 * 0.75))} / seat` },
                     { range: "20+ / full dept",   saving: "Custom institutional rate", example: "Contact us for a tailored quote" },
                   ].map(({ range, saving, example }) => (
                     <div

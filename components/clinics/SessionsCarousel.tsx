@@ -8,7 +8,8 @@ const SESSION_COLORS = [
   "#2563EB",
   "#4F46E5",
   "#8B5CF6",
-  "#10B981",
+  "#F59E0B",
+  "#D97706",
 ];
 
 function SessionRow({
@@ -56,7 +57,9 @@ function SessionCard({
       <div className="h-1" style={{ background: `linear-gradient(90deg, ${color}, #10B981)` }} />
       <div className="p-5" style={{ backgroundColor: "#1E293B" }}>
         <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
-          Session {session.number} of {total}
+          {(session as { isBonus?: boolean }).isBonus
+            ? "Bonus Masterclass"
+            : `Module ${session.number} of ${total}`}
         </p>
         <div className="flex items-center gap-3 mb-3">
           <span

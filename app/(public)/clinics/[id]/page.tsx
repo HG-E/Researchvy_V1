@@ -120,7 +120,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 duration={clinic.duration}
                 format={clinic.format}
                 capacity={clinic.capacity}
-                earlyBirdFrom="From ₦38,000 / $59 · early bird ends Jun 20"
+                earlyBirdFrom="From ₦24,000 / $45 · early bird ends Jun 20"
               />
             </div>
 
@@ -163,7 +163,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 className="text-2xl font-bold mb-6"
                 style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
               >
-                {clinic.sessions.length}-Session Agenda
+                3 Core Modules + 2 Bonus Masterclasses
               </h2>
               <SessionAccordion sessions={clinic.sessions} />
             </section>
@@ -276,21 +276,21 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                   <EarlyBirdCountdown deadline={clinic.pricing.earlyBirdDeadline} />
                 </div>
 
-                {/* Three tiers at a glance */}
+                {/* Three bundles at a glance */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
-                  {clinic.pricing.tiers.map((tier) => {
-                    const ACCENTS: Record<string, string> = { pro: "#8B5CF6", builder: "#2563EB", starter: "#10B981" };
-                    const accent = ACCENTS[tier.id] ?? "#2563EB";
+                  {clinic.pricing.bundles.map((bundle) => {
+                    const ACCENTS: Record<string, string> = { solo: "#10B981", core: "#2563EB", pro: "#8B5CF6" };
+                    const accent = ACCENTS[bundle.id] ?? "#2563EB";
                     return (
                       <div
-                        key={tier.id}
+                        key={bundle.id}
                         className="rounded-xl border p-4"
                         style={{
                           backgroundColor: "#080E1A",
-                          borderColor: tier.recommended ? `${accent}50` : "#1E293B",
+                          borderColor: bundle.recommended ? `${accent}50` : "#1E293B",
                         }}
                       >
-                        {tier.recommended && (
+                        {bundle.recommended && (
                           <span
                             className="text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full mb-2 inline-block"
                             style={{ backgroundColor: `${accent}20`, color: accent }}
@@ -298,12 +298,12 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                             Most popular
                           </span>
                         )}
-                        <p className="text-xs font-semibold mb-0.5" style={{ color: accent }}>{tier.name}</p>
+                        <p className="text-xs font-semibold mb-0.5" style={{ color: accent }}>{bundle.name}</p>
                         <p className="text-lg font-bold" style={{ color: "#F9FAFB" }}>
-                          ₦{tier.ngn.earlyBird.toLocaleString("en-NG")}
+                          ₦{bundle.ngn.earlyBird.toLocaleString("en-NG")}
                         </p>
                         <p className="text-xs" style={{ color: "#4B5563" }}>
-                          ${tier.usd.earlyBird} USD · early bird
+                          ${bundle.usd.earlyBird} USD · early bird
                         </p>
                       </div>
                     );
@@ -315,7 +315,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                   className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors hover:text-[#1D4ED8]"
                   style={{ color: "#2563EB" }}
                 >
-                  See full tier comparison &amp; group pricing <ArrowRight className="h-3.5 w-3.5" />
+                  See all bundles &amp; group pricing <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             </section>
@@ -330,7 +330,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 duration={clinic.duration}
                 format={clinic.format}
                 capacity={clinic.capacity}
-                earlyBirdFrom="From ₦38,000 / $59 · early bird ends Jun 20"
+                earlyBirdFrom="From ₦24,000 / $45 · early bird ends Jun 20"
               />
             </div>
           </aside>

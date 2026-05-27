@@ -1,145 +1,238 @@
 /**
- * Digital Visibility Clinic — static programme data.
- * July 2026 Cohort: 4 live sessions, Wed or Sunday track.
+ * Digital Visibility Clinic — programme data.
+ * July 2026 Cohort: 3 core modules + 2 bonus masterclasses.
+ *
+ * ⚠  Do NOT change nextCohort.sessionTime, timezone, or track dates.
  */
 
 export const digitalVisibilityClinic = {
   id:      "digital-visibility-clinic",
   slug:    "digital-visibility-clinic",
   name:    "Digital Visibility Clinic",
-  tagline: "A scholarly visibility and discoverability transformation experience",
+  tagline: "Three tools. One complete digital presence. ORCID · LinkedIn · WordPress.",
   description:
-    "A structured, practical transformation experience for researchers who want to move from invisible to strategically visible, across all major scholarly discovery systems.",
-  duration: "4 live sessions",
+    "A hands-on clinic that takes researchers from digitally invisible to fully present across the three platforms that matter most: ORCID, LinkedIn, and WordPress. Three focused live sessions, each dedicated to one tool, one skill, one permanent transformation.",
+  duration: "3 core sessions + 2 bonus masterclasses",
   format:   "Live online + recorded access",
   capacity: 20,
 
-  outcomes: [
-    "Develop a complete and coherent digital scholarly identity",
-    "Optimise your research for major discovery systems (Scopus, Google Scholar, ORCID)",
-    "Understand citation intelligence and h-index strategy",
-    "Build a strategic research visibility plan for your discipline",
-    "Communicate your research to diverse academic and public audiences",
-    "Position yourself for global scholarly relevance and institutional recognition",
-  ],
+  // ── Opening keynote (delivered before Module 1) ──────────────────────────
+  opening: {
+    title:       "Opening Keynote — Why Digital Visibility Matters",
+    description:
+      "A 30-minute framing session that opens the clinic: why most researchers remain invisible despite good work, how digital visibility compounds over time, and exactly what you will build across the three core modules.",
+    duration: "30 minutes",
+  },
 
+  // ── Modules (session_number in DB aligns with module number) ─────────────
   sessions: [
     {
-      number: 1,
-      title:  "Visibility Foundations & Digital Identity",
+      number:   1,
+      id:       "orcid",
+      name:     "ORCID",
+      title:    "ORCID — Your Research Passport",
+      subtitle: "Set up and master the universal researcher identifier",
       description:
-        "Understanding modern scholarly visibility systems, digital academic identity, and setting up your presence across all major scholarly platforms.",
+        "ORCID connects your research identity across every major database, funder system, and publisher on the planet. In this session you create or reclaim your ORCID iD, import all your publications correctly, and link it to Scopus, Google Scholar, and your institution — so your research follows you everywhere.",
       topics: [
-        "What scholarly visibility actually means, and why it compounds",
-        "The research discoverability landscape",
-        "Google Scholar, ORCID, and Scopus Author ID: full optimisation",
-        "Research profile consistency across platforms",
-      ],
+        "What ORCID is and why it is the most important ID a researcher can have right now",
+        "Creating or reclaiming your ORCID iD — and resolving duplicates permanently",
+        "Importing publications from Scopus, Crossref, PubMed, and manual entry",
+        "Connecting ORCID to your institutional email and employer record",
+        "Linking ORCID to Google Scholar, Scopus Author ID, and ResearchGate",
+        "Making your ORCID profile fully public and shareable across all platforms",
+      ] as const,
+      isBonus: false,
+      soloPrice: {
+        usd: { regular: 65, earlyBird: 45 },
+        ngn: { regular: 35000, earlyBird: 24000 },
+      },
     },
     {
-      number: 2,
-      title:  "Discoverability & Citation Intelligence",
+      number:   2,
+      id:       "linkedin",
+      name:     "LinkedIn",
+      title:    "LinkedIn — Your Global Academic Presence",
+      subtitle: "Turn LinkedIn into your most powerful professional research tool",
       description:
-        "How indexing systems work, how to position your research to be found, and how to understand and improve the metrics that matter.",
+        "LinkedIn has over a billion members — including funders, collaborators, policymakers, and journal editors. This session converts your incomplete profile into a strategic academic presence optimised for discoverability, not just connections.",
       topics: [
-        "How Scopus, Web of Science, and Google Scholar index content",
-        "Keyword strategy for research metadata and journal selection",
-        "h-index and citation counts: what they mean and how to improve them ethically",
-        "Bibliometric tools: VOSviewer, OpenAlex, and your citation gap audit",
-      ],
+        "Why LinkedIn matters for academics and how its algorithm treats research content",
+        "Headline, About section, and Experience: writing for discoverability, not your CV",
+        "Featured section strategy: pinning your papers, conference talks, and key work",
+        "Skills, endorsements, and search keywords that get researchers found",
+        "Building your academic network: the right 100 connections beat the wrong 1,000",
+        "Content strategy for researchers: what to share, how often, and why it compounds",
+      ] as const,
+      isBonus: false,
+      soloPrice: {
+        usd: { regular: 65, earlyBird: 45 },
+        ngn: { regular: 35000, earlyBird: 24000 },
+      },
     },
     {
-      number: 3,
-      title:  "Research Communication & Public Engagement",
+      number:   3,
+      id:       "wordpress",
+      name:     "WordPress",
+      title:    "WordPress — Your Permanent Academic Home",
+      subtitle: "Build an academic website you own and control permanently",
       description:
-        "Translating your research for broader audiences, from policymakers to the public, using modern science communication tools.",
+        "Your institution's staff page disappears the moment you move. Your WordPress academic website is the one digital presence you own permanently. This session covers domain setup, WordPress fundamentals, and the five essential pages every researcher's site must have.",
       topics: [
-        "Making complex research understandable to non-specialists",
-        "Visual abstracts and knowledge translation techniques",
-        "Social media strategy for researchers",
-        "Science communication for media, policy, and public audiences",
-      ],
+        "Why every researcher needs a website they own — not just an institutional profile",
+        "Domain selection and hosting: the right setup for academics at every budget",
+        "WordPress themes and page builders: what actually works for researcher websites",
+        "The five essential pages: About, Research, Publications, CV, and Contact",
+        "Embedding your ORCID iD and linking your Google Scholar and LinkedIn profiles",
+        "SEO basics for academic websites: being findable on Google without paid ads",
+      ] as const,
+      isBonus: false,
+      soloPrice: {
+        usd: { regular: 79, earlyBird: 55 },
+        ngn: { regular: 42000, earlyBird: 30000 },
+      },
     },
     {
-      number: 4,
-      title:  "Strategic Positioning & Your 12-Month Visibility Plan",
+      number:   4,
+      id:       "indexing",
+      name:     "Indexing",
+      title:    "Indexing — Google Scholar, Scopus & Web of Science",
+      subtitle: "Master citation databases and the metrics that committees actually look at",
       description:
-        "Building a long-term, sustainable scholarly visibility strategy, leaving with a personalised roadmap you can execute from Day 1.",
+        "A deep-dive masterclass into how the three major scholarly databases index content, how to optimise your presence in each, and how to understand and ethically improve the citation metrics that institutions, collaborators, and grant committees examine.",
       topics: [
-        "Creating your personal 12-month visibility roadmap",
-        "Institutional positioning, collaboration, and amplification",
-        "Amplifying research impact beyond publication",
-        "Measuring and tracking your visibility progress",
-      ],
+        "How Google Scholar, Scopus, and Web of Science index content differently",
+        "Google Scholar profile optimisation: keywords, citation alerts, and profile accuracy",
+        "Scopus Author ID: claiming your profile, merging duplicates, and optimising metrics",
+        "Web of Science Researcher Profile and ResearcherID / Publons integration",
+        "h-index, i10-index, and CiteScore: what they mean and what they genuinely don't",
+        "Open access strategy for maximum indexing reach and citation counts",
+      ] as const,
+      isBonus: true,
+      soloPrice: {
+        usd: { regular: 55, earlyBird: 38 },
+        ngn: { regular: 28000, earlyBird: 20000 },
+      },
+    },
+    {
+      number:   5,
+      id:       "publishing-strategy",
+      name:     "Publishing Strategy",
+      title:    "Publishing Strategy — For Nigerian & African Researchers",
+      subtitle: "Navigate the global publishing system from an African researcher's position",
+      description:
+        "A frank, practical masterclass built specifically for researchers working in Nigeria and across Africa — covering journal selection, open access routes, predatory journal avoidance, African scholarly infrastructure, and building a publication pipeline that produces indexed, citable work.",
+      topics: [
+        "Understanding the global publishing landscape as a Nigerian and African researcher",
+        "Journal selection using SJR, CiteScore, and Scimago rankings — and what they really mean",
+        "Open access routes: APC waivers, green OA, and African repository options",
+        "Predatory journals: how to identify them and avoid them definitively",
+        "AfricArXiv and African scholarly infrastructure you should already be using",
+        "Building a 12-month publication pipeline with realistic, achievable targets",
+      ] as const,
+      isBonus: true,
+      soloPrice: {
+        usd: { regular: 55, earlyBird: 38 },
+        ngn: { regular: 28000, earlyBird: 20000 },
+      },
     },
   ],
 
+  // ── Programme outcomes ─────────────────────────────────────────────────────
+  outcomes: [
+    "Set up a complete, verified ORCID profile with all your publications correctly linked",
+    "Build a strategic LinkedIn presence optimised for academic and professional discoverability",
+    "Launch a WordPress academic website that you own and control permanently",
+    "Understand how major indexing databases work and how to maximise your presence in them",
+    "Navigate the global publishing landscape strategically as a Nigerian and African researcher",
+    "Leave with a coherent, connected digital scholarly identity across all key platforms",
+  ],
+
+  // ── Pricing ────────────────────────────────────────────────────────────────
   pricing: {
     earlyBirdDeadline: "2026-06-20",
     groupDiscounts: [
-      { min: 5,  max: 10, off: 0.20 },
-      { min: 11, max: 20, off: 0.30 },
+      { min: 3,  max: 10, off: 0.15 },
+      { min: 11, max: 20, off: 0.25 },
     ],
-    tiers: [
+
+    // Ecommerce bundles — replaces legacy tiers
+    bundles: [
       {
-        id:          "pro",
-        name:        "Visibility Pro",
-        tagline:     "Publishing steadily, go strategic",
+        id:          "solo",
+        name:        "Single Module",
+        shortName:   "Per Module",
+        tagline:     "One tool. One session.",
+        description:
+          "Enrol in any individual module as a standalone 2-hour live workshop. Ideal if you need just one specific platform, or want to experience the quality before committing to a full bundle.",
         recommended: false,
-        usd: { regular: 249, earlyBird: 179 },
-        ngn: { regular: 130000, earlyBird: 99000 },
-        whatsappContext: "Visibility Pro cohort enrollment, July 2026",
-        cta: "Join as Pro",
+        isSolo:      true,
+        savingsLabel: "",
+        usd: { regular: 79, earlyBird: 45 },
+        ngn: { regular: 42000, earlyBird: 24000 },
+        whatsappContext: "Single module enrollment, July 2026",
+        cta: "Pick a Module",
         includes: [
-          "4 live sessions + all recordings (60-day access)",
-          "Session workbook + WhatsApp community",
-          "Pre-session profile audit",
-          "Priority Q&A + personalised action plan",
-          "Physical + digital certificate",
-          "1 × 45-min private strategy call",
-          "Full Intelligence Report on your scholarly profile",
-          "90-day personalised visibility roadmap",
-          "90-day WhatsApp follow-up support",
-          "Mailed premium certificate",
-        ],
-      },
-      {
-        id:          "builder",
-        name:        "Visibility Builder",
-        tagline:     "Profiles exist, gaps remain",
-        recommended: true,
-        usd: { regular: 149, earlyBird: 99 },
-        ngn: { regular: 85000, earlyBird: 65000 },
-        whatsappContext: "Visibility Builder cohort enrollment, July 2026",
-        cta: "Secure My Spot",
-        includes: [
-          "4 live sessions + all recordings (60-day access)",
-          "Session workbook + WhatsApp community",
-          "Pre-session profile audit before Session 1",
-          "Priority Q&A during sessions",
-          "Personalised action plan",
-          "Physical + digital certificate",
-        ],
-      },
-      {
-        id:          "starter",
-        name:        "Visibility Starter",
-        tagline:     "No digital presence yet",
-        recommended: false,
-        usd: { regular: 79, earlyBird: 59 },
-        ngn: { regular: 50000, earlyBird: 38000 },
-        whatsappContext: "Visibility Starter cohort enrollment, July 2026",
-        cta: "Join as Starter",
-        includes: [
-          "4 live sessions + all recordings (60-day access)",
+          "1 live session + recording (30-day access)",
           "Session workbook",
           "WhatsApp community access",
-          "Digital certificate",
-        ],
+          "Digital certificate of attendance",
+        ] as const,
+      },
+      {
+        id:          "core",
+        name:        "DVC Core Bundle",
+        shortName:   "Core Bundle",
+        tagline:     "ORCID · LinkedIn · WordPress",
+        description:
+          "The complete three-module Digital Visibility Clinic. Three tools, three sessions, one complete and connected digital academic presence. The most popular way to attend the clinic.",
+        recommended: true,
+        isSolo:      false,
+        savingsLabel: "Save 30%",
+        usd: { regular: 149, earlyBird: 99 },
+        ngn: { regular: 85000, earlyBird: 60000 },
+        whatsappContext: "DVC Core Bundle enrollment, July 2026",
+        cta: "Secure Core Bundle",
+        includes: [
+          "3 live sessions + recordings (60-day access)",
+          "Session workbook for each module",
+          "WhatsApp community access throughout the cohort",
+          "Pre-session profile audit before Module 1",
+          "Priority Q&A during all sessions",
+          "Personalised action plan after each module",
+          "Physical + digital Certificate of Scholarly Visibility Practice",
+        ] as const,
+      },
+      {
+        id:          "pro",
+        name:        "DVC Pro Bundle",
+        shortName:   "Pro Bundle",
+        tagline:     "Core + Indexing + Publishing Strategy",
+        description:
+          "Everything in the Core Bundle, plus two bonus masterclasses: a deep-dive into citation databases (Google Scholar, Scopus, WoS) and a publishing strategy session built for Nigerian and African researchers.",
+        recommended: false,
+        isSolo:      false,
+        savingsLabel: "Save 42%",
+        usd: { regular: 239, earlyBird: 149 },
+        ngn: { regular: 130000, earlyBird: 85000 },
+        whatsappContext: "DVC Pro Bundle enrollment, July 2026",
+        cta: "Unlock Pro Bundle",
+        includes: [
+          "5 live sessions + recordings (90-day access)",
+          "Session workbook for each module",
+          "WhatsApp community (during cohort + 90 days post-clinic)",
+          "Pre-session profile audit + Full Scholarly Intelligence Report",
+          "Priority Q&A during all sessions",
+          "Personalised 90-day visibility roadmap",
+          "1 × 45-min private strategy call with the facilitator",
+          "Physical premium certificate, mailed to your address",
+          "90-day post-clinic WhatsApp mentorship",
+        ] as const,
       },
     ],
   },
 
+  // ── Testimonials ───────────────────────────────────────────────────────────
   testimonials: [
     {
       name:        "Barnabas Folami-A",
@@ -185,10 +278,11 @@ export const digitalVisibilityClinic = {
     },
   ],
 
+  // ── Certificate ────────────────────────────────────────────────────────────
   certificate: {
     name:        "Certificate of Scholarly Visibility Practice",
     issuer:      "Researchvy Clinics",
-    description: "Awarded upon successful completion of the Digital Visibility Clinic",
+    description: "Awarded upon successful completion of the Digital Visibility Clinic (Core Bundle or Pro Bundle)",
     features: [
       "Unique certificate number",
       "QR verification code",
@@ -197,72 +291,96 @@ export const digitalVisibilityClinic = {
     ],
   },
 
+  // ── Post-clinic benefits ────────────────────────────────────────────────────
   postClinicBenefits: [
-    "Access to all session recordings",
+    "Access to all session recordings (Core: 60 days · Pro: 90 days)",
     "Researchvy Alumni Network membership",
-    "Exclusive post-clinic resource library",
-    "Certificate shareable on LinkedIn",
-    "Continued learning pathway recommendations",
+    "Exclusive post-clinic resource library and template pack",
+    "Verified certificate shareable directly on LinkedIn",
+    "Priority access to future cohorts and new clinic modules",
   ],
 
+  // ── FAQ ─────────────────────────────────────────────────────────────────────
   faq: [
     {
       question: "Who is the Digital Visibility Clinic designed for?",
       answer:
-        "The clinic is designed for postgraduate researchers, early-career academics, established scholars, and institutional research staff who want to improve how their research is found, cited, and applied. It is relevant across all disciplines, from sciences and social sciences to humanities.",
+        "The clinic is designed for postgraduate researchers, early-career academics, established scholars, and institutional research staff in Nigeria and across Africa who want to improve how their research is found, cited, and engaged with. It is relevant across all disciplines — sciences, social sciences, and humanities alike.",
+    },
+    {
+      question: "What is the difference between a module and a bundle?",
+      answer:
+        "A module is a single 2-hour live workshop focused on one specific tool — ORCID, LinkedIn, or WordPress. A bundle is a package of multiple modules sold together at a significant discount. The Core Bundle includes all three core modules (ORCID + LinkedIn + WordPress). The Pro Bundle adds two bonus masterclasses on top.",
+    },
+    {
+      question: "Can I buy just one module?",
+      answer:
+        "Yes. Every module is available as a standalone purchase. If you already have a strong LinkedIn presence but need to fix your ORCID, you can buy the ORCID module only. If you want to start with one and upgrade to a bundle later, contact us via WhatsApp and we will apply your solo payment toward the bundle price.",
+    },
+    {
+      question: "What is in the Core Bundle and why is it the most popular?",
+      answer:
+        "The Core Bundle includes all three core modules: ORCID, LinkedIn, and WordPress. Together these three platforms form the complete foundation of a researcher's digital presence — your identity layer (ORCID), your network layer (LinkedIn), and your permanent home (WordPress). Most participants find that completing all three in sequence produces the biggest transformation.",
+    },
+    {
+      question: "What does the Pro Bundle add on top of the Core?",
+      answer:
+        "The Pro Bundle adds two bonus masterclasses: Indexing (a deep-dive into Google Scholar, Scopus, and Web of Science optimisation) and Publishing Strategy (a frank session on navigating the global publishing system as a Nigerian and African researcher). It also adds a Full Scholarly Intelligence Report, a private strategy call, 90-day post-clinic WhatsApp mentorship, and a premium mailed certificate.",
     },
     {
       question: "Is this relevant to my field of research?",
       answer:
-        "Yes. Scholarly visibility operates the same way across all academic disciplines. The platforms, metrics, and discovery systems are field-agnostic. Our previous cohorts included microbiologists, environmental scientists, social scientists, and humanities researchers. Every researcher with publications benefits from the clinic.",
+        "Yes. The three core platforms — ORCID, LinkedIn, and WordPress — are used by researchers across all disciplines. Our previous cohorts included microbiologists, environmental scientists, social scientists, and humanities researchers. The tools and strategies in this clinic are field-agnostic.",
     },
     {
       question: "Do I have to attend sessions live?",
       answer:
-        "Live attendance is strongly encouraged. The small cohort size means real interaction and personalised feedback. However, all sessions are recorded and provided to enrolled participants, so you can review them within 60 days if you miss a live session.",
+        "Live attendance is strongly encouraged. The small cohort size means real interaction and personalised feedback. However, all sessions are recorded and provided to enrolled participants — Core Bundle for 60 days, Pro Bundle for 90 days.",
     },
     {
-      question: "I already have a Google Scholar profile and ORCID. Is this still for me?",
+      question: "I already have a LinkedIn and ORCID. Is this still for me?",
       answer:
-        "Almost certainly yes. 89% of researchers we audit have at least one broken, incomplete, or duplicate profile, even those who think they are set up correctly. The clinic goes far beyond profile creation: it covers citation intelligence, strategic positioning, and research communication that most researchers never receive training on.",
+        "Almost certainly yes. In our experience, most researchers who believe their profiles are set up correctly have at least one significant gap — an unclaimed Scopus ID, a LinkedIn headline written like a CV, or an ORCID with missing publications. The clinic goes well beyond setup: it covers strategy, discoverability, and connection between platforms.",
     },
     {
-      question: "How is this different from watching YouTube videos or reading about visibility online?",
+      question: "How is this different from watching YouTube videos?",
       answer:
-        "Passive content gives you information. The clinic gives you implementation. Every session ends with a specific action that you execute on your own profile, with feedback from the facilitator and your cohort peers. You leave with a completed, audited visibility system, not just notes.",
+        "Passive content gives you information. The clinic gives you implementation. Every session ends with specific tasks you execute on your own profiles, with live feedback from the facilitator and your cohort peers. You leave with a completed, connected visibility system — not just notes.",
     },
     {
       question: "What is the total time commitment?",
       answer:
-        "4 live sessions over 4 weeks (July 1 to 28, 2026), each 2 hours long. Between sessions, platform-based activities take approximately 2 to 3 hours per week at your own pace. Total: roughly 16 to 20 hours over the cohort period.",
+        "Core Bundle: 3 live sessions over 3 weeks (July 2026), each 2 hours, plus platform activities of roughly 1–2 hours per week. Pro Bundle: 5 live sessions over 5 weeks with the same weekly activity rhythm. Total: approximately 10–14 hours for Core, 16–20 hours for Pro.",
     },
     {
       question: "What will I have when I complete the clinic?",
       answer:
-        "You will leave with a fully optimised digital scholarly identity, a personal research visibility strategy tailored to your discipline, and a verified Certificate of Scholarly Visibility Practice, downloadable and shareable on LinkedIn.",
+        "You will have a complete, verified ORCID profile, an optimised LinkedIn academic presence, and a live WordPress academic website — all connected to each other. Core and Pro Bundle participants also receive a physical and digital Certificate of Scholarly Visibility Practice.",
     },
     {
       question: "How much does the clinic cost?",
       answer:
-        "Pricing is published transparently on this page. The Visibility Starter tier begins at $59 USD (₦38,000 NGN) early bird. The Visibility Builder, the most popular tier, is $99 USD (₦65,000 NGN) early bird. The Visibility Pro tier is $179 USD (₦99,000 NGN) early bird. Early bird pricing closes June 20, 2026.",
+        "Individual modules start from $45 USD (₦24,000 NGN) early bird. The Core Bundle (ORCID + LinkedIn + WordPress) is $99 USD (₦60,000 NGN) early bird. The Pro Bundle (Core + Indexing + Publishing Strategy) is $149 USD (₦85,000 NGN) early bird. Early bird pricing closes June 20, 2026.",
     },
     {
       question: "Can my institution or department fund my place?",
       answer:
-        "Yes. Many participants attend under institutional professional development budgets. We provide a formal institutional letter you can present to your department head or finance officer. This programme has been delivered in partnership with the American Society for Microbiology (ASM), Nigeria Chapter, and the Department of Environmental Science (EHS), Federal University of Technology, Owerri (FUTO). Download the institutional letter from our resources page or contact us via WhatsApp to request a tailored version.",
+        "Yes. Many participants attend under institutional professional development budgets. We provide a formal institutional letter you can present to your department head or finance officer. This programme has been delivered in partnership with the American Society for Microbiology (ASM), Nigeria Chapter, and the Department of Environmental Health Science, Federal University of Technology, Owerri (FUTO). Contact us via WhatsApp to request a tailored institutional letter.",
     },
     {
       question: "How many participants are in each cohort?",
       answer:
-        "Each cohort is deliberately limited to a maximum of 20 researchers to ensure every participant receives personal attention, peer interaction, and a high-quality learning experience.",
+        "Each cohort is limited to a maximum of 20 researchers to ensure every participant receives personal attention, peer interaction, and a high-quality experience.",
     },
     {
       question: "What do I need to participate?",
       answer:
-        "A stable internet connection, an active research profile (or the desire to build one), and a commitment to completing the inter-session platform activities. No special software is required.",
+        "A stable internet connection, an active research profile (or the intention to build one), and a commitment to completing the inter-session platform activities. No special software is required beyond a web browser.",
     },
   ],
 
+  // ── Next cohort ─────────────────────────────────────────────────────────────
+  // ⚠  Do NOT modify sessionTime, timezone, or track dates.
   nextCohort: {
     id:                   "cohort-2026-july",
     registrationDeadline: "2026-06-28",
@@ -270,8 +388,8 @@ export const digitalVisibilityClinic = {
     sessionTime:          "5:00–7:00 PM EST / 10:00 PM–12:00 AM WAT",
     timezone:             "EST (UTC−5) / WAT (UTC+1)",
     sessionDuration:      "2 hours",
-    weeklyTaskHours:      2,
-    totalCommitment:      "4 live sessions over 4 weeks",
+    weeklyTaskHours:      1,
+    totalCommitment:      "3 core sessions over 3 weeks (5 sessions for Pro Bundle)",
     spotsAlreadyFilled:   8,
     status:               "open" as "open" | "closing-soon" | "full" | "tba",
     tracks: {

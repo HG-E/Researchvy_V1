@@ -4,10 +4,12 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 type Session = {
-  number: number;
-  title: string;
+  number:      number;
+  title:       string;
+  subtitle?:   string;
   description: string;
-  topics: readonly string[];
+  topics:      readonly string[];
+  isBonus?:    boolean;
 };
 
 export function SessionAccordion({ sessions }: { sessions: readonly Session[] }) {
@@ -16,12 +18,16 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
   return (
     <div className="space-y-3">
       {sessions.map((session) => {
-        const isOpen = open === session.number;
+        const isOpen    = open === session.number;
+        const isBonus   = !!session.isBonus;
+        const accent    = isBonus ? "#F59E0B" : "#2563EB";
+        const accentBg  = isBonus ? "rgba(245,158,11,0.12)" : "rgba(37,99,235,0.12)";
+
         return (
           <div
             key={session.number}
             className="rounded-2xl border overflow-hidden transition-colors duration-200"
-            style={{ backgroundColor: "#0F172A", borderColor: isOpen ? "#2563EB" : "#1E293B" }}
+            style={{ backgroundColor: "#0F172A", borderColor: isOpen ? accent : "#1E293B" }}
           >
             <button
               onClick={() => setOpen(isOpen ? null : session.number)}
@@ -30,17 +36,35 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
               <div className="flex items-center gap-4">
                 <span
                   className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-                  style={{ backgroundColor: isOpen ? "#2563EB" : "#1E293B", color: isOpen ? "#fff" : "#60A5FA" }}
+                  style={{
+                    backgroundColor: isOpen ? accent : "#1E293B",
+                    color: isOpen ? "#fff" : accent,
+                  }}
                 >
                   {session.number}
                 </span>
                 <div>
-                  <p className="text-xs font-medium" style={{ color: "#6B7280" }}>
-                    Session {session.number}
-                  </p>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p className="text-xs font-medium" style={{ color: "#6B7280" }}>
+                      {isBonus ? "Bonus Masterclass" : `Module ${session.number}`}
+                    </p>
+                    {isBonus && (
+                      <span
+                        className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+                        style={{ backgroundColor: accentBg, color: accent }}
+                      >
+                        Bonus
+                      </span>
+                    )}
+                  </div>
                   <p className="text-sm font-semibold mt-0.5" style={{ color: "#F9FAFB" }}>
                     {session.title}
                   </p>
+                  {session.subtitle && (
+                    <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+                      {session.subtitle}
+                    </p>
+                  )}
                 </div>
               </div>
               <ChevronDown
@@ -59,7 +83,7 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
                     <li key={topic} className="flex items-start gap-2.5 text-sm" style={{ color: "#6B7280" }}>
                       <span
                         className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: "#2563EB" }}
+                        style={{ backgroundColor: accent }}
                       />
                       {topic}
                     </li>

@@ -50,10 +50,11 @@ async function getPageData(userId: string) {
 
 // Session titles — must match constants/clinics.ts sessions array
 const SESSION_TITLES: Record<number, string> = {
-  1: "Visibility Foundations & Digital Identity",
-  2: "Discoverability & Citation Intelligence",
-  3: "Research Communication & Public Engagement",
-  4: "Strategic Positioning & Your 12-Month Visibility Plan",
+  1: "ORCID — Your Research Passport",
+  2: "LinkedIn — Your Global Academic Presence",
+  3: "WordPress — Your Permanent Academic Home",
+  4: "Indexing — Google Scholar, Scopus & WoS",
+  5: "Publishing Strategy for Nigerian & African Researchers",
 };
 
 export default async function TasksPage() {
