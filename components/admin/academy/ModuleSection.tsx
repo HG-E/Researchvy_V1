@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, ChevronRight, Pencil, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronRight, Pencil, Trash2, ChevronUp } from "lucide-react";
 import { LessonRow } from "./LessonRow";
 import { AddLessonForm } from "./AddLessonForm";
 
@@ -18,7 +18,15 @@ type Module = {
   lessons: Lesson[];
 };
 
-export function ModuleSection({ mod }: { mod: Module }) {
+interface Props {
+  mod: Module;
+  isFirst?: boolean;
+  isLast?: boolean;
+  onMoveUp?: () => void;
+  onMoveDown?: () => void;
+}
+
+export function ModuleSection({ mod, isFirst, isLast, onMoveUp, onMoveDown }: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -27,6 +35,11 @@ export function ModuleSection({ mod }: { mod: Module }) {
   const [saving, setSaving] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
+
+  // Lesson order state (managed locally, synced to API)
+  const [lessons, setLessons] = useState(() =>
+    [...mod.lessons].sort((a, b) => a.position - b.position)
+  );
 
   async function save() {
     setSaving(true);
@@ -47,7 +60,29 @@ export function ModuleSection({ mod }: { mod: Module }) {
     else { setDeleting(false); setConfirmDelete(false); }
   }
 
-  const sortedLessons = [...mod.lessons].sort((a, b) => a.position - b.position);
+  function moveLesson(id: string, dir: "up" | "down") {
+    setLessons(prev => {
+      const idx = prev.findIndex(l => l.id === id);
+      if (dir === "up" && idx === 0) return prev;
+      if (dir === "down" && idx === prev.length - 1) return prev;
+
+      const next = [...prev];
+      const swapIdx = dir === "up" ? idx - 1 : idx + 1;
+      const temp = next[idx].position;
+      next[idx] = { ...next[idx], position: next[swapIdx].position };
+      next[swapIdx] = { ...next[swapIdx], position: temp };
+      const sorted = next.sort((a, b) => a.position - b.position).map((l, i) => ({ ...l, position: i + 1 }));
+
+      // Persist to API
+      fetch("/api/admin/academy/reorder", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "lesson", items: sorted.map(l => ({ id: l.id, position: l.position })) }),
+      }).catch(console.error);
+
+      return sorted;
+    });
+  }
 
   return (
     <div className="rounded-xl border overflow-hidden" style={{ borderColor: "#1E293B" }}>
@@ -68,17 +103,31 @@ export function ModuleSection({ mod }: { mod: Module }) {
           <span className="flex-1 text-sm font-medium min-w-0" style={{ color: "#E2E8F0" }}>
             Module {mod.position}: {mod.title}
             <span className="ml-2 text-xs font-normal" style={{ color: "#4B5563" }}>
-              {sortedLessons.length} lesson{sortedLessons.length !== 1 ? "s" : ""}
+              {lessons.length} lesson{lessons.length !== 1 ? "s" : ""}
             </span>
           </span>
         )}
 
         <div className="flex items-center gap-1 flex-shrink-0">
+          {/* Reorder buttons */}
+          {!editing && onMoveUp && (
+            <button onClick={onMoveUp} disabled={isFirst}
+              className="flex items-center justify-center w-6 h-6 rounded disabled:opacity-20"
+              style={{ color: "#6B7280" }} title="Move up">
+              <ChevronUp className="h-3.5 w-3.5" />
+            </button>
+          )}
+          {!editing && onMoveDown && (
+            <button onClick={onMoveDown} disabled={isLast}
+              className="flex items-center justify-center w-6 h-6 rounded disabled:opacity-20"
+              style={{ color: "#6B7280" }} title="Move down">
+              <ChevronDown className="h-3.5 w-3.5" />
+            </button>
+          )}
+
           {editing ? (
             <>
-              <button onClick={() => setEditing(false)} className="text-xs px-2 py-1 rounded" style={{ color: "#6B7280" }}>
-                Cancel
-              </button>
+              <button onClick={() => setEditing(false)} className="text-xs px-2 py-1 rounded" style={{ color: "#6B7280" }}>Cancel</button>
               <button onClick={save} disabled={saving} className="text-xs px-2.5 py-1 rounded font-medium"
                 style={{ backgroundColor: "#2563EB", color: "#fff" }}>
                 {saving ? "…" : "Save"}
@@ -120,7 +169,7 @@ export function ModuleSection({ mod }: { mod: Module }) {
             <div className="flex items-center gap-2 p-3 rounded-lg mb-2"
               style={{ backgroundColor: "#1f0a0a", border: "1px solid #7f1d1d" }}>
               <span className="text-xs flex-1" style={{ color: "#F87171" }}>
-                Delete module + {sortedLessons.length} lesson{sortedLessons.length !== 1 ? "s" : ""}?
+                Delete module + {lessons.length} lesson{lessons.length !== 1 ? "s" : ""}?
               </span>
               <button onClick={() => setConfirmDelete(false)} className="text-xs px-2 py-1" style={{ color: "#6B7280" }}>Cancel</button>
               <button onClick={del} disabled={deleting} className="text-xs px-2.5 py-1 rounded font-medium"
@@ -130,10 +179,15 @@ export function ModuleSection({ mod }: { mod: Module }) {
             </div>
           )}
 
-          {sortedLessons.length === 0 && !editing && (
+          {lessons.length === 0 && !editing && (
             <p className="text-xs py-2 text-center" style={{ color: "#4B5563" }}>No lessons yet</p>
           )}
-          {sortedLessons.map(l => <LessonRow key={l.id} lesson={l} />)}
+          {lessons.map((l, idx) => (
+            <LessonRow key={l.id} lesson={l}
+              isFirst={idx === 0} isLast={idx === lessons.length - 1}
+              onMoveUp={() => moveLesson(l.id, "up")}
+              onMoveDown={() => moveLesson(l.id, "down")} />
+          ))}
           <AddLessonForm moduleId={mod.id} />
         </div>
       )}

@@ -2,6 +2,7 @@ import { generatePageMetadata } from "@/lib/seo/metadata";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { format } from "date-fns";
 import { Building2, AlertCircle } from "lucide-react";
+import { PartnershipStatusSelect } from "@/components/admin/PartnershipStatusSelect";
 
 export const metadata = generatePageMetadata({ title: "Partnership Enquiries" });
 
@@ -17,12 +18,6 @@ type PartnershipEnquiry = {
   created_at:       string;
 };
 
-const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
-  new:         { bg: "rgba(245,158,11,0.12)",  text: "#FCD34D" },
-  contacted:   { bg: "rgba(37,99,235,0.12)",   text: "#60A5FA" },
-  in_progress: { bg: "rgba(139,92,246,0.12)",  text: "#A78BFA" },
-  closed:      { bg: "rgba(107,114,128,0.12)", text: "#9CA3AF" },
-};
 
 async function getEnquiries(): Promise<{ rows: PartnershipEnquiry[]; error: boolean }> {
   try {
@@ -92,7 +87,6 @@ export default async function PartnershipEnquiriesPage() {
       {!error && rows.length > 0 && (
         <div className="space-y-4">
           {rows.map((row, i) => {
-            const statusStyle = STATUS_COLORS[row.status] ?? STATUS_COLORS.new;
             return (
               <div
                 key={row.id}
@@ -104,12 +98,7 @@ export default async function PartnershipEnquiriesPage() {
                     <div>
                       <div className="flex items-center gap-3 flex-wrap">
                         <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>{row.institution}</p>
-                        <span
-                          className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
-                          style={{ backgroundColor: statusStyle.bg, color: statusStyle.text }}
-                        >
-                          {row.status.replace("_", " ")}
-                        </span>
+                        <PartnershipStatusSelect id={row.id} initial={row.status} />
                       </div>
                       <p className="text-xs mt-1" style={{ color: "#4B5563" }}>
                         {row.contact_name} · <a href={`mailto:${row.contact_email}`} style={{ color: "#2563EB" }}>{row.contact_email}</a>

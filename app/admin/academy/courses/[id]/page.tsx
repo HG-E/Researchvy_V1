@@ -2,9 +2,9 @@ import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { requireRole } from "@/lib/auth/permissions";
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Users } from "lucide-react";
 import { CourseMetaForm } from "@/components/admin/academy/CourseMetaForm";
-import { ModuleSection } from "@/components/admin/academy/ModuleSection";
+import { ModuleList } from "@/components/admin/academy/ModuleList";
 import { AddModuleForm } from "@/components/admin/academy/AddModuleForm";
 
 export const dynamic = "force-dynamic";
@@ -22,21 +22,27 @@ export default async function CourseEditorPage({
   const { id } = await params;
   const admin = createSupabaseAdminClient();
 
-  const { data: course } = await admin
-    .from("courses")
-    .select(`
-      id, title, subtitle, description, level, slug, is_free, is_published,
-      thumbnail_url, trailer_url, duration_minutes, position,
-      modules (
-        id, title, description, position,
-        lessons (
-          id, title, slug, lesson_type, video_provider, video_id, video_url,
-          content_md, duration_seconds, is_free_preview, is_published, position
+  const [{ data: course }, { count: enrollmentCount }] = await Promise.all([
+    admin
+      .from("courses")
+      .select(`
+        id, title, subtitle, description, level, slug, is_free, is_published,
+        thumbnail_url, trailer_url, duration_minutes, position,
+        modules (
+          id, title, description, position,
+          lessons (
+            id, title, slug, lesson_type, video_provider, video_id, video_url,
+            content_md, duration_seconds, is_free_preview, is_published, position
+          )
         )
-      )
-    `)
-    .eq("id", id)
-    .single();
+      `)
+      .eq("id", id)
+      .single(),
+    admin
+      .from("enrollments")
+      .select("*", { count: "exact", head: true })
+      .eq("course_id", id),
+  ]);
 
   if (!course) notFound();
 
@@ -65,19 +71,17 @@ export default async function CourseEditorPage({
               {sortedModules.length} module{sortedModules.length !== 1 ? "s" : ""}
             </span>
           </h2>
+          <Link
+            href={`/admin/academy/courses/${id}/progress`}
+            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg font-medium"
+            style={{ backgroundColor: "#1E293B", color: "#94A3B8" }}
+          >
+            <Users className="h-3.5 w-3.5" />
+            {enrollmentCount ?? 0} student{(enrollmentCount ?? 0) !== 1 ? "s" : ""}
+          </Link>
         </div>
 
-        {sortedModules.length === 0 && (
-          <p className="text-sm py-6 text-center rounded-xl border"
-            style={{ color: "#4B5563", borderColor: "#1E293B", borderStyle: "dashed" }}>
-            No modules yet — add your first module below
-          </p>
-        )}
-
-        {sortedModules.map(mod => (
-          <ModuleSection key={mod.id} mod={mod} />
-        ))}
-
+        <ModuleList modules={sortedModules} courseId={course.id} />
         <AddModuleForm courseId={course.id} />
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, ChevronRight, Trash2, Video, FileText } from "lucide-react";
+import { ChevronDown, ChevronRight, Trash2, Video, FileText, ChevronUp } from "lucide-react";
 
 type Lesson = {
   id: string; title: string; slug: string; lesson_type: string;
@@ -11,7 +11,15 @@ type Lesson = {
   is_published: boolean; position: number;
 };
 
-export function LessonRow({ lesson }: { lesson: Lesson }) {
+interface Props {
+  lesson: Lesson;
+  isFirst?: boolean;
+  isLast?: boolean;
+  onMoveUp?: () => void;
+  onMoveDown?: () => void;
+}
+
+export function LessonRow({ lesson, isFirst, isLast, onMoveUp, onMoveDown }: Props) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -24,6 +32,7 @@ export function LessonRow({ lesson }: { lesson: Lesson }) {
     video_provider: lesson.video_provider ?? "youtube",
     video_id: lesson.video_id ?? "",
     video_url: lesson.video_url ?? "",
+    content_md: lesson.content_md ?? "",
     duration_seconds: String(lesson.duration_seconds ?? ""),
     is_free_preview: lesson.is_free_preview,
     is_published: lesson.is_published,
@@ -38,7 +47,13 @@ export function LessonRow({ lesson }: { lesson: Lesson }) {
     const res = await fetch(`/api/admin/academy/lessons/${lesson.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, duration_seconds: Number(form.duration_seconds) || 0 }),
+      body: JSON.stringify({
+        ...form,
+        duration_seconds: Number(form.duration_seconds) || 0,
+        content_md: form.content_md || null,
+        video_id: form.video_id || null,
+        video_url: form.video_url || null,
+      }),
     });
     setSaving(false);
     if (res.ok) { setOpen(false); router.refresh(); }
@@ -58,6 +73,22 @@ export function LessonRow({ lesson }: { lesson: Lesson }) {
   return (
     <div className="border rounded-lg overflow-hidden" style={{ borderColor: "#334155" }}>
       <div className="flex items-center gap-2 px-3 py-2.5" style={{ backgroundColor: "#0F172A" }}>
+        {/* Reorder */}
+        {onMoveUp && (
+          <div className="flex flex-col flex-shrink-0">
+            <button onClick={onMoveUp} disabled={isFirst}
+              className="flex items-center justify-center w-5 h-4 disabled:opacity-20"
+              style={{ color: "#4B5563" }}>
+              <ChevronUp className="h-3 w-3" />
+            </button>
+            <button onClick={onMoveDown} disabled={isLast}
+              className="flex items-center justify-center w-5 h-4 disabled:opacity-20"
+              style={{ color: "#4B5563" }}>
+              <ChevronDown className="h-3 w-3" />
+            </button>
+          </div>
+        )}
+
         <button onClick={() => setOpen(o => !o)} className="flex-1 flex items-center gap-2 text-left min-w-0">
           {open
             ? <ChevronDown className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
@@ -67,14 +98,10 @@ export function LessonRow({ lesson }: { lesson: Lesson }) {
             : <FileText className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#34D399" }} />}
           <span className="text-sm truncate" style={{ color: "#D1D5DB" }}>{lesson.title}</span>
           {lesson.is_free_preview && (
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#1d4ed8", color: "#bfdbfe" }}>
-              preview
-            </span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#1d4ed8", color: "#bfdbfe" }}>preview</span>
           )}
           {!lesson.is_published && (
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#1E293B", color: "#6B7280" }}>
-              draft
-            </span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#1E293B", color: "#6B7280" }}>draft</span>
           )}
         </button>
         <span className="text-[10px] font-mono flex-shrink-0" style={{ color: "#4B5563" }}>#{lesson.position}</span>
@@ -98,6 +125,7 @@ export function LessonRow({ lesson }: { lesson: Lesson }) {
                 <option value="article">Article</option>
               </select>
             </div>
+
             {form.lesson_type === "video" && (
               <>
                 <div>
@@ -108,15 +136,21 @@ export function LessonRow({ lesson }: { lesson: Lesson }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Video ID</label>
-                  <input className={`${inp} font-mono`} style={inpStyle} value={form.video_id} onChange={e => set("video_id", e.target.value)} />
+                  <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>
+                    {form.video_provider === "youtube" ? "YouTube Video ID" : "Bunny Video ID"}
+                  </label>
+                  <input className={`${inp} font-mono`} style={inpStyle} value={form.video_id}
+                    onChange={e => set("video_id", e.target.value)}
+                    placeholder={form.video_provider === "youtube" ? "dQw4w9WgXcQ" : "uuid-here"} />
                 </div>
               </>
             )}
+
             <div>
-              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Duration (sec)</label>
+              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Duration (seconds)</label>
               <input className={inp} style={inpStyle} type="number" value={form.duration_seconds}
-                onChange={e => set("duration_seconds", e.target.value)} />
+                onChange={e => set("duration_seconds", e.target.value)}
+                placeholder="e.g. 900 for 15 min" />
             </div>
             <div className="flex items-center gap-4 pt-4">
               <label className="flex items-center gap-1.5 text-xs cursor-pointer" style={{ color: "#D1D5DB" }}>
@@ -127,6 +161,20 @@ export function LessonRow({ lesson }: { lesson: Lesson }) {
                 <input type="checkbox" checked={form.is_published} onChange={e => set("is_published", e.target.checked)} />
                 Published
               </label>
+            </div>
+
+            {/* Lesson body content editor */}
+            <div className="col-span-2">
+              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>
+                Lesson Content (Markdown)
+                <span className="ml-2 font-normal" style={{ color: "#4B5563" }}>optional — shown below the video</span>
+              </label>
+              <textarea
+                className={`${inp} resize-y font-mono text-xs leading-relaxed`} style={{ ...inpStyle, minHeight: "120px" }}
+                value={form.content_md}
+                onChange={e => set("content_md", e.target.value)}
+                placeholder={`## Lesson Notes\n\nWrite any supplementary content, key takeaways, or resources here.\n\nSupports **markdown** formatting.`}
+              />
             </div>
           </div>
 
