@@ -175,6 +175,131 @@ export async function sendEnrollmentWelcomeEmail(opts: {
   });
 }
 
+// ── Day-2 drip (platform re-engagement) ──────────────────────────────────────
+
+export async function sendDay2DripEmail(opts: { to: string; firstName: string }) {
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [opts.to],
+    replyTo: REPLY_TO,
+    subject: `${opts.firstName}, your first step to research visibility`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">
+    Researchvy
+  </p>
+
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 16px;line-height:1.4">
+      Hi ${opts.firstName} — one free lesson, 15 minutes.
+    </h1>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 20px">
+      You signed up yesterday. Most researchers explore for a week and then
+      it gets busy — and nothing changes about their visibility.
+    </p>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">
+      The researchers who move fastest usually start with one specific habit:
+      they make their abstract <strong style="color:#D1D5DB">searchable</strong>.
+      It takes 15 minutes. It lasts a career.
+    </p>
+    <div style="background:#0A0F1A;border:1px solid #1E293B;border-radius:12px;padding:20px;margin-bottom:24px">
+      <p style="color:#60A5FA;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px">Free lesson</p>
+      <p style="color:#E2E8F0;font-size:16px;font-weight:600;margin:0 0 4px">Keyword Strategy for Research Abstracts</p>
+      <p style="color:#6B7280;font-size:13px;margin:0">Level 1 · Foundations · ~15 min</p>
+    </div>
+    <a href="${SITE_URL}/academy/courses"
+       style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">
+      Start the free lesson →
+    </a>
+  </div>
+
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0;line-height:1.7">
+      <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a>
+      &nbsp;·&nbsp;
+      <a href="${SITE_URL}/academy/courses" style="color:#4B5563;text-decoration:none">Academy</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>`,
+  });
+}
+
+// ── Day-5 drip (course enrollment nudge) ─────────────────────────────────────
+
+export async function sendDay5DripEmail(opts: { to: string; firstName: string }) {
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [opts.to],
+    replyTo: REPLY_TO,
+    subject: `The visibility gap is widening, ${opts.firstName}`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">
+    Researchvy Academy
+  </p>
+
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 16px;line-height:1.4">
+      ${opts.firstName}, here's what separates cited researchers from invisible ones.
+    </h1>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 20px">
+      It's not prestige. It's not luck. It's a small set of learnable skills
+      that most researchers were never taught in their PhD programme.
+    </p>
+    <div style="border-left:3px solid #A78BFA;padding-left:16px;margin-bottom:24px">
+      <p style="color:#A78BFA;font-size:13px;font-weight:600;margin:0 0 8px">What the Academy teaches:</p>
+      <ul style="color:#9CA3AF;font-size:14px;line-height:2;margin:0;padding-left:20px">
+        <li>How to make your research <em>discoverable</em> on every major platform</li>
+        <li>Building a scholarly identity that precedes your papers</li>
+        <li>Writing abstracts that rank and get read</li>
+        <li>Turning one paper into 6 months of visibility content</li>
+        <li>Getting cited by researchers who've never met you</li>
+      </ul>
+    </div>
+    <a href="${SITE_URL}/academy/courses"
+       style="display:inline-block;background:#7C3AED;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 32px;border-radius:12px;margin-bottom:16px">
+      Explore Academy courses →
+    </a>
+    <p style="color:#4B5563;font-size:12px;margin:8px 0 0">
+      Several courses are free. No credit card needed.
+    </p>
+  </div>
+
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px;margin-bottom:24px">
+    <p style="color:#6B7280;font-size:13px;line-height:1.7;margin:0">
+      Not ready for a course? Join a free Digital Visibility Clinic.
+      Live 90-minute sessions where we work through your profile together.
+      <a href="${SITE_URL}/clinics" style="color:#60A5FA;text-decoration:none">See upcoming dates →</a>
+    </p>
+  </div>
+
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0;line-height:1.7">
+      <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a>
+      &nbsp;·&nbsp;
+      <a href="${SITE_URL}/academy/courses" style="color:#4B5563;text-decoration:none">Academy</a>
+      &nbsp;·&nbsp;
+      <a href="${SITE_URL}/clinics" style="color:#4B5563;text-decoration:none">Clinics</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>`,
+  });
+}
+
 // ── Lead magnet (insights email capture) ─────────────────────────────────────
 
 export async function sendLeadMagnetEmail(opts: {
