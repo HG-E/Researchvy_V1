@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
           <tr><td style="padding:10px 0;color:#6B7280;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Clinic</td>
               <td style="padding:10px 0;color:#0F172A;border-bottom:1px solid #F3F4F6;font-size:14px;">${clinicLabel}</td></tr>
           <tr><td style="padding:10px 0;color:#6B7280;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Track</td>
-              <td style="padding:10px 0;color:#0F172A;border-bottom:1px solid #F3F4F6;font-size:14px;">${preferredTrack === "wednesday" ? "Mid-week (Wednesdays)" : preferredTrack === "saturday" ? "Weekend (Saturdays)" : "Not selected"}</td></tr>
+              <td style="padding:10px 0;color:#0F172A;border-bottom:1px solid #F3F4F6;font-size:14px;">${preferredTrack === "wednesday" ? "Mid-week (Wednesdays)" : preferredTrack === "sunday" ? "Weekend (Sundays)" : "Not selected"}</td></tr>
           <tr><td style="padding:10px 0;color:#6B7280;vertical-align:top;font-size:14px;">Registered at</td>
               <td style="padding:10px 0;color:#0F172A;font-size:14px;">${new Date().toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })} UTC</td></tr>
         </table>

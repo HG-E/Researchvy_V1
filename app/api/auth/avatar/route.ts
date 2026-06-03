@@ -14,7 +14,8 @@ export async function POST(req: NextRequest) {
     const file     = formData.get("avatar") as File | null;
 
     if (!file)                          return NextResponse.json({ error: "No file provided" }, { status: 400 });
-    if (!file.type.startsWith("image/"))return NextResponse.json({ error: "File must be an image" }, { status: 400 });
+    const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+    if (!ALLOWED_TYPES.includes(file.type)) return NextResponse.json({ error: "Only JPEG, PNG, or WebP images are allowed" }, { status: 400 });
     if (file.size > MAX_BYTES)          return NextResponse.json({ error: "Image must be 2 MB or smaller" }, { status: 400 });
 
     const admin = createSupabaseAdminClient();

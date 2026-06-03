@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { generateOrderReference, isEarlyBird, resolveAmount } from "@/lib/orders";
+import { digitalVisibilityClinic } from "@/constants/clinics";
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,6 +23,16 @@ export async function POST(request: NextRequest) {
     if (bundleId === "solo" && !moduleId) {
       return NextResponse.json({ error: "Module selection required for solo purchase" }, { status: 400 });
     }
+    if (bundleId === "solo" && moduleId) {
+      const validSession = digitalVisibilityClinic.sessions.find((s) => s.id === moduleId && !s.isBonus);
+      if (!validSession) {
+        return NextResponse.json({ error: "Invalid module selection" }, { status: 400 });
+      }
+    }
+    const validBundle = digitalVisibilityClinic.pricing.bundles.find((b) => b.id === bundleId);
+    if (!validBundle && bundleId !== "solo") {
+      return NextResponse.json({ error: "Invalid bundle" }, { status: 400 });
+    }
 
     const earlyBird = isEarlyBird();
     const amount    = resolveAmount(bundleId, moduleId ?? null, currency, earlyBird);
@@ -38,6 +49,7 @@ export async function POST(request: NextRequest) {
         .eq("user_id", userId)
         .eq("clinic_slug", clinicSlug)
         .eq("bundle_id", bundleId)
+        .eq("module_id", moduleId ?? null)
         .neq("status", "cancelled")
         .maybeSingle();
 
