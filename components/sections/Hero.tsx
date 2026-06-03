@@ -44,13 +44,13 @@ export function Hero() {
       {/* Primary radial glow — blue → purple gradient */}
       <div
         aria-hidden="true"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.13] blur-3xl pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.13] blur-xl md:blur-3xl pointer-events-none"
         style={{ background: "radial-gradient(circle, #2563EB 0%, #7C3AED 55%, transparent 80%)" }}
       />
       {/* Secondary accent glow — green, upper-right */}
       <div
         aria-hidden="true"
-        className="absolute top-[30%] right-[5%] w-[280px] h-[280px] rounded-full opacity-[0.06] blur-3xl pointer-events-none"
+        className="absolute top-[30%] right-[5%] w-[280px] h-[280px] rounded-full opacity-[0.06] blur-xl md:blur-3xl pointer-events-none"
         style={{ backgroundColor: "#10B981" }}
       />
 

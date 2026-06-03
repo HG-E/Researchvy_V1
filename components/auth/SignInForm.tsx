@@ -83,7 +83,6 @@ export function SignInForm() {
       const raw  = searchParams.get("next") ?? "";
       const next = raw.startsWith("/") && !raw.startsWith("//") ? raw : "/dashboard";
       router.push(next);
-      router.refresh();
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Unknown error";
       setAuthError(`Connection failed: ${msg}. Please try again or contact support@researchvy.com`);

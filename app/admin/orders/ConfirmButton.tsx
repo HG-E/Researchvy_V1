@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 import { CheckCircle, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 export function ConfirmButton({ orderId }: { orderId: string }) {
-  const router = useRouter();
-  const [loading, setLoading]   = useState(false);
-  const [done,    setDone]      = useState(false);
-  const [err,     setErr]       = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [done,    setDone]    = useState(false);
+  const [err,     setErr]     = useState<string | null>(null);
 
   async function confirm() {
+    if (loading || done) return;
     setLoading(true);
     setErr(null);
     try {
@@ -18,7 +17,7 @@ export function ConfirmButton({ orderId }: { orderId: string }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Failed");
       setDone(true);
-      router.refresh();
+      // No router.refresh() — state update is instant; full page refresh was adding 200-500ms freeze
     } catch (e) {
       setErr(e instanceof Error ? e.message : "Error");
     } finally {
@@ -39,7 +38,7 @@ export function ConfirmButton({ orderId }: { orderId: string }) {
       <button
         onClick={confirm}
         disabled={loading}
-        className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-opacity disabled:opacity-60"
+        className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2.5 text-xs font-semibold transition-opacity disabled:opacity-60 min-h-[44px]"
         style={{ backgroundColor: "rgba(16,185,129,0.12)", color: "#10B981" }}
       >
         {loading ? <Loader2 className="h-3 w-3 animate-spin" /> : <CheckCircle className="h-3 w-3" />}

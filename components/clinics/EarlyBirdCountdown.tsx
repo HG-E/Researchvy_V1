@@ -16,17 +16,16 @@ function calc(deadline: string): TimeLeft {
 }
 
 export function EarlyBirdCountdown({ deadline }: { deadline: string }) {
-  const [time, setTime]       = useState<TimeLeft>(null);
-  const [mounted, setMounted] = useState(false);
+  // Initialize with calc() so first render matches SSR — prevents layout shift
+  const [time, setTime] = useState<TimeLeft>(() => calc(deadline));
 
   useEffect(() => {
-    setMounted(true);
     setTime(calc(deadline));
     const id = setInterval(() => setTime(calc(deadline)), 1_000);
     return () => clearInterval(id);
   }, [deadline]);
 
-  if (!mounted || !time) return null;
+  if (!time) return null;
 
   return (
     <span className="inline-flex items-center gap-1 font-mono text-xs">

@@ -14,12 +14,12 @@ export function CTA() {
     >
       {/* Multi-color radial glow — blue → purple → green */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-[0.09] blur-3xl pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-[0.09] blur-xl md:blur-3xl pointer-events-none"
         style={{ background: "radial-gradient(ellipse at center, #7C3AED 0%, #2563EB 40%, #10B981 80%, transparent 100%)" }}
       />
       {/* Subtle right-side accent */}
       <div
-        className="absolute right-0 top-0 bottom-0 w-[300px] opacity-[0.04] blur-3xl pointer-events-none"
+        className="absolute right-0 top-0 bottom-0 w-[300px] opacity-[0.04] blur-xl md:blur-3xl pointer-events-none"
         style={{ background: "linear-gradient(180deg, #10B981, transparent)" }}
       />
 
