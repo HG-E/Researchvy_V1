@@ -2,6 +2,8 @@
 // Uses Resend (free tier: 3,000/month). Fire-and-forget on the server — never
 // await these in critical paths; they must never break user-facing flows.
 
+import { digitalVisibilityClinic } from "@/constants/clinics";
+
 const FROM_ACADEMY = "Researchvy Academy <info@researchvy.com>";
 const FROM_TEAM    = "Researchvy Team <info@researchvy.com>";
 const REPLY_TO     = "info@researchvy.com";
@@ -364,6 +366,324 @@ export async function sendLeadMagnetEmail(opts: {
     <p style="color:#374151;font-size:12px;margin:0;line-height:1.7">
       Researchvy · Making researchers discoverable, globally.<br>
       <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">researchvy.com</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>`,
+  });
+}
+
+// ── Order submitted — admin alert ────────────────────────────────────────────
+
+export async function sendOrderSubmittedAdminAlert(opts: {
+  orderNumber:  string;
+  userName:     string;
+  userEmail:    string;
+  userPhone:    string | null;
+  bundleName:   string;
+  currency:     "ngn" | "usd";
+  amount:       number;
+  reference:    string;
+  submittedRef: string | null;
+  orderId:      string;
+}) {
+  const amt      = opts.currency === "ngn" ? `₦${opts.amount.toLocaleString("en-NG")}` : `$${opts.amount} USD`;
+  const confirmUrl = `${SITE_URL}/admin/orders`;
+
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [ADMIN_CC],
+    replyTo: opts.userEmail,
+    subject: `[Action needed] Payment submitted — ${opts.orderNumber} · ${amt}`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#F3F4F6;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:560px;margin:0 auto;padding:32px 20px">
+
+  <div style="background:#0F172A;border-radius:16px;overflow:hidden;margin-bottom:20px">
+    <div style="height:4px;background:linear-gradient(90deg,#6366F1,#10B981)"></div>
+    <div style="padding:28px 28px 24px">
+      <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6366F1">
+        Action Required
+      </p>
+      <h1 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#F9FAFB">Payment submitted — verify &amp; confirm</h1>
+      <p style="margin:0;font-size:13px;color:#9CA3AF">A customer has notified you that they've made a bank transfer.</p>
+    </div>
+  </div>
+
+  <div style="background:#ffffff;border-radius:12px;padding:24px 28px;margin-bottom:16px">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${[
+        ["Order",        opts.orderNumber],
+        ["Customer",     opts.userName],
+        ["Email",        opts.userEmail],
+        ...(opts.userPhone ? [["Phone", opts.userPhone]] : []),
+        ["Bundle",       opts.bundleName],
+        ["Amount",       amt],
+        ["Our reference", opts.reference],
+        ...(opts.submittedRef ? [["Their bank ref", opts.submittedRef]] : [["Their bank ref", "(not provided)"]]),
+      ].map(([label, value]) => `
+      <tr>
+        <td style="padding:7px 0;font-size:12px;color:#9CA3AF;border-bottom:1px solid #F3F4F6;width:40%">${label}</td>
+        <td style="padding:7px 0;font-size:13px;font-weight:600;color:#111827;border-bottom:1px solid #F3F4F6">${value}</td>
+      </tr>`).join("")}
+    </table>
+  </div>
+
+  <div style="text-align:center;margin-bottom:20px">
+    <a href="${confirmUrl}"
+       style="display:inline-block;background:#10B981;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 32px;border-radius:10px">
+      Go to Orders → Confirm
+    </a>
+  </div>
+
+  <p style="text-align:center;font-size:11px;color:#9CA3AF;margin:0">
+    Researchvy admin · Reply to this email to contact the customer directly.
+  </p>
+
+</div>
+</body>
+</html>`,
+  });
+}
+
+// ── Order submitted — customer acknowledgement ────────────────────────────────
+
+export async function sendPaymentReceivedEmail(opts: {
+  to:           string;
+  userName:     string;
+  orderNumber:  string;
+  bundleName:   string;
+  currency:     "ngn" | "usd";
+  amount:       number;
+  reference:    string;
+  submittedRef: string | null;
+}) {
+  const firstName = opts.userName.split(" ")[0] || opts.userName;
+  const amt       = opts.currency === "ngn" ? `₦${opts.amount.toLocaleString("en-NG")}` : `$${opts.amount} USD`;
+
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [opts.to],
+    replyTo: REPLY_TO,
+    subject: `We've received your payment notification — ${opts.orderNumber}`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:560px;margin:0 auto;padding:40px 20px">
+
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 32px;text-align:center">
+    Researchvy
+  </p>
+
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;overflow:hidden;margin-bottom:24px">
+    <div style="height:4px;background:linear-gradient(90deg,#2563EB,#10B981)"></div>
+    <div style="padding:32px 28px">
+      <div style="font-size:36px;margin-bottom:12px;text-align:center">⏳</div>
+      <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 8px;text-align:center;line-height:1.3">
+        Got it, ${firstName}. We're verifying your transfer.
+      </h1>
+      <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0;text-align:center">
+        Our team will confirm your enrollment within <strong style="color:#D1D5DB">2 business hours</strong>.
+        You'll get another email the moment it's done.
+      </p>
+    </div>
+  </div>
+
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px 28px;margin-bottom:24px">
+    <p style="margin:0 0 14px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4B5563">
+      Your submission summary
+    </p>
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${[
+        ["Order number",  opts.orderNumber],
+        ["Programme",     "Digital Visibility Clinic — July 2026"],
+        ["Bundle",        opts.bundleName],
+        ["Amount",        amt],
+        ["Your reference", opts.reference],
+        ...(opts.submittedRef ? [["Bank transaction ID", opts.submittedRef]] : []),
+      ].map(([label, value]) => `
+      <tr>
+        <td style="padding:6px 0;font-size:12px;color:#6B7280;border-bottom:1px solid #1E293B;width:45%">${label}</td>
+        <td style="padding:6px 0;font-size:12px;font-weight:600;color:#D1D5DB;border-bottom:1px solid #1E293B">${value}</td>
+      </tr>`).join("")}
+    </table>
+  </div>
+
+  <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:16px 20px;margin-bottom:24px">
+    <p style="margin:0;font-size:13px;color:#D97706;line-height:1.7">
+      <strong>Didn't make the transfer yet?</strong> No problem — this email is just confirmation that we received your notification.
+      Your enrollment is only confirmed once our team verifies the payment.
+    </p>
+  </div>
+
+  <div style="text-align:center;padding-top:20px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0;line-height:1.7">
+      Questions? Reply to this email — we read every one.<br>
+      <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>`,
+  });
+}
+
+// ── Order confirmed / enrollment receipt ──────────────────────────────────────
+
+export async function sendOrderConfirmedEmail(opts: {
+  to:          string;
+  userName:    string;
+  orderNumber: string;
+  bundleId:    string;
+  moduleId:    string | null;
+  currency:    "ngn" | "usd";
+  amount:      number;
+}) {
+  const { sessions, pricing } = digitalVisibilityClinic;
+
+  function bundleLabel(): string {
+    if (opts.bundleId === "solo" && opts.moduleId) {
+      const s = sessions.find((x) => x.id === opts.moduleId);
+      return s ? `${s.name} — Single Module` : "Single Module";
+    }
+    return pricing.bundles.find((b) => b.id === opts.bundleId)?.name ?? opts.bundleId;
+  }
+
+  function formatAmount(): string {
+    return opts.currency === "ngn"
+      ? `₦${opts.amount.toLocaleString("en-NG")}`
+      : `$${opts.amount} USD`;
+  }
+
+  const firstName  = opts.userName.split(" ")[0] || opts.userName;
+  const bundleName = bundleLabel();
+  const amountStr  = formatAmount();
+  const cohortUrl  = `${SITE_URL}/dashboard/clinics`;
+
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [opts.to],
+    cc:      [ADMIN_CC],
+    replyTo: REPLY_TO,
+    subject: `You're in — DVC July 2026 enrollment confirmed (${opts.orderNumber})`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#F3F4F6;">
+<div style="max-width:600px;margin:0 auto;padding:40px 20px;font-family:system-ui,-apple-system,sans-serif;">
+
+  <div style="background:#0F172A;border-radius:20px;overflow:hidden;margin-bottom:24px;">
+    <div style="height:4px;background:linear-gradient(90deg,#2563EB,#10B981);"></div>
+    <div style="padding:40px 32px;">
+      <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#2563EB;">
+        Digital Visibility Clinic · July 2026
+      </p>
+      <h1 style="margin:0 0 8px;font-size:26px;font-weight:700;line-height:1.3;color:#F9FAFB;">
+        You're enrolled, ${firstName}.
+      </h1>
+      <p style="margin:0;font-size:15px;line-height:1.7;color:#9CA3AF;">
+        Payment confirmed. Your place in the July 2026 cohort is secured.
+      </p>
+    </div>
+  </div>
+
+  <div style="background:#ffffff;border-radius:16px;padding:28px 32px;margin-bottom:20px;">
+    <p style="margin:0 0 16px;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;">
+      Order Receipt
+    </p>
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${[
+        ["Order Number", opts.orderNumber],
+        ["Programme",    "Digital Visibility Clinic"],
+        ["Bundle",       bundleName],
+        ["Cohort",       "July 2026"],
+        ["Amount paid",  amountStr],
+      ].map(([label, value]) => `
+      <tr>
+        <td style="padding:8px 0;font-size:13px;color:#9CA3AF;border-bottom:1px solid #F3F4F6;">${label}</td>
+        <td style="padding:8px 0;font-size:13px;font-weight:600;color:#111827;text-align:right;border-bottom:1px solid #F3F4F6;">${value}</td>
+      </tr>`).join("")}
+    </table>
+  </div>
+
+  <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:16px;padding:24px 32px;margin-bottom:20px;">
+    <p style="margin:0 0 12px;font-size:14px;font-weight:700;color:#166534;">What happens next</p>
+    <ol style="margin:0;padding-left:20px;color:#374151;font-size:14px;line-height:2;">
+      <li>Watch your inbox — cohort scheduling details will arrive within 48 hours.</li>
+      <li>Join the WhatsApp community group (link coming in the cohort email).</li>
+      <li>Log in to your dashboard to access your clinic tasks and resources.</li>
+    </ol>
+  </div>
+
+  <div style="text-align:center;margin-bottom:24px;">
+    <a href="${cohortUrl}"
+       style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 32px;border-radius:12px;">
+      Go to My Clinics Dashboard →
+    </a>
+  </div>
+
+  <div style="border-top:1px solid #E5E7EB;padding-top:20px;text-align:center;">
+    <p style="margin:0;font-size:12px;color:#9CA3AF;line-height:1.7;">
+      Questions? Reply to this email or message us on WhatsApp.<br>
+      Order ${opts.orderNumber} · <a href="${SITE_URL}" style="color:#6B7280;text-decoration:none;">researchvy.com</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>`,
+  });
+}
+
+// ── Order cancelled ───────────────────────────────────────────────────────────
+
+export async function sendOrderCancelledEmail(opts: {
+  to:          string;
+  userName:    string;
+  orderNumber: string;
+  reason:      string;
+}) {
+  const firstName = opts.userName.split(" ")[0] || opts.userName;
+
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [opts.to],
+    replyTo: REPLY_TO,
+    subject: `Re: your order ${opts.orderNumber} — important update`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:560px;margin:0 auto;padding:40px 20px">
+
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 32px;text-align:center">
+    Researchvy
+  </p>
+
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:32px 28px;margin-bottom:24px">
+    <h1 style="color:#F9FAFB;font-size:20px;font-weight:700;margin:0 0 12px;line-height:1.3">
+      Hi ${firstName}, we couldn't verify your payment for order ${opts.orderNumber}.
+    </h1>
+    <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0 0 16px">
+      Unfortunately we were unable to confirm a matching transfer for this order.
+      ${opts.reason ? `<br><br><strong style="color:#D1D5DB">Reason:</strong> ${opts.reason}` : ""}
+    </p>
+    <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0">
+      <strong style="color:#D1D5DB">What to do:</strong> If you've already made the transfer, please reply to this email with your bank's transaction receipt and we'll resolve it immediately.
+      If not, you're welcome to <a href="${SITE_URL}/clinics/checkout" style="color:#60A5FA;text-decoration:none">start a new order</a> when you're ready.
+    </p>
+  </div>
+
+  <div style="text-align:center;padding-top:20px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0;line-height:1.7">
+      Reply to this email to speak to our team.<br>
+      <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a>
     </p>
   </div>
 

@@ -12,10 +12,12 @@ import {
   Handshake,
   GraduationCap,
   Layers,
+  ShoppingBag,
 } from "lucide-react";
 
 const NAV = [
   { label: "Overview",    href: "/admin",               icon: LayoutDashboard, exact: true  },
+  { label: "Orders",      href: "/admin/orders",         icon: ShoppingBag,     exact: false },
   { label: "Enquiries",   href: "/admin/enquiries",      icon: Inbox,           exact: false },
   { label: "Partnerships",href: "/admin/partnerships",   icon: Handshake,       exact: false },
   { label: "Content",     href: "/admin/content",        icon: FileText,        exact: false },

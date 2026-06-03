@@ -8,15 +8,10 @@ import {
 } from "@/lib/academy/courses";
 import { getServerUser, createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { buildWhatsAppUrl } from "@/config/site";
-import dynamic from "next/dynamic";
+import { LessonPlayerClient as LessonPlayer } from "@/components/academy/LessonPlayerClient";
 import { LessonSidebar } from "@/components/academy/LessonSidebar";
 import { MdxContent } from "@/components/insights/MdxContent";
 import type { Lesson } from "@/types/academy";
-
-const LessonPlayer = dynamic(
-  () => import("@/components/academy/LessonPlayer").then((m) => m.LessonPlayer),
-  { ssr: false }
-);
 
 export async function generateMetadata({
   params,
