@@ -35,6 +35,9 @@ export async function PUT(req: NextRequest) {
   if (!lesson_id || typeof content !== "string") {
     return NextResponse.json({ error: "lesson_id and content required" }, { status: 400 });
   }
+  if (content.length > 20_000) {
+    return NextResponse.json({ error: "Note too long (max 20 000 characters)" }, { status: 400 });
+  }
 
   const admin = createSupabaseAdminClient();
   const { error } = await admin.from("lesson_notes").upsert(

@@ -19,7 +19,7 @@ export async function GET(
       .eq("id", id)
       .single();
     if (error || !data) return NextResponse.json({ error: "Order not found" }, { status: 404 });
-    if (data.user_id && data.user_id !== user.id) {
+    if (data.user_id !== user.id) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
     return NextResponse.json(data);

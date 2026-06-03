@@ -11,14 +11,23 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     const { full_name, bio, orcid, google_scholar, institutional_affiliation } = body;
 
+    const cap = (s: unknown, max: number) =>
+      typeof s === "string" ? s.slice(0, max) : "";
+
+    const safeName  = cap(full_name, 120);
+    const safeBio   = cap(bio, 800);
+    const safeOrcid = cap(orcid, 40);
+    const safeGs    = cap(google_scholar, 200);
+    const safeAff   = cap(institutional_affiliation, 200);
+
     // Update auth user_metadata (drives SSR session data)
     const { error: authError } = await supabase.auth.updateUser({
       data: {
-        full_name:                 full_name ?? "",
-        bio:                       bio ?? "",
-        orcid:                     orcid ?? "",
-        google_scholar:            google_scholar ?? "",
-        institutional_affiliation: institutional_affiliation ?? "",
+        full_name:                 safeName,
+        bio:                       safeBio,
+        orcid:                     safeOrcid,
+        google_scholar:            safeGs,
+        institutional_affiliation: safeAff,
       },
     });
 
@@ -28,11 +37,11 @@ export async function PUT(req: NextRequest) {
     // can query it without going through auth metadata
     const admin = createSupabaseAdminClient();
     await admin.from("users").update({
-      full_name:                 full_name ?? "",
-      bio:                       bio ?? "",
-      orcid:                     orcid ?? "",
-      google_scholar:            google_scholar ?? "",
-      institutional_affiliation: institutional_affiliation ?? "",
+      full_name:                 safeName,
+      bio:                       safeBio,
+      orcid:                     safeOrcid,
+      google_scholar:            safeGs,
+      institutional_affiliation: safeAff,
     }).eq("id", user.id);
 
     return NextResponse.json({ ok: true });

@@ -4,6 +4,10 @@ import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
 import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
+function esc(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const schema = z.object({
@@ -63,18 +67,18 @@ export async function POST(req: Request) {
           <h2 style="color:#0F172A;margin-bottom:16px">New Partnership Enquiry</h2>
           <table style="width:100%;border-collapse:collapse">
             <tr><td style="padding:8px 0;color:#6B7280;width:140px;vertical-align:top">Contact</td>
-                <td style="padding:8px 0;color:#0F172A;font-weight:600">${contact_name}</td></tr>
+                <td style="padding:8px 0;color:#0F172A;font-weight:600">${esc(contact_name)}</td></tr>
             <tr><td style="padding:8px 0;color:#6B7280;vertical-align:top">Email</td>
-                <td style="padding:8px 0"><a href="mailto:${contact_email}" style="color:#2563EB">${contact_email}</a></td></tr>
+                <td style="padding:8px 0"><a href="mailto:${esc(contact_email)}" style="color:#2563EB">${esc(contact_email)}</a></td></tr>
             <tr><td style="padding:8px 0;color:#6B7280;vertical-align:top">Institution</td>
-                <td style="padding:8px 0;color:#0F172A">${institution}</td></tr>
+                <td style="padding:8px 0;color:#0F172A">${esc(institution)}</td></tr>
             <tr><td style="padding:8px 0;color:#6B7280;vertical-align:top">Researcher count</td>
-                <td style="padding:8px 0;color:#0F172A">${researcher_count}</td></tr>
+                <td style="padding:8px 0;color:#0F172A">${esc(researcher_count)}</td></tr>
             <tr><td style="padding:8px 0;color:#6B7280;vertical-align:top">Interest area</td>
-                <td style="padding:8px 0;color:#0F172A">${interest_area}</td></tr>
+                <td style="padding:8px 0;color:#0F172A">${esc(interest_area)}</td></tr>
           </table>
-          ${message ? `<hr style="border:none;border-top:1px solid #E5E7EB;margin:16px 0"/><p style="color:#374151;line-height:1.7;white-space:pre-wrap">${message}</p>` : ""}
-          <p style="margin-top:20px;font-size:13px;color:#9CA3AF;">Reply to this email goes directly to: ${contact_email}</p>
+          ${message ? `<hr style="border:none;border-top:1px solid #E5E7EB;margin:16px 0"/><p style="color:#374151;line-height:1.7;white-space:pre-wrap">${esc(message)}</p>` : ""}
+          <p style="margin-top:20px;font-size:13px;color:#9CA3AF;">Reply to this email goes directly to: ${esc(contact_email)}</p>
         </div>
       `,
     });
@@ -86,9 +90,9 @@ export async function POST(req: Request) {
       subject: "Your partnership enquiry, Researchvy",
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#ffffff;">
-          <h2 style="color:#0F172A;margin-bottom:16px">Thank you, ${contact_name}.</h2>
+          <h2 style="color:#0F172A;margin-bottom:16px">Thank you, ${esc(contact_name)}.</h2>
           <p style="font-size:15px;line-height:1.7;color:#374151;margin-bottom:16px">
-            We've received your partnership enquiry from <strong>${institution}</strong>.
+            We've received your partnership enquiry from <strong>${esc(institution)}</strong>.
           </p>
           <p style="font-size:15px;line-height:1.7;color:#374151;margin-bottom:24px">
             Our partnerships team will review your enquiry and reach out within 24 hours to discuss how
