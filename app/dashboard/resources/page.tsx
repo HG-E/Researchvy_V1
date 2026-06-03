@@ -96,7 +96,7 @@ export default async function ResourcesPage() {
             return (
               <Link
                 key={resource.id}
-                href={`/resources`}
+                href={`/resources/${resource.id}`}
                 className="group flex items-center gap-4 rounded-2xl border p-4 transition-colors"
                 style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
               >

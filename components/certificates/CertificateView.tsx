@@ -184,7 +184,7 @@ export function CertificateView({ cert }: { cert: Certificate }) {
                 <span className="cert-logo-dot text-2xl font-bold" style={{ color: "#D97706" }}>.</span>
               </div>
               <p
-                className="cert-type-label text-[10px] font-bold tracking-[0.22em] uppercase"
+                className="cert-type-label text-xs font-bold tracking-[0.22em] uppercase"
                 style={{ color: "#6B7280" }}
               >
                 {prog.certificateType}
@@ -249,7 +249,7 @@ export function CertificateView({ cert }: { cert: Certificate }) {
               {/* Left — certificate meta */}
               <div className="space-y-4 text-center sm:text-left">
                 <div>
-                  <p className="cert-meta-label text-[9px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#4B5563" }}>
+                  <p className="cert-meta-label text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#4B5563" }}>
                     Certificate Number
                   </p>
                   <p className="cert-number font-mono text-sm font-bold" style={{ color: "#9CA3AF" }}>
@@ -257,7 +257,7 @@ export function CertificateView({ cert }: { cert: Certificate }) {
                   </p>
                 </div>
                 <div>
-                  <p className="cert-meta-label text-[9px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#4B5563" }}>
+                  <p className="cert-meta-label text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#4B5563" }}>
                     Date of Issue
                   </p>
                   <p className="cert-meta-value text-sm" style={{ color: "#9CA3AF" }}>
@@ -265,7 +265,7 @@ export function CertificateView({ cert }: { cert: Certificate }) {
                   </p>
                 </div>
                 <div>
-                  <p className="cert-meta-label text-[9px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#4B5563" }}>
+                  <p className="cert-meta-label text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#4B5563" }}>
                     Verify at
                   </p>
                   <p className="cert-verify text-xs font-mono" style={{ color: "#6B7280" }}>

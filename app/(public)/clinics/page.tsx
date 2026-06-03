@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, Building2, TrendingUp, Award, FileText } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -280,7 +281,9 @@ export default async function ClinicsPage() {
                 <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
                   5-Module Curriculum
                 </p>
-                <SessionsCarousel />
+                <Suspense fallback={<div className="h-64 rounded-2xl animate-pulse" style={{ backgroundColor: "#0F172A" }} />}>
+                  <SessionsCarousel />
+                </Suspense>
 
                 <div
                   className="mt-5 rounded-xl p-4 border"
@@ -550,7 +553,9 @@ export default async function ClinicsPage() {
             </h2>
           </div>
 
-          <TestimonialsCarousel />
+          <Suspense fallback={<div className="h-56 rounded-2xl animate-pulse" style={{ backgroundColor: "#0F172A" }} />}>
+            <TestimonialsCarousel />
+          </Suspense>
         </div>
 
         {/* ── FOR INSTITUTIONS & DEPARTMENTS ──────────────────────────── */}
@@ -721,7 +726,9 @@ export default async function ClinicsPage() {
           <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: "#4B5563" }}>
             More Clinics Launching, Register Interest Now
           </p>
-          <ComingSoonCarousel />
+          <Suspense fallback={<div className="h-48 rounded-2xl animate-pulse" style={{ backgroundColor: "#0F172A" }} />}>
+            <ComingSoonCarousel />
+          </Suspense>
         </div>
 
       </div>
