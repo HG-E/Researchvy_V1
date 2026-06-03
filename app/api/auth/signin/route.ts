@@ -5,7 +5,7 @@ import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 export async function POST(req: NextRequest) {
   try {
     // 10 attempts per 15 minutes per IP
-    const { allowed } = checkRateLimit(getRateLimitKey(req, "signin"), 10, 15 * 60 * 1000);
+    const { allowed } = await checkRateLimit(getRateLimitKey(req, "signin"), 10, 15 * 60 * 1000);
     if (!allowed) {
       return NextResponse.json(
         { error: "Too many sign-in attempts. Please wait 15 minutes and try again." },

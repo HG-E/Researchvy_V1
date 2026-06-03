@@ -19,7 +19,7 @@ function getSupabaseAdmin() {
 export async function POST(req: Request) {
   try {
     // 5 subscribes per IP per hour
-    const { allowed } = checkRateLimit(getRateLimitKey(req, "newsletter"), 5, 60 * 60 * 1000);
+    const { allowed } = await checkRateLimit(getRateLimitKey(req, "newsletter"), 5, 60 * 60 * 1000);
     if (!allowed) {
       return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
     }

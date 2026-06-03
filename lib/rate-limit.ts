@@ -1,42 +1,44 @@
-interface Record {
-  count:   number;
-  resetAt: number;
-}
+import { Redis } from "@upstash/redis";
+import { Ratelimit } from "@upstash/ratelimit";
 
-// Module-level store — persists across requests within the same serverless instance.
-// Handles the majority of abuse; swap Map → Upstash Redis for cross-instance protection.
-const store = new Map<string, Record>();
+// Redis client — only created when env vars are present (production + local with .env.local set)
+const redis =
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+    ? new Redis({
+        url:   process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+      })
+    : null;
 
 /**
- * Returns allowed=true if the key is under the limit, false if exceeded.
- * limit   — max requests per window
- * windowMs — sliding window in milliseconds
+ * Returns { allowed, remaining }.
+ * Uses Upstash Redis sliding window when available; falls back to
+ * always-allowed in local dev without Redis configured.
  */
-export function checkRateLimit(
+export async function checkRateLimit(
   key:      string,
   limit:    number,
   windowMs: number,
-): { allowed: boolean; remaining: number } {
-  const now    = Date.now();
-  const record = store.get(key);
-
-  if (!record || now > record.resetAt) {
-    store.set(key, { count: 1, resetAt: now + windowMs });
+): Promise<{ allowed: boolean; remaining: number }> {
+  if (!redis) {
     return { allowed: true, remaining: limit - 1 };
   }
 
-  if (record.count >= limit) {
-    return { allowed: false, remaining: 0 };
-  }
+  const limiter = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(limit, `${windowMs} ms`),
+    prefix:  "rl",
+  });
 
-  record.count++;
-  return { allowed: true, remaining: limit - record.count };
+  const result = await limiter.limit(key);
+  return { allowed: result.success, remaining: result.remaining };
 }
 
-/** Extract a stable key from request IP + a namespace prefix. */
+/** Extract a stable rate-limit key from request IP + a namespace prefix. */
 export function getRateLimitKey(req: Request, prefix: string): string {
-  const forwarded = (req.headers as unknown as Headers).get("x-forwarded-for");
-  const realIp    = (req.headers as unknown as Headers).get("x-real-ip");
+  const headers   = req.headers as unknown as Headers;
+  const forwarded = headers.get("x-forwarded-for");
+  const realIp    = headers.get("x-real-ip");
   const ip        = forwarded?.split(",")[0]?.trim() ?? realIp ?? "unknown";
   return `${prefix}:${ip}`;
 }

@@ -5,7 +5,7 @@ import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 export async function POST(req: NextRequest) {
   try {
     // 3 lead captures per hour per IP — prevent abuse
-    const { allowed } = checkRateLimit(getRateLimitKey(req, "lead"), 3, 60 * 60 * 1000);
+    const { allowed } = await checkRateLimit(getRateLimitKey(req, "lead"), 3, 60 * 60 * 1000);
     if (!allowed) {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }

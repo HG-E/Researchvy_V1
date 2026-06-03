@@ -24,7 +24,7 @@ function escapeHtml(str: string): string {
 export async function POST(req: Request) {
   try {
     // 3 contact form submissions per IP per hour
-    const { allowed } = checkRateLimit(getRateLimitKey(req, "contact"), 3, 60 * 60 * 1000);
+    const { allowed } = await checkRateLimit(getRateLimitKey(req, "contact"), 3, 60 * 60 * 1000);
     if (!allowed) {
       return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
     }
