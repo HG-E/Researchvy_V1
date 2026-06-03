@@ -24,36 +24,34 @@ export default async function DashboardPage() {
   const user   = await getServerUser();
   const userId = user?.id;
 
-  // Profile
-  let profile: { full_name: string; avatar_url: string | null } | null = null;
-  if (userId) {
+  const admin = createSupabaseAdminClient();
+
+  async function fetchProfile() {
+    if (!userId) return null;
     try {
-      const admin = createSupabaseAdminClient();
       const { data } = await admin.from("users").select("full_name, avatar_url").eq("id", userId).single();
-      profile = data ?? null;
-    } catch { /* non-fatal */ }
+      return data as { full_name: string; avatar_url: string | null } | null;
+    } catch { return null; }
   }
+  async function fetchClinicCount() {
+    if (!userId) return 0;
+    try {
+      const { count } = await admin.from("clinic_enquiries").select("id", { count: "exact", head: true }).eq("user_id", userId);
+      return count ?? 0;
+    } catch { return 0; }
+  }
+
+  // Fetch profile, clinic count, and course data in parallel
+  const [profile, clinicCount, courseEntries] = await Promise.all([
+    fetchProfile(),
+    fetchClinicCount(),
+    userId ? getEnrolledCoursesWithProgress(userId).catch(() => []) : Promise.resolve([]),
+  ]);
 
   const fullName    = profile?.full_name || (user?.user_metadata?.full_name as string) || "";
   const avatarUrl   = profile?.avatar_url ?? null;
   const displayName = fullName.split(" ")[0] || user?.email?.split("@")[0] || "Scholar";
   const profileDone = !!(fullName.trim());
-
-  // Clinic enquiries
-  let clinicCount = 0;
-  if (userId) {
-    try {
-      const admin = createSupabaseAdminClient();
-      const { count } = await admin
-        .from("clinic_enquiries")
-        .select("id", { count: "exact", head: true })
-        .eq("user_id", userId);
-      clinicCount = count ?? 0;
-    } catch { /* non-fatal */ }
-  }
-
-  // Academy — real enrollments
-  const courseEntries = userId ? await getEnrolledCoursesWithProgress(userId) : [];
   const activeCount     = courseEntries.length;
   const completedCount  = courseEntries.filter((e) => e.enrollment.completed_at).length;
 

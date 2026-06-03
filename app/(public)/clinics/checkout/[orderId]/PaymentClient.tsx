@@ -70,13 +70,15 @@ function BankRow({ label, value }: { label: string; value: string }) {
 }
 
 export function PaymentClient({ order, bundleName, formattedAmount, bankDetails, isLoggedIn }: Props) {
-  const [status, setStatus]   = useState(order.status);
-  const [ref,    setRef]      = useState("");
-  const [loading, setLoading] = useState(false);
-  const [err,     setErr]     = useState<string | null>(null);
+  const [status,    setStatus]    = useState(order.status);
+  const [ref,       setRef]       = useState("");
+  const [loading,   setLoading]   = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [err,       setErr]       = useState<string | null>(null);
 
   async function confirmPayment(e: React.FormEvent) {
     e.preventDefault();
+    if (loading || submitted) return;
     setLoading(true);
     setErr(null);
     try {
@@ -87,6 +89,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Something went wrong");
+      setSubmitted(true);
       setStatus("payment_submitted");
     } catch (e) {
       setErr(e instanceof Error ? e.message : "Something went wrong — please try again");

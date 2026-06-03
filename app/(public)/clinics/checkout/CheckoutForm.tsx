@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Zap, Building2, CreditCard, Loader2 } from "lucide-react";
@@ -54,11 +54,12 @@ export function CheckoutForm({
   const [name,    setName]        = useState(userName);
   const [phone,   setPhone]       = useState("");
   const [loading, setLoading]     = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [err,     setErr]         = useState<string | null>(null);
 
   const selModule = bundle.isSolo ? modules.find((m) => m.id === moduleId) : null;
 
-  function price(): { amount: number; regular: number } {
+  const { amount, regular } = useMemo(() => {
     if (bundle.isSolo && selModule) {
       const p = selModule.soloPrice;
       return currency === "usd"
@@ -68,14 +69,13 @@ export function CheckoutForm({
     return currency === "usd"
       ? { amount: isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular, regular: bundle.usd.regular }
       : { amount: isEarlyBird ? bundle.ngn.earlyBird : bundle.ngn.regular, regular: bundle.ngn.regular };
-  }
-
-  const { amount, regular } = price();
+  }, [bundle, selModule, currency, isEarlyBird]);
   const savings = regular - amount;
   const ebDate  = new Date(earlyBirdDeadline).toLocaleDateString("en-GB", { day: "numeric", month: "long" });
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (loading || submitted) return;
     if (!name.trim())                  { setErr("Please enter your full name"); return; }
     if (bundle.isSolo && !moduleId)    { setErr("Please select a module"); return; }
 
@@ -102,6 +102,7 @@ export function CheckoutForm({
         return;
       }
       if (!res.ok) throw new Error(data.error ?? "Failed to create order");
+      setSubmitted(true);
       router.push(`/clinics/checkout/${data.orderId}`);
     } catch (e) {
       setErr(e instanceof Error ? e.message : "Something went wrong — please try again");
