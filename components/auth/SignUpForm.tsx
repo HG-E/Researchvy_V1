@@ -63,10 +63,11 @@ export function SignUpForm() {
   const [authError, setAuthError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const nextPath =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get("next") ?? "/dashboard"
-      : "/dashboard";
+  const nextPath = (() => {
+    if (typeof window === "undefined") return "/dashboard";
+    const raw = new URLSearchParams(window.location.search).get("next") ?? "";
+    return raw.startsWith("/") && !raw.startsWith("//") ? raw : "/dashboard";
+  })();
 
   const {
     register,

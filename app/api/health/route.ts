@@ -31,7 +31,6 @@ export async function GET() {
       RESEND_API_KEY:                (process.env.RESEND_API_KEY ?? "").length > 10 ? "✅ set" : "❌ MISSING",
     },
     supabase: {
-      url:       supabaseUrl || "(empty)",
       reachable: supabaseReachable,
       error:     supabaseError || null,
     },

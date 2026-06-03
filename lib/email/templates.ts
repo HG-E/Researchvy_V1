@@ -1,3 +1,12 @@
+function esc(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+}
+
 const BASE = `
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   max-width: 600px;
@@ -453,7 +462,9 @@ export function clinicInterestConfirmation(
   email: string,
   clinicName: string,
 ): { subject: string; html: string } {
-  const displayName = name || email.split("@")[0];
+  const displayName = esc(name || email.split("@")[0]);
+  const safeClinic  = esc(clinicName);
+  const safeEmail   = esc(email);
   return {
     subject: `You're registered, ${clinicName}`,
     html: `
@@ -468,8 +479,8 @@ export function clinicInterestConfirmation(
         <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#10B981;">Interest Registered</p>
         <h1 style="margin:0 0 20px;font-size:24px;font-weight:700;line-height:1.3;color:#111827;">We've got you, ${displayName}.</h1>
         <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">
-          Your interest in the <strong style="color:#111827;">${clinicName}</strong> has been registered.
-          You're now on the priority contact list, we'll reach out to <strong style="color:#111827;">${email}</strong>
+          Your interest in the <strong style="color:#111827;">${safeClinic}</strong> has been registered.
+          You're now on the priority contact list, we'll reach out to <strong style="color:#111827;">${safeEmail}</strong>
           within 3–5 business days with cohort dates, pricing, and next steps.
         </p>
         <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#374151;">
@@ -512,7 +523,7 @@ export function academyInterestConfirmation(
   name: string,
   email: string,
 ): { subject: string; html: string } {
-  const displayName = name || email.split("@")[0];
+  const displayName = esc(name || email.split("@")[0]);
   return {
     subject: "You're registered, Research Visibility Academy",
     html: `
@@ -717,9 +728,10 @@ export function certificateIssuedEmail(
   certificateNumber: string,
   programme: string,
 ): { subject: string; html: string } {
-  const verifyUrl = `https://researchvy.com/verify/${certificateNumber}`;
+  const verifyUrl    = `https://researchvy.com/verify/${esc(certificateNumber)}`;
   const dashboardUrl = "https://researchvy.com/dashboard/certificates";
-  const displayName = name || "Researcher";
+  const displayName  = esc(name || "Researcher");
+  const safeProg     = esc(programme);
   return {
     subject: `Your Certificate of Scholarly Visibility Practice, ${certificateNumber}`,
     html: `
@@ -737,10 +749,10 @@ export function certificateIssuedEmail(
         </h1>
         <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">
           Your <strong style="color:#111827;">Certificate of Scholarly Visibility Practice</strong> has been issued for your
-          successful completion of the <strong style="color:#111827;">${programme}</strong>.
+          successful completion of the <strong style="color:#111827;">${safeProg}</strong>.
         </p>
         <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#374151;">
-          Your certificate number is <strong style="color:#111827;font-family:monospace;">${certificateNumber}</strong>.
+          Your certificate number is <strong style="color:#111827;font-family:monospace;">${esc(certificateNumber)}</strong>.
           This certificate is verifiable, downloadable, and shareable, including directly to LinkedIn.
         </p>
       </td></tr>
@@ -754,7 +766,7 @@ export function certificateIssuedEmail(
         <p style="margin:0 0 6px;font-size:11px;color:#6B7280;">This certifies that</p>
         <p style="margin:0 0 12px;font-size:22px;font-weight:700;color:#F9FAFB;">${displayName}</p>
         <p style="margin:0 0 16px;font-size:11px;color:#6B7280;">has successfully completed the</p>
-        <p style="margin:0 0 20px;font-size:14px;font-weight:700;color:#2563EB;">${programme}</p>
+        <p style="margin:0 0 20px;font-size:14px;font-weight:700;color:#2563EB;">${safeProg}</p>
         <p style="margin:0;font-size:11px;font-family:monospace;color:#4B5563;">${certificateNumber}</p>
       </td></tr>
     </table>

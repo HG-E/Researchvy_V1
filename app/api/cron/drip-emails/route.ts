@@ -39,8 +39,9 @@ export async function GET(req: NextRequest) {
   for (const user of day2Users ?? []) {
     try {
       const firstName = (user.full_name as string)?.split(" ")[0] || "Researcher";
-      await sendDay2DripEmail({ to: user.email as string, firstName });
+      // Flag first — prevents duplicate sends if the email call throws or the process restarts
       await admin.from("users").update({ drip_day2_sent_at: now.toISOString() }).eq("id", user.id);
+      await sendDay2DripEmail({ to: user.email as string, firstName });
       results.day2++;
     } catch {
       results.errors++;
@@ -59,8 +60,9 @@ export async function GET(req: NextRequest) {
   for (const user of day5Users ?? []) {
     try {
       const firstName = (user.full_name as string)?.split(" ")[0] || "Researcher";
-      await sendDay5DripEmail({ to: user.email as string, firstName });
+      // Flag first — prevents duplicate sends if the email call throws or the process restarts
       await admin.from("users").update({ drip_day5_sent_at: now.toISOString() }).eq("id", user.id);
+      await sendDay5DripEmail({ to: user.email as string, firstName });
       results.day5++;
     } catch {
       results.errors++;

@@ -80,7 +80,8 @@ export function SignInForm() {
       }
 
       track(EVENTS.SIGN_IN_COMPLETED);
-      const next = searchParams.get("next") ?? "/dashboard";
+      const raw  = searchParams.get("next") ?? "";
+      const next = raw.startsWith("/") && !raw.startsWith("//") ? raw : "/dashboard";
       router.push(next);
       router.refresh();
     } catch (e: unknown) {
