@@ -14,17 +14,29 @@ export function LessonNotes({ lessonId, initialNote }: LessonNotesProps) {
   const [open, setOpen]     = useState(!!initialNote);
   const [text, setText]     = useState(initialNote);
   const [status, setStatus] = useState<"idle" | "saving" | "saved">("idle");
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timerRef  = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const abortRef  = useRef<AbortController | null>(null);
 
   const save = useCallback(async (content: string) => {
+    // Cancel any in-flight save so a stale response can't overwrite a newer one
+    abortRef.current?.abort();
+    abortRef.current = new AbortController();
+
     setStatus("saving");
-    await fetch("/api/academy/notes", {
-      method:  "PUT",
-      headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify({ lesson_id: lessonId, content }),
-    });
-    setStatus("saved");
-    setTimeout(() => setStatus("idle"), 2000);
+    try {
+      await fetch("/api/academy/notes", {
+        method:  "PUT",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ lesson_id: lessonId, content }),
+        signal:  abortRef.current.signal,
+      });
+      setStatus("saved");
+      setTimeout(() => setStatus("idle"), 2000);
+    } catch (e) {
+      if ((e as Error)?.name !== "AbortError") {
+        setStatus("idle");
+      }
+    }
   }, [lessonId]);
 
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -35,18 +47,20 @@ export function LessonNotes({ lessonId, initialNote }: LessonNotesProps) {
     timerRef.current = setTimeout(() => save(value), DEBOUNCE_MS);
   }
 
-  // Flush on unmount
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
+      abortRef.current?.abort();
     };
   }, []);
 
   return (
     <div className="border-t mt-10 pt-6" style={{ borderColor: "#1E293B" }}>
       <button
+        type="button"
         onClick={() => setOpen(o => !o)}
-        className="flex items-center gap-2 text-sm font-medium mb-3"
+        className="flex items-center gap-2 text-sm font-medium mb-3 min-h-[44px]"
         style={{ color: open ? "#E2E8F0" : "#6B7280" }}
       >
         <BookOpen className="h-4 w-4" />
@@ -71,10 +85,9 @@ export function LessonNotes({ lessonId, initialNote }: LessonNotesProps) {
               outline:         "none",
             }}
             onFocus={e => { e.currentTarget.style.borderColor = "#334155"; }}
-            onBlur={e => { e.currentTarget.style.borderColor = "#1E293B"; }}
+            onBlur={e =>  { e.currentTarget.style.borderColor = "#1E293B"; }}
           />
-          <div className="absolute bottom-3 right-3 flex items-center gap-1 text-xs"
-            style={{ color: "#4B5563" }}>
+          <div className="absolute bottom-3 right-3 flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
             {status === "saving" && (
               <>
                 <Loader2 className="h-3 w-3 animate-spin" />

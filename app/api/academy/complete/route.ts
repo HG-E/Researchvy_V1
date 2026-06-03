@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/auth/supabase";
 import { checkLessonAccess } from "@/lib/academy/courses";
 
+export const maxDuration = 30;
+
 export async function POST(req: NextRequest) {
   try {
     const supabase = await createSupabaseServerClient();

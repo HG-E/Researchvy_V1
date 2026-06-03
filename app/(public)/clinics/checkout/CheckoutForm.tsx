@@ -98,12 +98,12 @@ export function CheckoutForm({
       });
       const data = await res.json();
       if (res.status === 409 && data.orderId) {
-        router.push(`/clinics/checkout/${data.orderId}`);
+        router.replace(`/clinics/checkout/${data.orderId}`);
         return;
       }
       if (!res.ok) throw new Error(data.error ?? "Failed to create order");
       setSubmitted(true);
-      router.push(`/clinics/checkout/${data.orderId}`);
+      router.replace(`/clinics/checkout/${data.orderId}`);
     } catch (e) {
       setErr(e instanceof Error ? e.message : "Something went wrong — please try again");
       setLoading(false);
@@ -331,7 +331,7 @@ export function CheckoutForm({
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || submitted}
             className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-bold text-white transition-opacity disabled:opacity-60"
             style={{ backgroundColor: "#2563EB" }}
           >

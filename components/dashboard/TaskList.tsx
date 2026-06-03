@@ -232,20 +232,22 @@ function SessionRow({
                       )}
                     </div>
 
-                    {/* Action task toggle */}
+                    {/* Action task toggle — 44×44px touch target for mobile */}
                     {task.task_type === "action" && (
                       <button
+                        type="button"
                         onClick={() => toggleAction(task)}
                         disabled={loading === task.id}
-                        className="flex-shrink-0 mt-0.5"
+                        className="flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl -mr-2 transition-colors active:opacity-60"
+                        style={{ color: task.is_completed ? "#10B981" : "#374151" }}
                         title={task.is_completed ? "Mark as not done" : "Mark as done"}
                       >
                         {loading === task.id ? (
                           <Loader2 className="h-5 w-5 animate-spin" style={{ color: "#4B5563" }} />
                         ) : task.is_completed ? (
-                          <CheckCircle2 className="h-5 w-5" style={{ color: "#10B981" }} />
+                          <CheckCircle2 className="h-5 w-5" />
                         ) : (
-                          <Circle className="h-5 w-5" style={{ color: "#374151" }} />
+                          <Circle className="h-5 w-5" />
                         )}
                       </button>
                     )}
@@ -294,9 +296,10 @@ function SessionRow({
                             }}
                           />
                           <button
+                            type="button"
                             onClick={() => saveReflection(task)}
                             disabled={loading === task.id || !(reflections[task.id] ?? "").trim()}
-                            className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold text-white disabled:opacity-40 transition-opacity hover:opacity-80"
+                            className="flex items-center gap-1.5 rounded-xl px-4 py-3 text-xs font-semibold text-white disabled:opacity-40 transition-opacity hover:opacity-80 min-h-[44px] active:opacity-70"
                             style={{ backgroundColor: "#8B5CF6" }}
                           >
                             {loading === task.id ? <Loader2 className="h-3 w-3 animate-spin" /> : null}

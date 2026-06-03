@@ -158,7 +158,8 @@ export function CaseStudy() {
             style={{ borderColor: "#1E293B" }}
           >
             <button
-              className="flex-1 py-3.5 text-sm font-bold transition-all duration-200"
+              type="button"
+              className="flex-1 py-3.5 text-sm font-bold transition-all duration-200 min-h-[44px]"
               style={{
                 backgroundColor: activeTab === "before" ? "rgba(239,68,68,0.15)" : "#0F172A",
                 color:           activeTab === "before" ? "#EF4444" : "#4B5563",
@@ -169,7 +170,8 @@ export function CaseStudy() {
               Before, Week 1
             </button>
             <button
-              className="flex-1 py-3.5 text-sm font-bold transition-all duration-200"
+              type="button"
+              className="flex-1 py-3.5 text-sm font-bold transition-all duration-200 min-h-[44px]"
               style={{
                 backgroundColor: activeTab === "after" ? "rgba(16,185,129,0.15)" : "#0F172A",
                 color:           activeTab === "after" ? "#10B981" : "#4B5563",

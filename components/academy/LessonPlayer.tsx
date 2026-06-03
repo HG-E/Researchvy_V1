@@ -123,7 +123,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
             posthog.capture("course_completed", { course_slug: courseSlug });
             // Brief pause so the "Lesson complete" state renders, then celebrate
             setTimeout(() => {
-              router.push(`/academy/courses/${courseSlug}/complete`);
+              router.replace(`/academy/courses/${courseSlug}/complete`);
             }, 800);
           }
         }
@@ -207,7 +207,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
                   onClick={markComplete}
                   disabled={loading}
                   aria-label="Mark this lesson as complete"
-                  className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors disabled:opacity-60 hover:bg-[#1E293B]"
+                  className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-colors disabled:opacity-60 hover:bg-[#1E293B] min-h-[44px] active:opacity-70"
                   style={{ backgroundColor: "#161D2E", color: "#D1D5DB", border: "1px solid #334155" }}
                 >
                   {loading ? (

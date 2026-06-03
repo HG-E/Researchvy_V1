@@ -3,6 +3,8 @@ import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/aut
 import { Resend } from "resend";
 import { clinicInterestConfirmation } from "@/lib/email/templates";
 
+export const maxDuration = 30;
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function GET() {
