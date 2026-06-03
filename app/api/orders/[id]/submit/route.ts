@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { sendOrderSubmittedAdminAlert, sendPaymentReceivedEmail } from "@/lib/email/index";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 
@@ -17,17 +17,22 @@ export async function POST(
 ) {
   const { id } = await params;
   try {
+    const user = await getServerUser();
+    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
     const body = await request.json().catch(() => ({}));
     const submittedRef: string | null = body.submittedRef ?? null;
 
     const admin = createSupabaseAdminClient();
     const { data: order } = await admin
       .from("orders")
-      .select("status,user_name,user_email,user_phone,order_number,bundle_id,module_id,currency,amount,reference")
+      .select("user_id,status,user_name,user_email,user_phone,order_number,bundle_id,module_id,currency,amount,reference")
       .eq("id", id)
       .single();
 
-    if (!order || order.status !== "pending_payment") {
+    if (!order) return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    if (order.user_id !== user.id) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    if (order.status !== "pending_payment") {
       return NextResponse.json({ error: "Order cannot be updated" }, { status: 400 });
     }
 

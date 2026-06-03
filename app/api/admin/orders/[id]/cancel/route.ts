@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
+import { requireRole } from "@/lib/auth/permissions";
 import { sendOrderCancelledEmail } from "@/lib/email/index";
 
 export async function POST(
@@ -11,18 +12,10 @@ export async function POST(
   const caller = await getServerUser();
   if (!caller) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
+  const { allowed } = await requireRole(caller.id, "admin");
+  if (!allowed) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
   const admin = createSupabaseAdminClient();
-
-  const { data: callerRow } = await admin
-    .from("users")
-    .select("role")
-    .eq("id", caller.id)
-    .single();
-
-  if (!callerRow || callerRow.role !== "admin") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-
   const body = await request.json().catch(() => ({}));
   const reason: string = body.reason ?? "";
 
@@ -36,10 +29,12 @@ export async function POST(
   if (order.status === "cancelled") return NextResponse.json({ error: "Already cancelled" }, { status: 400 });
   if (order.status === "confirmed") return NextResponse.json({ error: "Cannot cancel a confirmed order" }, { status: 400 });
 
-  await admin
+  const { error: updateErr } = await admin
     .from("orders")
     .update({ status: "cancelled", notes: reason || null })
     .eq("id", id);
+
+  if (updateErr) return NextResponse.json({ error: "Failed to cancel order" }, { status: 500 });
 
   sendOrderCancelledEmail({
     to:          order.user_email,

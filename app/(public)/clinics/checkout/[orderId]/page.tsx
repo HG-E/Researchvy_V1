@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -12,6 +12,7 @@ export const dynamic  = "force-dynamic";
 
 type Order = {
   id:            string;
+  user_id:       string | null;
   order_number:  string;
   reference:     string;
   bundle_id:     string;
@@ -33,7 +34,7 @@ async function getOrder(id: string): Promise<Order | null> {
     const { data, error } = await admin
       .from("orders")
       .select(
-        "id,order_number,reference,bundle_id,module_id,currency,amount,is_early_bird,status,payment_method,submitted_ref,created_at,user_name,user_email",
+        "id,user_id,order_number,reference,bundle_id,module_id,currency,amount,is_early_bird,status,payment_method,submitted_ref,created_at,user_name,user_email",
       )
       .eq("id", id)
       .single();
@@ -60,6 +61,8 @@ export default async function OrderPage({
   const { orderId } = await params;
   const [order, user] = await Promise.all([getOrder(orderId), getServerUser()]);
   if (!order) notFound();
+  if (!user) redirect(`/signin?next=/clinics/checkout/${orderId}`);
+  if (order.user_id && order.user_id !== user.id) notFound();
 
   const bundleName      = bundleLabel(order.bundle_id, order.module_id);
   const formattedAmount =

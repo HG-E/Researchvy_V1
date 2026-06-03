@@ -106,6 +106,9 @@ export function CheckoutForm({
     } catch (e) {
       setErr(e instanceof Error ? e.message : "Something went wrong — please try again");
       setLoading(false);
+    } finally {
+      // Ensure loading resets if navigation fails or component stays mounted
+      setLoading(false);
     }
   }
 
