@@ -34,12 +34,45 @@ function getNonYouTubeEmbedUrl(lesson: Lesson): string | null {
   return null;
 }
 
+const LS_KEY = (id: string) => `lesson_progress_${id}`;
+
 export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextLesson, initialDone, initialSeconds, enrolled, initialNote, contentNode }: LessonPlayerProps) {
   const router = useRouter();
   const [done, setDone]             = useState(initialDone);
   const [loading, setLoading]       = useState(false);
   const [announced, setAnnounced]   = useState("");
   const announcerRef = useRef<HTMLDivElement>(null);
+
+  // Resolve starting position: prefer localStorage over server value so
+  // a page refresh mid-video resumes where the user left off
+  const resolvedSeconds = (() => {
+    try {
+      const saved = localStorage.getItem(LS_KEY(lesson.id));
+      if (saved) {
+        const n = parseInt(saved, 10);
+        if (!isNaN(n) && n > initialSeconds) return n;
+      }
+    } catch { /* localStorage unavailable (SSR / private mode) */ }
+    return initialSeconds;
+  })();
+
+  // Save progress to localStorage every 10 s via a custom event the
+  // video player fires (YouTubePlayer already emits onProgress)
+  useEffect(() => {
+    function handleProgress(e: Event) {
+      const sec = (e as CustomEvent<number>).detail;
+      try { localStorage.setItem(LS_KEY(lesson.id), String(sec)); } catch { /* ignore */ }
+    }
+    window.addEventListener("lesson:progress", handleProgress);
+    return () => window.removeEventListener("lesson:progress", handleProgress);
+  }, [lesson.id]);
+
+  // Clear localStorage once the lesson is marked complete
+  useEffect(() => {
+    if (done) {
+      try { localStorage.removeItem(LS_KEY(lesson.id)); } catch { /* ignore */ }
+    }
+  }, [done, lesson.id]);
 
   // Track lesson start once per mount
   useEffect(() => {
@@ -122,7 +155,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
           videoId={lesson.video_id!}
           title={lesson.title}
           lessonId={lesson.id}
-          initialSeconds={initialSeconds}
+          initialSeconds={resolvedSeconds}
           onVideoEnd={enrolled ? markComplete : undefined}
         />
       )}

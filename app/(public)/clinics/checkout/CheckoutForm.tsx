@@ -196,7 +196,7 @@ export function CheckoutForm({
               <div className="rounded-xl p-4" style={{ backgroundColor: "#1E293B" }}>
                 <div className="flex items-baseline justify-between gap-4">
                   <span className="text-2xl font-bold" style={{ color: "#F9FAFB" }}>
-                    {bundle.isSolo && "from "}{fmt(amount, currency)}
+                    {bundle.isSolo && !selModule && "from "}{fmt(amount, currency)}
                   </span>
                   {savings > 0 && (
                     <span className="text-xs line-through" style={{ color: "#374151" }}>

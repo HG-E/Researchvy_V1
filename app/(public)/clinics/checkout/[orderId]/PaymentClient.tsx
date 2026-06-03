@@ -137,12 +137,26 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
           We'll email <span style={{ color: "#9CA3AF" }}>{order.user_email}</span> when it's done.
         </p>
         <div
-          className="inline-flex items-center gap-2 rounded-xl px-4 py-3 text-xs border"
+          className="rounded-xl px-5 py-4 text-xs border mb-3 text-left"
           style={{ backgroundColor: "rgba(245,158,11,0.05)", borderColor: "rgba(245,158,11,0.2)", color: "#F59E0B" }}
         >
-          <AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
-          Questions? Email us at researchvy@gmail.com
+          <div className="flex items-start gap-2">
+            <AlertCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="font-semibold mb-1">Still waiting after 2 hours?</p>
+              <p style={{ color: "#D97706" }}>
+                Reply to the email we sent you, or contact us directly at{" "}
+                <a href="mailto:researchvy@gmail.com" style={{ color: "#F59E0B", textDecoration: "underline" }}>
+                  researchvy@gmail.com
+                </a>{" "}
+                with your order number <span className="font-mono font-bold">{order.order_number}</span> and we'll sort it out immediately.
+              </p>
+            </div>
+          </div>
         </div>
+        <p className="text-xs" style={{ color: "#4B5563" }}>
+          Reference: <span className="font-mono" style={{ color: "#6B7280" }}>{order.reference}</span>
+        </p>
       </div>
     );
   }

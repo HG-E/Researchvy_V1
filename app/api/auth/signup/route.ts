@@ -19,6 +19,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Email, password, and name are required" }, { status: 400 });
     }
 
+    const rawRedirect  = typeof redirectTo === "string" ? redirectTo : "/dashboard";
+    const safeRedirect = rawRedirect.startsWith("/") && !rawRedirect.startsWith("//") ? rawRedirect : "/dashboard";
+
     const supabase = await createSupabaseServerClient();
     const { error } = await supabase.auth.signUp({
       email,
@@ -28,7 +31,7 @@ export async function POST(req: NextRequest) {
           full_name,
           institutional_affiliation: institutional_affiliation ?? "",
         },
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://researchvy.com"}/auth/callback?next=${encodeURIComponent(redirectTo ?? "/dashboard")}`,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://researchvy.com"}/auth/callback?next=${encodeURIComponent(safeRedirect)}`,
       },
     });
 

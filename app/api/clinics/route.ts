@@ -25,9 +25,11 @@ export async function POST(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const body           = await req.json().catch(() => ({}));
-  const clinicSlug     = (body.clinic_slug     as string) || "digital-visibility-clinic";
-  const preferredTrack = (body.preferred_track as string) || null;
+  const body       = await req.json().catch(() => ({}));
+  const clinicSlug = (body.clinic_slug as string) || "digital-visibility-clinic";
+  const VALID_TRACKS = ["wednesday", "sunday"] as const;
+  const rawTrack     = body.preferred_track as string;
+  const preferredTrack: string | null = VALID_TRACKS.includes(rawTrack as typeof VALID_TRACKS[number]) ? rawTrack : null;
 
   const admin = createSupabaseAdminClient();
 
@@ -75,7 +77,7 @@ export async function POST(req: NextRequest) {
           <tr><td style="padding:10px 0;color:#6B7280;width:140px;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Name</td>
               <td style="padding:10px 0;color:#0F172A;font-weight:600;border-bottom:1px solid #F3F4F6;font-size:14px;">${fullName || "(not set)"}</td></tr>
           <tr><td style="padding:10px 0;color:#6B7280;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Email</td>
-              <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;"><a href="mailto:${user.email}" style="color:#2563EB;">${user.email}</a></td></tr>
+              <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;"><a href="mailto:${user.email?.replace(/[<>"]/g, '')}" style="color:#2563EB;">${user.email?.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</a></td></tr>
           <tr><td style="padding:10px 0;color:#6B7280;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Clinic</td>
               <td style="padding:10px 0;color:#0F172A;border-bottom:1px solid #F3F4F6;font-size:14px;">${clinicLabel}</td></tr>
           <tr><td style="padding:10px 0;color:#6B7280;border-bottom:1px solid #F3F4F6;vertical-align:top;font-size:14px;">Track</td>

@@ -55,13 +55,15 @@ export async function POST(req: NextRequest) {
   const prog = getProgramme(clinic_slug ?? "digital-visibility-clinic");
   const year = new Date().getFullYear().toString();
 
-  // Count existing certs for this programme code in the current year to get next sequence
-  const { count } = await admin
-    .from("certificates")
-    .select("*", { count: "exact", head: true })
-    .like("certificate_number", `${prog.code}-${year}-%`);
-
-  const seq = (count ?? 0) + 1;
+  // Use a Postgres SEQUENCE for atomic, collision-free cert numbering.
+  // Migration 019 creates cert_seq. Falls back to timestamp if RPC unavailable.
+  let seq = 1;
+  try {
+    const { data: seqData } = await admin.rpc("nextval_cert_seq");
+    if (seqData) seq = Number(seqData);
+  } catch {
+    seq = Date.now() % 100000;
+  }
   const certificate_number = `${prog.code}-${year}-${String(seq).padStart(5, "0")}`;
 
   const { data: cert, error } = await admin

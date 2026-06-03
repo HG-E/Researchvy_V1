@@ -180,7 +180,31 @@ export default async function TasksPage() {
         </p>
       </div>
 
-      <TaskList sessions={sessions} totalTasks={totalTasks} doneTasks={doneTasks} />
+      {unlockedSessions.size === 0 && (
+        <div
+          className="rounded-2xl border p-8 text-center"
+          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        >
+          <div className="text-4xl mb-4">📅</div>
+          <h2 className="text-lg font-bold mb-2" style={{ color: "#F9FAFB" }}>
+            Sessions open when your cohort begins
+          </h2>
+          <p className="text-sm mb-4" style={{ color: "#6B7280" }}>
+            Your July 2026 cohort hasn't started yet. Sessions will unlock one at a time
+            as the programme progresses — you'll get an email each time a new one opens.
+          </p>
+          <p className="text-xs" style={{ color: "#374151" }}>
+            Questions? Email{" "}
+            <a href="mailto:researchvy@gmail.com" style={{ color: "#4B5563" }}>
+              researchvy@gmail.com
+            </a>
+          </p>
+        </div>
+      )}
+
+      {unlockedSessions.size > 0 && (
+        <TaskList sessions={sessions} totalTasks={totalTasks} doneTasks={doneTasks} />
+      )}
     </div>
   );
 }
