@@ -203,8 +203,8 @@ export default async function MyClinicsPage() {
           style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
         >
           <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
-            Academy cohorts, Intelligence workshops, and specialised institution-level programmes are in development.
-            Registered members will be notified first.
+            More clinic programmes, intensive workshops, and institution-level cohorts are in development.
+            Registered members are notified first.
           </p>
         </div>
       </div>

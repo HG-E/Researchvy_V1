@@ -613,34 +613,39 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* ── COMPANION: CLINICS ─────────────────────────────────────────────── */}
-      <section className="border-t" style={{ borderColor: "#0F172A", backgroundColor: "rgba(37,99,235,0.02)" }}>
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16">
-          <div className="rounded-2xl border p-8 flex flex-col sm:flex-row items-start gap-6"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B", borderLeft: "4px solid #2563EB" }}>
-            <div className="flex-1">
-              <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
-                Companion Product · Optional
+      {/* ── RESEARCHVY ECOSYSTEM NOTE ─────────────────────────────────────── */}
+      <section className="border-t" style={{ borderColor: "#0F172A" }}>
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid sm:grid-cols-2 gap-4">
+            {/* Academy — current product, summary */}
+            <div className="rounded-xl border p-5" style={{ backgroundColor: "#0F172A", borderColor: "rgba(16,185,129,0.25)" }}>
+              <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "#10B981" }}>
+                Researchvy Academy
               </p>
-              <h3 className="text-lg font-bold mb-2" style={{ color: "#F9FAFB" }}>
-                Want Live Sessions Alongside the Self-Paced Course?
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-                The <strong style={{ color: "#F9FAFB" }}>Digital Visibility Clinic (DVC)</strong> is a <em>separate, paid</em> live programme — not part of the Academy.
-                Small cohorts, expert facilitator, live Q&A, personalised profile review.
-                The two products work well together but are completely independent.
-                <span style={{ display: "block", marginTop: "8px", color: "#4B5563", fontSize: "12px" }}>
-                  Academy = self-paced, Level 1 free · DVC = paid, live, cohort-based
-                </span>
+              <p className="text-sm font-semibold mb-2" style={{ color: "#F9FAFB" }}>Self-paced · Level 1 free</p>
+              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                Five structured levels. Work at your own pace. No deadline, no cohort, no facilitator required.
+                Designed for researchers who want to build visibility independently.
               </p>
             </div>
-            <Link
-              href="/clinics/digital-visibility-clinic"
-              className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold flex-shrink-0 transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#2563EB", color: "#fff" }}
-            >
-              View Clinic <ArrowRight className="h-4 w-4" />
-            </Link>
+            {/* DVC — separate standalone product */}
+            <div className="rounded-xl border p-5" style={{ backgroundColor: "#0F172A", borderColor: "rgba(37,99,235,0.25)" }}>
+              <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "#60A5FA" }}>
+                Digital Visibility Clinic — Separate Product
+              </p>
+              <p className="text-sm font-semibold mb-2" style={{ color: "#F9FAFB" }}>Live · Paid · Cohort-based</p>
+              <p className="text-xs leading-relaxed mb-3" style={{ color: "#6B7280" }}>
+                An entirely separate Researchvy programme. Small groups, expert facilitator, real-time profile review.
+                Neither depends on the other — you choose which fits your situation.
+              </p>
+              <Link
+                href="/clinics"
+                className="text-xs font-semibold"
+                style={{ color: "#60A5FA" }}
+              >
+                Learn about the clinic →
+              </Link>
+            </div>
           </div>
         </div>
       </section>

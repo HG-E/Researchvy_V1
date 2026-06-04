@@ -170,21 +170,33 @@ export default async function DashboardPage() {
         );
       })()}
 
-      {/* New-user nudge — only when no clinic AND no courses */}
+      {/* New-user nudge — show both products independently when user has neither */}
       {clinicCount === 0 && activeCount === 0 && (
-        <div
-          className="flex items-start gap-3 rounded-xl px-4 py-3.5 border-l-4"
-          style={{ backgroundColor: "rgba(37,99,235,0.06)", borderColor: "#2563EB" }}
-        >
-          <span className="text-base mt-px flex-shrink-0">👋</span>
-          <p className="text-sm leading-relaxed" style={{ color: "#D1D5DB" }}>
-            <strong style={{ color: "#60A5FA" }}>Welcome to Researchvy.</strong>{" "}
-            Start with the{" "}
-            <Link href="/clinics" className="underline underline-offset-2 hover:text-white transition-colors" style={{ color: "#60A5FA" }}>
-              Digital Visibility Clinic
+        <div className="grid sm:grid-cols-2 gap-4">
+          {/* Academy — self-paced, free */}
+          <div
+            className="rounded-xl border p-4"
+            style={{ backgroundColor: "rgba(16,185,129,0.05)", borderColor: "rgba(16,185,129,0.2)" }}
+          >
+            <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#10B981" }}>Researchvy Academy</p>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>Self-paced learning — Level 1 free</p>
+            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>36 lessons, 7 modules. No payment, no commitment. Work through at your own pace.</p>
+            <Link href="/academy/courses" className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: "#10B981" }}>
+              Start Level 1 free →
             </Link>
-            {" "}— our live programme that takes researchers from overlooked to globally discoverable.
-          </p>
+          </div>
+          {/* DVC — paid, live */}
+          <div
+            className="rounded-xl border p-4"
+            style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.2)" }}
+          >
+            <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#60A5FA" }}>Digital Visibility Clinic</p>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>Live cohort programme — July 2026</p>
+            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>Paid, small-group, facilitator-led. Real-time profile review and strategy. Independent of the Academy.</p>
+            <Link href="/clinics" className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: "#60A5FA" }}>
+              View the clinic →
+            </Link>
+          </div>
         </div>
       )}
 

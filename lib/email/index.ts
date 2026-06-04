@@ -51,9 +51,9 @@ export async function sendWelcomeEmail(opts: {
     <div style="border-left:3px solid #2563EB;padding-left:16px;margin-bottom:24px">
       <p style="color:#60A5FA;font-size:13px;font-weight:600;margin:0 0 8px">Your first three steps:</p>
       <ol style="color:#9CA3AF;font-size:14px;line-height:1.9;margin:0;padding-left:20px">
-        <li>Complete your researcher profile</li>
-        <li>Explore the Academy — start with a free lesson</li>
-        <li>Register for the Digital Visibility Clinic</li>
+        <li>Complete your researcher profile — add your ORCID and institution</li>
+        <li>Start Level 1 of the Academy — 100% free, no payment needed</li>
+        <li>Explore all Researchvy programmes at your own pace</li>
       </ol>
     </div>
 
@@ -280,9 +280,7 @@ export async function sendDay5DripEmail(opts: { to: string; firstName: string })
 
   <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px;margin-bottom:24px">
     <p style="color:#6B7280;font-size:13px;line-height:1.7;margin:0">
-      Want live, expert-guided training alongside the Academy?
-      The <strong style="color:#D1D5DB">Digital Visibility Clinic</strong> is a paid, cohort-based programme with live sessions and real-time facilitator feedback — a separate product that works alongside your Academy learning.
-      <a href="${SITE_URL}/clinics" style="color:#60A5FA;text-decoration:none">See the clinic →</a>
+      Questions about the Academy or your visibility strategy? Reply to this email — we read every one.
     </p>
   </div>
 

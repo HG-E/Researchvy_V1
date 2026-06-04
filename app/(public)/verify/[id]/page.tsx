@@ -154,14 +154,21 @@ function AcademyCertCard({ cert }: { cert: AcademyCert }) {
         </div>
       </div>
 
-      <div className="px-8 py-4 border-t flex items-center justify-between"
-        style={{ borderColor: "#1E293B", backgroundColor: "#070B14" }}>
-        <p className="text-xs" style={{ color: "#4B5563" }}>researchvy.com/verify/{cert.certId}</p>
-        <Link href={`/academy/courses/${cert.courseSlug}`}
-          className="text-xs px-3 py-1.5 rounded-lg"
-          style={{ backgroundColor: "#1E293B", color: "#94A3B8" }}>
-          View course
-        </Link>
+      <div className="px-8 py-4 border-t" style={{ borderColor: "#1E293B", backgroundColor: "#070B14" }}>
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-xs" style={{ color: "#4B5563" }}>researchvy.com/verify/{cert.certId}</p>
+          <Link href={`/academy/courses/${cert.courseSlug}`}
+            className="text-xs px-3 py-1.5 rounded-lg"
+            style={{ backgroundColor: "#1E293B", color: "#94A3B8" }}>
+            View course
+          </Link>
+        </div>
+        <CertShareButtons
+          certificateNumber={cert.certId}
+          recipientName={cert.researcherName}
+          programme={`${cert.courseTitle} — Researchvy Academy`}
+          issuedAt={cert.completedAt}
+        />
       </div>
     </div>
   );

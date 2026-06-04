@@ -218,32 +218,14 @@ export default async function AcademyPage() {
         </ul>
       </div>
 
-      {/* Clinics teaser */}
-      <div
-        className="rounded-2xl border p-5 flex flex-col sm:flex-row items-center justify-between gap-4"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
-      >
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
-              Want faster, guided results?
-            </p>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(245,158,11,0.12)", color: "#F59E0B" }}>
-              PAID · LIVE
-            </span>
-          </div>
-          <p className="text-xs" style={{ color: "#6B7280" }}>
-            The <strong style={{ color: "#D1D5DB" }}>Digital Visibility Clinic</strong> is a separate, live, cohort-based programme — not part of the Academy.
-            Expert facilitator, small group, real-time feedback.
-          </p>
-        </div>
-        <Link
-          href="/dashboard/clinics"
-          className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap transition-colors hover:opacity-90"
-          style={{ backgroundColor: "#2563EB" }}
-        >
-          View Clinics <ArrowRight className="h-4 w-4" />
-        </Link>
+      {/* Academy-only footer — no DVC cross-promotion inside the Academy journey */}
+      <div className="rounded-xl border p-4 text-center" style={{ borderColor: "#1E293B" }}>
+        <p className="text-xs" style={{ color: "#374151" }}>
+          Researchvy Academy · Self-paced · Level 1 free ·{" "}
+          <a href="/academy/courses" style={{ color: "#4B5563", textDecoration: "underline" }}>
+            Browse all courses
+          </a>
+        </p>
       </div>
 
     </div>
