@@ -2,18 +2,19 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers, Shield } from "lucide-react";
+import { LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers, Shield, Globe, Gift } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { UserAvatar } from "@/components/common/UserAvatar";
 import type { DashUser } from "@/app/dashboard/layout";
 
 const NAV_ITEMS = [
-  { href: "/dashboard",             label: "Overview",     Icon: LayoutDashboard },
-  { href: "/dashboard/clinics",     label: "My Clinics",   Icon: GraduationCap },
-  { href: "/dashboard/academy",     label: "Academy",      Icon: Layers },
-  { href: "/dashboard/resources",   label: "Resources",    Icon: BookOpen },
-  { href: "/dashboard/certificates",label: "Certificates", Icon: Award },
-  { href: "/dashboard/profile",     label: "Profile",      Icon: User },
+  { href: "/dashboard",                  label: "Overview",       Icon: LayoutDashboard },
+  { href: "/dashboard/clinics",          label: "My Clinics",     Icon: GraduationCap },
+  { href: "/dashboard/academy",          label: "Academy",        Icon: Layers },
+  { href: "/dashboard/opportunities",    label: "Opportunities",  Icon: Globe },
+  { href: "/dashboard/resources",        label: "Resources",      Icon: BookOpen },
+  { href: "/dashboard/certificates",     label: "Certificates",   Icon: Award },
+  { href: "/dashboard/profile",          label: "Profile",        Icon: User },
 ];
 
 export function DashboardSidebar({ user }: { user: DashUser }) {

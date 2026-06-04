@@ -13,19 +13,22 @@ import {
   GraduationCap,
   Layers,
   ShoppingBag,
+  Globe,
+  Gift,
 } from "lucide-react";
 
 const NAV = [
-  { label: "Overview",    href: "/admin",               icon: LayoutDashboard, exact: true  },
-  { label: "Orders",      href: "/admin/orders",         icon: ShoppingBag,     exact: false },
-  { label: "Enquiries",   href: "/admin/enquiries",      icon: Inbox,           exact: false },
-  { label: "Partnerships",href: "/admin/partnerships",   icon: Handshake,       exact: false },
-  { label: "Content",     href: "/admin/content",        icon: FileText,        exact: false },
-  { label: "Clinics",     href: "/admin/clinics",        icon: BookOpen,        exact: false },
-  { label: "Academy",     href: "/admin/academy",        icon: Layers,          exact: false },
-  { label: "Enrollments", href: "/admin/enrollments",    icon: GraduationCap,   exact: false },
-  { label: "Users",       href: "/admin/users",          icon: Users,           exact: false },
-  { label: "Analytics",   href: "/admin/analytics",      icon: BarChart2,       exact: false },
+  { label: "Overview",      href: "/admin",                     icon: LayoutDashboard, exact: true  },
+  { label: "Orders",        href: "/admin/orders",               icon: ShoppingBag,     exact: false },
+  { label: "Enquiries",     href: "/admin/enquiries",            icon: Inbox,           exact: false },
+  { label: "Partnerships",  href: "/admin/partnerships",         icon: Handshake,       exact: false },
+  { label: "Opportunities", href: "/admin/opportunities",        icon: Globe,           exact: false },
+  { label: "Content",       href: "/admin/content",              icon: FileText,        exact: false },
+  { label: "Clinics",       href: "/admin/clinics",              icon: BookOpen,        exact: false },
+  { label: "Academy",       href: "/admin/academy",              icon: Layers,          exact: false },
+  { label: "Enrollments",   href: "/admin/enrollments",          icon: GraduationCap,   exact: false },
+  { label: "Users",         href: "/admin/users",                icon: Users,           exact: false },
+  { label: "Analytics",     href: "/admin/analytics",            icon: BarChart2,       exact: false },
 ];
 
 export function AdminNav() {

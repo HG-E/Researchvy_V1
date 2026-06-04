@@ -349,3 +349,37 @@ h1, h2, h3, h4, h5, h6 {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ─── Print-to-PDF styles (lesson save as PDF) ─────────────────────────── */
+@media print {
+  body.printing-lesson {
+    background: #ffffff !important;
+    color:      #111827 !important;
+  }
+  body.printing-lesson nav,
+  body.printing-lesson aside,
+  body.printing-lesson header,
+  body.printing-lesson footer,
+  body.printing-lesson .print\\:hidden {
+    display: none !important;
+  }
+  body.printing-lesson main {
+    max-width:   100% !important;
+    padding:     0 !important;
+    margin:      0 !important;
+  }
+  body.printing-lesson h1,
+  body.printing-lesson h2,
+  body.printing-lesson h3 {
+    color: #111827 !important;
+  }
+  body.printing-lesson p,
+  body.printing-lesson li {
+    color: #374151 !important;
+    font-size: 12pt !important;
+    line-height: 1.6 !important;
+  }
+  body.printing-lesson a {
+    color: #1d4ed8 !important;
+  }
+}

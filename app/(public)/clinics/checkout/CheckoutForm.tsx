@@ -53,6 +53,7 @@ export function CheckoutForm({
   const [moduleId, setModuleId]   = useState(initialModuleId ?? modules[0]?.id ?? "");
   const [name,    setName]        = useState(userName);
   const [phone,   setPhone]       = useState("");
+  const [refCode, setRefCode]     = useState("");
   const [loading, setLoading]     = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [err,     setErr]         = useState<string | null>(null);
@@ -92,7 +93,8 @@ export function CheckoutForm({
           currency,
           userEmail,
           userName:  name.trim(),
-          userPhone: phone.trim() || null,
+          userPhone:    phone.trim()   || null,
+          referralCode: refCode.trim() || null,
           userId,
         }),
       });
@@ -267,6 +269,22 @@ export function CheckoutForm({
                   className="w-full rounded-xl px-4 py-2.5 text-sm border outline-none focus:ring-1 focus:ring-blue-500"
                   style={{ backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" }}
                 />
+              </div>
+              <div>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: "#9CA3AF" }}>
+                  Referral code <span style={{ color: "#4B5563" }}>(optional)</span>
+                </label>
+                <input
+                  type="text"
+                  value={refCode}
+                  onChange={(e) => setRefCode(e.target.value.toUpperCase())}
+                  placeholder="e.g. TUNDE123"
+                  className="w-full rounded-xl px-4 py-2.5 text-sm border outline-none focus:ring-1 focus:ring-blue-500"
+                  style={{ backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" }}
+                />
+                <p className="text-[11px] mt-1" style={{ color: "#374151" }}>
+                  If a colleague referred you, enter their code here
+                </p>
               </div>
             </div>
           </div>

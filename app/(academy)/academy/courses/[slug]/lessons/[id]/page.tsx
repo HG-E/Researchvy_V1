@@ -11,6 +11,7 @@ import { buildWhatsAppUrl } from "@/config/site";
 import { LessonPlayerClient as LessonPlayer } from "@/components/academy/LessonPlayerClient";
 import { LessonSidebar } from "@/components/academy/LessonSidebar";
 import { MdxContent } from "@/components/insights/MdxContent";
+import { DownloadPdfButton } from "@/components/academy/DownloadPdfButton";
 import type { Lesson } from "@/types/academy";
 
 export async function generateMetadata({
@@ -155,6 +156,7 @@ export default async function LessonPage({
           enrolled={enrolled}
           initialNote={initialNote}
           contentNode={lesson.content_md ? <MdxContent source={lesson.content_md} /> : null}
+          downloadButton={<DownloadPdfButton lessonTitle={lesson.title} courseTitle={course.title} />}
         />
       ) : (
         <AccessGate courseSlug={slug} courseName={course.title} />

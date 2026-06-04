@@ -26,6 +26,7 @@ interface LessonPlayerProps {
   enrolled:       boolean;
   initialNote:    string;
   contentNode:    ReactNode;
+  downloadButton?: ReactNode;
 }
 
 function getNonYouTubeEmbedUrl(lesson: Lesson): string | null {
@@ -36,7 +37,7 @@ function getNonYouTubeEmbedUrl(lesson: Lesson): string | null {
 
 const LS_KEY = (id: string) => `lesson_progress_${id}`;
 
-export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextLesson, initialDone, initialSeconds, enrolled, initialNote, contentNode }: LessonPlayerProps) {
+export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextLesson, initialDone, initialSeconds, enrolled, initialNote, contentNode, downloadButton }: LessonPlayerProps) {
   const router = useRouter();
   const [done, setDone]             = useState(initialDone);
   const [loading, setLoading]       = useState(false);
@@ -265,6 +266,13 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
           {contentNode && (
             <div className="prose-invert mb-10">
               {contentNode}
+            </div>
+          )}
+
+          {/* Download as PDF — shows below content */}
+          {downloadButton && (
+            <div className="flex justify-end mb-6 print:hidden">
+              {downloadButton}
             </div>
           )}
 

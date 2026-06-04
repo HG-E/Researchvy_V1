@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, ArrowRight, Share2, BookOpen } from "lucide-react";
+import { CertShareButtons } from "@/components/certificates/CertShareButtons";
 
 const CONFETTI_COLORS = ["#60A5FA", "#A78BFA", "#34D399", "#FCD34D", "#F472B6", "#F87171", "#FBBF24"];
 
@@ -65,6 +66,7 @@ interface CourseCompleteViewProps {
   levelColor:     string;
   certId:         string;
   completedDate:  string;
+  completedAt:    string;   // ISO string for certificate share buttons
   lessonsCount:   number;
   nextCourse: {
     title: string;
@@ -76,6 +78,7 @@ interface CourseCompleteViewProps {
 export function CourseCompleteView({
   researcherName,
   courseName,
+  completedAt,
   courseSlug,
   courseLevel,
   levelColor,
@@ -187,7 +190,17 @@ export function CourseCompleteView({
             </p>
           </div>
 
-          {/* Share row */}
+          {/* Certificate-specific: Add to LinkedIn Profile + ORCID */}
+          <div className="mb-4">
+            <CertShareButtons
+              certificateNumber={certId}
+              recipientName={researcherName}
+              programme={courseName}
+              issuedAt={completedAt}
+            />
+          </div>
+
+          {/* Share row — course page social share */}
           <div className="flex flex-wrap gap-3 justify-center mb-6">
             <a
               href={linkedInUrl}

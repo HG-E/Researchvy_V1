@@ -78,6 +78,7 @@ export default async function CourseCompletePage({
       levelColor={levelColor(course.level)}
       certId={certId}
       completedDate={completedDate}
+      completedAt={completedAt}
       lessonsCount={allLessons.length}
       nextCourse={nextCourse}
     />
