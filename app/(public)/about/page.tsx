@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, Shield, Globe, TrendingUp } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Shield, Globe, TrendingUp, ExternalLink, BookOpen, CheckCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { organizationSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/config/site";
 import { FrameworkCarousel } from "@/components/about/FrameworkCarousel";
 import { DivisionsCarousel } from "@/components/about/DivisionsCarousel";
+import { FACILITATORS, PARTNER_INSTITUTIONS } from "@/constants/facilitators";
 
 export const metadata = generatePageMetadata({
   title: "About Researchvy",
@@ -300,6 +302,119 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Facilitator section ────────────────────────────────────────── */}
+      {FACILITATORS.map((f) => (
+        <section key={f.id} className="border-t" style={{ borderColor: "#1E293B" }}>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
+              Your Facilitator
+            </p>
+            <h2 className="text-2xl font-bold mb-10" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+              The person who works with you directly
+            </h2>
+
+            <div className="rounded-3xl border overflow-hidden" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+              <div className="h-1 w-full" style={{ background: "linear-gradient(90deg,#2563EB,#10B981)" }} />
+              <div className="p-8 sm:p-10">
+                <div className="flex flex-col sm:flex-row gap-8 items-start">
+
+                  {/* Photo / initials */}
+                  <div className="flex-shrink-0">
+                    {f.photo ? (
+                      <Image src={f.photo} alt={f.name} width={112} height={112} className="rounded-2xl object-cover w-28 h-28" />
+                    ) : (
+                      <div className="w-28 h-28 rounded-2xl flex items-center justify-center text-2xl font-bold" style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#60A5FA" }}>
+                        {f.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Bio */}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-xl font-bold mb-1" style={{ color: "#F9FAFB" }}>{f.name}</h3>
+                    <p className="text-sm mb-0.5" style={{ color: "#60A5FA" }}>{f.title}</p>
+                    <p className="text-xs mb-4" style={{ color: "#4B5563" }}>{f.affiliation}</p>
+                    <p className="text-sm leading-relaxed mb-5" style={{ color: "#9CA3AF" }}>{f.bio}</p>
+
+                    {f.credentials.length > 0 && (
+                      <div className="mb-4">
+                        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#4B5563" }}>Credentials</p>
+                        <ul className="space-y-1">
+                          {f.credentials.map((c) => (
+                            <li key={c} className="text-xs flex items-start gap-2" style={{ color: "#6B7280" }}>
+                              <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#2563EB" }} />
+                              {c}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {f.specialisms.map((s) => (
+                        <span key={s} className="text-xs px-3 py-1 rounded-full" style={{ backgroundColor: "rgba(37,99,235,0.08)", color: "#93C5FD" }}>{s}</span>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-4">
+                      {f.linkedin      && <a href={f.linkedin}      target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-medium" style={{ color: "#60A5FA" }}>LinkedIn <ExternalLink className="h-3 w-3" /></a>}
+                      {f.orcid         && <a href={f.orcid}         target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-medium" style={{ color: "#10B981" }}>ORCID <ExternalLink className="h-3 w-3" /></a>}
+                      {f.googleScholar && <a href={f.googleScholar} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-medium" style={{ color: "#A78BFA" }}>Google Scholar <ExternalLink className="h-3 w-3" /></a>}
+                    </div>
+                  </div>
+                </div>
+
+                {f.publications.length > 0 && (
+                  <div className="mt-8 pt-6 border-t" style={{ borderColor: "#1E293B" }}>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-3 flex items-center gap-2" style={{ color: "#4B5563" }}>
+                      <BookOpen className="h-3.5 w-3.5" /> Selected Publications
+                    </p>
+                    <ul className="space-y-2">
+                      {f.publications.map((pub) => (
+                        <li key={pub.title} className="text-xs" style={{ color: "#6B7280" }}>
+                          <span style={{ color: "#D1D5DB" }}>{pub.title}</span> · {pub.journal}, {pub.year}
+                          {pub.url && <a href={pub.url} target="_blank" rel="noopener noreferrer" className="ml-2 inline-flex items-center gap-1" style={{ color: "#60A5FA" }}>View <ExternalLink className="h-2.5 w-2.5" /></a>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Track record */}
+                <div className="mt-8 pt-6 border-t grid grid-cols-2 sm:grid-cols-2 gap-4" style={{ borderColor: "#1E293B" }}>
+                  <div className="rounded-xl p-4 text-center" style={{ backgroundColor: "rgba(37,99,235,0.06)" }}>
+                    <p className="text-2xl font-bold mb-1" style={{ color: "#F9FAFB" }}>{f.clinicsLed}</p>
+                    <p className="text-xs" style={{ color: "#6B7280" }}>Cohorts facilitated</p>
+                  </div>
+                  <div className="rounded-xl p-4 text-center" style={{ backgroundColor: "rgba(16,185,129,0.06)" }}>
+                    <p className="text-2xl font-bold mb-1" style={{ color: "#F9FAFB" }}>{f.researchersHelped}+</p>
+                    <p className="text-xs" style={{ color: "#6B7280" }}>Researchers guided</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* ── Partner institutions ───────────────────────────────────────── */}
+      {PARTNER_INSTITUTIONS.length > 0 && (
+        <section className="border-t" style={{ borderColor: "#1E293B" }}>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+            <p className="text-xs font-semibold tracking-widest uppercase mb-6 text-center" style={{ color: "#4B5563" }}>
+              Previously Delivered In Partnership With
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              {PARTNER_INSTITUTIONS.map(({ name }) => (
+                <div key={name} className="rounded-xl border px-5 py-2.5 text-sm font-medium" style={{ borderColor: "#1E293B", color: "#6B7280" }}>
+                  {name}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

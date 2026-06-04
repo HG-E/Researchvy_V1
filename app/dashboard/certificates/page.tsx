@@ -3,6 +3,7 @@ import { Award, ArrowRight, Shield } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { CertificateView } from "@/components/certificates/CertificateView";
+import { CertShareButtons } from "@/components/certificates/CertShareButtons";
 
 export const metadata = generatePageMetadata({ title: "My Certificates", noIndex: true });
 
@@ -113,8 +114,16 @@ export default async function CertificatesPage() {
       ) : (
         <div className="space-y-10">
           {certificates.map((cert) => (
-            <div key={cert.certificate_number}>
+            <div key={cert.certificate_number} className="rounded-3xl border overflow-hidden" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
               <CertificateView cert={cert} />
+              <div className="px-6 pb-8">
+                <CertShareButtons
+                  certificateNumber={cert.certificate_number}
+                  recipientName={cert.recipient_name}
+                  programme={cert.programme}
+                  issuedAt={cert.issued_at}
+                />
+              </div>
             </div>
           ))}
         </div>

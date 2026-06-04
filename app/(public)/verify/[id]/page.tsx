@@ -3,6 +3,7 @@ import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { CheckCircle2, XCircle, Shield, Award, Calendar, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { CertificateView } from "@/components/certificates/CertificateView";
+import { CertShareButtons } from "@/components/certificates/CertShareButtons";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -213,7 +214,19 @@ export default async function VerifyPage({ params }: Props) {
         </div>
 
         {/* Cert display */}
-        {clinicCert && <CertificateView cert={clinicCert} />}
+        {clinicCert && (
+          <div>
+            <CertificateView cert={clinicCert} />
+            <div className="mt-4">
+              <CertShareButtons
+                certificateNumber={clinicCert.certificate_number}
+                recipientName={clinicCert.recipient_name}
+                programme={clinicCert.programme}
+                issuedAt={clinicCert.issued_at}
+              />
+            </div>
+          </div>
+        )}
         {academyCert && <AcademyCertCard cert={academyCert} />}
 
         {/* Not found state */}

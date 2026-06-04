@@ -1,6 +1,7 @@
 export const revalidate = 3600;
 
 import { notFound } from "next/navigation";
+import { FACILITATORS } from "@/constants/facilitators";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Award, Users, Monitor, Clock, Zap } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -236,6 +237,41 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 ))}
               </div>
             </section>
+
+            {/* ── Meet Your Facilitator ──────────────────────────────── */}
+            {FACILITATORS.length > 0 && (
+              <section>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
+                  Your Facilitator
+                </p>
+                <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+                  Who you'll be working with
+                </h2>
+
+                {FACILITATORS.map((f) => (
+                  <div key={f.id} className="rounded-2xl border p-6" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+                    <div className="flex items-start gap-5">
+                      <div className="w-16 h-16 rounded-xl flex items-center justify-center text-xl font-bold flex-shrink-0" style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#60A5FA" }}>
+                        {f.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold text-sm mb-0.5" style={{ color: "#F9FAFB" }}>{f.name}</p>
+                        <p className="text-xs mb-1" style={{ color: "#60A5FA" }}>{f.title}</p>
+                        <p className="text-xs mb-3" style={{ color: "#4B5563" }}>{f.affiliation} · {f.clinicsLed} cohorts · {f.researchersHelped}+ researchers guided</p>
+                        <p className="text-xs leading-relaxed mb-3 line-clamp-3" style={{ color: "#9CA3AF" }}>{f.bio}</p>
+                        <a
+                          href="/about"
+                          className="inline-flex items-center gap-1 text-xs font-semibold"
+                          style={{ color: "#2563EB" }}
+                        >
+                          Full profile & credentials →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </section>
+            )}
 
             {/* FAQ */}
             <section>
