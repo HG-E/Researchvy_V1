@@ -112,7 +112,8 @@ export default async function LessonPage({
   // Auth check
   const enrollment = user ? await getUserEnrollment(user.id, course.id) : null;
   const enrolled   = isEnrollmentActive(enrollment);
-  const canAccess  = enrolled || lesson.is_free_preview || course.is_free;
+  // Level 1 courses are fully free — no paywall between modules
+  const canAccess  = enrolled || lesson.is_free_preview || course.is_free || course.level === 1;
 
   // Build flat ordered lesson list for prev/next navigation
   const allLessons = course.modules.flatMap((m) =>

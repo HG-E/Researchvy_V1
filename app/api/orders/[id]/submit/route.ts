@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { sendOrderSubmittedAdminAlert, sendPaymentReceivedEmail } from "@/lib/email/index";
 import { digitalVisibilityClinic } from "@/constants/clinics";
+import { notifyPaymentReceived } from "@/lib/notifications/whatsapp";
 
 function bundleLabel(bundleId: string, moduleId: string | null): string {
   if (bundleId === "solo" && moduleId) {
@@ -68,6 +69,14 @@ export async function POST(
       reference:    order.reference,
       submittedRef,
     }).catch((err) => console.error("Payment received email failed:", err));
+
+    // WhatsApp notification — silently no-ops if Africa's Talking not configured
+    notifyPaymentReceived({
+      phone:       order.user_phone ?? null,
+      userName:    order.user_name,
+      orderNumber: order.order_number,
+      reference:   order.reference,
+    }).catch(() => {});
 
     return NextResponse.json({ success: true });
   } catch {

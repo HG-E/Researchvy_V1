@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { requireRole } from "@/lib/auth/permissions";
 import { sendOrderConfirmedEmail } from "@/lib/email/index";
+import { notifyEnrollmentConfirmed } from "@/lib/notifications/whatsapp";
 
 export async function POST(
   _request: NextRequest,
@@ -67,6 +68,26 @@ export async function POST(
     currency:    order.currency,
     amount:      order.amount,
   }).catch((err) => console.error("Receipt email failed:", err));
+
+  // WhatsApp enrollment confirmation — no-ops if AT not configured
+  const { data: fullOrder } = await admin.from("orders").select("user_phone").eq("id", id).single();
+  void notifyEnrollmentConfirmed({
+    phone:        (fullOrder as { user_phone?: string | null } | null)?.user_phone ?? null,
+    userName:     order.user_name,
+    orderNumber:  order.order_number,
+    bundleName:   order.bundle_id,
+    dashboardUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://researchvy.com"}/dashboard/clinics`,
+  });
+
+  // Schedule the 4 post-enrollment onboarding drip emails
+  const now = new Date();
+  const day = (n: number) => new Date(now.getTime() + n * 86_400_000).toISOString();
+  admin.from("enrollment_drip_emails").insert([
+    { order_id: id, user_email: order.user_email, email_type: "cohort_prep",       scheduled_for: day(1)  },
+    { order_id: id, user_email: order.user_email, email_type: "meet_cohort",        scheduled_for: day(3)  },
+    { order_id: id, user_email: order.user_email, email_type: "session1_reminder",  scheduled_for: day(7)  },
+    { order_id: id, user_email: order.user_email, email_type: "what_to_prepare",    scheduled_for: day(12) },
+  ]).then(() => {}, (e: unknown) => console.error("Drip schedule failed:", e));
 
   return NextResponse.json({ success: true });
 }

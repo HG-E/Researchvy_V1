@@ -692,3 +692,160 @@ export async function sendOrderCancelledEmail(opts: {
 </html>`,
   });
 }
+
+// ── Enrollment onboarding drip — shared opts type ─────────────────────────────
+
+interface EnrollmentDripOpts {
+  to:          string;
+  userName:    string;
+  bundleName:  string;
+  orderNumber: string;
+  cohortStart: string;
+  whatsappUrl: string;
+}
+
+function dripShell(body: string) {
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:560px;margin:0 auto;padding:40px 20px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 32px;text-align:center">Researchvy</p>
+  ${body}
+  <p style="text-align:center;font-size:12px;color:#374151;margin:20px 0 0">Reply to this email with any questions — we read every one.</p>
+</div></body></html>`;
+}
+
+// ── Email 2: Cohort Prep (Day 1 after enrollment) ─────────────────────────────
+
+export async function sendCohortPrepEmail(opts: EnrollmentDripOpts) {
+  const firstName = opts.userName.split(" ")[0] || opts.userName;
+  const r = await resend();
+  await r.emails.send({
+    from: FROM_TEAM, to: [opts.to], replyTo: REPLY_TO,
+    subject: `Your Digital Visibility Clinic starts ${opts.cohortStart} — here's how to prepare`,
+    html: dripShell(`
+      <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;overflow:hidden;margin-bottom:20px">
+        <div style="height:4px;background:linear-gradient(90deg,#2563EB,#10B981)"></div>
+        <div style="padding:32px 28px">
+          <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#2563EB">Cohort Preparation</p>
+          <h1 style="color:#F9FAFB;font-size:21px;font-weight:700;margin:8px 0 12px">${firstName}, your cohort starts ${opts.cohortStart}.</h1>
+          <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0 0 20px">Here's what to do before your first session so you get the most out of every minute:</p>
+          <ol style="color:#9CA3AF;font-size:13px;line-height:2.2;margin:0 0 24px;padding-left:20px">
+            <li>Create or log in to your <strong style="color:#D1D5DB">ORCID account</strong> at orcid.org</li>
+            <li>Open your <strong style="color:#D1D5DB">Google Scholar profile</strong> — note your current h-index</li>
+            <li>Take a screenshot of your <strong style="color:#D1D5DB">Scopus / Web of Science</strong> citation count</li>
+            <li>Write your <strong style="color:#D1D5DB">top 3 visibility goals</strong> — what do you most want to change?</li>
+            <li>Log in to your <a href="${SITE_URL}/dashboard/clinics" style="color:#60A5FA">clinic dashboard</a> and complete your profile</li>
+          </ol>
+          <a href="${opts.whatsappUrl}" target="_blank"
+             style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:13px 24px;border-radius:10px">
+            Join the Cohort WhatsApp Group →
+          </a>
+        </div>
+      </div>`),
+  });
+}
+
+// ── Email 3: Meet Your Cohort (Day 3) ─────────────────────────────────────────
+
+export async function sendMeetYourCohortEmail(opts: EnrollmentDripOpts) {
+  const firstName = opts.userName.split(" ")[0] || opts.userName;
+  const r = await resend();
+  await r.emails.send({
+    from: FROM_TEAM, to: [opts.to], replyTo: REPLY_TO,
+    subject: `Meet your fellow researchers — DVC ${opts.cohortStart} cohort`,
+    html: dripShell(`
+      <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;overflow:hidden;margin-bottom:20px">
+        <div style="height:4px;background:linear-gradient(90deg,#8B5CF6,#2563EB)"></div>
+        <div style="padding:32px 28px">
+          <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8B5CF6">Your Cohort</p>
+          <h1 style="color:#F9FAFB;font-size:21px;font-weight:700;margin:8px 0 12px">${firstName}, you're not doing this alone.</h1>
+          <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0 0 16px">
+            Your cohort is a small group of researchers at a similar stage — your accountability partners, sounding board, and often, future collaborators.
+          </p>
+          <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0 0 20px">
+            <strong style="color:#D1D5DB">Before your first session</strong>, introduce yourself in the WhatsApp group:
+          </p>
+          <div style="background:#0A0F1A;border-radius:12px;padding:18px 22px;margin-bottom:24px">
+            <p style="margin:0;font-size:13px;color:#C4B5FD;font-style:italic;line-height:1.7">
+              "Hi, I'm Dr. [Your Name] from [Institution]. I work in [Field]. My biggest visibility challenge is [X]."
+            </p>
+          </div>
+          <a href="${opts.whatsappUrl}" target="_blank"
+             style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:13px 24px;border-radius:10px">
+            Introduce Yourself →
+          </a>
+        </div>
+      </div>`),
+  });
+}
+
+// ── Email 4: Session 1 Reminder (2 days before session) ──────────────────────
+
+export async function sendSession1ReminderEmail(opts: EnrollmentDripOpts & { sessionTime: string; trackLabel: string }) {
+  const firstName = opts.userName.split(" ")[0] || opts.userName;
+  const r = await resend();
+  await r.emails.send({
+    from: FROM_TEAM, to: [opts.to], replyTo: REPLY_TO,
+    subject: `Session 1 is in 2 days — ${opts.sessionTime} (${opts.trackLabel} track)`,
+    html: dripShell(`
+      <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;overflow:hidden;margin-bottom:20px">
+        <div style="height:4px;background:linear-gradient(90deg,#F59E0B,#EF4444)"></div>
+        <div style="padding:32px 28px">
+          <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#F59E0B">Session 1 Reminder</p>
+          <h1 style="color:#F9FAFB;font-size:21px;font-weight:700;margin:8px 0 12px">${firstName}, your first session is in 2 days.</h1>
+          <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:14px 18px;margin-bottom:20px">
+            <p style="margin:0;font-size:13px;color:#FCD34D;font-weight:700">${opts.sessionTime} · ${opts.trackLabel} Track</p>
+            <p style="margin:4px 0 0;font-size:12px;color:#9CA3AF">Session 1: Scholar Identity Architecture</p>
+          </div>
+          <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0 0 16px">Have these open when the session starts:</p>
+          <ul style="color:#9CA3AF;font-size:13px;line-height:2.2;margin:0 0 20px;padding-left:20px">
+            <li>Your ORCID profile (orcid.org)</li>
+            <li>Your Google Scholar profile</li>
+            <li>Your institution's researcher profile (if any)</li>
+          </ul>
+          <p style="color:#6B7280;font-size:13px;margin:0 0 24px">The session link will be in the <strong style="color:#D1D5DB">WhatsApp group 30 min before</strong> it starts.</p>
+          <a href="${SITE_URL}/dashboard/clinics"
+             style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:13px 24px;border-radius:10px">
+            View Clinic Dashboard →
+          </a>
+        </div>
+      </div>`),
+  });
+}
+
+// ── Email 5: What to Prepare (morning of Session 1) ──────────────────────────
+
+export async function sendWhatToPrepareEmail(opts: EnrollmentDripOpts & { sessionTime: string }) {
+  const firstName = opts.userName.split(" ")[0] || opts.userName;
+  const checks = [
+    "Stable internet (WiFi recommended)",
+    "ORCID profile open in a browser tab",
+    "Google Scholar profile open",
+    "Notebook or notes app ready",
+    "Session link from the WhatsApp group saved",
+  ];
+  const r = await resend();
+  await r.emails.send({
+    from: FROM_TEAM, to: [opts.to], replyTo: REPLY_TO,
+    subject: `Today is the day — your Session 1 checklist, ${firstName}`,
+    html: dripShell(`
+      <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;overflow:hidden;margin-bottom:20px">
+        <div style="height:4px;background:linear-gradient(90deg,#10B981,#2563EB)"></div>
+        <div style="padding:32px 28px">
+          <p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#10B981">Today's Session</p>
+          <h1 style="color:#F9FAFB;font-size:21px;font-weight:700;margin:8px 0 12px">${firstName}, Session 1 is today at ${opts.sessionTime}.</h1>
+          <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0 0 20px">Quick checklist before you join:</p>
+          ${checks.map(t => `
+            <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px">
+              <span style="font-size:16px;flex-shrink:0">✅</span>
+              <p style="margin:0;font-size:13px;color:#D1D5DB;line-height:1.6">${t}</p>
+            </div>`).join("")}
+          <div style="margin-top:24px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:14px 18px">
+            <p style="margin:0;font-size:13px;color:#6EE7B7;line-height:1.7">
+              <strong>Session link</strong> will be in the WhatsApp group 30 minutes before the session.
+            </p>
+          </div>
+        </div>
+      </div>`),
+  });
+}

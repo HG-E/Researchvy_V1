@@ -182,12 +182,13 @@ export async function checkLessonAccess(userId: string, lessonId: string): Promi
 
     const { data: course } = await admin
       .from("courses")
-      .select("is_free")
+      .select("is_free, level")
       .eq("id", mod.course_id)
       .maybeSingle();
 
     if (!course) return false;
-    if (course.is_free) return true;
+    // Level 1 is fully free — no paywall between modules
+    if (course.is_free || course.level === 1) return true;
 
     // Step 3: check enrollment
     const { data: enrollment } = await admin
