@@ -153,10 +153,13 @@ export default async function AcademyCoursesPage() {
           >
             All Courses
           </h1>
-          <p className="text-lg leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-4" style={{ color: "#6B7280" }}>
             Self-paced courses across five levels. Work through each level in sequence,
             or jump to the topic most relevant to your current research goals.
           </p>
+          <div className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold" style={{ backgroundColor: "rgba(16,185,129,0.1)", color: "#10B981" }}>
+            <span>✓</span> Level 1 is 100% free — no payment, no signup required to start
+          </div>
         </div>
 
         {courses.length === 0 ? (
@@ -170,8 +173,9 @@ export default async function AcademyCoursesPage() {
               Courses launching soon
             </h2>
             <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
-              The Academy course library is being built. Start with the Digital Visibility Clinic
-              while courses are prepared — clinic alumni get first access to every Level 1 course.
+              Level 1 courses are live now. Levels 2–5 are in development — you'll get early access when they launch.
+              <br /><br />
+              <strong style={{ color: "#D1D5DB" }}>Note:</strong> The <a href="/clinics" style={{ color: "#60A5FA" }}>Digital Visibility Clinic</a> is a separate, live, cohort-based paid programme — not part of the Academy. You can do both independently.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
@@ -205,9 +209,16 @@ export default async function AcademyCoursesPage() {
                     {level}
                   </span>
                   <div>
-                    <p className="text-[10px] font-bold tracking-widest uppercase" style={{ color }}>
-                      Level {level}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-[10px] font-bold tracking-widest uppercase" style={{ color }}>
+                        Level {level}
+                      </p>
+                      {level === 1 && (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(16,185,129,0.12)", color: "#10B981" }}>
+                          FREE
+                        </span>
+                      )}
+                    </div>
                     <h2 className="text-base font-bold" style={{ color: "#F9FAFB" }}>{label}</h2>
                   </div>
                 </div>

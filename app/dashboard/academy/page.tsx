@@ -224,11 +224,17 @@ export default async function AcademyPage() {
         style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
       >
         <div>
-          <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
-            Want faster, guided results?
-          </p>
-          <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
-            The Digital Visibility Clinic delivers live sessions with expert guidance.
+          <div className="flex items-center gap-2 mb-1">
+            <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+              Want faster, guided results?
+            </p>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(245,158,11,0.12)", color: "#F59E0B" }}>
+              PAID · LIVE
+            </span>
+          </div>
+          <p className="text-xs" style={{ color: "#6B7280" }}>
+            The <strong style={{ color: "#D1D5DB" }}>Digital Visibility Clinic</strong> is a separate, live, cohort-based programme — not part of the Academy.
+            Expert facilitator, small group, real-time feedback.
           </p>
         </div>
         <Link

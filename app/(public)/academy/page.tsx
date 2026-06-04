@@ -371,7 +371,7 @@ export default function AcademyPage() {
                       {m.title}
                     </p>
                     <p className="text-[10px] mt-0.5" style={{ color: "#4B5563" }}>
-                      {m.lessons} lessons · First lesson free
+                      {m.lessons} lessons · Free
                     </p>
                   </div>
                   <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-1" style={{ color: "#10B981" }} />
@@ -585,8 +585,8 @@ export default function AcademyPage() {
               },
               {
                 icon: Zap,
-                title: "Free Previews on Every Module",
-                body: "The first lesson of every module is free — no login, no payment, no form. Seventeen free lessons across Level 1 alone. Experience the quality before you commit to anything.",
+                title: "Level 1 Is Fully Free",
+                body: "Every lesson in Level 1 (36 lessons across 7 modules) is 100% free — no login required to sample, no payment, no form. Start immediately and experience the full quality before committing to Levels 2–5.",
                 color: "#60A5FA",
               },
             ].map((f) => (
@@ -626,10 +626,12 @@ export default function AcademyPage() {
                 Want Live Sessions Alongside the Self-Paced Course?
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-                The Researchvy Digital Visibility Clinic is a live, cohort-based programme
-                that runs alongside the Academy self-paced course. Small groups, live Q&A,
-                personalised review of your actual Scopus and Google Scholar profiles.
-                The Academy and the Clinic are separate products — you can do either, or both.
+                The <strong style={{ color: "#F9FAFB" }}>Digital Visibility Clinic (DVC)</strong> is a <em>separate, paid</em> live programme — not part of the Academy.
+                Small cohorts, expert facilitator, live Q&A, personalised profile review.
+                The two products work well together but are completely independent.
+                <span style={{ display: "block", marginTop: "8px", color: "#4B5563", fontSize: "12px" }}>
+                  Academy = self-paced, Level 1 free · DVC = paid, live, cohort-based
+                </span>
               </p>
             </div>
             <Link

@@ -280,9 +280,9 @@ export async function sendDay5DripEmail(opts: { to: string; firstName: string })
 
   <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px;margin-bottom:24px">
     <p style="color:#6B7280;font-size:13px;line-height:1.7;margin:0">
-      Not ready for a course? Join a free Digital Visibility Clinic.
-      Live 90-minute sessions where we work through your profile together.
-      <a href="${SITE_URL}/clinics" style="color:#60A5FA;text-decoration:none">See upcoming dates →</a>
+      Want live, expert-guided training alongside the Academy?
+      The <strong style="color:#D1D5DB">Digital Visibility Clinic</strong> is a paid, cohort-based programme with live sessions and real-time facilitator feedback — a separate product that works alongside your Academy learning.
+      <a href="${SITE_URL}/clinics" style="color:#60A5FA;text-decoration:none">See the clinic →</a>
     </p>
   </div>
 
