@@ -48,7 +48,8 @@ export default async function AdminOrdersPage() {
     .select(
       "id,order_number,reference,bundle_id,module_id,currency,amount,is_early_bird,status,payment_method,submitted_ref,user_name,user_email,user_phone,created_at,confirmed_at",
     )
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .limit(200);
 
   const rows = (orders ?? []) as OrderRow[];
 

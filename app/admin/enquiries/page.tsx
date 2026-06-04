@@ -49,11 +49,13 @@ async function getData(): Promise<{
       admin
         .from("clinic_enquiries")
         .select("id, user_id, email, full_name, clinic_slug, status, created_at, notes, preferred_track")
-        .order("created_at", { ascending: false }),
+        .order("created_at", { ascending: false })
+        .limit(500),
       admin
         .from("academy_enquiries")
         .select("id, email, full_name, programme_slug, status, created_at, notes")
-        .order("created_at", { ascending: false }),
+        .order("created_at", { ascending: false })
+        .limit(500),
       admin
         .from("certificates")
         .select("enquiry_id")

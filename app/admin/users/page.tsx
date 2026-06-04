@@ -11,7 +11,7 @@ export const metadata = generatePageMetadata({ title: "Manage Users" });
 async function getUsers(): Promise<{ users: UserRow[]; error: boolean }> {
   try {
     const admin = createSupabaseAdminClient();
-    const { data, error } = await admin.auth.admin.listUsers({ page: 1, perPage: 500 });
+    const { data, error } = await admin.auth.admin.listUsers({ page: 1, perPage: 100 });
     if (error) return { users: [], error: true };
 
     const ids = data.users.map((u: { id: string }) => u.id);

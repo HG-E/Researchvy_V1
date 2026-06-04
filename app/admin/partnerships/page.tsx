@@ -25,7 +25,8 @@ async function getEnquiries(): Promise<{ rows: PartnershipEnquiry[]; error: bool
     const { data, error } = await admin
       .from("partnership_enquiries")
       .select("*")
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: false })
+      .limit(200);
     if (error) return { rows: [], error: true };
     return { rows: (data ?? []) as PartnershipEnquiry[], error: false };
   } catch {

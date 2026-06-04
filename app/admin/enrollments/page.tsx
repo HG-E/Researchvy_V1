@@ -20,7 +20,8 @@ async function getEnrollments(): Promise<{ rows: EnrollmentRow[]; error: boolean
         enrolled_at, expires_at, completed_at,
         courses (id, title, level, slug)
       `)
-      .order("enrolled_at", { ascending: false });
+      .order("enrolled_at", { ascending: false })
+      .limit(500);
 
     if (error) throw error;
 
