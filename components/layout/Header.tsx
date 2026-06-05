@@ -10,6 +10,11 @@ import { mainNav } from "@/constants/navigation";
 import { UserButton } from "./UserButton";
 import type { HeaderUser } from "./UserButton";
 
+const NotificationBell = dynamic(
+  () => import("@/components/notifications/NotificationBell").then((m) => ({ default: m.NotificationBell })),
+  { ssr: false }
+);
+
 const MobileDrawer = dynamic(
   () => import("./MobileDrawer").then((m) => ({ default: m.MobileDrawer })),
   { ssr: false }
@@ -156,7 +161,7 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
             })}
           </nav>
 
-          {/* Desktop right-side: search + UserButton when signed in, else Sign In + CTA */}
+          {/* Desktop right-side: search + bell + UserButton when signed in, else Sign In + CTA */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/search"
@@ -167,7 +172,10 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
               <Search className="h-4 w-4" />
             </Link>
             {serverUser ? (
-              <UserButton user={serverUser} />
+              <>
+                <NotificationBell userId={serverUser.id} />
+                <UserButton user={serverUser} />
+              </>
             ) : (
               <>
                 <Link

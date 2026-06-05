@@ -59,3 +59,40 @@ self.addEventListener("fetch", (event) => {
       })
   );
 });
+
+// ── Web Push ───────────────────────────────────────────────────────────────────
+
+self.addEventListener("push", (event) => {
+  if (!event.data) return;
+
+  let payload;
+  try { payload = event.data.json(); }
+  catch { payload = { title: "Researchvy", body: event.data.text() }; }
+
+  event.waitUntil(
+    self.registration.showNotification(payload.title ?? "Researchvy", {
+      body:             payload.body  ?? "",
+      icon:             payload.icon  ?? "/icon.png",
+      badge:            payload.badge ?? "/icon.png",
+      data:             { href: payload.href ?? "/" },
+      tag:              payload.href  ?? "researchvy",
+      renotify:         true,
+      requireInteraction: false,
+    })
+  );
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const href = event.notification.data?.href ?? "/";
+  const url  = new URL(href, self.location.origin).href;
+
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((wins) => {
+      for (const w of wins) {
+        if (w.url === url && "focus" in w) return w.focus();
+      }
+      return self.clients.openWindow(url);
+    })
+  );
+});

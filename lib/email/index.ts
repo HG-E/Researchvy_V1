@@ -1129,3 +1129,63 @@ export async function sendRSVPConfirmation(
 </body></html>`,
   });
 }
+
+// ── Deadline Reminder ─────────────────────────────────────────────────────────
+
+export async function sendDeadlineReminderEmail(opts: {
+  to:        string;
+  firstName: string;
+  oppTitle:  string;
+  oppHref:   string;
+  urgency:   string;   // "7 days" | "tomorrow"
+  deadline:  string;   // ISO date string
+}) {
+  const r = await resend();
+  const deadlineDate = new Date(opts.deadline).toLocaleDateString("en-GB", {
+    day: "numeric", month: "long", year: "numeric",
+  });
+  const isUrgent = opts.urgency === "tomorrow";
+
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [opts.to],
+    replyTo: REPLY_TO,
+    subject: `${isUrgent ? "⏰ " : ""}Deadline ${opts.urgency}: ${opts.oppTitle}`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:40px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 32px;text-align:center">Researchvy</p>
+
+  <div style="background:#0F172A;border:1px solid ${isUrgent ? "#EF4444" : "#1E293B"};border-radius:20px;padding:36px;margin-bottom:24px">
+    <div style="display:inline-block;background:${isUrgent ? "rgba(239,68,68,0.1)" : "rgba(37,99,235,0.1)"};border-radius:8px;padding:6px 12px;margin-bottom:20px">
+      <span style="color:${isUrgent ? "#F87171" : "#60A5FA"};font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase">
+        ${isUrgent ? "Closing Tomorrow" : "7 Days Remaining"}
+      </span>
+    </div>
+
+    <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 12px;line-height:1.3">
+      Don't miss this opportunity, ${opts.firstName}
+    </h1>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.7;margin:0 0 20px">
+      <strong style="color:#F9FAFB">${opts.oppTitle}</strong> closes on
+      <strong style="color:${isUrgent ? "#F87171" : "#F9FAFB"}">${deadlineDate}</strong>.
+    </p>
+
+    <a href="${opts.oppHref}"
+      style="display:inline-block;background:${isUrgent ? "#DC2626" : "#2563EB"};color:#fff;text-decoration:none;border-radius:10px;padding:14px 28px;font-size:15px;font-weight:600">
+      View Opportunity →
+    </a>
+  </div>
+
+  <div style="text-align:center;padding-top:20px">
+    <p style="color:#374151;font-size:12px;margin:0">
+      <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a>
+      &nbsp;·&nbsp;
+      <a href="${SITE_URL}/opportunities" style="color:#4B5563;text-decoration:none">Browse Opportunities</a>
+    </p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
