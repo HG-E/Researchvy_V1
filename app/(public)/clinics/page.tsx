@@ -46,7 +46,12 @@ async function getSpotsTaken(): Promise<number> {
   }
 }
 
-export default async function ClinicsPage() {
+export default async function ClinicsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ ref?: string }>;
+}) {
+  const { ref: refCode } = searchParams ? await searchParams : {};
   const cohort      = digitalVisibilityClinic.nextCohort;
   const spotsTaken  = await getSpotsTaken();
   const spotsLeft   = Math.max(0, digitalVisibilityClinic.capacity - spotsTaken - cohort.spotsAlreadyFilled);
@@ -455,17 +460,27 @@ export default async function ClinicsPage() {
                       ))}
                     </ul>
 
-                    {/* CTA */}
-                    <a
-                      href={buildWhatsAppUrl(bundle.whatsappContext)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white"
-                      style={{ backgroundColor: accent }}
-                    >
-                      <MessageCircle className="h-4 w-4" />
-                      {bundle.cta}
-                    </a>
+                    {/* CTA — referred users go direct to checkout, others via WhatsApp */}
+                    {refCode ? (
+                      <Link
+                        href={`/clinics/checkout?bundle=${bundle.id}${bundle.isSolo ? "" : ""}&ref=${encodeURIComponent(refCode)}`}
+                        className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white"
+                        style={{ backgroundColor: accent }}
+                      >
+                        {bundle.cta} →
+                      </Link>
+                    ) : (
+                      <a
+                        href={buildWhatsAppUrl(bundle.whatsappContext)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white"
+                        style={{ backgroundColor: accent }}
+                      >
+                        <MessageCircle className="h-4 w-4" />
+                        {bundle.cta}
+                      </a>
+                    )}
                   </div>
                 </div>
               );
