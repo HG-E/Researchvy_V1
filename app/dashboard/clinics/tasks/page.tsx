@@ -193,12 +193,19 @@ export default async function TasksPage() {
             Your July 2026 cohort hasn't started yet. Sessions will unlock one at a time
             as the programme progresses — you'll get an email each time a new one opens.
           </p>
-          <p className="text-xs" style={{ color: "#374151" }}>
+          <p className="text-xs mb-6" style={{ color: "#374151" }}>
             Questions? Email{" "}
             <a href="mailto:researchvy@gmail.com" style={{ color: "#4B5563" }}>
               researchvy@gmail.com
             </a>
           </p>
+          <Link
+            href="/dashboard/clinics"
+            className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white"
+            style={{ backgroundColor: "#2563EB" }}
+          >
+            ← Back to My Clinic
+          </Link>
         </div>
       )}
 

@@ -394,7 +394,7 @@ export async function sendOrderSubmittedAdminAlert(opts: {
   await r.emails.send({
     from:    FROM_TEAM,
     to:      [ADMIN_CC],
-    replyTo: opts.userEmail,
+    replyTo: REPLY_TO,
     subject: `[Action needed] Payment submitted — ${opts.orderNumber} · ${amt}`,
     html: `<!DOCTYPE html><html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>

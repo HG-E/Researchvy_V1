@@ -27,12 +27,18 @@ export async function POST(
   if (orderErr || !order) return NextResponse.json({ error: "Order not found" }, { status: 404 });
   if (order.status === "confirmed") return NextResponse.json({ error: "Already confirmed" }, { status: 400 });
 
-  const { error: updateErr } = await admin
+  // Atomic update: only succeeds if status is still not "confirmed" — prevents double-confirm race condition
+  const { data: updatedRows, error: updateErr } = await admin
     .from("orders")
     .update({ status: "confirmed", confirmed_at: new Date().toISOString(), confirmed_by: caller.id })
-    .eq("id", id);
+    .eq("id", id)
+    .neq("status", "confirmed")
+    .select("id");
 
   if (updateErr) return NextResponse.json({ error: "Failed to confirm order" }, { status: 500 });
+  if (!updatedRows || updatedRows.length === 0) {
+    return NextResponse.json({ error: "Already confirmed by another admin" }, { status: 400 });
+  }
 
   if (order.user_id) {
     const { data: existing } = await admin

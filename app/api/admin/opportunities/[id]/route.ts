@@ -16,9 +16,12 @@ export async function PATCH(
   if (!caller) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   if (!(await isAdmin(caller.id))) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const body  = await request.json().catch(() => ({}));
+  const raw     = await request.json().catch(() => ({})) as Record<string, unknown>;
+  const ALLOWED = ["title","body","category","target_level","apply_url","deadline","is_published","is_featured","funder","value","currency"];
+  const updateData = Object.fromEntries(Object.entries(raw).filter(([k]) => ALLOWED.includes(k)));
+  if (!Object.keys(updateData).length) return NextResponse.json({ error: "No valid fields provided" }, { status: 400 });
   const admin = createSupabaseAdminClient();
-  const { error } = await admin.from("research_opportunities").update(body).eq("id", id);
+  const { error } = await admin.from("research_opportunities").update(updateData).eq("id", id);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ success: true });
 }

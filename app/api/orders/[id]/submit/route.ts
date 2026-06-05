@@ -3,6 +3,7 @@ import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { sendOrderSubmittedAdminAlert, sendPaymentReceivedEmail } from "@/lib/email/index";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { notifyPaymentReceived } from "@/lib/notifications/whatsapp";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 function bundleLabel(bundleId: string, moduleId: string | null): string {
   if (bundleId === "solo" && moduleId) {
@@ -18,6 +19,9 @@ export async function POST(
 ) {
   const { id } = await params;
   try {
+    const { allowed } = await checkRateLimit(getRateLimitKey(request, "order-submit"), 10, 60 * 60 * 1000);
+    if (!allowed) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+
     const user = await getServerUser();
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 

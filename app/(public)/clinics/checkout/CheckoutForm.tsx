@@ -32,6 +32,7 @@ interface Props {
   initialModuleId:   string | null;
   isEarlyBird:       boolean;
   earlyBirdDeadline: string;
+  initialRefCode?:   string | null;
 }
 
 function fmt(amount: number, currency: "ngn" | "usd") {
@@ -47,13 +48,14 @@ export function CheckoutForm({
   initialModuleId,
   isEarlyBird,
   earlyBirdDeadline,
+  initialRefCode,
 }: Props) {
   const router   = useRouter();
   const [currency, setCurrency]   = useState<"ngn" | "usd">("ngn");
   const [moduleId, setModuleId]   = useState(initialModuleId ?? modules[0]?.id ?? "");
   const [name,    setName]        = useState(userName);
   const [phone,   setPhone]       = useState("");
-  const [refCode, setRefCode]     = useState("");
+  const [refCode, setRefCode]     = useState(initialRefCode ?? "");
   const [loading, setLoading]     = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [err,     setErr]         = useState<string | null>(null);

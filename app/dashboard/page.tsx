@@ -10,6 +10,7 @@ import { getEnrolledCoursesWithProgress } from "@/lib/academy/courses";
 import { levelColor } from "@/constants/academy";
 import { UserAvatar } from "@/components/common/UserAvatar";
 import { siteConfig } from "@/config/site";
+import { ReferralWidget } from "@/components/dashboard/ReferralWidget";
 
 export const metadata = generatePageMetadata({ title: "Dashboard", noIndex: true });
 
@@ -267,6 +268,9 @@ export default async function DashboardPage() {
           ))}
         </div>
       </div>
+
+      {/* Referral — earn by sharing Researchvy */}
+      <ReferralWidget />
 
       {/* Framework reminder */}
       <div className="rounded-2xl border p-6" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>

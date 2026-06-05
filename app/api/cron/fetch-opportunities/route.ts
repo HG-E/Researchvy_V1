@@ -17,7 +17,9 @@ import { FEED_SOURCES, RELEVANCE_KEYWORDS, SKIP_KEYWORDS } from "@/lib/feeds/sou
 import type { FeedSource } from "@/lib/feeds/sources";
 
 function isAuthorized(req: NextRequest): boolean {
-  return (req.headers.get("authorization") ?? "").replace("Bearer ", "") === process.env.CRON_SECRET;
+  const secret = process.env.CRON_SECRET;
+  if (!secret) return false; // Block all requests when secret is not configured
+  return (req.headers.get("authorization") ?? "").replace("Bearer ", "") === secret;
 }
 
 // ── RSS parser (zero external dependency fallback using fetch + regex) ──────────
@@ -32,7 +34,22 @@ interface FeedItem {
   pubDate?:     string;
 }
 
+function isSafeFeedUrl(url: string): boolean {
+  try {
+    const { protocol, hostname } = new URL(url);
+    if (!["http:", "https:"].includes(protocol)) return false;
+    // Block internal/metadata IPs (SSRF protection)
+    const blocked = ["localhost","127.0.0.1","0.0.0.0","169.254.169.254","metadata.google.internal"];
+    if (blocked.some((b) => hostname === b || hostname.startsWith("192.168.") || hostname.startsWith("10."))) return false;
+    return true;
+  } catch { return false; }
+}
+
 async function parseFeed(url: string): Promise<FeedItem[]> {
+  if (!isSafeFeedUrl(url)) {
+    console.error("[fetch-opportunities] Blocked unsafe URL:", url);
+    return [];
+  }
   const Parser = (await import("rss-parser")).default;
   const parser = new Parser({ timeout: 10_000 });
   try {
