@@ -5,6 +5,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, ArrowRight, Share2, BookOpen } from "lucide-react";
 import { CertShareButtons } from "@/components/certificates/CertShareButtons";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 const CONFETTI_COLORS = ["#60A5FA", "#A78BFA", "#34D399", "#FCD34D", "#F472B6", "#F87171", "#FBBF24"];
 
@@ -88,6 +90,12 @@ export function CourseCompleteView({
   nextCourse,
 }: CourseCompleteViewProps) {
   const [shared, setShared] = useState(false);
+  const { track } = useAnalytics();
+
+  useEffect(() => {
+    track(EVENTS.COURSE_COMPLETED, { courseSlug, courseLevel, lessonsCount, certId });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const siteUrl = typeof window !== "undefined"
     ? window.location.origin

@@ -15,6 +15,7 @@ import {
   ShoppingBag,
   Globe,
   CalendarDays,
+  Award,
 } from "lucide-react";
 
 const NAV = [
@@ -28,6 +29,7 @@ const NAV = [
   { label: "Clinics",       href: "/admin/clinics",              icon: BookOpen,        exact: false },
   { label: "Academy",       href: "/admin/academy",              icon: Layers,          exact: false },
   { label: "Enrollments",   href: "/admin/enrollments",          icon: GraduationCap,   exact: false },
+  { label: "Certificates",  href: "/admin/certificates",         icon: Award,           exact: false },
   { label: "Users",         href: "/admin/users",                icon: Users,           exact: false },
   { label: "Analytics",     href: "/admin/analytics",            icon: BarChart2,       exact: false },
 ];

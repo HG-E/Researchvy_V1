@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { CheckCircle, Clock, X } from "lucide-react";
 import type { EventRegistrationStatus } from "@/types/event";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 interface Props {
   slug: string;
@@ -16,6 +18,7 @@ export function RSVPButton({ slug, isAuthenticated, currentStatus, isFull, isPas
   const [status, setStatus]   = useState<EventRegistrationStatus | null>(currentStatus);
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState<string | null>(null);
+  const { track } = useAnalytics();
 
   async function handleRSVP() {
     if (!isAuthenticated) {
@@ -28,8 +31,10 @@ export function RSVPButton({ slug, isAuthenticated, currentStatus, isFull, isPas
       setError(null);
       try {
         const res = await fetch(`/api/events/${slug}/register`, { method: "DELETE" });
-        if (res.ok) setStatus(null);
-        else {
+        if (res.ok) {
+          setStatus(null);
+          track(EVENTS.EVENT_RSVP_CANCELLED, { slug });
+        } else {
           const j = await res.json().catch(() => ({}));
           setError(j.error ?? "Something went wrong.");
         }
@@ -44,8 +49,13 @@ export function RSVPButton({ slug, isAuthenticated, currentStatus, isFull, isPas
     try {
       const res = await fetch(`/api/events/${slug}/register`, { method: "POST" });
       const j   = await res.json().catch(() => ({}));
-      if (res.ok) setStatus(j.data?.status ?? "registered");
-      else setError(j.error ?? "Something went wrong.");
+      if (res.ok) {
+        const newStatus = j.data?.status ?? "registered";
+        setStatus(newStatus);
+        track(EVENTS.EVENT_RSVP_COMPLETED, { slug, status: newStatus });
+      } else {
+        setError(j.error ?? "Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }

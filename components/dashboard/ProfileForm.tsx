@@ -7,6 +7,8 @@ import { Loader2, CheckCircle2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema, type ProfileInput } from "@/lib/validation/schemas";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 const LABEL_STYLE = "block text-xs font-semibold tracking-wide uppercase mb-2";
 const INPUT_STYLE =
@@ -20,6 +22,7 @@ export function ProfileForm({
   initialData: Partial<ProfileInput> & { email?: string };
 }) {
   const router = useRouter();
+  const { track } = useAnalytics();
   const [saved, setSaved] = useState(false);
   const [serverError, setServerError] = useState("");
 
@@ -61,6 +64,11 @@ export function ProfileForm({
         return;
       }
 
+      track(EVENTS.PROFILE_UPDATED, {
+        has_orcid:  !!(data.orcid),
+        has_scholar: !!(data.google_scholar),
+        has_bio:    !!(data.bio),
+      });
       setSaved(true);
       router.refresh();
       setTimeout(() => setSaved(false), 3000);

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle } from "lucide-react";
 import type { EventType, EventFormat, EventRegistrationType, EventTargetAudience } from "@/types/event";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 const EVENT_TYPES: { value: EventType; label: string }[] = [
   { value: "conference",  label: "Conference"  },
@@ -47,6 +49,7 @@ const labelStyle: React.CSSProperties = {
 
 export function EventSubmitForm() {
   const router = useRouter();
+  const { track } = useAnalytics();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -117,6 +120,7 @@ export function EventSubmitForm() {
 
       const j = await res.json().catch(() => ({}));
       if (!res.ok) { setError(j.error ?? "Submission failed."); return; }
+      track(EVENTS.EVENT_SUBMITTED, { event_type: form.event_type, format: form.format });
       setSuccess(true);
     } finally {
       setLoading(false);

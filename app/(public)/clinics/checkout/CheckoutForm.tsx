@@ -4,6 +4,8 @@ import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Zap, Building2, CreditCard, Loader2 } from "lucide-react";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 type Bundle = {
   id:           string;
@@ -50,7 +52,8 @@ export function CheckoutForm({
   earlyBirdDeadline,
   initialRefCode,
 }: Props) {
-  const router   = useRouter();
+  const router     = useRouter();
+  const { track }  = useAnalytics();
   const [currency, setCurrency]   = useState<"ngn" | "usd">("ngn");
   const [moduleId, setModuleId]   = useState(initialModuleId ?? modules[0]?.id ?? "");
   const [name,    setName]        = useState(userName);
@@ -106,6 +109,7 @@ export function CheckoutForm({
         return;
       }
       if (!res.ok) throw new Error(data.error ?? "Failed to create order");
+      track(EVENTS.CLINIC_CHECKOUT_STARTED, { bundleId: bundle.id, currency, amount });
       setSubmitted(true);
       router.replace(`/clinics/checkout/${data.orderId}`);
     } catch (e) {

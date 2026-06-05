@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import type { OpportunityCategory } from "@/types/opportunity";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 const CATEGORIES: { value: OpportunityCategory; label: string; hint: string }[] = [
   { value: "grant",          label: "Grant",                   hint: "Research funding award" },
@@ -29,6 +31,7 @@ type FormState = "form" | "submitting" | "success" | "error";
 
 export function OpportunitySubmitForm() {
   const router = useRouter();
+  const { track } = useAnalytics();
 
   const [state, setState] = useState<FormState>("form");
   const [error, setError] = useState("");
@@ -68,6 +71,7 @@ export function OpportunitySubmitForm() {
       setState("error");
       return;
     }
+    track(EVENTS.OPPORTUNITY_SUBMITTED, { category });
     setState("success");
   }
 

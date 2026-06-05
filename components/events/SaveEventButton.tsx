@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Bookmark, BookmarkCheck } from "lucide-react";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { EVENTS } from "@/lib/analytics/events";
 
 interface Props {
   slug: string;
@@ -12,6 +14,7 @@ interface Props {
 export function SaveEventButton({ slug, initialSaved, isAuthenticated }: Props) {
   const [saved, setSaved]       = useState(initialSaved);
   const [loading, setLoading]   = useState(false);
+  const { track } = useAnalytics();
 
   async function toggle() {
     if (!isAuthenticated) {
@@ -22,7 +25,11 @@ export function SaveEventButton({ slug, initialSaved, isAuthenticated }: Props) 
     try {
       const method = saved ? "DELETE" : "POST";
       const res    = await fetch(`/api/events/${slug}/save`, { method });
-      if (res.ok) setSaved(!saved);
+      if (res.ok) {
+        const nowSaved = !saved;
+        setSaved(nowSaved);
+        track(nowSaved ? EVENTS.EVENT_SAVED : EVENTS.EVENT_UNSAVED, { slug });
+      }
     } finally {
       setLoading(false);
     }
