@@ -228,7 +228,7 @@ export function SignInForm() {
         <div className="mt-6">
           <div className="flex items-center gap-3 mb-5">
             <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
-            <span className="text-xs" style={{ color: "#374151" }}>
+            <span className="text-xs" style={{ color: "#6B7280" }}>
               new here?
             </span>
             <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />

@@ -135,7 +135,7 @@ export default function ResourceLibraryPage() {
           <div className="flex justify-center">
             <NewsletterForm variant="inline" />
           </div>
-          <p className="text-xs mt-4" style={{ color: "#374151" }}>
+          <p className="text-xs mt-4" style={{ color: "#6B7280" }}>
             Join researchers from universities and institutions worldwide.
           </p>
         </div>

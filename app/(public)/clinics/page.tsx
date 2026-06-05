@@ -433,7 +433,7 @@ export default async function ClinicsPage({
                           <>
                             <p className="text-xs" style={{ color: "#4B5563" }}>
                               After June 20:{" "}
-                              <span style={{ textDecoration: "line-through", color: "#374151" }}>
+                              <span style={{ textDecoration: "line-through", color: "#6B7280" }}>
                                 {formatUSD(bundle.usd.regular)} / {formatNGN(bundle.ngn.regular)}
                               </span>
                             </p>
@@ -545,9 +545,9 @@ export default async function ClinicsPage({
               </div>
               <div className="flex flex-col sm:flex-row sm:flex-wrap gap-1.5 sm:gap-x-4 sm:gap-y-1 text-xs" style={{ color: "#6B7280" }}>
                 <span>5–10 researchers → <strong style={{ color: "#F9FAFB" }}>15% off</strong></span>
-                <span className="hidden sm:inline" style={{ color: "#374151" }}>·</span>
+                <span className="hidden sm:inline" style={{ color: "#6B7280" }}>·</span>
                 <span>11–20 researchers → <strong style={{ color: "#F9FAFB" }}>25% off</strong></span>
-                <span className="hidden sm:inline" style={{ color: "#374151" }}>·</span>
+                <span className="hidden sm:inline" style={{ color: "#6B7280" }}>·</span>
                 <span>Institutional → <a href={buildWhatsAppUrl("institutional group enrollment for Digital Visibility Clinic")} target="_blank" rel="noopener noreferrer" style={{ color: "#2563EB" }}>enquire via WhatsApp</a></span>
               </div>
             </div>

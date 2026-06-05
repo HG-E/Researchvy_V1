@@ -54,12 +54,12 @@ function LessonRow({
         className="flex items-center gap-3 px-4 py-3 rounded-xl opacity-60"
         style={{ backgroundColor: "#080E1A" }}
       >
-        <Lock className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
+        <Lock className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} />
         <span className="text-sm flex-1 truncate" style={{ color: "#6B7280" }}>
           {lesson.title}
         </span>
         {lesson.duration_seconds > 0 && (
-          <span className="text-xs flex-shrink-0" style={{ color: "#374151" }}>
+          <span className="text-xs flex-shrink-0" style={{ color: "#6B7280" }}>
             {formatDuration(lesson.duration_seconds)}
           </span>
         )}
@@ -94,7 +94,7 @@ function LessonRow({
           </span>
         )}
         {lesson.duration_seconds > 0 && (
-          <span className="text-xs" style={{ color: "#4B5563" }}>
+          <span className="text-xs" style={{ color: "#6B7280" }}>
             {formatDuration(lesson.duration_seconds)}
           </span>
         )}
@@ -135,7 +135,7 @@ function ModuleAccordion({
             <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{mod.description}</p>
           )}
         </div>
-        <div className="flex items-center gap-3 text-xs flex-shrink-0" style={{ color: "#4B5563" }}>
+        <div className="flex items-center gap-3 text-xs flex-shrink-0" style={{ color: "#6B7280" }}>
           {enrolled && (
             <span>{completed}/{publishedLessons.length} done</span>
           )}
@@ -219,7 +219,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
         {/* Back */}
         <Link
           href="/academy/courses"
-          className="inline-flex items-center gap-1.5 text-sm mb-10 transition-colors text-[#4B5563] hover:text-[#9CA3AF]"
+          className="inline-flex items-center gap-1.5 text-sm mb-10 transition-colors text-[#6B7280] hover:text-[#9CA3AF]"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           All Courses
@@ -270,7 +270,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
             <p className="text-lg mb-4" style={{ color: "#6B7280" }}>{course.subtitle}</p>
           )}
           {course.description && (
-            <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "#4B5563" }}>{course.description}</p>
+            <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "#9CA3AF" }}>{course.description}</p>
           )}
 
           {/* Meta row */}
@@ -306,7 +306,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
                 />
               </div>
               {stats.percent_complete < 100 && stats.total_lessons > 0 && (
-                <p className="text-xs mt-1.5" style={{ color: "#4B5563" }}>
+                <p className="text-xs mt-1.5" style={{ color: "#6B7280" }}>
                   {stats.total_lessons - stats.completed_lessons} lesson{stats.total_lessons - stats.completed_lessons !== 1 ? "s" : ""} remaining
                 </p>
               )}
@@ -358,7 +358,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
 
           {/* Enroll nudge for non-enrolled with free previews exhausted — compact reminder */}
           {!enrolled && !course.is_free && (
-            <p className="mt-3 text-xs" style={{ color: "#4B5563" }}>
+            <p className="mt-3 text-xs" style={{ color: "#6B7280" }}>
               Full access · Completion certificate · Enroll in under 2 minutes via WhatsApp
             </p>
           )}

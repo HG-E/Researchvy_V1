@@ -170,7 +170,7 @@ export default function IntelligencePage() {
                 Send an Email
               </Link>
             </div>
-            <p className="text-xs text-center mt-4" style={{ color: "#374151" }}>
+            <p className="text-xs text-center mt-4" style={{ color: "#6B7280" }}>
               Typically respond within 24 hours
             </p>
           </div>

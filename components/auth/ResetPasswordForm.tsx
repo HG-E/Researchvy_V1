@@ -64,7 +64,7 @@ export function ResetPasswordForm() {
           <p className="text-sm font-semibold mb-6" style={{ color: "#F9FAFB" }}>
             {submittedEmail}
           </p>
-          <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
+          <p className="text-xs mb-6" style={{ color: "#6B7280" }}>
             Didn&apos;t receive it? Check your spam folder or{" "}
             <button
               onClick={() => setSent(false)}
@@ -186,9 +186,9 @@ export function ResetPasswordForm() {
           <Link
             href="/signin"
             className="inline-flex items-center gap-1.5 text-sm transition-colors"
-            style={{ color: "#4B5563" }}
+            style={{ color: "#6B7280" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#4B5563")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to sign in

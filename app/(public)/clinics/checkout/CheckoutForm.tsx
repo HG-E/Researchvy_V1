@@ -208,7 +208,7 @@ export function CheckoutForm({
                     {bundle.isSolo && !selModule && "from "}{fmt(amount, currency)}
                   </span>
                   {savings > 0 && (
-                    <span className="text-xs line-through" style={{ color: "#374151" }}>
+                    <span className="text-xs line-through" style={{ color: "#6B7280" }}>
                       {fmt(regular, currency)}
                     </span>
                   )}
@@ -259,7 +259,7 @@ export function CheckoutForm({
                   className="w-full rounded-xl px-4 py-2.5 text-sm border"
                   style={{ backgroundColor: "#0A1120", borderColor: "#1E293B", color: "#4B5563" }}
                 />
-                <p className="text-[11px] mt-1" style={{ color: "#374151" }}>
+                <p className="text-[11px] mt-1" style={{ color: "#6B7280" }}>
                   From your account · receipt will be sent here
                 </p>
               </div>
@@ -288,7 +288,7 @@ export function CheckoutForm({
                   className="w-full rounded-xl px-4 py-2.5 text-sm border outline-none focus:ring-1 focus:ring-blue-500"
                   style={{ backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" }}
                 />
-                <p className="text-[11px] mt-1" style={{ color: "#374151" }}>
+                <p className="text-[11px] mt-1" style={{ color: "#6B7280" }}>
                   If a colleague referred you, enter their code here
                 </p>
               </div>
@@ -329,7 +329,7 @@ export function CheckoutForm({
               className="flex items-start gap-3 rounded-xl border p-4 opacity-45"
               style={{ backgroundColor: "#0A1120", borderColor: "#1E293B" }}
             >
-              <div className="w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5" style={{ borderColor: "#374151" }} />
+              <div className="w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5" style={{ borderColor: "#6B7280" }} />
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
                   <CreditCard className="h-4 w-4" style={{ color: "#4B5563" }} />
@@ -372,7 +372,7 @@ export function CheckoutForm({
             )}
           </button>
 
-          <p className="text-center text-xs" style={{ color: "#374151" }}>
+          <p className="text-center text-xs" style={{ color: "#6B7280" }}>
             Enrollment is confirmed only after payment is verified by our team.
           </p>
         </form>

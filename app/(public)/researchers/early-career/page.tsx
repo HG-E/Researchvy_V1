@@ -230,7 +230,7 @@ export default function EarlyCareerPage() {
             >
               Take the Free Scorecard <ArrowRight className="h-4 w-4" />
             </Link>
-            <p className="text-xs mt-3" style={{ color: "#374151" }}>
+            <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
               Most early-career researchers score between 18–42. See where you stand.
             </p>
           </div>

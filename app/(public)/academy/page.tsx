@@ -229,7 +229,7 @@ export default function AcademyPage() {
             </div>
 
             {/* Trust line */}
-            <p className="mt-6 text-xs" style={{ color: "#374151" }}>
+            <p className="mt-6 text-xs" style={{ color: "#6B7280" }}>
               Free preview lessons available on every module. No credit card required.
             </p>
           </div>
@@ -239,7 +239,7 @@ export default function AcademyPage() {
       {/* ── THE PROBLEM ────────────────────────────────────────────────────── */}
       <section className="border-t" style={{ borderColor: "#0F172A" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#6B7280" }}>
             The Gap Nobody Talks About
           </p>
           <h2
@@ -317,7 +317,7 @@ export default function AcademyPage() {
                     style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
                   >
                     <p className="text-2xl font-bold mb-0.5" style={{ color: "#60A5FA" }}>{s.value}</p>
-                    <p className="text-xs" style={{ color: "#4B5563" }}>{s.label}</p>
+                    <p className="text-xs" style={{ color: "#6B7280" }}>{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -370,7 +370,7 @@ export default function AcademyPage() {
                     <p className="text-xs font-medium leading-snug" style={{ color: "#D1D5DB" }}>
                       {m.title}
                     </p>
-                    <p className="text-[10px] mt-0.5" style={{ color: "#4B5563" }}>
+                    <p className="text-[10px] mt-0.5" style={{ color: "#6B7280" }}>
                       {m.lessons} lessons · Free
                     </p>
                   </div>
@@ -385,7 +385,7 @@ export default function AcademyPage() {
       {/* ── 5-LEVEL PATHWAY ────────────────────────────────────────────────── */}
       <section className="border-t" style={{ borderColor: "#0F172A" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#6B7280" }}>
             The Complete Journey
           </p>
           <h2
@@ -438,12 +438,12 @@ export default function AcademyPage() {
                           ) : (
                             <span
                               className="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
-                              style={{ backgroundColor: "#1E293B", color: "#4B5563" }}
+                              style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
                             >
                               Coming 2026
                             </span>
                           )}
-                          <span className="text-[10px]" style={{ color: "#374151" }}>
+                          <span className="text-[10px]" style={{ color: "#6B7280" }}>
                             {lvl.lessonCount} lessons
                           </span>
                         </div>
@@ -488,7 +488,7 @@ export default function AcademyPage() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Globe className="h-4 w-4" style={{ color: "#A78BFA" }} />
-            <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#4B5563" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#6B7280" }}>
               Built for Researchers Everywhere
             </p>
           </div>
@@ -541,7 +541,7 @@ export default function AcademyPage() {
       {/* ── WHY RESEARCHVY ─────────────────────────────────────────────────── */}
       <section className="border-t" style={{ borderColor: "#0F172A" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#6B7280" }}>
             Why Researchvy Academy
           </p>
           <h2
@@ -653,7 +653,7 @@ export default function AcademyPage() {
       {/* ── FINAL CTA ─────────────────────────────────────────────────────── */}
       <section className="border-t" style={{ borderColor: "#0F172A" }}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-24 text-center">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
             Your Next Step
           </p>
           <h2
@@ -692,7 +692,7 @@ export default function AcademyPage() {
             </a>
           </div>
 
-          <p className="mt-6 text-xs" style={{ color: "#374151" }}>
+          <p className="mt-6 text-xs" style={{ color: "#6B7280" }}>
             Questions? WhatsApp us — we respond within 24 hours, usually much sooner.
           </p>
         </div>

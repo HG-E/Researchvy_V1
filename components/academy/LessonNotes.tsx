@@ -65,7 +65,7 @@ export function LessonNotes({ lessonId, initialNote }: LessonNotesProps) {
       >
         <BookOpen className="h-4 w-4" />
         Lesson Notes
-        <span className="text-xs ml-1" style={{ color: "#4B5563" }}>
+        <span className="text-xs ml-1" style={{ color: "#6B7280" }}>
           {open ? "▲" : "▼"}
         </span>
       </button>
@@ -87,7 +87,7 @@ export function LessonNotes({ lessonId, initialNote }: LessonNotesProps) {
             onFocus={e => { e.currentTarget.style.borderColor = "#334155"; }}
             onBlur={e =>  { e.currentTarget.style.borderColor = "#1E293B"; }}
           />
-          <div className="absolute bottom-3 right-3 flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
+          <div className="absolute bottom-3 right-3 flex items-center gap-1 text-xs" style={{ color: "#6B7280" }}>
             {status === "saving" && (
               <>
                 <Loader2 className="h-3 w-3 animate-spin" />

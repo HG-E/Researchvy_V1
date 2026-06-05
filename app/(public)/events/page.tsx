@@ -210,7 +210,7 @@ export default async function EventsPage({
           {(featured.length > 0 || searchQuery) && (
             <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
               {searchQuery ? `Results for "${searchQuery}"` : hasFilters ? "Filtered Results" : "All Events"}
-              {events.length > 0 && <span style={{ color: "#374151" }}> · {events.length} events</span>}
+              {events.length > 0 && <span style={{ color: "#6B7280" }}> · {events.length} events</span>}
             </p>
           )}
 

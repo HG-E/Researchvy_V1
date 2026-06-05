@@ -132,7 +132,7 @@ export function CourseCompleteView({
         >
 
           {/* Top label */}
-          <p className="text-center text-xs font-bold tracking-widest uppercase mb-8" style={{ color: "#4B5563" }}>
+          <p className="text-center text-xs font-bold tracking-widest uppercase mb-8" style={{ color: "#6B7280" }}>
             Researchvy Academy
           </p>
 
@@ -153,7 +153,7 @@ export function CourseCompleteView({
 
             <div className="text-5xl mb-4">🎓</div>
 
-            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
+            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
               Certificate of Completion
             </p>
             <p className="text-sm mb-5" style={{ color: "#9CA3AF" }}>This certifies that</p>
@@ -183,7 +183,7 @@ export function CourseCompleteView({
 
             <div className="border-t mt-6 mb-4" style={{ borderColor: "#1E293B" }} />
 
-            <div className="flex items-center justify-center gap-6 text-xs" style={{ color: "#4B5563" }}>
+            <div className="flex items-center justify-center gap-6 text-xs" style={{ color: "#6B7280" }}>
               <span className="flex items-center gap-1.5">
                 <CheckCircle className="h-3.5 w-3.5" style={{ color: "#10B981" }} />
                 {lessonsCount} lessons
@@ -192,7 +192,7 @@ export function CourseCompleteView({
             </div>
             <p
               className="text-[10px] mt-2 font-mono tracking-wider"
-              style={{ color: "#374151" }}
+              style={{ color: "#6B7280" }}
             >
               {certId}
             </p>
@@ -248,7 +248,7 @@ export function CourseCompleteView({
               className="rounded-2xl border p-5 text-center"
               style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
             >
-              <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#4B5563" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#6B7280" }}>
                 What&apos;s next
               </p>
               <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
@@ -293,7 +293,7 @@ export function CourseCompleteView({
             <Link
               href={`/academy/courses/${courseSlug}`}
               className="text-xs transition-colors hover:text-white"
-              style={{ color: "#4B5563" }}
+              style={{ color: "#6B7280" }}
             >
               ← Back to course
             </Link>

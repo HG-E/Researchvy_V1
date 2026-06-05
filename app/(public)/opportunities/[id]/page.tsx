@@ -262,8 +262,8 @@ export default async function OpportunityDetailPage({ params }: Props) {
               </a>
 
               {opp.auto_fetched && opp.source_url && (
-                <p className="text-[11px] mt-3 text-center" style={{ color: "#374151" }}>
-                  <a href={opp.source_url} target="_blank" rel="noopener noreferrer" style={{ color: "#4B5563" }}>
+                <p className="text-[11px] mt-3 text-center" style={{ color: "#6B7280" }}>
+                  <a href={opp.source_url} target="_blank" rel="noopener noreferrer" style={{ color: "#6B7280" }}>
                     Source link
                   </a>
                 </p>

@@ -180,7 +180,7 @@ export function Footer() {
           ))}
           {/* Contact row */}
           <div className="py-4">
-            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
               Contact
             </p>
             <a
@@ -196,14 +196,14 @@ export function Footer() {
         {/* Bottom bar */}
         <div
           className="mt-8 md:mt-12 pt-6 md:pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-3 text-xs"
-          style={{ borderColor: "#1E293B", color: "#4B5563" }}
+          style={{ borderColor: "#1E293B", color: "#6B7280" }}
         >
           <p>© {currentYear} Researchvy. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link href="/privacy" className="transition-colors hover:text-[#6B7280] active:opacity-60" style={{ color: "#4B5563" }}>
+            <Link href="/privacy" className="transition-colors hover:text-[#9CA3AF] active:opacity-60" style={{ color: "#6B7280" }}>
               Privacy Policy
             </Link>
-            <Link href="/terms" className="transition-colors hover:text-[#6B7280] active:opacity-60" style={{ color: "#4B5563" }}>
+            <Link href="/terms" className="transition-colors hover:text-[#9CA3AF] active:opacity-60" style={{ color: "#6B7280" }}>
               Terms of Service
             </Link>
           </div>

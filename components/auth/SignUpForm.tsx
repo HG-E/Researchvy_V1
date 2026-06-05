@@ -230,7 +230,7 @@ export function SignUpForm() {
               style={{ color: "#6B7280" }}
             >
               Institution{" "}
-              <span className="normal-case font-normal" style={{ color: "#374151" }}>
+              <span className="normal-case font-normal" style={{ color: "#6B7280" }}>
                 (optional)
               </span>
             </label>
@@ -372,7 +372,7 @@ export function SignUpForm() {
             )}
           </button>
 
-          <p className="text-center text-xs leading-relaxed" style={{ color: "#4B5563" }}>
+          <p className="text-center text-xs leading-relaxed" style={{ color: "#6B7280" }}>
             By creating an account you agree to our{" "}
             <Link href="/terms" style={{ color: "#6B7280" }}>
               Terms of Service

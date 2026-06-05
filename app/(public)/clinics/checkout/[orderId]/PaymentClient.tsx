@@ -218,7 +218,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
             </span>
             <CopyButton value={order.reference} />
           </div>
-          <p className="text-[11px] mt-1.5" style={{ color: "#374151" }}>
+          <p className="text-[11px] mt-1.5" style={{ color: "#6B7280" }}>
             Use this exactly as your payment narration so we can match your transfer.
           </p>
         </div>
@@ -269,7 +269,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
             className="w-full rounded-xl px-4 py-2.5 text-sm border outline-none focus:ring-1 focus:ring-blue-500"
             style={{ backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" }}
           />
-          <p className="text-[11px] mt-1" style={{ color: "#374151" }}>
+          <p className="text-[11px] mt-1" style={{ color: "#6B7280" }}>
             Your bank's transaction ID speeds up verification — you can skip this if you don't have it.
           </p>
         </div>
@@ -303,7 +303,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
         </button>
       </form>
 
-      <p className="text-center text-xs" style={{ color: "#374151" }}>
+      <p className="text-center text-xs" style={{ color: "#6B7280" }}>
         Questions? Email us at researchvy@gmail.com · We confirm within 2 business hours.
       </p>
     </div>
