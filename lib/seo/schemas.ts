@@ -149,6 +149,133 @@ export function academyCourseSchema(opts: {
   };
 }
 
+export function eventSchema(opts: {
+  title:       string;
+  description: string;
+  slug:        string;
+  startDate:   string;
+  endDate:     string | null;
+  format:      "in-person" | "virtual" | "hybrid";
+  location:    string | null;
+  venue:       string | null;
+  organizerName: string | null;
+  registrationUrl: string | null;
+  isFree:      boolean;
+  status:      string;
+}) {
+  const url  = `${base}/events/${opts.slug}`;
+  const mode = opts.format === "virtual"
+    ? "https://schema.org/OnlineEventAttendanceMode"
+    : opts.format === "hybrid"
+    ? "https://schema.org/MixedEventAttendanceMode"
+    : "https://schema.org/OfflineEventAttendanceMode";
+
+  const locationBlock = opts.format === "virtual"
+    ? { "@type": "VirtualLocation", url }
+    : opts.location
+    ? {
+        "@type":   "Place",
+        name:      opts.venue ?? opts.location,
+        address:   { "@type": "PostalAddress", addressLocality: opts.location },
+      }
+    : undefined;
+
+  const schemaStatus = opts.status === "cancelled"
+    ? "https://schema.org/EventCancelled"
+    : opts.status === "postponed"
+    ? "https://schema.org/EventPostponed"
+    : "https://schema.org/EventScheduled";
+
+  return {
+    "@context":           "https://schema.org",
+    "@type":              "Event",
+    "@id":                url,
+    name:                 opts.title,
+    description:          opts.description.slice(0, 500),
+    url,
+    startDate:            opts.startDate,
+    ...(opts.endDate ? { endDate: opts.endDate } : {}),
+    eventStatus:          schemaStatus,
+    eventAttendanceMode:  mode,
+    ...(locationBlock ? { location: locationBlock } : {}),
+    organizer:            opts.organizerName
+      ? { "@type": "Organization", name: opts.organizerName }
+      : { "@id": `${base}/#organization` },
+    offers: {
+      "@type":       "Offer",
+      price:         opts.isFree ? "0" : undefined,
+      priceCurrency: "USD",
+      url:           opts.registrationUrl ?? url,
+      availability:  "https://schema.org/InStock",
+    },
+    publisher: { "@id": `${base}/#organization` },
+    inLanguage: "en-US",
+  };
+}
+
+export function opportunitySchema(opts: {
+  id:          string;
+  title:       string;
+  description: string;
+  category:    string;
+  funder:      string | null;
+  value:       string | null;
+  deadline:    string | null;
+  applyUrl:    string;
+  targetLevel: string;
+}) {
+  const url = `${base}/opportunities/${opts.id}`;
+
+  if (opts.category === "job") {
+    return {
+      "@context":        "https://schema.org",
+      "@type":           "JobPosting",
+      "@id":             url,
+      title:             opts.title,
+      description:       opts.description.slice(0, 500),
+      url,
+      hiringOrganization: opts.funder
+        ? { "@type": "Organization", name: opts.funder }
+        : { "@id": `${base}/#organization` },
+      ...(opts.deadline ? { validThrough: opts.deadline } : {}),
+      jobLocationType:   "TELECOMMUTE",
+      applicantLocationRequirements: { "@type": "Country", name: "Worldwide" },
+      employmentType:    "CONTRACTOR",
+      directApply:       false,
+      salaryCurrency:    opts.value ? "USD" : undefined,
+      inLanguage:        "en-US",
+    };
+  }
+
+  return {
+    "@context":   "https://schema.org",
+    "@type":      "EducationalOccupationalProgram",
+    "@id":        url,
+    name:         opts.title,
+    description:  opts.description.slice(0, 500),
+    url,
+    provider:     opts.funder
+      ? { "@type": "Organization", name: opts.funder }
+      : { "@id": `${base}/#organization` },
+    offers: {
+      "@type":        "Offer",
+      price:          "0",
+      priceCurrency:  "USD",
+      url:            opts.applyUrl,
+      availability:   "https://schema.org/InStock",
+      ...(opts.deadline ? { validThrough: opts.deadline } : {}),
+    },
+    applicationDeadline: opts.deadline ?? undefined,
+    educationalCredentialAwarded: opts.category === "fellowship"
+      ? "Fellowship Certificate"
+      : opts.category === "award"
+      ? "Research Award"
+      : undefined,
+    timeToComplete: undefined,
+    inLanguage:     "en-US",
+  };
+}
+
 export function faqSchema(faqs: readonly { readonly question: string; readonly answer: string }[]) {
   return {
     "@context": "https://schema.org",

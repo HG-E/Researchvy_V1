@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Calendar, MapPin, Users, ExternalLink, Globe, Mail, Clock, Tag, BookOpen, ChevronLeft, Plane, Lock } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { eventSchema } from "@/lib/seo/schemas";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { EventTypeBadge, EventFormatBadge } from "@/components/events/EventTypeBadge";
 import { SaveEventButton } from "@/components/events/SaveEventButton";
@@ -97,7 +98,27 @@ export default async function EventDetailPage({
   const isCompetitive    = event.is_competitive_admission ?? false;
   const hasFunding       = event.has_travel_funding ?? false;
 
+  const ldSchema = eventSchema({
+    title:           event.title,
+    description:     event.short_description ?? event.description,
+    slug:            event.slug,
+    startDate:       event.start_date,
+    endDate:         event.end_date ?? null,
+    format:          event.format as "in-person" | "virtual" | "hybrid",
+    location:        event.location ?? null,
+    venue:           event.venue ?? null,
+    organizerName:   event.organizer_name ?? null,
+    registrationUrl: event.registration_url ?? null,
+    isFree:          event.is_free ?? false,
+    status:          event.status ?? "published",
+  });
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldSchema) }}
+      />
     <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
@@ -487,5 +508,6 @@ export default async function EventDetailPage({
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { opportunitySchema } from "@/lib/seo/schemas";
 import { Calendar, ExternalLink, Banknote, ArrowLeft, Plane, Globe, Users } from "lucide-react";
 import type { ResearchOpportunity, OpportunityCategory } from "@/types/opportunity";
 
@@ -91,7 +92,24 @@ export default async function OpportunityDetailPage({ params }: Props) {
     linkedEvent = ev ?? null;
   }
 
+  const ldSchema = opportunitySchema({
+    id:          opp.id,
+    title:       opp.title,
+    description: opp.body,
+    category:    opp.category,
+    funder:      opp.funder ?? null,
+    value:       opp.value ?? null,
+    deadline:    opp.deadline ?? null,
+    applyUrl:    opp.apply_url,
+    targetLevel: opp.target_level,
+  });
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldSchema) }}
+      />
     <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
         {/* Back */}
@@ -260,5 +278,6 @@ export default async function OpportunityDetailPage({ params }: Props) {
         </div>
       </div>
     </div>
+    </>
   );
 }
