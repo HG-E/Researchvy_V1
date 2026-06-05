@@ -8,12 +8,13 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Logo } from "@/components/common/Logo";
+import { SocialAuthButtons } from "@/components/auth/SocialAuthButtons";
 import { signInSchema, type SignInInput } from "@/lib/validation/schemas";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { EVENTS } from "@/lib/analytics/events";
 
 const INPUT_BASE =
-  "w-full rounded-xl px-4 py-3 text-sm border outline-none transition-all duration-200 placeholder:text-[#374151]";
+  "w-full rounded-xl px-4 py-3 text-sm border outline-none transition-all duration-200 placeholder:text-[#4B5563]";
 
 function Field({
   label,
@@ -55,6 +56,9 @@ export function SignInForm() {
   const [authError, setAuthError] = useState("");
   const [shake, setShake] = useState(false);
 
+  const rawNext  = searchParams.get("next") ?? "";
+  const nextPath = rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/dashboard";
+
   const {
     register,
     handleSubmit,
@@ -80,9 +84,7 @@ export function SignInForm() {
       }
 
       track(EVENTS.SIGN_IN_COMPLETED);
-      const raw  = searchParams.get("next") ?? "";
-      const next = raw.startsWith("/") && !raw.startsWith("//") ? raw : "/dashboard";
-      router.push(next);
+      router.push(nextPath);
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Unknown error";
       setAuthError(`Connection failed: ${msg}. Please try again or contact support@researchvy.com`);
@@ -109,7 +111,7 @@ export function SignInForm() {
         </div>
 
         {/* Header */}
-        <div className="mb-7">
+        <div className="mb-6">
           <h1
             className="text-2xl font-bold mb-1"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
@@ -119,6 +121,18 @@ export function SignInForm() {
           <p className="text-sm" style={{ color: "#9CA3AF" }}>
             Sign in to your Researchvy account
           </p>
+        </div>
+
+        {/* Social auth */}
+        <div className="mb-5">
+          <SocialAuthButtons next={nextPath} mode="signin" />
+        </div>
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+          <span className="text-xs" style={{ color: "#6B7280" }}>or continue with email</span>
+          <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>

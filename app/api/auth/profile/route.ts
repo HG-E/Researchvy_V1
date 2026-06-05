@@ -9,37 +9,37 @@ export async function PUT(req: NextRequest) {
     if (!user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
 
     const body = await req.json();
-    const { full_name, bio, orcid, google_scholar, institutional_affiliation } = body;
+    const { full_name, bio, google_scholar, institutional_affiliation } = body;
 
     const cap = (s: unknown, max: number) =>
       typeof s === "string" ? s.slice(0, max) : "";
 
-    const safeName  = cap(full_name, 120);
-    const safeBio   = cap(bio, 800);
-    const safeOrcid = cap(orcid, 40);
-    const safeGs    = cap(google_scholar, 200);
-    const safeAff   = cap(institutional_affiliation, 200);
+    const safeName = cap(full_name, 120);
+    const safeBio  = cap(bio, 800);
+    const safeGs   = cap(google_scholar, 200);
+    const safeAff  = cap(institutional_affiliation, 200);
 
-    // Update auth user_metadata (drives SSR session data)
+    // Preserve verified ORCID — never allow form submission to overwrite it
+    const currentMeta = user.user_metadata ?? {};
+    const orcidVerified = currentMeta.orcid_verified === true;
+    const preservedOrcid = orcidVerified ? (currentMeta.orcid as string ?? "") : undefined;
+
     const { error: authError } = await supabase.auth.updateUser({
       data: {
         full_name:                 safeName,
         bio:                       safeBio,
-        orcid:                     safeOrcid,
         google_scholar:            safeGs,
         institutional_affiliation: safeAff,
+        ...(preservedOrcid !== undefined ? { orcid: preservedOrcid } : {}),
       },
     });
 
     if (authError) return NextResponse.json({ error: authError.message }, { status: 400 });
 
-    // Sync the same data to public.users so other parts of the app (header, sidebar)
-    // can query it without going through auth metadata
     const admin = createSupabaseAdminClient();
     await admin.from("users").update({
       full_name:                 safeName,
       bio:                       safeBio,
-      orcid:                     safeOrcid,
       google_scholar:            safeGs,
       institutional_affiliation: safeAff,
     }).eq("id", user.id);

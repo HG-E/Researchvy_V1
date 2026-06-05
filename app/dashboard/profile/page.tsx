@@ -5,7 +5,12 @@ import { AvatarUpload } from "@/components/dashboard/AvatarUpload";
 
 export const metadata = generatePageMetadata({ title: "My Profile", noIndex: true });
 
-export default async function ProfilePage() {
+export default async function ProfilePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ orcid_connected?: string; orcid_error?: string }>;
+}) {
+  const { orcid_connected, orcid_error } = await searchParams;
   const user = await getServerUser();
 
   const meta = user?.user_metadata ?? {};
@@ -27,6 +32,7 @@ export default async function ProfilePage() {
     full_name:                fullName,
     bio:                      (meta.bio as string | undefined) ?? "",
     orcid:                    (meta.orcid as string | undefined) ?? "",
+    orcidVerified:            (meta.orcid_verified as boolean | undefined) ?? false,
     google_scholar:           (meta.google_scholar as string | undefined) ?? "",
     institutional_affiliation:(meta.institutional_affiliation as string | undefined) ?? "",
   };
@@ -59,6 +65,19 @@ export default async function ProfilePage() {
         </h2>
         <AvatarUpload name={fullName || null} email={userEmail} avatarUrl={avatarUrl} />
       </div>
+
+      {orcid_connected && (
+        <div className="rounded-xl border px-4 py-3 text-sm font-medium"
+          style={{ backgroundColor: "rgba(16,185,129,0.08)", borderColor: "rgba(16,185,129,0.25)", color: "#34D399" }}>
+          ✓ ORCID iD connected and verified successfully.
+        </div>
+      )}
+      {orcid_error && (
+        <div className="rounded-xl border px-4 py-3 text-sm font-medium"
+          style={{ backgroundColor: "rgba(239,68,68,0.06)", borderColor: "rgba(239,68,68,0.25)", color: "#F87171" }}>
+          ✗ {orcid_error}
+        </div>
+      )}
 
       <ProfileForm initialData={initialData} />
     </div>
