@@ -123,17 +123,7 @@ export function SignInForm() {
           </p>
         </div>
 
-        {/* Social auth */}
-        <div className="mb-5">
-          <SocialAuthButtons next={nextPath} mode="signin" />
-        </div>
-
-        {/* Divider */}
-        <div className="flex items-center gap-3 mb-5">
-          <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
-          <span className="text-xs" style={{ color: "#6B7280" }}>or continue with email</span>
-          <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
-        </div>
+        <SocialAuthButtons next={nextPath} mode="signin" />
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
           {/* Email */}

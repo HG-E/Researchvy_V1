@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Eye, EyeOff, Loader2, CheckCircle2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, CheckCircle2, BadgeCheck } from "lucide-react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Logo } from "@/components/common/Logo";
@@ -67,6 +67,10 @@ export function SignUpForm() {
 
   const raw      = searchParams.get("next") ?? "";
   const nextPath = raw.startsWith("/") && !raw.startsWith("//") ? raw : "/dashboard";
+
+  // Set by the ORCID callback route via server-side cookie — URL param is
+  // only a visual hint; the actual ORCID iD is read from the HttpOnly cookie server-side.
+  const orcidPrefill = searchParams.get("orcid_prefill") === "1";
 
   const {
     register,
@@ -169,17 +173,19 @@ export function SignUpForm() {
           </p>
         </div>
 
-        {/* Social auth */}
-        <div className="mb-5">
-          <SocialAuthButtons next={nextPath} mode="signup" />
-        </div>
+        <SocialAuthButtons next={nextPath} mode="signup" />
 
-        {/* Divider */}
-        <div className="flex items-center gap-3 mb-5">
-          <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
-          <span className="text-xs" style={{ color: "#6B7280" }}>or continue with email</span>
-          <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
-        </div>
+        {/* ORCID pre-fill banner — shown when redirected from ORCID OAuth signup flow */}
+        {orcidPrefill && (
+          <div className="flex items-start gap-3 rounded-xl border px-4 py-3 mb-5"
+            style={{ backgroundColor: "rgba(166,206,57,0.06)", borderColor: "rgba(166,206,57,0.25)" }}>
+            <BadgeCheck className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#A6CE39" }} />
+            <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+              Your <span className="font-semibold" style={{ color: "#A6CE39" }}>ORCID iD</span> has
+              been verified — it will be linked to your account automatically once you complete registration.
+            </p>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
           {/* Full name */}

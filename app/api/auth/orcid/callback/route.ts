@@ -13,8 +13,9 @@ function clearOrcidCookies(response: NextResponse) {
   response.cookies.set("orcid_oauth_mode",  "", { maxAge: 0, path: "/" });
 }
 
-function errorRedirect(reason: string, next = "/dashboard") {
-  const dest = next.startsWith("/signin") ? "/signin" : "/dashboard/profile";
+function errorRedirect(reason: string, mode = "link") {
+  // Signin-mode errors go back to /signin; link-mode errors go to /dashboard/profile
+  const dest = mode === "signin" ? "/signin" : "/dashboard/profile";
   const res  = NextResponse.redirect(`${SITE_URL}${dest}?orcid_error=${encodeURIComponent(reason)}`);
   clearOrcidCookies(res);
   return res;
@@ -30,19 +31,19 @@ export async function GET(req: NextRequest) {
   const cookieNext  = req.cookies.get("orcid_oauth_next")?.value ?? "/dashboard";
   const cookieMode  = req.cookies.get("orcid_oauth_mode")?.value ?? "link";
 
-  if (error) return errorRedirect("ORCID authorisation denied", cookieNext);
-  if (!code)  return errorRedirect("Missing authorisation code", cookieNext);
+  if (error) return errorRedirect("ORCID authorisation denied", cookieMode);
+  if (!code)  return errorRedirect("Missing authorisation code", cookieMode);
 
   // CSRF validation
   if (!state || !cookieState || state !== cookieState) {
-    return errorRedirect("State mismatch — possible CSRF, please try again", cookieNext);
+    return errorRedirect("State mismatch — possible CSRF, please try again", cookieMode);
   }
 
   if (!CLIENT_ID || !CLIENT_SECRET) {
-    return errorRedirect("ORCID integration not configured", cookieNext);
+    return errorRedirect("ORCID integration not configured", cookieMode);
   }
 
-  // Exchange code for token
+  // Exchange code for access token
   let orcidId: string;
   try {
     const tokenRes = await fetch(ORCID_TOKEN_URL, {
@@ -63,15 +64,15 @@ export async function GET(req: NextRequest) {
     if (!tokenRes.ok) {
       const text = await tokenRes.text();
       console.error("[ORCID callback] token exchange failed:", text);
-      return errorRedirect("Token exchange failed — please try again", cookieNext);
+      return errorRedirect("Token exchange failed — please try again", cookieMode);
     }
 
     const json = await tokenRes.json() as { orcid?: string; error?: string };
-    if (!json.orcid) return errorRedirect("ORCID did not return an iD", cookieNext);
+    if (!json.orcid) return errorRedirect("ORCID did not return an iD", cookieMode);
     orcidId = json.orcid;
   } catch (err) {
     console.error("[ORCID callback] fetch error:", err);
-    return errorRedirect("Network error — please try again", cookieNext);
+    return errorRedirect("Network error — please try again", cookieMode);
   }
 
   const supabase = await createSupabaseServerClient();
@@ -85,7 +86,7 @@ export async function GET(req: NextRequest) {
 
     if (authError) {
       console.error("[ORCID callback] updateUser error:", authError.message);
-      return errorRedirect("Failed to save ORCID — please try again", cookieNext);
+      return errorRedirect("Failed to save ORCID — please try again", cookieMode);
     }
 
     const admin = createSupabaseAdminClient();
@@ -107,16 +108,16 @@ export async function GET(req: NextRequest) {
     .maybeSingle();
 
   if (existingUser?.email) {
-    // Known ORCID → generate a magic link and auto-sign the user in
+    // Known ORCID → generate a one-time magic link and auto-sign the user in
     const { data: linkData, error: linkError } = await admin.auth.admin.generateLink({
-      type:       "magiclink",
-      email:      existingUser.email,
-      options:    { redirectTo: `${SITE_URL}${cookieNext}` },
+      type:    "magiclink",
+      email:   existingUser.email,
+      options: { redirectTo: `${SITE_URL}${cookieNext}` },
     });
 
     if (linkError || !linkData.properties?.action_link) {
       console.error("[ORCID signin] generateLink error:", linkError?.message);
-      return errorRedirect("Could not create sign-in link — please try email", cookieNext);
+      return errorRedirect("Could not create sign-in link — please try email", cookieMode);
     }
 
     const response = NextResponse.redirect(linkData.properties.action_link);
@@ -124,9 +125,25 @@ export async function GET(req: NextRequest) {
     return response;
   }
 
-  // Unknown ORCID → send to sign-up with ORCID pre-filled
-  const signupUrl = `${SITE_URL}/signup?orcid=${encodeURIComponent(orcidId)}&orcid_verified=1&next=${encodeURIComponent(cookieNext)}`;
-  const response  = NextResponse.redirect(signupUrl);
+  // Unknown ORCID → send to signup with ORCID stored in a server-side cookie.
+  // We do NOT put the ORCID iD in the URL — URL params are forgeable;
+  // the HttpOnly cookie guarantees only our server set it after real OAuth.
+  const cookieOpts = {
+    httpOnly: true,
+    secure:   process.env.NODE_ENV === "production",
+    sameSite: "lax" as const,
+    maxAge:   600, // 10 minutes — enough time to fill in the signup form
+    path:     "/",
+  };
+
+  const response = NextResponse.redirect(
+    `${SITE_URL}/signup?orcid_prefill=1&next=${encodeURIComponent(cookieNext)}`
+  );
   clearOrcidCookies(response);
+  response.cookies.set(
+    "orcid_pending",
+    JSON.stringify({ orcid: orcidId, ts: Date.now() }),
+    cookieOpts
+  );
   return response;
 }

@@ -6,13 +6,23 @@ import { getSupabaseBrowserClient } from "@/lib/auth/supabase-browser";
 
 type Provider = "google" | "linkedin_oidc" | "orcid";
 
-interface SocialProviderConfig {
-  label:    string;
-  icon:     React.ReactNode;
-  bg:       string;
-  border:   string;
-  textColor:string;
-  hoverBg:  string;
+// Each provider must be explicitly enabled via an env flag so that
+// unconfigured providers never render — avoids 503s hitting users.
+const ENABLED_PROVIDERS: Provider[] = (
+  [
+    process.env.NEXT_PUBLIC_GOOGLE_AUTH_ENABLED   === "true" && "google",
+    process.env.NEXT_PUBLIC_LINKEDIN_AUTH_ENABLED === "true" && "linkedin_oidc",
+    process.env.NEXT_PUBLIC_ORCID_ENABLED         === "true" && "orcid",
+  ] as (Provider | false)[]
+).filter((p): p is Provider => !!p);
+
+interface ProviderConfig {
+  label:     string;
+  icon:      React.ReactNode;
+  bg:        string;
+  border:    string;
+  textColor: string;
+  hoverBg:   string;
 }
 
 const GoogleIcon = () => (
@@ -38,7 +48,7 @@ const OrcidIcon = () => (
   </svg>
 );
 
-const PROVIDERS: Record<Provider, SocialProviderConfig> = {
+const PROVIDER_CONFIG: Record<Provider, ProviderConfig> = {
   google: {
     label:     "Continue with Google",
     icon:      <GoogleIcon />,
@@ -66,13 +76,16 @@ const PROVIDERS: Record<Provider, SocialProviderConfig> = {
 };
 
 interface Props {
-  next?:    string;
-  mode?:    "signin" | "signup";
+  next?: string;
+  mode?: "signin" | "signup";
 }
 
 export function SocialAuthButtons({ next = "/dashboard", mode = "signin" }: Props) {
   const [loading, setLoading] = useState<Provider | null>(null);
   const [error, setError]     = useState("");
+
+  // No providers configured → render nothing (no orphan divider in parent)
+  if (ENABLED_PROVIDERS.length === 0) return null;
 
   async function handleSocial(provider: Provider) {
     setLoading(provider);
@@ -80,7 +93,6 @@ export function SocialAuthButtons({ next = "/dashboard", mode = "signin" }: Prop
 
     try {
       if (provider === "orcid") {
-        // ORCID uses custom OAuth route — encode next destination in state
         const params = new URLSearchParams({ next });
         window.location.href = `/api/auth/orcid?${params}`;
         return;
@@ -91,7 +103,10 @@ export function SocialAuthButtons({ next = "/dashboard", mode = "signin" }: Prop
 
       const { error: oauthError } = await supabase.auth.signInWithOAuth({
         provider,
-        options: { redirectTo, queryParams: { access_type: "offline", prompt: "consent" } },
+        options: {
+          redirectTo,
+          queryParams: { access_type: "offline", prompt: "consent" },
+        },
       });
 
       if (oauthError) throw oauthError;
@@ -102,44 +117,47 @@ export function SocialAuthButtons({ next = "/dashboard", mode = "signin" }: Prop
     }
   }
 
-  const providers: Provider[] = ["google", "linkedin_oidc", "orcid"];
-
   return (
-    <div className="space-y-3">
-      {providers.map((p) => {
-        const cfg     = PROVIDERS[p];
-        const isLoading = loading === p;
-        return (
-          <button
-            key={p}
-            type="button"
-            disabled={!!loading}
-            onClick={() => handleSocial(p)}
-            className="w-full flex items-center justify-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-150 disabled:opacity-60"
-            style={{
-              backgroundColor: cfg.bg,
-              borderColor:     cfg.border,
-              color:           cfg.textColor,
-            }}
-            onMouseEnter={(e) => { if (!loading) e.currentTarget.style.backgroundColor = cfg.hoverBg; }}
-            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = cfg.bg; }}
-          >
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" style={{ color: "#6B7280" }} />
-            ) : (
-              cfg.icon
-            )}
-            {isLoading ? (mode === "signin" ? "Signing in…" : "Signing up…") : cfg.label}
-          </button>
-        );
-      })}
+    <>
+      <div className="space-y-3">
+        {ENABLED_PROVIDERS.map((p) => {
+          const cfg       = PROVIDER_CONFIG[p];
+          const isLoading = loading === p;
+          return (
+            <button
+              key={p}
+              type="button"
+              disabled={!!loading}
+              onClick={() => handleSocial(p)}
+              className="w-full flex items-center justify-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-150 disabled:opacity-60"
+              style={{ backgroundColor: cfg.bg, borderColor: cfg.border, color: cfg.textColor }}
+              onMouseEnter={(e) => { if (!loading) e.currentTarget.style.backgroundColor = cfg.hoverBg; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = cfg.bg; }}
+            >
+              {isLoading
+                ? <Loader2 className="h-4 w-4 animate-spin" style={{ color: "#6B7280" }} />
+                : cfg.icon}
+              {isLoading
+                ? (mode === "signin" ? "Signing in…" : "Signing up…")
+                : cfg.label}
+            </button>
+          );
+        })}
 
-      {error && (
-        <p className="text-xs text-center rounded-lg px-3 py-2 border"
-          style={{ color: "#FCA5A5", backgroundColor: "rgba(239,68,68,0.06)", borderColor: "rgba(239,68,68,0.2)" }}>
-          {error}
-        </p>
-      )}
-    </div>
+        {error && (
+          <p className="text-xs text-center rounded-lg px-3 py-2 border"
+            style={{ color: "#FCA5A5", backgroundColor: "rgba(239,68,68,0.06)", borderColor: "rgba(239,68,68,0.2)" }}>
+            {error}
+          </p>
+        )}
+      </div>
+
+      {/* Divider — only rendered when we actually showed buttons */}
+      <div className="flex items-center gap-3 my-5">
+        <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+        <span className="text-xs" style={{ color: "#6B7280" }}>or continue with email</span>
+        <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+      </div>
+    </>
   );
 }
