@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { generatePageMetadata } from "@/lib/seo/metadata";
-import { opportunitySchema } from "@/lib/seo/schemas";
+import { opportunitySchema, breadcrumbSchema } from "@/lib/seo/schemas";
+import { siteConfig } from "@/config/site";
 import { Calendar, ExternalLink, Banknote, ArrowLeft, Plane, Globe, Users } from "lucide-react";
 import type { ResearchOpportunity, OpportunityCategory } from "@/types/opportunity";
 
@@ -92,7 +93,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
     linkedEvent = ev ?? null;
   }
 
-  const ldSchema = opportunitySchema({
+  const ldOpp = opportunitySchema({
     id:          opp.id,
     title:       opp.title,
     description: opp.body,
@@ -104,12 +105,16 @@ export default async function OpportunityDetailPage({ params }: Props) {
     targetLevel: opp.target_level,
   });
 
+  const ldBreadcrumb = breadcrumbSchema([
+    { name: "Home",          url: siteConfig.url },
+    { name: "Opportunities", url: `${siteConfig.url}/opportunities` },
+    { name: opp.title,       url: `${siteConfig.url}/opportunities/${opp.id}` },
+  ]);
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ldSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldOpp) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldBreadcrumb) }} />
     <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
         {/* Back */}

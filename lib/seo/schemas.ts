@@ -3,6 +3,19 @@ import type { Insight } from "@/types";
 
 const base = siteConfig.url;
 
+function stripMd(text: string): string {
+  return text
+    .replace(/!\[.*?\]\(.*?\)/g, "")
+    .replace(/\[([^\]]+)\]\(.*?\)/g, "$1")
+    .replace(/#{1,6}\s+/g, "")
+    .replace(/(\*\*|__)(.*?)\1/g, "$2")
+    .replace(/(\*|_)(.*?)\1/g, "$2")
+    .replace(/`{1,3}[^`]*`{1,3}/g, "")
+    .replace(/^[-*>]\s+/gm, "")
+    .replace(/\n{2,}/g, " ")
+    .trim();
+}
+
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
@@ -43,7 +56,7 @@ export function websiteSchema() {
       "@type":  "SearchAction",
       target: {
         "@type":       "EntryPoint",
-        urlTemplate:   `${base}/insights?q={search_term_string}`,
+        urlTemplate:   `${base}/search?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -192,6 +205,7 @@ export function eventSchema(opts: {
     "@id":                url,
     name:                 opts.title,
     description:          opts.description.slice(0, 500),
+    image:                `${base}/events/${opts.slug}/opengraph-image`,
     url,
     startDate:            opts.startDate,
     ...(opts.endDate ? { endDate: opts.endDate } : {}),
@@ -226,13 +240,15 @@ export function opportunitySchema(opts: {
 }) {
   const url = `${base}/opportunities/${opts.id}`;
 
+  const cleanDesc = stripMd(opts.description).slice(0, 500);
+
   if (opts.category === "job") {
     return {
       "@context":        "https://schema.org",
       "@type":           "JobPosting",
       "@id":             url,
       title:             opts.title,
-      description:       opts.description.slice(0, 500),
+      description:       cleanDesc,
       url,
       hiringOrganization: opts.funder
         ? { "@type": "Organization", name: opts.funder }
@@ -242,7 +258,7 @@ export function opportunitySchema(opts: {
       applicantLocationRequirements: { "@type": "Country", name: "Worldwide" },
       employmentType:    "CONTRACTOR",
       directApply:       false,
-      salaryCurrency:    opts.value ? "USD" : undefined,
+      ...(opts.value ? { salaryCurrency: "USD" } : {}),
       inLanguage:        "en-US",
     };
   }
@@ -252,7 +268,7 @@ export function opportunitySchema(opts: {
     "@type":      "EducationalOccupationalProgram",
     "@id":        url,
     name:         opts.title,
-    description:  opts.description.slice(0, 500),
+    description:  cleanDesc,
     url,
     provider:     opts.funder
       ? { "@type": "Organization", name: opts.funder }
@@ -265,13 +281,12 @@ export function opportunitySchema(opts: {
       availability:   "https://schema.org/InStock",
       ...(opts.deadline ? { validThrough: opts.deadline } : {}),
     },
-    applicationDeadline: opts.deadline ?? undefined,
-    educationalCredentialAwarded: opts.category === "fellowship"
-      ? "Fellowship Certificate"
+    ...(opts.deadline ? { applicationDeadline: opts.deadline } : {}),
+    ...(opts.category === "fellowship"
+      ? { educationalCredentialAwarded: "Fellowship Certificate" }
       : opts.category === "award"
-      ? "Research Award"
-      : undefined,
-    timeToComplete: undefined,
+      ? { educationalCredentialAwarded: "Research Award" }
+      : {}),
     inLanguage:     "en-US",
   };
 }
