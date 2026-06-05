@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Search } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { mainNav } from "@/constants/navigation";
 import { UserButton } from "./UserButton";
@@ -156,8 +156,16 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
             })}
           </nav>
 
-          {/* Desktop right-side: UserButton when signed in, else Sign In + CTA */}
+          {/* Desktop right-side: search + UserButton when signed in, else Sign In + CTA */}
           <div className="hidden md:flex items-center gap-3">
+            <Link
+              href="/search"
+              className="flex items-center justify-center w-9 h-9 rounded-lg transition-colors hover:bg-[#1E293B]"
+              style={{ color: "#6B7280" }}
+              aria-label="Search"
+            >
+              <Search className="h-4 w-4" />
+            </Link>
             {serverUser ? (
               <UserButton user={serverUser} />
             ) : (

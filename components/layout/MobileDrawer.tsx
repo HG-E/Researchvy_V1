@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { X, ChevronRight, LayoutDashboard, User, LogOut, Shield } from "lucide-react";
+import { X, ChevronRight, LayoutDashboard, User, LogOut, Shield, Search } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { UserAvatar } from "@/components/common/UserAvatar";
 import { mainNav } from "@/constants/navigation";
@@ -96,6 +96,13 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
 
             {/* Nav links */}
             <nav className="flex-1 overflow-y-auto scroll-contain px-4 py-5 space-y-1" aria-label="Mobile navigation">
+              <Link href="/search" onClick={close}
+                className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#1E293B]"
+                style={{ color: "#9CA3AF" }}>
+                <Search className="h-4 w-4 flex-shrink-0" />
+                Search
+              </Link>
+
               {mainNav.map((item) => {
                 if (item.children) {
                   return (
