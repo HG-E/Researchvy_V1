@@ -11,25 +11,15 @@ function dayWindow(daysFromNow: number): { start: string; end: string } {
   const start = new Date();
   start.setDate(start.getDate() + daysFromNow - 1);
   start.setHours(0, 0, 0, 0);
-
   const end = new Date(start);
   end.setHours(23, 59, 59, 999);
-
   return { start: start.toISOString(), end: end.toISOString() };
 }
 
-interface Opportunity {
-  id:       string;
-  title:    string;
-  deadline: string;
-  category: string;
-}
-
-interface User {
-  id:        string;
-  email:     string;
-  full_name: string | null;
-}
+interface Opportunity { id: string; title: string; deadline: string; category: string; }
+interface UserPref    { user_id: string; email_deadlines: boolean; push_deadlines: boolean; inapp_deadlines: boolean; }
+interface EventRow    { id: string; title: string; slug: string | null; starts_at: string; }
+interface EventPref   { user_id: string; email_events: boolean; push_events: boolean; inapp_events: boolean; }
 
 export async function GET(req: NextRequest) {
   if (!isAuthorized(req)) {
@@ -37,28 +27,19 @@ export async function GET(req: NextRequest) {
   }
 
   const admin   = createSupabaseAdminClient();
-  const results = { notified_7d: 0, notified_1d: 0, emails_sent: 0, errors: 0 };
-
-  // Milestones: 7 days and 1 day before deadline
-  const milestones: { days: number; label: "7d" | "1d"; urgency: string }[] = [
-    { days: 7, label: "7d", urgency: "7 days"    },
-    { days: 1, label: "1d", urgency: "tomorrow"  },
-  ];
-
-  // Load all active users once
-  const { data: users } = await admin
-    .from("users")
-    .select("id, email, full_name")
-    .not("email", "is", null) as { data: User[] | null };
-
-  if (!users?.length) return NextResponse.json({ ok: true, ...results });
+  const results = { opps_7d: 0, opps_1d: 0, events: 0, emails: 0, pushes: 0, errors: 0 };
 
   const { sendDeadlineReminderEmail } = await import("@/lib/email");
+
+  // ── OPPORTUNITY DEADLINE REMINDERS ─────────────────────────────────────────
+  const milestones: { days: number; label: "7d" | "1d"; urgency: string }[] = [
+    { days: 7, label: "7d", urgency: "in 7 days"  },
+    { days: 1, label: "1d", urgency: "tomorrow"   },
+  ];
 
   for (const { days, label, urgency } of milestones) {
     const { start, end } = dayWindow(days);
 
-    // Find approved opportunities whose deadline falls in this window
     const { data: opps } = await admin
       .from("opportunities")
       .select("id, title, deadline, category")
@@ -69,107 +50,149 @@ export async function GET(req: NextRequest) {
     if (!opps?.length) continue;
 
     for (const opp of opps) {
-      // Idempotency: skip if already notified for this milestone
-      const { data: logged } = await admin
+      // Idempotency check
+      const { data: alreadySent } = await admin
         .from("reminder_log")
         .select("opportunity_id")
         .eq("opportunity_id", opp.id)
         .eq("milestone", label)
         .maybeSingle();
+      if (alreadySent) continue;
 
-      if (logged) continue;
+      // Get users who saved this opportunity + their preferences
+      const { data: saves } = await admin
+        .from("opportunity_saves")
+        .select("user_id")
+        .eq("opportunity_id", opp.id);
+
+      if (!saves?.length) {
+        // Still log so we don't re-check
+        await admin.from("reminder_log").insert({ opportunity_id: opp.id, milestone: label });
+        continue;
+      }
+
+      const userIds = saves.map((s) => s.user_id as string);
+
+      // Fetch preferences for these users
+      const { data: rawPrefs } = await admin
+        .from("notification_preferences")
+        .select("user_id, email_deadlines, push_deadlines, inapp_deadlines")
+        .in("user_id", userIds) as { data: UserPref[] | null };
+
+      // Build pref lookup (default all true if no row exists yet)
+      const prefMap = new Map<string, UserPref>(
+        (rawPrefs ?? []).map((p) => [p.user_id, p])
+      );
+      function prefs(uid: string): UserPref {
+        return prefMap.get(uid) ?? { user_id: uid, email_deadlines: true, push_deadlines: true, inapp_deadlines: true };
+      }
 
       const title = `Deadline ${urgency}: ${opp.title}`;
-      const body  = `The ${opp.category} opportunity "${opp.title}" closes ${urgency}. Don't miss it.`;
+      const body  = `The ${opp.category} opportunity closes ${urgency}. Don't miss it.`;
       const href  = `/opportunities/${opp.id}`;
 
-      // Batch-insert notification rows for all users
-      const rows = users.map((u) => ({
-        user_id: u.id,
-        type:    `deadline_${label}`,
-        title,
-        body,
-        href,
-        read:    false,
-      }));
+      // Fetch user emails for opted-in users
+      const { data: users } = await admin
+        .from("users")
+        .select("id, email, full_name")
+        .in("id", userIds);
 
-      // Insert in chunks of 500 to stay inside Supabase request limits
-      for (let i = 0; i < rows.length; i += 500) {
-        await admin.from("notifications").insert(rows.slice(i, i + 500));
+      // In-app notifications (respect inapp_deadlines pref)
+      const inappRows = userIds
+        .filter((uid) => prefs(uid).inapp_deadlines)
+        .map((uid) => ({ user_id: uid, type: `deadline_${label}`, title, body, href, read: false }));
+
+      for (let i = 0; i < inappRows.length; i += 500) {
+        await admin.from("notifications").insert(inappRows.slice(i, i + 500));
       }
 
-      // Send browser push to subscribed users
-      for (const user of users) {
-        try {
-          await sendPushToUser(user.id, { title, body, href });
-        } catch { /* non-critical */ }
+      // Push + email per user
+      for (const user of users ?? []) {
+        const p = prefs(user.id as string);
+
+        if (p.push_deadlines) {
+          try {
+            await sendPushToUser(user.id as string, { title, body, href });
+            results.pushes++;
+          } catch { results.errors++; }
+        }
+
+        if (p.email_deadlines && user.email) {
+          try {
+            const firstName = ((user.full_name as string) ?? "").split(" ")[0] || "Researcher";
+            await sendDeadlineReminderEmail({
+              to:        user.email as string,
+              firstName,
+              oppTitle:  opp.title,
+              oppHref:   `${process.env.NEXT_PUBLIC_SITE_URL}/opportunities/${opp.id}`,
+              urgency,
+              deadline:  opp.deadline,
+            });
+            results.emails++;
+          } catch { results.errors++; }
+        }
       }
 
-      // Send email reminders
-      for (const user of users) {
-        try {
-          const firstName = (user.full_name ?? "").split(" ")[0] || "Researcher";
-          await sendDeadlineReminderEmail({
-            to:         user.email,
-            firstName,
-            oppTitle:   opp.title,
-            oppHref:    `${process.env.NEXT_PUBLIC_SITE_URL}${href}`,
-            urgency,
-            deadline:   opp.deadline,
-          });
-          results.emails_sent++;
-        } catch { results.errors++; }
-      }
-
-      // Record in log so we don't re-send
       await admin.from("reminder_log").insert({ opportunity_id: opp.id, milestone: label });
-
-      if (label === "7d") results.notified_7d++;
-      else                results.notified_1d++;
+      if (label === "7d") results.opps_7d++;
+      else                results.opps_1d++;
     }
   }
 
-  // Event reminders — notify about events happening tomorrow
+  // ── EVENT REMINDERS (tomorrow) ──────────────────────────────────────────────
   const { start: evtStart, end: evtEnd } = dayWindow(1);
   const { data: events } = await admin
     .from("events")
     .select("id, title, slug, starts_at")
     .eq("status", "approved")
     .gte("starts_at", evtStart)
-    .lte("starts_at", evtEnd);
+    .lte("starts_at", evtEnd) as { data: EventRow[] | null };
 
   for (const evt of events ?? []) {
-    const { data: logged } = await admin
+    const { data: alreadySent } = await admin
       .from("reminder_log")
       .select("opportunity_id")
       .eq("opportunity_id", evt.id)
       .eq("milestone", "evt_1d")
       .maybeSingle();
+    if (alreadySent) continue;
 
-    if (logged) continue;
+    // Events go to ALL users (no save system for events yet); respect event prefs
+    const { data: allPrefs } = await admin
+      .from("notification_preferences")
+      .select("user_id, email_events, push_events, inapp_events") as { data: EventPref[] | null };
 
-    const title = `Tomorrow: ${evt.title}`;
-    const body  = `The event "${evt.title}" starts tomorrow. Join in!`;
-    const href  = `/events/${evt.slug ?? evt.id}`;
+    const { data: allUsers } = await admin
+      .from("users")
+      .select("id, email, full_name");
 
-    const rows = users.map((u) => ({
-      user_id: u.id,
-      type:    "event_tomorrow",
-      title,
-      body,
-      href,
-      read:    false,
-    }));
-
-    for (let i = 0; i < rows.length; i += 500) {
-      await admin.from("notifications").insert(rows.slice(i, i + 500));
+    const prefMap = new Map<string, EventPref>((allPrefs ?? []).map((p) => [p.user_id, p]));
+    function evtPrefs(uid: string): EventPref {
+      return prefMap.get(uid) ?? { user_id: uid, email_events: true, push_events: true, inapp_events: true };
     }
 
-    for (const user of users) {
-      try { await sendPushToUser(user.id, { title, body, href }); } catch { /* ok */ }
+    const title = `Tomorrow: ${evt.title}`;
+    const body  = `The event "${evt.title}" starts tomorrow. Don't miss it!`;
+    const href  = `/events/${evt.slug ?? evt.id}`;
+
+    const inappRows = (allUsers ?? [])
+      .filter((u) => evtPrefs(u.id as string).inapp_events)
+      .map((u) => ({ user_id: u.id, type: "event_tomorrow", title, body, href, read: false }));
+
+    for (let i = 0; i < inappRows.length; i += 500) {
+      await admin.from("notifications").insert(inappRows.slice(i, i + 500));
+    }
+
+    for (const user of allUsers ?? []) {
+      const p = evtPrefs(user.id as string);
+      if (p.push_events) {
+        try { await sendPushToUser(user.id as string, { title, body, href }); results.pushes++; }
+        catch { results.errors++; }
+      }
     }
 
     await admin.from("reminder_log").insert({ opportunity_id: evt.id, milestone: "evt_1d" });
+    results.events++;
   }
 
   console.log("[cron/reminders]", results);

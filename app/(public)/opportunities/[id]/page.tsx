@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { opportunitySchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/config/site";
 import { Calendar, ExternalLink, Banknote, ArrowLeft, Plane, Globe, Users } from "lucide-react";
+import { SaveOpportunityButton } from "@/components/opportunities/SaveOpportunityButton";
 import type { ResearchOpportunity, OpportunityCategory } from "@/types/opportunity";
 
 function renderBody(raw: string): { __html: string } {
@@ -78,6 +79,19 @@ export default async function OpportunityDetailPage({ params }: Props) {
   const opp = data as ResearchOpportunity;
   const cat = CAT_META[opp.category] ?? CAT_META.other;
 
+  // Check if authenticated user has saved this opportunity (for initial button state)
+  const currentUser = await getServerUser();
+  let initialSaved  = false;
+  if (currentUser) {
+    const { data: saved } = await admin
+      .from("opportunity_saves")
+      .select("opportunity_id")
+      .eq("opportunity_id", opp.id)
+      .eq("user_id", currentUser.id)
+      .maybeSingle();
+    initialSaved = !!saved;
+  }
+
   const isPast      = opp.deadline ? new Date(opp.deadline) < new Date() : false;
   const expiring    = opp.deadline ? (new Date(opp.deadline).getTime() - Date.now()) / 86_400_000 < 7 : false;
   const daysLeft    = opp.deadline ? Math.ceil((new Date(opp.deadline).getTime() - Date.now()) / 86_400_000) : null;
@@ -141,10 +155,17 @@ export default async function OpportunityDetailPage({ params }: Props) {
                   </span>
                 )}
               </div>
-              <h1 className="text-2xl sm:text-3xl font-bold leading-tight mb-2"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-                {opp.title}
-              </h1>
+              <div className="flex items-start justify-between gap-4">
+                <h1 className="text-2xl sm:text-3xl font-bold leading-tight mb-2"
+                  style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+                  {opp.title}
+                </h1>
+                {!isPast && (
+                  <div className="flex-shrink-0 mt-1">
+                    <SaveOpportunityButton opportunityId={opp.id} initialSaved={initialSaved} />
+                  </div>
+                )}
+              </div>
               {opp.funder && (
                 <p className="text-sm" style={{ color: "#9CA3AF" }}>by {opp.funder}</p>
               )}

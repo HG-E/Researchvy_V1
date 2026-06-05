@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers, Shield, Globe, CalendarDays } from "lucide-react";
+import { LayoutDashboard, GraduationCap, BookOpen, Award, User, LogOut, Layers, Shield, Globe, CalendarDays, Bell } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { UserAvatar } from "@/components/common/UserAvatar";
 import type { DashUser } from "@/app/dashboard/layout";
@@ -15,6 +15,7 @@ const NAV_ITEMS = [
   { href: "/dashboard/events",           label: "My Events",      Icon: CalendarDays },
   { href: "/dashboard/resources",        label: "Resources",      Icon: BookOpen },
   { href: "/dashboard/certificates",     label: "Certificates",   Icon: Award },
+  { href: "/dashboard/notifications",    label: "Notifications",  Icon: Bell },
   { href: "/dashboard/profile",          label: "Profile",        Icon: User },
 ];
 

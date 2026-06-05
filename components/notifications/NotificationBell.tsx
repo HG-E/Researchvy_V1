@@ -62,19 +62,35 @@ export function NotificationBell({ userId }: { userId: string }) {
   // Initial fetch
   useEffect(() => { fetchNotifications(); }, [fetchNotifications]);
 
-  // Real-time: subscribe to new inserts for this user via Supabase Realtime
+  // Real-time: subscribe to new inserts via Supabase Realtime.
+  // Requires the notifications table to be enabled for Realtime in Supabase Dashboard
+  // (Database → Replication). Falls back to 30s polling if Realtime is not configured.
   useEffect(() => {
     const supabase = getSupabaseBrowserClient();
-    const channel  = supabase
+    let realtimeActive = false;
+
+    const channel = supabase
       .channel(`notifications:${userId}`)
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "notifications", filter: `user_id=eq.${userId}` },
-        () => fetchNotifications()
+        () => { realtimeActive = true; fetchNotifications(); }
       )
-      .subscribe();
+      .subscribe((status) => {
+        if (status === "SUBSCRIBED") realtimeActive = true;
+      });
 
-    return () => { supabase.removeChannel(channel); };
+    // 30s polling fallback — fires when Realtime hasn't received anything
+    // (table not in Replication list or Realtime disabled). Harmless extra
+    // fetch if Realtime is active.
+    const poll = setInterval(() => {
+      if (!realtimeActive) fetchNotifications();
+    }, 30_000);
+
+    return () => {
+      supabase.removeChannel(channel);
+      clearInterval(poll);
+    };
   }, [userId, fetchNotifications]);
 
   // Close on outside click
