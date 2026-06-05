@@ -4,17 +4,34 @@ import { useState } from "react";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export function OppPublishButton({ oppId, isPublished }: { oppId: string; isPublished: boolean }) {
+interface Props {
+  oppId: string;
+  isPublished: boolean;
+  submittedBy?: string | null;
+}
+
+export function OppPublishButton({ oppId, isPublished, submittedBy }: Props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   async function toggle() {
     setLoading(true);
-    await fetch(`/api/admin/opportunities/${oppId}`, {
-      method:  "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify({ is_published: !isPublished }),
-    });
+    if (!isPublished) {
+      // Publishing: use the review route so submission_status is updated
+      // and submitter gets an email notification
+      await fetch(`/api/admin/opportunities/${oppId}/review`, {
+        method:  "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ action: "publish" }),
+      });
+    } else {
+      // Unpublishing: just set is_published via the standard PATCH
+      await fetch(`/api/admin/opportunities/${oppId}`, {
+        method:  "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ is_published: false }),
+      });
+    }
     setLoading(false);
     router.refresh();
   }

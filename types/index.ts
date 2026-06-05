@@ -14,6 +14,16 @@ export type {
 export type {
   Resource, ResourceListItem, ResourceCategory, ResourceFileType,
 } from "./resource";
+export type {
+  AcademicEvent, EventRegistration, EventSave, EventWithMeta,
+  EventType, EventFormat, EventStatus, EventRegistrationType,
+  OrganizerType, EventTargetAudience, EventRegistrationStatus,
+  EventFilters, EventSubmitPayload,
+} from "./event";
+export type {
+  ResearchOpportunity, OpportunityCategory, OpportunitySubmissionStatus,
+  OpportunitySubmitPayload,
+} from "./opportunity";
 
 // ── Shared utility types ─────────────────────────────────────────────────────
 

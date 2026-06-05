@@ -14,6 +14,8 @@ export const mainNav: NavigationItem[] = [
     ],
   },
   { label: "Clinics",        href: "/clinics" },
+  { label: "Events",         href: "/events" },
+  { label: "Opportunities",  href: "/opportunities" },
   { label: "Insights",       href: "/insights" },
   { label: "Resources",      href: "/resources" },
 ];
@@ -27,6 +29,8 @@ export const footerNav = {
     { label: "Network",      href: "/network" },
   ],
   learn: [
+    { label: "Events",         href: "/events" },
+    { label: "Opportunities",  href: "/opportunities" },
     { label: "Insights",       href: "/insights" },
     { label: "Resources",      href: "/resources" },
     { label: "Partnerships",   href: "/partnerships" },
@@ -44,9 +48,12 @@ export const footerNav = {
 };
 
 export const dashboardNav: NavigationItem[] = [
-  { label: "Dashboard",   href: "/dashboard" },
-  { label: "My Clinics",  href: "/dashboard/clinics" },
-  { label: "Resources",   href: "/dashboard/resources" },
-  { label: "Certificates",href: "/dashboard/certificates" },
-  { label: "Profile",     href: "/dashboard/profile" },
+  { label: "Dashboard",      href: "/dashboard" },
+  { label: "My Clinics",     href: "/dashboard/clinics" },
+  { label: "My Events",      href: "/dashboard/events" },
+  { label: "Opportunities",  href: "/dashboard/opportunities" },
+  { label: "Academy",        href: "/dashboard/academy" },
+  { label: "Resources",      href: "/dashboard/resources" },
+  { label: "Certificates",   href: "/dashboard/certificates" },
+  { label: "Profile",        href: "/dashboard/profile" },
 ];

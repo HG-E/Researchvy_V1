@@ -41,11 +41,19 @@ export default async function DashboardPage() {
       return count ?? 0;
     } catch { return 0; }
   }
+  async function fetchEventSaveCount() {
+    if (!userId) return 0;
+    try {
+      const { count } = await admin.from("event_saves").select("event_id", { count: "exact", head: true }).eq("user_id", userId);
+      return count ?? 0;
+    } catch { return 0; }
+  }
 
-  // Fetch profile, clinic count, and course data in parallel
-  const [profile, clinicCount, courseEntries] = await Promise.all([
+  // Fetch profile, clinic count, event saves, and course data in parallel
+  const [profile, clinicCount, eventSaveCount, courseEntries] = await Promise.all([
     fetchProfile(),
     fetchClinicCount(),
+    fetchEventSaveCount(),
     userId ? getEnrolledCoursesWithProgress(userId).catch(() => []) : Promise.resolve([]),
   ]);
 
@@ -66,7 +74,7 @@ export default async function DashboardPage() {
     { label: "Complete your scholar profile",      href: "/dashboard/profile",  done: profileDone },
     { label: "Register for your first clinic",     href: "/clinics",            done: clinicCount > 0 },
     { label: "Start your first Academy course",    href: "/academy/courses",    done: activeCount > 0 },
-    { label: "Read a research visibility insight", href: "/insights",           done: false },
+    { label: "Save your first event",              href: "/dashboard/events",   done: eventSaveCount > 0 },
   ];
   const doneCount = steps.filter((s) => s.done).length;
 

@@ -847,3 +847,285 @@ export async function sendWhatToPrepareEmail(opts: EnrollmentDripOpts & { sessio
       </div>`),
   });
 }
+
+// ── Events Portal ─────────────────────────────────────────────────────────────
+
+export async function sendEventSubmitted(to: string, name: string, eventTitle: string): Promise<void> {
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [to],
+    replyTo: REPLY_TO,
+    subject: `Your event "${eventTitle}" has been submitted for review`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">Researchvy Events</p>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <p style="color:#60A5FA;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">Submission Received</p>
+    <h1 style="color:#F9FAFB;font-size:24px;font-weight:700;margin:0 0 16px;line-height:1.3">Your event is under review, ${name?.split(" ")[0] ?? "there"}</h1>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 20px">
+      We received your submission for <strong style="color:#D1D5DB">${eventTitle}</strong>.
+      Our team reviews all submissions within 2 business days.
+    </p>
+    <a href="${SITE_URL}/events" style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">Browse the Events Board →</a>
+  </div>
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0"><a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a></p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
+
+export async function sendEventApproved(to: string, name: string, eventTitle: string, slug: string): Promise<void> {
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [to],
+    replyTo: REPLY_TO,
+    subject: `Your event is live — "${eventTitle}"`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">Researchvy Events</p>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <p style="color:#10B981;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">Approved & Live</p>
+    <h1 style="color:#F9FAFB;font-size:24px;font-weight:700;margin:0 0 16px;line-height:1.3">Your event is now visible to researchers, ${name?.split(" ")[0] ?? "there"}</h1>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">
+      <strong style="color:#D1D5DB">${eventTitle}</strong> is now live on the Researchvy Events Board.
+    </p>
+    <a href="${SITE_URL}/events/${slug}" style="display:inline-block;background:#10B981;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">View Your Event →</a>
+  </div>
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0"><a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a></p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
+
+export async function sendEventRejected(to: string, name: string, eventTitle: string, reason: string): Promise<void> {
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [to],
+    replyTo: REPLY_TO,
+    subject: `Update on your event submission — "${eventTitle}"`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">Researchvy Events</p>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <p style="color:#F59E0B;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">Submission Update</p>
+    <h1 style="color:#F9FAFB;font-size:24px;font-weight:700;margin:0 0 16px;line-height:1.3">We couldn't approve this submission, ${name?.split(" ")[0] ?? "there"}</h1>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 20px">
+      After reviewing <strong style="color:#D1D5DB">${eventTitle}</strong>, we weren't able to publish it at this time.
+    </p>
+    ${reason ? `<div style="background:#1E293B;border-left:3px solid #F59E0B;border-radius:8px;padding:16px 18px;margin-bottom:24px"><p style="color:#6B7280;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px">Reviewer Note</p><p style="color:#D1D5DB;font-size:14px;line-height:1.7;margin:0">${reason}</p></div>` : ""}
+    <a href="${SITE_URL}/dashboard/events" style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">View My Submissions →</a>
+  </div>
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0"><a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a></p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
+
+export async function sendEventRSVP(to: string, name: string, eventTitle: string, eventDate: string, eventSlug: string, status: "registered" | "waitlisted"): Promise<void> {
+  const r = await resend();
+  const isWaitlisted = status === "waitlisted";
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [to],
+    replyTo: REPLY_TO,
+    subject: isWaitlisted ? `You're on the waitlist for "${eventTitle}"` : `RSVP confirmed — "${eventTitle}"`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">Researchvy Events</p>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <p style="color:${isWaitlisted ? "#F59E0B" : "#10B981"};font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">${isWaitlisted ? "Waitlist Confirmed" : "RSVP Confirmed"}</p>
+    <h1 style="color:#F9FAFB;font-size:24px;font-weight:700;margin:0 0 16px;line-height:1.3">${isWaitlisted ? "You're on the waitlist" : "You're registered"}, ${name?.split(" ")[0] ?? "there"}</h1>
+    <div style="background:#1E293B;border-radius:12px;padding:18px;margin-bottom:24px">
+      <p style="color:#F9FAFB;font-size:16px;font-weight:600;margin:0 0 4px">${eventTitle}</p>
+      <p style="color:#9CA3AF;font-size:14px;margin:0">${eventDate}</p>
+    </div>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">
+      ${isWaitlisted ? "This event is at capacity. We'll notify you if a spot opens up." : "Your spot is confirmed. Check the event page for joining instructions."}
+    </p>
+    <a href="${SITE_URL}/events/${eventSlug}" style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">View Event Details →</a>
+  </div>
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0"><a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a> · <a href="${SITE_URL}/dashboard/events" style="color:#4B5563;text-decoration:none">My Events</a></p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
+
+// ── Opportunity community submission emails ───────────────────────────────────
+
+export async function sendOpportunitySubmitted(to: string, name: string, oppTitle: string) {
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [to],
+    bcc:     [ADMIN_CC],
+    replyTo: REPLY_TO,
+    subject: `We received your opportunity submission`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">Researchvy Opportunities</p>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <p style="color:#2563EB;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">Submission Received</p>
+    <h1 style="color:#F9FAFB;font-size:24px;font-weight:700;margin:0 0 16px;line-height:1.3">Thanks, ${name?.split(" ")[0] ?? "there"}</h1>
+    <div style="background:#1E293B;border-radius:12px;padding:18px;margin-bottom:24px">
+      <p style="color:#F9FAFB;font-size:16px;font-weight:600;margin:0">${oppTitle}</p>
+    </div>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">
+      Your opportunity submission is under review. Our team will check details and make it live on the board — usually within 48 hours.
+    </p>
+    <a href="${SITE_URL}/dashboard/opportunities" style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">Track your submission &rarr;</a>
+  </div>
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0"><a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a></p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
+
+export async function sendOpportunityApproved(to: string, name: string, oppTitle: string) {
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [to],
+    replyTo: REPLY_TO,
+    subject: `Your opportunity is live on the board`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">Researchvy Opportunities</p>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <p style="color:#10B981;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">Approved &amp; Live</p>
+    <h1 style="color:#F9FAFB;font-size:24px;font-weight:700;margin:0 0 16px;line-height:1.3">Your submission is now live, ${name?.split(" ")[0] ?? "there"}</h1>
+    <div style="background:#1E293B;border-radius:12px;padding:18px;margin-bottom:24px">
+      <p style="color:#F9FAFB;font-size:16px;font-weight:600;margin:0">${oppTitle}</p>
+    </div>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">
+      Researchers across the Researchvy community can now discover and apply. Thank you for contributing to the board.
+    </p>
+    <a href="${SITE_URL}/opportunities" style="display:inline-block;background:#10B981;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">View on Opportunities Board &rarr;</a>
+  </div>
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0"><a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a></p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
+
+export async function sendOpportunityRejected(to: string, name: string, oppTitle: string, reason: string) {
+  const r = await resend();
+  const noteBlock = reason
+    ? `<div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:18px;margin-bottom:24px">
+      <p style="color:#D97706;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px">Reviewer Note</p>
+      <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0">${reason}</p>
+    </div>`
+    : "";
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [to],
+    replyTo: REPLY_TO,
+    subject: `Update on your opportunity submission`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">Researchvy Opportunities</p>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <p style="color:#F59E0B;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">Submission Update</p>
+    <h1 style="color:#F9FAFB;font-size:24px;font-weight:700;margin:0 0 16px;line-height:1.3">We could not approve this one, ${name?.split(" ")[0] ?? "there"}</h1>
+    <div style="background:#1E293B;border-radius:12px;padding:18px;margin-bottom:24px">
+      <p style="color:#F9FAFB;font-size:16px;font-weight:600;margin:0">${oppTitle}</p>
+    </div>
+    ${noteBlock}
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">
+      You are welcome to revise and resubmit. Check the board for currently active opportunities.
+    </p>
+    <a href="${SITE_URL}/opportunities/submit" style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">Submit again &rarr;</a>
+  </div>
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0"><a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a></p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
+
+// ── RSVP / Event Registration Confirmation ─────────────────────────────────────
+
+export async function sendRSVPConfirmation(
+  to: string,
+  firstName: string,
+  eventTitle: string,
+  eventSlug: string,
+  isWaitlisted: boolean,
+) {
+  const r = await resend();
+  const statusLabel  = isWaitlisted ? "You're on the Waitlist" : "You're Registered";
+  const statusColor  = isWaitlisted ? "#F59E0B" : "#10B981";
+  const statusDetail = isWaitlisted
+    ? "You've been added to the waitlist. We'll email you if a spot opens up — keep an eye on your inbox."
+    : "Your spot is confirmed. Check your dashboard for updates and add the event to your calendar.";
+
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [to],
+    replyTo: REPLY_TO,
+    subject: `${statusLabel}: ${eventTitle}`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">
+    Researchvy Events
+  </p>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <p style="color:${statusColor};font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">${statusLabel}</p>
+    <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 16px;line-height:1.3">Hi ${firstName} — here's your confirmation.</h1>
+    <div style="background:#1E293B;border-radius:12px;padding:18px;margin-bottom:24px">
+      <p style="color:#9CA3AF;font-size:12px;margin:0 0 4px;text-transform:uppercase;letter-spacing:2px">Event</p>
+      <p style="color:#F9FAFB;font-size:16px;font-weight:600;margin:0">${eventTitle}</p>
+    </div>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">${statusDetail}</p>
+    <a href="${SITE_URL}/events/${eventSlug}"
+       style="display:inline-block;background:${statusColor};color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 32px;border-radius:12px;margin-bottom:16px">
+      View Event Details &rarr;
+    </a>
+  </div>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px;margin-bottom:24px">
+    <p style="color:#6B7280;font-size:13px;line-height:1.7;margin:0">
+      Manage your RSVPs any time from your <a href="${SITE_URL}/dashboard/events" style="color:#60A5FA;text-decoration:underline">My Events</a> dashboard.
+    </p>
+  </div>
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0">
+      <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a>
+      &nbsp;·&nbsp;
+      <a href="${SITE_URL}/events" style="color:#4B5563;text-decoration:none">Browse Events</a>
+    </p>
+  </div>
+</div>
+</body></html>`,
+  });
+}

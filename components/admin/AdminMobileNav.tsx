@@ -6,12 +6,15 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   Menu, X, LayoutDashboard, Inbox, Handshake,
   FileText, BookOpen, Users, BarChart2, LogOut, Shield, GraduationCap, Layers,
+  CalendarDays, Globe,
 } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 
 const NAV = [
   { label: "Overview",     href: "/admin",              Icon: LayoutDashboard, exact: true  },
-  { label: "Enquiries",    href: "/admin/enquiries",    Icon: Inbox,           exact: false },
+  { label: "Events",         href: "/admin/events",         Icon: CalendarDays,    exact: false },
+  { label: "Opportunities", href: "/admin/opportunities", Icon: Globe,           exact: false },
+  { label: "Enquiries",     href: "/admin/enquiries",     Icon: Inbox,           exact: false },
   { label: "Partnerships", href: "/admin/partnerships", Icon: Handshake,       exact: false },
   { label: "Content",      href: "/admin/content",      Icon: FileText,        exact: false },
   { label: "Clinics",      href: "/admin/clinics",      Icon: BookOpen,        exact: false },

@@ -14,12 +14,13 @@ import {
   Layers,
   ShoppingBag,
   Globe,
-  Gift,
+  CalendarDays,
 } from "lucide-react";
 
 const NAV = [
   { label: "Overview",      href: "/admin",                     icon: LayoutDashboard, exact: true  },
   { label: "Orders",        href: "/admin/orders",               icon: ShoppingBag,     exact: false },
+  { label: "Events",        href: "/admin/events",               icon: CalendarDays,    exact: false },
   { label: "Enquiries",     href: "/admin/enquiries",            icon: Inbox,           exact: false },
   { label: "Partnerships",  href: "/admin/partnerships",         icon: Handshake,       exact: false },
   { label: "Opportunities", href: "/admin/opportunities",        icon: Globe,           exact: false },

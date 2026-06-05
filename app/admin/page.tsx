@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileText, BookOpen, Layers, Users, ArrowRight, Clock, BarChart2, Inbox, Handshake, GraduationCap, TrendingUp, Award } from "lucide-react";
+import { FileText, BookOpen, Layers, Users, ArrowRight, Clock, BarChart2, Inbox, Handshake, GraduationCap, TrendingUp, Award, CalendarDays, Globe, Zap } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getInsights } from "@/lib/cms/mdx";
 import { RESOURCES } from "@/constants/resources";
@@ -72,12 +72,26 @@ async function getAcademyStats(): Promise<{
   }
 }
 
+async function getReviewQueueCounts() {
+  try {
+    const admin = createSupabaseAdminClient();
+    const [evRes, oppRes] = await Promise.all([
+      admin.from("events").select("id", { count: "exact", head: true }).eq("status", "pending"),
+      admin.from("research_opportunities").select("id", { count: "exact", head: true }).eq("submission_status", "pending"),
+    ]);
+    return { events: evRes.count ?? 0, opportunities: oppRes.count ?? 0 };
+  } catch {
+    return { events: 0, opportunities: 0 };
+  }
+}
+
 export default async function AdminOverviewPage() {
-  const [insights, userCount, enquiries, academy] = await Promise.all([
+  const [insights, userCount, enquiries, academy, reviewQueue] = await Promise.all([
     getInsights({ limit: 100 }),
     getUserCount(),
     getEnquiryCounts(),
     getAcademyStats(),
+    getReviewQueueCounts(),
   ]);
 
   const recent = insights.slice(0, 5);
@@ -126,6 +140,8 @@ export default async function AdminOverviewPage() {
   ];
 
   const quickLinks = [
+    { label: "Events",           href: "/admin/events",       desc: `${reviewQueue.events > 0 ? `${reviewQueue.events} pending review · ` : ""}Manage academic events` },
+    { label: "Opportunities",    href: "/admin/opportunities",desc: `${reviewQueue.opportunities > 0 ? `${reviewQueue.opportunities} community submissions pending · ` : ""}Grants, fellowships, CFPs` },
     { label: "Manage Content",   href: "/admin/content",      desc: "View and manage insights" },
     { label: "Manage Clinics",   href: "/admin/clinics",      desc: "Programme details and sessions" },
     { label: "Enrollments",      href: "/admin/enrollments",  desc: "Manage course enrollments" },
@@ -149,6 +165,65 @@ export default async function AdminOverviewPage() {
         <p className="mt-1 text-sm" style={{ color: "#6B7280" }}>
           Real-time summary of your Researchvy platform.
         </p>
+      </div>
+
+      {/* Review-queue alert — only shows when there are pending items */}
+      {(reviewQueue.events > 0 || reviewQueue.opportunities > 0) && (
+        <div className="rounded-2xl border mb-6 p-4 flex items-start gap-3"
+          style={{ backgroundColor: "rgba(245,158,11,0.06)", borderColor: "rgba(245,158,11,0.2)" }}>
+          <Zap className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#F59E0B" }} />
+          <div className="flex-1 text-sm" style={{ color: "#D97706" }}>
+            <span className="font-bold">Action needed: </span>
+            {reviewQueue.events > 0 && (
+              <Link href="/admin/events" className="underline underline-offset-2 mr-3">
+                {reviewQueue.events} event{reviewQueue.events > 1 ? "s" : ""} pending review
+              </Link>
+            )}
+            {reviewQueue.opportunities > 0 && (
+              <Link href="/admin/opportunities" className="underline underline-offset-2">
+                {reviewQueue.opportunities} opportunity submission{reviewQueue.opportunities > 1 ? "s" : ""} pending
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Content board quick links */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <Link href="/admin/events"
+          className="rounded-2xl border p-5 flex items-center gap-4 transition-all hover:border-[#334155]"
+          style={{ backgroundColor: "#0F172A", borderColor: reviewQueue.events > 0 ? "rgba(245,158,11,0.4)" : "#1E293B" }}>
+          <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(96,165,250,0.1)" }}>
+            <CalendarDays className="h-5 w-5" style={{ color: "#60A5FA" }} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Events Board</p>
+            <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>Create, review, and publish academic events</p>
+          </div>
+          {reviewQueue.events > 0 && (
+            <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0"
+              style={{ backgroundColor: "rgba(245,158,11,0.15)", color: "#FCD34D" }}>
+              {reviewQueue.events} pending
+            </span>
+          )}
+        </Link>
+        <Link href="/admin/opportunities"
+          className="rounded-2xl border p-5 flex items-center gap-4 transition-all hover:border-[#334155]"
+          style={{ backgroundColor: "#0F172A", borderColor: reviewQueue.opportunities > 0 ? "rgba(245,158,11,0.4)" : "#1E293B" }}>
+          <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(16,185,129,0.1)" }}>
+            <Globe className="h-5 w-5" style={{ color: "#10B981" }} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Opportunities Board</p>
+            <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>Grants, fellowships, community submissions</p>
+          </div>
+          {reviewQueue.opportunities > 0 && (
+            <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0"
+              style={{ backgroundColor: "rgba(245,158,11,0.15)", color: "#FCD34D" }}>
+              {reviewQueue.opportunities} pending
+            </span>
+          )}
+        </Link>
       </div>
 
       {/* Platform stats */}

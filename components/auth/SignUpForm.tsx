@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, EyeOff, Loader2, CheckCircle2 } from "lucide-react";
@@ -57,17 +57,15 @@ function PasswordStrengthBar({ password }: { password: string }) {
 
 export function SignUpForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { track } = useAnalytics();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [authError, setAuthError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const nextPath = (() => {
-    if (typeof window === "undefined") return "/dashboard";
-    const raw = new URLSearchParams(window.location.search).get("next") ?? "";
-    return raw.startsWith("/") && !raw.startsWith("//") ? raw : "/dashboard";
-  })();
+  const raw      = searchParams.get("next") ?? "";
+  const nextPath = raw.startsWith("/") && !raw.startsWith("//") ? raw : "/dashboard";
 
   const {
     register,

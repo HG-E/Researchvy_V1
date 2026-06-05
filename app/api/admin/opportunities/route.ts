@@ -32,16 +32,17 @@ export async function POST(req: NextRequest) {
   const { data, error } = await admin
     .from("research_opportunities")
     .insert({
-      title:        body.title.trim(),
-      body:         body.body.trim(),
-      category:     body.category ?? "other",
-      funder:       body.funder?.trim() || null,
-      value:        body.value?.trim()  || null,
-      deadline:     body.deadline       || null,
-      apply_url:    body.apply_url.trim(),
-      target_level: body.target_level ?? "all",
-      is_published: body.is_published  ?? false,
-      is_featured:  body.is_featured   ?? false,
+      title:             body.title.trim(),
+      body:              body.body.trim(),
+      category:          body.category ?? "other",
+      funder:            body.funder?.trim() || null,
+      value:             body.value?.trim()  || null,
+      deadline:          body.deadline       || null,
+      apply_url:         body.apply_url.trim(),
+      target_level:      body.target_level ?? "all",
+      is_published:      body.is_published  ?? false,
+      is_featured:       body.is_featured   ?? false,
+      submission_status: "published",
     })
     .select("id")
     .single();
