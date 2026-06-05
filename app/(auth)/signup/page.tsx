@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { SignUpForm } from "@/components/auth/SignUpForm";
 
@@ -9,5 +10,9 @@ export const metadata = generatePageMetadata({
 });
 
 export default function SignUpPage() {
-  return <SignUpForm />;
+  return (
+    <Suspense>
+      <SignUpForm />
+    </Suspense>
+  );
 }
