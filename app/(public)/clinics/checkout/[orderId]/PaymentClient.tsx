@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, CheckCircle, Clock, Loader2, AlertCircle, Check } from "lucide-react";
+import { Copy, CheckCircle, Clock, Loader2, AlertCircle, Check, ArrowRight, BookOpen, Users, Calendar } from "lucide-react";
 
 type Order = {
   id:             string;
@@ -99,23 +99,89 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
   }
 
   if (status === "confirmed") {
+    const NEXT_STEPS = [
+      {
+        icon:  Calendar,
+        color: "#2563EB",
+        label: "Check your email",
+        detail: "Your enrolment confirmation and session dates are on their way to " + order.user_email + ".",
+      },
+      {
+        icon:  Users,
+        color: "#7C3AED",
+        label: "Meet your cohort",
+        detail: "In the next few days you'll receive an introduction to your fellow researchers.",
+      },
+      {
+        icon:  BookOpen,
+        color: "#10B981",
+        label: "Start Academy Level 1 (free)",
+        detail: "Build your foundation knowledge before Session 1. Takes about 2 hours.",
+      },
+    ];
     return (
-      <div className="text-center py-12">
-        <div
-          className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6"
-          style={{ backgroundColor: "rgba(16,185,129,0.12)" }}
-        >
-          <CheckCircle className="h-8 w-8" style={{ color: "#10B981" }} />
+      <div className="space-y-6">
+        {/* Confirmation header */}
+        <div className="text-center py-8">
+          <div
+            className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-5"
+            style={{ backgroundColor: "rgba(16,185,129,0.12)" }}
+          >
+            <CheckCircle className="h-8 w-8" style={{ color: "#10B981" }} />
+          </div>
+          <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+            You&apos;re enrolled!
+          </h1>
+          <p className="text-sm" style={{ color: "#6B7280" }}>
+            Order <span className="font-mono" style={{ color: "#9CA3AF" }}>{order.order_number}</span>
+            {" · "}Confirmation sent to <span style={{ color: "#9CA3AF" }}>{order.user_email}</span>
+          </p>
         </div>
-        <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-          You&apos;re enrolled!
-        </h1>
-        <p className="text-sm mb-1" style={{ color: "#6B7280" }}>
-          Order <span className="font-mono" style={{ color: "#9CA3AF" }}>{order.order_number}</span>
-        </p>
-        <p className="text-sm" style={{ color: "#6B7280" }}>
-          A confirmation has been sent to <span style={{ color: "#9CA3AF" }}>{order.user_email}</span>.
-        </p>
+
+        {/* What happens next */}
+        <div
+          className="rounded-2xl border p-5"
+          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        >
+          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+            What happens next
+          </p>
+          <div className="space-y-4">
+            {NEXT_STEPS.map(({ icon: Icon, color, label, detail }, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+                  style={{ backgroundColor: color + "15" }}
+                >
+                  <Icon className="h-4 w-4" style={{ color }} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold mb-0.5" style={{ color: "#F9FAFB" }}>{label}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTAs */}
+        <div className="flex flex-col gap-3">
+          <a
+            href="/dashboard/clinics"
+            className="flex items-center justify-center gap-2 w-full rounded-xl px-6 py-3.5 text-sm font-bold text-white transition-all hover:opacity-90"
+            style={{ backgroundColor: "#2563EB" }}
+          >
+            Go to My Clinics Dashboard
+            <ArrowRight className="h-4 w-4" />
+          </a>
+          <a
+            href="/academy/courses"
+            className="flex items-center justify-center gap-2 w-full rounded-xl border px-6 py-3.5 text-sm font-bold transition-all hover:border-[#334155]"
+            style={{ borderColor: "#1E293B", color: "#F9FAFB" }}
+          >
+            Start Academy Level 1 (Free)
+          </a>
+        </div>
       </div>
     );
   }

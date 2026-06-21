@@ -11,7 +11,7 @@ const ROTATE_INTERVAL = 2800;
 const STAT_BADGES = [
   { value: "38+",  label: "Countries" },
   { value: "≤20",  label: "Per cohort" },
-  { value: "6",    label: "Sessions" },
+  { value: "5",    label: "Sessions" },
   { value: "100%", label: "Certified" },
 ];
 
@@ -107,21 +107,23 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="flex flex-col items-stretch sm:flex-row sm:items-center sm:justify-center gap-3 w-full max-w-xs mx-auto sm:max-w-none"
         >
+          {/* Primary: free scorecard — lowest friction entry to the funnel */}
           <Link
-            href="/clinics"
+            href="/resources/visibility-scorecard"
             className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-white active:scale-[0.97] active:opacity-90"
             style={{
-              backgroundColor: "#2563EB",
+              backgroundColor: "#10B981",
               transition: "background-color 150ms ease, transform 100ms ease, opacity 100ms ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#059669")}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#10B981")}
           >
-            {copy.hero.cta.primary}
+            Check My Score Free
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
+          {/* Secondary: clinic for researchers who are already sold */}
           <Link
-            href="/ecosystem"
+            href="/clinics"
             className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border active:scale-[0.97] active:opacity-80"
             style={{
               color: "#F9FAFB",
@@ -137,7 +139,7 @@ export function Hero() {
               e.currentTarget.style.color = "#F9FAFB";
             }}
           >
-            {copy.hero.cta.secondary}
+            Join the Clinic
           </Link>
         </motion.div>
 

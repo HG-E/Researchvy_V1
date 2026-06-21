@@ -15,10 +15,10 @@ import { ReferralWidget } from "@/components/dashboard/ReferralWidget";
 export const metadata = generatePageMetadata({ title: "Dashboard", noIndex: true });
 
 const QUICK_ACTIONS = [
-  { href: "/clinics",           label: "Register for a Clinic",    description: "Join the Digital Visibility Clinic™",      color: "#2563EB" },
-  { href: "/insights",          label: "Read Insights",            description: "Latest research visibility articles",       color: "#10B981" },
-  { href: "/resources",         label: "Browse Resources",         description: "Templates, guides, and tools",             color: "#8B5CF6" },
-  { href: "/dashboard/profile", label: "Complete Your Profile",    description: "Add ORCID, Google Scholar, and bio",       color: "#F59E0B" },
+  { href: "/resources/visibility-scorecard", label: "Take the Visibility Scorecard", description: "Free 12-checkpoint audit — score out of 100",  color: "#10B981" },
+  { href: "/clinics",                        label: "Register for a Clinic",          description: "Join the Digital Visibility Clinic™",          color: "#2563EB" },
+  { href: "/insights",                       label: "Read Insights",                  description: "Latest research visibility articles",           color: "#8B5CF6" },
+  { href: "/dashboard/profile",              label: "Complete Your Profile",          description: "Add ORCID, Google Scholar, and bio",           color: "#F59E0B" },
 ];
 
 export default async function DashboardPage() {
@@ -41,6 +41,16 @@ export default async function DashboardPage() {
       return count ?? 0;
     } catch { return 0; }
   }
+  async function fetchScorecardDone() {
+    if (!user?.email) return false;
+    try {
+      const { count } = await admin
+        .from("visibility_scorecard_leads")
+        .select("id", { count: "exact", head: true })
+        .eq("email", user.email);
+      return (count ?? 0) > 0;
+    } catch { return false; }
+  }
   async function fetchEventSaveCount() {
     if (!userId) return 0;
     try {
@@ -49,12 +59,13 @@ export default async function DashboardPage() {
     } catch { return 0; }
   }
 
-  // Fetch profile, clinic count, event saves, and course data in parallel
-  const [profile, clinicCount, eventSaveCount, courseEntries] = await Promise.all([
+  // Fetch all data in parallel
+  const [profile, clinicCount, eventSaveCount, courseEntries, scorecardDone] = await Promise.all([
     fetchProfile(),
     fetchClinicCount(),
     fetchEventSaveCount(),
     userId ? getEnrolledCoursesWithProgress(userId).catch(() => []) : Promise.resolve([]),
+    fetchScorecardDone(),
   ]);
 
   const fullName    = profile?.full_name || (user?.user_metadata?.full_name as string) || "";
@@ -71,10 +82,10 @@ export default async function DashboardPage() {
 
   // Getting Started steps (wired to real data)
   const steps = [
-    { label: "Complete your scholar profile",      href: "/dashboard/profile",  done: profileDone },
-    { label: "Register for your first clinic",     href: "/clinics",            done: clinicCount > 0 },
-    { label: "Start your first Academy course",    href: "/academy/courses",    done: activeCount > 0 },
-    { label: "Save your first event",              href: "/dashboard/events",   done: eventSaveCount > 0 },
+    { label: "Take the free Visibility Scorecard", href: "/resources/visibility-scorecard", done: scorecardDone },
+    { label: "Complete your scholar profile",      href: "/dashboard/profile",              done: profileDone },
+    { label: "Register for your first clinic",     href: "/clinics",                        done: clinicCount > 0 },
+    { label: "Start your first Academy course",    href: "/academy/courses",                done: activeCount > 0 },
   ];
   const doneCount = steps.filter((s) => s.done).length;
 
@@ -95,7 +106,7 @@ export default async function DashboardPage() {
             Your Dashboard
           </p>
           <h1 className="text-3xl font-bold leading-tight" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-            Welcome back, {displayName}
+            Welcome, {displayName}
           </h1>
           <p className="text-sm mt-1" style={{ color: "#9CA3AF" }}>
             {fullName || user?.email} · Your scholarly visibility command centre
