@@ -57,6 +57,8 @@ export default async function ClinicsPage({
   const spotsLeft   = Math.max(0, digitalVisibilityClinic.capacity - spotsTaken - cohort.spotsAlreadyFilled);
   const isClosingSoon = spotsLeft <= 5;
   const isFull        = cohort.status === "full" || spotsLeft === 0;
+  const isEarlyBird   = new Date() < new Date(cohort.earlyBirdDeadline + "T23:59:59");
+  const earlyBirdDate = formatCohortDate(cohort.earlyBirdDeadline);
 
   const { bundles } = digitalVisibilityClinic.pricing;
 
@@ -137,12 +139,14 @@ export default async function ClinicsPage({
                   >
                     {isFull ? "Full" : isClosingSoon ? `${spotsLeft} spots left` : `${spotsLeft} spots remaining`}
                   </span>
-                  <span
-                    className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
-                    style={{ backgroundColor: "rgba(245,158,11,0.12)", color: "#F59E0B" }}
-                  >
-                    Early bird ends June 20
-                  </span>
+                  {isEarlyBird && (
+                    <span
+                      className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
+                      style={{ backgroundColor: "rgba(245,158,11,0.12)", color: "#F59E0B" }}
+                    >
+                      Early bird ends {earlyBirdDate}
+                    </span>
+                  )}
                 </div>
 
                 {/* Two tracks */}
@@ -307,41 +311,42 @@ export default async function ClinicsPage({
         {/* ── PRICING ──────────────────────────────────────────────────── */}
         <div className="mb-20" id="pricing">
 
-          {/* Early bird urgency strip with live countdown */}
-          <div
-            className="rounded-xl border px-5 py-4 mb-10"
-            style={{ backgroundColor: "rgba(245,158,11,0.04)", borderColor: "rgba(245,158,11,0.18)" }}
-          >
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6">
-              <span
-                className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse mt-1 sm:mt-0"
-                style={{ backgroundColor: "#F59E0B" }}
-              />
-              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-sm flex-1">
-                <span className="font-bold" style={{ color: "#F9FAFB" }}>
-                  Early bird pricing ends June 20, 2026
-                </span>
-                <span className="hidden sm:inline" style={{ color: "#4B5563" }}>·</span>
-                <span style={{ color: "#6B7280" }}>
-                  July cohort · {spotsLeft} spots remaining
-                </span>
+          {/* Early bird urgency strip — only shown while early bird is active */}
+          {isEarlyBird && (
+            <div
+              className="rounded-xl border px-5 py-4 mb-10"
+              style={{ backgroundColor: "rgba(245,158,11,0.04)", borderColor: "rgba(245,158,11,0.18)" }}
+            >
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6">
+                <span
+                  className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse mt-1 sm:mt-0"
+                  style={{ backgroundColor: "#F59E0B" }}
+                />
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-sm flex-1">
+                  <span className="font-bold" style={{ color: "#F9FAFB" }}>
+                    Early bird pricing ends {earlyBirdDate}
+                  </span>
+                  <span className="hidden sm:inline" style={{ color: "#4B5563" }}>·</span>
+                  <span style={{ color: "#6B7280" }}>
+                    July cohort · {spotsLeft} spots remaining
+                  </span>
+                </div>
+                <a
+                  href={buildWhatsAppUrl("Digital Visibility Clinic July 2026 early bird enrollment")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0"
+                  style={{ color: "#F59E0B" }}
+                >
+                  Claim early bird <ArrowRight className="h-3.5 w-3.5" />
+                </a>
               </div>
-              <a
-                href={buildWhatsAppUrl("Digital Visibility Clinic July 2026 early bird enrollment")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0"
-                style={{ color: "#F59E0B" }}
-              >
-                Claim early bird <ArrowRight className="h-3.5 w-3.5" />
-              </a>
+              <div className="mt-3 pt-3 border-t flex items-center gap-3" style={{ borderColor: "rgba(245,158,11,0.15)" }}>
+                <span className="text-xs" style={{ color: "#6B7280" }}>Early bird closes in:</span>
+                <EarlyBirdCountdown deadline={digitalVisibilityClinic.pricing.earlyBirdDeadline} />
+              </div>
             </div>
-            {/* Live countdown */}
-            <div className="mt-3 pt-3 border-t flex items-center gap-3" style={{ borderColor: "rgba(245,158,11,0.15)" }}>
-              <span className="text-xs" style={{ color: "#6B7280" }}>Early bird closes in:</span>
-              <EarlyBirdCountdown deadline={digitalVisibilityClinic.pricing.earlyBirdDeadline} />
-            </div>
-          </div>
+          )}
 
           {/* Section header */}
           <div className="text-center mb-12">
@@ -355,7 +360,7 @@ export default async function ClinicsPage({
               Choose Your Transformation
             </h2>
             <p className="text-sm max-w-xl mx-auto" style={{ color: "#6B7280" }}>
-              All prices shown in USD and NGN. Early bird saves up to $90 / ₦45,000 on the Pro Bundle, closes June 20.
+              All prices shown in USD and NGN.{isEarlyBird && ` Early bird saves up to $90 / ₦45,000 on the Pro Bundle — closes ${earlyBirdDate}.`}
             </p>
           </div>
 
@@ -407,8 +412,8 @@ export default async function ClinicsPage({
                     >
                       {/* Early bird price */}
                       <div className="mb-3">
-                        <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: "#F59E0B" }}>
-                          {bundle.isSolo ? "From · per module" : "Early bird · ends Jun 20"}
+                        <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: isEarlyBird ? "#F59E0B" : "#4B5563" }}>
+                          {bundle.isSolo ? "From · per module" : isEarlyBird ? `Early bird · ends ${earlyBirdDate}` : "Regular price"}
                         </p>
                         <div className="flex items-baseline gap-2">
                           <span className="text-3xl font-bold" style={{ color: "#F9FAFB" }}>
@@ -429,10 +434,10 @@ export default async function ClinicsPage({
                           <p className="text-xs" style={{ color: "#4B5563" }}>
                             Prices vary per module · see FAQ
                           </p>
-                        ) : (
+                        ) : isEarlyBird ? (
                           <>
                             <p className="text-xs" style={{ color: "#4B5563" }}>
-                              After June 20:{" "}
+                              After {earlyBirdDate}:{" "}
                               <span style={{ textDecoration: "line-through", color: "#6B7280" }}>
                                 {formatUSD(bundle.usd.regular)} / {formatNGN(bundle.ngn.regular)}
                               </span>
@@ -441,6 +446,10 @@ export default async function ClinicsPage({
                               {bundle.savingsLabel} · Save {formatUSD(usdSave)} · {formatNGN(ngnSave)}
                             </p>
                           </>
+                        ) : (
+                          <p className="text-xs" style={{ color: "#4B5563" }}>
+                            Regular price applies
+                          </p>
                         )}
                       </div>
                     </div>
