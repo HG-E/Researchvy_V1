@@ -281,8 +281,9 @@ export default function AboutPage() {
             <span style={{ color: "#10B981" }}>to Be Found.</span>
           </h2>
           <p className="text-base mb-8 leading-relaxed" style={{ color: "#9CA3AF" }}>
-            Join a Researchvy Clinic and leave with a personal visibility strategy, verified
-            certificate, and measurable results across our structured live sessions.
+            Join the Digital Visibility Clinic for a cohort experience with live sessions and a
+            verified certificate, or choose Private Consulting for 1-on-1 done-for-you delivery.
+            Either way, you leave with a measurable, optimised scholarly presence.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link

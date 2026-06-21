@@ -55,7 +55,7 @@ export function ContactSidebar() {
               WhatsApp
             </h3>
             <p className="text-xs mb-3" style={{ color: "#9CA3AF" }}>
-              For urgent enquiries or clinic pricing information.
+              For urgent enquiries, clinic pricing, or Private Consulting availability.
             </p>
             <a
               href={buildWhatsAppUrl()}
@@ -85,7 +85,7 @@ export function ContactSidebar() {
           Before You Write
         </p>
         <ul className="space-y-2 text-xs" style={{ color: "#9CA3AF" }}>
-          <li>• Clinic pricing → use WhatsApp for a tailored quote</li>
+          <li>• Clinic or Private Consulting pricing → use WhatsApp for fastest response</li>
           <li>• Partnership enquiries → email is best</li>
           <li>• Technical issues → include your browser and OS</li>
           <li>• Research visibility questions → check our Insights first</li>
