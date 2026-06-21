@@ -9,6 +9,7 @@ export const metadata = generatePageMetadata({
   title: "Submit an Academic Event",
   description: "Submit your conference, seminar, workshop, or academic event to the Researchvy Events Board. Free to list.",
   path: "/events/submit",
+  noIndex: true,
 });
 
 export default async function SubmitEventPage() {

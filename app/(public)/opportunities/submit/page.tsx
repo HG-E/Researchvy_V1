@@ -8,6 +8,8 @@ import { CheckCircle } from "lucide-react";
 export const metadata = generatePageMetadata({
   title: "Submit a Research Opportunity",
   description: "Share a grant, fellowship, travel grant, or call for papers with the Researchvy research community.",
+  path: "/opportunities/submit",
+  noIndex: true,
 });
 
 const ACCEPTED = [
