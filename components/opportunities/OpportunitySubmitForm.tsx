@@ -48,29 +48,34 @@ export function OpportunitySubmitForm() {
     setError("");
     setState("submitting");
 
-    const res = await fetch("/api/opportunities", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title:        title.trim(),
-        body:         body.trim(),
-        category,
-        funder:       funder.trim()  || undefined,
-        value:        value.trim()   || undefined,
-        deadline:     deadline       || undefined,
-        apply_url:    applyUrl.trim(),
-        target_level: targetLevel,
-      }),
-    });
+    try {
+      const res = await fetch("/api/opportunities", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title:        title.trim(),
+          body:         body.trim(),
+          category,
+          funder:       funder.trim()  || undefined,
+          value:        value.trim()   || undefined,
+          deadline:     deadline       || undefined,
+          apply_url:    applyUrl.trim(),
+          target_level: targetLevel,
+        }),
+      });
 
-    const json = await res.json();
-    if (!res.ok) {
-      setError(json.error ?? "Something went wrong. Please try again.");
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError((json as { error?: string }).error ?? "Something went wrong. Please try again.");
+        setState("error");
+        return;
+      }
+      track(EVENTS.OPPORTUNITY_SUBMITTED, { category });
+      setState("success");
+    } catch {
+      setError("Connection error. Please check your internet connection and try again.");
       setState("error");
-      return;
     }
-    track(EVENTS.OPPORTUNITY_SUBMITTED, { category });
-    setState("success");
   }
 
   if (state === "success") {

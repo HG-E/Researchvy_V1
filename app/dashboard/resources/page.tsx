@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, BarChart2, CheckSquare, FileText, Layout, Layers,
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getInsights } from "@/lib/cms/mdx";
 import { RESOURCES } from "@/constants/resources";
+import { buildWhatsAppUrl } from "@/config/site";
 import type { ResourceIconName } from "@/constants/resources";
 import type { LucideIcon } from "lucide-react";
 
@@ -93,10 +94,20 @@ export default async function ResourcesPage() {
         <div className="space-y-3">
           {secondary.map((resource) => {
             const Icon = ICON_MAP[resource.icon];
-            return (
-              <Link
+            const href = resource.access === "free"
+              ? buildWhatsAppUrl(`the ${resource.title}`)
+              : "/resources";
+            const isExternal = resource.access === "free";
+            const badge = resource.access === "free"
+              ? { label: "Via WhatsApp", bg: "rgba(37,185,99,0.12)", color: "#25D366" }
+              : { label: "Email", bg: "rgba(37,99,235,0.12)", color: "#2563EB" };
+
+            return isExternal ? (
+              <a
                 key={resource.id}
-                href={`/resources/${resource.id}`}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-4 rounded-2xl border p-4 transition-colors"
                 style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
               >
@@ -115,16 +126,37 @@ export default async function ResourcesPage() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
-                  {resource.access === "free" && (
-                    <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#2563EB" }}>
-                      Free
-                    </span>
-                  )}
-                  {resource.access === "newsletter" && (
-                    <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: "rgba(16,185,129,0.12)", color: "#10B981" }}>
-                      Email
-                    </span>
-                  )}
+                  <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: badge.bg, color: badge.color }}>
+                    {badge.label}
+                  </span>
+                  <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: "#6B7280" }} />
+                </div>
+              </a>
+            ) : (
+              <Link
+                key={resource.id}
+                href={href}
+                className="group flex items-center gap-4 rounded-2xl border p-4 transition-colors"
+                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: `${resource.color}1A` }}
+                >
+                  <Icon className="h-5 w-5" style={{ color: resource.color }} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold truncate" style={{ color: "#F9FAFB" }}>
+                    {resource.title}
+                  </p>
+                  <p className="text-xs mt-0.5 line-clamp-1" style={{ color: "#6B7280" }}>
+                    {resource.description}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: badge.bg, color: badge.color }}>
+                    {badge.label}
+                  </span>
                   <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: "#6B7280" }} />
                 </div>
               </Link>

@@ -122,6 +122,8 @@ export function EventSubmitForm() {
       if (!res.ok) { setError(j.error ?? "Submission failed."); return; }
       track(EVENTS.EVENT_SUBMITTED, { event_type: form.event_type, format: form.format });
       setSuccess(true);
+    } catch {
+      setError("Connection error. Please check your internet connection and try again.");
     } finally {
       setLoading(false);
     }
