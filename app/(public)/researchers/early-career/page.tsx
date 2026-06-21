@@ -260,6 +260,12 @@ export default function EarlyCareerPage() {
             >
               View the Clinic Programme <ArrowRight className="h-4 w-4" />
             </Link>
+            <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
+              Prefer 1-on-1?{" "}
+              <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
+                Private Consulting — from $209
+              </Link>
+            </p>
           </div>
         </div>
 

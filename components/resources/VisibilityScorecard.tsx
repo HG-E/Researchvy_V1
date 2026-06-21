@@ -1032,11 +1032,11 @@ export function VisibilityScorecard() {
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link
-                    href="/consultation"
-                    className="inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition-all duration-200 hover:border-[#10B981] hover:text-white"
-                    style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                    href="/clinics/private-consulting"
+                    className="inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition-all duration-200 hover:border-[#8B5CF6] hover:text-white"
+                    style={{ borderColor: "#8B5CF6", color: "#A78BFA" }}
                   >
-                    Book a Strategy Call First
+                    Prefer 1-on-1? Private Consulting
                   </Link>
                 </>
               )}
@@ -1050,7 +1050,7 @@ export function VisibilityScorecard() {
                 </p>
               </div>
               <a
-                href={`https://wa.me/2347030515183?text=${encodeURIComponent(`Hi, I scored ${totalScore}/100 on the Researcher Visibility Scorecard and have a question about the Digital Visibility Clinic.`)}`}
+                href={`https://wa.me/2347030515183?text=${encodeURIComponent(`Hi, I scored ${totalScore}/100 on the Researcher Visibility Scorecard and would like to know which programme is right for me.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors hover:text-white flex-shrink-0"

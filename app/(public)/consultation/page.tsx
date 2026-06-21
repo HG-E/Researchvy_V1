@@ -27,7 +27,7 @@ const CALL_AGENDA = [
   {
     time:   "15–20 min",
     label:  "Your personalised action plan",
-    detail: "You leave with a written action plan: what to do first, what tools to use, and whether the Digital Visibility Clinic is the right next step for you.",
+    detail: "You leave with a written action plan: what to fix first, which tools matter, and whether the Clinic (cohort) or Private Consulting (1-on-1) is the right next step for your situation.",
     color:  "#059669",
   },
 ];
@@ -37,13 +37,13 @@ const GOOD_FIT = [
   "You've published consistently but citations aren't moving",
   "You're applying for promotions, grants, or international positions",
   "You're not sure which platforms or tools actually matter",
-  "You want to understand the ROI before investing in the Clinic",
+  "You want to understand the ROI before choosing between the Clinic and Private Consulting",
 ];
 
 const NOT_FOR = [
-  "A sales pitch (we only recommend the Clinic when it genuinely fits)",
+  "A sales pitch (we only recommend next steps that genuinely fit your situation)",
   "Peer review of your manuscripts or grant proposals",
-  "Long-form strategic consultancy (that's our Institutional service)",
+  "A done-for-you audit and deliverable — for that, see Private Consulting or our Institutional track",
 ];
 
 const waUrl = buildWhatsAppUrl("Free Strategy Call");
@@ -224,6 +224,28 @@ export default function ConsultationPage() {
           </div>
         </div>
 
+        {/* Private Consulting nudge — for researchers who want done-for-you */}
+        <div
+          className="rounded-2xl border p-5 mb-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style={{ backgroundColor: "rgba(139,92,246,0.04)", borderColor: "rgba(139,92,246,0.2)" }}
+        >
+          <div>
+            <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
+              Want the work done for you, not explained to you?
+            </p>
+            <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+              Private Consulting delivers a written audit, optimised profiles, and your strategy — 1-on-1, bespoke to your gaps. Starts at $209 / ₦205,000.
+            </p>
+          </div>
+          <Link
+            href="/clinics/private-consulting"
+            className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold whitespace-nowrap flex-shrink-0 transition-colors"
+            style={{ backgroundColor: "rgba(139,92,246,0.12)", color: "#A78BFA", border: "1px solid rgba(139,92,246,0.3)" }}
+          >
+            View Private Consulting <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
         {/* Journey banner */}
         <div
           className="rounded-2xl border p-6 sm:p-8 mb-16"
@@ -236,7 +258,7 @@ export default function ConsultationPage() {
             {[
               { step: "1", label: "Visibility Scorecard", sub: "Free · 5 minutes", href: "/resources/visibility-scorecard", active: false },
               { step: "2", label: "Strategy Call",         sub: "Free · 20 minutes", href: "/consultation", active: true },
-              { step: "3", label: "Digital Visibility Clinic", sub: "Paid · 5 core sessions", href: "/clinics/digital-visibility-clinic", active: false },
+              { step: "3", label: "Clinic or Private Consulting", sub: "Cohort or 1-on-1 · from $149", href: "/clinics", active: false },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 sm:gap-0 flex-1">
                 <Link

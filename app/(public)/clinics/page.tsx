@@ -288,7 +288,7 @@ export default async function ClinicsPage({
               {/* Right — sessions preview */}
               <div>
                 <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
-                  5-Module Curriculum
+                  5 Core Sessions
                 </p>
                 <Suspense fallback={<div className="h-64 rounded-2xl animate-pulse" style={{ backgroundColor: "#0F172A" }} />}>
                   <SessionsCarousel />
