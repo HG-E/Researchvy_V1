@@ -205,11 +205,11 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
                   Sign In
                 </Link>
                 <Link
-                  href="/clinics"
-                  className="rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1D4ED8]"
-                  style={{ backgroundColor: "#2563EB" }}
+                  href="/resources/visibility-scorecard"
+                  className="rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90"
+                  style={{ backgroundColor: "#10B981" }}
                 >
-                  Join a Clinic
+                  Check My Score Free
                 </Link>
               </>
             )}

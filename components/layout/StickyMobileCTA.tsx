@@ -8,11 +8,14 @@ export function StickyMobileCTA() {
   const [visible, setVisible] = useState(false);
   const pathname = usePathname();
 
-  // Don't show on clinics pages — that's where the button leads
-  const isClinicPage = pathname === "/clinics" || pathname.startsWith("/clinics/");
+  // Don't show on the scorecard page (that's where the button leads) or on clinics
+  const isSuppressed =
+    pathname === "/clinics" ||
+    pathname.startsWith("/clinics/") ||
+    pathname === "/resources/visibility-scorecard";
 
   useEffect(() => {
-    if (isClinicPage) return;
+    if (isSuppressed) return;
     const onScroll = () => {
       const scrollY = window.scrollY;
       const docH    = document.documentElement.scrollHeight;
@@ -21,9 +24,9 @@ export function StickyMobileCTA() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isClinicPage]);
+  }, [isSuppressed]);
 
-  if (isClinicPage) return null;
+  if (isSuppressed) return null;
 
   return (
     <div
@@ -43,14 +46,14 @@ export function StickyMobileCTA() {
         }}
       >
         <Link
-          href="/clinics"
+          href="/resources/visibility-scorecard"
           className="block w-full rounded-xl py-3.5 text-sm font-bold text-white text-center active:scale-[0.97] active:opacity-90"
           style={{
-            backgroundColor: "#2563EB",
+            backgroundColor: "#10B981",
             transition: "transform 100ms ease, opacity 100ms ease, background-color 150ms ease",
           }}
         >
-          Join a Clinic →
+          Check My Score Free →
         </Link>
       </div>
     </div>

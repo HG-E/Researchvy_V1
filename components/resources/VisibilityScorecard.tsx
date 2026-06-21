@@ -911,45 +911,67 @@ export function VisibilityScorecard() {
               </div>
             </div>
 
+            {/* Score-tier-dependent CTAs:
+                Low scorers (< 65) need the free consultation as their next step —
+                they're not yet ready to commit money on first contact.
+                High scorers (≥ 65) are primed to act directly. */}
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/clinics/digital-visibility-clinic"
-                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5"
-                style={{ backgroundColor: "#2563EB" }}
-              >
-                Claim My Spot in the Clinic
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              {totalScore < 65 ? (
+                <>
+                  <Link
+                    href="/consultation"
+                    className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5"
+                    style={{ backgroundColor: "#10B981" }}
+                  >
+                    Book a Free Strategy Call
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    href="/clinics/digital-visibility-clinic"
+                    className="inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition-all duration-200 hover:border-[#2563EB] hover:text-white"
+                    style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                  >
+                    View the Clinic
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/clinics/digital-visibility-clinic"
+                    className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5"
+                    style={{ backgroundColor: "#2563EB" }}
+                  >
+                    Claim My Spot in the Clinic
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    href="/consultation"
+                    className="inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition-all duration-200 hover:border-[#10B981] hover:text-white"
+                    style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                  >
+                    Book a Strategy Call First
+                  </Link>
+                </>
+              )}
+            </div>
+
+            <div className="flex items-center justify-between gap-4 mt-4 flex-wrap">
+              <div className="flex items-center gap-2">
+                <Award className="h-4 w-4" style={{ color: "#4B5563" }} />
+                <p className="text-xs" style={{ color: "#4B5563" }}>
+                  Verified Certificate on completion · ≤20 researchers per cohort
+                </p>
+              </div>
               <a
-                href={`https://wa.me/2347030515183?text=${encodeURIComponent(`Hi, I just completed the Researcher Visibility Scorecard and scored ${totalScore}/100. I'd like to find out more about the Digital Visibility Clinic.`)}`}
+                href={`https://wa.me/2347030515183?text=${encodeURIComponent(`Hi, I scored ${totalScore}/100 on the Researcher Visibility Scorecard and have a question about the Digital Visibility Clinic.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5"
-                style={{ backgroundColor: "#25D366" }}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors hover:text-white flex-shrink-0"
+                style={{ color: "#25D366" }}
               >
-                Discuss My Score via WhatsApp
-                <ExternalLink className="h-4 w-4" />
+                <ExternalLink className="h-3 w-3" /> Ask via WhatsApp
               </a>
             </div>
-
-            <div className="flex items-center gap-2 mt-4">
-              <Award className="h-4 w-4" style={{ color: "#4B5563" }} />
-              <p className="text-xs" style={{ color: "#4B5563" }}>
-                Verified Certificate of Scholarly Visibility Practice on completion. ≤20 researchers per cohort.
-              </p>
-            </div>
-
-            {/* Talk-first escape valve — keeps non-ready users in the funnel */}
-            <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
-              Not ready to enroll yet?{" "}
-              <Link
-                href="/consultation"
-                className="font-semibold underline underline-offset-2 transition-colors hover:text-white"
-                style={{ color: "#9CA3AF" }}
-              >
-                Book a free 20-min strategy call first →
-              </Link>
-            </p>
           </div>
 
           {/* Email capture — optional, below primary CTAs */}
