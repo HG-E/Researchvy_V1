@@ -290,14 +290,19 @@ export function day3Email(): { subject: string; html: string } {
         <td>
           <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">
             Want a professional audit that covers all five areas, with a
-            prioritised fix list and specific actions?
+            prioritised fix list and specific actions for your profile?
           </p>
-          <a href="https://wa.me/2347030515183?text=${encodeURIComponent("Hello, I'd like to request a Researchvy visibility audit. Could you share more details about the process and pricing?")}"
-             style="display:inline-block;background:#25D366;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">
-            Request My Visibility Audit →
+          <a href="https://researchvy.com/clinics/private-consulting"
+             style="display:inline-block;background:#8B5CF6;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;margin-bottom:12px;">
+            View Private Consulting — from $209 →
+          </a>
+          <br/>
+          <a href="https://wa.me/2347030515183?text=${encodeURIComponent("Hello, I'd like to request a Researchvy Private Consulting audit. Could you share more details about what's included and next steps?")}"
+             style="display:inline-block;color:#25D366;font-size:13px;font-weight:600;text-decoration:none;margin-top:8px;">
+            Or enquire via WhatsApp →
           </a>
           <p style="margin:16px 0 0;font-size:13px;color:#9CA3AF;">
-            We'll respond within 24 hours with exactly what your audit would cover.
+            Written deliverables. Optimised profiles. Live debrief. 1-on-1.
           </p>
         </td>
       </tr>
@@ -416,8 +421,13 @@ export function day7Email(): { subject: string; html: string } {
           </a>
           <br/>
           <a href="https://researchvy.com/clinics/digital-visibility-clinic"
-             style="display:inline-block;color:#2563EB;font-size:13px;font-weight:600;text-decoration:none;">
+             style="display:inline-block;color:#2563EB;font-size:13px;font-weight:600;text-decoration:none;margin-bottom:8px;">
             Or see the full programme details →
+          </a>
+          <br/>
+          <a href="https://researchvy.com/clinics/private-consulting"
+             style="display:inline-block;color:#A78BFA;font-size:13px;font-weight:600;text-decoration:none;margin-top:8px;">
+            Prefer 1-on-1? View Private Consulting — from $209 →
           </a>
         </td>
       </tr>
