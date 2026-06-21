@@ -240,7 +240,11 @@ export function SignInForm() {
           <p className="text-center text-sm" style={{ color: "#6B7280" }}>
             Don&apos;t have an account?{" "}
             <Link
-              href="/signup"
+              href={
+                rawNext.includes("clinics/checkout")
+                  ? `/signup?next=${encodeURIComponent(nextPath)}&from=clinic`
+                  : "/signup"
+              }
               className="font-semibold transition-colors"
               style={{ color: "#F9FAFB" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#2563EB")}

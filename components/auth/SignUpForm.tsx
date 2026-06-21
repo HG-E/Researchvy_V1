@@ -12,6 +12,7 @@ import { SocialAuthButtons } from "@/components/auth/SocialAuthButtons";
 import { signUpSchema, type SignUpInput } from "@/lib/validation/schemas";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { EVENTS } from "@/lib/analytics/events";
+import { Stethoscope } from "lucide-react";
 
 const INPUT_BASE =
   "w-full rounded-xl px-4 py-3 text-sm border outline-none transition-all duration-200 placeholder:text-[#4B5563]";
@@ -70,6 +71,7 @@ export function SignUpForm() {
   // Set by the ORCID callback route via server-side cookie — URL param is
   // only a visual hint; the actual ORCID iD is read from the HttpOnly cookie server-side.
   const orcidPrefill = searchParams.get("orcid_prefill") === "1";
+  const fromClinic   = searchParams.get("from") === "clinic" || nextPath.includes("clinics/checkout");
 
   const {
     register,
@@ -165,12 +167,29 @@ export function SignUpForm() {
             className="text-2xl font-bold mb-1"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
           >
-            Create your account
+            {fromClinic ? "One step to your spot" : "Create your account"}
           </h1>
           <p className="text-sm" style={{ color: "#6B7280" }}>
-            Join the scholarly visibility ecosystem
+            {fromClinic
+              ? "Create your free account to complete enrollment in the Digital Visibility Clinic."
+              : "Join the scholarly visibility ecosystem"}
           </p>
         </div>
+
+        {/* Clinic enrollment context banner */}
+        {fromClinic && (
+          <div
+            className="flex items-start gap-3 rounded-xl border px-4 py-3 mb-5"
+            style={{ backgroundColor: "rgba(37,99,235,0.08)", borderColor: "rgba(37,99,235,0.25)" }}
+          >
+            <Stethoscope className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#60A5FA" }} />
+            <p className="text-xs leading-relaxed" style={{ color: "#93C5FD" }}>
+              You&apos;re enrolling in the{" "}
+              <span className="font-semibold" style={{ color: "#F9FAFB" }}>Digital Visibility Clinic</span>.
+              Your account keeps your enrolment record, certificate, and session access in one place.
+            </p>
+          </div>
+        )}
 
         <SocialAuthButtons next={nextPath} mode="signup" />
 
@@ -409,7 +428,7 @@ export function SignUpForm() {
           <p className="text-sm text-center" style={{ color: "#6B7280" }}>
             Already have an account?{" "}
             <Link
-              href="/signin"
+              href={nextPath !== "/dashboard" ? `/signin?next=${encodeURIComponent(nextPath)}` : "/signin"}
               className="font-semibold transition-colors"
               style={{ color: "#F9FAFB" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#2563EB")}

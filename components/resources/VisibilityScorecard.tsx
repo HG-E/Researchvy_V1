@@ -937,6 +937,18 @@ export function VisibilityScorecard() {
                 Verified Certificate of Scholarly Visibility Practice on completion. ≤20 researchers per cohort.
               </p>
             </div>
+
+            {/* Talk-first escape valve — keeps non-ready users in the funnel */}
+            <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
+              Not ready to enroll yet?{" "}
+              <Link
+                href="/consultation"
+                className="font-semibold underline underline-offset-2 transition-colors hover:text-white"
+                style={{ color: "#9CA3AF" }}
+              >
+                Book a free 20-min strategy call first →
+              </Link>
+            </p>
           </div>
 
           {/* Email capture — optional, below primary CTAs */}

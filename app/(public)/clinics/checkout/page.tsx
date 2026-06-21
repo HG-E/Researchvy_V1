@@ -19,7 +19,9 @@ export default async function CheckoutPage({
     const next = encodeURIComponent(
       `/clinics/checkout?bundle=${bundleId}${moduleId ? `&module=${moduleId}` : ""}`,
     );
-    redirect(`/signin?next=${next}`);
+    // Send new visitors to signup — most scorecard → checkout users are new.
+    // The signup page links to signin for returning users.
+    redirect(`/signup?next=${next}&from=clinic`);
   }
 
   const bundles = [...digitalVisibilityClinic.pricing.bundles];
