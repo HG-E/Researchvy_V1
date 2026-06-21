@@ -235,7 +235,7 @@ function getInterpretation(score: number) {
     summary: "Your research career is running at a fraction of its potential. Your impact is reaching perhaps 20–30% of the audience it should. This is not a reflection of your work's quality, it is a visibility infrastructure problem.",
     gap: "The entire foundation needs to be built or rebuilt. Every dimension is suppressing every other. The good news: researchers at this starting point see the most dramatic transformation.",
     clinicTitle: "The Digital Visibility Clinic was built for exactly this starting position",
-    clinicBody: "Session 1 alone, the full visibility audit, produces immediate, measurable changes that compound across all four sessions.",
+    clinicBody: "Session 1 alone, the full visibility audit, produces immediate, measurable changes that compound across the full programme.",
   };
 }
 

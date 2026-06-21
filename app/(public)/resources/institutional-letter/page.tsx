@@ -101,7 +101,7 @@ export default function InstitutionalLetterPage() {
                   <p><strong style={{ color: "#D1D5DB" }}>Programme name:</strong> Digital Visibility Clinic™</p>
                   <p><strong style={{ color: "#D1D5DB" }}>Facilitating organisation:</strong> Researchvy</p>
                   <p><strong style={{ color: "#D1D5DB" }}>Cohort dates:</strong> July 1 – 28, 2026</p>
-                  <p><strong style={{ color: "#D1D5DB" }}>Format:</strong> 4 live online sessions (2 hours each) + async platform-based activities</p>
+                  <p><strong style={{ color: "#D1D5DB" }}>Format:</strong> 5 core sessions (2 hours each) + async platform-based activities</p>
                   <p><strong style={{ color: "#D1D5DB" }}>Delivery:</strong> Wednesday or Sunday, 5:00–7:00 PM EST / 10:00 PM–12:00 AM WAT</p>
                   <p><strong style={{ color: "#D1D5DB" }}>Cohort size:</strong> Maximum 20 participants (small cohort, high-touch)</p>
                   <p><strong style={{ color: "#D1D5DB" }}>Certificate awarded:</strong> Certificate of Scholarly Visibility Practice (verifiable, shareable on LinkedIn)</p>
@@ -117,7 +117,7 @@ export default function InstitutionalLetterPage() {
               </p>
 
               <p>
-                Over four intensive live sessions, participants will:
+                Across 5 core sessions, participants will:
               </p>
 
               <ul className="space-y-1.5 pl-4">

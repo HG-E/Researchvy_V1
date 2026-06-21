@@ -108,7 +108,7 @@ export default async function ClinicsPage({
             <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
               <strong style={{ color: "#F9FAFB" }}>Every promotion cycle evaluates your Scopus profile, h-index, and citation record.</strong>{" "}
               Most researchers publish without ever optimising how that work is found, attributed, or cited.
-              Nobody taught you the system. This clinic does — in four live sessions, with your actual profile.
+              Nobody taught you the system. This clinic does — across 5 core sessions, with your actual profile.
             </p>
           </div>
         </div>
