@@ -1,3 +1,5 @@
+const WA = "2347030515183";
+
 function esc(str: string): string {
   return str
     .replace(/&/g, "&amp;")
@@ -297,7 +299,7 @@ export function day3Email(): { subject: string; html: string } {
             View Private Consulting — from $209 →
           </a>
           <br/>
-          <a href="https://wa.me/2347030515183?text=${encodeURIComponent("Hello, I'd like to request a Researchvy Private Consulting audit. Could you share more details about what's included and next steps?")}"
+          <a href="https://wa.me/${WA}?text=${encodeURIComponent("Hello, I'd like to request a Researchvy Private Consulting audit. Could you share more details about what's included and next steps?")}"
              style="display:inline-block;color:#25D366;font-size:13px;font-weight:600;text-decoration:none;margin-top:8px;">
             Or enquire via WhatsApp →
           </a>
@@ -415,7 +417,7 @@ export function day7Email(): { subject: string; html: string } {
     <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 16px;">
       <tr>
         <td>
-          <a href="https://wa.me/2347030515183?text=${encodeURIComponent("Hello, I'd like to claim my spot in the Digital Visibility Clinic. Could you share pricing and the next cohort date?")}"
+          <a href="https://wa.me/${WA}?text=${encodeURIComponent("Hello, I'd like to claim my spot in the Digital Visibility Clinic. Could you share pricing and the next cohort date?")}"
              style="display:inline-block;background:#25D366;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;margin-bottom:12px;">
             Claim My Spot via WhatsApp →
           </a>
