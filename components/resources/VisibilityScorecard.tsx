@@ -253,15 +253,78 @@ function ScoreBar({ score, max, color }: { score: number; max: number; color: st
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
+// ── Share CTA sub-component ───────────────────────────────────────────────────
+
+function ShareScorecard({ score, tierDisplay }: { score: number; tierDisplay: string }) {
+  const [copied, setCopied] = useState(false);
+  const url = typeof window !== "undefined" ? window.location.href.split("?")[0] : "https://researchvy.com/resources/visibility-scorecard";
+
+  const shareText = `I just scored ${score}/100 on the Researcher Visibility Scorecard — ${tierDisplay}. 4 minutes. Eye-opening. Check your own score:`;
+  const waShare   = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${url}`)}`;
+  const liShare   = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* clipboard unavailable */ }
+  }
+
+  return (
+    <div
+      className="rounded-2xl border p-5"
+      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+    >
+      <p className="text-xs font-semibold mb-3" style={{ color: "#6B7280" }}>
+        Know a researcher who needs to see this?
+      </p>
+      <div className="flex flex-wrap gap-2">
+        <a
+          href={waShare}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-bold text-white transition-opacity hover:opacity-90"
+          style={{ backgroundColor: "#25D366" }}
+        >
+          <ExternalLink className="h-3 w-3" /> Share on WhatsApp
+        </a>
+        <a
+          href={liShare}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-bold text-white transition-opacity hover:opacity-90"
+          style={{ backgroundColor: "#0A66C2" }}
+        >
+          <ExternalLink className="h-3 w-3" /> Share on LinkedIn
+        </a>
+        <button
+          onClick={copyLink}
+          className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-bold transition-all border"
+          style={{
+            backgroundColor: copied ? "rgba(16,185,129,0.1)" : "transparent",
+            borderColor: copied ? "rgba(16,185,129,0.3)" : "#1E293B",
+            color: copied ? "#10B981" : "#6B7280",
+          }}
+        >
+          {copied ? <><Check className="h-3 w-3" /> Copied!</> : "Copy link"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ── Email capture sub-component ───────────────────────────────────────────────
 
-function EmailCapture({
-  leadId,
-  score,
-}: {
-  leadId: string | null;
-  score: number;
-}) {
+interface EmailCaptureProps {
+  leadId:          string | null;
+  score:           number;
+  answers:         Record<string, number>;
+  dimensionScores: Record<string, { score: number; maxPoints: number }>;
+  utmSource:       string | null;
+}
+
+function EmailCapture({ leadId, score, answers, dimensionScores, utmSource }: EmailCaptureProps) {
   const [name,    setName]    = useState("");
   const [email,   setEmail]   = useState("");
   const [status,  setStatus]  = useState<"idle" | "loading" | "done" | "error">("idle");
@@ -275,16 +338,29 @@ function EmailCapture({
     setStatus("loading");
 
     try {
-      const url  = leadId ? `/api/scorecard/${leadId}/claim` : "/api/scorecard/submit";
-      const body = leadId
-        ? JSON.stringify({ name, email })
-        : JSON.stringify({ name, email, totalScore: score, answers: {}, dimensionScores: {} });
-
-      const res = await fetch(url, {
-        method:  "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body,
-      });
+      let res: Response;
+      if (leadId) {
+        // Normal path: auto-save already created the record, just add email
+        res = await fetch(`/api/scorecard/${leadId}/claim`, {
+          method:  "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify({ name, email }),
+        });
+      } else {
+        // Fallback path: auto-save failed or race condition — create full record with email
+        res = await fetch("/api/scorecard/submit", {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify({
+            name,
+            email,
+            totalScore:      score,
+            answers,
+            dimensionScores,
+            source:          utmSource,
+          }),
+        });
+      }
 
       if (!res.ok) throw new Error("failed");
       setStatus("done");
@@ -342,7 +418,7 @@ function EmailCapture({
           value={name}
           onChange={e => setName(e.target.value)}
           placeholder="Your name (optional)"
-          className="w-full rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-xl px-4 py-2.5 text-sm outline-none"
           style={{
             backgroundColor: "#080E1A",
             border:          "1px solid #1E293B",
@@ -355,10 +431,10 @@ function EmailCapture({
           onChange={e => setEmail(e.target.value)}
           placeholder="Your email address *"
           required
-          className="w-full rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-xl px-4 py-2.5 text-sm outline-none"
           style={{
             backgroundColor: "#080E1A",
-            border:          "1px solid #1E293B",
+            border:          `1px solid ${email ? "#2563EB50" : "#1E293B"}`,
             color:           "#F9FAFB",
           }}
         />
@@ -371,7 +447,7 @@ function EmailCapture({
           <button
             type="submit"
             disabled={status === "loading" || !email}
-            className="flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-white transition-all disabled:opacity-50"
+            className="flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-white transition-all disabled:opacity-40"
             style={{ backgroundColor: "#2563EB" }}
           >
             {status === "loading" ? (
@@ -406,8 +482,17 @@ export function VisibilityScorecard() {
   });
 
   // Lead persistence: auto-save on completion, store returned id for email claim
-  const [leadId,     setLeadId]     = useState<string | null>(null);
-  const hasSavedRef                 = useRef(false);
+  const [leadId,    setLeadId]    = useState<string | null>(null);
+  const [utmSource, setUtmSource] = useState<string | null>(null);
+  const hasSavedRef               = useRef(false);
+  const prevAnsweredRef           = useRef<Record<string, number>>({});
+
+  // UTM source: capture once on mount — window.location is only available client-side
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setUtmSource(p.get("utm_source") ?? p.get("ref") ?? null);
+  }, []);
 
   function answer(checkpointId: string, value: number) {
     setAnswers((prev) => ({ ...prev, [checkpointId]: value }));
@@ -444,6 +529,20 @@ export function VisibilityScorecard() {
     ? [...dimScores].sort((a, b) => a.score / a.maxPoints - b.score / b.maxPoints)[0]
     : null;
 
+  // Auto-advance: when a dimension is fully answered, open the next one
+  useEffect(() => {
+    const prev = prevAnsweredRef.current;
+    DIMENSIONS.forEach((dim, i) => {
+      const wasComplete = dim.checkpoints.every(cp => cp.id in prev);
+      const nowComplete = dim.checkpoints.every(cp => cp.id in answers);
+      if (!wasComplete && nowComplete && i < DIMENSIONS.length - 1) {
+        const nextId = DIMENSIONS[i + 1].id;
+        setExpanded(e => e[nextId] ? e : { ...e, [nextId]: true });
+      }
+    });
+    prevAnsweredRef.current = answers;
+  }, [answers]);
+
   // Auto-save anonymous lead when all questions answered
   useEffect(() => {
     if (!complete || hasSavedRef.current) return;
@@ -455,6 +554,7 @@ export function VisibilityScorecard() {
         answers,
         totalScore,
         dimensionScores: dimensionScoresPayload,
+        source: utmSource,
       }),
     })
       .then(r => r.ok ? r.json() : null)
@@ -840,7 +940,16 @@ export function VisibilityScorecard() {
           </div>
 
           {/* Email capture — optional, below primary CTAs */}
-          <EmailCapture leadId={leadId} score={totalScore} />
+          <EmailCapture
+            leadId={leadId}
+            score={totalScore}
+            answers={answers}
+            dimensionScores={dimensionScoresPayload}
+            utmSource={utmSource}
+          />
+
+          {/* Share CTA — drive more traffic back into the funnel */}
+          <ShareScorecard score={totalScore} tierDisplay={interp.label} />
 
         </div>
       )}
