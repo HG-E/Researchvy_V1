@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import { getInsights } from "@/lib/cms/mdx";
 import { digitalVisibilityClinic } from "@/constants/clinics";
+import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 
 // Stable deploy date — update this when a page's content meaningfully changes.
 // Never use `new Date()` here: telling Google every page changed today on every
@@ -52,5 +53,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  return [...staticRoutes, ...insightRoutes, ...clinicRoutes];
+  // Public researcher profiles
+  let profileRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const admin = createSupabaseAdminClient();
+    const { data: profiles } = await admin
+      .from("users")
+      .select("username, updated_at")
+      .eq("profile_public", true)
+      .not("username", "is", null);
+
+    profileRoutes = (profiles ?? []).map((p) => ({
+      url:             `${base}/profile/${p.username}`,
+      lastModified:    p.updated_at ?? SITE_LAUNCH,
+      changeFrequency: "weekly" as const,
+      priority:        0.6,
+    }));
+  } catch { /* non-fatal */ }
+
+  return [...staticRoutes, ...insightRoutes, ...clinicRoutes, ...profileRoutes];
 }

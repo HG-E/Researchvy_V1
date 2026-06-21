@@ -58,6 +58,20 @@ export const profileSchema = z.object({
   institutional_affiliation: z.string().max(200).optional(),
 });
 
+export const usernameSchema = z
+  .string()
+  .min(3, "At least 3 characters")
+  .max(20, "Max 20 characters")
+  .regex(
+    /^[a-z0-9][a-z0-9_-]*[a-z0-9]$|^[a-z0-9]{3}$/,
+    "Lowercase letters, numbers, hyphens, underscores only"
+  );
+
+export const profileWithPublicSchema = profileSchema.extend({
+  username:       usernameSchema.optional().or(z.literal("")),
+  profile_public: z.boolean().optional(),
+});
+
 // ── Clinic Registration ───────────────────────────────────────────────────────
 
 export const clinicRegistrationSchema = z.object({
@@ -94,6 +108,7 @@ export type SignInInput            = z.infer<typeof signInSchema>;
 export type ResetPasswordInput     = z.infer<typeof resetPasswordSchema>;
 export type NewPasswordInput       = z.infer<typeof newPasswordSchema>;
 export type ProfileInput           = z.infer<typeof profileSchema>;
+export type ProfileWithPublicInput = z.infer<typeof profileWithPublicSchema>;
 export type ClinicRegistrationInput= z.infer<typeof clinicRegistrationSchema>;
 export type NewsletterInput        = z.infer<typeof newsletterSchema>;
 export type ContactInput           = z.infer<typeof contactSchema>;
