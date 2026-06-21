@@ -46,7 +46,7 @@ export async function POST(
     .select("id,status")
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Registration failed. Please try again." }, { status: 500 });
 
   // Fire-and-forget confirmation email
   if (user.email) {
@@ -83,6 +83,6 @@ export async function DELETE(
     .eq("event_id", event.id)
     .eq("user_id", user.id);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to cancel registration." }, { status: 500 });
   return NextResponse.json({ data: { cancelled: true } });
 }

@@ -18,7 +18,7 @@ export async function POST(
     .from("event_saves")
     .upsert({ event_id: event.id, user_id: user.id }, { onConflict: "event_id,user_id" });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to save event." }, { status: 500 });
   return NextResponse.json({ data: { saved: true } });
 }
 
@@ -41,6 +41,6 @@ export async function DELETE(
     .eq("event_id", event.id)
     .eq("user_id", user.id);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to remove save." }, { status: 500 });
   return NextResponse.json({ data: { saved: false } });
 }

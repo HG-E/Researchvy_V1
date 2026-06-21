@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     // Must use the server client (user JWT) so auth.uid() resolves inside the RPC
     const { error } = await supabase.rpc("complete_lesson", { p_lesson_id: lesson_id });
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return NextResponse.json({ error: "Failed to mark lesson complete." }, { status: 500 });
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "Server error" }, { status: 500 });

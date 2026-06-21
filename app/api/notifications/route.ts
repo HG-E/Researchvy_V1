@@ -15,7 +15,7 @@ export async function GET() {
     .order("created_at", { ascending: false })
     .limit(50);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to load notifications." }, { status: 500 });
 
   const unread = (data ?? []).filter((n) => !n.read).length;
   return NextResponse.json({ notifications: data ?? [], unread });

@@ -66,6 +66,6 @@ export async function PUT(req: NextRequest) {
     .from("notification_preferences")
     .upsert(safe, { onConflict: "user_id" });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to save preferences." }, { status: 500 });
   return NextResponse.json({ ok: true });
 }

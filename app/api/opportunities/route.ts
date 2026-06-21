@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
   if (search)    query = query.or(`title.ilike.%${search}%,body.ilike.%${search}%,funder.ilike.%${search}%`);
 
   const { data, error } = await query;
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to load opportunities." }, { status: 500 });
   return NextResponse.json({ data });
 }
 
@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
     .select("id,title")
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Submission failed. Please try again." }, { status: 500 });
 
   const firstName = user.user_metadata?.full_name?.split(" ")[0] ?? user.email?.split("@")[0] ?? "";
   sendOpportunitySubmitted(user.email!, firstName, title).catch(() => {});

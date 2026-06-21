@@ -85,9 +85,8 @@ export function SignInForm() {
 
       track(EVENTS.SIGN_IN_COMPLETED);
       router.push(nextPath);
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : "Unknown error";
-      setAuthError(`Connection failed: ${msg}. Please try again or contact support@researchvy.com`);
+    } catch {
+      setAuthError("Connection error. Please check your internet connection and try again, or contact info@researchvy.com");
       setShake(true);
       setTimeout(() => setShake(false), 500);
     }

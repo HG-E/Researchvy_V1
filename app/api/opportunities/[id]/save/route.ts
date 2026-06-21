@@ -23,7 +23,7 @@ export async function POST(_req: NextRequest, { params }: Ctx) {
     .from("opportunity_saves")
     .upsert({ opportunity_id: id, user_id: user.id }, { onConflict: "opportunity_id,user_id" });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to save opportunity." }, { status: 500 });
   return NextResponse.json({ saved: true });
 }
 
@@ -40,7 +40,7 @@ export async function DELETE(_req: NextRequest, { params }: Ctx) {
     .eq("opportunity_id", id)
     .eq("user_id", user.id);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to remove save." }, { status: 500 });
   return NextResponse.json({ saved: false });
 }
 

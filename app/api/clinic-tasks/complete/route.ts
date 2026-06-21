@@ -62,14 +62,14 @@ export async function POST(req: NextRequest) {
         { user_id: user.id, task_id, reflection: reflection ?? null },
         { onConflict: "user_id,task_id" },
       );
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return NextResponse.json({ error: "Failed to save progress." }, { status: 500 });
   } else {
     const { error } = await admin
       .from("participant_task_progress")
       .delete()
       .eq("user_id", user.id)
       .eq("task_id", task_id);
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return NextResponse.json({ error: "Failed to update progress." }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });

@@ -18,7 +18,7 @@ export async function GET() {
     .eq("user_id", user.id)
     .order("created_at", { ascending: false });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to load enquiries." }, { status: 500 });
   return NextResponse.json({ enquiries: data ?? [] });
 }
 
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
       { onConflict: "user_id,clinic_slug" }
     );
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: "Failed to register interest." }, { status: 500 });
 
   const clinicLabel = "Digital Visibility Clinic";
 
