@@ -211,6 +211,15 @@ select {
   display: none;
 }
 
+/* Skeleton shimmer animation — used by SectionFallback on homepage */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-shimmer {
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
 /* Focus ring — institutional clarity */
 :focus-visible {
   outline: 2px solid var(--ring);

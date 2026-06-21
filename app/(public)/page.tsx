@@ -16,9 +16,22 @@ export const metadata = generatePageMetadata({
     "Millions of researchers publish every year. Most are never found. Researchvy transforms researchers into globally visible, citable, and discoverable scholars.",
 });
 
-// Transparent spacers maintain layout while sections stream in — prevents CLS
+// Skeleton shimmer holds space while sections stream in — prevents layout shift
 function SectionFallback({ height = "400px" }: { height?: string }) {
-  return <div style={{ minHeight: height }} aria-hidden />;
+  return (
+    <div
+      style={{ minHeight: height, backgroundColor: "#080E1A" }}
+      aria-hidden
+      className="relative overflow-hidden"
+    >
+      <div
+        className="absolute inset-0 animate-shimmer"
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(30,41,59,0.4) 50%, transparent 100%)",
+        }}
+      />
+    </div>
+  );
 }
 
 export default function HomePage() {

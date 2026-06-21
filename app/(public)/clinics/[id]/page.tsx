@@ -197,7 +197,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 className="text-2xl font-bold mb-6"
                 style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
               >
-                3 Core Modules + 2 Bonus Masterclasses
+                5 Core Sessions
               </h2>
               <SessionAccordion sessions={clinic.sessions} />
             </section>

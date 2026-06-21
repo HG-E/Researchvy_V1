@@ -125,12 +125,12 @@ export function CheckoutForm({
     <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
       <div className="max-w-xl mx-auto px-4 sm:px-6 py-12">
         <Link
-          href="/clinics"
+          href="/clinics/digital-visibility-clinic"
           className="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors"
           style={{ color: "#4B5563" }}
         >
           <ArrowLeft className="h-3.5 w-3.5" />
-          Back to Clinics
+          Back to Clinic
         </Link>
 
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>

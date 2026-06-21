@@ -78,7 +78,13 @@ function FooterSection({
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const pathname    = usePathname();
-  const hidePreCta  = pathname === "/resources/visibility-scorecard";
+  // Suppress footer scorecard strip on pages that already have an inline strip in the body
+  const hidePreCta =
+    pathname === "/resources/visibility-scorecard" ||
+    pathname === "/events" ||
+    pathname === "/opportunities" ||
+    pathname === "/academy" ||
+    pathname === "/academy/courses";
 
   return (
     <footer className="border-t" style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}>

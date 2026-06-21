@@ -32,7 +32,6 @@ interface Props {
   bundleName:      string;
   formattedAmount: string;
   bankDetails:     BankDetails;
-  isLoggedIn:      boolean;
 }
 
 function CopyButton({ value }: { value: string }) {
