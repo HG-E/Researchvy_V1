@@ -211,6 +211,38 @@ export default function ResearchersHubPage() {
           </Link>
         </div>
 
+        {/* Private Consulting bridge */}
+        <div
+          className="mt-6 rounded-2xl border p-7 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+          style={{ backgroundColor: "rgba(139,92,246,0.04)", borderColor: "rgba(139,92,246,0.2)" }}
+        >
+          <div className="max-w-xl">
+            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#8B5CF6" }}>
+              Prefer 1-on-1?
+            </p>
+            <h2
+              className="text-xl font-bold mb-2"
+              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            >
+              Private Consulting
+            </h2>
+            <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+              The same expertise as the Clinic, applied exclusively to your profile. Written audit,
+              optimised accounts, and a strategy document — delivered 1-on-1, on your schedule.
+              Starts at{" "}
+              <strong style={{ color: "#A78BFA" }}>$209 / ₦205,000</strong>.
+            </p>
+          </div>
+          <Link
+            href="/clinics/private-consulting"
+            className="flex-shrink-0 flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold transition-all"
+            style={{ backgroundColor: "rgba(139,92,246,0.12)", color: "#A78BFA", border: "1px solid rgba(139,92,246,0.3)" }}
+          >
+            View Private Consulting
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
       </div>
     </div>
   );

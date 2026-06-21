@@ -391,6 +391,37 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               </div>
             </section>
 
+            {/* Private Consulting bridge */}
+            <div
+              className="rounded-2xl border overflow-hidden"
+              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            >
+              <div className="h-0.5" style={{ background: "linear-gradient(90deg, #8B5CF6, #A78BFA)" }} />
+              <div className="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+                <div>
+                  <p className="text-xs font-semibold tracking-widest uppercase mb-1.5" style={{ color: "#8B5CF6" }}>
+                    Prefer 1-on-1?
+                  </p>
+                  <p className="text-base font-bold mb-1.5" style={{ color: "#F9FAFB" }}>
+                    Private Consulting — Built Around You
+                  </p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                    Same expertise, applied exclusively to your profile. Written audit, optimised accounts,
+                    and a live debrief call — no cohort schedule. Start anytime. From{" "}
+                    <strong style={{ color: "#A78BFA" }}>$209 / ₦205,000</strong>.
+                  </p>
+                </div>
+                <Link
+                  href="/clinics/private-consulting"
+                  className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold whitespace-nowrap flex-shrink-0 transition-all hover:opacity-90"
+                  style={{ backgroundColor: "#8B5CF6", color: "#fff" }}
+                >
+                  View Private Consulting
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+
           </div>
 
           {/* Sticky enquiry sidebar — desktop only */}

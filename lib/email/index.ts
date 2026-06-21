@@ -3,6 +3,7 @@
 // await these in critical paths; they must never break user-facing flows.
 
 import { digitalVisibilityClinic } from "@/constants/clinics";
+import { siteConfig } from "@/config/site";
 
 const FROM_ACADEMY = "Researchvy Academy <info@researchvy.com>";
 const FROM_TEAM    = "Researchvy Team <info@researchvy.com>";
@@ -1299,9 +1300,10 @@ export async function sendScorecardLeadEmail(opts: {
 
   const color     = tierColor(opts.tier);
   const tLabel    = tierLabel(opts.tier);
-  const clinicUrl = `${SITE_URL}/clinics/digital-visibility-clinic`;
-  const waText    = encodeURIComponent(`Hi, I scored ${opts.score}/100 on the Researcher Visibility Scorecard. I'd like to discuss a strategy for improving my visibility.`);
-  const waUrl     = `https://wa.me/2347030515183?text=${waText}`;
+  const clinicUrl      = `${SITE_URL}/clinics/digital-visibility-clinic`;
+  const consultingUrl  = `${SITE_URL}/clinics/private-consulting`;
+  const waText         = encodeURIComponent(`Hi, I scored ${opts.score}/100 on the Researcher Visibility Scorecard. I'd like to discuss a strategy for improving my visibility.`);
+  const waUrl          = `https://wa.me/${siteConfig.whatsapp.number}?text=${waText}`;
 
   const dimRows = Object.entries(opts.dimScores).map(([id, d]) => {
     const pct   = d.maxPoints > 0 ? Math.round((d.score / d.maxPoints) * 100) : 0;
@@ -1386,16 +1388,21 @@ export async function sendScorecardLeadEmail(opts: {
     </h2>
     <p style="color:#6B7280;font-size:14px;line-height:1.7;margin:0 0 24px">
       We will review your specific gaps, show you what the biggest lever is for your profile,
-      and help you decide if the Digital Visibility Clinic is the right next step for you.
+      and help you decide between the Clinic (cohort) and Private Consulting (1-on-1 done-for-you).
     </p>
     <a href="${waUrl}"
        style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 28px;border-radius:12px;margin-bottom:12px">
-      Book via WhatsApp →
+      Book a Free Strategy Call →
     </a>
     <br>
     <a href="${clinicUrl}"
-       style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 28px;border-radius:12px;margin-top:4px">
+       style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 28px;border-radius:12px;margin-top:4px;margin-bottom:12px">
       Claim My Spot in the Clinic →
+    </a>
+    <br>
+    <a href="${consultingUrl}"
+       style="display:inline-block;background:rgba(139,92,246,0.15);color:#A78BFA;text-decoration:none;font-weight:700;font-size:13px;padding:12px 22px;border-radius:10px;border:1px solid rgba(139,92,246,0.3);margin-top:4px">
+      Prefer 1-on-1? View Private Consulting — from $209 →
     </a>
   </div>
 
@@ -1404,7 +1411,9 @@ export async function sendScorecardLeadEmail(opts: {
       Researchvy · Making researchers discoverable, globally.<br>
       <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">researchvy.com</a>
       &nbsp;·&nbsp;
-      <a href="${clinicUrl}" style="color:#4B5563;text-decoration:none">Digital Visibility Clinic</a>
+      <a href="${clinicUrl}" style="color:#4B5563;text-decoration:none">Clinic</a>
+      &nbsp;·&nbsp;
+      <a href="${consultingUrl}" style="color:#4B5563;text-decoration:none">Private Consulting</a>
     </p>
     <p style="color:#374151;font-size:11px;margin:8px 0 0">
       You received this because you completed the Researcher Visibility Scorecard.
@@ -1432,7 +1441,7 @@ export async function sendScorecardAdminAlert(opts: {
   const tLabel   = tierLabel(opts.tier);
   const adminUrl = `${SITE_URL}/admin/scorecard/${opts.leadId}`;
   const waText   = encodeURIComponent(`Hi ${opts.name.split(" ")[0]}, I saw your Researcher Visibility Scorecard score (${opts.score}/100). I'd love to chat about your specific gaps and how we can help.`);
-  const waUrl    = `https://wa.me/2347030515183?text=${waText}`;
+  const waUrl    = `https://wa.me/${siteConfig.whatsapp.number}?text=${waText}`;
 
   const dimRows = Object.entries(opts.dimScores).map(([id, d]) => {
     const pct   = d.maxPoints > 0 ? Math.round((d.score / d.maxPoints) * 100) : 0;
