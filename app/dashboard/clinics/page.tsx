@@ -12,7 +12,7 @@ export const metadata = generatePageMetadata({ title: "My Clinics", noIndex: tru
 const CLINIC = {
   slug:    "digital-visibility-clinic",
   name:    "Digital Visibility Clinic",
-  tagline: "3 core modules + 2 bonus masterclasses. ORCID · LinkedIn · WordPress.",
+  tagline: "5 core sessions. ORCID · LinkedIn · WordPress.",
   href:    "/clinics/digital-visibility-clinic",
 };
 

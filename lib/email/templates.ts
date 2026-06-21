@@ -314,7 +314,7 @@ export function day3Email(): { subject: string; html: string } {
 
 export function day7Email(): { subject: string; html: string } {
   return {
-    subject: "3 sessions. 2 masterclasses. One complete visibility transformation.",
+    subject: "5 core sessions. One complete visibility transformation.",
     html: `
 <!DOCTYPE html>
 <html lang="en">
@@ -345,7 +345,7 @@ export function day7Email(): { subject: string; html: string } {
             Digital Visibility Clinic
           </p>
           <h1 style="margin:0 0 20px;font-size:26px;font-weight:700;line-height:1.3;color:#111827;">
-            3 core sessions. 2 bonus masterclasses.<br/>One complete visibility transformation.
+            5 core sessions.<br/>One complete visibility transformation.
           </h1>
           <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">
             Dr. Amara Osei had 51 publications and an h-index of 3. After the clinic:

@@ -107,7 +107,7 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
           style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.15)" }}
         >
           <p style={{ color: "#93C5FD" }}>
-            <strong style={{ color: "#BFDBFE" }}>3 core sessions + 2 bonus masterclasses</strong> · live, interactive, ≤20 per cohort.
+            <strong style={{ color: "#BFDBFE" }}>5 core sessions</strong> · live, interactive, ≤20 per cohort.
             Recordings included for all sessions.
           </p>
         </div>

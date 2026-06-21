@@ -48,7 +48,7 @@ export const copy = {
 
   clinic: {
     name:     "Digital Visibility Clinic",
-    tagline:  "3 core sessions + 2 bonus masterclasses. One complete transformation. You leave visible, optimised, and ready to be found globally.",
+    tagline:  "5 core sessions. One complete transformation. You leave visible, optimised, and ready to be found globally.",
     outcomes: [
       "Walk away with a fully optimised digital scholarly identity",
       "Get your research ranking across Scopus, Google Scholar, and ORCID",

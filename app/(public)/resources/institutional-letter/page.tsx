@@ -161,7 +161,7 @@ export default function InstitutionalLetterPage() {
                   </p>
                   <p>
                     <strong style={{ color: "#D1D5DB" }}>DVC Pro Bundle</strong>{" "}
-                    <span>(3 core sessions + 2 bonus masterclasses)</span>
+                    <span>(5 core sessions total)</span>
                     <strong style={{ color: "#D1D5DB" }}>:</strong>{" "}
                     $239 USD / ₦130,000 NGN
                   </p>

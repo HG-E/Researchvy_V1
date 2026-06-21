@@ -197,7 +197,7 @@ export default function ResearchersHubPage() {
               Digital Visibility Clinic
             </h2>
             <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
-              3 core sessions + 2 bonus masterclasses. Up to 20 researchers per cohort. Leave with a fully optimised scholarly identity,
+              5 core sessions. Up to 20 researchers per cohort. Leave with a fully optimised scholarly identity,
               a personal visibility strategy, and a verified Researchvy certificate.
             </p>
           </div>

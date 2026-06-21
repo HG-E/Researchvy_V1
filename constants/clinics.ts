@@ -12,7 +12,7 @@ export const digitalVisibilityClinic = {
   tagline: "Three tools. One complete digital presence. ORCID · LinkedIn · WordPress.",
   description:
     "A hands-on clinic that takes researchers from digitally invisible to fully present across the three platforms that matter most: ORCID, LinkedIn, and WordPress. Three focused live sessions, each dedicated to one tool, one skill, one permanent transformation.",
-  duration: "3 core sessions + 2 bonus masterclasses",
+  duration: "5 core sessions",
   format:   "Live online + recorded access",
   capacity: 20,
 
