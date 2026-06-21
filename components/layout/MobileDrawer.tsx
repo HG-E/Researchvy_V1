@@ -17,11 +17,11 @@ interface Props {
 }
 
 export function MobileDrawer({ open, onClose, serverUser }: Props) {
-  const [mobileEcoOpen, setMobileEcoOpen] = useState(false);
+  const [mobileOpenMenu, setMobileOpenMenu] = useState<string | null>(null);
   const router = useRouter();
 
   function close() {
-    setMobileEcoOpen(false);
+    setMobileOpenMenu(null);
     onClose();
   }
 
@@ -105,21 +105,22 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
 
               {mainNav.map((item) => {
                 if (item.children) {
+                  const isOpen = mobileOpenMenu === item.label;
                   return (
                     <div key={item.href}>
                       <button
-                        onClick={() => setMobileEcoOpen(!mobileEcoOpen)}
+                        onClick={() => setMobileOpenMenu(isOpen ? null : item.label)}
                         className="w-full flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#1E293B]"
-                        style={{ color: mobileEcoOpen ? "#F9FAFB" : "#9CA3AF" }}
+                        style={{ color: isOpen ? "#F9FAFB" : "#9CA3AF" }}
                       >
                         {item.label}
                         <ChevronRight
                           className="h-4 w-4 transition-transform duration-200"
-                          style={{ transform: mobileEcoOpen ? "rotate(90deg)" : "rotate(0deg)" }}
+                          style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
                         />
                       </button>
                       <AnimatePresence>
-                        {mobileEcoOpen && (
+                        {isOpen && (
                           <motion.div
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}

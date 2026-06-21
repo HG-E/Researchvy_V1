@@ -21,16 +21,12 @@ const MobileDrawer = dynamic(
 );
 
 export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
-  const [mobileOpen, setMobileOpen]       = useState(false);
-  const [scrolled, setScrolled]           = useState(false);
-  const [ecosystemOpen, setEcosystemOpen] = useState(false);
-  const ecosystemRef = useRef<HTMLDivElement>(null);
-  const pathname     = usePathname();
-  const router       = useRouter();
-
-  const ecosystemActive = mainNav
-    .find((i) => i.children)
-    ?.children?.some((c) => pathname.startsWith(c.href)) ?? false;
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled]     = useState(false);
+  const [openMenu, setOpenMenu]     = useState<string | null>(null);
+  const navRef   = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const router   = useRouter();
 
   function isNavActive(href: string) {
     return pathname === href || pathname.startsWith(href + "/");
@@ -49,8 +45,8 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (ecosystemRef.current && !ecosystemRef.current.contains(e.target as Node)) {
-        setEcosystemOpen(false);
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenMenu(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -60,7 +56,7 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        setEcosystemOpen(false);
+        setOpenMenu(null);
         setMobileOpen(false);
       }
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -89,28 +85,29 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
           <Logo variant="full" width={130} />
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
+          <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation" ref={navRef}>
             {mainNav.map((item) => {
               if (item.children) {
-                const isActive = ecosystemActive || ecosystemOpen;
+                const isOpen   = openMenu === item.label;
+                const isActive = isOpen || item.children.some((c) => pathname.startsWith(c.href));
                 return (
-                  <div key={item.href} className="relative" ref={ecosystemRef}>
+                  <div key={item.href} className="relative">
                     <button
                       className="flex items-center gap-1 text-sm font-medium transition-colors"
                       style={{ color: isActive ? "#F9FAFB" : "#9CA3AF" }}
-                      onMouseEnter={() => setEcosystemOpen(true)}
-                      onClick={() => setEcosystemOpen(!ecosystemOpen)}
-                      aria-expanded={ecosystemOpen}
+                      onMouseEnter={() => setOpenMenu(item.label)}
+                      onClick={() => setOpenMenu(isOpen ? null : item.label)}
+                      aria-expanded={isOpen}
                       aria-haspopup="true"
                     >
                       {item.label}
                       <ChevronDown
                         className="h-3.5 w-3.5 transition-transform duration-200"
-                        style={{ transform: ecosystemOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                        style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
                         aria-hidden="true"
                       />
                     </button>
-                    {isActive && !ecosystemOpen && (
+                    {isActive && !isOpen && (
                       <span
                         className="absolute -bottom-[19px] left-0 right-0 h-px"
                         style={{ backgroundColor: "#2563EB" }}
@@ -121,13 +118,13 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
                       style={{
                         backgroundColor: "#0F172A",
                         borderColor:     "#1E293B",
-                        opacity:         ecosystemOpen ? 1 : 0,
-                        transform:       `translateX(-50%) translateY(${ecosystemOpen ? "0px" : "8px"}) scale(${ecosystemOpen ? 1 : 0.97})`,
-                        pointerEvents:   ecosystemOpen ? "auto" : "none",
+                        opacity:         isOpen ? 1 : 0,
+                        transform:       `translateX(-50%) translateY(${isOpen ? "0px" : "8px"}) scale(${isOpen ? 1 : 0.97})`,
+                        pointerEvents:   isOpen ? "auto" : "none",
                         transition:      "opacity 0.18s ease, transform 0.18s ease",
                       }}
                       role="menu"
-                      onMouseLeave={() => setEcosystemOpen(false)}
+                      onMouseLeave={() => setOpenMenu(null)}
                     >
                       {item.children.map((child) => {
                         const childActive = pathname.startsWith(child.href);
@@ -140,7 +137,7 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
                             style={{ color: childActive ? "#F9FAFB" : "#9CA3AF" }}
                             onMouseEnter={(e) => (e.currentTarget.style.color = "#F9FAFB")}
                             onMouseLeave={(e) => (e.currentTarget.style.color = childActive ? "#F9FAFB" : "#9CA3AF")}
-                            onClick={() => setEcosystemOpen(false)}
+                            onClick={() => setOpenMenu(null)}
                           >
                             <span className="block text-sm font-semibold">{child.label}</span>
                             {child.description && (

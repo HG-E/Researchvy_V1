@@ -12,7 +12,14 @@ export const mainNav: NavigationItem[] = [
       { label: "Network",      href: "/network",      description: "Community, fellows & partnerships" },
     ],
   },
-  { label: "Clinics",        href: "/clinics" },
+  {
+    label: "Clinics",
+    href:  "/clinics",
+    children: [
+      { label: "Digital Visibility Clinic", href: "/clinics/digital-visibility-clinic", description: "5-session cohort programme · from $149" },
+      { label: "Private Consulting",        href: "/clinics/private-consulting",        description: "1-on-1 done-for-you · from $209"        },
+    ],
+  },
   { label: "Events",         href: "/events" },
   { label: "Opportunities",  href: "/opportunities" },
   { label: "Insights",       href: "/insights" },
