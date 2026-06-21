@@ -1340,7 +1340,7 @@ export async function sendScorecardLeadEmail(opts: {
     <p style="color:#9CA3AF;font-size:13px;line-height:1.7;margin:0">
       The global researcher average is <strong style="color:#F9FAFB">34/100</strong>.
       Researchers who complete the Digital Visibility Clinic exit at an average of
-      <strong style="color:#10B981">79/100</strong> after 4 live sessions.
+      <strong style="color:#10B981">79/100</strong> across 3 core sessions and 2 bonus masterclasses.
     </p>
   </div>
 

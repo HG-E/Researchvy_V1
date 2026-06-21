@@ -19,7 +19,7 @@ export const RESOURCES: StaticResource[] = [
     title:       "The Researcher Visibility Scorecard",
     description: "A 12-point interactive self-assessment that calculates your exact visibility score across Scholar Identity, Discoverability, Citation Health, and Research Communication, showing you precisely what every gap is costing your h-index, citations, and career right now.",
     category:    "checklist",
-    access:      "newsletter",
+    access:      "free",
     featured:    true,
     tags:        ["h-index", "citations", "ORCID", "Google Scholar", "Scopus", "audit"],
     icon:        "CheckSquare",

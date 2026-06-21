@@ -33,6 +33,19 @@ async function getNewScorecardCount(): Promise<number> {
   }
 }
 
+async function getSubmittedOrderCount(): Promise<number> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const { count } = await admin
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "payment_submitted");
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
 export default async function AdminLayout({
   children,
 }: {
@@ -46,15 +59,16 @@ export default async function AdminLayout({
   // If role is null, the DB query failed — don't redirect (could be transient).
   if (!allowed && role !== null) redirect("/dashboard");
 
-  const [pendingCount, newScorecardCount] = await Promise.all([
+  const [pendingCount, newScorecardCount, submittedOrderCount] = await Promise.all([
     getPendingCount(),
     getNewScorecardCount(),
+    getSubmittedOrderCount(),
   ]);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row" style={{ backgroundColor: "#080E1A" }}>
       {/* Mobile top bar + drawer */}
-      <AdminMobileNav email={user.email ?? ""} />
+      <AdminMobileNav email={user.email ?? ""} submittedOrderCount={submittedOrderCount} />
 
       {/* Desktop sidebar */}
       <aside
@@ -70,7 +84,7 @@ export default async function AdminLayout({
           </div>
         </div>
 
-        <AdminNav pendingCount={pendingCount} newScorecardCount={newScorecardCount} />
+        <AdminNav pendingCount={pendingCount} newScorecardCount={newScorecardCount} submittedOrderCount={submittedOrderCount} />
 
         {/* Footer: identity + sign out */}
         <div className="px-4 py-3 border-t space-y-1" style={{ borderColor: "#1E293B" }}>

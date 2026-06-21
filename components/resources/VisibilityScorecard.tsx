@@ -225,7 +225,7 @@ function getInterpretation(score: number) {
     summary: "You are losing citations, collaboration opportunities, and career advancement to visibility problems that are entirely fixable. The gap is large but the fix is systematic, not dependent on producing more research.",
     gap: "Multiple dimensions are suppressing your metrics simultaneously. Fixing them in isolation produces limited results. A structured programme that addresses all dimensions together is significantly more effective than individual fixes.",
     clinicTitle: "This is the most common starting profile",
-    clinicBody: "The average participant enters at 38/100 and exits at 79/100, in 4 live sessions.",
+    clinicBody: "The average participant enters at 38/100 and exits at 79/100 through the Digital Visibility Clinic.",
   };
   return {
     label: "Invisible",
@@ -898,13 +898,14 @@ export function VisibilityScorecard() {
               </p>
               <div className="space-y-1.5">
                 {[
-                  ["Session 1", "Visibility Foundations: your digital identity audit, Google Scholar, ORCID, Scopus setup"],
-                  ["Session 2", "Discoverability: keyword strategy, indexing, and citation intelligence"],
-                  ["Session 3", "Research Communication: lay summaries, visual abstracts, and public engagement"],
-                  ["Session 4", "Strategic Roadmap: your personalised 12-month visibility plan"],
+                  ["Session 1", "Scholar Identity: full audit of your Google Scholar, ORCID, and Scopus profiles"],
+                  ["Session 2", "Discoverability: keyword strategy, open access optimisation, and citation intelligence"],
+                  ["Session 3", "Research Communication + 12-month visibility strategy roadmap tailored to your profile"],
+                  ["Bonus 1", "Masterclass: Bibliometrics and h-index strategy for promotion and grant applications"],
+                  ["Bonus 2", "Masterclass: Research communication for policy, media, and global audiences"],
                 ].map(([s, d]) => (
                   <p key={s} className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
-                    <strong style={{ color: "#BFDBFE" }}>{s}:</strong> {d}
+                    <strong style={{ color: s.startsWith("Bonus") ? "#A78BFA" : "#BFDBFE" }}>{s}:</strong> {d}
                   </p>
                 ))}
               </div>

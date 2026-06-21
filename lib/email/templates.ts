@@ -314,7 +314,7 @@ export function day3Email(): { subject: string; html: string } {
 
 export function day7Email(): { subject: string; html: string } {
   return {
-    subject: "3 modules. One complete digital presence. Here's what changes.",
+    subject: "3 sessions. 2 masterclasses. One complete visibility transformation.",
     html: `
 <!DOCTYPE html>
 <html lang="en">
@@ -345,7 +345,7 @@ export function day7Email(): { subject: string; html: string } {
             Digital Visibility Clinic
           </p>
           <h1 style="margin:0 0 20px;font-size:26px;font-weight:700;line-height:1.3;color:#111827;">
-            Three tools.<br/>One complete digital presence.
+            3 core sessions. 2 bonus masterclasses.<br/>One complete visibility transformation.
           </h1>
           <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#374151;">
             Dr. Amara Osei had 51 publications and an h-index of 3. After the clinic:
@@ -353,7 +353,7 @@ export function day7Email(): { subject: string; html: string } {
             Four months. The research didn't change. The visibility did.
           </p>
           <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:#374151;">
-            Here's exactly what the three core modules cover:
+            Here's exactly what the programme covers:
           </p>
         </td>
       </tr>
@@ -364,15 +364,16 @@ export function day7Email(): { subject: string; html: string } {
       <tr>
         <td>
           ${[
-            { n: "M1", title: "ORCID — Your Research Passport", desc: "Create or reclaim your ORCID iD, import all publications, and connect it to Scopus, Google Scholar, and your institution." },
-            { n: "M2", title: "LinkedIn — Your Global Academic Presence", desc: "Rewrite your profile for discoverability, build your Featured section, and publish your first research post." },
-            { n: "M3", title: "WordPress — Your Permanent Academic Home", desc: "Register a domain, launch your WordPress academic site, and build the five essential pages every researcher needs." },
-            { n: "+B", title: "Pro Bonuses: Indexing + Publishing Strategy", desc: "Deep-dives into Google Scholar, Scopus, WoS optimisation — and a frank publishing strategy session for Nigerian and African researchers." },
-          ].map(({ n, title, desc }) => `
+            { n: "S1", title: "Scholar Identity Audit", desc: "Full live review of your Google Scholar, ORCID, and Scopus profiles. Disambiguation fixed, all publications attributed, citations flowing to one identity.", bg: "#EFF6FF", color: "#2563EB" },
+            { n: "S2", title: "Discoverability & Citation Intelligence", desc: "Keyword strategy, open access optimisation, repository presence, and a personal citation growth strategy that doesn't require publishing more.", bg: "#EFF6FF", color: "#2563EB" },
+            { n: "S3", title: "Research Communication + 12-Month Roadmap", desc: "Lay summaries, visual abstracts, cross-sector engagement — and your personalised 12-month visibility strategy built live during the session.", bg: "#EFF6FF", color: "#2563EB" },
+            { n: "B1", title: "Bonus Masterclass: Bibliometrics & h-index Strategy", desc: "How promotion panels and grant reviewers use bibliometrics — and the ethical, evidence-based strategies to improve your metrics.", bg: "#F5F3FF", color: "#7C3AED" },
+            { n: "B2", title: "Bonus Masterclass: Research Communication for Global Audiences", desc: "Policy briefs, media coverage, and practitioner engagement — how to translate your research findings for the audiences who can act on them.", bg: "#F5F3FF", color: "#7C3AED" },
+          ].map(({ n, title, desc, bg, color }) => `
             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
               <tr>
                 <td style="width:36px;vertical-align:top;padding-top:2px;">
-                  <span style="display:inline-block;width:28px;height:28px;background:#EFF6FF;border-radius:6px;text-align:center;line-height:28px;font-size:11px;font-weight:700;color:#2563EB;">${n}</span>
+                  <span style="display:inline-block;width:28px;height:28px;background:${bg};border-radius:6px;text-align:center;line-height:28px;font-size:11px;font-weight:700;color:${color};">${n}</span>
                 </td>
                 <td style="padding-left:10px;vertical-align:top;border-bottom:1px solid #F3F4F6;padding-bottom:10px;">
                   <p style="margin:0 0 3px;font-size:14px;font-weight:700;color:#111827;">${title}</p>

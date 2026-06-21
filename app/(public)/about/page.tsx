@@ -286,18 +286,18 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/clinics"
+              href="/resources/visibility-scorecard"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:scale-[0.97]"
-              style={{ backgroundColor: "#2563EB" }}
+              style={{ backgroundColor: "#10B981" }}
             >
-              Join a Clinic <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              Check My Score Free <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
-              href="/ecosystem"
+              href="/clinics"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold border transition-all duration-200 hover:border-[#2563EB] hover:text-white active:scale-[0.97]"
               style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
             >
-              Explore the Ecosystem
+              Join a Clinic
             </Link>
           </div>
         </div>

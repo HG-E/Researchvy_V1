@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   Menu, X, LayoutDashboard, Inbox, Handshake,
   FileText, BookOpen, Users, BarChart2, LogOut, Shield, GraduationCap, Layers,
-  CalendarDays, Globe, Award, ClipboardCheck, Target,
+  CalendarDays, Globe, Award, ClipboardCheck, Target, ShoppingBag,
 } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 
@@ -14,6 +14,7 @@ const NAV = [
   { label: "Overview",         href: "/admin",              Icon: LayoutDashboard,  exact: true  },
   { label: "Review Queue",     href: "/admin/review",       Icon: ClipboardCheck,   exact: false },
   { label: "Scorecard Leads",  href: "/admin/scorecard",    Icon: Target,           exact: false },
+  { label: "Orders",           href: "/admin/orders",       Icon: ShoppingBag,      exact: false },
   { label: "Events",           href: "/admin/events",       Icon: CalendarDays,     exact: false },
   { label: "Opportunities", href: "/admin/opportunities", Icon: Globe,           exact: false },
   { label: "Enquiries",     href: "/admin/enquiries",     Icon: Inbox,           exact: false },
@@ -27,7 +28,7 @@ const NAV = [
   { label: "Analytics",    href: "/admin/analytics",    Icon: BarChart2,       exact: false },
 ];
 
-export function AdminMobileNav({ email }: { email: string }) {
+export function AdminMobileNav({ email, submittedOrderCount = 0 }: { email: string; submittedOrderCount?: number }) {
   const [open, setOpen] = useState(false);
   const pathname        = usePathname();
   const router          = useRouter();
@@ -110,7 +111,8 @@ export function AdminMobileNav({ email }: { email: string }) {
         {/* Nav */}
         <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto" aria-label="Admin navigation">
           {NAV.map(({ label, href, Icon, exact }) => {
-            const active = exact ? pathname === href : pathname.startsWith(href);
+            const active    = exact ? pathname === href : pathname.startsWith(href);
+            const isOrders  = href === "/admin/orders";
             return (
               <Link
                 key={href}
@@ -127,7 +129,15 @@ export function AdminMobileNav({ email }: { email: string }) {
                   <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full" style={{ backgroundColor: "#2563EB" }} />
                 )}
                 <Icon className="h-4 w-4 flex-shrink-0" style={{ color: active ? "#60A5FA" : "#4B5563" }} />
-                {label}
+                <span className="flex-1">{label}</span>
+                {isOrders && submittedOrderCount > 0 && (
+                  <span
+                    className="text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none"
+                    style={{ backgroundColor: "rgba(99,102,241,0.25)", color: "#A5B4FC" }}
+                  >
+                    {submittedOrderCount}
+                  </span>
+                )}
               </Link>
             );
           })}

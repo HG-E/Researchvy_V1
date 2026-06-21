@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { RESOURCES } from "@/constants/resources";
-import { FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers, type LucideIcon } from "lucide-react";
+import { FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers, ArrowRight, type LucideIcon } from "lucide-react";
 import { ResourceCard } from "@/components/resources/ResourceCard";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 import type { ResourceIconName } from "@/constants/resources";
@@ -68,17 +69,36 @@ export default function ResourceLibraryPage() {
                 {featured.description}
               </p>
               <div>
-                <p className="text-sm mb-1 font-medium" style={{ color: "#9CA3AF" }}>
-                  Free, enter your email to access instantly:
-                </p>
-                <p className="text-xs mb-3 leading-relaxed" style={{ color: "#4B5563" }}>
-                  Most researchers score between 25–45. See exactly where you stand.
-                </p>
-                <NewsletterForm
-                  variant="inline"
-                  resourceTitle={featured.title}
-                  redirectTo="/resources/visibility-scorecard"
-                />
+                {featured.access === "free" ? (
+                  <div>
+                    <p className="text-xs mb-4 leading-relaxed" style={{ color: "#4B5563" }}>
+                      Most researchers score between 25–45. Takes 4–6 minutes.
+                      No email required — results are shown immediately.
+                    </p>
+                    <Link
+                      href={`/resources/${featured.id}`}
+                      className="group inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5"
+                      style={{ backgroundColor: featured.color }}
+                    >
+                      Take the Scorecard Free
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                    <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
+                      Free · No account needed · Results shown instantly
+                    </p>
+                  </div>
+                ) : (
+                  <div>
+                    <p className="text-sm mb-1 font-medium" style={{ color: "#9CA3AF" }}>
+                      Free, enter your email to access instantly:
+                    </p>
+                    <NewsletterForm
+                      variant="inline"
+                      resourceTitle={featured.title}
+                      redirectTo={`/resources/${featured.id}`}
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
