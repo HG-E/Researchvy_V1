@@ -809,6 +809,20 @@ export function certificateIssuedEmail(
       </td></tr>
     </table>
 
+    <!-- Private Consulting — natural next step for DVC completers -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 32px 32px;">
+      <tr><td>
+        <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#111827;">Want to go further?</p>
+        <p style="margin:0 0 14px;font-size:13px;line-height:1.6;color:#374151;">
+          Private Consulting takes everything you learned in the clinic and applies it directly to your profile — a bespoke 1-on-1 audit, done-for-you optimisation, and a 12-month roadmap built around your specific gaps. No cohort schedule, no waiting.
+        </p>
+        <a href="https://researchvy.com/clinics/private-consulting"
+           style="display:inline-block;background:rgba(139,92,246,0.1);color:#7C3AED;border:1px solid rgba(139,92,246,0.3);padding:11px 22px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;">
+          Explore Private Consulting — from $209 →
+        </a>
+      </td></tr>
+    </table>
+
     ${TRANSACTIONAL_FOOTER}
   </div>
 </body>
