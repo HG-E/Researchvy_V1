@@ -192,6 +192,21 @@ export default async function MyClinicsPage() {
         </div>
       </div>
 
+      {/* Private Consulting — available now, no cohort wait */}
+      <div
+        className="rounded-2xl border p-5"
+        style={{ backgroundColor: "rgba(139,92,246,0.04)", borderColor: "rgba(139,92,246,0.2)" }}
+      >
+        <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#A78BFA" }}>Available now · No cohort</p>
+        <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>Private Consulting — 1-on-1, done for you</p>
+        <p className="text-xs leading-relaxed mb-3" style={{ color: "#6B7280" }}>
+          Rather than waiting for a cohort, Private Consulting delivers a bespoke audit, optimised profiles, and a 12-month strategy built around your specific gaps — from $209.
+        </p>
+        <Link href="/clinics/private-consulting" className="inline-flex items-center gap-1.5 text-xs font-semibold" style={{ color: "#A78BFA" }}>
+          View Private Consulting → <ArrowRight className="h-3 w-3" />
+        </Link>
+      </div>
+
       {/* Coming soon teaser */}
       <div>
         <h2 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "#9CA3AF" }}>
