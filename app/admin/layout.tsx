@@ -2,10 +2,23 @@ import { Logo } from "@/components/common/Logo";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { AdminSignOutButton } from "@/components/admin/AdminSignOutButton";
 import { AdminMobileNav } from "@/components/admin/AdminMobileNav";
-import { getServerUser } from "@/lib/auth/supabase";
+import { getServerUser, createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { requireRole, isSuperAdmin } from "@/lib/auth/permissions";
 import { redirect } from "next/navigation";
 import { Crown } from "lucide-react";
+
+async function getPendingCount(): Promise<number> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const [{ count: oppCount }, { count: evtCount }] = await Promise.all([
+      admin.from("research_opportunities").select("*", { count: "exact", head: true }).eq("submission_status", "pending"),
+      admin.from("events").select("*", { count: "exact", head: true }).eq("status", "pending"),
+    ]);
+    return (oppCount ?? 0) + (evtCount ?? 0);
+  } catch {
+    return 0;
+  }
+}
 
 export default async function AdminLayout({
   children,
@@ -19,6 +32,8 @@ export default async function AdminLayout({
   // Only redirect if we successfully fetched a role that is insufficient.
   // If role is null, the DB query failed — don't redirect (could be transient).
   if (!allowed && role !== null) redirect("/dashboard");
+
+  const pendingCount = await getPendingCount();
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row" style={{ backgroundColor: "#080E1A" }}>
@@ -39,7 +54,7 @@ export default async function AdminLayout({
           </div>
         </div>
 
-        <AdminNav />
+        <AdminNav pendingCount={pendingCount} />
 
         {/* Footer: identity + sign out */}
         <div className="px-4 py-3 border-t space-y-1" style={{ borderColor: "#1E293B" }}>

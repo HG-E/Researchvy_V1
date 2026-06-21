@@ -16,10 +16,12 @@ import {
   Globe,
   CalendarDays,
   Award,
+  ClipboardCheck,
 } from "lucide-react";
 
 const NAV = [
   { label: "Overview",      href: "/admin",                     icon: LayoutDashboard, exact: true  },
+  { label: "Review Queue",  href: "/admin/review",              icon: ClipboardCheck,  exact: false },
   { label: "Orders",        href: "/admin/orders",               icon: ShoppingBag,     exact: false },
   { label: "Events",        href: "/admin/events",               icon: CalendarDays,    exact: false },
   { label: "Enquiries",     href: "/admin/enquiries",            icon: Inbox,           exact: false },
@@ -34,13 +36,18 @@ const NAV = [
   { label: "Analytics",     href: "/admin/analytics",            icon: BarChart2,       exact: false },
 ];
 
-export function AdminNav() {
+interface Props {
+  pendingCount?: number;
+}
+
+export function AdminNav({ pendingCount = 0 }: Props) {
   const pathname = usePathname();
 
   return (
     <nav className="flex-1 px-3 py-5 space-y-0.5" aria-label="Admin navigation">
       {NAV.map(({ label, href, icon: Icon, exact }) => {
         const active = exact ? pathname === href : pathname.startsWith(href);
+        const isReviewQueue = href === "/admin/review";
         return (
           <Link
             key={href}
@@ -55,7 +62,15 @@ export function AdminNav() {
               className="h-4 w-4 flex-shrink-0"
               style={{ color: active ? "#60A5FA" : "#4B5563" }}
             />
-            {label}
+            <span className="flex-1">{label}</span>
+            {isReviewQueue && pendingCount > 0 && (
+              <span
+                className="text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none"
+                style={{ backgroundColor: "rgba(245,158,11,0.2)", color: "#FCD34D" }}
+              >
+                {pendingCount}
+              </span>
+            )}
           </Link>
         );
       })}

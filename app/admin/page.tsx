@@ -175,16 +175,24 @@ export default async function AdminOverviewPage() {
           <div className="flex-1 text-sm" style={{ color: "#D97706" }}>
             <span className="font-bold">Action needed: </span>
             {reviewQueue.events > 0 && (
-              <Link href="/admin/events" className="underline underline-offset-2 mr-3">
-                {reviewQueue.events} event{reviewQueue.events > 1 ? "s" : ""} pending review
-              </Link>
+              <span className="mr-2">
+                {reviewQueue.events} event{reviewQueue.events > 1 ? "s" : ""} pending
+              </span>
             )}
             {reviewQueue.opportunities > 0 && (
-              <Link href="/admin/opportunities" className="underline underline-offset-2">
+              <span>
                 {reviewQueue.opportunities} opportunity submission{reviewQueue.opportunities > 1 ? "s" : ""} pending
-              </Link>
+              </span>
             )}
           </div>
+          <Link
+            href="/admin/review"
+            className="shrink-0 inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg transition-opacity hover:opacity-80"
+            style={{ backgroundColor: "rgba(245,158,11,0.15)", color: "#FCD34D" }}
+          >
+            Go to queue
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
       )}
 
