@@ -145,6 +145,19 @@ export function SignUpForm() {
           >
             Back to Sign In
           </Link>
+
+          <div className="mt-5 pt-5 border-t" style={{ borderColor: "#1E293B" }}>
+            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
+              While you wait for your email — take the free Visibility Scorecard:
+            </p>
+            <Link
+              href="/resources/visibility-scorecard"
+              className="inline-flex items-center justify-center w-full rounded-xl px-6 py-3 text-sm font-semibold text-white transition-all duration-200"
+              style={{ backgroundColor: "#10B981" }}
+            >
+              Check My Score Free →
+            </Link>
+          </div>
         </div>
       </div>
     );

@@ -133,6 +133,24 @@ export default async function EventsPage({
           </div>
         </div>
 
+        {/* Scorecard strip */}
+        <div
+          className="rounded-xl border px-5 py-4 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
+        >
+          <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+            <span className="font-semibold" style={{ color: "#F9FAFB" }}>Know your research visibility score</span>
+            {" "}— before you submit to conferences or apply for funding.
+          </p>
+          <Link
+            href="/resources/visibility-scorecard"
+            className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0 rounded-lg px-4 py-2 text-white"
+            style={{ backgroundColor: "#10B981" }}
+          >
+            Take the Scorecard Free →
+          </Link>
+        </div>
+
         {/* Search */}
         <form method="GET" className="mb-6 relative max-w-xl">
           {activeType    && <input type="hidden" name="type"     value={activeType}   />}

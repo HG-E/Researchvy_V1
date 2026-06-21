@@ -79,6 +79,25 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
       </section>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+
+        {/* Scorecard strip */}
+        <div
+          className="rounded-xl border px-5 py-4 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
+        >
+          <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+            <span className="font-semibold" style={{ color: "#F9FAFB" }}>Maximise your application success</span>
+            {" "}— know your visibility score across Scholar Identity, Discoverability, and Citation Health before you apply.
+          </p>
+          <Link
+            href="/resources/visibility-scorecard"
+            className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0 rounded-lg px-4 py-2 text-white"
+            style={{ backgroundColor: "#10B981" }}
+          >
+            Take the Scorecard Free →
+          </Link>
+        </div>
+
         {/* Search + Filters */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           {/* Search */}
