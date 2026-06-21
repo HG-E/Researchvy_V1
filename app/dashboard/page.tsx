@@ -37,7 +37,13 @@ export default async function DashboardPage() {
   async function fetchClinicCount() {
     if (!userId) return 0;
     try {
-      const { count } = await admin.from("clinic_enquiries").select("id", { count: "exact", head: true }).eq("user_id", userId);
+      // Count confirmed/pending-payment orders — these are users who completed online checkout.
+      // WhatsApp-based enquiries (clinic_enquiries) don't carry user_id so can't be linked here.
+      const { count } = await admin
+        .from("orders")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", userId)
+        .in("status", ["confirmed", "payment_submitted"]);
       return count ?? 0;
     } catch { return 0; }
   }
@@ -84,13 +90,13 @@ export default async function DashboardPage() {
   const steps = [
     { label: "Take the free Visibility Scorecard", href: "/resources/visibility-scorecard", done: scorecardDone },
     { label: "Complete your scholar profile",      href: "/dashboard/profile",              done: profileDone },
-    { label: "Register for your first clinic",     href: "/clinics",                        done: clinicCount > 0 },
+    { label: "Enrol in your first clinic",          href: "/clinics",                        done: clinicCount > 0 },
     { label: "Start your first Academy course",    href: "/academy/courses",                done: activeCount > 0 },
   ];
   const doneCount = steps.filter((s) => s.done).length;
 
   const STATS = [
-    { label: "Clinics Registered", value: String(clinicCount),     Icon: GraduationCap, color: "#2563EB" },
+    { label: "Clinics Enrolled",   value: String(clinicCount),     Icon: GraduationCap, color: "#2563EB" },
     { label: "Courses Enrolled",   value: String(activeCount),     Icon: BookOpen,      color: "#8B5CF6" },
     { label: "Certificates",       value: String(completedCount),  Icon: Award,         color: "#F59E0B" },
   ];
