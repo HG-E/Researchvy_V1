@@ -150,9 +150,8 @@ export function ProfileForm({
       setSaved(true);
       router.refresh();
       setTimeout(() => setSaved(false), 3000);
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : "Unknown error";
-      setServerError(`Connection failed: ${msg}`);
+    } catch {
+      setServerError("Connection error. Please check your internet connection and try again.");
     }
   }
 
