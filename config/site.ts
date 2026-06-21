@@ -128,7 +128,7 @@ export type SiteConfig = typeof siteConfig;
 /** Generate a WhatsApp enquiry URL with a contextual message. */
 export function buildWhatsAppUrl(context?: string): string {
   const message = context
-    ? `Hello, I'm interested in the ${context} programme at Researchvy. Could you share more details about pricing and availability?`
+    ? `Hello, I'm interested in the ${context} at Researchvy. Could you share more details about pricing and availability?`
     : siteConfig.whatsapp.defaultMessage;
   return `${siteConfig.whatsapp.baseUrl}?text=${encodeURIComponent(message)}`;
 }

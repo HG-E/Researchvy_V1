@@ -85,6 +85,18 @@ export function CTA() {
               Explore the Ecosystem
             </Link>
           </div>
+          <p className="mt-5 text-sm" style={{ color: "#4B5563" }}>
+            Prefer 1-on-1?{" "}
+            <Link
+              href="/clinics/private-consulting"
+              className="font-semibold transition-colors"
+              style={{ color: "#8B5CF6" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#A78BFA")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#8B5CF6")}
+            >
+              View Private Consulting — from $209 →
+            </Link>
+          </p>
 
           {/* Framework chain — scrollable on mobile, centered on desktop */}
           <div className="mt-16 relative">
