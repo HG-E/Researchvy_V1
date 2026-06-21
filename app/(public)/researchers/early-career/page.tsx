@@ -243,13 +243,13 @@ export default function EarlyCareerPage() {
               className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold mb-4"
               style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#2563EB", border: "1px solid rgba(37,99,235,0.25)" }}
             >
-              Guided · 4 Live Sessions
+              Live · 5 Core Sessions
             </span>
             <h3 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>
               Digital Visibility Clinic
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-              Six expert-guided sessions that fix your entire visibility system from the ground up.
+              Five expert-guided sessions that fix your entire visibility system from the ground up.
               Profiles, disambiguation, citations, communication, strategy, all covered.
               Designed specifically for researchers at a critical career stage.
             </p>

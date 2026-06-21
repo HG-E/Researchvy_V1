@@ -901,11 +901,11 @@ export function VisibilityScorecard() {
                   ["Session 1", "Scholar Identity: full audit of your Google Scholar, ORCID, and Scopus profiles"],
                   ["Session 2", "Discoverability: keyword strategy, open access optimisation, and citation intelligence"],
                   ["Session 3", "Research Communication + 12-month visibility strategy roadmap tailored to your profile"],
-                  ["Bonus 1", "Masterclass: Bibliometrics and h-index strategy for promotion and grant applications"],
-                  ["Bonus 2", "Masterclass: Research communication for policy, media, and global audiences"],
+                  ["Session 4", "Bibliometrics and h-index strategy for promotion and grant applications"],
+                  ["Session 5", "Research communication for policy, media, and global audiences"],
                 ].map(([s, d]) => (
                   <p key={s} className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
-                    <strong style={{ color: s.startsWith("Bonus") ? "#A78BFA" : "#BFDBFE" }}>{s}:</strong> {d}
+                    <strong style={{ color: "#BFDBFE" }}>{s}:</strong> {d}
                   </p>
                 ))}
               </div>

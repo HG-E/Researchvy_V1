@@ -43,16 +43,32 @@ export function LeadCaptureWidget({ articleTitle }: LeadCaptureWidgetProps) {
   if (status === "done") {
     return (
       <div
-        className="rounded-2xl border p-8 text-center"
+        className="rounded-2xl border p-8"
         style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
       >
-        <CheckCircle className="h-10 w-10 mx-auto mb-4" style={{ color: "#10B981" }} />
-        <h3 className="text-lg font-bold mb-2" style={{ color: "#F9FAFB" }}>
-          Check your inbox, {firstName}.
-        </h3>
-        <p className="text-sm" style={{ color: "#6B7280" }}>
-          Your Researcher Visibility Guide is on its way.
-        </p>
+        <div className="flex items-center gap-3 mb-4">
+          <CheckCircle className="h-8 w-8 flex-shrink-0" style={{ color: "#10B981" }} />
+          <div>
+            <h3 className="text-base font-bold" style={{ color: "#F9FAFB" }}>
+              Check your inbox, {firstName}.
+            </h3>
+            <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+              Your Researcher Visibility Guide is on its way.
+            </p>
+          </div>
+        </div>
+        <div className="pt-4 border-t" style={{ borderColor: "#1E293B" }}>
+          <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
+            While you wait — find out your exact visibility score:
+          </p>
+          <a
+            href="/resources/visibility-scorecard"
+            className="inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-bold text-white"
+            style={{ backgroundColor: "#10B981" }}
+          >
+            Take the Scorecard Free →
+          </a>
+        </div>
       </div>
     );
   }
