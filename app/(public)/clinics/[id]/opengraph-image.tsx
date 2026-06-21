@@ -14,7 +14,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
 
   const name     = clinic?.name     ?? "Digital Visibility Clinic";
   const tagline  = clinic?.tagline  ?? "Scholarly visibility transformation";
-  const duration = clinic?.duration ?? "3 core modules + 2 bonus";
+  const duration = clinic?.duration ?? "5 core sessions";
   const format   = clinic?.format   ?? "Live online";
   const capacity = clinic?.capacity ?? 30;
 

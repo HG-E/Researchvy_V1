@@ -367,8 +367,8 @@ export function day7Email(): { subject: string; html: string } {
             { n: "S1", title: "Scholar Identity Audit", desc: "Full live review of your Google Scholar, ORCID, and Scopus profiles. Disambiguation fixed, all publications attributed, citations flowing to one identity.", bg: "#EFF6FF", color: "#2563EB" },
             { n: "S2", title: "Discoverability & Citation Intelligence", desc: "Keyword strategy, open access optimisation, repository presence, and a personal citation growth strategy that doesn't require publishing more.", bg: "#EFF6FF", color: "#2563EB" },
             { n: "S3", title: "Research Communication + 12-Month Roadmap", desc: "Lay summaries, visual abstracts, cross-sector engagement — and your personalised 12-month visibility strategy built live during the session.", bg: "#EFF6FF", color: "#2563EB" },
-            { n: "B1", title: "Bonus Masterclass: Bibliometrics & h-index Strategy", desc: "How promotion panels and grant reviewers use bibliometrics — and the ethical, evidence-based strategies to improve your metrics.", bg: "#F5F3FF", color: "#7C3AED" },
-            { n: "B2", title: "Bonus Masterclass: Research Communication for Global Audiences", desc: "Policy briefs, media coverage, and practitioner engagement — how to translate your research findings for the audiences who can act on them.", bg: "#F5F3FF", color: "#7C3AED" },
+            { n: "S4", title: "Bibliometrics & h-index Strategy", desc: "How promotion panels and grant reviewers use bibliometrics — and the ethical, evidence-based strategies to improve your metrics.", bg: "#F5F3FF", color: "#7C3AED" },
+            { n: "S5", title: "Research Communication for Global Audiences", desc: "Policy briefs, media coverage, and practitioner engagement — how to translate your research findings for the audiences who can act on them.", bg: "#F5F3FF", color: "#7C3AED" },
           ].map(({ n, title, desc, bg, color }) => `
             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
               <tr>
