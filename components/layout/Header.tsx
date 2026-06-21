@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, ChevronDown, Search } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { mainNav } from "@/constants/navigation";
@@ -26,6 +26,7 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
   const [ecosystemOpen, setEcosystemOpen] = useState(false);
   const ecosystemRef = useRef<HTMLDivElement>(null);
   const pathname     = usePathname();
+  const router       = useRouter();
 
   const ecosystemActive = mainNav
     .find((i) => i.children)
@@ -55,6 +56,17 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        router.push("/search");
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [router]);
 
   return (
     <>
@@ -165,11 +177,18 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/search"
-              className="flex items-center justify-center w-9 h-9 rounded-lg transition-colors hover:bg-[#1E293B]"
-              style={{ color: "#6B7280" }}
+              className="flex items-center gap-2 rounded-lg border px-3 py-1.5 transition-colors hover:border-[#334155] hover:bg-[#0F172A]"
+              style={{ borderColor: "#1E293B", color: "#4B5563" }}
               aria-label="Search"
             >
-              <Search className="h-4 w-4" />
+              <Search className="h-3.5 w-3.5 flex-shrink-0" />
+              <span className="hidden lg:inline text-xs font-medium" style={{ color: "#6B7280" }}>Search…</span>
+              <kbd
+                className="hidden lg:inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] font-mono leading-none"
+                style={{ borderColor: "#374151", color: "#4B5563", backgroundColor: "#0A0F1A" }}
+              >
+                ⌘K
+              </kbd>
             </Link>
             {serverUser ? (
               <>

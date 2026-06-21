@@ -13,7 +13,7 @@ export const metadata = generatePageMetadata({
 });
 
 export interface SearchHit {
-  type: "event" | "opportunity" | "course" | "insight";
+  type: "event" | "opportunity" | "researcher" | "course" | "insight";
   id:   string;
   href: string;
   title: string;
@@ -27,11 +27,18 @@ function escapeQ(q: string) {
   return q.replace(/[%_\\]/g, "\\$&");
 }
 
+const ROLE_LABEL: Record<string, string> = {
+  researcher: "Researcher",
+  partner:    "Partner",
+  admin:      "Team",
+  user:       "Community",
+};
+
 async function searchAll(q: string): Promise<SearchHit[]> {
   const safe = escapeQ(q);
   const admin = createSupabaseAdminClient();
 
-  const [eventsRes, oppsRes, courses, insights] = await Promise.all([
+  const [eventsRes, oppsRes, researchersRes, courses, insights] = await Promise.all([
     admin
       .from("events")
       .select("id,slug,title,short_description,event_type,start_date")
@@ -47,6 +54,14 @@ async function searchAll(q: string): Promise<SearchHit[]> {
       .or(`title.ilike.%${safe}%,body.ilike.%${safe}%,funder.ilike.%${safe}%`)
       .order("created_at", { ascending: false })
       .limit(10),
+
+    admin
+      .from("users")
+      .select("username,full_name,bio,institutional_affiliation,role")
+      .eq("profile_public", true)
+      .not("username", "is", null)
+      .or(`full_name.ilike.%${safe}%,institutional_affiliation.ilike.%${safe}%,bio.ilike.%${safe}%`)
+      .limit(5),
 
     getCourses(),
     getInsights({ limit: 200 }),
@@ -72,6 +87,17 @@ async function searchAll(q: string): Promise<SearchHit[]> {
     badge:      o.funder ?? undefined,
     badgeColor: "#10B981",
     meta:       o.deadline ? `Deadline: ${new Date(o.deadline).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}` : undefined,
+  }));
+
+  const researcherHits: SearchHit[] = (researchersRes.data ?? []).map((u) => ({
+    type:       "researcher",
+    id:         u.username as string,
+    href:       `/profile/${u.username as string}`,
+    title:      (u.full_name as string | null) ?? (u.username as string),
+    excerpt:    (u.bio as string | null)?.slice(0, 180) ?? (u.institutional_affiliation as string | null) ?? "",
+    badge:      ROLE_LABEL[(u.role as string | null) ?? "user"] ?? "Researcher",
+    badgeColor: "#EC4899",
+    meta:       (u.institutional_affiliation as string | null) ?? undefined,
   }));
 
   const lq = q.toLowerCase();
@@ -110,7 +136,7 @@ async function searchAll(q: string): Promise<SearchHit[]> {
       meta:       i.reading_time ? `${i.reading_time} min read` : undefined,
     }));
 
-  return [...eventHits, ...oppHits, ...courseHits, ...insightHits];
+  return [...eventHits, ...oppHits, ...researcherHits, ...courseHits, ...insightHits];
 }
 
 type Props = { searchParams: Promise<{ q?: string }> };

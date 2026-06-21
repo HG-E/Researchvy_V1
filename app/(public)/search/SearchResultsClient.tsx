@@ -3,17 +3,18 @@
 import { useRouter, usePathname } from "next/navigation";
 import { useRef, useTransition, FormEvent } from "react";
 import Link from "next/link";
-import { Search, CalendarDays, Globe, BookOpen, FileText, ArrowRight } from "lucide-react";
+import { Search, CalendarDays, Globe, BookOpen, FileText, Users, ArrowRight } from "lucide-react";
 import type { SearchHit } from "./page";
 
 const TYPE_META: Record<SearchHit["type"], { label: string; Icon: React.ElementType; color: string }> = {
   event:       { label: "Events",       Icon: CalendarDays, color: "#2563EB" },
   opportunity: { label: "Opportunities", Icon: Globe,        color: "#10B981" },
+  researcher:  { label: "Researchers",  Icon: Users,        color: "#EC4899" },
   course:      { label: "Courses",      Icon: BookOpen,     color: "#8B5CF6" },
   insight:     { label: "Insights",     Icon: FileText,     color: "#F59E0B" },
 };
 
-const ORDER: SearchHit["type"][] = ["event", "opportunity", "course", "insight"];
+const ORDER: SearchHit["type"][] = ["event", "opportunity", "researcher", "course", "insight"];
 
 interface Props {
   q:       string;
@@ -107,6 +108,7 @@ export function SearchResultsClient({ q, results }: Props) {
                   {[
                     { href: "/events",        label: "Browse Events"        },
                     { href: "/opportunities", label: "Browse Opportunities" },
+                    { href: "/network",       label: "Find Researchers"     },
                     { href: "/academy",       label: "Browse Courses"       },
                     { href: "/insights",      label: "Read Insights"        },
                   ].map(({ href, label }) => (
@@ -199,13 +201,14 @@ export function SearchResultsClient({ q, results }: Props) {
             <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
               {q.length === 0 ? "Start typing to search across all content." : "Enter at least 2 characters."}
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {ORDER.map((type) => {
                 const meta = TYPE_META[type];
                 const Icon = meta.Icon;
                 const hrefs: Record<string, string> = {
                   event:       "/events",
                   opportunity: "/opportunities",
+                  researcher:  "/network",
                   course:      "/academy",
                   insight:     "/insights",
                 };
