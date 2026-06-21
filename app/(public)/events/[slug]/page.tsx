@@ -496,6 +496,19 @@ export default async function EventDetailPage({
               </Link>
             </div>
 
+            {/* Scorecard nudge */}
+            <div className="rounded-2xl border p-5" style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.18)" }}>
+              <p className="text-xs font-semibold mb-1.5" style={{ color: "#10B981" }}>Know your visibility score</p>
+              <p className="text-xs leading-relaxed mb-3" style={{ color: "#6B7280" }}>
+                Before you attend — check where your research profile stands across Scholar Identity, Discoverability, and Citation Health.
+              </p>
+              <Link href="/resources/visibility-scorecard"
+                className="w-full inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-xs font-bold text-white"
+                style={{ backgroundColor: "#10B981" }}>
+                Take the Scorecard Free →
+              </Link>
+            </div>
+
             {/* Cross-link to Opportunities board */}
             <div className="rounded-2xl border p-5" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
               <p className="text-xs font-semibold mb-2" style={{ color: "#F9FAFB" }}>Looking for funded opportunities?</p>

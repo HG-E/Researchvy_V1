@@ -81,6 +81,28 @@ export function Footer() {
     <footer className="border-t" style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
 
+        {/* Pre-footer CTA */}
+        <div
+          className="rounded-2xl border p-6 sm:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5"
+          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        >
+          <div>
+            <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
+              Not sure where your research visibility stands?
+            </p>
+            <p className="text-xs" style={{ color: "#6B7280" }}>
+              4–6 minutes · 12 checkpoints · Score out of 100 · Free
+            </p>
+          </div>
+          <Link
+            href="/resources/visibility-scorecard"
+            className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white whitespace-nowrap flex-shrink-0"
+            style={{ backgroundColor: "#10B981" }}
+          >
+            Check My Score Free →
+          </Link>
+        </div>
+
         {/* Brand + socials — always full width on mobile, 2-col span on lg */}
         <div className="mb-8 md:mb-0 md:hidden">
           <Logo variant="full" width={130} linkToHome />

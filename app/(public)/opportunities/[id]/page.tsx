@@ -293,6 +293,19 @@ export default async function OpportunityDetailPage({ params }: Props) {
               )}
             </div>
 
+            {/* Scorecard nudge */}
+            <div className="rounded-2xl border p-5" style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.18)" }}>
+              <p className="text-xs font-semibold mb-1.5" style={{ color: "#10B981" }}>Strong applications need strong profiles</p>
+              <p className="text-[11px] leading-relaxed mb-3" style={{ color: "#6B7280" }}>
+                Know exactly where your research visibility stands before you apply — Scholar Identity, Discoverability, Citation Health.
+              </p>
+              <Link href="/resources/visibility-scorecard"
+                className="w-full inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-xs font-bold text-white"
+                style={{ backgroundColor: "#10B981" }}>
+                Check My Score Free →
+              </Link>
+            </div>
+
             {/* Submit similar */}
             <div className="rounded-2xl border p-5" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
               <p className="text-xs font-semibold mb-1" style={{ color: "#F9FAFB" }}>Know a similar opportunity?</p>
