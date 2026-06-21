@@ -13,6 +13,17 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      // Standard TS convention: _ prefix means intentionally unused
+      "@typescript-eslint/no-unused-vars": ["warn", {
+        argsIgnorePattern:               "^_",
+        varsIgnorePattern:               "^_",
+        destructuredArrayIgnorePattern:  "^_",
+        caughtErrorsIgnorePattern:       "^_",
+      }],
+    },
+  },
 ]);
 
 export default eslintConfig;

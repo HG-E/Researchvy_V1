@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useRef, useTransition, FormEvent } from "react";
 import Link from "next/link";
 import { Search, CalendarDays, Globe, BookOpen, FileText, Users, ArrowRight } from "lucide-react";

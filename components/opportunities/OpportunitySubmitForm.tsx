@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, AlertCircle } from "lucide-react";
 import type { OpportunityCategory } from "@/types/opportunity";
@@ -30,7 +29,6 @@ const LEVELS = [
 type FormState = "form" | "submitting" | "success" | "error";
 
 export function OpportunitySubmitForm() {
-  const router = useRouter();
   const { track } = useAnalytics();
 
   const [state, setState] = useState<FormState>("form");

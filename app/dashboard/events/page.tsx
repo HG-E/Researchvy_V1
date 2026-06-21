@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Calendar, Plus, Bookmark, Clock, CheckCircle, XCircle, Eye } from "lucide-react";
+import { Calendar, Plus, Bookmark, CheckCircle, Eye } from "lucide-react";
 import { getServerUser, createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { EventTypeBadge } from "@/components/events/EventTypeBadge";
 import type { AcademicEvent, EventRegistration, EventSave } from "@/types/event";
@@ -90,7 +90,7 @@ export default async function DashboardEventsPage() {
           {submitted.length === 0 ? (
             <div className="rounded-2xl border p-10 text-center" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
               <Calendar className="h-8 w-8 mx-auto mb-3" style={{ color: "#1E293B" }} />
-              <p className="text-sm mb-1" style={{ color: "#9CA3AF" }}>You haven't submitted any events yet.</p>
+              <p className="text-sm mb-1" style={{ color: "#9CA3AF" }}>You haven&apos;t submitted any events yet.</p>
               <p className="text-xs mb-5" style={{ color: "#4B5563" }}>Submit your conference, workshop, or seminar to reach researchers on Researchvy.</p>
               <Link href="/events/submit" className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white"
                 style={{ backgroundColor: "#2563EB" }}>
@@ -202,7 +202,7 @@ export default async function DashboardEventsPage() {
             <div className="rounded-2xl border p-8 text-center" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
               <Bookmark className="h-7 w-7 mx-auto mb-3" style={{ color: "#1E293B" }} />
               <p className="text-sm mb-1" style={{ color: "#9CA3AF" }}>No saved events yet.</p>
-              <p className="text-xs mb-5" style={{ color: "#4B5563" }}>Browse the events board and bookmark ones you're interested in.</p>
+              <p className="text-xs mb-5" style={{ color: "#4B5563" }}>Browse the events board and bookmark ones you&apos;re interested in.</p>
               <Link href="/events" className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold border"
                 style={{ borderColor: "#1E293B", color: "#9CA3AF" }}>
                 Browse Events

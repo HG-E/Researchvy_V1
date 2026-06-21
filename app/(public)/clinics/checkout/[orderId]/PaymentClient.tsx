@@ -69,7 +69,7 @@ function BankRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-export function PaymentClient({ order, bundleName, formattedAmount, bankDetails, isLoggedIn }: Props) {
+export function PaymentClient({ order, bundleName, formattedAmount, bankDetails }: Props) {
   const [status,    setStatus]    = useState(order.status);
   const [ref,       setRef]       = useState("");
   const [loading,   setLoading]   = useState(false);
@@ -108,7 +108,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
           <CheckCircle className="h-8 w-8" style={{ color: "#10B981" }} />
         </div>
         <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-          You're enrolled!
+          You&apos;re enrolled!
         </h1>
         <p className="text-sm mb-1" style={{ color: "#6B7280" }}>
           Order <span className="font-mono" style={{ color: "#9CA3AF" }}>{order.order_number}</span>
@@ -137,7 +137,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
         </p>
         <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
           Our team will confirm your enrollment within 2 business hours.
-          We'll email <span style={{ color: "#9CA3AF" }}>{order.user_email}</span> when it's done.
+          We&apos;ll email <span style={{ color: "#9CA3AF" }}>{order.user_email}</span> when it&apos;s done.
         </p>
         <div
           className="rounded-xl px-5 py-4 text-xs border mb-3 text-left"
@@ -152,7 +152,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
                 <a href="mailto:researchvy@gmail.com" style={{ color: "#F59E0B", textDecoration: "underline" }}>
                   researchvy@gmail.com
                 </a>{" "}
-                with your order number <span className="font-mono font-bold">{order.order_number}</span> and we'll sort it out immediately.
+                with your order number <span className="font-mono font-bold">{order.order_number}</span> and we&apos;ll sort it out immediately.
               </p>
             </div>
           </div>
@@ -270,7 +270,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
             style={{ backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" }}
           />
           <p className="text-[11px] mt-1" style={{ color: "#6B7280" }}>
-            Your bank's transaction ID speeds up verification — you can skip this if you don't have it.
+            Your bank&apos;s transaction ID speeds up verification — you can skip this if you don&apos;t have it.
           </p>
         </div>
 
@@ -297,7 +297,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails,
           ) : (
             <>
               <CheckCircle className="h-4 w-4" />
-              I've Paid — Notify the Team
+              I&apos;ve Paid — Notify the Team
             </>
           )}
         </button>

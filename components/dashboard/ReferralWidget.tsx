@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Copy, Check, Users, Gift } from "lucide-react";
+import { Copy, Check, Gift } from "lucide-react";
 
 type ReferralData = {
   code:          string;

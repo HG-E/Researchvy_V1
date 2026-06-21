@@ -94,6 +94,7 @@ export function SocialAuthButtons({ next = "/dashboard", mode = "signin" }: Prop
     try {
       if (provider === "orcid") {
         const params = new URLSearchParams({ next });
+        // eslint-disable-next-line react-hooks/immutability
         window.location.href = `/api/auth/orcid?${params}`;
         return;
       }

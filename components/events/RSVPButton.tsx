@@ -104,7 +104,7 @@ export function RSVPButton({ slug, isAuthenticated, currentStatus, isFull, isPas
 
       {isRegistered && (
         <p className="text-center text-[11px]" style={{ color: "#6B7280" }}>
-          You'll receive a confirmation email. Check your dashboard for updates.
+          You&apos;ll receive a confirmation email. Check your dashboard for updates.
         </p>
       )}
     </div>

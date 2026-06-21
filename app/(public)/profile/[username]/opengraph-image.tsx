@@ -73,8 +73,10 @@ export default async function Image({ params }: { params: Promise<{ username: st
       {/* Avatar + name */}
       <div style={{ display: "flex", alignItems: "center", gap: "28px", flex: 1 }}>
         {profile?.avatar_url ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={profile.avatar_url}
+            alt=""
             width={120}
             height={120}
             style={{ borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}

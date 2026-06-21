@@ -114,6 +114,7 @@ export function OpportunityCard({ opp }: Props) {
               <span className={`flex items-center gap-1 text-[11px] font-medium ${past ? "line-through" : ""}`}
                 style={{ color: expiring ? "#EF4444" : past ? "#374151" : "#6B7280" }}>
                 <Calendar className="h-3 w-3" />
+                {/* eslint-disable-next-line react-hooks/purity */}
                 {past ? "Closed" : expiring ? `${Math.ceil((new Date(opp.deadline).getTime() - Date.now()) / 86_400_000)}d left` : new Date(opp.deadline).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
               </span>
             ) : (

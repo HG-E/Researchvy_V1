@@ -7,7 +7,7 @@ interface Props {
   courseTitle: string;
 }
 
-export function DownloadPdfButton({ lessonTitle, courseTitle }: Props) {
+export function DownloadPdfButton({ lessonTitle, courseTitle: _courseTitle }: Props) {
   function print() {
     // Add a body class for print-only CSS, then trigger browser print-to-PDF
     document.body.classList.add("printing-lesson");

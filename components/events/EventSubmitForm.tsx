@@ -138,7 +138,7 @@ export function EventSubmitForm() {
           Event submitted for review
         </h2>
         <p className="text-sm mb-6 max-w-sm mx-auto" style={{ color: "#6B7280" }}>
-          We'll review your event within 2 business days. You'll receive an email when it goes live on the board.
+          We&apos;ll review your event within 2 business days. You&apos;ll receive an email when it goes live on the board.
         </p>
         <div className="flex justify-center gap-3">
           <button
@@ -466,7 +466,7 @@ export function EventSubmitForm() {
 
           <div className="rounded-xl border px-4 py-3 text-xs leading-relaxed" style={{ borderColor: "rgba(37,99,235,0.2)", backgroundColor: "rgba(37,99,235,0.04)", color: "#6B7280" }}>
             By submitting, you confirm this is an academic event and all information is accurate.
-            Researchvy reserves the right to decline submissions that don't meet our community guidelines.
+            Researchvy reserves the right to decline submissions that don&apos;t meet our community guidelines.
           </div>
 
           {error && (

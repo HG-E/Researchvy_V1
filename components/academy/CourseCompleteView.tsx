@@ -30,6 +30,7 @@ function Confetti() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPieces(makePieces());
     setVisible(true);
     const t = setTimeout(() => setVisible(false), 4500);

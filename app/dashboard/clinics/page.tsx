@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 import Link from "next/link";
-import { GraduationCap, ArrowRight, CheckCircle2, Clock, Calendar, Users, ListChecks } from "lucide-react";
+import { GraduationCap, ArrowRight, CheckCircle2, Clock, ListChecks } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getServerUser } from "@/lib/auth/supabase";
 import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";

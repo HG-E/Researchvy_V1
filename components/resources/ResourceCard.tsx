@@ -105,7 +105,7 @@ export function ResourceCard({ resource }: { resource: StaticResource }) {
       {resource.access === "newsletter" && expanded && (
         <div className="px-6 pb-6 border-t pt-4" style={{ borderColor: "#1E293B" }}>
           <p className="text-xs mb-3" style={{ color: "#9CA3AF" }}>
-            Enter your email and we'll send this resource within 24 hours.
+            Enter your email and we&apos;ll send this resource within 24 hours.
           </p>
           <NewsletterForm variant="inline" resourceTitle={resource.title} />
         </div>

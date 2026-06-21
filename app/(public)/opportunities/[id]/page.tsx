@@ -92,9 +92,11 @@ export default async function OpportunityDetailPage({ params }: Props) {
     initialSaved = !!saved;
   }
 
+  // eslint-disable-next-line react-hooks/purity
+  const now         = Date.now();
   const isPast      = opp.deadline ? new Date(opp.deadline) < new Date() : false;
-  const expiring    = opp.deadline ? (new Date(opp.deadline).getTime() - Date.now()) / 86_400_000 < 7 : false;
-  const daysLeft    = opp.deadline ? Math.ceil((new Date(opp.deadline).getTime() - Date.now()) / 86_400_000) : null;
+  const expiring    = opp.deadline ? (new Date(opp.deadline).getTime() - now) / 86_400_000 < 7 : false;
+  const daysLeft    = opp.deadline ? Math.ceil((new Date(opp.deadline).getTime() - now) / 86_400_000) : null;
 
   // Fetch linked event if any
   let linkedEvent: { title: string; slug: string } | null = null;

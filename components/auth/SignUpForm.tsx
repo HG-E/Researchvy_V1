@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, EyeOff, Loader2, CheckCircle2, BadgeCheck } from "lucide-react";
@@ -57,7 +57,6 @@ function PasswordStrengthBar({ password }: { password: string }) {
 }
 
 export function SignUpForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const { track } = useAnalytics();
   const [showPassword, setShowPassword] = useState(false);

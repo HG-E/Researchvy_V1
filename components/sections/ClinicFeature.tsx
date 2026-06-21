@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle, MessageCircle } from "lucide-react";
-import { WhatsAppButton } from "@/components/common/WhatsAppButton";
 import { copy } from "@/constants/copy";
 import { siteConfig, buildWhatsAppUrl } from "@/config/site";
 
@@ -168,13 +167,13 @@ export function ClinicFeature() {
                   <strong style={{ color: "#10B981" }}>₦38,000 NGN</strong>
                   {" "}early bird · Early bird closes June 20.
                 </p>
-                <a
+                <Link
                   href="/clinics#pricing"
                   className="text-xs font-semibold"
                   style={{ color: "#2563EB" }}
                 >
-                  See full pricing & tiers →
-                </a>
+                  See full pricing &amp; tiers →
+                </Link>
               </div>
             </div>
           </motion.div>

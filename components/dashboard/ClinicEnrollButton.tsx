@@ -53,7 +53,7 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
             </p>
           )}
           <p className="text-xs mt-1" style={{ color: "#4B5563" }}>
-            We'll reach out to confirm your place and send joining details.
+            We&apos;ll reach out to confirm your place and send joining details.
           </p>
         </div>
       </div>

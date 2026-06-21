@@ -23,7 +23,7 @@ const ROLE_OPTIONS = [
 export function UserActionsMenu({
   userId,
   currentRole,
-  targetEmail,
+  targetEmail: _targetEmail,
   targetIsSuper,
   callerIsSuper,
   emailConfirmed,

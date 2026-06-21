@@ -222,9 +222,9 @@ export default async function AcademyPage() {
       <div className="rounded-xl border p-4 text-center" style={{ borderColor: "#1E293B" }}>
         <p className="text-xs" style={{ color: "#374151" }}>
           Researchvy Academy · Self-paced · Level 1 free ·{" "}
-          <a href="/academy/courses" style={{ color: "#4B5563", textDecoration: "underline" }}>
+          <Link href="/academy/courses" style={{ color: "#4B5563", textDecoration: "underline" }}>
             Browse all courses
-          </a>
+          </Link>
         </p>
       </div>
 

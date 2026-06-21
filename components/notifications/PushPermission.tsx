@@ -23,6 +23,7 @@ export function PushPermission() {
 
   useEffect(() => {
     if (!("Notification" in window) || !("serviceWorker" in navigator) || !VAPID_PUBLIC_KEY) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setState("unsupported");
       return;
     }

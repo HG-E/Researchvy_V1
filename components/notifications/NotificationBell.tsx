@@ -60,6 +60,7 @@ export function NotificationBell({ userId }: { userId: string }) {
   }, []);
 
   // Initial fetch
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchNotifications(); }, [fetchNotifications]);
 
   // Real-time: subscribe to new inserts via Supabase Realtime.

@@ -10,7 +10,7 @@ interface Props {
   submittedBy?: string | null;
 }
 
-export function OppPublishButton({ oppId, isPublished, submittedBy }: Props) {
+export function OppPublishButton({ oppId, isPublished, submittedBy: _submittedBy }: Props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 

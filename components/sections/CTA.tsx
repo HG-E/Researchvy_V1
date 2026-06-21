@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { copy } from "@/constants/copy";
 import { siteConfig, buildWhatsAppUrl } from "@/config/site";
 

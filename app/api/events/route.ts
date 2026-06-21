@@ -14,7 +14,7 @@ function slugify(text: string): string {
 }
 
 async function uniqueSlug(base: string, admin: ReturnType<typeof createSupabaseAdminClient>): Promise<string> {
-  let slug = slugify(base);
+  const slug = slugify(base);
   let suffix = 0;
   while (true) {
     const candidate = suffix === 0 ? slug : `${slug}-${suffix}`;

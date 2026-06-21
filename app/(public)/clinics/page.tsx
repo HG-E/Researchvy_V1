@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, Building2, TrendingUp, Award, FileText } from "lucide-react";
+import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, TrendingUp, Award, FileText } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { courseSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import { siteConfig, buildWhatsAppUrl } from "@/config/site";
@@ -564,7 +564,7 @@ export default async function ClinicsPage({
               className="text-3xl font-bold"
               style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
             >
-              Researchers Who've Been Through It
+              Researchers Who&apos;ve Been Through It
             </h2>
           </div>
 

@@ -83,6 +83,7 @@ export function ProfileForm({
     const val = (usernameValue ?? "").trim();
 
     if (!val || val === currentUsername) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUsernameState({ status: "idle" });
       return;
     }

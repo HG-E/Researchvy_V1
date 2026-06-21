@@ -59,7 +59,7 @@ export default function EarlyCareerPage() {
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
             style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
           >
-            You're Publishing.<br />
+            You&apos;re Publishing.<br />
             <span style={{ color: "#10B981" }}>Is Anyone Finding You?</span>
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
@@ -111,7 +111,7 @@ export default function EarlyCareerPage() {
               style={{ backgroundColor: "rgba(245,158,11,0.05)", border: "1px solid rgba(245,158,11,0.15)" }}
             >
               <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
-                These aren't signs that your research isn't good enough. They're signs that
+                These aren&apos;t signs that your research isn&apos;t good enough. They&apos;re signs that
                 your <strong style={{ color: "#F9FAFB" }}>discovery infrastructure is broken</strong>,
                 and nobody in academia ever taught you how to fix it.
               </p>
@@ -187,14 +187,14 @@ export default function EarlyCareerPage() {
               style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
             >
               The researcher who builds visibility at 35<br />
-              doesn't catch up to the one who built it at 28.
+              doesn&apos;t catch up to the one who built it at 28.
             </h2>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
               Citation compounding is real. A researcher who fixes their discovery infrastructure
               early sees citations accumulate faster, and those citations attract more citations.
               The h-index gap between a researcher with optimal visibility and one with equivalent
               output but poor visibility widens by roughly 1-2 points per year. Over a career,
-              that's a different funding bracket, a different promotion track, and a different
+              that&apos;s a different funding bracket, a different promotion track, and a different
               level of international recognition.
             </p>
             <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>

@@ -173,9 +173,9 @@ export default async function AcademyCoursesPage() {
               Courses launching soon
             </h2>
             <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
-              Level 1 courses are live now. Levels 2–5 are in development — you'll get early access when they launch.
+              Level 1 courses are live now. Levels 2–5 are in development — you&apos;ll get early access when they launch.
               <br /><br />
-              <strong style={{ color: "#D1D5DB" }}>Note:</strong> The <a href="/clinics" style={{ color: "#60A5FA" }}>Digital Visibility Clinic</a> is a separate, live, cohort-based paid programme — not part of the Academy. You can do both independently.
+              <strong style={{ color: "#D1D5DB" }}>Note:</strong> The <Link href="/clinics" style={{ color: "#60A5FA" }}>Digital Visibility Clinic</Link> is a separate, live, cohort-based paid programme — not part of the Academy. You can do both independently.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link

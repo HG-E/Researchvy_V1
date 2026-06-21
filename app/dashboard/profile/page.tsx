@@ -43,7 +43,7 @@ export default async function ProfilePage({
     orcidVerified:            (meta.orcid_verified as boolean | undefined) ?? false,
     google_scholar:           (meta.google_scholar as string | undefined) ?? "",
     institutional_affiliation:(meta.institutional_affiliation as string | undefined) ?? "",
-    username,
+    username:                 username ?? undefined,
     profile_public:           profilePublic,
   };
 

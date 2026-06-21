@@ -27,7 +27,6 @@ function trackLabel(track: string) {
 }
 
 function sessionTime(track: string) {
-  const t = track === "wednesday" ? COHORT.tracks.wednesday : COHORT.tracks.sunday;
   return `${cohortStartLabel(track)} at ${COHORT.sessionTime} WAT`;
 }
 

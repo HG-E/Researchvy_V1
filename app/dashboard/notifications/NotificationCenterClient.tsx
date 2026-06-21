@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, Clock, CalendarDays, Briefcase, Info, CheckCheck, Trash2 } from "lucide-react";
+import { Bell, Clock, CalendarDays, Briefcase, Info, CheckCheck } from "lucide-react";
 import Link from "next/link";
 
 interface Notification {

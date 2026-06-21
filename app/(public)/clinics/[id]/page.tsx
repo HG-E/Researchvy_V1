@@ -130,7 +130,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
             {/* Outcomes */}
             <section>
               <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
-                What You'll Learn
+                What You&apos;ll Learn
               </p>
               <h2
                 className="text-2xl font-bold mb-6"
@@ -245,7 +245,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                   Your Facilitator
                 </p>
                 <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-                  Who you'll be working with
+                  Who you&apos;ll be working with
                 </h2>
 
                 {FACILITATORS.map((f) => (

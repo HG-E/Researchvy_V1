@@ -22,8 +22,7 @@ export interface Resource {
   updated_at: string;
 }
 
-export interface ResourceListItem
-  extends Pick<
-    Resource,
-    "id" | "title" | "description" | "file_type" | "category" | "tags" | "downloads" | "featured"
-  > {}
+export type ResourceListItem = Pick<
+  Resource,
+  "id" | "title" | "description" | "file_type" | "category" | "tags" | "downloads" | "featured"
+>;

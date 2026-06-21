@@ -20,7 +20,6 @@ export function EarlyBirdCountdown({ deadline }: { deadline: string }) {
   const [time, setTime] = useState<TimeLeft>(() => calc(deadline));
 
   useEffect(() => {
-    setTime(calc(deadline));
     const id = setInterval(() => setTime(calc(deadline)), 1_000);
     return () => clearInterval(id);
   }, [deadline]);

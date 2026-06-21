@@ -12,10 +12,7 @@ export function StickyMobileCTA() {
   const isClinicPage = pathname === "/clinics" || pathname.startsWith("/clinics/");
 
   useEffect(() => {
-    if (isClinicPage) {
-      setVisible(false);
-      return;
-    }
+    if (isClinicPage) return;
     const onScroll = () => {
       const scrollY = window.scrollY;
       const docH    = document.documentElement.scrollHeight;
