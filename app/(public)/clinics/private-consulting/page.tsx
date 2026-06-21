@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircle, CheckCircle, User, ArrowLeft, Clock, Zap, Star } from "lucide-react";
+import { ArrowRight, MessageCircle, CheckCircle, User, ArrowLeft, Clock, Zap, Star, Mail } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
-import { buildWhatsAppUrl } from "@/config/site";
-import { breadcrumbSchema } from "@/lib/seo/schemas";
+import { breadcrumbSchema, faqSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/config/site";
 
 export const metadata = generatePageMetadata({
@@ -105,8 +104,8 @@ const HOW_DIFFERENT = [
 const PROCESS_STEPS = [
   {
     step:  "01",
-    title: "You reach out via WhatsApp",
-    desc:  "Tell us your career stage, field, and which package interests you. We confirm availability and answer any questions.",
+    title: "You reach out — WhatsApp or email",
+    desc:  "Tell us your career stage, field, and which package interests you. We confirm availability, answer any questions, and send payment details. Payment is completed before the audit begins.",
     color: "#10B981",
   },
   {
@@ -150,6 +149,18 @@ const OBJECTIONS = [
     q: "What if the deliverables don't meet my expectations?",
     a: "We revise at no additional cost. If the strategy document, optimised profiles, or gap report don't address the specific issues we identified in the audit, raise it at the debrief call or within 7 days of delivery and we go back in and fix it. You are paying for a solved problem, not a best effort.",
   },
+  {
+    q: "How does payment work?",
+    a: "After we confirm availability and agree on the right package, we send payment instructions via WhatsApp or email. Researchers based in Nigeria pay via bank transfer in NGN. International clients pay in USD — we share the payment method when we confirm. Full payment is required before we begin the audit. If you are unsure which package fits your situation, we can work through that first — no payment commitment needed until you are ready.",
+  },
+  {
+    q: "Do you need access to my research accounts?",
+    a: "For platforms that allow direct editing (such as ORCID), we will either guide you through every change step-by-step, or you can grant temporary access — which you revoke immediately after. We never store credentials, never request your password via message, and access remains fully under your control throughout. For read-only platforms like Scopus, we work from your public profile. Your security is non-negotiable.",
+  },
+  {
+    q: "Is this available for researchers outside Nigeria?",
+    a: "Yes — researchers based anywhere in the world can access Private Consulting. We work remotely across all platforms. Packages are priced in both USD and NGN. Debrief calls happen via video call or WhatsApp, and all deliverables are sent digitally. We have worked with researchers across West Africa, East Africa, and beyond.",
+  },
 ];
 
 export default function PrivateConsultingPage() {
@@ -164,6 +175,14 @@ export default function PrivateConsultingPage() {
               { name: "Clinics",            url: `${siteConfig.url}/clinics` },
               { name: "Private Consulting", url: `${siteConfig.url}/clinics/private-consulting` },
             ])
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            faqSchema(OBJECTIONS.map((o) => ({ question: o.q, answer: o.a })))
           ),
         }}
       />
@@ -208,7 +227,7 @@ export default function PrivateConsultingPage() {
           </p>
           <div className="flex flex-wrap gap-3">
             <a
-              href={buildWhatsAppUrl("Private Consulting")}
+              href={`https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent("Hi, I'm interested in Researchvy Private Consulting. Could you tell me about current availability and which package might suit my situation?")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white"
@@ -461,6 +480,35 @@ export default function PrivateConsultingPage() {
           </div>
         </div>
 
+        {/* Testimonial */}
+        <div className="mb-20">
+          <div
+            className="rounded-2xl border p-7 sm:p-8"
+            style={{ backgroundColor: "rgba(139,92,246,0.04)", borderColor: "rgba(139,92,246,0.2)" }}
+          >
+            <p
+              className="text-xl sm:text-2xl leading-snug font-medium mb-6"
+              style={{ color: "#D1D5DB", fontFamily: "var(--font-serif)" }}
+            >
+              &ldquo;Three years of publishing and my h-index hadn&apos;t moved. Researchvy
+              audited my profiles and found 19 papers not linked to my ORCID — they fixed it
+              the same week. My citation count has climbed 38 points since.&rdquo;
+            </p>
+            <div className="flex items-center gap-4 pt-5 border-t" style={{ borderColor: "rgba(139,92,246,0.15)" }}>
+              <div
+                className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                style={{ backgroundColor: "rgba(139,92,246,0.15)", color: "#A78BFA" }}
+              >
+                NA
+              </div>
+              <div>
+                <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>Dr. Nkechi Adeleke</p>
+                <p className="text-xs" style={{ color: "#4B5563" }}>Lecturer · Biochemistry · Private Consulting client</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* How it works */}
         <div className="mb-20">
           <div className="text-center mb-12">
@@ -495,7 +543,7 @@ export default function PrivateConsultingPage() {
           <div className="flex items-center gap-2 mt-6 justify-center">
             <Clock className="h-3.5 w-3.5" style={{ color: "#4B5563" }} />
             <p className="text-xs" style={{ color: "#4B5563" }}>
-              From WhatsApp message to debrief call: typically 7–10 working days.
+              From first message to debrief call: typically 7–10 working days.
             </p>
           </div>
         </div>
@@ -552,10 +600,10 @@ export default function PrivateConsultingPage() {
               <span style={{ color: "#8B5CF6" }}>Everything changes.</span>
             </h2>
             <p className="text-base max-w-xl mx-auto mb-8 leading-relaxed" style={{ color: "#6B7280" }}>
-              Send a WhatsApp message with your career stage, field, and the package you&apos;re interested in.
+              Reach out via WhatsApp or email with your career stage, field, and which package interests you.
               We&apos;ll confirm availability and tell you exactly what to expect.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
               <a
                 href={`https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent("Hi, I'm ready to start with Researchvy Private Consulting. Can you tell me about next steps and current availability?")}`}
                 target="_blank"
@@ -565,6 +613,14 @@ export default function PrivateConsultingPage() {
               >
                 <MessageCircle className="h-4 w-4" />
                 Start via WhatsApp
+              </a>
+              <a
+                href={`mailto:${siteConfig.contact.email}?subject=Private%20Consulting%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20Researchvy%20Private%20Consulting.%20Could%20you%20share%20more%20details%20about%20availability%20and%20packages%3F`}
+                className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-bold border transition-colors"
+                style={{ borderColor: "rgba(139,92,246,0.3)", color: "#A78BFA", backgroundColor: "rgba(139,92,246,0.08)" }}
+              >
+                <Mail className="h-4 w-4" />
+                Email Us Instead
               </a>
               <Link
                 href="/clinics/digital-visibility-clinic"
