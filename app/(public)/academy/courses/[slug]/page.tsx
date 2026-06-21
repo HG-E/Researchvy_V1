@@ -423,6 +423,28 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
               </a>
             </div>
           )}
+
+          {/* Clinic upgrade nudge */}
+          {!enrolled && (
+            <div
+              className="mt-6 rounded-2xl border p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+              style={{ backgroundColor: "rgba(37,99,235,0.04)", borderColor: "rgba(37,99,235,0.18)" }}
+            >
+              <div>
+                <p className="text-xs font-semibold mb-1" style={{ color: "#60A5FA" }}>Prefer live, facilitated learning?</p>
+                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                  The Digital Visibility Clinic covers this and more — live sessions with an expert, small cohort, real-time profile review.
+                </p>
+              </div>
+              <Link
+                href="/clinics"
+                className="inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-xs font-bold text-white whitespace-nowrap flex-shrink-0"
+                style={{ backgroundColor: "#2563EB" }}
+              >
+                Explore the Clinic →
+              </Link>
+            </div>
+          )}
         </div>
 
       </div>

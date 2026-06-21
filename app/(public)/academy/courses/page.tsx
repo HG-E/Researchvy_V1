@@ -162,6 +162,24 @@ export default async function AcademyCoursesPage() {
           </div>
         </div>
 
+        {/* Scorecard strip */}
+        <div
+          className="rounded-xl border px-5 py-4 mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
+        >
+          <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+            <span className="font-semibold" style={{ color: "#F9FAFB" }}>Not sure which area to prioritise?</span>
+            {" "}The free Visibility Scorecard shows exactly where your research profile is weakest — so you know which modules matter most right now.
+          </p>
+          <Link
+            href="/resources/visibility-scorecard"
+            className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0 rounded-lg px-4 py-2 text-white"
+            style={{ backgroundColor: "#10B981" }}
+          >
+            Take the Scorecard Free →
+          </Link>
+        </div>
+
         {courses.length === 0 ? (
           /* Empty state — no published courses yet */
           <div

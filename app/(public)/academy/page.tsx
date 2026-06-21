@@ -232,6 +232,24 @@ export default function AcademyPage() {
             <p className="mt-6 text-xs" style={{ color: "#6B7280" }}>
               Free preview lessons available on every module. No credit card required.
             </p>
+
+            {/* Scorecard hook */}
+            <div
+              className="mt-5 p-4 rounded-xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
+              style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
+            >
+              <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+                <span className="font-semibold" style={{ color: "#F9FAFB" }}>Not sure where your gaps are?</span>
+                {" "}Take the free Visibility Scorecard first — 4 minutes, 12 checkpoints, score out of 100.
+              </p>
+              <Link
+                href="/resources/visibility-scorecard"
+                className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0 rounded-lg px-4 py-2 text-white"
+                style={{ backgroundColor: "#10B981" }}
+              >
+                Check My Score →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -640,10 +658,10 @@ export default function AcademyPage() {
               </p>
               <Link
                 href="/clinics"
-                className="text-xs font-semibold"
-                style={{ color: "#60A5FA" }}
+                className="inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-xs font-bold text-white"
+                style={{ backgroundColor: "#2563EB" }}
               >
-                Learn about the clinic →
+                Explore the Digital Visibility Clinic →
               </Link>
             </div>
           </div>
@@ -695,6 +713,19 @@ export default function AcademyPage() {
           <p className="mt-6 text-xs" style={{ color: "#6B7280" }}>
             Questions? WhatsApp us — we respond within 24 hours, usually much sooner.
           </p>
+
+          <div className="mt-8 pt-8 border-t" style={{ borderColor: "#1E293B" }}>
+            <p className="text-xs mb-3" style={{ color: "#4B5563" }}>
+              Prefer live, expert-facilitated learning with a small group?
+            </p>
+            <Link
+              href="/clinics"
+              className="text-xs font-semibold transition-opacity hover:opacity-80"
+              style={{ color: "#60A5FA" }}
+            >
+              Explore the Digital Visibility Clinic — live cohort, 5 core sessions →
+            </Link>
+          </div>
         </div>
       </section>
 
