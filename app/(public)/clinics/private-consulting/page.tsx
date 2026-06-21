@@ -28,7 +28,7 @@ const PACKAGES = [
       "Written gap report with prioritised action list",
       "30-min debrief call — walk through findings together",
     ],
-    whatsappContext: "Visibility Starter private consulting — $209 / ₦205,000",
+    whatsappMessage: "Hi, I'd like to start with the Visibility Starter package ($209 / ₦205,000) from Researchvy Private Consulting. What are the next steps and current availability?",
     cta: "Start with Starter",
     ideal: "Best for researchers who need their core discovery profiles fixed fast.",
   },
@@ -47,7 +47,7 @@ const PACKAGES = [
       "Platform-by-platform reach plan (Mendeley, SSRN, preprints, open-access repos)",
       "60-min strategy call — implementation roadmap, questions, priorities",
     ],
-    whatsappContext: "Visibility Growth private consulting — $309 / ₦305,000",
+    whatsappMessage: "Hi, I'd like to start with the Visibility Growth package ($309 / ₦305,000) from Researchvy Private Consulting. What are the next steps and current availability?",
     cta: "Start with Growth",
     ideal: "Best for researchers publishing consistently but not reaching outside their immediate circle.",
   },
@@ -66,7 +66,7 @@ const PACKAGES = [
       "Citation growth roadmap — strategic, ethical citation-building over 12 months",
       "Ongoing advisory — one monthly 30-min check-in call for 3 months after delivery",
     ],
-    whatsappContext: "Visibility Authority private consulting — $509 / ₦505,000",
+    whatsappMessage: "Hi, I'd like to start with the Visibility Authority package ($509 / ₦505,000) from Researchvy Private Consulting. What are the next steps and current availability?",
     cta: "Start with Authority",
     ideal: "Best for researchers aiming for global recognition, keynote invitations, and career-defining impact.",
   },
@@ -75,7 +75,7 @@ const PACKAGES = [
 const HOW_DIFFERENT = [
   {
     label: "Cohort Clinic",
-    href:  "/clinics",
+    href:  "/clinics/digital-visibility-clinic",
     color: "#10B981",
     points: [
       "Up to 20 researchers per cohort",
@@ -88,7 +88,7 @@ const HOW_DIFFERENT = [
   },
   {
     label: "Private Consulting",
-    href:  "/clinics/private-consulting",
+    href:  "#packages",
     color: "#8B5CF6",
     points: [
       "1-on-1 — only you, only your gaps",
@@ -97,7 +97,7 @@ const HOW_DIFFERENT = [
       "Start anytime — no cohort schedule to join",
       "₦205,000 – ₦505,000",
     ],
-    cta: "View Consulting",
+    cta: "See Packages",
     current: true,
   },
 ];
@@ -118,7 +118,7 @@ const PROCESS_STEPS = [
   {
     step:  "03",
     title: "You receive your deliverables",
-    desc:  "Within 5 working days: a written gap report, optimised profiles (we make the changes for you), and your strategy document.",
+    desc:  "Within 5–7 working days: a written gap report, optimised profiles (we make the changes for you), and your strategy document.",
     color: "#8B5CF6",
   },
   {
@@ -145,6 +145,10 @@ const OBJECTIONS = [
   {
     q: "I'm in the middle of submitting papers — is now a good time?",
     a: "Yes, especially for the Starter package. Getting your ORCID and Google Scholar optimised before a paper publishes means it gets attributed correctly from day one, not after months of chasing corrections.",
+  },
+  {
+    q: "What if the deliverables don't meet my expectations?",
+    a: "We revise at no additional cost. If the strategy document, optimised profiles, or gap report don't address the specific issues we identified in the audit, raise it at the debrief call or within 7 days of delivery and we go back in and fix it. You are paying for a solved problem, not a best effort.",
   },
 ];
 
@@ -192,14 +196,19 @@ export default function PrivateConsultingPage() {
             Your Gaps. Your Profile.<br />
             <span style={{ color: "#8B5CF6" }}>Done For You.</span>
           </h1>
-          <p className="text-base sm:text-lg leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-base sm:text-lg leading-relaxed mb-4" style={{ color: "#6B7280" }}>
             One-on-one consulting built around your specific research identity — not a cohort curriculum.
             We audit your profiles, fix what&apos;s broken, build your strategy, and hand you the deliverables.
             You leave with a fully optimised scholarly presence, not homework.
           </p>
+          <p className="text-sm mb-6" style={{ color: "#4B5563" }}>
+            Packages from{" "}
+            <strong style={{ color: "#A78BFA" }}>$209 / ₦205,000</strong>
+            {" "}· Written deliverables + debrief call · Start anytime
+          </p>
           <div className="flex flex-wrap gap-3">
             <a
-              href={buildWhatsAppUrl("Researchvy private consulting — enquiry")}
+              href={buildWhatsAppUrl("Private Consulting")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white"
@@ -286,6 +295,29 @@ export default function PrivateConsultingPage() {
             </p>
           </div>
 
+          {/* Every package baseline */}
+          <div
+            className="rounded-2xl border p-5 mb-8"
+            style={{ backgroundColor: "rgba(139,92,246,0.04)", borderColor: "rgba(139,92,246,0.18)" }}
+          >
+            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#8B5CF6" }}>
+              Every package includes
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {[
+                "Full independent audit of your profiles before we speak",
+                "We make the changes — directly on your accounts",
+                "Written deliverables, not just verbal advice or notes",
+                "Live debrief call to walk through every decision",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-2">
+                  <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#8B5CF6" }} />
+                  <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {PACKAGES.map((pkg) => (
               <div
@@ -360,7 +392,7 @@ export default function PrivateConsultingPage() {
 
                   {/* CTA */}
                   <a
-                    href={buildWhatsAppUrl(pkg.whatsappContext)}
+                    href={`https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(pkg.whatsappMessage)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white"
@@ -372,6 +404,60 @@ export default function PrivateConsultingPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Trust — evidence base + institutional track record */}
+        <div className="mb-20">
+          <div
+            className="rounded-2xl border p-7"
+            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
+              <div>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
+                  What the data shows
+                </p>
+                <div className="space-y-4">
+                  {[
+                    { stat: "89%",   label: "of researchers audited have at least one unclaimed or misattributed publication" },
+                    { stat: "23",    label: "citations recovered on average by fixing a single split Scopus author profile" },
+                    { stat: "4 pts", label: "average h-index gain after correcting author disambiguation alone" },
+                  ].map(({ stat, label }) => (
+                    <div key={stat} className="flex items-start gap-4">
+                      <span
+                        className="text-3xl font-black leading-none flex-shrink-0"
+                        style={{ color: "#8B5CF6", fontFamily: "var(--font-serif)" }}
+                      >
+                        {stat}
+                      </span>
+                      <p className="text-sm leading-relaxed pt-1" style={{ color: "#6B7280" }}>{label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
+                  Previously delivered to researchers at
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "ASM Nigeria — American Society for Microbiology, Nigeria Chapter",
+                    "FUTO EHS Department — Federal University of Technology, Owerri",
+                    "Bingham University, Nigeria",
+                    "Olabisi Onabanjo University, Ogun State",
+                  ].map((inst) => (
+                    <li key={inst} className="flex items-start gap-2.5">
+                      <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#8B5CF6" }} />
+                      <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>{inst}</p>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs mt-4 leading-relaxed" style={{ color: "#4B5563" }}>
+                  Private Consulting brings the same expertise, applied exclusively to your profile, 1-on-1.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -471,7 +557,7 @@ export default function PrivateConsultingPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href={buildWhatsAppUrl("Researchvy private consulting — ready to start")}
+                href={`https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent("Hi, I'm ready to start with Researchvy Private Consulting. Can you tell me about next steps and current availability?")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-bold text-white"
@@ -481,13 +567,19 @@ export default function PrivateConsultingPage() {
                 Start via WhatsApp
               </a>
               <Link
-                href="/clinics"
+                href="/clinics/digital-visibility-clinic"
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-semibold border transition-colors"
                 style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
               >
                 View the Cohort Clinic Instead
               </Link>
             </div>
+            <p className="text-xs mt-5" style={{ color: "#4B5563" }}>
+              Know which package you want?{" "}
+              <a href="#packages" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
+                Go to packages ↑
+              </a>
+            </p>
           </div>
         </div>
 

@@ -117,7 +117,6 @@ export default function ConsultationPage() {
               href="/resources/visibility-scorecard"
               className="font-semibold transition-colors"
               style={{ color: "#2563EB" }}
-              onMouseEnter={undefined}
             >
               Take it free (5 minutes) →
             </Link>
