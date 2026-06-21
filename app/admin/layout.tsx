@@ -20,6 +20,19 @@ async function getPendingCount(): Promise<number> {
   }
 }
 
+async function getNewScorecardCount(): Promise<number> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const { count } = await admin
+      .from("visibility_scorecard_leads")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "new");
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
 export default async function AdminLayout({
   children,
 }: {
@@ -33,7 +46,10 @@ export default async function AdminLayout({
   // If role is null, the DB query failed — don't redirect (could be transient).
   if (!allowed && role !== null) redirect("/dashboard");
 
-  const pendingCount = await getPendingCount();
+  const [pendingCount, newScorecardCount] = await Promise.all([
+    getPendingCount(),
+    getNewScorecardCount(),
+  ]);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row" style={{ backgroundColor: "#080E1A" }}>
@@ -54,7 +70,7 @@ export default async function AdminLayout({
           </div>
         </div>
 
-        <AdminNav pendingCount={pendingCount} />
+        <AdminNav pendingCount={pendingCount} newScorecardCount={newScorecardCount} />
 
         {/* Footer: identity + sign out */}
         <div className="px-4 py-3 border-t space-y-1" style={{ borderColor: "#1E293B" }}>

@@ -17,12 +17,14 @@ import {
   CalendarDays,
   Award,
   ClipboardCheck,
+  Target,
 } from "lucide-react";
 
 const NAV = [
-  { label: "Overview",      href: "/admin",                     icon: LayoutDashboard, exact: true  },
-  { label: "Review Queue",  href: "/admin/review",              icon: ClipboardCheck,  exact: false },
-  { label: "Orders",        href: "/admin/orders",               icon: ShoppingBag,     exact: false },
+  { label: "Overview",        href: "/admin",                     icon: LayoutDashboard, exact: true  },
+  { label: "Review Queue",    href: "/admin/review",              icon: ClipboardCheck,  exact: false },
+  { label: "Scorecard Leads", href: "/admin/scorecard",           icon: Target,          exact: false },
+  { label: "Orders",          href: "/admin/orders",              icon: ShoppingBag,     exact: false },
   { label: "Events",        href: "/admin/events",               icon: CalendarDays,    exact: false },
   { label: "Enquiries",     href: "/admin/enquiries",            icon: Inbox,           exact: false },
   { label: "Partnerships",  href: "/admin/partnerships",         icon: Handshake,       exact: false },
@@ -37,17 +39,19 @@ const NAV = [
 ];
 
 interface Props {
-  pendingCount?: number;
+  pendingCount?:        number;
+  newScorecardCount?:   number;
 }
 
-export function AdminNav({ pendingCount = 0 }: Props) {
+export function AdminNav({ pendingCount = 0, newScorecardCount = 0 }: Props) {
   const pathname = usePathname();
 
   return (
     <nav className="flex-1 px-3 py-5 space-y-0.5" aria-label="Admin navigation">
       {NAV.map(({ label, href, icon: Icon, exact }) => {
-        const active = exact ? pathname === href : pathname.startsWith(href);
-        const isReviewQueue = href === "/admin/review";
+        const active           = exact ? pathname === href : pathname.startsWith(href);
+        const isReviewQueue    = href === "/admin/review";
+        const isScorecard      = href === "/admin/scorecard";
         return (
           <Link
             key={href}
@@ -69,6 +73,14 @@ export function AdminNav({ pendingCount = 0 }: Props) {
                 style={{ backgroundColor: "rgba(245,158,11,0.2)", color: "#FCD34D" }}
               >
                 {pendingCount}
+              </span>
+            )}
+            {isScorecard && newScorecardCount > 0 && (
+              <span
+                className="text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none"
+                style={{ backgroundColor: "rgba(16,185,129,0.2)", color: "#34D399" }}
+              >
+                {newScorecardCount}
               </span>
             )}
           </Link>

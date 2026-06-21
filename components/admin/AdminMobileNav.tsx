@@ -6,14 +6,15 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   Menu, X, LayoutDashboard, Inbox, Handshake,
   FileText, BookOpen, Users, BarChart2, LogOut, Shield, GraduationCap, Layers,
-  CalendarDays, Globe, Award, ClipboardCheck,
+  CalendarDays, Globe, Award, ClipboardCheck, Target,
 } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 
 const NAV = [
-  { label: "Overview",     href: "/admin",              Icon: LayoutDashboard,  exact: true  },
-  { label: "Review Queue", href: "/admin/review",       Icon: ClipboardCheck,   exact: false },
-  { label: "Events",         href: "/admin/events",         Icon: CalendarDays,    exact: false },
+  { label: "Overview",         href: "/admin",              Icon: LayoutDashboard,  exact: true  },
+  { label: "Review Queue",     href: "/admin/review",       Icon: ClipboardCheck,   exact: false },
+  { label: "Scorecard Leads",  href: "/admin/scorecard",    Icon: Target,           exact: false },
+  { label: "Events",           href: "/admin/events",       Icon: CalendarDays,     exact: false },
   { label: "Opportunities", href: "/admin/opportunities", Icon: Globe,           exact: false },
   { label: "Enquiries",     href: "/admin/enquiries",     Icon: Inbox,           exact: false },
   { label: "Partnerships", href: "/admin/partnerships", Icon: Handshake,       exact: false },

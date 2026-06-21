@@ -1189,3 +1189,295 @@ export async function sendDeadlineReminderEmail(opts: {
 </body></html>`,
   });
 }
+
+// ── Scorecard helpers ─────────────────────────────────────────────────────────
+
+const CHECKPOINT_META: Record<string, { label: string; maxPoints: number; dim: string }> = {
+  orcid:         { label: "ORCID iD",                    maxPoints: 9, dim: "Scholar Identity"             },
+  googlescholar: { label: "Google Scholar",               maxPoints: 8, dim: "Scholar Identity"             },
+  scopus:        { label: "Scopus Author Profile",        maxPoints: 8, dim: "Scholar Identity"             },
+  openaccess:    { label: "Open Access Rate",             maxPoints: 9, dim: "Discoverability"              },
+  keywords:      { label: "Keywords & Abstracts",         maxPoints: 8, dim: "Discoverability"              },
+  repository:    { label: "Institutional Repository",     maxPoints: 8, dim: "Discoverability"              },
+  cppratio:      { label: "Citations Per Paper vs. Field",maxPoints: 9, dim: "Citation Health"              },
+  hefficiency:   { label: "h-index Efficiency",           maxPoints: 8, dim: "Citation Health"              },
+  alerts:        { label: "Citation Alert System",        maxPoints: 8, dim: "Citation Health"              },
+  laysummaries:  { label: "Lay Summary Practice",         maxPoints: 9, dim: "Research Communication"       },
+  socialmedia:   { label: "Professional Online Presence", maxPoints: 8, dim: "Research Communication"       },
+  crosssector:   { label: "Cross-Sector Engagement",      maxPoints: 8, dim: "Research Communication"       },
+};
+
+const DIM_COLORS: Record<string, string> = {
+  identity:        "#2563EB",
+  discoverability: "#7C3AED",
+  citationhealth:  "#059669",
+  communication:   "#D97706",
+};
+
+const DIM_LABELS: Record<string, string> = {
+  identity:        "Scholar Identity",
+  discoverability: "Discoverability",
+  citationhealth:  "Citation Health",
+  communication:   "Research Communication",
+};
+
+function tierLabel(tier: string): string {
+  const map: Record<string, string> = {
+    leader:          "Visibility Leader",
+    emerging:        "Emerging Researcher",
+    significant_gaps:"Significant Gaps",
+    invisible:       "Invisible",
+  };
+  return map[tier] ?? tier;
+}
+
+function tierColor(tier: string): string {
+  const map: Record<string, string> = {
+    leader:           "#10B981",
+    emerging:         "#F59E0B",
+    significant_gaps: "#F97316",
+    invisible:        "#EF4444",
+  };
+  return map[tier] ?? "#6B7280";
+}
+
+// ── Scorecard lead email (to the researcher) ──────────────────────────────────
+
+export async function sendScorecardLeadEmail(opts: {
+  to:         string;
+  firstName:  string;
+  score:      number;
+  tier:       string;
+  answers:    Record<string, number>;
+  dimScores:  Record<string, { score: number; maxPoints: number }>;
+  leadId:     string;
+}) {
+  const r = await resend();
+
+  // Find 3 lowest-scoring checkpoints (by % of max)
+  const gaps = Object.entries(opts.answers)
+    .map(([id, val]) => {
+      const meta = CHECKPOINT_META[id];
+      if (!meta) return null;
+      return { id, label: meta.label, dim: meta.dim, pct: meta.maxPoints > 0 ? val / meta.maxPoints : 1 };
+    })
+    .filter(Boolean)
+    .sort((a, b) => (a!.pct - b!.pct))
+    .slice(0, 3) as { id: string; label: string; dim: string; pct: number }[];
+
+  const color     = tierColor(opts.tier);
+  const tLabel    = tierLabel(opts.tier);
+  const clinicUrl = `${SITE_URL}/clinics/digital-visibility-clinic`;
+  const waText    = encodeURIComponent(`Hi, I scored ${opts.score}/100 on the Researcher Visibility Scorecard. I'd like to discuss a strategy for improving my visibility.`);
+  const waUrl     = `https://wa.me/2347030515183?text=${waText}`;
+
+  const dimRows = Object.entries(opts.dimScores).map(([id, d]) => {
+    const pct   = d.maxPoints > 0 ? Math.round((d.score / d.maxPoints) * 100) : 0;
+    const bg    = DIM_COLORS[id] ?? "#6B7280";
+    const label = DIM_LABELS[id] ?? id;
+    return `
+      <tr>
+        <td style="padding:8px 0;color:#9CA3AF;font-size:13px">${label}</td>
+        <td style="padding:8px 0 8px 12px;color:${bg};font-size:13px;font-weight:700;text-align:right;white-space:nowrap">
+          ${d.score}/${d.maxPoints} &nbsp;(${pct}%)
+        </td>
+      </tr>`;
+  }).join("");
+
+  const gapItems = gaps.map(g => `
+    <li style="color:#9CA3AF;font-size:14px;line-height:1.7;margin-bottom:8px">
+      <strong style="color:#F9FAFB">${g.label}</strong>
+      <span style="color:#6B7280;font-size:12px"> — ${g.dim}</span>
+    </li>`).join("");
+
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [opts.to],
+    replyTo: REPLY_TO,
+    subject: `Your Visibility Scorecard: ${opts.score}/100 — ${tLabel}`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">
+    Researchvy · Researcher Visibility Scorecard
+  </p>
+
+  <!-- Score card -->
+  <div style="background:${color}12;border:1px solid ${color}30;border-radius:20px;padding:32px;text-align:center;margin-bottom:24px">
+    <p style="color:${color};font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 8px">
+      Your Visibility Score
+    </p>
+    <p style="color:#F9FAFB;font-size:64px;font-weight:800;margin:0 0 4px;line-height:1">${opts.score}</p>
+    <p style="color:${color};font-size:16px;font-weight:700;margin:0 0 16px">${tLabel}</p>
+    <p style="color:#9CA3AF;font-size:14px;line-height:1.7;margin:0">
+      Hi ${opts.firstName}, here is your complete visibility breakdown and your highest-priority gaps.
+    </p>
+  </div>
+
+  <!-- Dimension breakdown -->
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px;margin-bottom:24px">
+    <p style="color:#F9FAFB;font-size:14px;font-weight:700;margin:0 0 16px">Your dimension breakdown</p>
+    <table style="width:100%;border-collapse:collapse">
+      ${dimRows}
+    </table>
+  </div>
+
+  <!-- Priority gaps -->
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px;margin-bottom:24px">
+    <p style="color:#F87171;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 12px">
+      Your 3 priority gaps
+    </p>
+    <p style="color:#6B7280;font-size:13px;margin:0 0 16px">
+      These are the checkpoints where you are losing the most visibility relative to your potential:
+    </p>
+    <ul style="padding-left:20px;margin:0">${gapItems}</ul>
+  </div>
+
+  <!-- Benchmark -->
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px;margin-bottom:24px">
+    <p style="color:#9CA3AF;font-size:13px;line-height:1.7;margin:0">
+      The global researcher average is <strong style="color:#F9FAFB">34/100</strong>.
+      Researchers who complete the Digital Visibility Clinic exit at an average of
+      <strong style="color:#10B981">79/100</strong> after 4 live sessions.
+    </p>
+  </div>
+
+  <!-- CTA -->
+  <div style="background:#0F172A;border:1px solid #1E293B;border-top:3px solid #2563EB;border-radius:16px;padding:32px;margin-bottom:24px">
+    <p style="color:#93C5FD;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px">
+      Your next step
+    </p>
+    <h2 style="color:#F9FAFB;font-size:20px;font-weight:700;margin:0 0 12px;line-height:1.3">
+      Book a free 20-minute strategy call
+    </h2>
+    <p style="color:#6B7280;font-size:14px;line-height:1.7;margin:0 0 24px">
+      We will review your specific gaps, show you what the biggest lever is for your profile,
+      and help you decide if the Digital Visibility Clinic is the right next step for you.
+    </p>
+    <a href="${waUrl}"
+       style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 28px;border-radius:12px;margin-bottom:12px">
+      Book via WhatsApp →
+    </a>
+    <br>
+    <a href="${clinicUrl}"
+       style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 28px;border-radius:12px;margin-top:4px">
+      Claim My Spot in the Clinic →
+    </a>
+  </div>
+
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0;line-height:1.7">
+      Researchvy · Making researchers discoverable, globally.<br>
+      <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">researchvy.com</a>
+      &nbsp;·&nbsp;
+      <a href="${clinicUrl}" style="color:#4B5563;text-decoration:none">Digital Visibility Clinic</a>
+    </p>
+    <p style="color:#374151;font-size:11px;margin:8px 0 0">
+      You received this because you completed the Researcher Visibility Scorecard.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>`,
+  });
+}
+
+// ── Scorecard admin alert (to researchvy@gmail.com) ───────────────────────────
+
+export async function sendScorecardAdminAlert(opts: {
+  name:      string;
+  email:     string;
+  score:     number;
+  tier:      string;
+  dimScores: Record<string, { score: number; maxPoints: number }>;
+  leadId:    string;
+}) {
+  const r        = await resend();
+  const color    = tierColor(opts.tier);
+  const tLabel   = tierLabel(opts.tier);
+  const adminUrl = `${SITE_URL}/admin/scorecard/${opts.leadId}`;
+  const waText   = encodeURIComponent(`Hi ${opts.name.split(" ")[0]}, I saw your Researcher Visibility Scorecard score (${opts.score}/100). I'd love to chat about your specific gaps and how we can help.`);
+  const waUrl    = `https://wa.me/2347030515183?text=${waText}`;
+
+  const dimRows = Object.entries(opts.dimScores).map(([id, d]) => {
+    const pct   = d.maxPoints > 0 ? Math.round((d.score / d.maxPoints) * 100) : 0;
+    const label = DIM_LABELS[id] ?? id;
+    const barW  = Math.round((d.score / d.maxPoints) * 120);
+    return `
+      <tr>
+        <td style="padding:6px 0;color:#9CA3AF;font-size:13px;width:180px">${label}</td>
+        <td style="padding:6px 0 6px 12px">
+          <div style="background:#1E293B;border-radius:4px;height:6px;width:120px;display:inline-block;vertical-align:middle">
+            <div style="background:${DIM_COLORS[id] ?? "#6B7280"};width:${barW}px;height:6px;border-radius:4px"></div>
+          </div>
+        </td>
+        <td style="padding:6px 0 6px 8px;color:#F9FAFB;font-size:13px;font-weight:700;white-space:nowrap">
+          ${d.score}/${d.maxPoints} (${pct}%)
+        </td>
+      </tr>`;
+  }).join("");
+
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [ADMIN_CC],
+    replyTo: opts.email,
+    subject: `🎯 New Scorecard Lead: ${opts.name} scored ${opts.score}/100 — ${tLabel}`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:40px 24px">
+
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 32px;text-align:center">
+    Researchvy Admin · New Scorecard Lead
+  </p>
+
+  <!-- Score summary -->
+  <div style="background:${color}12;border:1px solid ${color}30;border-radius:16px;padding:24px;margin-bottom:20px;display:flex;align-items:center;gap:20px">
+    <div style="text-align:center;min-width:80px">
+      <p style="color:#F9FAFB;font-size:48px;font-weight:800;margin:0;line-height:1">${opts.score}</p>
+      <p style="color:${color};font-size:11px;font-weight:700;margin:4px 0 0;text-transform:uppercase">${tLabel}</p>
+    </div>
+    <div>
+      <p style="color:#F9FAFB;font-size:16px;font-weight:700;margin:0 0 4px">${opts.name}</p>
+      <p style="color:#60A5FA;font-size:14px;margin:0 0 8px">
+        <a href="mailto:${opts.email}" style="color:#60A5FA">${opts.email}</a>
+      </p>
+      <p style="color:#6B7280;font-size:12px;margin:0">Lead ID: ${opts.leadId}</p>
+    </div>
+  </div>
+
+  <!-- Dimension breakdown -->
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:14px;padding:20px;margin-bottom:20px">
+    <p style="color:#F9FAFB;font-size:13px;font-weight:700;margin:0 0 14px">Dimension breakdown</p>
+    <table style="width:100%;border-collapse:collapse">${dimRows}</table>
+  </div>
+
+  <!-- Actions -->
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px">
+    <a href="${adminUrl}"
+       style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:12px 20px;border-radius:10px">
+      View in Admin Dashboard →
+    </a>
+    <a href="${waUrl}"
+       style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:12px 20px;border-radius:10px">
+      Follow up via WhatsApp
+    </a>
+    <a href="mailto:${opts.email}"
+       style="display:inline-block;background:#1E293B;color:#F9FAFB;text-decoration:none;font-weight:700;font-size:13px;padding:12px 20px;border-radius:10px;border:1px solid #374151">
+      Reply by email
+    </a>
+  </div>
+
+  <div style="text-align:center;padding-top:20px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0">
+      Researchvy Admin · <a href="${SITE_URL}/admin/scorecard" style="color:#4B5563;text-decoration:none">All Scorecard Leads</a>
+    </p>
+  </div>
+</div>
+</body>
+</html>`,
+  });
+}

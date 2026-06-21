@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ChevronDown, ChevronUp, ArrowRight, AlertTriangle, TrendingUp, Award, ExternalLink } from "lucide-react";
+import { ChevronDown, ChevronUp, ArrowRight, AlertTriangle, TrendingUp, Award, ExternalLink, Mail, Check, Loader2 } from "lucide-react";
 
 // ── Scorecard data ────────────────────────────────────────────────────────────
 
@@ -253,6 +253,149 @@ function ScoreBar({ score, max, color }: { score: number; max: number; color: st
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
+// ── Email capture sub-component ───────────────────────────────────────────────
+
+function EmailCapture({
+  leadId,
+  score,
+}: {
+  leadId: string | null;
+  score: number;
+}) {
+  const [name,    setName]    = useState("");
+  const [email,   setEmail]   = useState("");
+  const [status,  setStatus]  = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [skipped, setSkipped] = useState(false);
+
+  if (skipped) return null;
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email) return;
+    setStatus("loading");
+
+    try {
+      const url  = leadId ? `/api/scorecard/${leadId}/claim` : "/api/scorecard/submit";
+      const body = leadId
+        ? JSON.stringify({ name, email })
+        : JSON.stringify({ name, email, totalScore: score, answers: {}, dimensionScores: {} });
+
+      const res = await fetch(url, {
+        method:  "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body,
+      });
+
+      if (!res.ok) throw new Error("failed");
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "done") {
+    return (
+      <div
+        className="rounded-2xl border p-6 text-center"
+        style={{ backgroundColor: "rgba(16,185,129,0.06)", borderColor: "rgba(16,185,129,0.25)" }}
+      >
+        <div
+          className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3"
+          style={{ backgroundColor: "rgba(16,185,129,0.15)" }}
+        >
+          <Check className="h-5 w-5" style={{ color: "#10B981" }} />
+        </div>
+        <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>Roadmap on its way</p>
+        <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+          Check your inbox — your personalised visibility roadmap and booking link are there.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="rounded-2xl border p-6"
+      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+    >
+      <div className="flex items-start gap-3 mb-4">
+        <div
+          className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+          style={{ backgroundColor: "rgba(37,99,235,0.15)" }}
+        >
+          <Mail className="h-4 w-4" style={{ color: "#60A5FA" }} />
+        </div>
+        <div>
+          <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>
+            Get your personalised roadmap
+          </p>
+          <p className="text-xs leading-relaxed mt-1" style={{ color: "#6B7280" }}>
+            We&apos;ll email your score breakdown, your exact gaps ranked by impact, and a link to
+            book a free 20-minute strategy call — no spam, no obligation.
+          </p>
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <input
+          type="text"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          placeholder="Your name (optional)"
+          className="w-full rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 focus:ring-blue-500"
+          style={{
+            backgroundColor: "#080E1A",
+            border:          "1px solid #1E293B",
+            color:           "#F9FAFB",
+          }}
+        />
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Your email address *"
+          required
+          className="w-full rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 focus:ring-blue-500"
+          style={{
+            backgroundColor: "#080E1A",
+            border:          "1px solid #1E293B",
+            color:           "#F9FAFB",
+          }}
+        />
+        {status === "error" && (
+          <p className="text-xs" style={{ color: "#F87171" }}>
+            Something went wrong. Try again or use the WhatsApp button above.
+          </p>
+        )}
+        <div className="flex items-center gap-3">
+          <button
+            type="submit"
+            disabled={status === "loading" || !email}
+            className="flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-white transition-all disabled:opacity-50"
+            style={{ backgroundColor: "#2563EB" }}
+          >
+            {status === "loading" ? (
+              <><Loader2 className="h-4 w-4 animate-spin" /> Sending…</>
+            ) : (
+              <>Send my roadmap <ArrowRight className="h-4 w-4" /></>
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={() => setSkipped(true)}
+            className="text-xs transition-colors hover:text-white"
+            style={{ color: "#4B5563" }}
+          >
+            Skip
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
+
 export function VisibilityScorecard() {
   const [answers, setAnswers]   = useState<Record<string, number>>({});
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
@@ -261,6 +404,10 @@ export function VisibilityScorecard() {
     citationhealth: false,
     communication: false,
   });
+
+  // Lead persistence: auto-save on completion, store returned id for email claim
+  const [leadId,     setLeadId]     = useState<string | null>(null);
+  const hasSavedRef                 = useRef(false);
 
   function answer(checkpointId: string, value: number) {
     setAnswers((prev) => ({ ...prev, [checkpointId]: value }));
@@ -282,9 +429,39 @@ export function VisibilityScorecard() {
     answeredCount: d.checkpoints.filter((c) => c.id in answers).length,
   }));
 
+  // Build dimension scores object for API
+  const dimensionScoresPayload = Object.fromEntries(
+    DIMENSIONS.map(d => [
+      d.id,
+      {
+        score: d.checkpoints.reduce((a, c) => a + (answers[c.id] ?? 0), 0),
+        maxPoints: d.maxPoints,
+      },
+    ])
+  );
+
   const weakest = complete
     ? [...dimScores].sort((a, b) => a.score / a.maxPoints - b.score / b.maxPoints)[0]
     : null;
+
+  // Auto-save anonymous lead when all questions answered
+  useEffect(() => {
+    if (!complete || hasSavedRef.current) return;
+    hasSavedRef.current = true;
+    fetch("/api/scorecard/submit", {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify({
+        answers,
+        totalScore,
+        dimensionScores: dimensionScoresPayload,
+      }),
+    })
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d?.id) setLeadId(d.id); })
+      .catch(() => {});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [complete]);
 
   return (
     <div>
@@ -661,6 +838,9 @@ export function VisibilityScorecard() {
               </p>
             </div>
           </div>
+
+          {/* Email capture — optional, below primary CTAs */}
+          <EmailCapture leadId={leadId} score={totalScore} />
 
         </div>
       )}

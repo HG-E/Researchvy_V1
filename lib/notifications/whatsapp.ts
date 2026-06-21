@@ -113,6 +113,31 @@ export async function notifyCertificateReady(opts: {
   if (error) console.error("[whatsapp] certificateReady:", error);
 }
 
+/** Sent to admin when a high-intent scorecard lead claims their email (score < 65) */
+export async function notifyScorecardLead(opts: {
+  name:  string;
+  email: string;
+  score: number;
+  tier:  string;
+}): Promise<void> {
+  const adminPhone = process.env.ADMIN_WHATSAPP_PHONE ?? "2347030515183";
+  const tierEmoji: Record<string, string> = {
+    invisible:        "🔴",
+    significant_gaps: "🟠",
+    emerging:         "🟡",
+    leader:           "🟢",
+  };
+  const emoji = tierEmoji[opts.tier] ?? "📊";
+  const msg =
+    `${emoji} *New Scorecard Lead* — ${opts.name}\n\n` +
+    `Score: *${opts.score}/100* (${opts.tier.replace("_", " ")})\n` +
+    `Email: ${opts.email}\n\n` +
+    `This researcher has gaps we can directly address. Reach out now while intent is high 🎯\n\n` +
+    `Admin: https://researchvy.com/admin/scorecard`;
+  const { error } = await sendWa(adminPhone, msg);
+  if (error) console.error("[whatsapp] scorecardLead:", error);
+}
+
 /** Session reminder (2 hrs before) */
 export async function notifySessionReminder(opts: {
   phone:        string | null;
