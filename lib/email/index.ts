@@ -238,7 +238,7 @@ export async function sendDay2DripEmail(opts: { to: string; firstName: string })
   });
 }
 
-// ── Day-5 drip (course enrollment nudge) ─────────────────────────────────────
+// ── Day-5 drip (scorecard nudge + academy as deepening path) ─────────────────
 
 export async function sendDay5DripEmail(opts: { to: string; firstName: string }) {
   const r = await resend();
@@ -246,52 +246,74 @@ export async function sendDay5DripEmail(opts: { to: string; firstName: string })
     from:    FROM_TEAM,
     to:      [opts.to],
     replyTo: REPLY_TO,
-    subject: `The visibility gap is widening, ${opts.firstName}`,
+    subject: `${opts.firstName}, where do you actually stand?`,
     html: `<!DOCTYPE html><html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
 <div style="max-width:600px;margin:0 auto;padding:48px 24px">
 
   <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">
-    Researchvy Academy
+    Researchvy
   </p>
 
-  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:24px">
     <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 16px;line-height:1.4">
-      ${opts.firstName}, here's what separates cited researchers from invisible ones.
+      Here's what separates cited researchers from invisible ones.
     </h1>
     <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 20px">
       It's not prestige. It's not luck. It's a small set of learnable skills
       that most researchers were never taught in their PhD programme.
     </p>
-    <div style="border-left:3px solid #A78BFA;padding-left:16px;margin-bottom:24px">
-      <p style="color:#A78BFA;font-size:13px;font-weight:600;margin:0 0 8px">What the Academy teaches:</p>
-      <ul style="color:#9CA3AF;font-size:14px;line-height:2;margin:0;padding-left:20px">
-        <li>How to make your research <em>discoverable</em> on every major platform</li>
-        <li>Building a scholarly identity that precedes your papers</li>
-        <li>Writing abstracts that rank and get read</li>
-        <li>Turning one paper into 6 months of visibility content</li>
-        <li>Getting cited by researchers who've never met you</li>
-      </ul>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">
+      Before you learn the skills, though — you need to know <em>which</em> ones matter most for you.
+      Most researchers who fix the wrong thing first spend months on platforms that don't move their numbers.
+    </p>
+    <div style="background:#0A2118;border:1px solid rgba(16,185,129,0.2);border-radius:14px;padding:24px;margin-bottom:28px">
+      <p style="color:#10B981;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px">
+        The Researcher Visibility Scorecard
+      </p>
+      <p style="color:#D1D5DB;font-size:14px;line-height:1.8;margin:0 0 12px">
+        12 checkpoints. 4–6 minutes. Your score out of 100, with a breakdown of exactly where your visibility is leaking and what to fix first.
+      </p>
+      <p style="color:#6B7280;font-size:13px;margin:0">
+        Scholar Identity · Discoverability · Citation Health · Research Communication
+      </p>
     </div>
-    <a href="${SITE_URL}/academy/courses"
-       style="display:inline-block;background:#7C3AED;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 32px;border-radius:12px;margin-bottom:16px">
-      Explore Academy courses →
+    <a href="${SITE_URL}/resources/visibility-scorecard"
+       style="display:inline-block;background:#10B981;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 32px;border-radius:12px;margin-bottom:12px">
+      Check My Visibility Score Free →
     </a>
     <p style="color:#4B5563;font-size:12px;margin:8px 0 0">
-      Several courses are free. No credit card needed.
+      Free · No payment required · Results shown instantly
     </p>
   </div>
 
   <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px;margin-bottom:24px">
+    <p style="color:#A78BFA;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px">
+      Then go deeper with the Academy
+    </p>
+    <p style="color:#9CA3AF;font-size:13px;line-height:1.7;margin:0 0 14px">
+      Once you know your score, the Academy courses show you exactly how to fix each gap —
+      discoverable profiles, citation-worthy abstracts, research communication that travels.
+      Several courses are free.
+    </p>
+    <a href="${SITE_URL}/academy/courses"
+       style="color:#A78BFA;text-decoration:none;font-weight:600;font-size:13px">
+      Explore Academy courses →
+    </a>
+  </div>
+
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:24px;margin-bottom:24px">
     <p style="color:#6B7280;font-size:13px;line-height:1.7;margin:0">
-      Questions about the Academy or your visibility strategy? Reply to this email — we read every one.
+      Questions about your visibility strategy? Reply to this email — we read every one.
     </p>
   </div>
 
   <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
     <p style="color:#374151;font-size:12px;margin:0;line-height:1.7">
       <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a>
+      &nbsp;·&nbsp;
+      <a href="${SITE_URL}/resources/visibility-scorecard" style="color:#4B5563;text-decoration:none">Visibility Scorecard</a>
       &nbsp;·&nbsp;
       <a href="${SITE_URL}/academy/courses" style="color:#4B5563;text-decoration:none">Academy</a>
       &nbsp;·&nbsp;

@@ -417,14 +417,14 @@ export default async function ClinicsPage({
                         </p>
                         <div className="flex items-baseline gap-2">
                           <span className="text-3xl font-bold" style={{ color: "#F9FAFB" }}>
-                            {bundle.isSolo ? "from " : ""}{formatUSD(bundle.usd.earlyBird)}
+                            {bundle.isSolo ? "from " : ""}{formatUSD(isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular)}
                           </span>
                           <span className="text-base font-semibold" style={{ color: "#6B7280" }}>
                             USD
                           </span>
                         </div>
                         <p className="text-sm font-semibold mt-0.5" style={{ color: accent }}>
-                          {bundle.isSolo ? "from " : ""}{formatNGN(bundle.ngn.earlyBird)} NGN
+                          {bundle.isSolo ? "from " : ""}{formatNGN(isEarlyBird ? bundle.ngn.earlyBird : bundle.ngn.regular)} NGN
                         </p>
                       </div>
 
@@ -553,7 +553,7 @@ export default async function ClinicsPage({
                 <span className="text-xs font-semibold" style={{ color: "#6B7280" }}>Group discounts:</span>
               </div>
               <div className="flex flex-col sm:flex-row sm:flex-wrap gap-1.5 sm:gap-x-4 sm:gap-y-1 text-xs" style={{ color: "#6B7280" }}>
-                <span>5–10 researchers → <strong style={{ color: "#F9FAFB" }}>15% off</strong></span>
+                <span>3–10 researchers → <strong style={{ color: "#F9FAFB" }}>15% off</strong></span>
                 <span className="hidden sm:inline" style={{ color: "#6B7280" }}>·</span>
                 <span>11–20 researchers → <strong style={{ color: "#F9FAFB" }}>25% off</strong></span>
                 <span className="hidden sm:inline" style={{ color: "#6B7280" }}>·</span>
