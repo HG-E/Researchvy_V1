@@ -275,6 +275,12 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
                     Book a Strategy Call
                   </Link>
                 </div>
+                <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
+                  Want done-for-you?{" "}
+                  <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
+                    Private Consulting — from $209 →
+                  </Link>
+                </p>
               </div>
             )}
           </article>

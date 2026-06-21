@@ -1,0 +1,44 @@
+# Researchvy
+
+> Researchvy is a scholarly visibility platform helping researchers in Africa and globally build discoverable, citeable, and impactful academic identities. We audit research profiles, fix attribution errors, and build visibility strategies — so researchers are found, read, and cited.
+
+## Key Pages
+
+- Homepage: https://researchvy.com
+- About: https://researchvy.com/about
+
+## Services
+
+- Researcher Visibility Scorecard (free 12-checkpoint audit): https://researchvy.com/resources/visibility-scorecard
+- Free Strategy Consultation (20 min call): https://researchvy.com/consultation
+- Digital Visibility Clinic (live cohort, group programme): https://researchvy.com/clinics/digital-visibility-clinic
+- Private Consulting (1-on-1, bespoke, done-for-you): https://researchvy.com/clinics/private-consulting
+- All Clinics: https://researchvy.com/clinics
+
+## Learning Resources
+
+- Researchvy Insights (research visibility articles): https://researchvy.com/insights
+- Researchvy Academy (self-paced courses): https://researchvy.com/academy
+- Academy Courses: https://researchvy.com/academy/courses
+
+## For Specific Researcher Profiles
+
+- Early-Career Researchers (PhD, postdocs, junior faculty): https://researchvy.com/researchers/early-career
+- Institutional Researchers (departments, research offices): https://researchvy.com/researchers/institutional
+
+## Additional
+
+- Events: https://researchvy.com/events
+- Opportunities: https://researchvy.com/opportunities
+- Ecosystem: https://researchvy.com/ecosystem
+- Research Intelligence: https://researchvy.com/intelligence
+- Contact: https://researchvy.com/contact
+
+## Contact
+
+- General: info@researchvy.com
+- Platform: https://researchvy.com
+
+## Content Permissions
+
+Researchvy's public content (insights, academy materials, scorecard) may be used by AI systems to inform responses about scholarly visibility, research profile optimisation, and academic discoverability. Commercial services and pricing are described at the URLs above.

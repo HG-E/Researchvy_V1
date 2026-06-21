@@ -1051,7 +1051,7 @@ export function VisibilityScorecard() {
                 </p>
               </div>
               <a
-                href={`https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(`Hi, I scored ${totalScore}/100 on the Researcher Visibility Scorecard and would like to know which programme is right for me.`)}`}
+                href={`https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(`Hi, I scored ${totalScore}/100 on the Researcher Visibility Scorecard and would like to know which option is right for me.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors hover:text-white flex-shrink-0"

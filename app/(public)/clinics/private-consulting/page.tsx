@@ -615,7 +615,7 @@ export default function PrivateConsultingPage() {
                 Start via WhatsApp
               </a>
               <a
-                href={`mailto:${siteConfig.contact.email}?subject=Private%20Consulting%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20Researchvy%20Private%20Consulting.%20Could%20you%20share%20more%20details%20about%20availability%20and%20packages%3F`}
+                href={`mailto:${siteConfig.contact.email}?subject=Private%20Consulting%20Enquiry&body=Hi%2C%0A%0AI%27m%20interested%20in%20Researchvy%20Private%20Consulting.%0A%0ACareer%20stage%3A%20%0AResearch%20field%3A%20%0APackage%20I%27m%20considering%20(Starter%20%2F%20Growth%20%2F%20Authority)%3A%20%0A%0ACould%20you%20share%20availability%20and%20next%20steps%3F`}
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-bold border transition-colors"
                 style={{ borderColor: "rgba(139,92,246,0.3)", color: "#A78BFA", backgroundColor: "rgba(139,92,246,0.08)" }}
               >
