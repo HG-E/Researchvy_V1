@@ -5,8 +5,14 @@ import { motion } from "framer-motion";
 import { CheckCircle, MessageCircle } from "lucide-react";
 import { copy } from "@/constants/copy";
 import { siteConfig, buildWhatsAppUrl } from "@/config/site";
+import { digitalVisibilityClinic } from "@/constants/clinics";
 
 export function ClinicFeature() {
+  const soloBundle = digitalVisibilityClinic.pricing.bundles[0];
+  const isEarlyBird = new Date() < new Date(digitalVisibilityClinic.pricing.earlyBirdDeadline + "T23:59:59");
+  const ngnPrice = isEarlyBird ? soloBundle.ngn.earlyBird : soloBundle.ngn.regular;
+  const usdPrice = isEarlyBird ? soloBundle.usd.earlyBird : soloBundle.usd.regular;
+
   return (
     <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#0F172A" }}>
       <div className="mx-auto max-w-6xl">
@@ -162,10 +168,10 @@ export function ClinicFeature() {
               <div className="mt-6 pt-6 border-t" style={{ borderColor: "#334155" }}>
                 <p className="text-xs mb-2" style={{ color: "#6B7280" }}>
                   From{" "}
-                  <strong style={{ color: "#F9FAFB" }}>$59 USD</strong>
+                  <strong style={{ color: "#F9FAFB" }}>${usdPrice} USD</strong>
                   {" / "}
-                  <strong style={{ color: "#10B981" }}>₦38,000 NGN</strong>
-                  {" "}early bird · Early bird closes June 20.
+                  <strong style={{ color: "#10B981" }}>₦{ngnPrice.toLocaleString("en-NG")} NGN</strong>
+                  {isEarlyBird ? " · Early bird pricing." : " per module."}
                 </p>
                 <Link
                   href="/clinics#pricing"

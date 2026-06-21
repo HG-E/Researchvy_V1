@@ -150,22 +150,24 @@ export default function InstitutionalLetterPage() {
                 </p>
                 <div className="space-y-1.5 text-xs" style={{ color: "#9CA3AF" }}>
                   <p>
-                    <strong style={{ color: "#D1D5DB" }}>Visibility Starter:</strong>{" "}
-                    $59 USD / ₦38,000 NGN (early bird, before June 20, 2026) · $79 / ₦50,000 regular
+                    <strong style={{ color: "#D1D5DB" }}>Single Module (per session):</strong>{" "}
+                    $79 USD / ₦42,000 NGN
                   </p>
                   <p>
-                    <strong style={{ color: "#D1D5DB" }}>Visibility Builder</strong>{" "}
-                    <span style={{ color: "#10B981" }}>(most popular)</span>
+                    <strong style={{ color: "#D1D5DB" }}>DVC Core Bundle</strong>{" "}
+                    <span style={{ color: "#10B981" }}>(most popular — 3 core sessions)</span>
                     <strong style={{ color: "#D1D5DB" }}>:</strong>{" "}
-                    $99 USD / ₦65,000 NGN (early bird) · $149 / ₦85,000 regular
+                    $149 USD / ₦85,000 NGN
                   </p>
                   <p>
-                    <strong style={{ color: "#D1D5DB" }}>Visibility Pro:</strong>{" "}
-                    $179 USD / ₦99,000 NGN (early bird) · $249 / ₦130,000 regular
+                    <strong style={{ color: "#D1D5DB" }}>DVC Pro Bundle</strong>{" "}
+                    <span>(3 core sessions + 2 bonus masterclasses)</span>
+                    <strong style={{ color: "#D1D5DB" }}>:</strong>{" "}
+                    $239 USD / ₦130,000 NGN
                   </p>
                   <p className="mt-2 pt-2 border-t" style={{ borderColor: "#1E293B" }}>
-                    Group enrolments of 5 or more researchers receive a 20% institutional discount.
-                    Groups of 11–20 receive 30% off. Institutional invoices are available upon request.
+                    Group enrolments of 3–10 researchers receive a 15% institutional discount.
+                    Groups of 11–20 receive 25% off. Institutional invoices are available upon request.
                   </p>
                 </div>
               </div>

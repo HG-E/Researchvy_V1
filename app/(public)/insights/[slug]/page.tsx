@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 import { format } from "date-fns";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getInsightBySlug, getInsightSlugs, getInsights, getArticleMetaSingle } from "@/lib/cms/mdx";
@@ -235,6 +235,46 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             {!user && (
               <div className="mt-12">
                 <LeadCaptureWidget articleTitle={insight.title} />
+              </div>
+            )}
+
+            {/* Logged-in readers: skip email capture, offer scorecard as next step */}
+            {user && (
+              <div
+                className="mt-12 rounded-2xl border p-6 sm:p-8"
+                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              >
+                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#10B981" }}>
+                  Your Next Step
+                </p>
+                <p
+                  className="text-xl font-bold mb-2"
+                  style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                >
+                  Know exactly where you stand.
+                </p>
+                <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>
+                  The Researcher Visibility Scorecard gives you a precise score across 12 checkpoints —
+                  Scholar Identity, Discoverability, Citation Health, and Research Communication.
+                  Takes 4–6 minutes. Results shown instantly.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/resources/visibility-scorecard"
+                    className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5"
+                    style={{ backgroundColor: "#10B981" }}
+                  >
+                    Take the Scorecard Free
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    href="/consultation"
+                    className="inline-flex items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold transition-colors hover:border-[#2563EB] hover:text-white"
+                    style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                  >
+                    Book a Strategy Call
+                  </Link>
+                </div>
               </div>
             )}
           </article>

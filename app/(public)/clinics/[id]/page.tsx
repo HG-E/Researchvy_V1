@@ -38,6 +38,12 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
   const clinic = CLINICS[id];
   if (!clinic) notFound();
 
+  const isEarlyBird = new Date() < new Date(clinic.pricing.earlyBirdDeadline + "T23:59:59");
+  const firstBundle = clinic.pricing.bundles[0];
+  const earlyBirdLabel = isEarlyBird
+    ? `From ₦${firstBundle.ngn.earlyBird.toLocaleString("en-NG")} / $${firstBundle.usd.earlyBird} · early bird`
+    : undefined;
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
       <script
@@ -123,8 +129,33 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 duration={clinic.duration}
                 format={clinic.format}
                 capacity={clinic.capacity}
-                earlyBirdFrom="From ₦24,000 / $45 · early bird ends Jun 20"
+                earlyBirdFrom={earlyBirdLabel}
               />
+            </div>
+
+            {/* Scorecard escape valve — cold traffic warmup */}
+            <div
+              className="rounded-2xl border p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+              style={{ backgroundColor: "rgba(16,185,129,0.05)", borderColor: "rgba(16,185,129,0.2)" }}
+            >
+              <div className="flex-1">
+                <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>
+                  Not sure if you need this programme?
+                </p>
+                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                  Take the free Researcher Visibility Scorecard first — 4–6 minutes, 12 checkpoints,
+                  results shown instantly. Most researchers score 25–45 and use their score to decide
+                  which modules matter most.
+                </p>
+              </div>
+              <Link
+                href="/resources/visibility-scorecard"
+                className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-bold text-white flex-shrink-0 transition-all duration-200 hover:-translate-y-0.5"
+                style={{ backgroundColor: "#10B981" }}
+              >
+                Take the Scorecard Free
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
 
             {/* Outcomes */}
@@ -302,17 +333,19 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 className="rounded-2xl border p-6"
                 style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
               >
-                {/* Early bird strip */}
-                <div
-                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 mb-5 border"
-                  style={{ backgroundColor: "rgba(252,211,77,0.05)", borderColor: "rgba(252,211,77,0.2)" }}
-                >
-                  <Zap className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#FCD34D" }} />
-                  <span className="text-xs font-semibold" style={{ color: "#FCD34D" }}>
-                    Early bird closes in:
-                  </span>
-                  <EarlyBirdCountdown deadline={clinic.pricing.earlyBirdDeadline} />
-                </div>
+                {/* Early bird strip — only shown while deadline is active */}
+                {isEarlyBird && (
+                  <div
+                    className="flex items-center gap-2 rounded-xl px-4 py-2.5 mb-5 border"
+                    style={{ backgroundColor: "rgba(252,211,77,0.05)", borderColor: "rgba(252,211,77,0.2)" }}
+                  >
+                    <Zap className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#FCD34D" }} />
+                    <span className="text-xs font-semibold" style={{ color: "#FCD34D" }}>
+                      Early bird closes in:
+                    </span>
+                    <EarlyBirdCountdown deadline={clinic.pricing.earlyBirdDeadline} />
+                  </div>
+                )}
 
                 {/* Three bundles at a glance */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
@@ -338,10 +371,10 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                         )}
                         <p className="text-xs font-semibold mb-0.5" style={{ color: accent }}>{bundle.name}</p>
                         <p className="text-lg font-bold" style={{ color: "#F9FAFB" }}>
-                          ₦{bundle.ngn.earlyBird.toLocaleString("en-NG")}
+                          ₦{(isEarlyBird ? bundle.ngn.earlyBird : bundle.ngn.regular).toLocaleString("en-NG")}
                         </p>
                         <p className="text-xs" style={{ color: "#4B5563" }}>
-                          ${bundle.usd.earlyBird} USD · early bird
+                          ${isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular} USD{isEarlyBird ? " · early bird" : ""}
                         </p>
                       </div>
                     );
@@ -368,7 +401,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 duration={clinic.duration}
                 format={clinic.format}
                 capacity={clinic.capacity}
-                earlyBirdFrom="From ₦24,000 / $45 · early bird ends Jun 20"
+                earlyBirdFrom={earlyBirdLabel}
               />
             </div>
           </aside>

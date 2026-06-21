@@ -107,10 +107,8 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
           style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.15)" }}
         >
           <p style={{ color: "#93C5FD" }}>
-            <strong style={{ color: "#BFDBFE" }}>4 live sessions</strong> × 2 hrs +{" "}
-            <strong style={{ color: "#BFDBFE" }}>weekly activities</strong> between sessions ={" "}
-            <strong style={{ color: "#BFDBFE" }}>16–20 hours total</strong> over 4 weeks.
-            Complete the activities at your own pace between sessions.
+            <strong style={{ color: "#BFDBFE" }}>3 core sessions + 2 bonus masterclasses</strong> · live, interactive, ≤20 per cohort.
+            Recordings included for all sessions.
           </p>
         </div>
       )}

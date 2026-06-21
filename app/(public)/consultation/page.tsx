@@ -236,7 +236,7 @@ export default function ConsultationPage() {
             {[
               { step: "1", label: "Visibility Scorecard", sub: "Free · 5 minutes", href: "/resources/visibility-scorecard", active: false },
               { step: "2", label: "Strategy Call",         sub: "Free · 20 minutes", href: "/consultation", active: true },
-              { step: "3", label: "Digital Visibility Clinic", sub: "Paid · 4 live sessions", href: "/clinics/digital-visibility-clinic", active: false },
+              { step: "3", label: "Digital Visibility Clinic", sub: "Paid · 3 sessions + 2 masterclasses", href: "/clinics/digital-visibility-clinic", active: false },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 sm:gap-0 flex-1">
                 <Link
