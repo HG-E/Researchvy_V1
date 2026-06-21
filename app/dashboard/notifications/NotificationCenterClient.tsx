@@ -176,7 +176,7 @@ export function NotificationCenterClient({ initialNotifications }: { initialNoti
                     </span>
                   </div>
                   <p className="text-xs mt-1 leading-relaxed" style={{ color: "#6B7280" }}>{n.body}</p>
-                  <p className="text-[10px] mt-1.5" style={{ color: "#374151" }}>{timeAgo(n.created_at)}</p>
+                  <p className="text-[10px] mt-1.5" style={{ color: "#6B7280" }}>{timeAgo(n.created_at)}</p>
                 </div>
 
                 {/* Unread dot */}

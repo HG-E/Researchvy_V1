@@ -18,7 +18,7 @@ function dayWindow(daysFromNow: number): { start: string; end: string } {
 
 interface Opportunity { id: string; title: string; deadline: string; category: string; }
 interface UserPref    { user_id: string; email_deadlines: boolean; push_deadlines: boolean; inapp_deadlines: boolean; }
-interface EventRow    { id: string; title: string; slug: string | null; starts_at: string; }
+interface EventRow    { id: string; title: string; slug: string | null; start_date: string; }
 interface EventPref   { user_id: string; email_events: boolean; push_events: boolean; inapp_events: boolean; }
 
 export async function GET(req: NextRequest) {
@@ -41,9 +41,9 @@ export async function GET(req: NextRequest) {
     const { start, end } = dayWindow(days);
 
     const { data: opps } = await admin
-      .from("opportunities")
+      .from("research_opportunities")
       .select("id, title, deadline, category")
-      .eq("status", "approved")
+      .eq("is_published", true)
       .gte("deadline", start)
       .lte("deadline", end) as { data: Opportunity[] | null };
 
@@ -143,10 +143,10 @@ export async function GET(req: NextRequest) {
   const { start: evtStart, end: evtEnd } = dayWindow(1);
   const { data: events } = await admin
     .from("events")
-    .select("id, title, slug, starts_at")
-    .eq("status", "approved")
-    .gte("starts_at", evtStart)
-    .lte("starts_at", evtEnd) as { data: EventRow[] | null };
+    .select("id, title, slug, start_date")
+    .in("status", ["published", "featured"])
+    .gte("start_date", evtStart)
+    .lte("start_date", evtEnd) as { data: EventRow[] | null };
 
   for (const evt of events ?? []) {
     const { data: alreadySent } = await admin

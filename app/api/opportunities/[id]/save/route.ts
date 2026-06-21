@@ -13,7 +13,7 @@ export async function POST(_req: NextRequest, { params }: Ctx) {
 
   // Verify opportunity exists
   const { data: opp } = await admin
-    .from("opportunities")
+    .from("research_opportunities")
     .select("id")
     .eq("id", id)
     .maybeSingle();
