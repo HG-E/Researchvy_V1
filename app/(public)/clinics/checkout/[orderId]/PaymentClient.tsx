@@ -187,45 +187,85 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
   }
 
   if (status === "payment_submitted") {
+    const waFallback = `https://wa.me/2347030515183?text=${encodeURIComponent(
+      `Hi, I submitted my payment notification for order ${order.order_number} (ref: ${order.reference}) and I'm following up on verification. My name is ${order.user_name}.`
+    )}`;
     return (
-      <div className="text-center py-12">
-        <div
-          className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6"
-          style={{ backgroundColor: "rgba(245,158,11,0.1)" }}
-        >
-          <Clock className="h-8 w-8" style={{ color: "#F59E0B" }} />
-        </div>
-        <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-          Payment received — verifying
-        </h1>
-        <p className="text-sm mb-1" style={{ color: "#6B7280" }}>
-          Order <span className="font-mono" style={{ color: "#9CA3AF" }}>{order.order_number}</span>
-        </p>
-        <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
-          Our team will confirm your enrollment within 2 business hours.
-          We&apos;ll email <span style={{ color: "#9CA3AF" }}>{order.user_email}</span> when it&apos;s done.
-        </p>
-        <div
-          className="rounded-xl px-5 py-4 text-xs border mb-3 text-left"
-          style={{ backgroundColor: "rgba(245,158,11,0.05)", borderColor: "rgba(245,158,11,0.2)", color: "#F59E0B" }}
-        >
-          <div className="flex items-start gap-2">
-            <AlertCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="font-semibold mb-1">Still waiting after 2 hours?</p>
-              <p style={{ color: "#D97706" }}>
-                Reply to the email we sent you, or contact us directly at{" "}
-                <a href="mailto:researchvy@gmail.com" style={{ color: "#F59E0B", textDecoration: "underline" }}>
-                  researchvy@gmail.com
-                </a>{" "}
-                with your order number <span className="font-mono font-bold">{order.order_number}</span> and we&apos;ll sort it out immediately.
-              </p>
-            </div>
+      <div className="space-y-5">
+        <div className="text-center py-8">
+          <div
+            className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-5"
+            style={{ backgroundColor: "rgba(245,158,11,0.1)" }}
+          >
+            <Clock className="h-8 w-8" style={{ color: "#F59E0B" }} />
           </div>
+          <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+            Payment received — verifying
+          </h1>
+          <p className="text-sm" style={{ color: "#6B7280" }}>
+            Order <span className="font-mono" style={{ color: "#9CA3AF" }}>{order.order_number}</span>
+            {" · "}We&apos;ll email <span style={{ color: "#9CA3AF" }}>{order.user_email}</span> within 2 business hours.
+          </p>
         </div>
-        <p className="text-xs" style={{ color: "#4B5563" }}>
-          Reference: <span className="font-mono" style={{ color: "#6B7280" }}>{order.reference}</span>
-        </p>
+
+        {/* What happens next */}
+        <div
+          className="rounded-2xl border p-5"
+          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        >
+          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+            What happens next
+          </p>
+          <ol className="space-y-3">
+            {[
+              "Our team verifies your transfer against the reference code — usually within 2 business hours.",
+              `You'll receive a confirmation email at ${order.user_email} with your cohort details.`,
+              "You'll be added to the cohort WhatsApp group and given session access.",
+            ].map((step, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span
+                  className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5"
+                  style={{ backgroundColor: "#1E293B", color: "#4B5563" }}
+                >
+                  {i + 1}
+                </span>
+                <span className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* Fallback if waiting too long */}
+        <div
+          className="rounded-xl border px-5 py-4"
+          style={{ backgroundColor: "rgba(245,158,11,0.05)", borderColor: "rgba(245,158,11,0.2)" }}
+        >
+          <div className="flex items-start gap-2 mb-3">
+            <AlertCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#F59E0B" }} />
+            <p className="text-xs font-semibold" style={{ color: "#D97706" }}>Still waiting after 2 hours?</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <a
+              href={waFallback}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold text-white"
+              style={{ backgroundColor: "#25D366" }}
+            >
+              <span>WhatsApp us directly</span>
+            </a>
+            <a
+              href={`mailto:researchvy@gmail.com?subject=Payment+Verification+${order.order_number}&body=Hi%2C+I+submitted+payment+for+order+${order.order_number}+(ref%3A+${order.reference})+and+I%27m+following+up+on+verification.`}
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-bold"
+              style={{ borderColor: "#334155", color: "#9CA3AF" }}
+            >
+              Email the team
+            </a>
+          </div>
+          <p className="text-[11px] mt-2" style={{ color: "#4B5563" }}>
+            Reference: <span className="font-mono">{order.reference}</span>
+          </p>
+        </div>
       </div>
     );
   }
