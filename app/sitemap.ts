@@ -26,6 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/researchers/early-career`,         lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/researchers/institutional`,        lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/resources/visibility-scorecard`,   lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/consultation`,                     lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/ecosystem`,                        lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/academy`,                          lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/intelligence`,                     lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.6 },
@@ -48,6 +49,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url:             `${base}/clinics/${digitalVisibilityClinic.slug}`,
       lastModified:    COHORT_UPDATED,
+      changeFrequency: "monthly" as const,
+      priority:        0.9,
+    },
+    {
+      url:             `${base}/clinics/private-consulting`,
+      lastModified:    "2026-06-22",
       changeFrequency: "monthly" as const,
       priority:        0.9,
     },
