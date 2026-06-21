@@ -37,14 +37,19 @@ export default async function DashboardPage() {
   async function fetchClinicCount() {
     if (!userId) return 0;
     try {
-      // Count confirmed/pending-payment orders — these are users who completed online checkout.
-      // WhatsApp-based enquiries (clinic_enquiries) don't carry user_id so can't be linked here.
-      const { count } = await admin
-        .from("orders")
-        .select("id", { count: "exact", head: true })
-        .eq("user_id", userId)
-        .in("status", ["confirmed", "payment_submitted"]);
-      return count ?? 0;
+      // Two enrollment paths: online checkout (orders) and dashboard interest button (clinic_enquiries)
+      const [ordersRes, enquiriesRes] = await Promise.all([
+        admin
+          .from("orders")
+          .select("id", { count: "exact", head: true })
+          .eq("user_id", userId)
+          .in("status", ["confirmed", "payment_submitted"]),
+        admin
+          .from("clinic_enquiries")
+          .select("id", { count: "exact", head: true })
+          .eq("user_id", userId),
+      ]);
+      return Math.max(ordersRes.count ?? 0, enquiriesRes.count ?? 0);
     } catch { return 0; }
   }
   async function fetchScorecardDone() {
