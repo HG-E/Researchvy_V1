@@ -153,9 +153,9 @@ export function welcomeEmail(email: string): { subject: string; html: string } {
             Take the Researcher Visibility Scorecard →
           </a>
           <br/>
-          <a href="https://researchvy.com/clinics/digital-visibility-clinic"
+          <a href="https://researchvy.com/clinics"
              style="display:inline-block;color:#2563EB;font-size:13px;font-weight:600;text-decoration:none;">
-            Or see the Digital Visibility Clinic →
+            Or explore our Clinics →
           </a>
           <p style="margin:16px 0 0;font-size:13px;color:#9CA3AF;">
             Or reply to this email with your biggest visibility challenge.
@@ -623,6 +623,7 @@ export function clinicDripDay3(): { subject: string; html: string } {
         <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#374151;">The average clinic participant recovers <strong style="color:#059669;">11 missing publications and 23 lost citations</strong> in that single session.</p>
         <a href="https://researchvy.com/clinics/digital-visibility-clinic" style="display:inline-block;background:#2563EB;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">See the Full Clinic Programme →</a>
         <p style="margin:16px 0 0;font-size:13px;color:#9CA3AF;">We'll be in touch about cohort dates soon. Reply with any questions.</p>
+        <p style="margin:8px 0 0;font-size:13px;color:#6B7280;">Can't wait for a cohort or prefer 1-on-1 work? <a href="https://researchvy.com/clinics/private-consulting" style="color:#8B5CF6;font-weight:600;text-decoration:none;">Private Consulting — from $209 →</a></p>
       </td></tr>
     </table>
     ${TRANSACTIONAL_FOOTER}
@@ -681,6 +682,7 @@ export function clinicDripDay7(): { subject: string; html: string } {
       <tr><td>
         <a href="https://researchvy.com/clinics/digital-visibility-clinic" style="display:inline-block;background:#2563EB;color:#ffffff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">Review the Full Programme →</a>
         <p style="margin:12px 0 0;font-size:13px;color:#9CA3AF;">Reply to this email any time with questions.</p>
+        <p style="margin:8px 0 0;font-size:13px;color:#6B7280;">Prefer it 1-on-1, outside a cohort schedule? <a href="https://researchvy.com/clinics/private-consulting" style="color:#8B5CF6;font-weight:600;text-decoration:none;">Private Consulting — from $209 →</a></p>
       </td></tr>
     </table>
     ${TRANSACTIONAL_FOOTER}

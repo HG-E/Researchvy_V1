@@ -83,6 +83,12 @@ export default async function ResourcesPage() {
           <p className="text-xs mt-4" style={{ color: "#374151" }}>
             Most researchers score between 25–45. Where do you rank?
           </p>
+          <p className="text-xs mt-2" style={{ color: "#4B5563" }}>
+            Prefer done-for-you?{" "}
+            <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
+              Private Consulting — from $209 →
+            </Link>
+          </p>
         </div>
       </div>
 
