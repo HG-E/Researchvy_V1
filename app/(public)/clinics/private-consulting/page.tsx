@@ -543,7 +543,7 @@ export default function PrivateConsultingPage() {
           <div className="flex items-center gap-2 mt-6 justify-center">
             <Clock className="h-3.5 w-3.5" style={{ color: "#4B5563" }} />
             <p className="text-xs" style={{ color: "#4B5563" }}>
-              From first message to debrief call: typically 7–10 working days.
+              First response within 4 business hours · Deliverables within 5–7 working days · Debrief call within 7–10 working days from first contact.
             </p>
           </div>
         </div>
@@ -601,7 +601,7 @@ export default function PrivateConsultingPage() {
             </h2>
             <p className="text-base max-w-xl mx-auto mb-8 leading-relaxed" style={{ color: "#6B7280" }}>
               Reach out via WhatsApp or email with your career stage, field, and which package interests you.
-              We&apos;ll confirm availability and tell you exactly what to expect.
+              We respond within 4 business hours on working days, confirm availability, and walk you through exactly what to expect.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
               <a
