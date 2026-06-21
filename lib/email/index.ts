@@ -48,18 +48,23 @@ export async function sendWelcomeEmail(opts: {
       and reads their work.
     </p>
 
-    <div style="border-left:3px solid #2563EB;padding-left:16px;margin-bottom:24px">
-      <p style="color:#60A5FA;font-size:13px;font-weight:600;margin:0 0 8px">Your first three steps:</p>
+    <div style="border-left:3px solid #10B981;padding-left:16px;margin-bottom:24px">
+      <p style="color:#34D399;font-size:13px;font-weight:600;margin:0 0 8px">Your first three steps:</p>
       <ol style="color:#9CA3AF;font-size:14px;line-height:1.9;margin:0;padding-left:20px">
+        <li><strong style="color:#D1D5DB">Take the free Visibility Scorecard</strong> — 12 checkpoints, 5 minutes, your exact score across all four dimensions</li>
         <li>Complete your researcher profile — add your ORCID and institution</li>
-        <li>Start Level 1 of the Academy — 100% free, no payment needed</li>
-        <li>Explore all Researchvy programmes at your own pace</li>
+        <li>Explore the free Academy courses — practical skills at every career stage</li>
       </ol>
     </div>
 
+    <a href="${SITE_URL}/resources/visibility-scorecard"
+       style="display:inline-block;background:#10B981;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 32px;border-radius:12px;margin-bottom:12px">
+      Take the Scorecard Free →
+    </a>
+    <br>
     <a href="${SITE_URL}/dashboard"
-       style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">
-      Go to your dashboard →
+       style="display:inline-block;color:#6B7280;text-decoration:none;font-size:13px;padding:8px 0">
+      Or go to your dashboard →
     </a>
   </div>
 
@@ -185,7 +190,7 @@ export async function sendDay2DripEmail(opts: { to: string; firstName: string })
     from:    FROM_TEAM,
     to:      [opts.to],
     replyTo: REPLY_TO,
-    subject: `${opts.firstName}, your first step to research visibility`,
+    subject: `${opts.firstName}, do you know your actual visibility score?`,
     html: `<!DOCTYPE html><html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
@@ -197,25 +202,25 @@ export async function sendDay2DripEmail(opts: { to: string; firstName: string })
 
   <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
     <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 16px;line-height:1.4">
-      Hi ${opts.firstName} — one free lesson, 15 minutes.
+      Hi ${opts.firstName} — most researchers score between 25 and 45.
     </h1>
     <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 20px">
-      You signed up yesterday. Most researchers explore for a week and then
-      it gets busy — and nothing changes about their visibility.
+      The Researcher Visibility Scorecard takes 5 minutes and gives you an exact score
+      across 12 checkpoints — Scholar Identity, Discoverability, Citation Health,
+      and Research Communication.
     </p>
     <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">
-      The researchers who move fastest usually start with one specific habit:
-      they make their abstract <strong style="color:#D1D5DB">searchable</strong>.
-      It takes 15 minutes. It lasts a career.
+      Most researchers are surprised by how many fixable gaps they find. Each checkpoint
+      shows you exactly what the gap is costing you — and the fastest way to close it.
     </p>
-    <div style="background:#0A0F1A;border:1px solid #1E293B;border-radius:12px;padding:20px;margin-bottom:24px">
-      <p style="color:#60A5FA;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px">Free lesson</p>
-      <p style="color:#E2E8F0;font-size:16px;font-weight:600;margin:0 0 4px">Keyword Strategy for Research Abstracts</p>
-      <p style="color:#6B7280;font-size:13px;margin:0">Level 1 · Foundations · ~15 min</p>
+    <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:18px;margin-bottom:24px">
+      <p style="color:#10B981;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px">Free Diagnostic Tool</p>
+      <p style="color:#E2E8F0;font-size:15px;font-weight:600;margin:0 0 4px">Researcher Visibility Scorecard</p>
+      <p style="color:#6B7280;font-size:13px;margin:0">12 checkpoints · 5 minutes · Results shown immediately</p>
     </div>
-    <a href="${SITE_URL}/academy/courses"
-       style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">
-      Start the free lesson →
+    <a href="${SITE_URL}/resources/visibility-scorecard"
+       style="display:inline-block;background:#10B981;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 32px;border-radius:12px">
+      Check My Score Free →
     </a>
   </div>
 
@@ -223,7 +228,7 @@ export async function sendDay2DripEmail(opts: { to: string; firstName: string })
     <p style="color:#374151;font-size:12px;margin:0;line-height:1.7">
       <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a>
       &nbsp;·&nbsp;
-      <a href="${SITE_URL}/academy/courses" style="color:#4B5563;text-decoration:none">Academy</a>
+      <a href="${SITE_URL}/resources/visibility-scorecard" style="color:#4B5563;text-decoration:none">Visibility Scorecard</a>
     </p>
   </div>
 
@@ -354,9 +359,14 @@ export async function sendLeadMagnetEmail(opts: {
       </ol>
     </div>
 
+    <a href="${SITE_URL}/resources/visibility-scorecard"
+       style="display:inline-block;background:#10B981;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 32px;border-radius:12px;margin-bottom:12px">
+      Take the free Visibility Scorecard →
+    </a>
+    <br>
     <a href="${SITE_URL}/academy/courses"
-       style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:14px 32px;border-radius:12px">
-      Explore the free Academy courses →
+       style="display:inline-block;color:#6B7280;text-decoration:none;font-size:13px;padding:8px 0">
+      Or explore the free Academy courses →
     </a>
   </div>
 

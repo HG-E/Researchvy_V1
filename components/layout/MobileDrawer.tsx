@@ -209,12 +209,12 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
                     Sign In
                   </Link>
                   <Link
-                    href="/clinics"
+                    href="/resources/visibility-scorecard"
                     onClick={close}
                     className="block w-full rounded-xl px-4 py-3.5 text-sm font-bold text-white text-center transition-colors active:opacity-90"
-                    style={{ backgroundColor: "#2563EB" }}
+                    style={{ backgroundColor: "#10B981" }}
                   >
-                    Join a Clinic →
+                    Check My Score Free →
                   </Link>
                 </>
               )}
