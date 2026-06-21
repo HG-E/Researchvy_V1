@@ -41,6 +41,7 @@ export const footerNav = {
     { label: "Visibility Scorecard (Free)",     href: "/resources/visibility-scorecard" },
     { label: "Free Strategy Call",             href: "/consultation" },
     { label: "Digital Visibility Clinic",       href: "/clinics/digital-visibility-clinic" },
+    { label: "Private Consulting",              href: "/clinics/private-consulting" },
   ],
   company: [
     { label: "About",   href: "/about" },

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, TrendingUp, Award, FileText } from "lucide-react";
+import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, TrendingUp, Award, FileText, User } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { courseSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import { siteConfig, buildWhatsAppUrl } from "@/config/site";
@@ -742,6 +742,42 @@ export default async function ClinicsPage({
 
           <div className="max-w-3xl mx-auto">
             <ClinicFAQ items={digitalVisibilityClinic.faq} />
+          </div>
+        </div>
+
+        {/* ── PRIVATE CONSULTING BRIDGE ────────────────────────────── */}
+        <div className="mb-20">
+          <div
+            className="rounded-2xl border overflow-hidden"
+            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          >
+            <div className="h-0.5" style={{ background: "linear-gradient(90deg, #8B5CF6, #A78BFA)" }} />
+            <div className="p-7 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <div className="max-w-xl">
+                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#A78BFA" }}>
+                  Prefer 1-on-1?
+                </p>
+                <h2
+                  className="text-xl sm:text-2xl font-bold mb-2"
+                  style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                >
+                  Private Consulting — Built Around You, Not a Cohort
+                </h2>
+                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                  If you want bespoke 1-on-1 work on your specific profile — no fixed schedule,
+                  no group sessions, just your gaps fixed and your strategy written for you —
+                  our Private Consulting track starts at <strong style={{ color: "#F9FAFB" }}>$209 / ₦205,000</strong>.
+                </p>
+              </div>
+              <Link
+                href="/clinics/private-consulting"
+                className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold text-white whitespace-nowrap flex-shrink-0"
+                style={{ backgroundColor: "#8B5CF6" }}
+              >
+                <User className="h-4 w-4" />
+                View Private Consulting
+              </Link>
+            </div>
           </div>
         </div>
 
