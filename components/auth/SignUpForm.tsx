@@ -106,9 +106,8 @@ export function SignUpForm() {
 
       track(EVENTS.SIGN_UP_COMPLETED);
       setSuccess(true);
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : "Unknown error";
-      setAuthError(`Connection failed: ${msg}. Please try again or contact support@researchvy.com`);
+    } catch {
+      setAuthError("Connection error. Please check your internet connection and try again.");
     }
   }
 
@@ -134,28 +133,37 @@ export function SignUpForm() {
           >
             Check your email
           </h2>
-          <p className="text-sm mb-6 leading-relaxed" style={{ color: "#9CA3AF" }}>
-            We sent a verification link to your email. Click it to activate your account and
-            access your Researchvy dashboard.
+          <p className="text-sm mb-2 leading-relaxed" style={{ color: "#9CA3AF" }}>
+            We sent a verification link to your email. Click it to activate your account.
           </p>
-          <Link
-            href="/signin"
-            className="inline-flex items-center justify-center w-full rounded-xl px-6 py-3 text-sm font-semibold text-white transition-all duration-200"
-            style={{ backgroundColor: "#2563EB" }}
-          >
-            Back to Sign In
-          </Link>
+          <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
+            Didn&apos;t receive it? Check your spam folder, or{" "}
+            <a href="mailto:info@researchvy.com" className="underline" style={{ color: "#6B7280" }}>
+              contact us
+            </a>
+            .
+          </p>
 
-          <div className="mt-5 pt-5 border-t" style={{ borderColor: "#1E293B" }}>
-            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
-              While you wait for your email — take the free Visibility Scorecard:
-            </p>
+          {/* Primary action while waiting — scorecard */}
+          <Link
+            href="/resources/visibility-scorecard"
+            className="inline-flex items-center justify-center w-full rounded-xl px-6 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:opacity-90"
+            style={{ backgroundColor: "#10B981" }}
+          >
+            Check My Score Free →
+          </Link>
+          <p className="text-xs mt-2 text-center" style={{ color: "#4B5563" }}>
+            While you wait — takes 4 minutes
+          </p>
+
+          {/* Secondary: back to sign in */}
+          <div className="mt-5 pt-5 border-t text-center" style={{ borderColor: "#1E293B" }}>
             <Link
-              href="/resources/visibility-scorecard"
-              className="inline-flex items-center justify-center w-full rounded-xl px-6 py-3 text-sm font-semibold text-white transition-all duration-200"
-              style={{ backgroundColor: "#10B981" }}
+              href="/signin"
+              className="text-xs transition-colors hover:text-white"
+              style={{ color: "#6B7280" }}
             >
-              Check My Score Free →
+              Back to Sign In
             </Link>
           </div>
         </div>

@@ -59,6 +59,10 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setEcosystemOpen(false);
+        setMobileOpen(false);
+      }
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         router.push("/search");

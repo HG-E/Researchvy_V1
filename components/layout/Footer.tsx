@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 import { footerNav } from "@/constants/navigation";
@@ -76,13 +77,15 @@ function FooterSection({
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname    = usePathname();
+  const hidePreCta  = pathname === "/resources/visibility-scorecard";
 
   return (
     <footer className="border-t" style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
 
-        {/* Pre-footer CTA */}
-        <div
+        {/* Pre-footer CTA — hidden on the scorecard page itself */}
+        {!hidePreCta && <div
           className="rounded-2xl border p-6 sm:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5"
           style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
         >
@@ -101,7 +104,7 @@ export function Footer() {
           >
             Check My Score Free →
           </Link>
-        </div>
+        </div>}
 
         {/* Brand + socials — always full width on mobile, 2-col span on lg */}
         <div className="mb-8 md:mb-0 md:hidden">

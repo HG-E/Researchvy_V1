@@ -9,7 +9,6 @@ export const mainNav: NavigationItem[] = [
       { label: "Intelligence", href: "/intelligence", description: "Research analytics & visibility insights" },
       { label: "Academy",      href: "/academy",      description: "Learning programs & certifications" },
       { label: "Media",        href: "/media",        description: "Scholarly communication & visuals" },
-      { label: "Clinics",      href: "/clinics",      description: "Practical transformation experiences" },
       { label: "Network",      href: "/network",      description: "Community, fellows & partnerships" },
     ],
   },

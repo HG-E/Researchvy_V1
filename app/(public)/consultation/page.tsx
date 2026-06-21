@@ -72,9 +72,9 @@ export default function ConsultationPage() {
             Book a Free Researcher Visibility Strategy Call
           </h1>
           <p className="text-lg leading-relaxed mb-8" style={{ color: "#94A3B8" }}>
-            You took the scorecard. You saw the gaps. Now let&apos;s talk through exactly what to do about them.
-            Book 20 minutes with a Researchvy visibility expert — we&apos;ll read your results, identify your top priorities,
-            and give you a clear action plan. Free. No obligation.
+            Whether you&apos;ve taken the Visibility Scorecard or you&apos;re starting from scratch, 20 minutes with a
+            Researchvy expert will give you a precise read on where your research profile stands, your top three
+            priorities, and a clear written action plan. Free. No obligation.
           </p>
 
           {/* Primary CTA block */}

@@ -472,6 +472,20 @@ function EmailCapture({ leadId, score, answers, dimensionScores, utmSource }: Em
 
 // ── Main component ────────────────────────────────────────────────────────────
 
+const LS_KEY = "rv_scorecard_answers";
+
+function loadSavedAnswers(): Record<string, number> {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (typeof parsed === "object" && parsed !== null && !Array.isArray(parsed)) {
+      return parsed as Record<string, number>;
+    }
+  } catch { /* ignore */ }
+  return {};
+}
+
 export function VisibilityScorecard() {
   const [answers, setAnswers]   = useState<Record<string, number>>({});
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
@@ -487,12 +501,42 @@ export function VisibilityScorecard() {
   const hasSavedRef               = useRef(false);
   const prevAnsweredRef           = useRef<Record<string, number>>({});
 
-  // UTM source: capture once on mount — window.location is only available client-side
+  // Restore saved answers from localStorage on mount + capture UTM
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setUtmSource(p.get("utm_source") ?? p.get("ref") ?? null);
+
+    const saved = loadSavedAnswers();
+    if (Object.keys(saved).length === 0) return;
+    setAnswers(saved);
+
+    // Auto-open the first dimension that has partial answers so the user can continue
+    const newExpanded: Record<string, boolean> = {
+      identity: false, discoverability: false, citationhealth: false, communication: false,
+    };
+    let opened = false;
+    for (const dim of DIMENSIONS) {
+      const anyAnswered = dim.checkpoints.some(cp => cp.id in saved);
+      const allAnswered = dim.checkpoints.every(cp => cp.id in saved);
+      if (anyAnswered && !allAnswered && !opened) {
+        newExpanded[dim.id] = true;
+        opened = true;
+      }
+    }
+    if (!opened) {
+      // All complete or none answered — open identity by default
+      newExpanded.identity = true;
+    }
+    setExpanded(newExpanded);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Persist answers to localStorage on every change
+  useEffect(() => {
+    if (Object.keys(answers).length === 0) return;
+    try { localStorage.setItem(LS_KEY, JSON.stringify(answers)); } catch { /* ignore */ }
+  }, [answers]);
 
   function answer(checkpointId: string, value: number) {
     setAnswers((prev) => ({ ...prev, [checkpointId]: value }));
@@ -543,7 +587,7 @@ export function VisibilityScorecard() {
     prevAnsweredRef.current = answers;
   }, [answers]);
 
-  // Auto-save anonymous lead when all questions answered
+  // Auto-save anonymous lead when all questions answered; clear localStorage on success
   useEffect(() => {
     if (!complete || hasSavedRef.current) return;
     hasSavedRef.current = true;
@@ -558,10 +602,22 @@ export function VisibilityScorecard() {
       }),
     })
       .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d?.id) setLeadId(d.id); })
+      .then(d => {
+        if (d?.id) setLeadId(d.id);
+        try { localStorage.removeItem(LS_KEY); } catch { /* ignore */ }
+      })
       .catch(() => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [complete]);
+
+  function retake() {
+    setAnswers({});
+    setExpanded({ identity: true, discoverability: false, citationhealth: false, communication: false });
+    setLeadId(null);
+    hasSavedRef.current = false;
+    try { localStorage.removeItem(LS_KEY); } catch { /* ignore */ }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
     <div>
@@ -594,6 +650,26 @@ export function VisibilityScorecard() {
           ))}
         </div>
       </div>
+
+      {/* Resume banner — shown when progress was restored from a previous session */}
+      {answered > 0 && !complete && (
+        <div
+          className="rounded-xl border px-4 py-3 mb-6 flex items-center justify-between gap-3"
+          style={{ backgroundColor: "rgba(37,99,235,0.06)", borderColor: "rgba(37,99,235,0.2)" }}
+        >
+          <p className="text-xs leading-relaxed" style={{ color: "#93C5FD" }}>
+            <span className="font-semibold" style={{ color: "#F9FAFB" }}>Welcome back.</span>
+            {" "}Your progress has been restored — {answered} of {totalQ} checkpoints answered.
+          </p>
+          <button
+            onClick={retake}
+            className="text-xs whitespace-nowrap flex-shrink-0 transition-colors hover:text-white"
+            style={{ color: "#4B5563" }}
+          >
+            Start over
+          </button>
+        </div>
+      )}
 
       {/* Live score bar */}
       {answered > 0 && (
@@ -761,6 +837,17 @@ export function VisibilityScorecard() {
       {/* Final result — only shown when complete */}
       {complete && interp && (
         <div className="space-y-6">
+
+          {/* Retake option */}
+          <div className="flex justify-end">
+            <button
+              onClick={retake}
+              className="text-xs transition-colors hover:text-white"
+              style={{ color: "#4B5563" }}
+            >
+              ↺ Start over / Retake
+            </button>
+          </div>
 
           {/* Score reveal */}
           <div
