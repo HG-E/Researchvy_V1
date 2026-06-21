@@ -23,12 +23,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/insights`,                         lastModified: latestInsight,  changeFrequency: "weekly",  priority: 0.9 },
     { url: `${base}/about`,                            lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/resources`,                        lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/researchers`,                        lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/researchers/early-career`,         lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/researchers/institutional`,        lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/resources/visibility-scorecard`,   lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/resources/visibility-scorecard`,   lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/consultation`,                     lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/events`,                            lastModified: SITE_LAUNCH,    changeFrequency: "daily",   priority: 0.8 },
+    { url: `${base}/opportunities`,                    lastModified: SITE_LAUNCH,    changeFrequency: "daily",   priority: 0.8 },
     { url: `${base}/ecosystem`,                        lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/academy`,                          lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/academy`,                          lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/academy/courses`,                  lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/intelligence`,                     lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/contact`,                          lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/media`,                            lastModified: SITE_LAUNCH,    changeFrequency: "monthly", priority: 0.5 },
@@ -60,6 +64,54 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  // Published events
+  let eventRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const admin = createSupabaseAdminClient();
+    const { data: events } = await admin
+      .from("events")
+      .select("slug, updated_at")
+      .in("status", ["published", "featured"]);
+    eventRoutes = (events ?? []).map((e) => ({
+      url:             `${base}/events/${e.slug}`,
+      lastModified:    e.updated_at ?? SITE_LAUNCH,
+      changeFrequency: "weekly" as const,
+      priority:        0.7,
+    }));
+  } catch { /* non-fatal */ }
+
+  // Published opportunities
+  let opportunityRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const admin = createSupabaseAdminClient();
+    const { data: opps } = await admin
+      .from("research_opportunities")
+      .select("id, created_at")
+      .eq("is_published", true);
+    opportunityRoutes = (opps ?? []).map((o) => ({
+      url:             `${base}/opportunities/${o.id}`,
+      lastModified:    o.created_at ?? SITE_LAUNCH,
+      changeFrequency: "monthly" as const,
+      priority:        0.6,
+    }));
+  } catch { /* non-fatal */ }
+
+  // Published academy courses
+  let courseRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const admin = createSupabaseAdminClient();
+    const { data: courses } = await admin
+      .from("courses")
+      .select("slug, updated_at")
+      .eq("is_published", true);
+    courseRoutes = (courses ?? []).map((c) => ({
+      url:             `${base}/academy/courses/${c.slug}`,
+      lastModified:    c.updated_at ?? SITE_LAUNCH,
+      changeFrequency: "monthly" as const,
+      priority:        0.7,
+    }));
+  } catch { /* non-fatal */ }
+
   // Public researcher profiles
   let profileRoutes: MetadataRoute.Sitemap = [];
   try {
@@ -78,5 +130,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   } catch { /* non-fatal */ }
 
-  return [...staticRoutes, ...insightRoutes, ...clinicRoutes, ...profileRoutes];
+  return [...staticRoutes, ...insightRoutes, ...clinicRoutes, ...eventRoutes, ...opportunityRoutes, ...courseRoutes, ...profileRoutes];
 }
