@@ -216,16 +216,18 @@ export default async function DashboardPage() {
               Start Level 1 free →
             </Link>
           </div>
-          {/* DVC — paid, live */}
+          {/* Clinics — DVC cohort or Private Consulting */}
           <div
             className="rounded-xl border p-4"
             style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.2)" }}
           >
-            <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#60A5FA" }}>Digital Visibility Clinic</p>
-            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>Live cohort programme — July 2026</p>
-            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>Paid, small-group, facilitator-led. Real-time profile review and strategy. Independent of the Academy.</p>
+            <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#60A5FA" }}>Researchvy Clinics</p>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>Cohort or 1-on-1 — Paid</p>
+            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
+              Join the Digital Visibility Clinic (live cohort, July 2026) or choose Private Consulting for done-for-you 1-on-1 delivery — from $209.
+            </p>
             <Link href="/clinics" className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: "#60A5FA" }}>
-              View the clinic →
+              View all options →
             </Link>
           </div>
         </div>
