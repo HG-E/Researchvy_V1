@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { sendOpportunitySubmitted } from "@/lib/email/index";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 import type { OpportunitySubmitPayload } from "@/types/opportunity";
 
 // GET /api/opportunities — public listing (published only)
@@ -35,6 +36,10 @@ export async function GET(req: NextRequest) {
 
 // POST /api/opportunities — authenticated community submission
 export async function POST(req: NextRequest) {
+  // 5 opportunity submissions per IP per hour
+  const { allowed } = await checkRateLimit(getRateLimitKey(req, "opp-submit"), 5, 60 * 60 * 1000);
+  if (!allowed) return NextResponse.json({ error: "Too many submissions. Please try again later." }, { status: 429 });
+
   const user = await getServerUser();
   if (!user) return NextResponse.json({ error: "Sign in to submit an opportunity." }, { status: 401 });
 

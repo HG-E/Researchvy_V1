@@ -18,7 +18,7 @@ export async function GET() {
     .from("courses")
     .select("*, modules(id, title, position, lessons(id, title, position, is_published, lesson_type))")
     .order("level").order("position");
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/academy/courses] GET", error.message); return NextResponse.json({ error: "Failed to fetch courses" }, { status: 500 }); }
   return NextResponse.json({ courses: data ?? [] });
 }
 
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
     position, thumbnail_url: thumbnail_url ?? null,
   }).select().single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/academy/courses] POST", error.message); return NextResponse.json({ error: "Failed to create course" }, { status: 500 }); }
   revalidatePath("/academy/courses");
   return NextResponse.json({ course: data }, { status: 201 });
 }

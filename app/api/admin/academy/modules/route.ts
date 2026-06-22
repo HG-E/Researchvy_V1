@@ -25,6 +25,6 @@ export async function POST(req: NextRequest) {
     course_id, title, description: description ?? null, position,
   }).select().single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/academy/modules] POST", error.message); return NextResponse.json({ error: "Failed to create module" }, { status: 500 }); }
   return NextResponse.json({ module: data }, { status: 201 });
 }

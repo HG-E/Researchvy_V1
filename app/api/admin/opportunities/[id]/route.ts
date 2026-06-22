@@ -22,7 +22,7 @@ export async function PATCH(
   if (!Object.keys(updateData).length) return NextResponse.json({ error: "No valid fields provided" }, { status: 400 });
   const admin = createSupabaseAdminClient();
   const { error } = await admin.from("research_opportunities").update(updateData).eq("id", id);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/opportunities] PATCH", error.message); return NextResponse.json({ error: "Failed to update opportunity" }, { status: 500 }); }
   return NextResponse.json({ success: true });
 }
 
@@ -37,6 +37,6 @@ export async function DELETE(
 
   const admin = createSupabaseAdminClient();
   const { error } = await admin.from("research_opportunities").delete().eq("id", id);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/opportunities] DELETE", error.message); return NextResponse.json({ error: "Failed to delete opportunity" }, { status: 500 }); }
   return NextResponse.json({ success: true });
 }

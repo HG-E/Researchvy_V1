@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { getServerUser } from "@/lib/auth/supabase";
 import { sendEventSubmitted } from "@/lib/email/index";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 import type { EventSubmitPayload } from "@/types/event";
 
 function slugify(text: string): string {
@@ -57,6 +58,10 @@ export async function GET(req: NextRequest) {
 
 // POST /api/events — authenticated event submission
 export async function POST(req: NextRequest) {
+  // 5 event submissions per IP per hour — prevents spam from compromised accounts
+  const { allowed } = await checkRateLimit(getRateLimitKey(req, "event-submit"), 5, 60 * 60 * 1000);
+  if (!allowed) return NextResponse.json({ error: "Too many submissions. Please try again later." }, { status: 429 });
+
   const user = await getServerUser();
   if (!user) return NextResponse.json({ error: "Sign in to submit an event." }, { status: 401 });
 

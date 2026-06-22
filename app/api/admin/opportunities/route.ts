@@ -46,6 +46,6 @@ export async function POST(req: NextRequest) {
     })
     .select("id")
     .single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/opportunities] POST", error.message); return NextResponse.json({ error: "Failed to create opportunity" }, { status: 500 }); }
   return NextResponse.json({ id: data.id });
 }

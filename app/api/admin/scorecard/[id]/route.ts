@@ -46,6 +46,6 @@ export async function PATCH(
     .update(update)
     .eq("id", id);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/scorecard] PATCH", error.message); return NextResponse.json({ error: "Failed to update lead" }, { status: 500 }); }
   return NextResponse.json({ ok: true });
 }

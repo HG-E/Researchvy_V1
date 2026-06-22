@@ -44,6 +44,6 @@ export async function POST(req: NextRequest) {
     position,
   }).select().single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/academy/lessons] POST", error.message); return NextResponse.json({ error: "Failed to create lesson" }, { status: 500 }); }
   return NextResponse.json({ lesson: data }, { status: 201 });
 }

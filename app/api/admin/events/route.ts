@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
   if (status) query = query.eq("status", status);
 
   const { data, error } = await query;
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/events] GET", error.message); return NextResponse.json({ error: "Failed to fetch events" }, { status: 500 }); }
   return NextResponse.json({ data });
 }
 
@@ -61,6 +61,6 @@ export async function POST(req: NextRequest) {
     .select("id,slug,title")
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/events] POST", error.message); return NextResponse.json({ error: "Failed to create event" }, { status: 500 }); }
   return NextResponse.json({ data }, { status: 201 });
 }

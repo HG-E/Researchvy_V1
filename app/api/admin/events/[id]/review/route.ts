@@ -58,7 +58,7 @@ export async function PATCH(
     .select("id,slug,status")
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/events/review] PATCH", error.message); return NextResponse.json({ error: "Failed to update event status" }, { status: 500 }); }
 
   // Notify submitter of approval or rejection
   if (event.submitted_by && (action === "publish" || action === "feature")) {

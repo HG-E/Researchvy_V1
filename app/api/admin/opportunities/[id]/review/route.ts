@@ -40,7 +40,7 @@ export async function PATCH(
     .from("research_opportunities")
     .update(update)
     .eq("id", id);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/opportunities/review] PATCH", error.message); return NextResponse.json({ error: "Failed to update opportunity status" }, { status: 500 }); }
 
   // Notify submitter if this was a community submission
   if (opp.submitted_by && (action === "publish" || action === "feature" || action === "reject")) {

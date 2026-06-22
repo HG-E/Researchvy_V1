@@ -27,7 +27,7 @@ export async function PATCH(
 
   const admin = createSupabaseAdminClient();
   const { data, error } = await admin.from("courses").update(update).eq("id", id).select().single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/academy/courses] PATCH", error.message); return NextResponse.json({ error: "Failed to update course" }, { status: 500 }); }
 
   // Revalidate public course pages
   if (data?.slug) {
@@ -52,7 +52,7 @@ export async function DELETE(
   }
 
   const { error } = await admin.from("courses").delete().eq("id", id);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/academy/courses] DELETE", error.message); return NextResponse.json({ error: "Failed to delete course" }, { status: 500 }); }
   revalidatePath("/academy/courses");
   return NextResponse.json({ ok: true });
 }

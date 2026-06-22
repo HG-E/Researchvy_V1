@@ -30,6 +30,6 @@ export async function PATCH(
     .update({ status })
     .eq("id", id);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/partnerships] PATCH", error.message); return NextResponse.json({ error: "Failed to update partnership status" }, { status: 500 }); }
   return NextResponse.json({ ok: true });
 }

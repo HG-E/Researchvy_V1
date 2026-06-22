@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { usernameSchema } from "@/lib/validation/schemas";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 export async function PUT(req: NextRequest) {
   try {
+    const { allowed } = await checkRateLimit(getRateLimitKey(req, "profile-update"), 20, 60 * 60 * 1000);
+    if (!allowed) return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+
     const supabase = await createSupabaseServerClient();
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -49,7 +53,7 @@ export async function PUT(req: NextRequest) {
       },
     });
 
-    if (authError) return NextResponse.json({ error: authError.message }, { status: 400 });
+    if (authError) { console.error("[auth/profile] updateUser:", authError.message); return NextResponse.json({ error: "Failed to update profile. Please try again." }, { status: 400 }); }
 
     const admin = createSupabaseAdminClient();
     const { error: dbError } = await admin.from("users").update({

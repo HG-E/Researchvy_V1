@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 const MAX_BYTES   = 2 * 1024 * 1024;
 const BUCKET_NAME = "avatars";
@@ -18,6 +19,10 @@ function detectImageType(buf: ArrayBuffer): "image/jpeg" | "image/png" | "image/
 
 export async function POST(req: NextRequest) {
   try {
+    // 10 avatar uploads per IP per hour — prevents storage spam
+    const { allowed } = await checkRateLimit(getRateLimitKey(req, "avatar-upload"), 10, 60 * 60 * 1000);
+    if (!allowed) return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+
     const supabase = await createSupabaseServerClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });

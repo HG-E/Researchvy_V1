@@ -28,7 +28,7 @@ export async function PATCH(
 
   const admin = createSupabaseAdminClient();
   const { data, error } = await admin.from("lessons").update(update).eq("id", id).select().single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/academy/lessons] PATCH", error.message); return NextResponse.json({ error: "Failed to update lesson" }, { status: 500 }); }
   return NextResponse.json({ lesson: data });
 }
 
@@ -42,6 +42,6 @@ export async function DELETE(
   // Remove progress records before deleting the lesson
   await admin.from("lesson_progress").delete().eq("lesson_id", id);
   const { error } = await admin.from("lessons").delete().eq("id", id);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) { console.error("[admin/academy/lessons] DELETE", error.message); return NextResponse.json({ error: "Failed to delete lesson" }, { status: 500 }); }
   return NextResponse.json({ ok: true });
 }
