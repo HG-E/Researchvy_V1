@@ -42,10 +42,8 @@ export async function POST(req: NextRequest) {
     });
 
     if (authErr || !authUser.user) {
-      return NextResponse.json(
-        { error: authErr?.message ?? "Failed to create auth user" },
-        { status: 500 }
-      );
+      console.error("[setup-admin] createUser:", authErr?.message);
+      return NextResponse.json({ error: "Failed to create auth user" }, { status: 500 });
     }
 
     await new Promise((r) => setTimeout(r, 800));
