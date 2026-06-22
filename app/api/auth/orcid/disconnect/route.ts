@@ -13,7 +13,10 @@ export async function POST() {
     },
   });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+  if (error) {
+    console.error("[orcid/disconnect]", error.message);
+    return NextResponse.json({ error: "Failed to disconnect ORCID. Please try again." }, { status: 400 });
+  }
 
   const admin = createSupabaseAdminClient();
   await admin.from("users").update({ orcid: "" }).eq("id", user.id);

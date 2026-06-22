@@ -10,7 +10,9 @@ import {
 } from "@/lib/email/index";
 
 function isAuthorized(req: NextRequest): boolean {
-  return (req.headers.get("authorization") ?? "").replace("Bearer ", "") === process.env.CRON_SECRET;
+  const secret = process.env.CRON_SECRET;
+  if (!secret) return false; // Block all requests when secret is not configured
+  return (req.headers.get("authorization") ?? "").replace("Bearer ", "") === secret;
 }
 
 const COHORT     = digitalVisibilityClinic.nextCohort;

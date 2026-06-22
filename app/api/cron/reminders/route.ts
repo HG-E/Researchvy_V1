@@ -3,8 +3,9 @@ import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { sendPushToUser } from "@/lib/notifications/push";
 
 function isAuthorized(req: NextRequest): boolean {
-  const auth = req.headers.get("authorization") ?? "";
-  return auth.replace("Bearer ", "") === process.env.CRON_SECRET;
+  const secret = process.env.CRON_SECRET;
+  if (!secret) return false; // Block all requests when secret is not configured
+  return (req.headers.get("authorization") ?? "").replace("Bearer ", "") === secret;
 }
 
 function dayWindow(daysFromNow: number): { start: string; end: string } {

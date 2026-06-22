@@ -82,7 +82,8 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("[certificates/issue]", error.message);
+    return NextResponse.json({ error: "Failed to issue certificate. Please try again." }, { status: 500 });
   }
 
   // Send certificate email to recipient (non-blocking)

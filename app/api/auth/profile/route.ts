@@ -66,12 +66,13 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: "Username is already taken" }, { status: 409 });
     }
     if (dbError) {
-      return NextResponse.json({ error: dbError.message }, { status: 500 });
+      console.error("[profile/put] db error:", dbError.message);
+      return NextResponse.json({ error: "Failed to save profile. Please try again." }, { status: 500 });
     }
 
     return NextResponse.json({ ok: true });
   } catch (e: unknown) {
-    const msg = e instanceof Error ? e.message : "Unknown error";
-    return NextResponse.json({ error: msg }, { status: 500 });
+    console.error("[profile/put]", e);
+    return NextResponse.json({ error: "An error occurred. Please try again." }, { status: 500 });
   }
 }

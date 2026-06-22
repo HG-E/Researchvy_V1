@@ -10,6 +10,11 @@ async function getCallerAdmin() {
   return allowed ? user : null;
 }
 
+function adminErr(msg: string, raw: unknown, status = 500): NextResponse {
+  console.error("[admin/users]", msg, raw);
+  return NextResponse.json({ error: msg }, { status });
+}
+
 // PATCH — suspend | unsuspend | flag | unflag | set_role | verify
 export async function PATCH(
   req: NextRequest,
@@ -45,17 +50,13 @@ export async function PATCH(
   }
 
   if (action === "suspend") {
-    const { error } = await admin.auth.admin.updateUserById(targetId, {
-      ban_duration: "876000h",
-    });
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    const { error } = await admin.auth.admin.updateUserById(targetId, { ban_duration: "876000h" });
+    if (error) return adminErr("Failed to suspend user", error.message);
   }
 
   else if (action === "unsuspend") {
-    const { error } = await admin.auth.admin.updateUserById(targetId, {
-      ban_duration: "none",
-    });
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    const { error } = await admin.auth.admin.updateUserById(targetId, { ban_duration: "none" });
+    if (error) return adminErr("Failed to unsuspend user", error.message);
   }
 
   else if (action === "flag") {
@@ -69,16 +70,14 @@ export async function PATCH(
         flagged_by:     caller.email,
       },
     });
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return adminErr("Failed to flag user", error.message);
   }
 
   else if (action === "unflag") {
     const { flagged: _f, flagged_reason: _r, flagged_at: _a, flagged_by: _b, ...rest } =
       targetData?.user?.user_metadata ?? {};
-    const { error } = await admin.auth.admin.updateUserById(targetId, {
-      user_metadata: rest,
-    });
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    const { error } = await admin.auth.admin.updateUserById(targetId, { user_metadata: rest });
+    if (error) return adminErr("Failed to unflag user", error.message);
   }
 
   else if (action === "set_role") {
@@ -87,14 +86,12 @@ export async function PATCH(
       return NextResponse.json({ error: "Invalid role" }, { status: 400 });
     }
     const { error } = await admin.from("users").update({ role }).eq("id", targetId);
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return adminErr("Failed to update role", error.message);
   }
 
   else if (action === "verify") {
-    const { error } = await admin.auth.admin.updateUserById(targetId, {
-      email_confirm: true,
-    });
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    const { error } = await admin.auth.admin.updateUserById(targetId, { email_confirm: true });
+    if (error) return adminErr("Failed to verify user", error.message);
   }
 
   else {
@@ -127,7 +124,7 @@ export async function DELETE(
   }
 
   const { error } = await admin.auth.admin.deleteUser(targetId);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return adminErr("Failed to delete user", error.message);
 
   return NextResponse.json({ ok: true });
 }
