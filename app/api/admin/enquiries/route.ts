@@ -23,6 +23,9 @@ export async function PATCH(req: NextRequest) {
   const admin = createSupabaseAdminClient();
   const { error } = await admin.from(table).update({ status }).eq("id", id);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    console.error("[admin/enquiries]", error.message);
+    return NextResponse.json({ error: "Failed to update status" }, { status: 500 });
+  }
   return NextResponse.json({ ok: true });
 }

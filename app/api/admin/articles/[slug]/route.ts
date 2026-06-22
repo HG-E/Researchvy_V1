@@ -57,7 +57,10 @@ export async function PATCH(
       { onConflict: "slug" }
     );
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    console.error("[admin/articles]", error.message);
+    return NextResponse.json({ error: "Failed to save article metadata" }, { status: 500 });
+  }
 
   // Immediately invalidate the static article page and the insights list
   revalidatePath(`/insights/${slug}`);
