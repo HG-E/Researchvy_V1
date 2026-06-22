@@ -30,8 +30,14 @@ export async function checkRateLimit(
     prefix:  "rl",
   });
 
-  const result = await limiter.limit(key);
-  return { allowed: result.success, remaining: result.remaining };
+  try {
+    const result = await limiter.limit(key);
+    return { allowed: result.success, remaining: result.remaining };
+  } catch {
+    // Redis error in production — fail closed to prevent rate-limit bypass during outage
+    console.error("[rate-limit] Redis error; denying request to fail safe");
+    return { allowed: false, remaining: 0 };
+  }
 }
 
 /** Extract a stable rate-limit key from request IP + a namespace prefix. */

@@ -54,10 +54,8 @@ export default async function AdminLayout({
   const user = await getServerUser();
   if (!user) redirect("/signin?next=/admin");
 
-  const { allowed, role } = await requireRole(user.id, "admin");
-  // Only redirect if we successfully fetched a role that is insufficient.
-  // If role is null, the DB query failed — don't redirect (could be transient).
-  if (!allowed && role !== null) redirect("/dashboard");
+  const { allowed } = await requireRole(user.id, "admin");
+  if (!allowed) redirect("/dashboard");
 
   const [pendingCount, newScorecardCount, submittedOrderCount] = await Promise.all([
     getPendingCount(),

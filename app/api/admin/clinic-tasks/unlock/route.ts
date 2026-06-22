@@ -35,7 +35,10 @@ export async function POST(req: NextRequest) {
       { onConflict: "clinic_slug,cohort_id,session_number" }
     );
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    console.error("[clinic-tasks/unlock]", error.message);
+    return NextResponse.json({ error: "Failed to unlock session" }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true });
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { generateOrderReference, isEarlyBird, resolveAmount } from "@/lib/orders";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 
@@ -38,6 +38,16 @@ export async function POST(request: NextRequest) {
     const amount    = resolveAmount(bundleId, moduleId ?? null, currency, earlyBird);
     if (!amount) {
       return NextResponse.json({ error: "Invalid bundle or module" }, { status: 400 });
+    }
+
+    // If a userId is submitted, verify it matches the authenticated session.
+    // This prevents guest requests from attaching orders to another user's account,
+    // and prevents authenticated users from claiming orders under a different user ID.
+    if (userId) {
+      const sessionUser = await getServerUser();
+      if (!sessionUser || sessionUser.id !== userId) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
     }
 
     const admin = createSupabaseAdminClient();

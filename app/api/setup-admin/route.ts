@@ -8,7 +8,11 @@ export async function POST(req: NextRequest) {
   try {
     const { secret, password } = await req.json();
 
-    if (!SETUP_SECRET || secret !== SETUP_SECRET) {
+    // Return 404 when no secret is configured — hides route existence in production
+    if (!SETUP_SECRET) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+    if (secret !== SETUP_SECRET) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
@@ -51,11 +55,11 @@ export async function POST(req: NextRequest) {
       .eq("id", authUser.user.id);
 
     if (roleErr) {
+      console.error("[setup-admin] Role update failed:", roleErr.message);
       return NextResponse.json({
         ok: true,
         action: "created",
-        warning: "Auth user created but role update failed — run SQL manually",
-        sql: `UPDATE public.users SET role = 'admin' WHERE email = '${email}';`,
+        warning: "Auth user created but role update failed — set role manually in Supabase dashboard",
       });
     }
 
