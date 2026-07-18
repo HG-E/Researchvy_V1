@@ -80,13 +80,47 @@ export async function POST(req: NextRequest) {
   const admin = createSupabaseAdminClient();
   const slug  = await uniqueSlug(title, admin);
 
+  // Explicitly whitelist only user-settable fields — never spread body directly
+  // to prevent clients from injecting is_featured, status, organizer_type, etc.
   const { data, error } = await admin
     .from("events")
     .insert({
-      ...body,
+      title:                    title.trim(),
+      description:              description.trim(),
+      short_description:        body.short_description?.trim()  || null,
+      event_type,
+      format,
+      location:                 body.location?.trim()           || null,
+      venue:                    body.venue?.trim()               || null,
+      timezone:                 body.timezone                   ?? "UTC",
+      start_date,
+      end_date:                 body.end_date                   || null,
+      registration_deadline:    body.registration_deadline      || null,
+      featured_image:           body.featured_image?.trim()     || null,
+      website_url:              body.website_url?.trim()        || null,
+      registration_url:         body.registration_url?.trim()   || null,
+      registration_type:        body.registration_type          ?? "external",
+      capacity:                 body.capacity                   ?? null,
+      is_free:                  body.is_free                    ?? true,
+      fee_amount:               body.fee_amount                 ?? null,
+      fee_currency:             body.fee_currency               ?? "USD",
+      call_for_papers_url:      body.call_for_papers_url?.trim()       || null,
+      call_for_papers_deadline: body.call_for_papers_deadline          || null,
+      organizer_name:           organizer_name.trim(),
+      organizer_email:          body.organizer_email?.trim()    || null,
+      organizer_type:           "external",
+      target_audience:          body.target_audience            ?? "all",
+      disciplines:              Array.isArray(body.disciplines) ? body.disciplines : [],
+      tags:                     Array.isArray(body.tags)        ? body.tags        : [],
+      has_travel_funding:       body.has_travel_funding         ?? false,
+      funding_description:      body.funding_description?.trim()       || null,
+      funding_url:              body.funding_url?.trim()               || null,
+      is_competitive_admission: body.is_competitive_admission  ?? false,
+      application_url:          body.application_url?.trim()           || null,
       slug,
-      status: "pending",
-      submitted_by: user.id,
+      status:                   "pending",
+      is_featured:              false,
+      submitted_by:             user.id,
     })
     .select("id,slug,title")
     .single();
