@@ -374,7 +374,7 @@ h1, h2, h3, h4, h5, h6 {
   body.printing-lesson aside,
   body.printing-lesson header,
   body.printing-lesson footer,
-  body.printing-lesson .print\\:hidden {
+  body.printing-lesson [class~="print:hidden"] {
     display: none !important;
   }
   body.printing-lesson main {

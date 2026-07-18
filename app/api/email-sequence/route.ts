@@ -12,11 +12,11 @@ function getSupabaseAdmin() {
   );
 }
 
-// Vercel Cron sends Authorization: Bearer <CRON_SECRET>
 function isAuthorized(req: NextRequest): boolean {
-  const auth = req.headers.get("authorization") ?? "";
-  const token = auth.replace("Bearer ", "");
-  return token === process.env.CRON_SECRET;
+  const secret = process.env.CRON_SECRET;
+  if (!secret) return false;
+  const token = (req.headers.get("authorization") ?? "").replace("Bearer ", "");
+  return token === secret;
 }
 
 export async function GET(req: NextRequest) {

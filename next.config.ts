@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Disable Next.js font-optimization scan — next/font/google handles subsetting itself.
+  // Without this, Turbopack tries to download a dynamic font subset for characters like ₦
+  // that are outside the "latin" unicode range and fails with a 400 from Google Fonts.
+  optimizeFonts: false,
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 365,
@@ -36,6 +40,8 @@ const nextConfig: NextConfig = {
       "frame-src https://www.youtube.com https://www.youtube-nocookie.com https://iframe.mediadelivery.net",
       // Supabase realtime uses WSS; PostHog for analytics; YouTube IFrame API calls googleapis
       "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://app.posthog.com https://eu.posthog.com https://www.googleapis.com",
+      // Service workers (PWA) — must be allowed as scripts from same origin
+      "worker-src 'self'",
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
