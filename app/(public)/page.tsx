@@ -9,6 +9,7 @@ import { ObjectionBuster } from "@/components/sections/ObjectionBuster";
 import { CaseStudy } from "@/components/sections/CaseStudy";
 import { EcosystemOverview } from "@/components/sections/EcosystemOverview";
 import { SocialProof } from "@/components/sections/SocialProof";
+import { ImpactNumbers } from "@/components/sections/ImpactNumbers";
 import { CTA } from "@/components/sections/CTA";
 
 export const revalidate = 300; // refresh live spot count every 5 minutes
@@ -48,7 +49,11 @@ export default function HomePage() {
         <VisibilityGap />
       </Suspense>
 
-      {/* Social proof at position 3 — validates pain before asking for a CTA */}
+      <Suspense fallback={<SectionFallback height="480px" />}>
+        <ImpactNumbers />
+      </Suspense>
+
+      {/* Social proof at position 4 — validates pain before asking for a CTA */}
       <Suspense fallback={<SectionFallback height="480px" />}>
         <SocialProof />
       </Suspense>

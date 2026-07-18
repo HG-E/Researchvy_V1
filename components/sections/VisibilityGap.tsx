@@ -1,126 +1,168 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertCircle, ArrowRight } from "lucide-react";
-import { copy } from "@/constants/copy";
-import { MobileCarousel } from "@/components/ui/MobileCarousel";
+import { Eye, SearchX, Unplug, Megaphone, BarChart3, Lightbulb, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
-const containerVariants = {
-  hidden:   {},
-  visible:  { transition: { staggerChildren: 0.12 } },
-};
-
-const itemVariants = {
-  hidden:  { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-};
+const PROBLEMS = [
+  {
+    icon:  Eye,
+    label: "Low Visibility",
+    color: "#2563EB",
+    bg:    "rgba(37,99,235,0.08)",
+    desc:  "Hard to find profiles, papers, or information about your research.",
+  },
+  {
+    icon:  SearchX,
+    label: "Poor Discoverability",
+    color: "#10B981",
+    bg:    "rgba(16,185,129,0.08)",
+    desc:  "Not optimised for search or indexing across scholarly databases.",
+  },
+  {
+    icon:  Unplug,
+    label: "Limited Connections",
+    color: "#F59E0B",
+    bg:    "rgba(245,158,11,0.08)",
+    desc:  "Not enough collaboration or exposure to researchers in your field.",
+  },
+  {
+    icon:  Megaphone,
+    label: "Weak Promotion",
+    color: "#EF4444",
+    bg:    "rgba(239,68,68,0.08)",
+    desc:  "Great work shared with the wrong audience, in the wrong way.",
+  },
+  {
+    icon:  BarChart3,
+    label: "No Impact Strategy",
+    color: "#6366F1",
+    bg:    "rgba(99,102,241,0.08)",
+    desc:  "No clear plan to increase citations, reach, or measurable impact.",
+  },
+];
 
 export function VisibilityGap() {
-  const problems = copy.visibilityGap.problems;
-
   return (
-    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#FFFFFF" }}>
+    <section
+      className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8"
+      style={{ backgroundColor: "#FFFFFF" }}
+    >
       <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-          {/* Left — intro copy */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#EF4444" }}>
+            The Problem
+          </p>
+          <h2
+            className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
-            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
-              The Problem
-            </p>
-            <h2
-              className="text-4xl sm:text-5xl font-bold mb-6 leading-tight"
-              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
-            >
-              {copy.visibilityGap.title}
-            </h2>
-            <p className="text-base leading-relaxed mb-8" style={{ color: "#6B7280" }}>
-              {copy.visibilityGap.subtitle}
-            </p>
-            <div
-              className="rounded-xl p-6 border"
-              style={{
-                backgroundColor: "rgba(16,185,129,0.04)",
-                borderColor: "rgba(16,185,129,0.28)",
-              }}
-            >
-              <p className="flex items-center gap-2 text-sm font-semibold mb-2" style={{ color: "#111827" }}>
-                <ArrowRight className="h-4 w-4 flex-shrink-0" style={{ color: "#10B981" }} />
-                The Researchvy Framework bridges every gap:
-              </p>
-              <p className="text-sm leading-relaxed pl-6" style={{ color: "#6B7280" }}>
-                Research → Visibility → Discoverability → Connection → Communication → Application →{" "}
-                <span style={{ color: "#10B981" }}>Impact</span>
-              </p>
-            </div>
-          </motion.div>
+            Why great research
+            <br />
+            <span style={{ color: "#2563EB" }}>gets ignored.</span>
+          </h2>
+          <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed" style={{ color: "#6B7280" }}>
+            It&rsquo;s not always about the quality.
+            <br />
+            It&rsquo;s about the <span className="font-semibold" style={{ color: "#374151" }}>visibility.</span>
+          </p>
+        </motion.div>
 
-          {/* Right — mobile: swipe carousel | desktop: staggered list */}
-          <div>
-            {/* Mobile carousel */}
-            <MobileCarousel
-              className="lg:hidden"
-              dotColor="#EF4444"
-              items={problems.map((problem, i) => (
-                <div
-                  key={i}
-                  className="relative flex items-start gap-4 rounded-xl p-5 border mx-0.5 overflow-hidden"
-                  style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", minHeight: 90 }}
-                >
-                  {/* Left accent stripe */}
-                  <div
-                    className="absolute left-0 top-0 bottom-0 w-0.5"
-                    style={{ backgroundColor: "#EF4444" }}
-                  />
-                  {/* Problem number */}
-                  <span
-                    className="absolute top-3 right-3 text-xs font-bold tabular-nums"
-                    style={{ color: "#CBD5E1" }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "#EF4444" }} />
-                  <span className="text-sm font-medium leading-relaxed pr-6" style={{ color: "#374151" }}>
-                    {problem}
-                  </span>
-                </div>
-              ))}
-            />
-
-            {/* Desktop animated list */}
-            <motion.ul
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="space-y-4 hidden lg:block"
+        {/* Problem cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
+          {PROBLEMS.map(({ icon: Icon, label, color, bg, desc }, i) => (
+            <motion.div
+              key={label}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: i * 0.09 }}
+              className="rounded-2xl border p-5 flex flex-col items-center text-center gap-3"
+              style={{ backgroundColor: "#FAFAFA", borderColor: "#E5E7EB" }}
             >
-              {problems.map((problem, i) => (
-                <motion.li
-                  key={i}
-                  variants={itemVariants}
-                  className="relative flex items-start gap-4 rounded-xl p-5 border overflow-hidden"
-                  style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
-                >
-                  <div
-                    className="absolute left-0 top-0 bottom-0 w-0.5"
-                    style={{ backgroundColor: "#EF4444" }}
-                  />
-                  <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "#EF4444" }} />
-                  <span className="text-sm font-medium leading-relaxed" style={{ color: "#374151" }}>
-                    {problem}
-                  </span>
-                </motion.li>
-              ))}
-            </motion.ul>
+              {/* Icon circle */}
+              <div
+                className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: bg }}
+              >
+                <Icon className="h-6 w-6" style={{ color }} />
+              </div>
+
+              {/* Label */}
+              <p
+                className="text-sm font-bold leading-snug"
+                style={{ color }}
+              >
+                {label}
+              </p>
+
+              {/* Description */}
+              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                {desc}
+              </p>
+
+              {/* Bottom accent bar */}
+              <div
+                className="w-8 h-0.5 rounded-full mt-auto"
+                style={{ backgroundColor: color }}
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* "Visibility is not luck" banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6"
+          style={{ backgroundColor: "#0F172A" }}
+        >
+          {/* Light-bulb icon */}
+          <div
+            className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: "rgba(245,158,11,0.15)" }}
+          >
+            <Lightbulb className="h-8 w-8" style={{ color: "#F59E0B" }} />
           </div>
 
-        </div>
+          <div className="flex-1 text-center sm:text-left">
+            <p
+              className="text-xl sm:text-2xl font-bold mb-1 leading-snug"
+              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            >
+              Visibility is not luck.{" "}
+              <span style={{ color: "#FCD34D" }}>It&rsquo;s a strategy.</span>
+            </p>
+            <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+              We help researchers get discovered, get cited, and make real impact.
+            </p>
+          </div>
+
+          <Link
+            href="/resources/visibility-scorecard"
+            className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white flex-shrink-0 active:opacity-80"
+            style={{
+              backgroundColor: "#2563EB",
+              transition: "background-color 140ms ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+          >
+            Start your strategy
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </motion.div>
+
       </div>
     </section>
   );
