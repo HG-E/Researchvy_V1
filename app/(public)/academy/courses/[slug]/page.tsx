@@ -52,7 +52,7 @@ function LessonRow({
     return (
       <div
         className="flex items-center gap-3 px-4 py-3 rounded-xl opacity-60"
-        style={{ backgroundColor: "#080E1A" }}
+        style={{ backgroundColor: "#FFFFFF" }}
       >
         <Lock className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} />
         <span className="text-sm flex-1 truncate" style={{ color: "#6B7280" }}>
@@ -70,8 +70,8 @@ function LessonRow({
   return (
     <Link
       href={`/academy/courses/${courseSlug}/lessons/${lesson.id}`}
-      className="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-[#1E293B]"
-      style={{ backgroundColor: "#080E1A" }}
+      className="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-[#F1F5F9]"
+      style={{ backgroundColor: "#FFFFFF" }}
     >
       {completed ? (
         <CheckCircle className="h-4 w-4 flex-shrink-0" style={{ color: "#10B981" }} />
@@ -122,15 +122,15 @@ function ModuleAccordion({
     <details
       open
       className="group rounded-2xl border overflow-hidden"
-      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
     >
       {/* Module header — acts as the toggle */}
       <summary
         className="flex items-center justify-between gap-4 px-5 py-4 border-b cursor-pointer list-none select-none"
-        style={{ borderColor: "#1E293B" }}
+        style={{ borderColor: "#E2E8F0" }}
       >
         <div className="flex-1 min-w-0">
-          <h3 className="text-sm font-bold" style={{ color: "#F9FAFB" }}>{mod.title}</h3>
+          <h3 className="text-sm font-bold" style={{ color: "#111827" }}>{mod.title}</h3>
           {mod.description && (
             <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{mod.description}</p>
           )}
@@ -209,7 +209,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
   });
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -262,7 +262,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
 
           <h1
             className="text-3xl sm:text-4xl font-bold mb-3 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             {course.title}
           </h1>
@@ -270,7 +270,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
             <p className="text-lg mb-4" style={{ color: "#6B7280" }}>{course.subtitle}</p>
           )}
           {course.description && (
-            <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "#9CA3AF" }}>{course.description}</p>
+            <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "#6B7280" }}>{course.description}</p>
           )}
 
           {/* Meta row */}
@@ -299,7 +299,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
                 <span>{stats.completed_lessons} of {stats.total_lessons} complete</span>
                 <span style={{ color }}>{stats.percent_complete}%</span>
               </div>
-              <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "#1E293B" }}>
+              <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "#F1F5F9" }}>
                 <div
                   className="h-full rounded-full transition-all"
                   style={{ width: `${stats.percent_complete}%`, backgroundColor: color }}
@@ -368,14 +368,14 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
         {!enrolled && course.modules.length > 0 && (
           <div
             className="rounded-2xl border p-6 mb-10"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
-            <h2 className="text-sm font-bold mb-4" style={{ color: "#F9FAFB" }}>What you&apos;ll cover</h2>
+            <h2 className="text-sm font-bold mb-4" style={{ color: "#111827" }}>What you&apos;ll cover</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {course.modules.map((mod) => (
                 <div key={mod.id} className="flex items-start gap-2.5">
                   <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: color }} />
-                  <span className="text-sm leading-snug" style={{ color: "#9CA3AF" }}>{mod.title}</span>
+                  <span className="text-sm leading-snug" style={{ color: "#6B7280" }}>{mod.title}</span>
                 </div>
               ))}
             </div>
@@ -384,7 +384,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
 
         {/* Curriculum */}
         <div>
-          <h2 className="text-lg font-bold mb-5" style={{ color: "#F9FAFB" }}>
+          <h2 className="text-lg font-bold mb-5" style={{ color: "#111827" }}>
             Course Curriculum
           </h2>
           <div className="space-y-3">
@@ -403,9 +403,9 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
           {!enrolled && !course.is_free && (
             <div
               className="mt-8 rounded-2xl border p-6 text-center"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B", borderTop: `3px solid ${color}` }}
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", borderTop: `3px solid ${color}` }}
             >
-              <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
+              <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
                 Ready to get found?
               </p>
               <p className="text-xs mb-5" style={{ color: "#6B7280" }}>

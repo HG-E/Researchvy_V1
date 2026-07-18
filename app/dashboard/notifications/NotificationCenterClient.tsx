@@ -74,22 +74,34 @@ export function NotificationCenterClient({ initialNotifications }: { initialNoti
   const filtered = notifications.filter((n) => matchesFilter(n, filter));
 
   async function markAllRead() {
-    await fetch("/api/notifications/read", {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify({}),
-    });
-    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+    const prev = notifications;
+    setNotifications((ns) => ns.map((n) => ({ ...n, read: true })));
+    try {
+      const res = await fetch("/api/notifications/read", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({}),
+      });
+      if (!res.ok) setNotifications(prev);
+    } catch {
+      setNotifications(prev);
+    }
   }
 
   async function markOneRead(id: string) {
     if (notifications.find((n) => n.id === id)?.read) return;
-    await fetch("/api/notifications/read", {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify({ id }),
-    });
-    setNotifications((prev) => prev.map((n) => n.id === id ? { ...n, read: true } : n));
+    const prev = notifications;
+    setNotifications((ns) => ns.map((n) => n.id === id ? { ...n, read: true } : n));
+    try {
+      const res = await fetch("/api/notifications/read", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ id }),
+      });
+      if (!res.ok) setNotifications(prev);
+    } catch {
+      setNotifications(prev);
+    }
   }
 
   return (
@@ -97,7 +109,7 @@ export function NotificationCenterClient({ initialNotifications }: { initialNoti
       {/* Toolbar */}
       <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
         {/* Filter tabs */}
-        <div className="flex items-center gap-1 rounded-xl border p-1" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+        <div className="flex items-center gap-1 rounded-xl border p-1" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
           {FILTERS.map(({ key, label }) => {
             const active = filter === key;
             return (
@@ -106,8 +118,8 @@ export function NotificationCenterClient({ initialNotifications }: { initialNoti
                 onClick={() => setFilter(key)}
                 className="rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-150"
                 style={{
-                  backgroundColor: active ? "#1E293B" : "transparent",
-                  color:           active ? "#F9FAFB" : "#6B7280",
+                  backgroundColor: active ? "#2563EB" : "transparent",
+                  color:           active ? "#FFFFFF" : "#6B7280",
                 }}
               >
                 {label}
@@ -129,12 +141,12 @@ export function NotificationCenterClient({ initialNotifications }: { initialNoti
       </div>
 
       {/* List */}
-      <div className="rounded-2xl border overflow-hidden" style={{ borderColor: "#1E293B" }}>
+      <div className="rounded-2xl border overflow-hidden" style={{ borderColor: "#E2E8F0" }}>
         {filtered.length === 0 ? (
-          <div className="px-6 py-16 text-center" style={{ backgroundColor: "#0F172A" }}>
+          <div className="px-6 py-16 text-center" style={{ backgroundColor: "#FFFFFF" }}>
             <Bell className="h-10 w-10 mx-auto mb-3 opacity-20" style={{ color: "#6B7280" }} />
-            <p className="text-sm font-medium" style={{ color: "#9CA3AF" }}>No notifications</p>
-            <p className="text-xs mt-1" style={{ color: "#4B5563" }}>
+            <p className="text-sm font-medium" style={{ color: "#6B7280" }}>No notifications</p>
+            <p className="text-xs mt-1" style={{ color: "#6B7280" }}>
               {filter === "all"
                 ? "Save opportunities to start receiving deadline reminders."
                 : `No ${filter} notifications yet.`}
@@ -149,7 +161,7 @@ export function NotificationCenterClient({ initialNotifications }: { initialNoti
                 className="flex gap-4 px-5 py-4 border-b cursor-pointer transition-colors hover:bg-[#111827]"
                 style={{
                   borderColor:   "#1E293B",
-                  backgroundColor: i % 2 === 0 ? "#0F172A" : "#0A0F1A",
+                  backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F8FAFC",
                   borderLeft:    `3px solid ${n.read ? "transparent" : color}`,
                 }}
                 onClick={() => markOneRead(n.id)}

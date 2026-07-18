@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Calendar, ExternalLink, Banknote, Star, Plane } from "lucide-react";
 import type { ResearchOpportunity, OpportunityCategory } from "@/types/opportunity";
 
@@ -49,7 +49,7 @@ export function OpportunityCard({ opp }: Props) {
     <Link
       href={`/opportunities/${opp.id}`}
       className="group block rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg relative overflow-hidden"
-      style={{ backgroundColor: "#0F172A", borderColor: opp.is_featured ? "#7C3AED" : "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: opp.is_featured ? "#7C3AED" : "#1E293B" }}
     >
       {/* Featured accent */}
       {opp.is_featured && (
@@ -83,7 +83,7 @@ export function OpportunityCard({ opp }: Props) {
 
         {/* Title */}
         <h3 className="text-sm font-semibold leading-snug mb-1 group-hover:text-blue-400 transition-colors line-clamp-2"
-          style={{ color: "#F9FAFB" }}>
+          style={{ color: "#111827" }}>
           {opp.title}
         </h3>
 
@@ -118,17 +118,17 @@ export function OpportunityCard({ opp }: Props) {
                 {past ? "Closed" : expiring ? `${Math.ceil((new Date(opp.deadline).getTime() - Date.now()) / 86_400_000)}d left` : new Date(opp.deadline).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
               </span>
             ) : (
-              <span className="text-[11px]" style={{ color: "#4B5563" }}>Rolling deadline</span>
+              <span className="text-[11px]" style={{ color: "#6B7280" }}>Rolling deadline</span>
             )}
 
             {opp.target_level && opp.target_level !== "all" && (
-              <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: "#1E293B", color: "#9CA3AF" }}>
+              <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}>
                 {LEVEL_LABEL[opp.target_level] ?? opp.target_level}
               </span>
             )}
           </div>
 
-          <span className="text-[11px] font-medium flex items-center gap-1" style={{ color: "#4B5563" }}>
+          <span className="text-[11px] font-medium flex items-center gap-1" style={{ color: "#6B7280" }}>
             {opp.apply_url.startsWith("http") ? (
               <><ExternalLink className="h-3 w-3" /> Details</>
             ) : "View →"}

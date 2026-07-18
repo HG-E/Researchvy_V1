@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -20,7 +20,7 @@ function SessionRow({
   return (
     <div
       className="flex items-start gap-4 rounded-xl p-4"
-      style={{ backgroundColor: "#1E293B" }}
+      style={{ backgroundColor: "#F1F5F9" }}
     >
       <span
         className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
@@ -29,7 +29,7 @@ function SessionRow({
         {session.number}
       </span>
       <div>
-        <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+        <p className="text-sm font-semibold" style={{ color: "#111827" }}>
           {session.title}
         </p>
         <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#6B7280" }}>
@@ -55,8 +55,8 @@ function SessionCard({
       style={{ borderColor: `${color}40` }}
     >
       <div className="h-1" style={{ background: `linear-gradient(90deg, ${color}, #10B981)` }} />
-      <div className="p-5" style={{ backgroundColor: "#1E293B" }}>
-        <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
+      <div className="p-5" style={{ backgroundColor: "#F1F5F9" }}>
+        <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#6B7280" }}>
           {(session as { isBonus?: boolean }).isBonus
             ? "Bonus Masterclass"
             : `Module ${session.number} of ${total}`}
@@ -74,12 +74,12 @@ function SessionCard({
           </span>
           <p
             className="text-base font-bold leading-snug"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             {session.title}
           </p>
         </div>
-        <p className="text-sm leading-relaxed mb-4" style={{ color: "#9CA3AF" }}>
+        <p className="text-sm leading-relaxed mb-4" style={{ color: "#6B7280" }}>
           {session.description}
         </p>
         <ul className="space-y-1.5">

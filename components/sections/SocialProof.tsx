@@ -6,36 +6,42 @@ import { MobileCarousel } from "@/components/ui/MobileCarousel";
 
 const TESTIMONIALS = [
   {
+    before:   "Google Scholar missing half my publications. H-index stuck for 3 years.",
+    after:    "H-index moved within 2 weeks. Fully optimised profile, first time ever.",
     quote:
-      "Before the clinic, I had no idea my Google Scholar profile was missing half my publications. Within two weeks of applying what I learned, my h-index moved. That had never happened in three years.",
+      "I had no idea the gaps even existed until the visibility audit. Within two weeks of applying the fixes, my h-index moved — something that hadn't happened in three years of publishing.",
     name:     "Dr. A. Mensah",
     role:     "Senior Lecturer, West Africa",
     initials: "AM",
-    color:    "#60A5FA",
+    color:    "#2563EB",
   },
   {
+    before:   "6 years publishing. Near-zero citations outside my department.",
+    after:    "Citation trend reversed in 6 months. Discoverable internationally.",
     quote:
-      "I published consistently for six years and barely got cited outside my department. The visibility audit showed me exactly why, giving me a step-by-step fix. Six months later, the difference is measurable.",
+      "The audit showed me exactly why I was invisible — and gave me a step-by-step fix. Six months later the difference is measurable, and people outside my field are finding my work for the first time.",
     name:     "Dr. O. Adeyemi",
     role:     "Postdoctoral Researcher",
     initials: "OA",
-    color:    "#A78BFA",
+    color:    "#7C3AED",
   },
   {
+    before:   "Team of 14 researchers, none knew how visibility worked.",
+    after:    "Institution-wide audit. Every researcher with an optimised scholarly identity.",
     quote:
-      "As a research director, I needed something I could bring to the whole team, not another generic workshop. The institutional programme was built around our specific gaps. Our researchers finally understand how visibility works.",
+      "I needed something built for our specific gaps, not a generic workshop. The institutional programme gave my entire team a shared framework. Our researchers now understand exactly what drives discoverability.",
     name:     "Prof. R. Nkosi",
     role:     "Director of Research, South Africa",
     initials: "RN",
-    color:    "#34D399",
+    color:    "#10B981",
   },
 ];
 
 const STATS = [
-  { value: "≤20",  label: "Researchers per cohort",  accent: "#60A5FA" },
-  { value: "5",    label: "Sessions per cohort",  accent: "#A78BFA" },
-  { value: "5",    label: "Ecosystem divisions",     accent: "#34D399" },
-  { value: "100%", label: "Certified on completion", accent: "#FCD34D" },
+  { value: "≤20",  label: "Researchers per cohort",  accent: "#2563EB" },
+  { value: "5",    label: "Sessions per cohort",      accent: "#7C3AED" },
+  { value: "5",    label: "Ecosystem divisions",      accent: "#10B981" },
+  { value: "100%", label: "Certified on completion",  accent: "#F59E0B" },
 ];
 
 function StarRating({ color }: { color: string }) {
@@ -57,23 +63,43 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
   return (
     <div
       className="rounded-2xl border p-6 flex flex-col h-full"
-      style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
     >
+      {/* Before → After transformation strip */}
+      <div className="rounded-xl overflow-hidden mb-5 text-xs font-medium" style={{ borderColor: "#E2E8F0" }}>
+        <div className="flex items-stretch">
+          <div className="flex-1 px-3 py-2.5" style={{ backgroundColor: "#FEF2F2", color: "#DC2626" }}>
+            <span className="block text-[9px] font-bold tracking-widest uppercase mb-0.5" style={{ color: "#F87171" }}>Before</span>
+            {t.before}
+          </div>
+          <div
+            className="flex items-center justify-center px-2 text-sm font-bold flex-shrink-0"
+            style={{ backgroundColor: t.color, color: "#FFFFFF" }}
+          >
+            →
+          </div>
+          <div className="flex-1 px-3 py-2.5" style={{ backgroundColor: "#F0FDF4", color: "#16A34A" }}>
+            <span className="block text-[9px] font-bold tracking-widest uppercase mb-0.5" style={{ color: "#4ADE80" }}>After</span>
+            {t.after}
+          </div>
+        </div>
+      </div>
+
       <StarRating color={t.color} />
       <Quote className="h-5 w-5 mb-3 flex-shrink-0" style={{ color: t.color }} />
-      <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: "#D1D5DB" }}>
+      <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: "#374151" }}>
         &ldquo;{t.quote}&rdquo;
       </p>
       <div className="flex items-center gap-3">
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-          style={{ background: `linear-gradient(135deg, ${t.color}30, ${t.color}10)`, color: t.color }}
+          style={{ background: `linear-gradient(135deg, ${t.color}20, ${t.color}08)`, color: t.color }}
         >
           {t.initials}
         </div>
         <div>
-          <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{t.name}</p>
-          <p className="text-xs" style={{ color: "#4B5563" }}>{t.role}</p>
+          <p className="text-sm font-semibold" style={{ color: "#111827" }}>{t.name}</p>
+          <p className="text-xs" style={{ color: "#6B7280" }}>{t.role}</p>
         </div>
       </div>
     </div>
@@ -82,7 +108,7 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
 
 export function SocialProof() {
   return (
-    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#0F172A" }}>
+    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#F8FAFC" }}>
       <div className="mx-auto max-w-6xl">
 
         {/* Header */}
@@ -98,7 +124,7 @@ export function SocialProof() {
           </p>
           <h2
             className="text-4xl sm:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             This Is What Changes
             <br />
@@ -110,7 +136,7 @@ export function SocialProof() {
           </p>
         </motion.div>
 
-        {/* Testimonials — desktop: 3-col grid | mobile: swipe carousel */}
+        {/* Testimonials */}
         <div className="mb-12 sm:mb-16">
           {/* Desktop */}
           <div className="hidden md:grid grid-cols-3 gap-6">
@@ -122,13 +148,13 @@ export function SocialProof() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.12 }}
                 className="rounded-2xl border transition-all duration-300"
-                style={{ borderColor: "#1E293B" }}
+                style={{ borderColor: "#E2E8F0" }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = t.color;
                   e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "#1E293B";
+                  e.currentTarget.style.borderColor = "#E2E8F0";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
@@ -140,7 +166,7 @@ export function SocialProof() {
           {/* Mobile carousel */}
           <MobileCarousel
             className="md:hidden"
-            dotColor="#60A5FA"
+            dotColor="#2563EB"
             items={TESTIMONIALS.map((t) => (
               <div key={t.initials} className="px-0.5">
                 <TestimonialCard t={t} />
@@ -149,14 +175,14 @@ export function SocialProof() {
           />
         </div>
 
-        {/* Stats bar — with per-stat accent colors */}
+        {/* Stats bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="rounded-2xl border p-6 sm:p-8 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
-          style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           {STATS.map((stat, i) => (
             <div key={i} className="text-center">
@@ -169,6 +195,41 @@ export function SocialProof() {
               <p className="text-xs leading-snug" style={{ color: "#6B7280" }}>{stat.label}</p>
             </div>
           ))}
+        </motion.div>
+
+        {/* University partnership strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mt-8 text-center"
+        >
+          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#9CA3AF" }}>
+            Delivered in partnership with
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {[
+              "FUTO",
+              "Bingham University",
+              "Olabisi Onabanjo University",
+              "ASM Nigeria",
+            ].map((name) => (
+              <span
+                key={name}
+                className="text-xs font-medium px-3.5 py-1.5 rounded-full border"
+                style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0", color: "#6B7280" }}
+              >
+                {name}
+              </span>
+            ))}
+            <span
+              className="text-xs font-medium px-3.5 py-1.5 rounded-full border"
+              style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0", color: "#9CA3AF" }}
+            >
+              + more institutions
+            </span>
+          </div>
         </motion.div>
 
       </div>

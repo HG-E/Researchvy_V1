@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Loader2, CheckCircle2, Send } from "lucide-react";
@@ -21,9 +21,9 @@ const INTEREST_AREAS = [
 
 const INPUT_STYLE: React.CSSProperties = {
   width: "100%",
-  backgroundColor: "#1E293B",
-  borderColor: "#334155",
-  color: "#F9FAFB",
+  backgroundColor: "#F1F5F9",
+  borderColor: "#CBD5E1",
+  color: "#111827",
   borderRadius: "0.75rem",
   padding: "12px 14px",
   /* 16px minimum prevents iOS Safari auto-zoom on input focus */
@@ -73,12 +73,12 @@ export function PartnershipForm() {
     return (
       <div
         className="rounded-2xl border p-8"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         <div className="flex items-start gap-4">
           <CheckCircle2 className="h-6 w-6 flex-shrink-0 mt-0.5" style={{ color: "#10B981" }} />
           <div>
-            <p className="text-base font-bold mb-2" style={{ color: "#F9FAFB" }}>Enquiry received.</p>
+            <p className="text-base font-bold mb-2" style={{ color: "#111827" }}>Enquiry received.</p>
             <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
               We&apos;ll review your enquiry and reach out within 24 hours to discuss how Researchvy
               can support your institution&apos;s research visibility goals.
@@ -96,13 +96,13 @@ export function PartnershipForm() {
     <form
       onSubmit={handleSubmit}
       className="rounded-2xl border p-8 space-y-5"
-      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
     >
       <div>
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#60A5FA" }}>
           Partnership Enquiry
         </p>
-        <h3 className="text-xl font-bold" style={{ color: "#F9FAFB" }}>
+        <h3 className="text-xl font-bold" style={{ color: "#111827" }}>
           Tell us about your institution
         </h3>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
@@ -112,7 +112,7 @@ export function PartnershipForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: "#9CA3AF" }}>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
             Your name <span style={{ color: "#EF4444" }}>*</span>
           </label>
           <input
@@ -125,7 +125,7 @@ export function PartnershipForm() {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: "#9CA3AF" }}>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
             Email <span style={{ color: "#EF4444" }}>*</span>
           </label>
           <input
@@ -140,7 +140,7 @@ export function PartnershipForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-medium mb-1.5" style={{ color: "#9CA3AF" }}>
+        <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
           Institution / Organisation <span style={{ color: "#EF4444" }}>*</span>
         </label>
         <input
@@ -155,7 +155,7 @@ export function PartnershipForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: "#9CA3AF" }}>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
             Number of researchers <span style={{ color: "#EF4444" }}>*</span>
           </label>
           <select
@@ -171,7 +171,7 @@ export function PartnershipForm() {
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: "#9CA3AF" }}>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
             Primary interest <span style={{ color: "#EF4444" }}>*</span>
           </label>
           <select
@@ -189,7 +189,7 @@ export function PartnershipForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-medium mb-1.5" style={{ color: "#9CA3AF" }}>
+        <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
           Anything else you&apos;d like us to know? (optional)
         </label>
         <textarea

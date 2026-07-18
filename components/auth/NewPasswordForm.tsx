@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -38,9 +38,9 @@ export function NewPasswordForm() {
   }
 
   const INPUT_STYLE = {
-    backgroundColor: "#1E293B",
-    borderColor: "#334155",
-    color: "#F9FAFB",
+    backgroundColor: "#F1F5F9",
+    borderColor: "#CBD5E1",
+    color: "#111827",
   };
 
   if (success) {
@@ -48,7 +48,7 @@ export function NewPasswordForm() {
       <div className="w-full" style={{ maxWidth: "400px" }}>
         <div
           className="rounded-2xl border p-8 text-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
@@ -58,11 +58,11 @@ export function NewPasswordForm() {
           </div>
           <h2
             className="text-xl font-bold mb-2"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Password updated
           </h2>
-          <p className="text-sm" style={{ color: "#9CA3AF" }}>
+          <p className="text-sm" style={{ color: "#6B7280" }}>
             Your password has been changed successfully. Redirecting to your dashboard…
           </p>
         </div>
@@ -74,7 +74,7 @@ export function NewPasswordForm() {
     <div className="w-full" style={{ maxWidth: "400px" }}>
       <div
         className="rounded-2xl border p-8"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         <div className="flex justify-center mb-8">
           <Logo variant="full" width={120} linkToHome />
@@ -83,7 +83,7 @@ export function NewPasswordForm() {
         <div className="mb-7">
           <h1
             className="text-2xl font-bold mb-1"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Set new password
           </h1>
@@ -108,7 +108,7 @@ export function NewPasswordForm() {
                 className="w-full rounded-xl px-4 py-3 text-sm border outline-none transition-all duration-200 placeholder:text-[#374151]"
                 style={{
                   ...INPUT_STYLE,
-                  borderColor: errors.password ? "#EF4444" : "#334155",
+                  borderColor: "#E2E8F0",
                   paddingRight: "44px",
                 }}
                 placeholder="Min. 8 chars, 1 uppercase, 1 number"
@@ -145,7 +145,7 @@ export function NewPasswordForm() {
                 className="w-full rounded-xl px-4 py-3 text-sm border outline-none transition-all duration-200 placeholder:text-[#374151]"
                 style={{
                   ...INPUT_STYLE,
-                  borderColor: errors.confirm_password ? "#EF4444" : "#334155",
+                  borderColor: "#E2E8F0",
                   paddingRight: "44px",
                 }}
                 placeholder="Repeat your new password"
@@ -177,7 +177,7 @@ export function NewPasswordForm() {
                 style={{
                   backgroundColor: "rgba(239,68,68,0.08)",
                   border: "1px solid rgba(239,68,68,0.2)",
-                  color: "#FCA5A5",
+                  color: "#DC2626",
                 }}
               >
                 {serverError}
@@ -212,7 +212,7 @@ export function NewPasswordForm() {
           <Link
             href="/signin"
             className="text-sm transition-colors"
-            style={{ color: "#4B5563" }}
+            style={{ color: "#6B7280" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "#4B5563")}
           >

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Bell, X, CheckCheck, Clock, CalendarDays, Briefcase, Info } from "lucide-react";
@@ -126,7 +126,7 @@ export function NotificationBell({ userId }: { userId: string }) {
       <button
         onClick={() => setOpen(!open)}
         aria-label={`Notifications${unread ? ` — ${unread} unread` : ""}`}
-        className="relative flex items-center justify-center w-9 h-9 rounded-lg transition-colors hover:bg-[#1E293B]"
+        className="relative flex items-center justify-center w-9 h-9 rounded-lg transition-colors hover:bg-[#F1F5F9]"
         style={{ color: open ? "#F9FAFB" : "#6B7280" }}
       >
         <Bell className="h-4 w-4" />
@@ -145,13 +145,13 @@ export function NotificationBell({ userId }: { userId: string }) {
       {open && (
         <div
           className="absolute right-0 top-full mt-2 w-[360px] rounded-2xl border shadow-2xl overflow-hidden z-50"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           role="dialog"
           aria-label="Notifications"
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: "#1E293B" }}>
-            <h3 className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Notifications</h3>
+          <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: "#E2E8F0" }}>
+            <h3 className="text-sm font-semibold" style={{ color: "#111827" }}>Notifications</h3>
             <div className="flex items-center gap-2">
               {unread > 0 && (
                 <button
@@ -165,7 +165,7 @@ export function NotificationBell({ userId }: { userId: string }) {
               )}
               <button
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center w-6 h-6 rounded hover:bg-[#1E293B] transition-colors"
+                className="flex items-center justify-center w-6 h-6 rounded hover:bg-[#F1F5F9] transition-colors"
                 style={{ color: "#6B7280" }}
                 aria-label="Close"
               >
@@ -178,20 +178,20 @@ export function NotificationBell({ userId }: { userId: string }) {
           <div className="max-h-[380px] overflow-y-auto">
             {loading && notifications.length === 0 ? (
               <div className="px-4 py-8 text-center">
-                <div className="h-4 w-4 border-2 border-t-transparent rounded-full animate-spin mx-auto" style={{ borderColor: "#334155", borderTopColor: "transparent" }} />
+                <div className="h-4 w-4 border-2 border-t-transparent rounded-full animate-spin mx-auto" style={{ borderColor: "#CBD5E1", borderTopColor: "transparent" }} />
               </div>
             ) : notifications.length === 0 ? (
               <div className="px-4 py-10 text-center">
                 <Bell className="h-8 w-8 mx-auto mb-3 opacity-20" style={{ color: "#6B7280" }} />
                 <p className="text-sm" style={{ color: "#6B7280" }}>No notifications yet</p>
-                <p className="text-xs mt-1" style={{ color: "#4B5563" }}>Deadline reminders will appear here</p>
+                <p className="text-xs mt-1" style={{ color: "#6B7280" }}>Deadline reminders will appear here</p>
               </div>
             ) : (
               notifications.map((n) => {
                 const color = typeColor(n.type);
                 const inner = (
                   <div
-                    className="flex gap-3 px-4 py-3.5 cursor-pointer transition-colors hover:bg-[#1E293B]"
+                    className="flex gap-3 px-4 py-3.5 cursor-pointer transition-colors hover:bg-[#F1F5F9]"
                     style={{ borderLeft: `2px solid ${n.read ? "transparent" : color}` }}
                     onClick={() => handleItemClick(n)}
                   >
@@ -208,7 +208,7 @@ export function NotificationBell({ userId }: { userId: string }) {
                       <p className="text-xs mt-0.5 leading-relaxed line-clamp-2" style={{ color: "#6B7280" }}>
                         {n.body}
                       </p>
-                      <p className="text-[10px] mt-1" style={{ color: "#4B5563" }}>
+                      <p className="text-[10px] mt-1" style={{ color: "#6B7280" }}>
                         {timeAgo(n.created_at)}
                       </p>
                     </div>
@@ -230,10 +230,10 @@ export function NotificationBell({ userId }: { userId: string }) {
           </div>
 
           {/* Footer */}
-          <div className="border-t px-4 py-2.5" style={{ borderColor: "#1E293B" }}>
+          <div className="border-t px-4 py-2.5" style={{ borderColor: "#E2E8F0" }}>
             <Link
               href="/dashboard/notifications"
-              className="text-xs font-medium transition-colors hover:text-white block text-center"
+              className="text-xs font-medium transition-colors hover:text-[#111827] block text-center"
               style={{ color: "#6B7280" }}
               onClick={() => setOpen(false)}
             >

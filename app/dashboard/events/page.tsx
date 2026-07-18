@@ -13,7 +13,7 @@ type RegisteredEvent = EventRegistration & { event: Pick<AcademicEvent, "id" | "
 
 const STATUS_LABELS: Record<string, { label: string; color: string; bg: string }> = {
   pending:   { label: "Under Review",  color: "#F59E0B", bg: "rgba(245,158,11,0.1)"  },
-  approved:  { label: "Approved",      color: "#60A5FA", bg: "rgba(96,165,250,0.1)"  },
+  approved:  { label: "Approved",      color: "#2563EB", bg: "rgba(96,165,250,0.1)"  },
   published: { label: "Live",          color: "#10B981", bg: "rgba(16,185,129,0.1)"  },
   featured:  { label: "Featured",      color: "#A78BFA", bg: "rgba(167,139,250,0.1)" },
   rejected:  { label: "Not Published", color: "#F87171", bg: "rgba(248,113,113,0.1)" },
@@ -58,14 +58,14 @@ export default async function DashboardEventsPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
 
         {/* Header */}
         <div className="flex items-start justify-between gap-4 mb-10">
           <div>
             <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>My Account</p>
-            <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>My Events</h1>
+            <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>My Events</h1>
             <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
               Your submitted events, saved events, and RSVPs.
             </p>
@@ -82,23 +82,23 @@ export default async function DashboardEventsPage() {
 
         {/* ── Submitted events ──────────────────────────────────────── */}
         <section className="mb-12">
-          <h2 className="text-sm font-bold uppercase tracking-widest mb-5 flex items-center gap-2" style={{ color: "#4B5563" }}>
+          <h2 className="text-sm font-bold uppercase tracking-widest mb-5 flex items-center gap-2" style={{ color: "#6B7280" }}>
             <Eye className="h-4 w-4" />
             Submitted Events ({submitted.length})
           </h2>
 
           {submitted.length === 0 ? (
-            <div className="rounded-2xl border p-10 text-center" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+            <div className="rounded-2xl border p-10 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
               <Calendar className="h-8 w-8 mx-auto mb-3" style={{ color: "#1E293B" }} />
-              <p className="text-sm mb-1" style={{ color: "#9CA3AF" }}>You haven&apos;t submitted any events yet.</p>
-              <p className="text-xs mb-5" style={{ color: "#4B5563" }}>Submit your conference, workshop, or seminar to reach researchers on Researchvy.</p>
+              <p className="text-sm mb-1" style={{ color: "#6B7280" }}>You haven&apos;t submitted any events yet.</p>
+              <p className="text-xs mb-5" style={{ color: "#6B7280" }}>Submit your conference, workshop, or seminar to reach researchers on Researchvy.</p>
               <Link href="/events/submit" className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white"
                 style={{ backgroundColor: "#2563EB" }}>
                 <Plus className="h-4 w-4" /> Submit Your First Event
               </Link>
             </div>
           ) : (
-            <div className="rounded-2xl border overflow-hidden" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+            <div className="rounded-2xl border overflow-hidden" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
               {submitted.map((event, i) => {
                 const statusCfg = STATUS_LABELS[event.status] ?? STATUS_LABELS.pending;
                 return (
@@ -115,8 +115,8 @@ export default async function DashboardEventsPage() {
                           {statusCfg.label}
                         </span>
                       </div>
-                      <p className="text-sm font-semibold mb-0.5 truncate" style={{ color: "#F9FAFB" }}>{event.title}</p>
-                      <p className="text-xs" style={{ color: "#4B5563" }}>
+                      <p className="text-sm font-semibold mb-0.5 truncate" style={{ color: "#111827" }}>{event.title}</p>
+                      <p className="text-xs" style={{ color: "#6B7280" }}>
                         Submitted {formatDate(event.created_at)}
                         {event.start_date && ` · Event: ${formatDate(event.start_date)}`}
                       </p>
@@ -138,7 +138,7 @@ export default async function DashboardEventsPage() {
                       {event.status === "rejected" && (
                         <Link href="/events/submit"
                           className="text-[11px] font-semibold px-3 py-1.5 rounded-lg"
-                          style={{ backgroundColor: "rgba(37,99,235,0.1)", color: "#60A5FA" }}>
+                          style={{ backgroundColor: "rgba(37,99,235,0.1)", color: "#2563EB" }}>
                           Resubmit
                         </Link>
                       )}
@@ -153,11 +153,11 @@ export default async function DashboardEventsPage() {
         {/* ── Registered events ─────────────────────────────────────── */}
         {registered.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-sm font-bold uppercase tracking-widest mb-5 flex items-center gap-2" style={{ color: "#4B5563" }}>
+            <h2 className="text-sm font-bold uppercase tracking-widest mb-5 flex items-center gap-2" style={{ color: "#6B7280" }}>
               <CheckCircle className="h-4 w-4" />
               My RSVPs ({registered.length})
             </h2>
-            <div className="rounded-2xl border overflow-hidden" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+            <div className="rounded-2xl border overflow-hidden" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
               {registered.map((reg, i) => {
                 const e = reg.event as unknown as AcademicEvent;
                 return (
@@ -173,15 +173,15 @@ export default async function DashboardEventsPage() {
                           {reg.status === "registered" ? "Registered" : "Waitlisted"}
                         </span>
                       </div>
-                      <p className="text-sm font-semibold mb-0.5 truncate" style={{ color: "#F9FAFB" }}>{e?.title}</p>
-                      <p className="text-xs" style={{ color: "#4B5563" }}>
+                      <p className="text-sm font-semibold mb-0.5 truncate" style={{ color: "#111827" }}>{e?.title}</p>
+                      <p className="text-xs" style={{ color: "#6B7280" }}>
                         {e?.start_date ? formatDate(e.start_date) : ""}
                         {e?.location ? ` · ${e.location}` : ""}
                       </p>
                     </div>
                     <Link href={`/events/${e?.slug}`}
                       className="text-[11px] font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap"
-                      style={{ backgroundColor: "rgba(37,99,235,0.1)", color: "#60A5FA" }}>
+                      style={{ backgroundColor: "rgba(37,99,235,0.1)", color: "#2563EB" }}>
                       View Event
                     </Link>
                   </div>
@@ -193,18 +193,18 @@ export default async function DashboardEventsPage() {
 
         {/* ── Saved events ──────────────────────────────────────────── */}
         <section>
-          <h2 className="text-sm font-bold uppercase tracking-widest mb-5 flex items-center gap-2" style={{ color: "#4B5563" }}>
+          <h2 className="text-sm font-bold uppercase tracking-widest mb-5 flex items-center gap-2" style={{ color: "#6B7280" }}>
             <Bookmark className="h-4 w-4" />
             Saved Events ({saved.length})
           </h2>
 
           {saved.length === 0 ? (
-            <div className="rounded-2xl border p-8 text-center" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+            <div className="rounded-2xl border p-8 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
               <Bookmark className="h-7 w-7 mx-auto mb-3" style={{ color: "#1E293B" }} />
-              <p className="text-sm mb-1" style={{ color: "#9CA3AF" }}>No saved events yet.</p>
-              <p className="text-xs mb-5" style={{ color: "#4B5563" }}>Browse the events board and bookmark ones you&apos;re interested in.</p>
+              <p className="text-sm mb-1" style={{ color: "#6B7280" }}>No saved events yet.</p>
+              <p className="text-xs mb-5" style={{ color: "#6B7280" }}>Browse the events board and bookmark ones you&apos;re interested in.</p>
               <Link href="/events" className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold border"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}>
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
                 Browse Events
               </Link>
             </div>
@@ -215,11 +215,11 @@ export default async function DashboardEventsPage() {
                 return (
                   <Link key={event_id} href={`/events/${e?.slug}`}
                     className="group rounded-xl border p-4 block transition-all"
-                    style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
                     <EventTypeBadge type={e?.event_type} />
                     <p className="text-sm font-semibold mt-2 mb-1 group-hover:text-blue-400 transition-colors line-clamp-2"
-                      style={{ color: "#F9FAFB" }}>{e?.title}</p>
-                    <p className="text-xs" style={{ color: "#4B5563" }}>
+                      style={{ color: "#111827" }}>{e?.title}</p>
+                    <p className="text-xs" style={{ color: "#6B7280" }}>
                       {e?.start_date ? formatDate(e.start_date) : ""}
                       {e?.location ? ` · ${e.location}` : ""}
                     </p>

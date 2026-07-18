@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { MessageCircle, Clock, Monitor, Users, Award, Zap } from "lucide-react";
@@ -21,13 +21,13 @@ export function EnquiryCard({ clinicName, duration, format, capacity, earlyBirdF
   return (
     <div
       className="rounded-2xl border p-6 space-y-6"
-      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
     >
       <div>
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#10B981" }}>
           Limited Cohort, ≤{capacity} Researchers
         </p>
-        <p className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+        <p className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
           Secure Your Place
         </p>
         {earlyBirdFrom && (
@@ -41,7 +41,7 @@ export function EnquiryCard({ clinicName, duration, format, capacity, earlyBirdF
         <Link
           href="/clinics#pricing"
           className="inline-block text-xs mt-1 transition-colors hover:text-[#60A5FA]"
-          style={{ color: "#4B5563" }}
+          style={{ color: "#6B7280" }}
         >
           View all tiers &amp; pricing →
         </Link>
@@ -58,13 +58,13 @@ export function EnquiryCard({ clinicName, duration, format, capacity, earlyBirdF
           <div key={label} className="flex items-center gap-3">
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-              style={{ backgroundColor: "#1E293B" }}
+              style={{ backgroundColor: "#F1F5F9" }}
             >
               <Icon className="h-4 w-4" style={{ color: "#60A5FA" }} />
             </div>
             <div>
-              <p className="text-xs" style={{ color: "#4B5563" }}>{label}</p>
-              <p className="text-sm font-medium" style={{ color: "#F9FAFB" }}>{value}</p>
+              <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
+              <p className="text-sm font-medium" style={{ color: "#111827" }}>{value}</p>
             </div>
           </div>
         ))}
@@ -87,8 +87,8 @@ export function EnquiryCard({ clinicName, duration, format, capacity, earlyBirdF
 
       <a
         href="mailto:info@researchvy.com?subject=Clinic%20Pricing%20Enquiry"
-        className="flex items-center justify-center gap-2 w-full rounded-xl py-2.5 text-xs font-medium border transition-colors hover:bg-[#1E293B]"
-        style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+        className="flex items-center justify-center gap-2 w-full rounded-xl py-2.5 text-xs font-medium border transition-colors hover:bg-[#F1F5F9]"
+        style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
       >
         Or email info@researchvy.com
       </a>

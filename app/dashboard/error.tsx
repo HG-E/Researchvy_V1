@@ -23,7 +23,7 @@ export default function DashboardError({
         </p>
         <h2
           className="text-2xl font-bold mb-3"
-          style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+          style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
         >
           Page failed to load
         </h2>
@@ -42,7 +42,7 @@ export default function DashboardError({
           <Link
             href="/dashboard"
             className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors"
-            style={{ backgroundColor: "#0F172A", color: "#9CA3AF", border: "1px solid #1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", color: "#6B7280", border: "1px solid #1E293B" }}
           >
             <LayoutDashboard className="h-4 w-4" />
             Dashboard Home

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -80,18 +80,18 @@ export function OpportunitySubmitForm() {
 
   if (state === "success") {
     return (
-      <div className="rounded-2xl border p-10 text-center" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+      <div className="rounded-2xl border p-10 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
         <div className="flex items-center justify-center mb-4">
           <CheckCircle className="h-12 w-12" style={{ color: "#10B981" }} />
         </div>
-        <h2 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>Submission received</h2>
-        <p className="text-sm mb-6" style={{ color: "#9CA3AF" }}>
+        <h2 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>Submission received</h2>
+        <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
           Our team will review it within 48 hours. You will receive an email when it is live.
         </p>
         <div className="flex items-center justify-center gap-3 flex-wrap">
           <Link href="/opportunities"
             className="px-6 py-2.5 rounded-xl text-sm font-semibold transition-colors"
-            style={{ backgroundColor: "#1E293B", color: "#F9FAFB" }}>
+            style={{ backgroundColor: "#F1F5F9", color: "#111827" }}>
             Browse Opportunities
           </Link>
           <Link href="/dashboard/opportunities"
@@ -117,7 +117,7 @@ export function OpportunitySubmitForm() {
 
       {/* Title */}
       <div>
-        <label className="block text-xs font-semibold mb-1.5" style={{ color: "#9CA3AF" }}>
+        <label className="block text-xs font-semibold mb-1.5" style={{ color: "#6B7280" }}>
           Opportunity Title <span style={{ color: "#EF4444" }}>*</span>
         </label>
         <input
@@ -126,7 +126,7 @@ export function OpportunitySubmitForm() {
           required
           placeholder="e.g. TWAS Research Grants Programme 2025"
           className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors"
-          style={{ backgroundColor: "#1E293B", border: "1px solid #334155", color: "#F9FAFB" }}
+          style={{ backgroundColor: "#F1F5F9", border: "1px solid #334155", color: "#111827" }}
           onFocus={(e) => { e.target.style.borderColor = "#2563EB"; }}
           onBlur={(e)  => { e.target.style.borderColor = "#334155"; }}
         />
@@ -134,7 +134,7 @@ export function OpportunitySubmitForm() {
 
       {/* Category */}
       <div>
-        <label className="block text-xs font-semibold mb-2" style={{ color: "#9CA3AF" }}>
+        <label className="block text-xs font-semibold mb-2" style={{ color: "#6B7280" }}>
           Category <span style={{ color: "#EF4444" }}>*</span>
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -160,25 +160,25 @@ export function OpportunitySubmitForm() {
       {/* Funder + Value */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-semibold mb-1.5" style={{ color: "#9CA3AF" }}>Funder / Organisation</label>
+          <label className="block text-xs font-semibold mb-1.5" style={{ color: "#6B7280" }}>Funder / Organisation</label>
           <input
             value={funder}
             onChange={(e) => setFunder(e.target.value)}
             placeholder="e.g. TWAS, Wellcome Trust"
             className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors"
-            style={{ backgroundColor: "#1E293B", border: "1px solid #334155", color: "#F9FAFB" }}
+            style={{ backgroundColor: "#F1F5F9", border: "1px solid #334155", color: "#111827" }}
             onFocus={(e) => { e.target.style.borderColor = "#2563EB"; }}
             onBlur={(e)  => { e.target.style.borderColor = "#334155"; }}
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold mb-1.5" style={{ color: "#9CA3AF" }}>Value / Stipend</label>
+          <label className="block text-xs font-semibold mb-1.5" style={{ color: "#6B7280" }}>Value / Stipend</label>
           <input
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="e.g. $10,000 · Travel funded · Stipend"
             className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors"
-            style={{ backgroundColor: "#1E293B", border: "1px solid #334155", color: "#F9FAFB" }}
+            style={{ backgroundColor: "#F1F5F9", border: "1px solid #334155", color: "#111827" }}
             onFocus={(e) => { e.target.style.borderColor = "#2563EB"; }}
             onBlur={(e)  => { e.target.style.borderColor = "#334155"; }}
           />
@@ -188,25 +188,25 @@ export function OpportunitySubmitForm() {
       {/* Deadline + Target Level */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-semibold mb-1.5" style={{ color: "#9CA3AF" }}>Application Deadline</label>
+          <label className="block text-xs font-semibold mb-1.5" style={{ color: "#6B7280" }}>Application Deadline</label>
           <input
             type="date"
             value={deadline}
             onChange={(e) => setDeadline(e.target.value)}
             className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors"
-            style={{ backgroundColor: "#1E293B", border: "1px solid #334155", color: "#F9FAFB" }}
+            style={{ backgroundColor: "#F1F5F9", border: "1px solid #334155", color: "#111827" }}
             onFocus={(e) => { e.target.style.borderColor = "#2563EB"; }}
             onBlur={(e)  => { e.target.style.borderColor = "#334155"; }}
           />
-          <p className="text-[11px] mt-1" style={{ color: "#4B5563" }}>Leave blank for rolling deadlines</p>
+          <p className="text-[11px] mt-1" style={{ color: "#6B7280" }}>Leave blank for rolling deadlines</p>
         </div>
         <div>
-          <label className="block text-xs font-semibold mb-1.5" style={{ color: "#9CA3AF" }}>Target Career Level</label>
+          <label className="block text-xs font-semibold mb-1.5" style={{ color: "#6B7280" }}>Target Career Level</label>
           <select
             value={targetLevel}
             onChange={(e) => setTargetLevel(e.target.value)}
             className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors"
-            style={{ backgroundColor: "#1E293B", border: "1px solid #334155", color: "#F9FAFB" }}
+            style={{ backgroundColor: "#F1F5F9", border: "1px solid #334155", color: "#111827" }}
           >
             {LEVELS.map((l) => (
               <option key={l.value} value={l.value}>{l.label}</option>
@@ -217,7 +217,7 @@ export function OpportunitySubmitForm() {
 
       {/* Apply URL */}
       <div>
-        <label className="block text-xs font-semibold mb-1.5" style={{ color: "#9CA3AF" }}>
+        <label className="block text-xs font-semibold mb-1.5" style={{ color: "#6B7280" }}>
           Application / Details URL <span style={{ color: "#EF4444" }}>*</span>
         </label>
         <input
@@ -227,7 +227,7 @@ export function OpportunitySubmitForm() {
           type="url"
           placeholder="https://example.org/apply"
           className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors font-mono"
-          style={{ backgroundColor: "#1E293B", border: "1px solid #334155", color: "#F9FAFB" }}
+          style={{ backgroundColor: "#F1F5F9", border: "1px solid #334155", color: "#111827" }}
           onFocus={(e) => { e.target.style.borderColor = "#2563EB"; }}
           onBlur={(e)  => { e.target.style.borderColor = "#334155"; }}
         />
@@ -235,7 +235,7 @@ export function OpportunitySubmitForm() {
 
       {/* Description */}
       <div>
-        <label className="block text-xs font-semibold mb-1.5" style={{ color: "#9CA3AF" }}>
+        <label className="block text-xs font-semibold mb-1.5" style={{ color: "#6B7280" }}>
           Description <span style={{ color: "#EF4444" }}>*</span>
         </label>
         <textarea
@@ -245,15 +245,15 @@ export function OpportunitySubmitForm() {
           rows={6}
           placeholder="Describe the opportunity, eligibility criteria, what is funded, key dates, and any relevant context. Markdown is supported."
           className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors resize-y"
-          style={{ backgroundColor: "#1E293B", border: "1px solid #334155", color: "#F9FAFB", minHeight: "130px" }}
+          style={{ backgroundColor: "#F1F5F9", border: "1px solid #334155", color: "#111827", minHeight: "130px" }}
           onFocus={(e) => { e.target.style.borderColor = "#2563EB"; }}
           onBlur={(e)  => { e.target.style.borderColor = "#334155"; }}
         />
-        <p className="text-[11px] mt-1" style={{ color: "#4B5563" }}>Markdown supported. Minimum 50 characters.</p>
+        <p className="text-[11px] mt-1" style={{ color: "#6B7280" }}>Markdown supported. Minimum 50 characters.</p>
       </div>
 
       {/* Legal */}
-      <p className="text-[11px] leading-relaxed" style={{ color: "#4B5563" }}>
+      <p className="text-[11px] leading-relaxed" style={{ color: "#6B7280" }}>
         By submitting you confirm this opportunity is genuine and the information is accurate. Admin will review before publishing.
       </p>
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -27,7 +27,7 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
           <div
             key={session.number}
             className="rounded-2xl border overflow-hidden transition-colors duration-200"
-            style={{ backgroundColor: "#0F172A", borderColor: isOpen ? accent : "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: isOpen ? accent : "#1E293B" }}
           >
             <button
               onClick={() => setOpen(isOpen ? null : session.number)}
@@ -57,7 +57,7 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
                       </span>
                     )}
                   </div>
-                  <p className="text-sm font-semibold mt-0.5" style={{ color: "#F9FAFB" }}>
+                  <p className="text-sm font-semibold mt-0.5" style={{ color: "#111827" }}>
                     {session.title}
                   </p>
                   {session.subtitle && (
@@ -69,13 +69,13 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
               </div>
               <ChevronDown
                 className="h-4 w-4 flex-shrink-0 transition-transform duration-200"
-                style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#4B5563" }}
+                style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#6B7280" }}
               />
             </button>
 
             {isOpen && (
-              <div className="px-5 pb-5 border-t" style={{ borderColor: "#1E293B" }}>
-                <p className="text-sm mt-4 mb-4 leading-relaxed" style={{ color: "#9CA3AF" }}>
+              <div className="px-5 pb-5 border-t" style={{ borderColor: "#E2E8F0" }}>
+                <p className="text-sm mt-4 mb-4 leading-relaxed" style={{ color: "#6B7280" }}>
                   {session.description}
                 </p>
                 <ul className="space-y-2">

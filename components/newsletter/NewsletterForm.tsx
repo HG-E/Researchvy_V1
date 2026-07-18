@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Loader2, CheckCircle2, Mail } from "lucide-react";
@@ -66,13 +66,13 @@ export function NewsletterForm({ variant = "inline", resourceTitle, redirectTo }
 
   if (variant === "card") {
     return (
-      <div className="rounded-2xl border p-8" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+      <div className="rounded-2xl border p-8" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(37,99,235,0.1)" }}>
             <Mail className="h-5 w-5" style={{ color: "#2563EB" }} />
           </div>
           <div>
-            <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>Free Resources by Email</p>
+            <p className="text-sm font-bold" style={{ color: "#111827" }}>Free Resources by Email</p>
             <p className="text-xs" style={{ color: "#6B7280" }}>No spam, scholarly visibility insights only</p>
           </div>
         </div>
@@ -84,7 +84,7 @@ export function NewsletterForm({ variant = "inline", resourceTitle, redirectTo }
             placeholder="your@email.com"
             required
             className="flex-1 rounded-xl px-4 py-2.5 text-sm border outline-none"
-            style={{ backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" }}
+            style={{ backgroundColor: "#F1F5F9", borderColor: "#CBD5E1", color: "#111827" }}
           />
           <button
             type="submit"
@@ -113,7 +113,7 @@ export function NewsletterForm({ variant = "inline", resourceTitle, redirectTo }
         placeholder="Enter your email address"
         required
         className="flex-1 rounded-xl px-4 py-2.5 text-sm border outline-none"
-        style={{ backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" }}
+        style={{ backgroundColor: "#F1F5F9", borderColor: "#CBD5E1", color: "#111827" }}
       />
       <button
         type="submit"

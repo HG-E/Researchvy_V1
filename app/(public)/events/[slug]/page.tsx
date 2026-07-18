@@ -124,13 +124,13 @@ export default async function EventDetailPage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldEvent) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldBreadcrumb) }} />
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Breadcrumb */}
         <div className="mb-8">
           <Link href="/events" className="flex items-center gap-1.5 text-xs font-semibold hover:text-white transition-colors"
-            style={{ color: "#4B5563" }}>
+            style={{ color: "#6B7280" }}>
             <ChevronLeft className="h-3.5 w-3.5" />
             Back to Events
           </Link>
@@ -180,7 +180,7 @@ export default async function EventDetailPage({
 
               <h1
                 className="text-3xl sm:text-4xl font-bold mb-4 leading-tight"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
               >
                 {event.title}
               </h1>
@@ -196,40 +196,40 @@ export default async function EventDetailPage({
 
             {/* Meta cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div className="rounded-xl border p-4" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-                <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>Date &amp; Time</p>
+              <div className="rounded-xl border p-4" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+                <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>Date &amp; Time</p>
                 <div className="flex items-start gap-2">
                   <Calendar className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: "#2563EB" }} />
                   <div>
-                    <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{formatDate(event.start_date)}</p>
+                    <p className="text-sm font-semibold" style={{ color: "#111827" }}>{formatDate(event.start_date)}</p>
                     {event.end_date && (
                       <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>Ends {formatDate(event.end_date)}</p>
                     )}
-                    {event.timezone && <p className="text-[11px] mt-1" style={{ color: "#4B5563" }}>{event.timezone}</p>}
+                    {event.timezone && <p className="text-[11px] mt-1" style={{ color: "#6B7280" }}>{event.timezone}</p>}
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-xl border p-4" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-                <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
+              <div className="rounded-xl border p-4" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+                <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
                   {event.format === "virtual" ? "Platform" : "Location"}
                 </p>
                 <div className="flex items-start gap-2">
                   <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: "#10B981" }} />
                   <div>
-                    {event.venue    && <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{event.venue}</p>}
+                    {event.venue    && <p className="text-sm font-semibold" style={{ color: "#111827" }}>{event.venue}</p>}
                     {event.location && <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{event.location}</p>}
-                    {!event.venue && !event.location && <p className="text-sm" style={{ color: "#4B5563" }}>TBA</p>}
+                    {!event.venue && !event.location && <p className="text-sm" style={{ color: "#6B7280" }}>TBA</p>}
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-xl border p-4" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-                <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>Organiser</p>
+              <div className="rounded-xl border p-4" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+                <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>Organiser</p>
                 <div className="flex items-start gap-2">
                   <Users className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: "#F59E0B" }} />
                   <div>
-                    <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{event.organizer_name}</p>
+                    <p className="text-sm font-semibold" style={{ color: "#111827" }}>{event.organizer_name}</p>
                     {event.organizer_email && (
                       <a href={`mailto:${event.organizer_email}`} className="text-xs mt-0.5 flex items-center gap-1 hover:underline"
                         style={{ color: "#6B7280" }}>
@@ -240,14 +240,14 @@ export default async function EventDetailPage({
                 </div>
               </div>
 
-              <div className="rounded-xl border p-4" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-                <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
+              <div className="rounded-xl border p-4" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+                <p className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
                   {isCompetitive ? "Admission" : "Fee"}
                 </p>
                 {isCompetitive ? (
                   <>
                     <p className="text-sm font-semibold" style={{ color: "#F59E0B" }}>Competitive</p>
-                    <p className="text-xs mt-1" style={{ color: "#4B5563" }}>Application required to attend</p>
+                    <p className="text-xs mt-1" style={{ color: "#6B7280" }}>Application required to attend</p>
                   </>
                 ) : (
                   <>
@@ -255,7 +255,7 @@ export default async function EventDetailPage({
                       {event.is_free ? "Free" : `${event.fee_currency} ${event.fee_amount?.toLocaleString()}`}
                     </p>
                     {event.target_audience !== "all" && (
-                      <p className="text-xs mt-1 capitalize" style={{ color: "#4B5563" }}>
+                      <p className="text-xs mt-1 capitalize" style={{ color: "#6B7280" }}>
                         For {event.target_audience.replace("_", "-")} researchers
                       </p>
                     )}
@@ -271,9 +271,9 @@ export default async function EventDetailPage({
                 <div className="flex items-start gap-3">
                   <Plane className="h-5 w-5 flex-shrink-0" style={{ color: "#22D3EE" }} />
                   <div className="flex-1">
-                    <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>Travel Funding Available</p>
+                    <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>Travel Funding Available</p>
                     {event.funding_description && (
-                      <p className="text-xs leading-relaxed mb-2" style={{ color: "#9CA3AF" }}>{event.funding_description}</p>
+                      <p className="text-xs leading-relaxed mb-2" style={{ color: "#6B7280" }}>{event.funding_description}</p>
                     )}
                     {event.funding_url && (
                       <a href={event.funding_url} target="_blank" rel="noopener noreferrer"
@@ -293,7 +293,7 @@ export default async function EventDetailPage({
                 style={{ backgroundColor: "rgba(245,158,11,0.05)", borderColor: "rgba(245,158,11,0.2)" }}>
                 <Clock className="h-4 w-4 flex-shrink-0" style={{ color: "#F59E0B" }} />
                 <div>
-                  <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Call for Papers open</p>
+                  <p className="text-sm font-semibold" style={{ color: "#111827" }}>Call for Papers open</p>
                   <p className="text-xs" style={{ color: "#6B7280" }}>
                     Submission deadline: {formatDateTime(event.call_for_papers_deadline!)}
                   </p>
@@ -309,11 +309,11 @@ export default async function EventDetailPage({
             )}
 
             {/* Description */}
-            <div className="rounded-2xl border p-6 mb-8" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-              <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>About this event</p>
+            <div className="rounded-2xl border p-6 mb-8" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+              <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>About this event</p>
               <div
                 className="text-sm leading-relaxed prose-invert max-w-none"
-                style={{ color: "#9CA3AF", whiteSpace: "pre-wrap" }}
+                style={{ color: "#6B7280", whiteSpace: "pre-wrap" }}
               >
                 {event.description}
               </div>
@@ -324,7 +324,7 @@ export default async function EventDetailPage({
               <div className="mb-8">
                 {event.disciplines?.length > 0 && (
                   <div className="flex flex-wrap items-center gap-2 mb-2">
-                    <BookOpen className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#4B5563" }} />
+                    <BookOpen className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
                     {event.disciplines.map((d) => (
                       <span key={d} className="rounded-full px-2.5 py-1 text-[11px] font-medium"
                         style={{ backgroundColor: "rgba(37,99,235,0.08)", color: "#60A5FA" }}>
@@ -335,7 +335,7 @@ export default async function EventDetailPage({
                 )}
                 {event.tags?.length > 0 && (
                   <div className="flex flex-wrap items-center gap-2">
-                    <Tag className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#4B5563" }} />
+                    <Tag className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
                     {event.tags.map((t) => (
                       <span key={t} className="rounded-full px-2.5 py-1 text-[11px] font-medium"
                         style={{ backgroundColor: "rgba(255,255,255,0.04)", color: "#6B7280", border: "1px solid #1E293B" }}>
@@ -349,11 +349,11 @@ export default async function EventDetailPage({
 
             {/* Cross-link: linked opportunity */}
             {linkedOpportunity && (
-              <div className="rounded-2xl border p-5 mb-8" style={{ backgroundColor: "#0F172A", borderColor: "#7C3AED" }}>
+              <div className="rounded-2xl border p-5 mb-8" style={{ backgroundColor: "#FFFFFF", borderColor: "#7C3AED" }}>
                 <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#7C3AED" }}>
                   Related Opportunity
                 </p>
-                <p className="text-sm font-semibold mb-3" style={{ color: "#F9FAFB" }}>{linkedOpportunity.title}</p>
+                <p className="text-sm font-semibold mb-3" style={{ color: "#111827" }}>{linkedOpportunity.title}</p>
                 <Link href={`/opportunities/${linkedOpportunity.id}`}
                   className="inline-flex items-center gap-1.5 text-xs font-medium"
                   style={{ color: "#60A5FA" }}>
@@ -367,9 +367,9 @@ export default async function EventDetailPage({
           <div className="space-y-4">
             <div
               className="rounded-2xl border p-6 sticky top-24"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
             >
-              <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+              <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
                 {past ? "This event has ended" : isCompetitive ? "Apply to attend" : "Register for this event"}
               </p>
 
@@ -412,7 +412,7 @@ export default async function EventDetailPage({
                     isPast={past}
                   />
                   {event.capacity && (
-                    <p className="text-center text-[11px] mt-2" style={{ color: "#4B5563" }}>
+                    <p className="text-center text-[11px] mt-2" style={{ color: "#6B7280" }}>
                       {Math.max(0, event.capacity - registrationCount)} of {event.capacity} spots remaining
                     </p>
                   )}
@@ -466,17 +466,17 @@ export default async function EventDetailPage({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold border mb-4"
-                  style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                  style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
                 >
                   <Globe className="h-4 w-4" />
                   Visit Event Website
                 </a>
               )}
 
-              <div className="pt-4 border-t space-y-2" style={{ borderColor: "#1E293B" }}>
+              <div className="pt-4 border-t space-y-2" style={{ borderColor: "#E2E8F0" }}>
                 <SaveEventButton slug={event.slug} initialSaved={isSaved} isAuthenticated={!!user} />
                 {!user && (
-                  <p className="text-[11px] text-center" style={{ color: "#4B5563" }}>
+                  <p className="text-[11px] text-center" style={{ color: "#6B7280" }}>
                     <Link href="/signup" style={{ color: "#2563EB" }}>Create an account</Link> to save events and track registrations.
                   </p>
                 )}
@@ -484,9 +484,9 @@ export default async function EventDetailPage({
             </div>
 
             {/* Submit your own event CTA */}
-            <div className="rounded-2xl border p-5" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
-              <p className="text-xs font-semibold mb-2" style={{ color: "#F9FAFB" }}>Organising an event?</p>
-              <p className="text-xs leading-relaxed mb-3" style={{ color: "#4B5563" }}>
+            <div className="rounded-2xl border p-5" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+              <p className="text-xs font-semibold mb-2" style={{ color: "#111827" }}>Organising an event?</p>
+              <p className="text-xs leading-relaxed mb-3" style={{ color: "#6B7280" }}>
                 Reach researchers across the Researchvy community. Free to submit, reviewed within 2 days.
               </p>
               <Link href="/events/submit"
@@ -510,14 +510,14 @@ export default async function EventDetailPage({
             </div>
 
             {/* Cross-link to Opportunities board */}
-            <div className="rounded-2xl border p-5" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
-              <p className="text-xs font-semibold mb-2" style={{ color: "#F9FAFB" }}>Looking for funded opportunities?</p>
-              <p className="text-xs leading-relaxed mb-3" style={{ color: "#4B5563" }}>
+            <div className="rounded-2xl border p-5" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+              <p className="text-xs font-semibold mb-2" style={{ color: "#111827" }}>Looking for funded opportunities?</p>
+              <p className="text-xs leading-relaxed mb-3" style={{ color: "#6B7280" }}>
                 Browse grants, travel bursaries, fellowships and more on the Opportunities Board.
               </p>
               <Link href="/opportunities"
                 className="w-full inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-xs font-semibold border"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}>
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
                 Browse Opportunities →
               </Link>
             </div>

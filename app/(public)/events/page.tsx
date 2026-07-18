@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { Plus, Calendar, Zap, Search } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -51,6 +52,97 @@ async function getEvents(params: {
   }
 }
 
+// ── Streamed results component ────────────────────────────────────────────────
+
+async function EventsResults({
+  params,
+}: {
+  params: { type?: string; format?: string; audience?: string; upcoming?: string; q?: string };
+}) {
+  const events      = await getEvents(params);
+  const featured    = events.filter((e) => e.is_featured);
+  const regular     = events.filter((e) => !e.is_featured);
+  const searchQuery = params.q ?? "";
+  const hasFilters  = !!(params.type || params.format || params.upcoming === "true" || params.q);
+
+  return (
+    <>
+      {/* Featured events */}
+      {featured.length > 0 && !searchQuery && (
+        <div className="mb-12">
+          <div className="flex items-center gap-2 mb-5">
+            <Zap className="h-4 w-4" style={{ color: "#8B5CF6" }} />
+            <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#8B5CF6" }}>
+              Featured Events
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featured.map((event) => <EventCard key={event.id} event={event} />)}
+          </div>
+        </div>
+      )}
+
+      {/* All events */}
+      <div>
+        {(featured.length > 0 || searchQuery) && (
+          <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#6B7280" }}>
+            {searchQuery ? `Results for "${searchQuery}"` : hasFilters ? "Filtered Results" : "All Events"}
+            {events.length > 0 && <span style={{ color: "#6B7280" }}> · {events.length} events</span>}
+          </p>
+        )}
+
+        {regular.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {regular.map((event) => <EventCard key={event.id} event={event} />)}
+          </div>
+        ) : featured.length === 0 ? (
+          <div className="rounded-2xl border p-16 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+            <Calendar className="h-10 w-10 mx-auto mb-4" style={{ color: "#9CA3AF" }} />
+            <p className="text-base font-semibold mb-2" style={{ color: "#111827" }}>
+              {hasFilters ? "No events match your search" : "No events yet"}
+            </p>
+            <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
+              {hasFilters
+                ? "Try different keywords or clear the filters."
+                : "Be the first to promote your academic event to this community."}
+            </p>
+            <div className="flex justify-center gap-3">
+              {hasFilters && (
+                <Link href="/events" className="rounded-xl px-4 py-2 text-sm font-semibold border"
+                  style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
+                  Clear filters
+                </Link>
+              )}
+              <Link href="/events/submit" className="rounded-xl px-4 py-2 text-sm font-bold text-white"
+                style={{ backgroundColor: "#2563EB" }}>
+                Submit an Event
+              </Link>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </>
+  );
+}
+
+// ── Loading skeleton ──────────────────────────────────────────────────────────
+
+function EventsLoadingSkeleton() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" aria-label="Loading events…">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div
+          key={i}
+          className="rounded-2xl border animate-pulse"
+          style={{ height: 220, backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}
+        />
+      ))}
+    </div>
+  );
+}
+
+// ── Page ──────────────────────────────────────────────────────────────────────
+
 export default async function EventsPage({
   searchParams,
 }: {
@@ -59,9 +151,6 @@ export default async function EventsPage({
   }>;
 }) {
   const params      = searchParams ? await searchParams : {};
-  const events      = await getEvents(params);
-  const featured    = events.filter((e) => e.is_featured);
-  const regular     = events.filter((e) => !e.is_featured);
 
   const activeType   = params.type     ?? "";
   const activeFormat = params.format   ?? "";
@@ -83,7 +172,7 @@ export default async function EventsPage({
   const hasFilters = !!(activeType || activeFormat || upcomingOnly || searchQuery);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
 
         {/* Hero */}
@@ -93,7 +182,7 @@ export default async function EventsPage({
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-5 leading-[1.1]"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Academic Events for<br />
             <span style={{ color: "#10B981" }}>Research Professionals</span>
@@ -103,33 +192,33 @@ export default async function EventsPage({
             connected, collaborate, and advance their academic careers.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link
-              href="/events/submit"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white"
-              style={{ backgroundColor: "#2563EB" }}
-            >
-              <Plus className="h-4 w-4" />
-              Submit Your Event
-            </Link>
             {!upcomingOnly ? (
               <Link
                 href={filterHref({ upcoming: "true" })}
-                className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold border"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white"
+                style={{ backgroundColor: "#2563EB" }}
               >
                 <Calendar className="h-4 w-4" />
-                Upcoming Only
+                See Upcoming Events
               </Link>
             ) : (
               <Link
                 href={filterHref({ upcoming: "" })}
-                className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold border"
-                style={{ borderColor: "#2563EB", color: "#60A5FA" }}
+                className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white"
+                style={{ backgroundColor: "#2563EB" }}
               >
                 <Calendar className="h-4 w-4" />
                 Show All Events
               </Link>
             )}
+            <Link
+              href="/events/submit"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold border"
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+            >
+              <Plus className="h-4 w-4" />
+              Submit an Event
+            </Link>
           </div>
         </div>
 
@@ -138,8 +227,8 @@ export default async function EventsPage({
           className="rounded-xl border px-5 py-4 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
           style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
         >
-          <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
-            <span className="font-semibold" style={{ color: "#F9FAFB" }}>Know your research visibility score</span>
+          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+            <span className="font-semibold" style={{ color: "#111827" }}>Know your research visibility score</span>
             {" "}— before you submit to conferences or apply for funding.
           </p>
           <Link
@@ -151,139 +240,119 @@ export default async function EventsPage({
           </Link>
         </div>
 
-        {/* Search */}
+        {/* Search — Item 61: visible label for a11y */}
         <form method="GET" className="mb-6 relative max-w-xl">
           {activeType    && <input type="hidden" name="type"     value={activeType}   />}
           {activeFormat  && <input type="hidden" name="format"   value={activeFormat} />}
           {upcomingOnly  && <input type="hidden" name="upcoming" value="true"         />}
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "#4B5563" }} />
+          <label htmlFor="events-search" className="sr-only">Search events</label>
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none" aria-hidden="true" style={{ color: "#6B7280" }} />
           <input
+            id="events-search"
             name="q"
             defaultValue={searchQuery}
             placeholder="Search events, organisers, disciplines…"
             className="w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none"
-            style={{ backgroundColor: "#0F172A", border: "1px solid #1E293B", color: "#F9FAFB" }}
+            style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0", color: "#111827" }}
           />
         </form>
 
-        {/* Filter bar */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {EVENT_TYPES.map(({ value, label }) => (
-            <Link
-              key={value}
-              href={value ? filterHref({ type: value }) : filterHref({ type: "" })}
-              className="rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all"
-              style={{
-                backgroundColor: activeType === value ? "#2563EB" : "rgba(255,255,255,0.04)",
-                color:           activeType === value ? "#fff"    : "#6B7280",
-                border:          activeType === value ? "none"    : "1px solid #1E293B",
-              }}
-            >
-              {label}
-            </Link>
-          ))}
+        {/* Filter bar — Item 53: aria-pressed for a11y */}
+        <div className="flex flex-wrap gap-2 mb-10" role="group" aria-label="Filter by event type and format">
+          {EVENT_TYPES.map(({ value, label }) => {
+            const active = activeType === value;
+            return (
+              <Link
+                key={value}
+                href={value ? filterHref({ type: value }) : filterHref({ type: "" })}
+                className="rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all"
+                aria-pressed={active}
+                style={{
+                  backgroundColor: active ? "#2563EB" : "#F8FAFC",
+                  color:           active ? "#fff"    : "#6B7280",
+                  border:          active ? "none"    : "1px solid #E2E8F0",
+                }}
+              >
+                {label}
+              </Link>
+            );
+          })}
 
-          <div className="w-px h-6 self-center" style={{ backgroundColor: "#1E293B" }} />
+          <div className="w-px h-6 self-center" style={{ backgroundColor: "#E2E8F0" }} />
 
-          {(["", "in-person", "virtual", "hybrid"] as const).map((f) => (
-            <Link
-              key={f}
-              href={filterHref({ format: f })}
-              className="rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all"
-              style={{
-                backgroundColor: activeFormat === f ? "#8B5CF6" : "rgba(255,255,255,0.04)",
-                color:           activeFormat === f ? "#fff"    : "#6B7280",
-                border:          activeFormat === f ? "none"    : "1px solid #1E293B",
-              }}
-            >
-              {f === "" ? "Any format" : f === "in-person" ? "In-Person" : f.charAt(0).toUpperCase() + f.slice(1)}
-            </Link>
-          ))}
+          {(["", "in-person", "virtual", "hybrid"] as const).map((f) => {
+            const active = activeFormat === f;
+            return (
+              <Link
+                key={f}
+                href={filterHref({ format: f })}
+                className="rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all"
+                aria-pressed={active}
+                style={{
+                  backgroundColor: active ? "#8B5CF6" : "#F8FAFC",
+                  color:           active ? "#fff"    : "#6B7280",
+                  border:          active ? "none"    : "1px solid #E2E8F0",
+                }}
+              >
+                {f === "" ? "Any format" : f === "in-person" ? "In-Person" : f.charAt(0).toUpperCase() + f.slice(1)}
+              </Link>
+            );
+          })}
 
           {hasFilters && (
             <Link href="/events" className="rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all"
-              style={{ backgroundColor: "rgba(255,255,255,0.04)", color: "#EF4444", border: "1px solid rgba(239,68,68,0.2)" }}>
+              style={{ backgroundColor: "#FEF2F2", color: "#EF4444", border: "1px solid rgba(239,68,68,0.2)" }}>
               Clear filters
             </Link>
           )}
         </div>
 
-        {/* Featured events */}
-        {featured.length > 0 && !searchQuery && (
-          <div className="mb-12">
-            <div className="flex items-center gap-2 mb-5">
-              <Zap className="h-4 w-4" style={{ color: "#8B5CF6" }} />
-              <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#8B5CF6" }}>
-                Featured Events
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {featured.map((event) => <EventCard key={event.id} event={event} />)}
-            </div>
-          </div>
-        )}
+        {/* Streamed card grid */}
+        <Suspense fallback={<EventsLoadingSkeleton />}>
+          <EventsResults params={params} />
+        </Suspense>
 
-        {/* All events */}
-        <div>
-          {(featured.length > 0 || searchQuery) && (
-            <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
-              {searchQuery ? `Results for "${searchQuery}"` : hasFilters ? "Filtered Results" : "All Events"}
-              {events.length > 0 && <span style={{ color: "#6B7280" }}> · {events.length} events</span>}
+        {/* Newsletter strip — Item 62 */}
+        <div
+          className="mt-14 rounded-2xl border px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}
+        >
+          <div>
+            <p className="text-sm font-semibold mb-0.5" style={{ color: "#111827" }}>
+              Get new events &amp; calls for papers weekly — free
             </p>
-          )}
-
-          {regular.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {regular.map((event) => <EventCard key={event.id} event={event} />)}
-            </div>
-          ) : featured.length === 0 ? (
-            <div className="rounded-2xl border p-16 text-center" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-              <Calendar className="h-10 w-10 mx-auto mb-4" style={{ color: "#1E293B" }} />
-              <p className="text-base font-semibold mb-2" style={{ color: "#F9FAFB" }}>
-                {hasFilters ? "No events match your search" : "No events yet"}
-              </p>
-              <p className="text-sm mb-6" style={{ color: "#4B5563" }}>
-                {hasFilters
-                  ? "Try different keywords or clear the filters."
-                  : "Be the first to promote your academic event to this community."}
-              </p>
-              <div className="flex justify-center gap-3">
-                {hasFilters && (
-                  <Link href="/events" className="rounded-xl px-4 py-2 text-sm font-semibold border"
-                    style={{ borderColor: "#1E293B", color: "#9CA3AF" }}>
-                    Clear filters
-                  </Link>
-                )}
-                <Link href="/events/submit" className="rounded-xl px-4 py-2 text-sm font-bold text-white"
-                  style={{ backgroundColor: "#2563EB" }}>
-                  Submit an Event
-                </Link>
-              </div>
-            </div>
-          ) : null}
+            <p className="text-xs" style={{ color: "#6B7280" }}>
+              Conferences, workshops, and deadlines worth attending, curated for research professionals.
+            </p>
+          </div>
+          <Link
+            href="/resources#newsletter"
+            className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0 rounded-lg px-4 py-2.5 text-white"
+            style={{ backgroundColor: "#2563EB" }}
+          >
+            Subscribe Free →
+          </Link>
         </div>
 
         {/* Community CTA */}
-        {events.length > 0 && (
-          <div className="mt-16 rounded-2xl border p-8 text-center" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
-              Organising an Academic Event?
-            </p>
-            <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
-              Reach researchers who care about your field
-            </h2>
-            <p className="text-sm max-w-xl mx-auto mb-6" style={{ color: "#6B7280" }}>
-              Submit your conference, seminar, or workshop — free to list, reviewed within 2 business days,
-              and visible to thousands of research professionals.
-            </p>
-            <Link href="/events/submit"
-              className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white"
-              style={{ backgroundColor: "#2563EB" }}>
-              <Plus className="h-4 w-4" />
-              Submit Your Event — It&apos;s Free
-            </Link>
-          </div>
-        )}
+        <div className="mt-8 rounded-2xl border p-8 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#6B7280" }}>
+            Organising an Academic Event?
+          </p>
+          <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
+            Reach researchers who take visibility seriously
+          </h2>
+          <p className="text-sm max-w-xl mx-auto mb-6" style={{ color: "#6B7280" }}>
+            Submit your conference, seminar, or workshop — free to list, reviewed within 2 business days,
+            and visible to every researcher in this community.
+          </p>
+          <Link href="/events/submit"
+            className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white"
+            style={{ backgroundColor: "#2563EB" }}>
+            <Plus className="h-4 w-4" />
+            Submit Your Event — It&apos;s Free
+          </Link>
+        </div>
 
       </div>
     </div>

@@ -45,7 +45,7 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 md:hidden"
-            style={{ backgroundColor: "rgba(8,14,26,0.6)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
+            style={{ backgroundColor: "rgba(15,23,42,0.5)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}
             onClick={close}
           />
 
@@ -56,17 +56,17 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
             exit={{ x: "100%" }}
             transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
             className="fixed top-0 right-0 bottom-0 z-50 w-[85vw] max-w-sm md:hidden flex flex-col"
-            style={{ backgroundColor: "#0A0F1A", borderLeft: "1px solid #1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderLeft: "1px solid #E2E8F0" }}
           >
             {/* Header */}
             <div
               className="flex items-center justify-between px-5 h-16 border-b flex-shrink-0"
-              style={{ borderColor: "#1E293B", paddingTop: "env(safe-area-inset-top)", height: "calc(64px + env(safe-area-inset-top))" }}
+              style={{ borderColor: "#E2E8F0", paddingTop: "env(safe-area-inset-top)", height: "calc(64px + env(safe-area-inset-top))" }}
             >
               <Logo variant="full" width={120} />
               <button
                 onClick={close}
-                className="flex items-center justify-center w-10 h-10 rounded-lg active:bg-[#1E293B] transition-colors"
+                className="flex items-center justify-center w-10 h-10 rounded-lg active:bg-[#F1F5F9] transition-colors"
                 style={{ color: "#6B7280" }}
                 aria-label="Close menu"
               >
@@ -78,12 +78,12 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
             {serverUser && (
               <div
                 className="flex items-center gap-3 px-5 py-3 border-b"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}
               >
                 <UserAvatar name={serverUser.name} email={serverUser.email} avatarUrl={serverUser.avatar_url} size="sm" />
                 <div className="min-w-0">
                   {serverUser.name && (
-                    <p className="text-sm font-semibold truncate" style={{ color: "#F9FAFB" }}>
+                    <p className="text-sm font-semibold truncate" style={{ color: "#111827" }}>
                       {displayName}
                     </p>
                   )}
@@ -97,8 +97,8 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
             {/* Nav links */}
             <nav className="flex-1 overflow-y-auto scroll-contain px-4 py-5 space-y-1" aria-label="Mobile navigation">
               <Link href="/search" onClick={close}
-                className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#1E293B]"
-                style={{ color: "#9CA3AF" }}>
+                className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#F1F5F9]"
+                style={{ color: "#6B7280" }}>
                 <Search className="h-4 w-4 flex-shrink-0" />
                 Search
               </Link>
@@ -110,8 +110,8 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
                     <div key={item.href}>
                       <button
                         onClick={() => setMobileOpenMenu(isOpen ? null : item.label)}
-                        className="w-full flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#1E293B]"
-                        style={{ color: isOpen ? "#F9FAFB" : "#9CA3AF" }}
+                        className="w-full flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#F1F5F9]"
+                        style={{ color: isOpen ? "#111827" : "#374151" }}
                       >
                         {item.label}
                         <ChevronRight
@@ -134,12 +134,12 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
                                   key={child.href}
                                   href={child.href}
                                   onClick={close}
-                                  className="flex items-start gap-3 rounded-xl px-4 py-3 transition-colors active:bg-[#1E293B]"
+                                  className="flex items-start gap-3 rounded-xl px-4 py-3 transition-colors active:bg-[#F1F5F9]"
                                 >
                                   <div>
-                                    <p className="text-sm font-semibold" style={{ color: "#D1D5DB" }}>{child.label}</p>
+                                    <p className="text-sm font-semibold" style={{ color: "#111827" }}>{child.label}</p>
                                     {child.description && (
-                                      <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{child.description}</p>
+                                      <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{child.description}</p>
                                     )}
                                   </div>
                                 </Link>
@@ -156,8 +156,8 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
                     key={item.href}
                     href={item.href}
                     onClick={close}
-                    className="block rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#1E293B]"
-                    style={{ color: "#9CA3AF" }}
+                    className="block rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#F1F5F9]"
+                    style={{ color: "#374151" }}
                   >
                     {item.label}
                   </Link>
@@ -166,17 +166,17 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
 
               {/* Signed-in quick links */}
               {serverUser && (
-                <div className="pt-3 mt-3 border-t space-y-1" style={{ borderColor: "#1E293B" }}>
-                  <Link href="/dashboard" onClick={close} className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors active:bg-[#1E293B]" style={{ color: "#9CA3AF" }}>
+                <div className="pt-3 mt-3 border-t space-y-1" style={{ borderColor: "#E2E8F0" }}>
+                  <Link href="/dashboard" onClick={close} className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors active:bg-[#F1F5F9]" style={{ color: "#374151" }}>
                     <LayoutDashboard className="h-4 w-4 flex-shrink-0" />
                     Dashboard
                   </Link>
-                  <Link href="/dashboard/profile" onClick={close} className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors active:bg-[#1E293B]" style={{ color: "#9CA3AF" }}>
+                  <Link href="/dashboard/profile" onClick={close} className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors active:bg-[#F1F5F9]" style={{ color: "#374151" }}>
                     <User className="h-4 w-4 flex-shrink-0" />
                     Profile Settings
                   </Link>
                   {serverUser.role === "admin" && (
-                    <Link href="/admin" onClick={close} prefetch={false} className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors active:bg-[#1E293B]" style={{ color: "#FCA5A5" }}>
+                    <Link href="/admin" onClick={close} prefetch={false} className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors active:bg-[#FEF2F2]" style={{ color: "#DC2626" }}>
                       <Shield className="h-4 w-4 flex-shrink-0" />
                       Admin Panel
                     </Link>
@@ -188,13 +188,13 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
             {/* Footer CTAs */}
             <div
               className="px-5 py-5 border-t space-y-3 flex-shrink-0"
-              style={{ borderColor: "#1E293B", paddingBottom: "max(20px, env(safe-area-inset-bottom))" }}
+              style={{ borderColor: "#E2E8F0", paddingBottom: "max(20px, env(safe-area-inset-bottom))" }}
             >
               {serverUser ? (
                 <button
                   onClick={handleSignOut}
-                  className="flex items-center justify-center gap-2 w-full rounded-xl px-4 py-3.5 text-sm font-semibold border transition-colors active:bg-[#1E293B]"
-                  style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                  className="flex items-center justify-center gap-2 w-full rounded-xl px-4 py-3.5 text-sm font-semibold border transition-colors active:bg-[#F1F5F9]"
+                  style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
                 >
                   <LogOut className="h-4 w-4" />
                   Sign out
@@ -204,8 +204,8 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
                   <Link
                     href="/signin"
                     onClick={close}
-                    className="block w-full rounded-xl px-4 py-3.5 text-sm font-semibold text-center border transition-colors active:bg-[#1E293B]"
-                    style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                    className="block w-full rounded-xl px-4 py-3.5 text-sm font-semibold text-center border transition-colors active:bg-[#F1F5F9]"
+                    style={{ borderColor: "#E2E8F0", color: "#374151" }}
                   >
                     Sign In
                   </Link>

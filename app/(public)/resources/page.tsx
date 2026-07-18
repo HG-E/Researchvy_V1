@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { RESOURCES } from "@/constants/resources";
 import { FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers, ArrowRight, type LucideIcon } from "lucide-react";
@@ -23,7 +23,7 @@ export default function ResourceLibraryPage() {
   const FeaturedIcon = ICON_MAP[featured.icon];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
@@ -33,7 +33,7 @@ export default function ResourceLibraryPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Tools for Scholarly<br />
             <span style={{ color: "#10B981" }}>Visibility</span>
@@ -47,7 +47,7 @@ export default function ResourceLibraryPage() {
         {/* Featured resource */}
         <div
           className="rounded-3xl border p-5 sm:p-8 lg:p-10 mb-14 overflow-hidden relative"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div className="absolute top-0 left-0 right-0 h-1" style={{ background: `linear-gradient(90deg, ${featured.color}, #2563EB)` }} />
 
@@ -61,7 +61,7 @@ export default function ResourceLibraryPage() {
               </span>
               <h2
                 className="text-3xl font-bold mb-3 leading-tight"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
               >
                 {featured.title}
               </h2>
@@ -71,7 +71,7 @@ export default function ResourceLibraryPage() {
               <div>
                 {featured.access === "free" ? (
                   <div>
-                    <p className="text-xs mb-4 leading-relaxed" style={{ color: "#4B5563" }}>
+                    <p className="text-xs mb-4 leading-relaxed" style={{ color: "#6B7280" }}>
                       Most researchers score between 25–45. Takes 4–6 minutes.
                       No email required — results are shown immediately.
                     </p>
@@ -83,13 +83,13 @@ export default function ResourceLibraryPage() {
                       Take the Scorecard Free
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
-                    <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
+                    <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
                       Free · No account needed · Results shown instantly
                     </p>
                   </div>
                 ) : (
                   <div>
-                    <p className="text-sm mb-1 font-medium" style={{ color: "#9CA3AF" }}>
+                    <p className="text-sm mb-1 font-medium" style={{ color: "#6B7280" }}>
                       Free, enter your email to access instantly:
                     </p>
                     <NewsletterForm
@@ -137,14 +137,14 @@ export default function ResourceLibraryPage() {
         {/* Newsletter banner */}
         <div
           className="rounded-3xl border p-6 sm:p-10 text-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
             Stay Informed
           </p>
           <h2
             className="text-3xl font-bold mb-3"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Research Visibility Insights
           </h2>

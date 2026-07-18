@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { CheckCircle2, MessageCircle, Mail, Clock, ArrowRight, Target, Zap, Shield } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -57,7 +57,7 @@ const WHAT_YOU_GET = [
 
 export default function ConsultationPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Hero */}
@@ -67,7 +67,7 @@ export default function ConsultationPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Book a Free Researcher Visibility Strategy Call
           </h1>
@@ -80,9 +80,9 @@ export default function ConsultationPage() {
           {/* Primary CTA block */}
           <div
             className="rounded-2xl border p-6 sm:p-8 mb-6"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
-            <p className="text-sm font-semibold mb-4" style={{ color: "#9CA3AF" }}>
+            <p className="text-sm font-semibold mb-4" style={{ color: "#6B7280" }}>
               Book your call — choose how you&apos;d like to connect:
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -98,14 +98,14 @@ export default function ConsultationPage() {
               </a>
               <a
                 href={`mailto:${siteConfig.contact.email}?subject=Free%20Strategy%20Call%20Request&body=Hi%2C%20I%27d%20like%20to%20book%20a%20free%2020-minute%20strategy%20call.%20My%20availability%3A%20`}
-                className="flex items-center justify-center gap-2.5 rounded-xl border px-6 py-3.5 text-sm font-bold transition-all hover:border-[#334155]"
-                style={{ borderColor: "#1E293B", color: "#F9FAFB" }}
+                className="flex items-center justify-center gap-2.5 rounded-xl border px-6 py-3.5 text-sm font-bold transition-all hover:border-[#CBD5E1]"
+                style={{ borderColor: "#E2E8F0", color: "#111827" }}
               >
                 <Mail className="h-4 w-4" />
                 Book via Email
               </a>
             </div>
-            <p className="text-xs mt-4" style={{ color: "#4B5563" }}>
+            <p className="text-xs mt-4" style={{ color: "#6B7280" }}>
               We respond within 4 business hours · Calls available Mon–Fri, 9am–6pm WAT
             </p>
           </div>
@@ -127,7 +127,7 @@ export default function ConsultationPage() {
         <div className="mb-16">
           <h2
             className="text-2xl font-bold mb-8"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             What you get from the call
           </h2>
@@ -136,7 +136,7 @@ export default function ConsultationPage() {
               <div
                 key={label}
                 className="rounded-2xl border p-5 flex items-start gap-4"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -145,7 +145,7 @@ export default function ConsultationPage() {
                   <Icon className="h-5 w-5" style={{ color: "#60A5FA" }} />
                 </div>
                 <div>
-                  <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>{label}</p>
+                  <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>{label}</p>
                   <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
                 </div>
               </div>
@@ -157,7 +157,7 @@ export default function ConsultationPage() {
         <div className="max-w-2xl mb-16">
           <h2
             className="text-2xl font-bold mb-8"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             How the 20 minutes are structured
           </h2>
@@ -166,14 +166,14 @@ export default function ConsultationPage() {
               <div
                 key={i}
                 className="rounded-2xl border p-5 flex gap-5"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <div className="flex-shrink-0 text-center min-w-[64px]">
                   <p className="text-xs font-bold mb-1" style={{ color: item.color }}>{item.time}</p>
                   <div className="w-1 h-full mx-auto rounded-full" style={{ backgroundColor: item.color + "30" }} />
                 </div>
                 <div>
-                  <p className="text-sm font-bold mb-1.5" style={{ color: "#F9FAFB" }}>{item.label}</p>
+                  <p className="text-sm font-bold mb-1.5" style={{ color: "#111827" }}>{item.label}</p>
                   <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{item.detail}</p>
                 </div>
               </div>
@@ -185,9 +185,9 @@ export default function ConsultationPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
           <div
             className="rounded-2xl border p-6"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
-            <p className="text-sm font-bold mb-5" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-bold mb-5" style={{ color: "#111827" }}>
               This call is right for you if…
             </p>
             <ul className="space-y-3">
@@ -202,9 +202,9 @@ export default function ConsultationPage() {
 
           <div
             className="rounded-2xl border p-6"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
-            <p className="text-sm font-bold mb-5" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-bold mb-5" style={{ color: "#111827" }}>
               This call is NOT for…
             </p>
             <ul className="space-y-3">
@@ -229,7 +229,7 @@ export default function ConsultationPage() {
           style={{ backgroundColor: "rgba(139,92,246,0.04)", borderColor: "rgba(139,92,246,0.2)" }}
         >
           <div>
-            <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
               Want the work done for you, not explained to you?
             </p>
             <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
@@ -279,7 +279,7 @@ export default function ConsultationPage() {
                   >
                     {item.label}
                   </p>
-                  <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{item.sub}</p>
+                  <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{item.sub}</p>
                 </Link>
                 {i < 2 && (
                   <ArrowRight
@@ -296,7 +296,7 @@ export default function ConsultationPage() {
         <div className="text-center max-w-xl mx-auto">
           <h2
             className="text-2xl font-bold mb-3"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Ready to talk?
           </h2>
@@ -316,8 +316,8 @@ export default function ConsultationPage() {
             </a>
             <a
               href={`mailto:${siteConfig.contact.email}?subject=Free%20Strategy%20Call%20Request&body=Hi%2C%20I%27d%20like%20to%20book%20a%20free%2020-minute%20strategy%20call.%20My%20availability%3A%20`}
-              className="flex items-center justify-center gap-2 rounded-xl border px-6 py-3.5 text-sm font-bold transition-all hover:border-[#334155]"
-              style={{ borderColor: "#1E293B", color: "#F9FAFB" }}
+              className="flex items-center justify-center gap-2 rounded-xl border px-6 py-3.5 text-sm font-bold transition-all hover:border-[#CBD5E1]"
+              style={{ borderColor: "#E2E8F0", color: "#111827" }}
             >
               <Mail className="h-4 w-4" />
               Book via Email

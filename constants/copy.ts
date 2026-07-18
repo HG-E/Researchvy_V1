@@ -8,8 +8,8 @@ export const copy = {
     subheadline:"From Invisible to Globally Discovered",
     body: "You've done the work. Most of the world still can't find it. Researchvy transforms researchers into globally visible, citable, and discoverable scholars, through intelligence, training, and strategic visibility.",
     cta: {
-      primary:   "Get My Research Found",
-      secondary: "See How It Works",
+      primary:   "Join the Clinic",
+      secondary: "Check My Score Free",
     },
     rotatingMessages: [
       "Visibility",
@@ -22,13 +22,13 @@ export const copy = {
 
   visibilityGap: {
     title:    "Your Research Is Better Than Your Visibility Suggests",
-    subtitle: "It's not the quality of your work holding you back. It's visibility, and almost no one in academia ever taught you this.",
+    subtitle: "You didn't spend years producing this work to be invisible. The gap between what you've done and what the world sees is a solvable problem — and it's costing you right now.",
     problems: [
-      "Your papers are published, but your citation count doesn't reflect your output",
-      "You're invisible outside your institution, even in your own field",
-      "Policymakers and practitioners who need your findings can't find them",
-      "Your h-index is lower than your publication record deserves",
-      "You're building a career on research the world hasn't discovered yet",
+      "You've published papers — and still can't explain why your citation count doesn't reflect the work you've done",
+      "Colleagues with less output are getting invited to speak and collaborate. You're unknown outside your institution.",
+      "Policymakers who needed your exact research just funded a project that ignored your findings — because they never found you",
+      "Every grant panel sees your h-index before they read your work. Yours is lower than your record deserves.",
+      "You're watching your career stall while researchers with worse output but better visibility get the recognition you've earned",
     ],
   },
 
@@ -57,7 +57,7 @@ export const copy = {
       "Communicate your research to audiences who can actually use it",
       "Position yourself for global relevance, not just institutional recognition",
     ],
-    cta: "Secure My Spot",
+    cta: "Join the Next Cohort",
   },
 
   cta: {

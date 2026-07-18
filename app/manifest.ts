@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description:      "Scholarly visibility and research intelligence platform",
     start_url:        "/",
     display:          "standalone",
-    background_color: "#080E1A",
-    theme_color:      "#0A0F1A",
+    background_color: "#ffffff",
+    theme_color:      "#ffffff",
     orientation:      "portrait",
     icons: [
       { src: "/icon.png",       sizes: "512x512", type: "image/png", purpose: "maskable" },

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -16,9 +16,9 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const INPUT_STYLE = {
-  backgroundColor: "#1E293B",
-  borderColor: "#334155",
-  color: "#F9FAFB",
+  backgroundColor: "#F1F5F9",
+  borderColor: "#CBD5E1",
+  color: "#111827",
 };
 
 const ERROR_STYLE = { borderColor: "#EF4444" };
@@ -57,7 +57,7 @@ export function ContactForm() {
     return (
       <div
         className="rounded-2xl p-10 border text-center"
-        style={{ backgroundColor: "#1E293B", borderColor: "#334155" }}
+        style={{ backgroundColor: "#F1F5F9", borderColor: "#CBD5E1" }}
       >
         <div
           className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
@@ -65,10 +65,10 @@ export function ContactForm() {
         >
           <CheckCircle className="h-7 w-7 text-white" />
         </div>
-        <h3 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>
+        <h3 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
           Message Received
         </h3>
-        <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+        <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
           Thank you for reaching out. We respond within 1–2 business days. For urgent
           enquiries, please use the WhatsApp button below.
         </p>
@@ -80,7 +80,7 @@ export function ContactForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium mb-1.5" style={{ color: "#D1D5DB" }}>
+          <label className="block text-sm font-medium mb-1.5" style={{ color: "#374151" }}>
             Full Name
           </label>
           <input
@@ -96,7 +96,7 @@ export function ContactForm() {
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1.5" style={{ color: "#D1D5DB" }}>
+          <label className="block text-sm font-medium mb-1.5" style={{ color: "#374151" }}>
             Email Address
           </label>
           <input
@@ -115,7 +115,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1.5" style={{ color: "#D1D5DB" }}>
+        <label className="block text-sm font-medium mb-1.5" style={{ color: "#374151" }}>
           Subject
         </label>
         <input
@@ -132,7 +132,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1.5" style={{ color: "#D1D5DB" }}>
+        <label className="block text-sm font-medium mb-1.5" style={{ color: "#374151" }}>
           Message
         </label>
         <textarea

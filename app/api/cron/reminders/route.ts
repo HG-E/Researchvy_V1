@@ -152,47 +152,54 @@ export async function GET(req: NextRequest) {
   for (const evt of events ?? []) {
     const { data: alreadySent } = await admin
       .from("reminder_log")
-      .select("opportunity_id")
-      .eq("opportunity_id", evt.id)
+      .select("event_id")
+      .eq("event_id", evt.id)
       .eq("milestone", "evt_1d")
       .maybeSingle();
     if (alreadySent) continue;
 
-    // Events go to ALL users (no save system for events yet); respect event prefs
-    const { data: allPrefs } = await admin
+    // Only notify users who have explicitly opted in to event notifications.
+    // Defaulting to true for all users causes inbox noise at scale (Item 37).
+    const { data: optedInPrefs } = await admin
       .from("notification_preferences")
-      .select("user_id, email_events, push_events, inapp_events") as { data: EventPref[] | null };
+      .select("user_id, email_events, push_events, inapp_events")
+      .or("inapp_events.eq.true,push_events.eq.true") as { data: EventPref[] | null };
 
-    const { data: allUsers } = await admin
-      .from("users")
-      .select("id, email, full_name");
-
-    const prefMap = new Map<string, EventPref>((allPrefs ?? []).map((p) => [p.user_id, p]));
-    function evtPrefs(uid: string): EventPref {
-      return prefMap.get(uid) ?? { user_id: uid, email_events: true, push_events: true, inapp_events: true };
+    if (!optedInPrefs?.length) {
+      await admin.from("reminder_log").insert({ event_id: evt.id, milestone: "evt_1d" });
+      results.events++;
+      continue;
     }
+
+    const optedInUserIds = optedInPrefs.map((p) => p.user_id);
+    const prefMap = new Map<string, EventPref>(optedInPrefs.map((p) => [p.user_id, p]));
+
+    const { data: optedInUsers } = await admin
+      .from("users")
+      .select("id, email, full_name")
+      .in("id", optedInUserIds);
 
     const title = `Tomorrow: ${evt.title}`;
     const body  = `The event "${evt.title}" starts tomorrow. Don't miss it!`;
     const href  = `/events/${evt.slug ?? evt.id}`;
 
-    const inappRows = (allUsers ?? [])
-      .filter((u) => evtPrefs(u.id as string).inapp_events)
+    const inappRows = (optedInUsers ?? [])
+      .filter((u) => prefMap.get(u.id as string)?.inapp_events)
       .map((u) => ({ user_id: u.id, type: "event_tomorrow", title, body, href, read: false }));
 
     for (let i = 0; i < inappRows.length; i += 500) {
       await admin.from("notifications").insert(inappRows.slice(i, i + 500));
     }
 
-    for (const user of allUsers ?? []) {
-      const p = evtPrefs(user.id as string);
-      if (p.push_events) {
+    for (const user of optedInUsers ?? []) {
+      const p = prefMap.get(user.id as string);
+      if (p?.push_events) {
         try { await sendPushToUser(user.id as string, { title, body, href }); results.pushes++; }
         catch { results.errors++; }
       }
     }
 
-    await admin.from("reminder_log").insert({ opportunity_id: evt.id, milestone: "evt_1d" });
+    await admin.from("reminder_log").insert({ event_id: evt.id, milestone: "evt_1d" });
     results.events++;
   }
 

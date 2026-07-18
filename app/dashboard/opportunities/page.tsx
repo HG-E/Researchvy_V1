@@ -88,7 +88,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
           <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
             Dashboard
           </p>
-          <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+          <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             Research Opportunities
           </h1>
           <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
@@ -117,9 +117,9 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
               const status = opp.submission_status ? (SUBMISSION_STATUS[opp.submission_status] ?? null) : null;
               return (
                 <div key={opp.id} className="rounded-xl border p-4 flex items-center justify-between gap-4"
-                  style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+                  style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold truncate mb-1" style={{ color: "#F9FAFB" }}>{opp.title}</p>
+                    <p className="text-sm font-semibold truncate mb-1" style={{ color: "#111827" }}>{opp.title}</p>
                     <span className="text-[11px] px-2 py-0.5 rounded-full"
                       style={{ backgroundColor: `${meta.color}18`, color: meta.color }}>
                       {meta.label}
@@ -136,7 +136,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
               );
             })}
           </div>
-          <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
+          <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
             Approved submissions appear in the board below and are visible to all researchers.
           </p>
         </div>
@@ -150,7 +150,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
           defaultValue={q}
           placeholder="Search opportunities…"
           className="w-full pl-4 pr-4 py-2.5 rounded-xl text-sm outline-none"
-          style={{ backgroundColor: "#0F172A", border: "1px solid #1E293B", color: "#F9FAFB" }}
+          style={{ backgroundColor: "#FFFFFF", border: "1px solid #1E293B", color: "#111827" }}
         />
       </form>
 
@@ -178,20 +178,20 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
         })}
         {(category || q) && (
           <Link href="/dashboard/opportunities" className="text-xs px-3 py-1.5 rounded-full font-medium"
-            style={{ backgroundColor: "transparent", color: "#4B5563", border: "1px solid #1E293B" }}>
+            style={{ backgroundColor: "transparent", color: "#6B7280", border: "1px solid #1E293B" }}>
             Clear ×
           </Link>
         )}
       </div>
 
       {opps.length === 0 ? (
-        <div className="rounded-2xl border p-12 text-center" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+        <div className="rounded-2xl border p-12 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: "rgba(37,99,235,0.1)" }}>
             <Globe className="h-7 w-7" style={{ color: "#2563EB" }} />
           </div>
           {(category || q) ? (
             <>
-              <h2 className="text-base font-semibold mb-2" style={{ color: "#F9FAFB" }}>No results</h2>
+              <h2 className="text-base font-semibold mb-2" style={{ color: "#111827" }}>No results</h2>
               <p className="text-sm max-w-sm mx-auto mb-4" style={{ color: "#6B7280" }}>
                 Try a different filter or search term.
               </p>
@@ -201,7 +201,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
             </>
           ) : (
             <>
-              <h2 className="text-base font-semibold mb-2" style={{ color: "#F9FAFB" }}>First batch coming soon</h2>
+              <h2 className="text-base font-semibold mb-2" style={{ color: "#111827" }}>First batch coming soon</h2>
               <p className="text-sm max-w-sm mx-auto" style={{ color: "#6B7280" }}>
                 We curate and review every opportunity before publishing. Check back on Sunday — our weekly fetch runs automatically.
               </p>
@@ -226,7 +226,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
           {rest.length > 0 && (
             <section>
               {featured.length > 0 && !q && (
-                <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
                   All Opportunities
                 </p>
               )}
@@ -239,9 +239,9 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
       )}
 
       {/* Submit CTA */}
-      <div className="rounded-2xl border p-5" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
-        <p className="text-xs font-semibold mb-1" style={{ color: "#F9FAFB" }}>Know of an opportunity we should feature?</p>
-        <p className="text-xs mb-3" style={{ color: "#4B5563" }}>
+      <div className="rounded-2xl border p-5" style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}>
+        <p className="text-xs font-semibold mb-1" style={{ color: "#111827" }}>Know of an opportunity we should feature?</p>
+        <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
           Submit a grant, fellowship, travel bursary, or CFP and we will review and publish it within 48 hours.
         </p>
         <Link href="/opportunities/submit" className="inline-flex items-center gap-1.5 text-xs font-semibold"
@@ -276,7 +276,7 @@ function OppCard({ opp, featured = false }: { opp: Opp; featured?: boolean }) {
     <div
       className="rounded-2xl border overflow-hidden transition-colors"
       style={{
-        backgroundColor: featured ? "rgba(37,99,235,0.04)" : "#0F172A",
+        backgroundColor: featured ? "rgba(37,99,235,0.04)" : "#FFFFFF",
         borderColor:     featured ? "rgba(37,99,235,0.25)" : "#1E293B",
       }}
     >
@@ -295,12 +295,12 @@ function OppCard({ opp, featured = false }: { opp: Opp; featured?: boolean }) {
                   style={{ backgroundColor: `${meta.color}15`, color: meta.color }}>
                   {meta.label}
                 </span>
-                <span className="text-[11px]" style={{ color: "#4B5563" }}>
+                <span className="text-[11px]" style={{ color: "#6B7280" }}>
                   {LEVEL_LABEL[opp.target_level] ?? "All career stages"}
                 </span>
               </div>
 
-              <h3 className="text-sm font-semibold leading-snug mb-1" style={{ color: "#F9FAFB" }}>
+              <h3 className="text-sm font-semibold leading-snug mb-1" style={{ color: "#111827" }}>
                 {opp.title}
               </h3>
 
@@ -311,7 +311,7 @@ function OppCard({ opp, featured = false }: { opp: Opp; featured?: boolean }) {
                 </div>
               )}
 
-              <p className="text-xs leading-relaxed line-clamp-2" style={{ color: "#4B5563" }}>
+              <p className="text-xs leading-relaxed line-clamp-2" style={{ color: "#6B7280" }}>
                 {stripMd(opp.body).slice(0, 200)}
               </p>
             </div>
@@ -331,7 +331,7 @@ function OppCard({ opp, featured = false }: { opp: Opp; featured?: boolean }) {
             <Link
               href={`/opportunities/${opp.id}`}
               className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold min-h-[36px]"
-              style={{ backgroundColor: "rgba(37,99,235,0.1)", color: "#60A5FA" }}
+              style={{ backgroundColor: "rgba(37,99,235,0.1)", color: "#2563EB" }}
             >
               View <ExternalLink className="h-3 w-3" />
             </Link>

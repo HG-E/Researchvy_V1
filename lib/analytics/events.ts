@@ -34,6 +34,9 @@ export const EVENTS = {
 
   // Engagement
   INSIGHT_SHARE_CLICKED:    "insight_share_clicked",
+
+  // CTA tracking (Item 10)
+  CTA_CLICKED:              "cta_click",
 } as const;
 
 export type EventName = (typeof EVENTS)[keyof typeof EVENTS];

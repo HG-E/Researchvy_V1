@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Shield, Globe, TrendingUp, ExternalLink, BookOpen, CheckCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -45,7 +45,7 @@ const HERO_STATS = [
 
 export default function AboutPage() {
   return (
-    <div style={{ backgroundColor: "#0F172A", color: "#F9FAFB" }}>
+    <div style={{ backgroundColor: "#FFFFFF", color: "#111827" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
@@ -61,7 +61,7 @@ export default function AboutPage() {
       {/* ── Hero ────────────────────────────────────────────── */}
       <section
         className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center overflow-hidden"
-        style={{ backgroundColor: "#080E1A" }}
+        style={{ backgroundColor: "#FFFFFF" }}
       >
         {/* Radial glow */}
         <div
@@ -88,12 +88,12 @@ export default function AboutPage() {
           </p>
           <h1
             className="text-4xl sm:text-6xl font-bold mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Built for Researchers<br />
             <span style={{ color: "#2563EB" }}>Who Refuse to Stay Invisible.</span>
           </h1>
-          <p className="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#9CA3AF" }}>
+          <p className="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#6B7280" }}>
             Researchvy exists because great research deserves to be found, not buried in
             platforms nobody searches, cited by no one, reaching no one. We are the system
             that changes that.
@@ -130,7 +130,7 @@ export default function AboutPage() {
               </p>
               <h2
                 className="text-3xl font-bold mb-6"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
               >
                 The Scholarly Visibility Crisis
               </h2>
@@ -142,7 +142,7 @@ export default function AboutPage() {
                   style={{ backgroundColor: "rgba(37,99,235,0.35)" }}
                   aria-hidden="true"
                 />
-                <div className="pl-4 lg:pl-0 space-y-4 text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+                <div className="pl-4 lg:pl-0 space-y-4 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
                   <p>
                     You spent years learning how to produce rigorous research. Nobody taught you how
                     to make it findable. That gap between what researchers produce and what the world
@@ -178,7 +178,7 @@ export default function AboutPage() {
               </p>
               <h2
                 className="text-3xl font-bold mb-6"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
               >
                 The Researchvy Framework
               </h2>
@@ -190,7 +190,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Divisions ───────────────────────────────────────── */}
-      <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
+      <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#FFFFFF" }}>
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
@@ -198,7 +198,7 @@ export default function AboutPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               Five Specialised Divisions
             </h2>
@@ -220,7 +220,7 @@ export default function AboutPage() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-bold"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               What We Stand For
             </h2>
@@ -230,7 +230,7 @@ export default function AboutPage() {
               <div
                 key={title}
                 className="rounded-2xl p-6 border"
-                style={{ backgroundColor: "#1E293B", borderColor: `${color}25` }}
+                style={{ backgroundColor: "#F1F5F9", borderColor: `${color}25` }}
               >
                 {/* Colored icon container */}
                 <div
@@ -242,10 +242,10 @@ export default function AboutPage() {
                 >
                   <Icon className="h-5 w-5" style={{ color }} />
                 </div>
-                <h3 className="font-bold text-base mb-2" style={{ color: "#F9FAFB" }}>
+                <h3 className="font-bold text-base mb-2" style={{ color: "#111827" }}>
                   {title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
                   {description}
                 </p>
               </div>
@@ -257,7 +257,7 @@ export default function AboutPage() {
       {/* ── CTA ─────────────────────────────────────────────── */}
       <section
         className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8 text-center overflow-hidden"
-        style={{ backgroundColor: "#080E1A" }}
+        style={{ backgroundColor: "#FFFFFF" }}
       >
         {/* Glow */}
         <div
@@ -275,12 +275,12 @@ export default function AboutPage() {
           </p>
           <h2
             className="text-3xl sm:text-4xl font-bold mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Your Research Deserves<br />
             <span style={{ color: "#10B981" }}>to Be Found.</span>
           </h2>
-          <p className="text-base mb-8 leading-relaxed" style={{ color: "#9CA3AF" }}>
+          <p className="text-base mb-8 leading-relaxed" style={{ color: "#6B7280" }}>
             Join the Digital Visibility Clinic for a cohort experience with live sessions and a
             verified certificate, or choose Private Consulting for 1-on-1 done-for-you delivery.
             Either way, you leave with a measurable, optimised scholarly presence.
@@ -295,8 +295,8 @@ export default function AboutPage() {
             </Link>
             <Link
               href="/clinics"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold border transition-all duration-200 hover:border-[#2563EB] hover:text-white active:scale-[0.97]"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold border transition-all duration-200 hover:border-[#2563EB] hover:text-[#111827] active:scale-[0.97]"
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
             >
               Join a Clinic
             </Link>
@@ -306,16 +306,16 @@ export default function AboutPage() {
 
       {/* ── Facilitator section ────────────────────────────────────────── */}
       {FACILITATORS.map((f) => (
-        <section key={f.id} className="border-t" style={{ borderColor: "#1E293B" }}>
+        <section key={f.id} className="border-t" style={{ borderColor: "#E2E8F0" }}>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
             <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
               Your Facilitator
             </p>
-            <h2 className="text-2xl font-bold mb-10" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+            <h2 className="text-2xl font-bold mb-10" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
               The person who works with you directly
             </h2>
 
-            <div className="rounded-3xl border overflow-hidden" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+            <div className="rounded-3xl border overflow-hidden" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
               <div className="h-1 w-full" style={{ background: "linear-gradient(90deg,#2563EB,#10B981)" }} />
               <div className="p-8 sm:p-10">
                 <div className="flex flex-col sm:flex-row gap-8 items-start">
@@ -333,14 +333,14 @@ export default function AboutPage() {
 
                   {/* Bio */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-xl font-bold mb-1" style={{ color: "#F9FAFB" }}>{f.name}</h3>
+                    <h3 className="text-xl font-bold mb-1" style={{ color: "#111827" }}>{f.name}</h3>
                     <p className="text-sm mb-0.5" style={{ color: "#60A5FA" }}>{f.title}</p>
-                    <p className="text-xs mb-4" style={{ color: "#4B5563" }}>{f.affiliation}</p>
-                    <p className="text-sm leading-relaxed mb-5" style={{ color: "#9CA3AF" }}>{f.bio}</p>
+                    <p className="text-xs mb-4" style={{ color: "#6B7280" }}>{f.affiliation}</p>
+                    <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>{f.bio}</p>
 
                     {f.credentials.length > 0 && (
                       <div className="mb-4">
-                        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#4B5563" }}>Credentials</p>
+                        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#6B7280" }}>Credentials</p>
                         <ul className="space-y-1">
                           {f.credentials.map((c) => (
                             <li key={c} className="text-xs flex items-start gap-2" style={{ color: "#6B7280" }}>
@@ -367,14 +367,14 @@ export default function AboutPage() {
                 </div>
 
                 {f.publications.length > 0 && (
-                  <div className="mt-8 pt-6 border-t" style={{ borderColor: "#1E293B" }}>
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-3 flex items-center gap-2" style={{ color: "#4B5563" }}>
+                  <div className="mt-8 pt-6 border-t" style={{ borderColor: "#E2E8F0" }}>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-3 flex items-center gap-2" style={{ color: "#6B7280" }}>
                       <BookOpen className="h-3.5 w-3.5" /> Selected Publications
                     </p>
                     <ul className="space-y-2">
                       {f.publications.map((pub) => (
                         <li key={pub.title} className="text-xs" style={{ color: "#6B7280" }}>
-                          <span style={{ color: "#D1D5DB" }}>{pub.title}</span> · {pub.journal}, {pub.year}
+                          <span style={{ color: "#374151" }}>{pub.title}</span> · {pub.journal}, {pub.year}
                           {pub.url && <a href={pub.url} target="_blank" rel="noopener noreferrer" className="ml-2 inline-flex items-center gap-1" style={{ color: "#60A5FA" }}>View <ExternalLink className="h-2.5 w-2.5" /></a>}
                         </li>
                       ))}
@@ -383,13 +383,13 @@ export default function AboutPage() {
                 )}
 
                 {/* Track record */}
-                <div className="mt-8 pt-6 border-t grid grid-cols-2 sm:grid-cols-2 gap-4" style={{ borderColor: "#1E293B" }}>
+                <div className="mt-8 pt-6 border-t grid grid-cols-2 sm:grid-cols-2 gap-4" style={{ borderColor: "#E2E8F0" }}>
                   <div className="rounded-xl p-4 text-center" style={{ backgroundColor: "rgba(37,99,235,0.06)" }}>
-                    <p className="text-2xl font-bold mb-1" style={{ color: "#F9FAFB" }}>{f.clinicsLed}</p>
+                    <p className="text-2xl font-bold mb-1" style={{ color: "#111827" }}>{f.clinicsLed}</p>
                     <p className="text-xs" style={{ color: "#6B7280" }}>Cohorts facilitated</p>
                   </div>
                   <div className="rounded-xl p-4 text-center" style={{ backgroundColor: "rgba(16,185,129,0.06)" }}>
-                    <p className="text-2xl font-bold mb-1" style={{ color: "#F9FAFB" }}>{f.researchersHelped}+</p>
+                    <p className="text-2xl font-bold mb-1" style={{ color: "#111827" }}>{f.researchersHelped}+</p>
                     <p className="text-xs" style={{ color: "#6B7280" }}>Researchers guided</p>
                   </div>
                 </div>
@@ -401,14 +401,14 @@ export default function AboutPage() {
 
       {/* ── Partner institutions ───────────────────────────────────────── */}
       {PARTNER_INSTITUTIONS.length > 0 && (
-        <section className="border-t" style={{ borderColor: "#1E293B" }}>
+        <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
-            <p className="text-xs font-semibold tracking-widest uppercase mb-6 text-center" style={{ color: "#4B5563" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-6 text-center" style={{ color: "#6B7280" }}>
               Previously Delivered In Partnership With
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               {PARTNER_INSTITUTIONS.map(({ name }) => (
-                <div key={name} className="rounded-xl border px-5 py-2.5 text-sm font-medium" style={{ borderColor: "#1E293B", color: "#6B7280" }}>
+                <div key={name} className="rounded-xl border px-5 py-2.5 text-sm font-medium" style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
                   {name}
                 </div>
               ))}

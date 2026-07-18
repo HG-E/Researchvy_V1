@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Search, Eye, Compass, Share2, MessageSquare, Zap, TrendingUp } from "lucide-react";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
@@ -40,7 +40,7 @@ export function FrameworkCarousel() {
             <div
               key={step}
               className="flex items-center gap-3 rounded-xl px-4 py-3 border"
-              style={{ backgroundColor: "#1E293B", borderColor: `${color}28` }}
+              style={{ backgroundColor: "#F1F5F9", borderColor: `${color}28` }}
             >
               <div
                 className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -111,8 +111,8 @@ export function FrameworkCarousel() {
                 className="h-px w-full"
                 style={{ background: `linear-gradient(90deg, transparent, ${color}40, transparent)` }}
               />
-              <div className="p-5 text-center" style={{ backgroundColor: "#1E293B" }}>
-                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
+              <div className="p-5 text-center" style={{ backgroundColor: "#F1F5F9" }}>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
                   Step {i + 1} of {steps.length}
                 </p>
                 <p

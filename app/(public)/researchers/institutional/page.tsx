@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowRight, BarChart2, Building2, Users, TrendingUp, CheckCircle2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -74,7 +74,7 @@ const PARTNERSHIP_TYPES = [
 
 export default function InstitutionalPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
@@ -84,7 +84,7 @@ export default function InstitutionalPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Your Researchers Are Publishing.<br />
             <span style={{ color: "#60A5FA" }}>Is Anyone Finding Their Work?</span>
@@ -108,7 +108,7 @@ export default function InstitutionalPage() {
             <Link
               href="/partnerships"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
             >
               View Partnership Options <ArrowRight className="h-4 w-4" />
             </Link>
@@ -120,7 +120,7 @@ export default function InstitutionalPage() {
           {PROBLEMS.map(({ stat, label, detail, color }) => (
             <HoverCard key={label} accentColor={color} className="p-6">
               <p className="text-4xl font-bold mb-2" style={{ color }}>{stat}</p>
-              <p className="text-sm font-semibold mb-3" style={{ color: "#F9FAFB" }}>{label}</p>
+              <p className="text-sm font-semibold mb-3" style={{ color: "#111827" }}>{label}</p>
               <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
             </HoverCard>
           ))}
@@ -134,7 +134,7 @@ export default function InstitutionalPage() {
             </p>
             <h2
               className="text-3xl font-bold mb-6"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               You can&apos;t fix what<br />you haven&apos;t measured.
             </h2>
@@ -145,7 +145,7 @@ export default function InstitutionalPage() {
             </p>
             <ul className="space-y-2.5">
               {AUDIT_DIMENSIONS.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "#9CA3AF" }}>
+                <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "#6B7280" }}>
                   <CheckCircle2 className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#60A5FA" }} />
                   {item}
                 </li>
@@ -155,7 +155,7 @@ export default function InstitutionalPage() {
 
           <div
             className="rounded-2xl border p-8"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#60A5FA" }}>
               Audit outcomes
@@ -168,8 +168,8 @@ export default function InstitutionalPage() {
                 ["Staff development roadmap", "A phased training plan mapped to your existing PD calendar"],
                 ["Executive summary", "Board and research committee-ready report with headline findings"],
               ].map(([title, desc]) => (
-                <div key={String(title)} className="border-b pb-4 last:border-0 last:pb-0" style={{ borderColor: "#1E293B" }}>
-                  <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>{title}</p>
+                <div key={String(title)} className="border-b pb-4 last:border-0 last:pb-0" style={{ borderColor: "#E2E8F0" }}>
+                  <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>{title}</p>
                   <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
                 </div>
               ))}
@@ -181,7 +181,7 @@ export default function InstitutionalPage() {
         <div className="mb-16">
           <h2
             className="text-3xl font-bold mb-8"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             How we work with institutions
           </h2>
@@ -194,7 +194,7 @@ export default function InstitutionalPage() {
                 >
                   <Icon className="h-5 w-5" style={{ color }} />
                 </div>
-                <h3 className="text-base font-bold mb-2" style={{ color: "#F9FAFB" }}>{title}</h3>
+                <h3 className="text-base font-bold mb-2" style={{ color: "#111827" }}>{title}</h3>
                 <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>{desc}</p>
                 <a
                   href={buildWhatsAppUrl(title)}
@@ -213,7 +213,7 @@ export default function InstitutionalPage() {
         {/* The ROI argument */}
         <div
           className="rounded-3xl border p-10 mb-16"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div className="max-w-2xl">
             <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#F59E0B" }}>
@@ -221,7 +221,7 @@ export default function InstitutionalPage() {
             </p>
             <h2
               className="text-2xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               Every citation your researchers lose to poor visibility<br />
               is a ranking point, a funding argument, or a collaboration that never happened.
@@ -243,9 +243,9 @@ export default function InstitutionalPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div
             className="rounded-2xl border p-8"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
-            <h3 className="text-xl font-bold mb-3" style={{ color: "#F9FAFB" }}>
+            <h3 className="text-xl font-bold mb-3" style={{ color: "#111827" }}>
               Start with a conversation
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
@@ -264,9 +264,9 @@ export default function InstitutionalPage() {
           </div>
           <div
             className="rounded-2xl border p-8"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
-            <h3 className="text-xl font-bold mb-3" style={{ color: "#F9FAFB" }}>
+            <h3 className="text-xl font-bold mb-3" style={{ color: "#111827" }}>
               See the intelligence layer first
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>

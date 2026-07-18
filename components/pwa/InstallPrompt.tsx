@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { Download, X } from "lucide-react";
@@ -45,7 +45,7 @@ export function InstallPrompt() {
   return (
     <div
       className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-80 z-50 rounded-2xl border shadow-xl p-4 flex items-start gap-3"
-      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       role="dialog"
       aria-label="Install Researchvy app"
     >
@@ -56,7 +56,7 @@ export function InstallPrompt() {
         <Download className="h-5 w-5" style={{ color: "#60A5FA" }} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+        <p className="text-sm font-semibold" style={{ color: "#111827" }}>
           Install Researchvy
         </p>
         <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#6B7280" }}>
@@ -73,9 +73,9 @@ export function InstallPrompt() {
       </div>
       <button
         onClick={handleDismiss}
-        className="flex-shrink-0 rounded-md p-1 transition-colors hover:bg-[#1E293B]"
+        className="flex-shrink-0 rounded-md p-1 transition-colors hover:bg-[#F1F5F9]"
         aria-label="Dismiss"
-        style={{ color: "#4B5563" }}
+        style={{ color: "#6B7280" }}
       >
         <X className="h-4 w-4" />
       </button>

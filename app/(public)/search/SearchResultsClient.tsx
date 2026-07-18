@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRouter } from "next/navigation";
 import { useRef, useTransition, FormEvent } from "react";
@@ -43,7 +43,7 @@ export function SearchResultsClient({ q, results }: Props) {
   const total = results.length;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 py-12 sm:py-16">
 
         {/* Header */}
@@ -51,7 +51,7 @@ export function SearchResultsClient({ q, results }: Props) {
           <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
             Global Search
           </p>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2 leading-tight" style={{ color: "#F9FAFB", fontFamily: "var(--font-serif)" }}>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 leading-tight" style={{ color: "#111827", fontFamily: "var(--font-serif)" }}>
             Search Researchvy
           </h1>
           <p className="text-sm" style={{ color: "#6B7280" }}>
@@ -64,7 +64,7 @@ export function SearchResultsClient({ q, results }: Props) {
           <div className="relative">
             <Search
               className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 pointer-events-none"
-              style={{ color: "#4B5563" }}
+              style={{ color: "#6B7280" }}
               aria-hidden="true"
             />
             <input
@@ -77,7 +77,7 @@ export function SearchResultsClient({ q, results }: Props) {
               autoComplete="off"
               className="w-full rounded-xl border py-4 pl-12 pr-28 text-base outline-none placeholder:text-[#4B5563] focus:ring-2"
               style={{
-                backgroundColor: "#0F172A",
+                backgroundColor: "#FFFFFF",
                 borderColor:     "#1E293B",
                 color:           "#F9FAFB",
                 caretColor:      "#2563EB",
@@ -102,8 +102,8 @@ export function SearchResultsClient({ q, results }: Props) {
             {total === 0 ? (
               <div className="text-center py-20">
                 <Search className="h-12 w-12 mx-auto mb-4" style={{ color: "#1E293B" }} />
-                <p className="text-lg font-semibold mb-2" style={{ color: "#F9FAFB" }}>No results for &ldquo;{q}&rdquo;</p>
-                <p className="text-sm" style={{ color: "#4B5563" }}>Try different keywords, or browse the boards below.</p>
+                <p className="text-lg font-semibold mb-2" style={{ color: "#111827" }}>No results for &ldquo;{q}&rdquo;</p>
+                <p className="text-sm" style={{ color: "#6B7280" }}>Try different keywords, or browse the boards below.</p>
                 <div className="flex flex-wrap justify-center gap-3 mt-8">
                   {[
                     { href: "/events",        label: "Browse Events"        },
@@ -113,8 +113,8 @@ export function SearchResultsClient({ q, results }: Props) {
                     { href: "/insights",      label: "Read Insights"        },
                   ].map(({ href, label }) => (
                     <Link key={href} href={href}
-                      className="rounded-lg border px-4 py-2 text-sm font-medium transition-colors hover:text-white"
-                      style={{ borderColor: "#1E293B", color: "#6B7280" }}>
+                      className="rounded-lg border px-4 py-2 text-sm font-medium transition-colors hover:text-[#111827]"
+                      style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
                       {label} →
                     </Link>
                   ))}
@@ -123,7 +123,7 @@ export function SearchResultsClient({ q, results }: Props) {
             ) : (
               <>
                 <p className="text-xs mb-8" style={{ color: "#6B7280" }}>
-                  {total} result{total !== 1 ? "s" : ""} for &ldquo;<span style={{ color: "#F9FAFB" }}>{q}</span>&rdquo;
+                  {total} result{total !== 1 ? "s" : ""} for &ldquo;<span style={{ color: "#111827" }}>{q}</span>&rdquo;
                 </p>
 
                 <div className="space-y-12">
@@ -136,7 +136,7 @@ export function SearchResultsClient({ q, results }: Props) {
                         <div className="flex items-center gap-3 mb-5">
                           <div className="flex items-center gap-2">
                             <Icon className="h-4 w-4" style={{ color: meta.color }} />
-                            <h2 className="text-sm font-bold tracking-widest uppercase" style={{ color: "#F9FAFB" }}>
+                            <h2 className="text-sm font-bold tracking-widest uppercase" style={{ color: "#111827" }}>
                               {meta.label}
                             </h2>
                           </div>
@@ -151,8 +151,8 @@ export function SearchResultsClient({ q, results }: Props) {
                             <Link
                               key={hit.id}
                               href={hit.href}
-                              className="group flex items-start gap-4 rounded-xl border p-4 transition-all hover:border-[#334155]"
-                              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                              className="group flex items-start gap-4 rounded-xl border p-4 transition-all hover:border-[#CBD5E1]"
+                              style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                             >
                               <div className="flex-1 min-w-0">
                                 <div className="flex flex-wrap items-center gap-2 mb-1.5">
@@ -166,11 +166,11 @@ export function SearchResultsClient({ q, results }: Props) {
                                     </span>
                                   )}
                                   {hit.meta && (
-                                    <span className="text-[11px]" style={{ color: "#4B5563" }}>{hit.meta}</span>
+                                    <span className="text-[11px]" style={{ color: "#6B7280" }}>{hit.meta}</span>
                                   )}
                                 </div>
-                                <p className="text-sm font-semibold leading-snug mb-1 group-hover:text-white transition-colors"
-                                  style={{ color: "#F9FAFB" }}>
+                                <p className="text-sm font-semibold leading-snug mb-1 group-hover:text-[#111827] transition-colors"
+                                  style={{ color: "#111827" }}>
                                   {hit.title}
                                 </p>
                                 {hit.excerpt && (
@@ -181,7 +181,7 @@ export function SearchResultsClient({ q, results }: Props) {
                               </div>
                               <ArrowRight
                                 className="h-4 w-4 flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                                style={{ color: "#4B5563" }}
+                                style={{ color: "#6B7280" }}
                               />
                             </Link>
                           ))}
@@ -198,7 +198,7 @@ export function SearchResultsClient({ q, results }: Props) {
         {/* Initial state — no query yet */}
         {q.length < 2 && (
           <div className="space-y-3">
-            <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
+            <p className="text-xs mb-6" style={{ color: "#6B7280" }}>
               {q.length === 0 ? "Start typing to search across all content." : "Enter at least 2 characters."}
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
@@ -214,10 +214,10 @@ export function SearchResultsClient({ q, results }: Props) {
                 };
                 return (
                   <Link key={type} href={hrefs[type]}
-                    className="flex flex-col items-center gap-2 rounded-xl border p-4 text-center transition-colors hover:border-[#334155]"
-                    style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+                    className="flex flex-col items-center gap-2 rounded-xl border p-4 text-center transition-colors hover:border-[#CBD5E1]"
+                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
                     <Icon className="h-5 w-5" style={{ color: meta.color }} />
-                    <span className="text-xs font-semibold" style={{ color: "#9CA3AF" }}>{meta.label}</span>
+                    <span className="text-xs font-semibold" style={{ color: "#6B7280" }}>{meta.label}</span>
                   </Link>
                 );
               })}

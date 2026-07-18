@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Link2, Twitter, Linkedin, Check } from "lucide-react";
@@ -36,12 +36,12 @@ export function ShareButtons({
 
   const btnStyle = {
     base:    "flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all duration-150 border",
-    default: { backgroundColor: "#1E293B", borderColor: "#334155", color: "#9CA3AF" },
+    default: { backgroundColor: "#F1F5F9", borderColor: "#CBD5E1", color: "#6B7280" },
   };
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-xs font-semibold tracking-widest uppercase mr-1" style={{ color: "#4B5563" }}>
+      <span className="text-xs font-semibold tracking-widest uppercase mr-1" style={{ color: "#6B7280" }}>
         Share
       </span>
 

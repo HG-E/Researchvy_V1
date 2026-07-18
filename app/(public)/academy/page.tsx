@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import {
   ArrowRight, GraduationCap, MessageCircle, PlayCircle,
   CheckCircle, Globe, TrendingUp, Award, Users, BookOpen,
@@ -157,7 +157,7 @@ const PAIN_POINTS = [
 
 export default function AcademyPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
@@ -175,7 +175,7 @@ export default function AcademyPage() {
             <div className="flex items-center gap-2 mb-6">
               <span
                 className="text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full border"
-                style={{ backgroundColor: "rgba(37,99,235,0.1)", borderColor: "rgba(37,99,235,0.3)", color: "#60A5FA" }}
+                style={{ backgroundColor: "rgba(37,99,235,0.1)", borderColor: "rgba(37,99,235,0.3)", color: "#2563EB" }}
               >
                 Researchvy Academy
               </span>
@@ -189,10 +189,10 @@ export default function AcademyPage() {
 
             <h1
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
             >
               You Were Taught to{" "}
-              <span style={{ color: "#60A5FA" }}>Publish.</span>
+              <span style={{ color: "#2563EB" }}>Publish.</span>
               <br />
               Nobody Taught You to Be{" "}
               <span style={{ color: "#A78BFA" }}>Found.</span>
@@ -220,8 +220,8 @@ export default function AcademyPage() {
               </Link>
               <Link
                 href="/academy/courses"
-                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
               >
                 <GraduationCap className="h-4 w-4" />
                 Browse All Courses
@@ -238,8 +238,8 @@ export default function AcademyPage() {
               className="mt-5 p-4 rounded-xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
               style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
             >
-              <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
-                <span className="font-semibold" style={{ color: "#F9FAFB" }}>Not sure where your gaps are?</span>
+              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                <span className="font-semibold" style={{ color: "#111827" }}>Not sure where your gaps are?</span>
                 {" "}Take the free Visibility Scorecard first — 4 minutes, 12 checkpoints, score out of 100.
               </p>
               <Link
@@ -255,14 +255,14 @@ export default function AcademyPage() {
       </section>
 
       {/* ── THE PROBLEM ────────────────────────────────────────────────────── */}
-      <section className="border-t" style={{ borderColor: "#0F172A" }}>
+      <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
           <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#6B7280" }}>
             The Gap Nobody Talks About
           </p>
           <h2
             className="text-2xl sm:text-3xl font-bold mb-4 text-center"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             The System Is Running Your Career.<br />Most Researchers Don&apos;t Know How.
           </h2>
@@ -275,10 +275,10 @@ export default function AcademyPage() {
               <div
                 key={p.headline}
                 className="rounded-2xl border p-6"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <span className="text-3xl mb-4 block">{p.icon}</span>
-                <h3 className="text-sm font-bold mb-3 leading-snug" style={{ color: "#F9FAFB" }}>
+                <h3 className="text-sm font-bold mb-3 leading-snug" style={{ color: "#111827" }}>
                   {p.headline}
                 </h3>
                 <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
@@ -291,7 +291,7 @@ export default function AcademyPage() {
       </section>
 
       {/* ── LEVEL 1 SPOTLIGHT ──────────────────────────────────────────────── */}
-      <section className="border-t" style={{ borderColor: "#0F172A", backgroundColor: "rgba(37,99,235,0.03)" }}>
+      <section className="border-t" style={{ borderColor: "#E2E8F0", backgroundColor: "rgba(37,99,235,0.03)" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <span
@@ -302,7 +302,7 @@ export default function AcademyPage() {
             </span>
             <span
               className="text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"
-              style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#60A5FA", border: "1px solid rgba(37,99,235,0.25)" }}
+              style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#2563EB", border: "1px solid rgba(37,99,235,0.25)" }}
             >
               Level 1 · Start Here
             </span>
@@ -312,10 +312,10 @@ export default function AcademyPage() {
             <div>
               <h2
                 className="text-3xl sm:text-4xl font-bold mb-4 leading-tight"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
               >
                 Research Identity:<br />
-                <span style={{ color: "#60A5FA" }}>Be Found Where It Counts</span>
+                <span style={{ color: "#2563EB" }}>Be Found Where It Counts</span>
               </h2>
               <p className="text-base leading-relaxed mb-6" style={{ color: "#6B7280" }}>
                 Seven modules. 36 lessons. Everything you need to build a verified, cross-platform
@@ -332,9 +332,9 @@ export default function AcademyPage() {
                   <div
                     key={s.label}
                     className="rounded-xl border p-4 text-center"
-                    style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                   >
-                    <p className="text-2xl font-bold mb-0.5" style={{ color: "#60A5FA" }}>{s.value}</p>
+                    <p className="text-2xl font-bold mb-0.5" style={{ color: "#2563EB" }}>{s.value}</p>
                     <p className="text-xs" style={{ color: "#6B7280" }}>{s.label}</p>
                   </div>
                 ))}
@@ -353,7 +353,7 @@ export default function AcademyPage() {
                   href={buildWhatsAppUrl("Researchvy Academy — Level 1 enrolment")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
+                  className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
                   style={{ borderColor: "#25D366", color: "#25D366" }}
                 >
                   <MessageCircle className="h-4 w-4" />
@@ -376,16 +376,16 @@ export default function AcademyPage() {
                 <div
                   key={m.pos}
                   className="flex items-start gap-3 px-4 py-3 rounded-xl border"
-                  style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                  style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                 >
                   <span
                     className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5"
-                    style={{ backgroundColor: "rgba(96,165,250,0.15)", color: "#60A5FA" }}
+                    style={{ backgroundColor: "rgba(96,165,250,0.15)", color: "#2563EB" }}
                   >
                     {m.pos}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium leading-snug" style={{ color: "#D1D5DB" }}>
+                    <p className="text-xs font-medium leading-snug" style={{ color: "#374151" }}>
                       {m.title}
                     </p>
                     <p className="text-[10px] mt-0.5" style={{ color: "#6B7280" }}>
@@ -401,14 +401,14 @@ export default function AcademyPage() {
       </section>
 
       {/* ── 5-LEVEL PATHWAY ────────────────────────────────────────────────── */}
-      <section className="border-t" style={{ borderColor: "#0F172A" }}>
+      <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
           <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#6B7280" }}>
             The Complete Journey
           </p>
           <h2
             className="text-2xl sm:text-3xl font-bold mb-4 text-center"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Five Levels. One Career Transformation.
           </h2>
@@ -424,7 +424,7 @@ export default function AcademyPage() {
                 <div
                   key={lvl.level}
                   className="rounded-2xl border overflow-hidden"
-                  style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                  style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                 >
                   <div className="flex items-start gap-5 p-6">
                     {/* Level badge */}
@@ -441,7 +441,7 @@ export default function AcademyPage() {
                           <p className="text-[10px] font-bold tracking-widest uppercase mb-0.5" style={{ color }}>
                             Level {lvl.level} · {lvl.name}
                           </p>
-                          <h3 className="text-base font-bold" style={{ color: "#F9FAFB" }}>
+                          <h3 className="text-base font-bold" style={{ color: "#111827" }}>
                             {lvl.tagline}
                           </h3>
                         </div>
@@ -456,7 +456,7 @@ export default function AcademyPage() {
                           ) : (
                             <span
                               className="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
-                              style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
+                              style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
                             >
                               Coming 2026
                             </span>
@@ -476,7 +476,7 @@ export default function AcademyPage() {
                         {lvl.outcomes.map((o) => (
                           <div key={o} className="flex items-start gap-2">
                             <ChevronRight className="h-3 w-3 flex-shrink-0 mt-0.5" style={{ color }} />
-                            <span className="text-xs" style={{ color: "#9CA3AF" }}>{o}</span>
+                            <span className="text-xs" style={{ color: "#6B7280" }}>{o}</span>
                           </div>
                         ))}
                       </div>
@@ -502,7 +502,7 @@ export default function AcademyPage() {
       </section>
 
       {/* ── GLOBAL AUDIENCE ────────────────────────────────────────────────── */}
-      <section className="border-t" style={{ borderColor: "#0F172A", backgroundColor: "rgba(167,139,250,0.02)" }}>
+      <section className="border-t" style={{ borderColor: "#E2E8F0", backgroundColor: "rgba(167,139,250,0.02)" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Globe className="h-4 w-4" style={{ color: "#A78BFA" }} />
@@ -512,7 +512,7 @@ export default function AcademyPage() {
           </div>
           <h2
             className="text-2xl sm:text-3xl font-bold mb-4 text-center"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             The Stakes Are Real — Wherever You Are
           </h2>
@@ -527,13 +527,13 @@ export default function AcademyPage() {
               <div
                 key={a.region}
                 className="rounded-2xl border p-6"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-xl">{a.flag}</span>
-                  <h3 className="text-sm font-bold" style={{ color: "#F9FAFB" }}>{a.region}</h3>
+                  <h3 className="text-sm font-bold" style={{ color: "#111827" }}>{a.region}</h3>
                 </div>
-                <p className="text-xs font-semibold mb-2 leading-snug" style={{ color: "#D1D5DB" }}>
+                <p className="text-xs font-semibold mb-2 leading-snug" style={{ color: "#374151" }}>
                   &ldquo;{a.pain}&rdquo;
                 </p>
                 <p className="text-xs leading-relaxed mb-4" style={{ color: "#6B7280" }}>
@@ -544,7 +544,7 @@ export default function AcademyPage() {
                     <span
                       key={k}
                       className="text-[10px] px-2 py-0.5 rounded-md"
-                      style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
+                      style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
                     >
                       {k}
                     </span>
@@ -557,14 +557,14 @@ export default function AcademyPage() {
       </section>
 
       {/* ── WHY RESEARCHVY ─────────────────────────────────────────────────── */}
-      <section className="border-t" style={{ borderColor: "#0F172A" }}>
+      <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
           <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#6B7280" }}>
             Why Researchvy Academy
           </p>
           <h2
             className="text-2xl sm:text-3xl font-bold mb-14 text-center"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             No Other Platform Teaches This
           </h2>
@@ -575,7 +575,7 @@ export default function AcademyPage() {
                 icon: TrendingUp,
                 title: "Built Around Your Career, Not Generic Learners",
                 body: "Every lesson connects directly to a promotion panel, a grant application, a citation count, or a discoverability outcome. Nothing here is theoretical padding.",
-                color: "#60A5FA",
+                color: "#2563EB",
               },
               {
                 icon: Globe,
@@ -605,13 +605,13 @@ export default function AcademyPage() {
                 icon: Zap,
                 title: "Level 1 Is Fully Free",
                 body: "Every lesson in Level 1 (36 lessons across 7 modules) is 100% free — no login required to sample, no payment, no form. Start immediately and experience the full quality before committing to Levels 2–5.",
-                color: "#60A5FA",
+                color: "#2563EB",
               },
             ].map((f) => (
               <div
                 key={f.title}
                 className="rounded-2xl border p-6"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
@@ -619,7 +619,7 @@ export default function AcademyPage() {
                 >
                   <f.icon className="h-5 w-5" style={{ color: f.color }} />
                 </div>
-                <h3 className="text-sm font-bold mb-2 leading-snug" style={{ color: "#F9FAFB" }}>
+                <h3 className="text-sm font-bold mb-2 leading-snug" style={{ color: "#111827" }}>
                   {f.title}
                 </h3>
                 <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
@@ -632,26 +632,26 @@ export default function AcademyPage() {
       </section>
 
       {/* ── RESEARCHVY ECOSYSTEM NOTE ─────────────────────────────────────── */}
-      <section className="border-t" style={{ borderColor: "#0F172A" }}>
+      <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid sm:grid-cols-2 gap-4">
             {/* Academy — current product, summary */}
-            <div className="rounded-xl border p-5" style={{ backgroundColor: "#0F172A", borderColor: "rgba(16,185,129,0.25)" }}>
+            <div className="rounded-xl border p-5" style={{ backgroundColor: "#FFFFFF", borderColor: "rgba(16,185,129,0.25)" }}>
               <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "#10B981" }}>
                 Researchvy Academy
               </p>
-              <p className="text-sm font-semibold mb-2" style={{ color: "#F9FAFB" }}>Self-paced · Level 1 free</p>
+              <p className="text-sm font-semibold mb-2" style={{ color: "#111827" }}>Self-paced · Level 1 free</p>
               <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
                 Five structured levels. Work at your own pace. No deadline, no cohort, no facilitator required.
                 Designed for researchers who want to build visibility independently.
               </p>
             </div>
             {/* DVC — separate standalone product */}
-            <div className="rounded-xl border p-5" style={{ backgroundColor: "#0F172A", borderColor: "rgba(37,99,235,0.25)" }}>
-              <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "#60A5FA" }}>
+            <div className="rounded-xl border p-5" style={{ backgroundColor: "#FFFFFF", borderColor: "rgba(37,99,235,0.25)" }}>
+              <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "#2563EB" }}>
                 Digital Visibility Clinic — Separate Product
               </p>
-              <p className="text-sm font-semibold mb-2" style={{ color: "#F9FAFB" }}>Live · Paid · Cohort-based</p>
+              <p className="text-sm font-semibold mb-2" style={{ color: "#111827" }}>Live · Paid · Cohort-based</p>
               <p className="text-xs leading-relaxed mb-3" style={{ color: "#6B7280" }}>
                 An entirely separate Researchvy programme. Small groups, expert facilitator, real-time profile review.
                 Neither depends on the other — you choose which fits your situation.
@@ -669,14 +669,14 @@ export default function AcademyPage() {
       </section>
 
       {/* ── FINAL CTA ─────────────────────────────────────────────────────── */}
-      <section className="border-t" style={{ borderColor: "#0F172A" }}>
+      <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-24 text-center">
           <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
             Your Next Step
           </p>
           <h2
             className="text-3xl sm:text-4xl font-bold mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             The Researchers Getting Found<br />
             Started Exactly Here.
@@ -702,7 +702,7 @@ export default function AcademyPage() {
               href={buildWhatsAppUrl("Researchvy Academy — I want to enrol")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border transition-colors hover:bg-[#1E293B]"
+              className="inline-flex items-center gap-2 rounded-xl px-8 py-4 text-base font-semibold border transition-colors hover:bg-[#F1F5F9]"
               style={{ borderColor: "#25D366", color: "#25D366" }}
             >
               <MessageCircle className="h-5 w-5" />
@@ -714,14 +714,14 @@ export default function AcademyPage() {
             Questions? WhatsApp us — we respond within 24 hours, usually much sooner.
           </p>
 
-          <div className="mt-8 pt-8 border-t" style={{ borderColor: "#1E293B" }}>
-            <p className="text-xs mb-3" style={{ color: "#4B5563" }}>
+          <div className="mt-8 pt-8 border-t" style={{ borderColor: "#E2E8F0" }}>
+            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
               Prefer live, expert-facilitated learning with a small group?
             </p>
             <Link
               href="/clinics"
               className="text-xs font-semibold transition-opacity hover:opacity-80"
-              style={{ color: "#60A5FA" }}
+              style={{ color: "#2563EB" }}
             >
               Explore the Digital Visibility Clinic — live cohort, 5 core sessions →
             </Link>

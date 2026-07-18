@@ -58,10 +58,10 @@ function CopyButton({ value }: { value: string }) {
 
 function BankRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-3 py-2.5 border-b" style={{ borderColor: "#1E293B" }}>
+    <div className="flex items-center justify-between gap-3 py-2.5 border-b" style={{ borderColor: "#E2E8F0" }}>
       <span className="text-xs" style={{ color: "#6B7280" }}>{label}</span>
       <div className="flex items-center gap-1">
-        <span className="text-sm font-mono font-semibold" style={{ color: "#F9FAFB" }}>{value}</span>
+        <span className="text-sm font-mono font-semibold" style={{ color: "#111827" }}>{value}</span>
         <CopyButton value={value} />
       </div>
     </div>
@@ -128,21 +128,21 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
           >
             <CheckCircle className="h-8 w-8" style={{ color: "#10B981" }} />
           </div>
-          <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+          <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             You&apos;re enrolled!
           </h1>
           <p className="text-sm" style={{ color: "#6B7280" }}>
-            Order <span className="font-mono" style={{ color: "#9CA3AF" }}>{order.order_number}</span>
-            {" · "}Confirmation sent to <span style={{ color: "#9CA3AF" }}>{order.user_email}</span>
+            Order <span className="font-mono" style={{ color: "#6B7280" }}>{order.order_number}</span>
+            {" · "}Confirmation sent to <span style={{ color: "#6B7280" }}>{order.user_email}</span>
           </p>
         </div>
 
         {/* What happens next */}
         <div
           className="rounded-2xl border p-5"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
-          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
             What happens next
           </p>
           <div className="space-y-4">
@@ -155,7 +155,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
                   <Icon className="h-4 w-4" style={{ color }} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold mb-0.5" style={{ color: "#F9FAFB" }}>{label}</p>
+                  <p className="text-sm font-semibold mb-0.5" style={{ color: "#111827" }}>{label}</p>
                   <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
                 </div>
               </div>
@@ -176,7 +176,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
           <a
             href="/academy/courses"
             className="flex items-center justify-center gap-2 w-full rounded-xl border px-6 py-3.5 text-sm font-bold transition-all hover:border-[#334155]"
-            style={{ borderColor: "#1E293B", color: "#F9FAFB" }}
+            style={{ borderColor: "#E2E8F0", color: "#111827" }}
           >
             Start Academy Level 1 (Free)
           </a>
@@ -198,21 +198,21 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
           >
             <Clock className="h-8 w-8" style={{ color: "#F59E0B" }} />
           </div>
-          <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+          <h1 className="text-2xl font-bold mb-1" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             Payment received — verifying
           </h1>
           <p className="text-sm" style={{ color: "#6B7280" }}>
-            Order <span className="font-mono" style={{ color: "#9CA3AF" }}>{order.order_number}</span>
-            {" · "}We&apos;ll email <span style={{ color: "#9CA3AF" }}>{order.user_email}</span> within 2 business hours.
+            Order <span className="font-mono" style={{ color: "#6B7280" }}>{order.order_number}</span>
+            {" · "}We&apos;ll email <span style={{ color: "#6B7280" }}>{order.user_email}</span> within 2 business hours.
           </p>
         </div>
 
         {/* What happens next */}
         <div
           className="rounded-2xl border p-5"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
-          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
             What happens next
           </p>
           <ol className="space-y-3">
@@ -224,7 +224,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
               <li key={i} className="flex items-start gap-3">
                 <span
                   className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5"
-                  style={{ backgroundColor: "#1E293B", color: "#4B5563" }}
+                  style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
                 >
                   {i + 1}
                 </span>
@@ -256,12 +256,12 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
             <a
               href={`mailto:researchvy@gmail.com?subject=Payment+Verification+${order.order_number}&body=Hi%2C+I+submitted+payment+for+order+${order.order_number}+(ref%3A+${order.reference})+and+I%27m+following+up+on+verification.`}
               className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-bold"
-              style={{ borderColor: "#334155", color: "#9CA3AF" }}
+              style={{ borderColor: "#CBD5E1", color: "#6B7280" }}
             >
               Email the team
             </a>
           </div>
-          <p className="text-[11px] mt-2" style={{ color: "#4B5563" }}>
+          <p className="text-[11px] mt-2" style={{ color: "#6B7280" }}>
             Reference: <span className="font-mono">{order.reference}</span>
           </p>
         </div>
@@ -275,11 +275,11 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
           Payment Instructions
         </p>
-        <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+        <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
           Complete Your Transfer
         </h1>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
-          Order <span className="font-mono" style={{ color: "#9CA3AF" }}>{order.order_number}</span>
+          Order <span className="font-mono" style={{ color: "#6B7280" }}>{order.order_number}</span>
           {" · "}{bundleName}
         </p>
       </div>
@@ -287,14 +287,14 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
       {/* Amount highlight */}
       <div
         className="rounded-2xl border overflow-hidden"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         <div className="h-1" style={{ background: "linear-gradient(90deg,#2563EB,#10B981)" }} />
         <div className="p-5">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
             Amount to Transfer
           </p>
-          <p className="text-3xl font-bold" style={{ color: "#F9FAFB" }}>{formattedAmount}</p>
+          <p className="text-3xl font-bold" style={{ color: "#111827" }}>{formattedAmount}</p>
           {order.is_early_bird && (
             <p className="text-xs mt-1" style={{ color: "#10B981" }}>Early bird price applied</p>
           )}
@@ -304,9 +304,9 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
       {/* Bank details */}
       <div
         className="rounded-2xl border p-5"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
-        <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
+        <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#6B7280" }}>
           Bank Account Details
         </p>
         <BankRow label="Account Name"   value={bankDetails.accountName} />
@@ -332,9 +332,9 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
       {/* Instructions */}
       <div
         className="rounded-2xl border p-5"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
-        <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
+        <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#6B7280" }}>
           How to Pay
         </p>
         <ol className="space-y-2">
@@ -347,7 +347,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
             <li key={i} className="flex items-start gap-3 text-xs" style={{ color: "#6B7280" }}>
               <span
                 className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold mt-0.5"
-                style={{ backgroundColor: "#1E293B", color: "#4B5563" }}
+                style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
               >
                 {i + 1}
               </span>
@@ -358,13 +358,13 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
       </div>
 
       {/* Submit payment */}
-      <form onSubmit={confirmPayment} className="rounded-2xl border p-5 space-y-4" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-        <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#4B5563" }}>
+      <form onSubmit={confirmPayment} className="rounded-2xl border p-5 space-y-4" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+        <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#6B7280" }}>
           Confirm Your Payment
         </p>
         <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: "#9CA3AF" }}>
-            Bank transaction reference <span style={{ color: "#4B5563" }}>(optional but helpful)</span>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
+            Bank transaction reference <span style={{ color: "#6B7280" }}>(optional but helpful)</span>
           </label>
           <input
             type="text"
@@ -372,7 +372,7 @@ export function PaymentClient({ order, bundleName, formattedAmount, bankDetails 
             onChange={(e) => setRef(e.target.value)}
             placeholder="e.g. TXN12345678"
             className="w-full rounded-xl px-4 py-2.5 text-sm border outline-none focus:ring-1 focus:ring-blue-500"
-            style={{ backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" }}
+            style={{ backgroundColor: "#F1F5F9", borderColor: "#CBD5E1", color: "#111827" }}
           />
           <p className="text-[11px] mt-1" style={{ color: "#6B7280" }}>
             Your bank&apos;s transaction ID speeds up verification — you can skip this if you don&apos;t have it.

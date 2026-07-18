@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -41,14 +41,14 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
     : 0;
 
   const inner = (
-    <div className="flex flex-col h-full" style={{ backgroundColor: "#0A0F1A" }}>
+    <div className="flex flex-col h-full" style={{ backgroundColor: "#FFFFFF" }}>
       {/* Course title + progress */}
-      <div className="px-4 py-4 border-b" style={{ borderColor: "#1E293B" }}>
+      <div className="px-4 py-4 border-b" style={{ borderColor: "#E2E8F0" }}>
         <div className="flex items-start justify-between gap-3 mb-2">
           <Link
             href={`/academy/courses/${courseSlug}`}
-            className="text-xs font-bold leading-snug hover:text-white transition-colors line-clamp-2"
-            style={{ color: "#D1D5DB" }}
+            className="text-xs font-bold leading-snug hover:text-[#111827] transition-colors line-clamp-2"
+            style={{ color: "#374151" }}
           >
             {course.title}
           </Link>
@@ -67,7 +67,7 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
               <span>{completedCount}/{allPublished.length} lessons</span>
               <span style={{ color: pct === 100 ? "#10B981" : "#2563EB" }}>{pct}%</span>
             </div>
-            <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: "#1E293B" }}>
+            <div className="h-1 rounded-full overflow-hidden" style={{ backgroundColor: "#F1F5F9" }}>
               <div
                 className="h-full rounded-full transition-all duration-300"
                 style={{ width: `${pct}%`, backgroundColor: pct === 100 ? "#10B981" : "#2563EB" }}
@@ -88,10 +88,10 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
             <div key={mod.id}>
               <button
                 onClick={() => toggleModule(mod.id)}
-                className="w-full flex items-center justify-between gap-2 px-4 py-2.5 text-left transition-colors hover:bg-[#1E293B]"
+                className="w-full flex items-center justify-between gap-2 px-4 py-2.5 text-left transition-colors hover:bg-[#F1F5F9]"
               >
                 <div className="min-w-0">
-                  <p className="text-[11px] font-bold leading-snug truncate" style={{ color: "#F9FAFB" }}>
+                  <p className="text-[11px] font-bold leading-snug truncate" style={{ color: "#111827" }}>
                     {mod.title}
                   </p>
                   <p className="text-[10px] mt-0.5" style={{ color: "#6B7280" }}>
@@ -161,7 +161,7 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
       {/* Desktop sidebar */}
       <aside
         className="hidden lg:flex flex-col w-72 flex-shrink-0 border-r"
-        style={{ borderColor: "#1E293B", height: "100vh", position: "sticky", top: 0 }}
+        style={{ borderColor: "#E2E8F0", height: "100vh", position: "sticky", top: 0 }}
       >
         {inner}
       </aside>
@@ -187,7 +187,7 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
             />
             <div
               className="fixed inset-y-0 left-0 z-50 w-80 max-w-[90vw] flex flex-col"
-              style={{ borderRight: "1px solid #1E293B" }}
+              style={{ borderRight: "1px solid #E2E8F0" }}
             >
               {inner}
             </div>

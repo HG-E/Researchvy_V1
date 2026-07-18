@@ -12,7 +12,7 @@ import { TableOfContents, type TocHeading } from "@/components/insights/TableOfC
 import { ShareButtons } from "@/components/insights/ShareButtons";
 import { InsightCard } from "@/components/insights/InsightCard";
 import { ArticleViewTracker } from "@/components/insights/ArticleViewTracker";
-import { LeadCaptureWidget } from "@/components/insights/LeadCaptureWidget";
+import { ScrollTriggerLeadCapture } from "@/components/insights/ScrollTriggerLeadCapture";
 import { siteConfig } from "@/config/site";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import type { InsightCategory } from "@/types";
@@ -111,7 +111,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
     .slice(0, 3);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema(insight)) }}
@@ -147,11 +147,11 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             >
               {CATEGORY_LABELS[insight.category]}
             </span>
-            <span className="flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
+            <span className="flex items-center gap-1 text-xs" style={{ color: "#6B7280" }}>
               <Clock className="h-3 w-3" />
               {insight.reading_time} min read
             </span>
-            <span className="flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
+            <span className="flex items-center gap-1 text-xs" style={{ color: "#6B7280" }}>
               <Calendar className="h-3 w-3" />
               <time dateTime={insight.published_at}>
                 {format(new Date(insight.published_at), "MMMM d, yyyy")}
@@ -161,7 +161,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
           <h1
             className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             {insight.title}
           </h1>
@@ -170,19 +170,19 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             {insight.excerpt}
           </p>
 
-          <address className="not-italic flex items-center gap-3 pt-5 border-t" style={{ borderColor: "#1E293B" }}>
+          <address className="not-italic flex items-center gap-3 pt-5 border-t" style={{ borderColor: "#E2E8F0" }}>
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-              style={{ backgroundColor: "#1E293B", color: "#60A5FA" }}
+              style={{ backgroundColor: "#F1F5F9", color: "#60A5FA" }}
               aria-hidden="true"
             >
               {(insight.author?.name ?? "R")[0]}
             </div>
             <div>
-              <p className="text-sm font-semibold" rel="author" style={{ color: "#F9FAFB" }}>
+              <p className="text-sm font-semibold" rel="author" style={{ color: "#111827" }}>
                 {insight.author?.name ?? "Researchvy Editorial"}
               </p>
-              <p className="text-xs" style={{ color: "#4B5563" }}>Researchvy</p>
+              <p className="text-xs" style={{ color: "#6B7280" }}>Researchvy</p>
             </div>
           </address>
         </header>
@@ -213,12 +213,12 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
             {/* Tags */}
             {insight.tags.length > 0 && (
-              <div className="flex items-center gap-2 flex-wrap mt-10 pt-8 border-t" style={{ borderColor: "#1E293B" }}>
+              <div className="flex items-center gap-2 flex-wrap mt-10 pt-8 border-t" style={{ borderColor: "#E2E8F0" }}>
                 {insight.tags.map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full px-3 py-1 text-xs font-medium"
-                    style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
+                    style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
                   >
                     {tag}
                   </span>
@@ -231,56 +231,59 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
               <ShareButtons title={insight.title} url={articleUrl} slug={slug} />
             </div>
 
-            {/* Lead capture — shown only to non-logged-in readers */}
+            {/* Lead capture — non-logged-in readers only.
+                Appears when user reaches 60% of page (Item 67); shows at article end position. */}
             {!user && (
               <div className="mt-12">
-                <LeadCaptureWidget articleTitle={insight.title} />
+                <ScrollTriggerLeadCapture articleTitle={insight.title} threshold={0.6} />
               </div>
             )}
 
-            {/* Logged-in readers: skip email capture, offer scorecard as next step */}
+            {/* Logged-in readers: clinic-first CTA (Item 68) */}
             {user && (
               <div
-                className="mt-12 rounded-2xl border p-6 sm:p-8"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                className="mt-12 rounded-2xl overflow-hidden border"
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
-                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#10B981" }}>
-                  Your Next Step
-                </p>
-                <p
-                  className="text-xl font-bold mb-2"
-                  style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
-                >
-                  Know exactly where you stand.
-                </p>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>
-                  The Researcher Visibility Scorecard gives you a precise score across 12 checkpoints —
-                  Scholar Identity, Discoverability, Citation Health, and Research Communication.
-                  Takes 4–6 minutes. Results shown instantly.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Link
-                    href="/resources/visibility-scorecard"
-                    className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5"
-                    style={{ backgroundColor: "#10B981" }}
+                <div className="h-0.5" style={{ background: "linear-gradient(90deg, #2563EB, #10B981)" }} />
+                <div className="p-6 sm:p-8">
+                  <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
+                    Ready to Act?
+                  </p>
+                  <p
+                    className="text-xl font-bold mb-2"
+                    style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
                   >
-                    Take the Scorecard Free
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="/consultation"
-                    className="inline-flex items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold transition-colors hover:border-[#2563EB] hover:text-white"
-                    style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
-                  >
-                    Book a Strategy Call
-                  </Link>
+                    Turn this insight into measurable visibility.
+                  </p>
+                  <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>
+                    The Digital Visibility Clinic works through your actual profile — your ORCID, Google Scholar, Scopus —
+                    across 5 live sessions. You leave with a strategy, a certificate, and results you can track.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <Link
+                      href="/clinics"
+                      className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5"
+                      style={{ backgroundColor: "#2563EB" }}
+                    >
+                      View the Clinic
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    <Link
+                      href="/resources/visibility-scorecard"
+                      className="inline-flex items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold transition-colors"
+                      style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                    >
+                      Check My Visibility Score First
+                    </Link>
+                  </div>
+                  <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
+                    Need 1-on-1 support?{" "}
+                    <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
+                      Private Consulting — from $209 →
+                    </Link>
+                  </p>
                 </div>
-                <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
-                  Want done-for-you?{" "}
-                  <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
-                    Private Consulting — from $209 →
-                  </Link>
-                </p>
               </div>
             )}
           </article>
@@ -297,13 +300,13 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
         {/* Related articles */}
         {related.length > 0 && (
-          <section className="mt-20 pt-12 border-t" style={{ borderColor: "#1E293B" }}>
+          <section className="mt-20 pt-12 border-t" style={{ borderColor: "#E2E8F0" }}>
             <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
               Continue Reading
             </p>
             <h2
               className="text-2xl font-bold mb-8"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               More Insights
             </h2>

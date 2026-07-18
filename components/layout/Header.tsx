@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
@@ -74,8 +74,8 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
         className="sticky top-0 z-50 w-full border-b transition-all duration-300"
         style={{
           paddingTop:           "env(safe-area-inset-top)",
-          backgroundColor:      scrolled ? "rgba(15, 23, 42, 0.97)" : "#0F172A",
-          borderColor:          "#1E293B",
+          backgroundColor:      scrolled ? "rgba(255,255,255,0.97)" : "#FFFFFF",
+          borderColor:          "#E2E8F0",
           backdropFilter:       scrolled ? "blur(12px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
         }}
@@ -94,7 +94,7 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
                   <div key={item.href} className="relative">
                     <button
                       className="flex items-center gap-1 text-sm font-medium transition-colors"
-                      style={{ color: isActive ? "#F9FAFB" : "#9CA3AF" }}
+                      style={{ color: isActive ? "#111827" : "#6B7280" }}
                       onMouseEnter={() => setOpenMenu(item.label)}
                       onClick={() => setOpenMenu(isOpen ? null : item.label)}
                       aria-expanded={isOpen}
@@ -114,10 +114,10 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
                       />
                     )}
                     <div
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 rounded-xl border p-2 shadow-2xl"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 rounded-xl border p-2 shadow-lg"
                       style={{
-                        backgroundColor: "#0F172A",
-                        borderColor:     "#1E293B",
+                        backgroundColor: "#FFFFFF",
+                        borderColor:     "#E2E8F0",
                         opacity:         isOpen ? 1 : 0,
                         transform:       `translateX(-50%) translateY(${isOpen ? "0px" : "8px"}) scale(${isOpen ? 1 : 0.97})`,
                         pointerEvents:   isOpen ? "auto" : "none",
@@ -133,10 +133,10 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
                             key={child.href}
                             href={child.href}
                             role="menuitem"
-                            className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-[#1E293B]"
-                            style={{ color: childActive ? "#F9FAFB" : "#9CA3AF" }}
-                            onMouseEnter={(e) => (e.currentTarget.style.color = "#F9FAFB")}
-                            onMouseLeave={(e) => (e.currentTarget.style.color = childActive ? "#F9FAFB" : "#9CA3AF")}
+                            className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-[#F1F5F9]"
+                            style={{ color: childActive ? "#111827" : "#374151" }}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = "#111827")}
+                            onMouseLeave={(e) => (e.currentTarget.style.color = childActive ? "#111827" : "#374151")}
                             onClick={() => setOpenMenu(null)}
                           >
                             <span className="block text-sm font-semibold">{child.label}</span>
@@ -158,8 +158,8 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="relative text-sm font-medium transition-colors hover:text-white"
-                  style={{ color: active ? "#F9FAFB" : "#9CA3AF" }}
+                  className="relative text-sm font-medium transition-colors hover:text-[#111827]"
+                  style={{ color: active ? "#111827" : "#6B7280" }}
                   aria-current={active ? "page" : undefined}
                 >
                   {item.label}
@@ -178,15 +178,15 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/search"
-              className="flex items-center gap-2 rounded-lg border px-3 py-1.5 transition-colors hover:border-[#334155] hover:bg-[#0F172A]"
-              style={{ borderColor: "#1E293B", color: "#4B5563" }}
+              className="flex items-center gap-2 rounded-lg border px-3 py-1.5 transition-colors hover:border-[#CBD5E1] hover:bg-[#F8FAFC]"
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
               aria-label="Search"
             >
               <Search className="h-3.5 w-3.5 flex-shrink-0" />
               <span className="hidden lg:inline text-xs font-medium" style={{ color: "#6B7280" }}>Search…</span>
               <kbd
                 className="hidden lg:inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] font-mono leading-none"
-                style={{ borderColor: "#374151", color: "#4B5563", backgroundColor: "#0A0F1A" }}
+                style={{ borderColor: "#CBD5E1", color: "#6B7280", backgroundColor: "#F8FAFC" }}
               >
                 ⌘K
               </kbd>
@@ -200,8 +200,8 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
               <>
                 <Link
                   href="/signin"
-                  className="text-sm font-medium transition-colors hover:text-white"
-                  style={{ color: isNavActive("/signin") ? "#F9FAFB" : "#9CA3AF" }}
+                  className="text-sm font-medium transition-colors hover:text-[#111827]"
+                  style={{ color: isNavActive("/signin") ? "#111827" : "#6B7280" }}
                 >
                   Sign In
                 </Link>
@@ -218,8 +218,8 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden flex items-center justify-center w-11 h-11 rounded-lg -mr-1.5 active:bg-[#1E293B] transition-colors"
-            style={{ color: "#9CA3AF" }}
+            className="md:hidden flex items-center justify-center w-11 h-11 rounded-lg -mr-1.5 active:bg-[#F1F5F9] transition-colors"
+            style={{ color: "#6B7280" }}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}

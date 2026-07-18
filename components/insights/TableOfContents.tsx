@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 
@@ -38,7 +38,7 @@ export function TableOfContents({ headings }: { headings: TocHeading[] }) {
 
   return (
     <nav aria-label="Table of contents">
-      <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+      <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
         Contents
       </p>
       <ul className="space-y-1">

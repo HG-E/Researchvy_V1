@@ -1,7 +1,6 @@
 import type { NavigationItem } from "@/types";
 
 export const mainNav: NavigationItem[] = [
-  { label: "About",          href: "/about" },
   {
     label: "Ecosystem",
     href: "/ecosystem",
@@ -16,14 +15,23 @@ export const mainNav: NavigationItem[] = [
     label: "Clinics",
     href:  "/clinics",
     children: [
-      { label: "Digital Visibility Clinic", href: "/clinics/digital-visibility-clinic", description: "5-session cohort programme · from $149" },
+      { label: "Digital Visibility Clinic", href: "/clinics/digital-visibility-clinic", description: "5-session cohort programme · from $79" },
       { label: "Private Consulting",        href: "/clinics/private-consulting",        description: "1-on-1 done-for-you · from $209"        },
     ],
   },
   { label: "Events",         href: "/events" },
   { label: "Opportunities",  href: "/opportunities" },
   { label: "Insights",       href: "/insights" },
-  { label: "Resources",      href: "/resources" },
+  {
+    label: "Resources",
+    href:  "/resources",
+    children: [
+      { label: "Visibility Scorecard",     href: "/resources/visibility-scorecard",    description: "Free 12-checkpoint research audit" },
+      { label: "Institutional Letter",     href: "/resources/institutional-letter",    description: "Request a sponsor letter for your clinic" },
+      { label: "Free Strategy Call",       href: "/consultation",                      description: "20-min free call with our team" },
+    ],
+  },
+  { label: "About",          href: "/about" },
 ];
 
 export const footerNav = {

@@ -1,4 +1,4 @@
-import { generatePageMetadata } from "@/lib/seo/metadata";
+﻿import { generatePageMetadata } from "@/lib/seo/metadata";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ContactSidebar } from "@/components/forms/ContactSidebar";
 
@@ -11,11 +11,11 @@ export const metadata = generatePageMetadata({
 
 export default function ContactPage() {
   return (
-    <div style={{ backgroundColor: "#0F172A", color: "#F9FAFB" }}>
+    <div style={{ backgroundColor: "#FFFFFF", color: "#111827" }}>
       {/* Hero */}
       <section
         className="py-20 px-4 sm:px-6 lg:px-8 text-center"
-        style={{ backgroundColor: "#080E1A" }}
+        style={{ backgroundColor: "#FFFFFF" }}
       >
         <div className="mx-auto max-w-3xl">
           <p
@@ -26,11 +26,11 @@ export default function ContactPage() {
           </p>
           <h1
             className="text-5xl sm:text-6xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Contact Us
           </h1>
-          <p className="text-lg" style={{ color: "#9CA3AF" }}>
+          <p className="text-lg" style={{ color: "#6B7280" }}>
             Questions, partnerships, or just curious about what we do, we&apos;d love to hear
             from you.
           </p>
@@ -42,7 +42,7 @@ export default function ContactPage() {
         <div className="mx-auto max-w-5xl grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Form — wider column */}
           <div className="lg:col-span-3">
-            <h2 className="text-2xl font-bold mb-6" style={{ color: "#F9FAFB" }}>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: "#111827" }}>
               Send a Message
             </h2>
             <ContactForm />

@@ -5,7 +5,7 @@ import type {
 
 // ── Public queries (admin client — bypasses RLS for server-side reads) ────────
 
-export async function getCourses(opts?: { level?: number }): Promise<Course[]> {
+export async function getCourses(opts?: { level?: number; search?: string; limit?: number }): Promise<Course[]> {
   try {
     const { createSupabaseAdminClient } = await import("@/lib/auth/supabase");
     const admin = createSupabaseAdminClient();
@@ -16,6 +16,11 @@ export async function getCourses(opts?: { level?: number }): Promise<Course[]> {
       .order("level")
       .order("position");
     if (opts?.level) q = q.eq("level", opts.level);
+    if (opts?.search) {
+      const safe = opts.search.replace(/[%_\\]/g, "\\$&");
+      q = q.or(`title.ilike.%${safe}%,description.ilike.%${safe}%`);
+    }
+    if (opts?.limit) q = q.limit(opts.limit);
     const { data } = await q;
     return (data as Course[]) ?? [];
   } catch {

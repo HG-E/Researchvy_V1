@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -60,7 +61,6 @@ async function getProfileData(username: string): Promise<ProfileData | null> {
         .select("id, title, body, category, funder, value, deadline, apply_url, target_level, is_featured, linked_event_id")
         .eq("submitted_by", profile.id)
         .eq("is_published", true)
-        .eq("submission_status", "published")
         .order("created_at", { ascending: false })
         .limit(12),
 
@@ -133,26 +133,26 @@ export default async function PublicProfilePage({
     : "R";
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <main className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-3xl mx-auto px-4 py-12 sm:px-6 space-y-10">
 
         {/* ── Hero card ──────────────────────────────────────────────── */}
         <div
           className="rounded-2xl border p-8"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div className="flex flex-col sm:flex-row items-start gap-6">
 
             {/* Avatar */}
             <div className="flex-shrink-0">
               {profile.avatar_url ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={profile.avatar_url}
                   alt={profile.full_name}
                   width={96}
                   height={96}
                   className="rounded-full object-cover w-24 h-24"
+                  unoptimized={profile.avatar_url.includes("supabase")}
                 />
               ) : (
                 <div
@@ -169,7 +169,7 @@ export default async function PublicProfilePage({
               <div className="flex flex-wrap items-center gap-2 mb-1">
                 <h1
                   className="text-2xl font-bold"
-                  style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                  style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
                 >
                   {profile.full_name}
                 </h1>
@@ -226,7 +226,7 @@ export default async function PublicProfilePage({
           {profile.bio && (
             <p
               className="mt-6 text-sm leading-relaxed border-t pt-6"
-              style={{ color: "#9CA3AF", borderColor: "#1E293B" }}
+              style={{ color: "#6B7280", borderColor: "#E2E8F0" }}
             >
               {profile.bio}
             </p>
@@ -247,7 +247,7 @@ export default async function PublicProfilePage({
                 <div
                   key={cert.id}
                   className="rounded-xl border p-4 flex items-start gap-3"
-                  style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                  style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                 >
                   <GraduationCap
                     className="h-5 w-5 flex-shrink-0 mt-0.5"
@@ -256,7 +256,7 @@ export default async function PublicProfilePage({
                   <div className="min-w-0">
                     <p
                       className="text-sm font-semibold leading-snug"
-                      style={{ color: "#F9FAFB" }}
+                      style={{ color: "#111827" }}
                     >
                       {cert.programme}
                     </p>
@@ -268,7 +268,7 @@ export default async function PublicProfilePage({
                     </p>
                     <p
                       className="text-xs mt-1 flex items-center gap-1"
-                      style={{ color: "#4B5563" }}
+                      style={{ color: "#6B7280" }}
                     >
                       <Calendar className="h-3 w-3" />
                       {new Date(cert.issued_at).toLocaleDateString("en-GB", {
@@ -320,7 +320,7 @@ export default async function PublicProfilePage({
 
         {/* ── Empty state ────────────────────────────────────────────── */}
         {certificates.length === 0 && opportunities.length === 0 && events.length === 0 && (
-          <p className="text-sm text-center py-8" style={{ color: "#4B5563" }}>
+          <p className="text-sm text-center py-8" style={{ color: "#6B7280" }}>
             This researcher hasn&apos;t published any contributions yet.
           </p>
         )}

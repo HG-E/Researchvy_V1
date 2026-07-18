@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Users, Globe, Award, Handshake, ArrowRight, MessageCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -21,7 +21,7 @@ const PILLARS = [
     icon:  Award,
     title: "Fellows Programme",
     desc:  "Our Fellows are researchers who have completed advanced training and are committed to championing scholarly visibility within their institutions and disciplines.",
-    color: "#60A5FA",
+    color: "#2563EB",
   },
   {
     icon:  Globe,
@@ -48,7 +48,7 @@ const BENEFITS = [
 
 export default function NetworkPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
@@ -58,7 +58,7 @@ export default function NetworkPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             You Don&apos;t Have to<br />
             <span style={{ color: "#34D399" }}>Figure This Out Alone.</span>
@@ -77,12 +77,12 @@ export default function NetworkPage() {
               style={{ backgroundColor: "#25D366" }}
             >
               <MessageCircle className="h-4 w-4" />
-              Join the Network
+              Join the Waitlist
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+              className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
             >
               Ask a Question
             </Link>
@@ -99,7 +99,7 @@ export default function NetworkPage() {
               >
                 <Icon className="h-5 w-5" style={{ color }} />
               </div>
-              <h2 className="text-base font-bold mb-2" style={{ color: "#F9FAFB" }}>{title}</h2>
+              <h2 className="text-base font-bold mb-2" style={{ color: "#111827" }}>{title}</h2>
               <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
             </HoverCard>
           ))}
@@ -113,7 +113,7 @@ export default function NetworkPage() {
             </p>
             <h2
               className="text-3xl font-bold mb-6"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               What members receive
             </h2>
@@ -122,10 +122,10 @@ export default function NetworkPage() {
                 <div
                   key={item}
                   className="flex items-start gap-3 rounded-xl px-4 py-3"
-                  style={{ backgroundColor: "#0F172A", border: "1px solid #1E293B" }}
+                  style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "#34D399" }} />
-                  <p className="text-sm" style={{ color: "#D1D5DB" }}>{item}</p>
+                  <p className="text-sm" style={{ color: "#374151" }}>{item}</p>
                 </div>
               ))}
             </div>
@@ -134,14 +134,14 @@ export default function NetworkPage() {
           {/* Fellows CTA */}
           <div
             className="rounded-2xl border p-8"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#34D399" }}>
               Opening Soon
             </p>
             <h3
               className="text-2xl font-bold mb-3"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               Join the Waitlist
             </h3>
@@ -163,8 +163,8 @@ export default function NetworkPage() {
               </a>
               <Link
                 href="/contact"
-                className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
               >
                 Send an Email
               </Link>
@@ -181,7 +181,7 @@ export default function NetworkPage() {
           style={{ backgroundColor: "rgba(52,211,153,0.05)", borderColor: "rgba(52,211,153,0.2)" }}
         >
           <div>
-            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
               Build your skills before joining the community
             </p>
             <p className="text-sm" style={{ color: "#6B7280" }}>

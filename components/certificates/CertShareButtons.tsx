@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Linkedin, Copy, Check, ExternalLink } from "lucide-react";
@@ -58,7 +58,7 @@ export function CertShareButtons({ certificateNumber, recipientName, programme, 
 
   return (
     <div className="mt-6 space-y-3">
-      <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#4B5563" }}>
+      <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#6B7280" }}>
         Add to your profiles
       </p>
 
@@ -95,25 +95,25 @@ export function CertShareButtons({ certificateNumber, recipientName, programme, 
       {orcidOpen && (
         <div
           className="rounded-2xl border p-5 space-y-4 mt-2"
-          style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div>
             <p className="text-xs font-semibold mb-1" style={{ color: "#A6D139" }}>
               How to add to ORCID
             </p>
-            <ol className="text-xs space-y-1.5 list-decimal list-inside" style={{ color: "#9CA3AF" }}>
+            <ol className="text-xs space-y-1.5 list-decimal list-inside" style={{ color: "#6B7280" }}>
               <li>Go to <a href="https://orcid.org" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "#60A5FA" }}>orcid.org</a> and sign in</li>
-              <li>Click <strong style={{ color: "#D1D5DB" }}>Add Works</strong> → <strong style={{ color: "#D1D5DB" }}>Add manually</strong></li>
-              <li>Choose work type <strong style={{ color: "#D1D5DB" }}>Qualification</strong></li>
+              <li>Click <strong style={{ color: "#374151" }}>Add Works</strong> → <strong style={{ color: "#374151" }}>Add manually</strong></li>
+              <li>Choose work type <strong style={{ color: "#374151" }}>Qualification</strong></li>
               <li>Paste the details below into the relevant fields</li>
-              <li>Click <strong style={{ color: "#D1D5DB" }}>Save changes</strong></li>
+              <li>Click <strong style={{ color: "#374151" }}>Save changes</strong></li>
             </ol>
           </div>
 
           <div className="relative">
             <pre
               className="text-xs rounded-xl p-4 leading-relaxed whitespace-pre-wrap overflow-x-auto"
-              style={{ backgroundColor: "#0F172A", color: "#9CA3AF", border: "1px solid #1E293B" }}
+              style={{ backgroundColor: "#FFFFFF", color: "#6B7280", border: "1px solid #E2E8F0" }}
             >
               {orcidText}
             </pre>

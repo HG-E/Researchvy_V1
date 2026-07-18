@@ -33,27 +33,27 @@ function AccessGate({ courseSlug, courseName }: { courseSlug: string; courseName
     <div className="flex-1 flex items-center justify-center p-8">
       <div
         className="rounded-2xl border p-10 text-center max-w-md"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         <div
           className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5"
           style={{ backgroundColor: "rgba(37,99,235,0.1)" }}
         >
-          <Lock className="h-6 w-6" style={{ color: "#60A5FA" }} />
+          <Lock className="h-6 w-6" style={{ color: "#2563EB" }} />
         </div>
         <h2
           className="text-xl font-bold mb-2"
-          style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+          style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
         >
           Enroll to access this lesson
         </h2>
         <p className="text-sm mb-6 leading-relaxed" style={{ color: "#6B7280" }}>
-          This lesson is part of <strong style={{ color: "#D1D5DB" }}>{courseName}</strong>.
+          This lesson is part of <strong style={{ color: "#374151" }}>{courseName}</strong>.
           Reach out via WhatsApp to enroll and unlock all lessons.
         </p>
 
         {/* What you'll gain — value teaser */}
-        <ul className="text-left text-sm space-y-2 mb-6 px-2" style={{ color: "#9CA3AF" }}>
+        <ul className="text-left text-sm space-y-2 mb-6 px-2" style={{ color: "#6B7280" }}>
           {[
             "Full access to every lesson in this course",
             "Track your progress and mark lessons complete",
@@ -79,8 +79,8 @@ function AccessGate({ courseSlug, courseName }: { courseSlug: string; courseName
           </a>
           <Link
             href={`/academy/courses/${courseSlug}`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium border transition-colors hover:bg-[#1E293B]"
-            style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+            className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium border transition-colors hover:bg-[#F1F5F9]"
+            style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
           >
             <ArrowLeft className="h-4 w-4" />
             Back to course
@@ -135,7 +135,7 @@ export default async function LessonPage({
   const initialNote = (noteRow as { data?: { content?: string } | null } | null)?.data?.content ?? "";
 
   return (
-    <div className="flex min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="flex min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <LessonSidebar
         course={course}
         currentLessonId={id}

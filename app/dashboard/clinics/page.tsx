@@ -73,7 +73,7 @@ export default async function MyClinicsPage() {
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
           Dashboard
         </p>
-        <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+        <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
           My Clinics
         </h1>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
@@ -84,7 +84,7 @@ export default async function MyClinicsPage() {
       {/* Clinic card */}
       <div
         className="rounded-2xl border p-8"
-        style={{ backgroundColor: "#0F172A", borderColor: hasRegistered ? "#2563EB" : "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: hasRegistered ? "#2563EB" : "#1E293B" }}
       >
         <div className="flex items-start justify-between gap-4 mb-6">
           <div
@@ -104,7 +104,7 @@ export default async function MyClinicsPage() {
           )}
         </div>
 
-        <h2 className="text-lg font-bold mb-1" style={{ color: "#F9FAFB" }}>{CLINIC.name}</h2>
+        <h2 className="text-lg font-bold mb-1" style={{ color: "#111827" }}>{CLINIC.name}</h2>
         <p className="text-sm mb-6 leading-relaxed" style={{ color: "#6B7280" }}>{CLINIC.tagline}</p>
 
         {enquiryStatus === "enrolled" && (
@@ -118,14 +118,14 @@ export default async function MyClinicsPage() {
                 className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
                 style={{ backgroundColor: "rgba(37,99,235,0.12)" }}
               >
-                <ListChecks className="h-5 w-5" style={{ color: "#60A5FA" }} />
+                <ListChecks className="h-5 w-5" style={{ color: "#2563EB" }} />
               </div>
               <div>
-                <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>My Tasks</p>
+                <p className="text-sm font-semibold" style={{ color: "#111827" }}>My Tasks</p>
                 <p className="text-xs" style={{ color: "#6B7280" }}>Weekly clinic tasks &amp; reflections</p>
               </div>
             </div>
-            <ArrowRight className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
+            <ArrowRight className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} />
           </Link>
         )}
 
@@ -141,7 +141,7 @@ export default async function MyClinicsPage() {
             </p>
           </div>
         ) : !hasRegistered ? (
-          <p className="text-sm mb-6 leading-relaxed" style={{ color: "#4B5563" }}>
+          <p className="text-sm mb-6 leading-relaxed" style={{ color: "#6B7280" }}>
             Cohorts are forming now. Register your interest below and we&apos;ll reach out to you
             directly when a spot becomes available.
           </p>
@@ -151,7 +151,7 @@ export default async function MyClinicsPage() {
         {cohort.status !== "tba" && !hasRegistered && (
           <div className="rounded-xl border p-4 mb-5 space-y-3" style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}>
             <div className="flex items-center justify-between flex-wrap gap-2">
-              <p className="text-xs font-bold" style={{ color: "#F9FAFB" }}>July 2026 Cohort</p>
+              <p className="text-xs font-bold" style={{ color: "#111827" }}>July 2026 Cohort</p>
               <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: isFull ? "rgba(239,68,68,0.15)" : isClosingSoon ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.12)", color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#10B981" }}>
                 {isFull ? "Full" : `${spotsLeft} spots left`}
               </span>
@@ -160,16 +160,16 @@ export default async function MyClinicsPage() {
               {(["wednesday", "sunday"] as const).map((key) => {
                 const track = cohort.tracks[key];
                 return (
-                  <div key={key} className="rounded-lg border px-3 py-2" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
-                    <p className="text-[9px] font-bold tracking-widest uppercase" style={{ color: "#4B5563" }}>{track.label}</p>
-                    <p className="text-xs font-semibold mt-0.5" style={{ color: "#F9FAFB" }}>{track.day}s</p>
+                  <div key={key} className="rounded-lg border px-3 py-2" style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}>
+                    <p className="text-[9px] font-bold tracking-widest uppercase" style={{ color: "#6B7280" }}>{track.label}</p>
+                    <p className="text-xs font-semibold mt-0.5" style={{ color: "#111827" }}>{track.day}s</p>
                     <p className="text-[10px]" style={{ color: "#6B7280" }}>{cohort.sessionTime}</p>
-                    <p className="text-[10px]" style={{ color: "#4B5563" }}>Starts {formatDate(track.startDate)}</p>
+                    <p className="text-[10px]" style={{ color: "#6B7280" }}>Starts {formatDate(track.startDate)}</p>
                   </div>
                 );
               })}
             </div>
-            <p className="text-[10px]" style={{ color: "#4B5563" }}>
+            <p className="text-[10px]" style={{ color: "#6B7280" }}>
               2 hrs/session · platform activities between sessions · Registration closes {formatDate(cohort.registrationDeadline)}
             </p>
           </div>
@@ -185,7 +185,7 @@ export default async function MyClinicsPage() {
           <Link
             href={CLINIC.href}
             className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200"
-            style={{ color: "#60A5FA" }}
+            style={{ color: "#2563EB" }}
           >
             View Full Programme <ArrowRight className="h-4 w-4" />
           </Link>
@@ -198,7 +198,7 @@ export default async function MyClinicsPage() {
         style={{ backgroundColor: "rgba(139,92,246,0.04)", borderColor: "rgba(139,92,246,0.2)" }}
       >
         <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#A78BFA" }}>Available now · No cohort</p>
-        <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>Private Consulting — 1-on-1, done for you</p>
+        <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>Private Consulting — 1-on-1, done for you</p>
         <p className="text-xs leading-relaxed mb-3" style={{ color: "#6B7280" }}>
           Rather than waiting for a cohort, Private Consulting delivers a bespoke audit, optimised profiles, and a 12-month strategy built around your specific gaps — from $209.
         </p>
@@ -209,15 +209,15 @@ export default async function MyClinicsPage() {
 
       {/* Coming soon teaser */}
       <div>
-        <h2 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "#9CA3AF" }}>
+        <h2 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "#6B7280" }}>
           <Clock className="h-4 w-4" />
           More clinics coming soon
         </h2>
         <div
           className="rounded-2xl border p-5"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
-          <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
+          <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
             More clinic programmes, intensive workshops, and institution-level cohorts are in development.
             Registered members are notified first.
           </p>

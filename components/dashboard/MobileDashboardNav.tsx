@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -44,12 +44,12 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
       {/* Top bar */}
       <header
         className="md:hidden flex items-center justify-between px-4 border-b"
-        style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B", height: "56px" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", height: "56px" }}
       >
         <Logo variant="icon" width={28} linkToHome />
         <button
           onClick={() => setOpen(true)}
-          className="flex items-center justify-center w-11 h-11 rounded-xl active:bg-[#1E293B] transition-colors"
+          className="flex items-center justify-center w-11 h-11 rounded-xl active:bg-[#F1F5F9] transition-colors"
           style={{ color: "#6B7280" }}
           aria-label="Open navigation"
           aria-expanded={open}
@@ -72,8 +72,8 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
       <div
         className="fixed top-0 right-0 bottom-0 z-50 w-[80vw] max-w-xs flex flex-col md:hidden"
         style={{
-          backgroundColor: "#0A0F1A",
-          borderLeft:      "1px solid #1E293B",
+          backgroundColor: "#FFFFFF",
+          borderLeft:      "1px solid #E2E8F0",
           transform:       open ? "translateX(0)" : "translateX(100%)",
           transition:      "transform 0.28s cubic-bezier(0.32, 0.72, 0, 1)",
           paddingBottom:   "env(safe-area-inset-bottom)",
@@ -83,11 +83,11 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
         aria-label="Dashboard navigation"
       >
         {/* Drawer header */}
-        <div className="flex items-center justify-between px-5 h-14 border-b flex-shrink-0" style={{ borderColor: "#1E293B" }}>
+        <div className="flex items-center justify-between px-5 h-14 border-b flex-shrink-0" style={{ borderColor: "#E2E8F0" }}>
           <Logo variant="full" width={110} linkToHome />
           <button
             onClick={() => setOpen(false)}
-            className="flex items-center justify-center w-10 h-10 rounded-xl active:bg-[#1E293B] transition-colors"
+            className="flex items-center justify-center w-10 h-10 rounded-xl active:bg-[#F1F5F9] transition-colors"
             style={{ color: "#6B7280" }}
             aria-label="Close navigation"
           >
@@ -99,12 +99,12 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
         <Link
           href="/dashboard/profile"
           onClick={() => setOpen(false)}
-          className="flex items-center gap-3 px-5 py-3.5 border-b transition-colors active:bg-[#1E293B]"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          className="flex items-center gap-3 px-5 py-3.5 border-b transition-colors active:bg-[#F1F5F9]"
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <UserAvatar name={user.full_name} email={user.email} avatarUrl={user.avatar_url} size="sm" />
           <div className="min-w-0">
-            <p className="text-sm font-semibold truncate" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-semibold truncate" style={{ color: "#111827" }}>
               {displayName}
             </p>
             <p className="text-xs truncate" style={{ color: "#6B7280" }}>
@@ -124,15 +124,15 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-medium transition-colors relative active:opacity-75"
                 style={{
-                  backgroundColor: isActive ? "#1E293B" : "transparent",
-                  color:           isActive ? "#F9FAFB" : "#6B7280",
+                  backgroundColor: isActive ? "#EFF6FF" : "transparent",
+                  color:           isActive ? "#1D4ED8" : "#6B7280",
                   minHeight:       "48px",
                 }}
               >
                 {isActive && (
                   <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full" style={{ backgroundColor: "#2563EB" }} />
                 )}
-                <Icon className="h-4 w-4 flex-shrink-0" style={{ color: isActive ? "#60A5FA" : "#4B5563" }} />
+                <Icon className="h-4 w-4 flex-shrink-0" style={{ color: isActive ? "#2563EB" : "#9CA3AF" }} />
                 {label}
               </Link>
             );
@@ -142,12 +142,12 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
         {/* Admin Panel link */}
         {user.role === "admin" && (
           <div className="px-3 pb-2 flex-shrink-0">
-            <div className="h-px mb-2" style={{ backgroundColor: "#1E293B" }} />
+            <div className="h-px mb-2" style={{ backgroundColor: "#F1F5F9" }} />
             <Link
               href="/admin"
               onClick={() => setOpen(false)}
               className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-medium transition-colors active:opacity-75"
-              style={{ color: "#FCA5A5", backgroundColor: "rgba(239,68,68,0.06)", minHeight: "48px" }}
+              style={{ color: "#DC2626", backgroundColor: "#FEF2F2", minHeight: "48px" }}
             >
               <Shield className="h-4 w-4 flex-shrink-0" />
               Admin Panel
@@ -156,11 +156,11 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
         )}
 
         {/* Sign out */}
-        <div className="px-3 py-4 border-t flex-shrink-0" style={{ borderColor: "#1E293B" }}>
+        <div className="px-3 py-4 border-t flex-shrink-0" style={{ borderColor: "#E2E8F0" }}>
           <button
             onClick={handleSignOut}
-            className="flex items-center gap-3 w-full rounded-xl px-4 py-3.5 text-sm font-medium transition-colors active:bg-[#1E293B]"
-            style={{ color: "#4B5563", minHeight: "48px" }}
+            className="flex items-center gap-3 w-full rounded-xl px-4 py-3.5 text-sm font-medium transition-colors active:bg-[#F1F5F9]"
+            style={{ color: "#6B7280", minHeight: "48px" }}
           >
             <LogOut className="h-4 w-4 flex-shrink-0" />
             Sign out

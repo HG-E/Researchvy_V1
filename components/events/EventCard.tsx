@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Calendar, MapPin, Users, ExternalLink, Star, Plane, Lock } from "lucide-react";
 import { EventTypeBadge, EventFormatBadge } from "./EventTypeBadge";
 import type { AcademicEvent } from "@/types/event";
@@ -29,7 +29,7 @@ export function EventCard({ event }: { event: AcademicEvent }) {
       href={`/events/${event.slug}`}
       className="group block rounded-2xl border transition-all duration-200 overflow-hidden hover:-translate-y-0.5 hover:shadow-lg"
       style={{
-        backgroundColor: "#0F172A",
+        backgroundColor: "#FFFFFF",
         borderColor:     event.is_featured ? "rgba(139,92,246,0.4)" : "#1E293B",
         boxShadow:       event.is_featured ? "0 0 0 1px rgba(139,92,246,0.15)" : "none",
       }}
@@ -73,7 +73,7 @@ export function EventCard({ event }: { event: AcademicEvent }) {
         {/* Title */}
         <h3
           className="text-base font-bold mb-2 leading-snug line-clamp-2 group-hover:text-blue-400 transition-colors"
-          style={{ color: "#F9FAFB" }}
+          style={{ color: "#111827" }}
         >
           {event.title}
         </h3>
@@ -87,17 +87,17 @@ export function EventCard({ event }: { event: AcademicEvent }) {
 
         {/* Meta info */}
         <div className="space-y-1.5 mb-4">
-          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#4B5563" }}>
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#6B7280" }}>
             <Calendar className="h-3 w-3 flex-shrink-0" />
             <span>{formatEventDate(event.start_date, event.end_date)}</span>
           </div>
           {event.location && (
-            <div className="flex items-center gap-1.5 text-xs" style={{ color: "#4B5563" }}>
+            <div className="flex items-center gap-1.5 text-xs" style={{ color: "#6B7280" }}>
               <MapPin className="h-3 w-3 flex-shrink-0" />
               <span className="truncate">{event.location}</span>
             </div>
           )}
-          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#4B5563" }}>
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#6B7280" }}>
             <Users className="h-3 w-3 flex-shrink-0" />
             <span>{event.organizer_name}</span>
           </div>
@@ -126,7 +126,7 @@ export function EventCard({ event }: { event: AcademicEvent }) {
         </div>
 
         {/* Bottom row — fee + CTA hint */}
-        <div className="mt-4 pt-3 border-t flex items-center justify-between" style={{ borderColor: "#1E293B" }}>
+        <div className="mt-4 pt-3 border-t flex items-center justify-between" style={{ borderColor: "#E2E8F0" }}>
           <span className="text-xs font-semibold" style={{ color: event.is_free ? "#10B981" : "#F9FAFB" }}>
             {event.is_free ? "Free" : `${event.fee_currency} ${event.fee_amount?.toLocaleString()}`}
           </span>

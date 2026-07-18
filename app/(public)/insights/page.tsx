@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Suspense } from "react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getInsights } from "@/lib/cms/mdx";
@@ -28,7 +28,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
   });
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Page header */}
@@ -44,7 +44,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
           </p>
           <h1
             className="relative text-4xl sm:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Research Intelligence<br />
             <span style={{ color: "#60A5FA" }}>&amp; Visibility</span>
@@ -63,7 +63,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
               <div
                 key={label}
                 className="flex items-center gap-1.5 rounded-full px-3 py-1.5 border text-sm"
-                style={{ backgroundColor: "rgba(15,23,42,0.6)", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "rgba(15,23,42,0.6)", borderColor: "#E2E8F0" }}
               >
                 <span className="font-bold" style={{ color: "#60A5FA" }}>{value}</span>
                 <span style={{ color: "#6B7280" }}>{label}</span>
@@ -84,7 +84,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
         {/* Funnel CTA — insights readers are high-intent; give them a frictionless next step */}
         <div
           className="mt-16 rounded-3xl border p-8 sm:p-10 relative overflow-hidden"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div className="absolute top-0 left-0 right-0 h-1" style={{ background: "linear-gradient(90deg, #10B981, #2563EB)" }} />
           <div className="max-w-2xl">
@@ -93,7 +93,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
             </p>
             <h2
               className="text-2xl sm:text-3xl font-bold mb-3 leading-tight"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               Know where you actually stand.
             </h2>
@@ -113,13 +113,13 @@ export default async function InsightsPage({ searchParams }: PageProps) {
               </Link>
               <Link
                 href="/consultation"
-                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-all duration-200 hover:border-[#2563EB] hover:text-white"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-all duration-200 hover:border-[#2563EB] hover:text-[#111827]"
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
               >
                 Book a Free Strategy Call
               </Link>
             </div>
-            <p className="text-xs mt-4" style={{ color: "#4B5563" }}>
+            <p className="text-xs mt-4" style={{ color: "#6B7280" }}>
               4–6 minutes · 12 checkpoints · Results shown immediately
             </p>
           </div>

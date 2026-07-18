@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,7 @@ const AUDIENCES: { value: EventTargetAudience; label: string }[] = [
 ];
 
 const inputStyle: React.CSSProperties = {
-  backgroundColor: "#0A0F1A",
+  backgroundColor: "#FFFFFF",
   border:          "1px solid #1E293B",
   borderRadius:    "10px",
   color:           "#F9FAFB",
@@ -131,12 +131,12 @@ export function EventSubmitForm() {
 
   if (success) {
     return (
-      <div className="rounded-2xl border p-10 text-center" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+      <div className="rounded-2xl border p-10 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
         <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
           style={{ backgroundColor: "rgba(16,185,129,0.12)" }}>
           <CheckCircle className="h-7 w-7" style={{ color: "#10B981" }} />
         </div>
-        <h2 className="text-xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+        <h2 className="text-xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
           Event submitted for review
         </h2>
         <p className="text-sm mb-6 max-w-sm mx-auto" style={{ color: "#6B7280" }}>
@@ -153,7 +153,7 @@ export function EventSubmitForm() {
           <button
             onClick={() => router.push("/dashboard/events")}
             className="rounded-xl px-5 py-2.5 text-sm font-semibold border"
-            style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+            style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
           >
             My Submissions
           </button>
@@ -304,8 +304,8 @@ export function EventSubmitForm() {
               onChange={(e) => set("registration_deadline", e.target.value)} />
           </div>
 
-          <div className="rounded-xl border p-4 space-y-4" style={{ borderColor: "#1E293B", backgroundColor: "#080E1A" }}>
-            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#4B5563" }}>Registration type</p>
+          <div className="rounded-xl border p-4 space-y-4" style={{ borderColor: "#E2E8F0", backgroundColor: "#FFFFFF" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#6B7280" }}>Registration type</p>
             <div className="flex gap-3">
               {[
                 { value: "external", label: "External link", desc: "Direct to your own registration page" },
@@ -319,8 +319,8 @@ export function EventSubmitForm() {
                     borderColor: form.registration_type === opt.value ? "#2563EB" : "#1E293B",
                     backgroundColor: form.registration_type === opt.value ? "rgba(37,99,235,0.06)" : "transparent",
                   }}>
-                    <p className="text-xs font-semibold mb-1" style={{ color: "#F9FAFB" }}>{opt.label}</p>
-                    <p className="text-[11px] leading-relaxed" style={{ color: "#4B5563" }}>{opt.desc}</p>
+                    <p className="text-xs font-semibold mb-1" style={{ color: "#111827" }}>{opt.label}</p>
+                    <p className="text-[11px] leading-relaxed" style={{ color: "#6B7280" }}>{opt.desc}</p>
                   </div>
                 </label>
               ))}
@@ -341,12 +341,12 @@ export function EventSubmitForm() {
               placeholder="https://yourconference.com" />
           </div>
 
-          <div className="rounded-xl border p-4 space-y-4" style={{ borderColor: "#1E293B", backgroundColor: "#080E1A" }}>
+          <div className="rounded-xl border p-4 space-y-4" style={{ borderColor: "#E2E8F0", backgroundColor: "#FFFFFF" }}>
             <div className="flex items-center gap-3">
               <input type="checkbox" id="is_free" checked={form.is_free}
                 onChange={(e) => set("is_free", e.target.checked)}
                 className="w-4 h-4 rounded" />
-              <label htmlFor="is_free" className="text-sm cursor-pointer" style={{ color: "#D1D5DB" }}>
+              <label htmlFor="is_free" className="text-sm cursor-pointer" style={{ color: "#374151" }}>
                 This event is free to attend
               </label>
             </div>
@@ -383,15 +383,15 @@ export function EventSubmitForm() {
           </div>
 
           {/* Funding + competitive admission */}
-          <div className="rounded-xl border p-4 space-y-4" style={{ borderColor: "#1E293B", backgroundColor: "#080E1A" }}>
-            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#4B5563" }}>Funding &amp; Admission</p>
+          <div className="rounded-xl border p-4 space-y-4" style={{ borderColor: "#E2E8F0", backgroundColor: "#FFFFFF" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#6B7280" }}>Funding &amp; Admission</p>
             <label className="flex items-start gap-3 cursor-pointer">
               <input type="checkbox" checked={form.has_travel_funding}
                 onChange={(e) => set("has_travel_funding", e.target.checked)}
                 className="w-4 h-4 rounded mt-0.5" />
               <div>
-                <p className="text-sm font-medium" style={{ color: "#D1D5DB" }}>Travel funding / bursary is available for this event</p>
-                <p className="text-[11px] mt-0.5" style={{ color: "#4B5563" }}>A badge will appear on the event card so researchers can spot funded opportunities immediately.</p>
+                <p className="text-sm font-medium" style={{ color: "#374151" }}>Travel funding / bursary is available for this event</p>
+                <p className="text-[11px] mt-0.5" style={{ color: "#6B7280" }}>A badge will appear on the event card so researchers can spot funded opportunities immediately.</p>
               </div>
             </label>
             {form.has_travel_funding && (
@@ -406,8 +406,8 @@ export function EventSubmitForm() {
                 onChange={(e) => set("is_competitive_admission", e.target.checked)}
                 className="w-4 h-4 rounded mt-0.5" />
               <div>
-                <p className="text-sm font-medium" style={{ color: "#D1D5DB" }}>Attendance is competitive (application required)</p>
-                <p className="text-[11px] mt-0.5" style={{ color: "#4B5563" }}>For workshops, training programmes, or residencies where attendees must be selected.</p>
+                <p className="text-sm font-medium" style={{ color: "#374151" }}>Attendance is competitive (application required)</p>
+                <p className="text-[11px] mt-0.5" style={{ color: "#6B7280" }}>For workshops, training programmes, or residencies where attendees must be selected.</p>
               </div>
             </label>
             {form.is_competitive_admission && (
@@ -421,7 +421,7 @@ export function EventSubmitForm() {
 
           <div className="flex justify-between">
             <button onClick={() => setStep(1)} className="rounded-xl px-5 py-2.5 text-sm font-semibold border"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}>
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
               ← Back
             </button>
             <button
@@ -445,8 +445,8 @@ export function EventSubmitForm() {
       {/* Step 3 — Review & submit */}
       {step === 3 && (
         <div className="space-y-5">
-          <div className="rounded-2xl border p-6" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#4B5563" }}>Review your submission</p>
+          <div className="rounded-2xl border p-6" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#6B7280" }}>Review your submission</p>
             <dl className="space-y-3">
               {[
                 ["Title",         form.title],
@@ -460,7 +460,7 @@ export function EventSubmitForm() {
               ].map(([k, v]) => (
                 <div key={k} className="flex gap-4">
                   <dt className="w-28 text-xs font-semibold shrink-0" style={{ color: "#6B7280" }}>{k}</dt>
-                  <dd className="text-sm capitalize" style={{ color: "#D1D5DB" }}>{String(v)}</dd>
+                  <dd className="text-sm capitalize" style={{ color: "#374151" }}>{String(v)}</dd>
                 </div>
               ))}
             </dl>
@@ -479,7 +479,7 @@ export function EventSubmitForm() {
 
           <div className="flex justify-between">
             <button onClick={() => setStep(2)} className="rounded-xl px-5 py-2.5 text-sm font-semibold border"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}>
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
               ← Back
             </button>
             <button

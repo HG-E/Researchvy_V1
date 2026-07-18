@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { BarChart2, GraduationCap, FileImage, Stethoscope, Network } from "lucide-react";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
@@ -28,7 +28,7 @@ export function DivisionsCarousel() {
             <div
               key={division.id}
               className="rounded-2xl p-6 border transition-all duration-300"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${accent}40`; }}
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1E293B"; }}
             >
@@ -41,13 +41,13 @@ export function DivisionsCarousel() {
               >
                 <Icon className="h-5 w-5" style={{ color: accent }} />
               </div>
-              <h3 className="font-bold text-base mb-1" style={{ color: "#F9FAFB" }}>
+              <h3 className="font-bold text-base mb-1" style={{ color: "#111827" }}>
                 {division.name}
               </h3>
               <p className="text-xs mb-3 font-medium" style={{ color: accent }}>
                 {division.tagline}
               </p>
-              <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
                 {division.description}
               </p>
             </div>
@@ -66,7 +66,7 @@ export function DivisionsCarousel() {
             <div
               key={division.id}
               className="mx-0.5 rounded-2xl border overflow-hidden"
-              style={{ backgroundColor: "#0F172A", borderColor: `${accent}35` }}
+              style={{ backgroundColor: "#FFFFFF", borderColor: `${accent}35` }}
             >
               {/* Gradient header */}
               <div
@@ -82,7 +82,7 @@ export function DivisionsCarousel() {
                 >
                   <Icon className="h-5 w-5" style={{ color: accent }} />
                 </div>
-                <h3 className="font-bold text-base leading-snug mb-0.5" style={{ color: "#F9FAFB" }}>
+                <h3 className="font-bold text-base leading-snug mb-0.5" style={{ color: "#111827" }}>
                   {division.name}
                 </h3>
                 <p className="text-xs font-medium leading-snug" style={{ color: accent }}>
@@ -94,7 +94,7 @@ export function DivisionsCarousel() {
                 style={{ background: `linear-gradient(90deg, ${accent}30, transparent)` }}
               />
               <div className="px-5 py-4">
-                <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
                   {division.description}
                 </p>
               </div>

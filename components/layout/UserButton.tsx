@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -41,14 +41,14 @@ export function UserButton({ user }: { user: HeaderUser }) {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 rounded-xl px-2.5 py-1.5 transition-colors hover:bg-[#1E293B]"
+        className="flex items-center gap-2 rounded-xl px-2.5 py-1.5 transition-colors hover:bg-[#F1F5F9]"
         aria-expanded={open}
         aria-haspopup="menu"
       >
         <UserAvatar name={user.name} email={user.email} avatarUrl={user.avatar_url} size="sm" />
         <span
           className="hidden lg:block text-sm font-medium max-w-[120px] truncate"
-          style={{ color: "#F9FAFB" }}
+          style={{ color: "#111827" }}
         >
           {displayName}
         </span>
@@ -65,8 +65,8 @@ export function UserButton({ user }: { user: HeaderUser }) {
       <div
         className="absolute top-full right-0 mt-2 w-56 rounded-xl border p-1.5 shadow-2xl z-50"
         style={{
-          backgroundColor: "#0F172A",
-          borderColor:     "#1E293B",
+          backgroundColor: "#FFFFFF",
+          borderColor:     "#E2E8F0",
           opacity:         open ? 1 : 0,
           transform:       `translateY(${open ? "0px" : "6px"}) scale(${open ? 1 : 0.97})`,
           pointerEvents:   open ? "auto" : "none",
@@ -75,11 +75,11 @@ export function UserButton({ user }: { user: HeaderUser }) {
         role="menu"
       >
         {/* Identity header */}
-        <div className="flex items-center gap-3 px-3 py-2.5 border-b mb-1" style={{ borderColor: "#1E293B" }}>
+        <div className="flex items-center gap-3 px-3 py-2.5 border-b mb-1" style={{ borderColor: "#E2E8F0" }}>
           <UserAvatar name={user.name} email={user.email} avatarUrl={user.avatar_url} size="sm" />
           <div className="min-w-0">
             {user.name && (
-              <p className="text-sm font-semibold truncate" style={{ color: "#F9FAFB" }}>
+              <p className="text-sm font-semibold truncate" style={{ color: "#111827" }}>
                 {user.name}
               </p>
             )}
@@ -95,23 +95,23 @@ export function UserButton({ user }: { user: HeaderUser }) {
 
         {isAdmin && (
           <>
-            <div className="my-1 mx-1.5 h-px" style={{ backgroundColor: "#1E293B" }} />
+            <div className="my-1 mx-1.5 h-px" style={{ backgroundColor: "#F1F5F9" }} />
             <MenuItem
               href="/admin"
               icon={Shield}
               label="Admin Panel"
               onClose={() => setOpen(false)}
-              color="#FCA5A5"
+              color="#DC2626"
               prefetch={false}
             />
           </>
         )}
 
-        <div className="my-1 mx-1.5 h-px" style={{ backgroundColor: "#1E293B" }} />
+        <div className="my-1 mx-1.5 h-px" style={{ backgroundColor: "#F1F5F9" }} />
 
         <button
           onClick={handleSignOut}
-          className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-[#1E293B]"
+          className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-[#F1F5F9]"
           style={{ color: "#6B7280" }}
           role="menuitem"
         >
@@ -143,8 +143,8 @@ function MenuItem({
       href={href}
       onClick={onClose}
       prefetch={prefetch}
-      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-[#1E293B]"
-      style={{ color: color ?? "#9CA3AF" }}
+      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-[#F1F5F9]"
+      style={{ color: color ?? "#374151" }}
       role="menuitem"
     >
       <Icon className="h-4 w-4 flex-shrink-0" />

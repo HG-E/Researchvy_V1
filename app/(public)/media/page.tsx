@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Mic, Video, BookOpen, PenTool, ArrowRight, MessageCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -21,7 +21,7 @@ const SERVICES = [
     icon:  Video,
     title: "Visual Abstracts & Explainers",
     desc:  "Professional visual abstracts, infographics, and short-form explainer content designed for social media, conference presentations, and journal submissions.",
-    color: "#60A5FA",
+    color: "#2563EB",
   },
   {
     icon:  Mic,
@@ -48,7 +48,7 @@ const FORMATS = [
 
 export default function MediaPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
@@ -58,7 +58,7 @@ export default function MediaPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Your Research Is Published.<br />
             <span style={{ color: "#F472B6" }}>The World Still Can&apos;t Read It.</span>
@@ -81,8 +81,8 @@ export default function MediaPage() {
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+              className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
             >
               Send an Enquiry
             </Link>
@@ -99,7 +99,7 @@ export default function MediaPage() {
               >
                 <Icon className="h-5 w-5" style={{ color }} />
               </div>
-              <h2 className="text-base font-bold mb-2" style={{ color: "#F9FAFB" }}>{title}</h2>
+              <h2 className="text-base font-bold mb-2" style={{ color: "#111827" }}>{title}</h2>
               <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
             </HoverCard>
           ))}
@@ -113,7 +113,7 @@ export default function MediaPage() {
             </p>
             <h2
               className="text-3xl font-bold mb-6"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               What we produce
             </h2>
@@ -122,10 +122,10 @@ export default function MediaPage() {
                 <div
                   key={item}
                   className="flex items-start gap-3 rounded-xl px-4 py-3"
-                  style={{ backgroundColor: "#0F172A", border: "1px solid #1E293B" }}
+                  style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "#F472B6" }} />
-                  <p className="text-sm" style={{ color: "#D1D5DB" }}>{item}</p>
+                  <p className="text-sm" style={{ color: "#374151" }}>{item}</p>
                 </div>
               ))}
             </div>
@@ -134,14 +134,14 @@ export default function MediaPage() {
           {/* CTA panel */}
           <div
             className="rounded-2xl border p-8"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#F472B6" }}>
               Work With Us
             </p>
             <h3
               className="text-2xl font-bold mb-3"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               Start a Media Project
             </h3>
@@ -163,8 +163,8 @@ export default function MediaPage() {
               </a>
               <Link
                 href="/contact"
-                className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
               >
                 Send an Email
               </Link>
@@ -181,7 +181,7 @@ export default function MediaPage() {
           style={{ backgroundColor: "rgba(244,114,182,0.05)", borderColor: "rgba(244,114,182,0.2)" }}
         >
           <div>
-            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
               Want to learn to communicate your research yourself?
             </p>
             <p className="text-sm" style={{ color: "#6B7280" }}>

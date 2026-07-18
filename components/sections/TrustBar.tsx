@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 
@@ -11,11 +11,11 @@ const PILLARS = [
 
 export function TrustBar() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#0F172A" }}>
+    <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-5xl">
         <div
           className="rounded-2xl border p-8 grid grid-cols-2 lg:grid-cols-4 gap-8"
-          style={{ backgroundColor: "#1E293B", borderColor: "#334155" }}
+          style={{ backgroundColor: "#F1F5F9", borderColor: "#CBD5E1" }}
         >
           {PILLARS.map((pillar, i) => (
             <motion.div
@@ -32,7 +32,7 @@ export function TrustBar() {
               >
                 {pillar.number}
               </p>
-              <p className="text-sm" style={{ color: "#9CA3AF" }}>
+              <p className="text-sm" style={{ color: "#6B7280" }}>
                 {pillar.label}
               </p>
             </motion.div>

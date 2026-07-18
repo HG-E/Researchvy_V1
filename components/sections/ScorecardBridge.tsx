@@ -1,13 +1,45 @@
 import Link from "next/link";
 import { BarChart2, ArrowRight } from "lucide-react";
+import { trackCtaClick } from "@/lib/analytics/posthog";
+
+const VALUE_LADDER = [
+  { step: "1", label: "Visibility Scorecard", sub: "Free · 5 min", color: "#10B981", href: "/resources/visibility-scorecard" },
+  { step: "2", label: "Digital Visibility Clinic", sub: "Live cohort · from $79", color: "#2563EB", href: "/clinics" },
+  { step: "3", label: "Private Consulting", sub: "1-on-1 · from $209", color: "#8B5CF6", href: "/clinics/private-consulting" },
+];
 
 export function ScorecardBridge() {
   return (
-    <div className="px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
+    <div className="px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-6xl pb-8 sm:pb-12">
+
+        {/* Value Ladder — Item 17: surface the journey early */}
+        <div className="mb-6 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0">
+          {VALUE_LADDER.map(({ step, label, sub, color, href }, i) => (
+            <span key={step} className="flex items-center gap-2 sm:gap-3">
+              <Link href={href} className="flex items-center gap-2.5 group">
+                <span
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+                  style={{ backgroundColor: `${color}18`, color, border: `1px solid ${color}30` }}
+                >
+                  {step}
+                </span>
+                <div className="text-left">
+                  <p className="text-xs font-semibold leading-none" style={{ color: "#111827" }}>{label}</p>
+                  <p className="text-[10px] mt-0.5" style={{ color: "#9CA3AF" }}>{sub}</p>
+                </div>
+              </Link>
+              {i < VALUE_LADDER.length - 1 && (
+                <ArrowRight className="h-3.5 w-3.5 flex-shrink-0 hidden sm:block" style={{ color: "#CBD5E1" }} />
+              )}
+            </span>
+          ))}
+        </div>
+
         <Link
           href="/resources/visibility-scorecard"
           className="group flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8 rounded-2xl border p-5 sm:p-6 transition-all duration-200 hover:border-[#10B981]/50"
+          onClick={() => trackCtaClick("Check My Score, Free", "scorecard-bridge", "/resources/visibility-scorecard")}
           style={{
             backgroundColor: "rgba(16,185,129,0.04)",
             borderColor:     "rgba(16,185,129,0.22)",
@@ -26,7 +58,7 @@ export function ScorecardBridge() {
 
           {/* Text */}
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
               Not sure how bad your visibility gap actually is?
             </p>
             <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>

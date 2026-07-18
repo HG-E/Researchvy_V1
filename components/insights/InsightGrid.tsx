@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -22,7 +22,7 @@ export function InsightGrid({ insights }: Props) {
   return (
     <div>
       {/* Count */}
-      <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
+      <p className="text-xs mb-6" style={{ color: "#6B7280" }}>
         Showing {shown.length} of {insights.length}{" "}
         {insights.length === 1 ? "article" : "articles"}
       </p>
@@ -43,8 +43,8 @@ export function InsightGrid({ insights }: Props) {
                 onClick={() => setVisible((v) => v + INCREMENT)}
                 className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5"
                 style={{
-                  backgroundColor: "#0F172A",
-                  border: "1px solid #1E293B",
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #E2E8F0",
                   color: "#60A5FA",
                 }}
               >
@@ -52,7 +52,7 @@ export function InsightGrid({ insights }: Props) {
                 Show more
                 <span
                   className="ml-1 rounded-full px-2 py-0.5 text-xs font-medium"
-                  style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
+                  style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
                 >
                   {remaining} left
                 </span>
@@ -63,9 +63,9 @@ export function InsightGrid({ insights }: Props) {
       ) : (
         <div
           className="rounded-2xl border p-16 flex flex-col items-center text-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
-          <p className="text-2xl mb-3" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+          <p className="text-2xl mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             No articles yet
           </p>
           <p className="text-sm" style={{ color: "#6B7280" }}>

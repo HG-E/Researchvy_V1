@@ -10,9 +10,9 @@ export const metadata = generatePageMetadata({ title: "Checkout", noIndex: true 
 export default async function CheckoutPage({
   searchParams,
 }: {
-  searchParams: Promise<{ bundle?: string; module?: string; ref?: string }>;
+  searchParams: Promise<{ bundle?: string; module?: string }>;
 }) {
-  const { bundle: bundleId = "core", module: moduleId, ref: refCode } = await searchParams;
+  const { bundle: bundleId = "core", module: moduleId } = await searchParams;
 
   const user = await getServerUser();
   if (!user) {
@@ -61,7 +61,6 @@ export default async function CheckoutPage({
       initialModuleId={moduleId ?? null}
       isEarlyBird={earlyBird}
       earlyBirdDeadline={PAYMENT_CONFIG.earlyBirdDeadline}
-      initialRefCode={refCode ?? null}
     />
   );
 }

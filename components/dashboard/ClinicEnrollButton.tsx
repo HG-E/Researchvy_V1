@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { CheckCircle, Loader2, Calendar } from "lucide-react";
@@ -52,7 +52,7 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
               {track.day} track · starts {formatDate(track.startDate)} · 5:00–7:00 PM EST / 10:00 PM WAT
             </p>
           )}
-          <p className="text-xs mt-1" style={{ color: "#4B5563" }}>
+          <p className="text-xs mt-1" style={{ color: "#6B7280" }}>
             We&apos;ll reach out to confirm your place and send joining details.
           </p>
         </div>
@@ -64,7 +64,7 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
     <div className="space-y-4 w-full">
       {/* Track selection */}
       <div>
-        <p className="text-xs font-semibold mb-3 flex items-center gap-2" style={{ color: "#9CA3AF" }}>
+        <p className="text-xs font-semibold mb-3 flex items-center gap-2" style={{ color: "#6B7280" }}>
           <Calendar className="h-3.5 w-3.5" />
           Choose your schedule track
         </p>
@@ -78,20 +78,20 @@ export function ClinicEnrollButton({ clinicSlug }: Props) {
                 onClick={() => setSelected(key)}
                 className="text-left rounded-xl border p-4 transition-all"
                 style={{
-                  backgroundColor: isChosen ? "rgba(37,99,235,0.1)"  : "#0F172A",
+                  backgroundColor: isChosen ? "rgba(37,99,235,0.08)" : "#F8FAFC",
                   borderColor:     isChosen ? "#2563EB"               : "#1E293B",
                 }}
               >
                 <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: isChosen ? "#60A5FA" : "#4B5563" }}>
                   {track.label}
                 </p>
-                <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>
+                <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
                   {track.day}s
                 </p>
                 <p className="text-xs" style={{ color: "#6B7280" }}>
                   {cohort.sessionTime}
                 </p>
-                <p className="text-xs mt-1" style={{ color: "#4B5563" }}>
+                <p className="text-xs mt-1" style={{ color: "#6B7280" }}>
                   Starts {formatDate(track.startDate)}
                 </p>
               </button>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Bell } from "lucide-react";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
@@ -34,17 +34,17 @@ export function ComingSoonCarousel() {
           <div
             key={name}
             className="rounded-2xl border p-6 opacity-60"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <p className="text-2xl mb-3">{icon}</p>
-            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>{name}</p>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>{name}</p>
             <p className="text-xs leading-relaxed mb-4" style={{ color: "#6B7280" }}>{tagline}</p>
             <a
               href={buildWhatsAppUrl(`${name}, register interest`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors hover:bg-[#1E3A2F]"
-              style={{ backgroundColor: "#1E293B", color: "#10B981", border: "1px solid rgba(16,185,129,0.2)" }}
+              style={{ backgroundColor: "#F1F5F9", color: "#10B981", border: "1px solid rgba(16,185,129,0.2)" }}
             >
               <Bell className="h-3 w-3" />
               Notify Me
@@ -63,7 +63,7 @@ export function ComingSoonCarousel() {
           <div
             key={name}
             className="mx-0.5 rounded-2xl border p-6"
-            style={{ backgroundColor: "#0F172A", borderColor: `${color}30` }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: `${color}30` }}
           >
             {/* Colored top accent */}
             <div
@@ -72,14 +72,14 @@ export function ComingSoonCarousel() {
             >
               {icon}
             </div>
-            <p className="text-sm font-semibold mb-1.5" style={{ color: "#F9FAFB" }}>{name}</p>
+            <p className="text-sm font-semibold mb-1.5" style={{ color: "#111827" }}>{name}</p>
             <p className="text-xs leading-relaxed mb-5" style={{ color: "#6B7280" }}>{tagline}</p>
             <a
               href={buildWhatsAppUrl(`${name}, register interest`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium"
-              style={{ backgroundColor: "#1E293B", color: "#10B981", border: "1px solid rgba(16,185,129,0.2)" }}
+              style={{ backgroundColor: "#F1F5F9", color: "#10B981", border: "1px solid rgba(16,185,129,0.2)" }}
             >
               <Bell className="h-3 w-3" />
               Notify Me

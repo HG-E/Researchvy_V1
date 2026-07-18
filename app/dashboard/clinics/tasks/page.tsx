@@ -79,7 +79,7 @@ export default async function TasksPage() {
 
         <div
           className="rounded-2xl border p-10 text-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div
             className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
@@ -87,7 +87,7 @@ export default async function TasksPage() {
           >
             <Lock className="h-6 w-6" style={{ color: "#2563EB" }} />
           </div>
-          <h2 className="text-lg font-bold mb-2" style={{ color: "#F9FAFB" }}>
+          <h2 className="text-lg font-bold mb-2" style={{ color: "#111827" }}>
             Tasks are for enrolled participants
           </h2>
           <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
@@ -172,7 +172,7 @@ export default async function TasksPage() {
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
           Dashboard › Clinics
         </p>
-        <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+        <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
           My Tasks
         </h1>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
@@ -183,10 +183,10 @@ export default async function TasksPage() {
       {unlockedSessions.size === 0 && (
         <div
           className="rounded-2xl border p-8 text-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div className="text-4xl mb-4">📅</div>
-          <h2 className="text-lg font-bold mb-2" style={{ color: "#F9FAFB" }}>
+          <h2 className="text-lg font-bold mb-2" style={{ color: "#111827" }}>
             Sessions open when your cohort begins
           </h2>
           <p className="text-sm mb-4" style={{ color: "#6B7280" }}>
@@ -195,7 +195,7 @@ export default async function TasksPage() {
           </p>
           <p className="text-xs mb-6" style={{ color: "#374151" }}>
             Questions? Email{" "}
-            <a href="mailto:researchvy@gmail.com" style={{ color: "#4B5563" }}>
+            <a href="mailto:researchvy@gmail.com" style={{ color: "#6B7280" }}>
               researchvy@gmail.com
             </a>
           </p>

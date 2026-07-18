@@ -39,8 +39,8 @@ export function StickyMobileCTA() {
       <div
         className="px-4 py-3 border-t"
         style={{
-          backgroundColor:     "rgba(10,15,26,0.97)",
-          borderColor:         "#1E293B",
+          backgroundColor:     "rgba(255,255,255,0.97)",
+          borderColor:         "#E2E8F0",
           backdropFilter:      "blur(12px)",
           WebkitBackdropFilter:"blur(12px)",
         }}

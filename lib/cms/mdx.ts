@@ -33,8 +33,9 @@ export async function getInsights(params?: {
   tag?: string;
   limit?: number;
   offset?: number;
+  search?: string;
 }): Promise<InsightListItem[]> {
-  const { category, tag, limit = 12, offset = 0 } = params ?? {};
+  const { category, tag, limit = 12, offset = 0, search } = params ?? {};
 
   let items = readMdxFiles(CONTENT_DIR)
     .filter((f) => f.data.published === true)
@@ -58,6 +59,15 @@ export async function getInsights(params?: {
 
   if (category) items = items.filter((i) => i.category === category);
   if (tag)      items = items.filter((i) => i.tags.includes(tag));
+  if (search) {
+    const lq = search.toLowerCase();
+    items = items.filter(
+      (i) =>
+        i.title.toLowerCase().includes(lq) ||
+        i.excerpt.toLowerCase().includes(lq) ||
+        i.tags.some((t) => t.toLowerCase().includes(lq))
+    );
+  }
 
   return items.slice(offset, offset + limit);
 }

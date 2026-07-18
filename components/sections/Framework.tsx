@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { copy } from "@/constants/copy";
@@ -13,15 +13,14 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-// Blue → indigo → purple → green journey through the 7 steps
 const STEP_COLORS = [
-  "#2563EB", // Research
-  "#4F46E5", // Visibility
-  "#6366F1", // Discoverability
-  "#8B5CF6", // Connection
-  "#A78BFA", // Communication
-  "#34D399", // Application
-  "#10B981", // Impact
+  "#2563EB",
+  "#4F46E5",
+  "#6366F1",
+  "#8B5CF6",
+  "#7C3AED",
+  "#059669",
+  "#10B981",
 ];
 
 const STEP_CONFIG = [
@@ -38,7 +37,7 @@ export function Framework() {
   const steps = copy.framework.steps;
 
   return (
-    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#0F172A" }}>
+    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -52,18 +51,17 @@ export function Framework() {
           </p>
           <h2
             className="text-4xl sm:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             {copy.framework.title}
           </h2>
-          <p className="text-base max-w-2xl mx-auto" style={{ color: "#9CA3AF" }}>
+          <p className="text-base max-w-2xl mx-auto" style={{ color: "#6B7280" }}>
             {copy.framework.subtitle}
           </p>
         </motion.div>
 
         {/* Desktop: horizontal chain with gradient connector line */}
         <div className="hidden lg:flex items-start justify-between relative">
-          {/* Gradient connector line — blue to green */}
           <div
             className="absolute top-8 left-8 right-8 h-px"
             style={{ background: "linear-gradient(90deg, #2563EB, #6366F1, #10B981)" }}
@@ -83,7 +81,7 @@ export function Framework() {
                 <div
                   className="relative z-10 w-16 h-16 rounded-full flex items-center justify-center text-sm font-bold mb-4 border-2"
                   style={{
-                    backgroundColor: `${color}18`,
+                    backgroundColor: `${color}12`,
                     borderColor: color,
                     color,
                   }}
@@ -93,7 +91,7 @@ export function Framework() {
                 <p className="text-sm font-semibold mb-1" style={{ color }}>
                   {step.label}
                 </p>
-                <p className="text-xs leading-snug px-1" style={{ color: "#9CA3AF" }}>
+                <p className="text-xs leading-snug px-1" style={{ color: "#6B7280" }}>
                   {step.description}
                 </p>
               </motion.div>
@@ -101,7 +99,7 @@ export function Framework() {
           })}
         </div>
 
-        {/* Mobile: one-step-at-a-time swipe carousel */}
+        {/* Mobile: swipe carousel */}
         <MobileCarousel
           className="lg:hidden"
           items={steps.map((step, i) => {
@@ -111,59 +109,54 @@ export function Framework() {
               <div
                 key={step.label}
                 className="mx-0.5 rounded-2xl border overflow-hidden flex flex-col text-center"
-                style={{ backgroundColor: "#1E293B", borderColor: `${color}40` }}
+                style={{ backgroundColor: "#F8FAFC", borderColor: `${color}40` }}
               >
                 {/* Visual header */}
                 <div
                   className="relative flex items-center justify-center"
                   style={{
                     height: 168,
-                    background: `linear-gradient(135deg, ${color}28 0%, ${color}08 100%)`,
+                    background: `linear-gradient(135deg, ${color}15 0%, ${color}05 100%)`,
                   }}
                 >
-                  {/* Large watermark number */}
                   <span
                     className="absolute inset-0 flex items-end justify-end pr-4 pb-2 text-8xl font-black select-none pointer-events-none"
-                    style={{ color: `${color}14`, lineHeight: 1 }}
+                    style={{ color: `${color}10`, lineHeight: 1 }}
                     aria-hidden="true"
                   >
                     {i + 1}
                   </span>
-                  {/* Ghost background icon */}
                   <Icon
                     className="absolute"
-                    style={{ width: 88, height: 88, color: `${color}12` }}
+                    style={{ width: 88, height: 88, color: `${color}10` }}
                     aria-hidden="true"
                   />
-                  {/* Main icon container */}
                   <div
                     className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center border"
                     style={{
-                      backgroundColor: `${color}20`,
-                      borderColor: `${color}55`,
+                      backgroundColor: `${color}15`,
+                      borderColor: `${color}40`,
                     }}
                   >
                     <Icon className="w-8 h-8" style={{ color }} />
                   </div>
-                  {/* Top-left corner accent */}
                   <div
                     className="absolute top-0 left-0 w-16 h-16 pointer-events-none"
                     style={{
-                      background: `radial-gradient(circle at 0% 0%, ${color}22 0%, transparent 70%)`,
+                      background: `radial-gradient(circle at 0% 0%, ${color}15 0%, transparent 70%)`,
                     }}
                     aria-hidden="true"
                   />
                 </div>
 
-                {/* Gradient separator */}
                 <div
                   className="h-px w-full"
-                  style={{ background: `linear-gradient(90deg, transparent, ${color}40, transparent)` }}
+                  style={{ background: `linear-gradient(90deg, transparent, ${color}30, transparent)` }}
                 />
 
                 {/* Content */}
                 <div className="p-5 flex flex-col items-center flex-1">
-                  <p className="text-xs font-semibold mb-3 tracking-widest uppercase" style={{ color: "#4B5563" }}>
+                  <p className="text-xs font-semibold mb-3 tracking-widest uppercase" style={{ color: "#6B7280" }}>
                     Step {i + 1} of {steps.length}
                   </p>
                   <p
@@ -172,18 +165,17 @@ export function Framework() {
                   >
                     {step.label}
                   </p>
-                  <p className="text-sm leading-relaxed mb-4" style={{ color: "#9CA3AF" }}>
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: "#6B7280" }}>
                     {step.description}
                   </p>
-                  {/* Keyword tags */}
                   <div className="flex flex-wrap gap-1.5 justify-center mt-auto">
                     {tags.map((tag) => (
                       <span
                         key={tag}
                         className="text-xs px-2.5 py-0.5 rounded-full"
                         style={{
-                          backgroundColor: `${color}15`,
-                          color: `${color}CC`,
+                          backgroundColor: `${color}12`,
+                          color: color,
                           border: `1px solid ${color}25`,
                         }}
                       >

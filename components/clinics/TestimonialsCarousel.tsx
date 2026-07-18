@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Quote } from "lucide-react";
@@ -11,14 +11,14 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   return (
     <div
       className="rounded-2xl border p-6 flex flex-col h-full"
-      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
     >
       <Quote className="h-5 w-5 mb-4 flex-shrink-0" style={{ color: "#1E3A5F" }} />
-      <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: "#D1D5DB" }}>
+      <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: "#374151" }}>
         &ldquo;{t.quote}&rdquo;
       </p>
-      <div className="border-t pt-4" style={{ borderColor: "#1E293B" }}>
-        <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+      <div className="border-t pt-4" style={{ borderColor: "#E2E8F0" }}>
+        <p className="text-sm font-semibold" style={{ color: "#111827" }}>
           {t.name}
         </p>
         <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>

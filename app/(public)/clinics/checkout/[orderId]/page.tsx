@@ -62,7 +62,7 @@ export default async function OrderPage({
   const [order, user] = await Promise.all([getOrder(orderId), getServerUser()]);
   if (!order) notFound();
   if (!user) redirect(`/signin?next=/clinics/checkout/${orderId}`);
-  if (order.user_id && order.user_id !== user.id) notFound();
+  if (!order.user_id || order.user_id !== user.id) notFound();
 
   const bundleName      = bundleLabel(order.bundle_id, order.module_id);
   const formattedAmount =
@@ -71,12 +71,12 @@ export default async function OrderPage({
       : `$${order.amount} USD`;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-xl mx-auto px-4 sm:px-6 py-12">
         <Link
           href="/clinics/digital-visibility-clinic"
           className="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors"
-          style={{ color: "#4B5563" }}
+          style={{ color: "#6B7280" }}
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to Clinic

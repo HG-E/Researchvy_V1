@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +35,7 @@ export function Logo({
             fontFamily: "var(--font-serif)",
             fontWeight: 600,
             fontSize: width ? Math.round(width * 0.115) : 15,
-            color: "#F9FAFB",
+            color: "#111827",
             letterSpacing: "-0.01em",
             lineHeight: 1,
           }}

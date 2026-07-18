@@ -17,7 +17,10 @@ function renderBody(raw: string): { __html: string } {
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     .replace(/`([^`]+)`/g, "<code>$1</code>")
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color:#60A5FA;text-decoration:underline;">$1</a>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, text, url) => {
+      const safe = /^https?:\/\//i.test(url) ? url : "#";
+      return `<a href="${safe}" target="_blank" rel="noopener noreferrer" style="color:#60A5FA;text-decoration:underline;">${text}</a>`;
+    })
     .replace(/^[-*+]\s+(.+)$/gm, "• $1")
     .replace(/^(\d+)\.\s+(.+)$/gm, "$1. $2")
     .replace(/\n\n+/g, "</p><p>")
@@ -131,7 +134,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldOpp) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldBreadcrumb) }} />
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
         {/* Back */}
         <Link href="/opportunities"
@@ -159,7 +162,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
               </div>
               <div className="flex items-start justify-between gap-4">
                 <h1 className="text-2xl sm:text-3xl font-bold leading-tight mb-2"
-                  style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+                  style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
                   {opp.title}
                 </h1>
                 {!isPast && (
@@ -169,7 +172,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
                 )}
               </div>
               {opp.funder && (
-                <p className="text-sm" style={{ color: "#9CA3AF" }}>by {opp.funder}</p>
+                <p className="text-sm" style={{ color: "#6B7280" }}>by {opp.funder}</p>
               )}
             </div>
 
@@ -184,20 +187,20 @@ export default async function OpportunityDetailPage({ params }: Props) {
               </div>
             )}
             {isPast && (
-              <div className="rounded-xl border p-4" style={{ backgroundColor: "rgba(107,114,128,0.06)", borderColor: "#1E293B" }}>
+              <div className="rounded-xl border p-4" style={{ backgroundColor: "rgba(107,114,128,0.06)", borderColor: "#E2E8F0" }}>
                 <p className="text-sm" style={{ color: "#6B7280" }}>This opportunity has closed. You may still find similar ones below.</p>
               </div>
             )}
 
             {/* Description */}
             <div>
-              <h2 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+              <h2 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
                 About this Opportunity
               </h2>
-              <div className="rounded-2xl border p-6" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+              <div className="rounded-2xl border p-6" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
                 <div
                   className="text-sm leading-relaxed opp-body"
-                  style={{ color: "#9CA3AF" }}
+                  style={{ color: "#6B7280" }}
                   dangerouslySetInnerHTML={renderBody(opp.body)}
                 />
               </div>
@@ -205,11 +208,11 @@ export default async function OpportunityDetailPage({ params }: Props) {
 
             {/* Linked event */}
             {linkedEvent && (
-              <div className="rounded-2xl border p-5" style={{ backgroundColor: "#0F172A", borderColor: "#7C3AED" }}>
+              <div className="rounded-2xl border p-5" style={{ backgroundColor: "#FFFFFF", borderColor: "#7C3AED" }}>
                 <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#7C3AED" }}>
                   Related Event
                 </p>
-                <p className="text-sm font-semibold mb-3" style={{ color: "#F9FAFB" }}>{linkedEvent.title}</p>
+                <p className="text-sm font-semibold mb-3" style={{ color: "#111827" }}>{linkedEvent.title}</p>
                 <Link href={`/events/${linkedEvent.slug}`}
                   className="inline-flex items-center gap-1.5 text-xs font-medium"
                   style={{ color: "#60A5FA" }}>
@@ -222,16 +225,16 @@ export default async function OpportunityDetailPage({ params }: Props) {
           {/* Sidebar */}
           <div className="space-y-4">
             {/* Apply CTA */}
-            <div className="rounded-2xl border p-5 sticky top-6" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-              <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+            <div className="rounded-2xl border p-5 sticky top-6" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
                 Quick Info
               </p>
 
               <dl className="space-y-3 mb-5">
                 {opp.funder && (
                   <div>
-                    <dt className="text-[11px] font-semibold mb-0.5" style={{ color: "#4B5563" }}>Funder</dt>
-                    <dd className="text-sm font-medium flex items-center gap-2" style={{ color: "#F9FAFB" }}>
+                    <dt className="text-[11px] font-semibold mb-0.5" style={{ color: "#6B7280" }}>Funder</dt>
+                    <dd className="text-sm font-medium flex items-center gap-2" style={{ color: "#111827" }}>
                       <Globe className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
                       {opp.funder}
                     </dd>
@@ -240,7 +243,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
 
                 {opp.value && (
                   <div>
-                    <dt className="text-[11px] font-semibold mb-0.5" style={{ color: "#4B5563" }}>Value</dt>
+                    <dt className="text-[11px] font-semibold mb-0.5" style={{ color: "#6B7280" }}>Value</dt>
                     <dd className="text-sm font-semibold flex items-center gap-2" style={{ color: "#10B981" }}>
                       <Banknote className="h-3.5 w-3.5 flex-shrink-0" />
                       {opp.value}
@@ -249,8 +252,8 @@ export default async function OpportunityDetailPage({ params }: Props) {
                 )}
 
                 <div>
-                  <dt className="text-[11px] font-semibold mb-0.5" style={{ color: "#4B5563" }}>Target Level</dt>
-                  <dd className="text-sm flex items-center gap-2" style={{ color: "#9CA3AF" }}>
+                  <dt className="text-[11px] font-semibold mb-0.5" style={{ color: "#6B7280" }}>Target Level</dt>
+                  <dd className="text-sm flex items-center gap-2" style={{ color: "#6B7280" }}>
                     <Users className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
                     {LEVEL_LABEL[opp.target_level] ?? opp.target_level}
                   </dd>
@@ -258,7 +261,7 @@ export default async function OpportunityDetailPage({ params }: Props) {
 
                 {opp.deadline && (
                   <div>
-                    <dt className="text-[11px] font-semibold mb-0.5" style={{ color: "#4B5563" }}>Deadline</dt>
+                    <dt className="text-[11px] font-semibold mb-0.5" style={{ color: "#6B7280" }}>Deadline</dt>
                     <dd className={`text-sm font-medium flex items-center gap-2 ${isPast ? "line-through" : ""}`}
                       style={{ color: expiring ? "#EF4444" : isPast ? "#4B5563" : "#F9FAFB" }}>
                       <Calendar className="h-3.5 w-3.5 flex-shrink-0" style={{ color: expiring ? "#EF4444" : "#6B7280" }} />
@@ -307,8 +310,8 @@ export default async function OpportunityDetailPage({ params }: Props) {
             </div>
 
             {/* Submit similar */}
-            <div className="rounded-2xl border p-5" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-              <p className="text-xs font-semibold mb-1" style={{ color: "#F9FAFB" }}>Know a similar opportunity?</p>
+            <div className="rounded-2xl border p-5" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+              <p className="text-xs font-semibold mb-1" style={{ color: "#111827" }}>Know a similar opportunity?</p>
               <p className="text-[11px] mb-3" style={{ color: "#6B7280" }}>Help the community by sharing it with us.</p>
               <Link href="/opportunities/submit"
                 className="text-xs font-semibold" style={{ color: "#2563EB" }}>

@@ -5,6 +5,7 @@ import "@/styles/animations.css";
 import { siteConfig } from "@/config/site";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
 import { PostHogProvider } from "@/components/analytics/PostHogProvider";
+import { CookieBanner } from "@/components/analytics/CookieBanner";
 import { ServiceWorkerRegistration } from "@/components/pwa/ServiceWorkerRegistration";
 import { InstallPrompt } from "@/components/pwa/InstallPrompt";
 
@@ -78,7 +79,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)",  color: "#0A0F1A" },
+    { media: "(prefers-color-scheme: dark)",  color: "#ffffff" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -128,6 +129,7 @@ export default function RootLayout({
           <main id="main-content" className="flex-1">
             {children}
           </main>
+          <CookieBanner />
         </PostHogProvider>
       </body>
     </html>

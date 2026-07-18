@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowRight, MessageCircle, CheckCircle, User, ArrowLeft, Clock, Zap, Star, Mail } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo/schemas";
@@ -165,7 +165,7 @@ const OBJECTIONS = [
 
 export default function PrivateConsultingPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -193,7 +193,7 @@ export default function PrivateConsultingPage() {
         <Link
           href="/clinics"
           className="inline-flex items-center gap-1.5 text-sm mb-10 transition-colors"
-          style={{ color: "#4B5563" }}
+          style={{ color: "#6B7280" }}
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           All Clinics
@@ -210,7 +210,7 @@ export default function PrivateConsultingPage() {
           </span>
           <h1
             className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 leading-[1.1]"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Your Gaps. Your Profile.<br />
             <span style={{ color: "#8B5CF6" }}>Done For You.</span>
@@ -220,7 +220,7 @@ export default function PrivateConsultingPage() {
             We audit your profiles, fix what&apos;s broken, build your strategy, and hand you the deliverables.
             You leave with a fully optimised scholarly presence, not homework.
           </p>
-          <p className="text-sm mb-6" style={{ color: "#4B5563" }}>
+          <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
             Packages from{" "}
             <strong style={{ color: "#A78BFA" }}>$209 / ₦205,000</strong>
             {" "}· Written deliverables + debrief call · Start anytime
@@ -239,7 +239,7 @@ export default function PrivateConsultingPage() {
             <a
               href="#packages"
               className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-colors"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
             >
               See Packages <ArrowRight className="h-4 w-4" />
             </a>
@@ -248,7 +248,7 @@ export default function PrivateConsultingPage() {
 
         {/* Clinic vs Private Consulting — two-track comparison */}
         <div className="mb-20">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: "#6B7280" }}>
             Which track is right for you?
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -257,7 +257,7 @@ export default function PrivateConsultingPage() {
                 key={track.label}
                 className="rounded-2xl border overflow-hidden flex flex-col"
                 style={{
-                  backgroundColor: "#0F172A",
+                  backgroundColor: "#FFFFFF",
                   borderColor: track.current ? `${track.color}50` : "#1E293B",
                   boxShadow: track.current ? `0 0 0 1px ${track.color}30` : "none",
                 }}
@@ -265,7 +265,7 @@ export default function PrivateConsultingPage() {
                 <div className="h-1" style={{ backgroundColor: track.color }} />
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center justify-between mb-5">
-                    <p className="text-base font-bold" style={{ color: "#F9FAFB" }}>{track.label}</p>
+                    <p className="text-base font-bold" style={{ color: "#111827" }}>{track.label}</p>
                     {track.current && (
                       <span
                         className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
@@ -277,7 +277,7 @@ export default function PrivateConsultingPage() {
                   </div>
                   <ul className="space-y-2.5 flex-1 mb-6">
                     {track.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2.5 text-sm" style={{ color: "#9CA3AF" }}>
+                      <li key={point} className="flex items-start gap-2.5 text-sm" style={{ color: "#6B7280" }}>
                         <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: track.color }} />
                         {point}
                       </li>
@@ -304,7 +304,7 @@ export default function PrivateConsultingPage() {
             </p>
             <h2
               className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               Choose Your Level
             </h2>
@@ -331,7 +331,7 @@ export default function PrivateConsultingPage() {
               ].map((item) => (
                 <div key={item} className="flex items-start gap-2">
                   <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#8B5CF6" }} />
-                  <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>{item}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{item}</p>
                 </div>
               ))}
             </div>
@@ -343,7 +343,7 @@ export default function PrivateConsultingPage() {
                 key={pkg.id}
                 className="rounded-2xl border overflow-hidden flex flex-col"
                 style={{
-                  backgroundColor: "#0F172A",
+                  backgroundColor: "#FFFFFF",
                   borderColor: pkg.recommended ? `${pkg.color}60` : "#1E293B",
                   boxShadow: pkg.recommended ? `0 0 0 1px ${pkg.color}40` : "none",
                 }}
@@ -357,7 +357,7 @@ export default function PrivateConsultingPage() {
                       <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: pkg.color }}>
                         {pkg.tagline}
                       </p>
-                      <h3 className="text-xl font-bold" style={{ color: "#F9FAFB" }}>
+                      <h3 className="text-xl font-bold" style={{ color: "#111827" }}>
                         {pkg.name}
                       </h3>
                     </div>
@@ -373,12 +373,12 @@ export default function PrivateConsultingPage() {
                   </div>
 
                   {/* Pricing */}
-                  <div className="rounded-xl p-4 mb-6" style={{ backgroundColor: "#1E293B" }}>
-                    <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: "#4B5563" }}>
+                  <div className="rounded-xl p-4 mb-6" style={{ backgroundColor: "#F1F5F9" }}>
+                    <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: "#6B7280" }}>
                       One-time investment
                     </p>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-bold" style={{ color: "#F9FAFB" }}>
+                      <span className="text-3xl font-bold" style={{ color: "#111827" }}>
                         ${pkg.usd}
                       </span>
                       <span className="text-base font-semibold" style={{ color: "#6B7280" }}>USD</span>
@@ -386,10 +386,10 @@ export default function PrivateConsultingPage() {
                     <p className="text-sm font-semibold mt-0.5" style={{ color: pkg.color }}>
                       ₦{pkg.ngn.toLocaleString("en-NG")} NGN
                     </p>
-                    <div className="pt-3 mt-3 border-t" style={{ borderColor: "#334155" }}>
+                    <div className="pt-3 mt-3 border-t" style={{ borderColor: "#CBD5E1" }}>
                       <div className="flex items-center gap-1.5">
-                        <Zap className="h-3 w-3" style={{ color: "#4B5563" }} />
-                        <p className="text-xs" style={{ color: "#4B5563" }}>Delivered within 5–7 working days</p>
+                        <Zap className="h-3 w-3" style={{ color: "#6B7280" }} />
+                        <p className="text-xs" style={{ color: "#6B7280" }}>Delivered within 5–7 working days</p>
                       </div>
                     </div>
                   </div>
@@ -399,13 +399,13 @@ export default function PrivateConsultingPage() {
                     {pkg.deliverables.map((item, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-xs leading-relaxed">
                         <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: pkg.color }} />
-                        <span style={{ color: "#D1D5DB" }}>{item}</span>
+                        <span style={{ color: "#374151" }}>{item}</span>
                       </li>
                     ))}
                   </ul>
 
                   {/* Ideal for */}
-                  <p className="text-[11px] leading-relaxed mb-5" style={{ color: "#4B5563" }}>
+                  <p className="text-[11px] leading-relaxed mb-5" style={{ color: "#6B7280" }}>
                     {pkg.ideal}
                   </p>
 
@@ -430,11 +430,11 @@ export default function PrivateConsultingPage() {
         <div className="mb-20">
           <div
             className="rounded-2xl border p-7"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
               <div>
-                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#6B7280" }}>
                   What the data shows
                 </p>
                 <div className="space-y-4">
@@ -456,7 +456,7 @@ export default function PrivateConsultingPage() {
                 </div>
               </div>
               <div>
-                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#6B7280" }}>
                   Previously delivered to researchers at
                 </p>
                 <ul className="space-y-3">
@@ -468,11 +468,11 @@ export default function PrivateConsultingPage() {
                   ].map((inst) => (
                     <li key={inst} className="flex items-start gap-2.5">
                       <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#8B5CF6" }} />
-                      <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>{inst}</p>
+                      <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{inst}</p>
                     </li>
                   ))}
                 </ul>
-                <p className="text-xs mt-4 leading-relaxed" style={{ color: "#4B5563" }}>
+                <p className="text-xs mt-4 leading-relaxed" style={{ color: "#6B7280" }}>
                   Private Consulting brings the same expertise, applied exclusively to your profile, 1-on-1.
                 </p>
               </div>
@@ -488,7 +488,7 @@ export default function PrivateConsultingPage() {
           >
             <p
               className="text-xl sm:text-2xl leading-snug font-medium mb-6"
-              style={{ color: "#D1D5DB", fontFamily: "var(--font-serif)" }}
+              style={{ color: "#374151", fontFamily: "var(--font-serif)" }}
             >
               &ldquo;Three years of publishing and my h-index hadn&apos;t moved. Researchvy
               audited my profiles and found 19 papers not linked to my ORCID — they fixed it
@@ -502,8 +502,8 @@ export default function PrivateConsultingPage() {
                 NA
               </div>
               <div>
-                <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>Dr. Nkechi Adeleke</p>
-                <p className="text-xs" style={{ color: "#4B5563" }}>Lecturer · Biochemistry · Private Consulting client</p>
+                <p className="text-sm font-bold" style={{ color: "#111827" }}>Dr. Nkechi Adeleke</p>
+                <p className="text-xs" style={{ color: "#6B7280" }}>Lecturer · Biochemistry · Private Consulting client</p>
               </div>
             </div>
           </div>
@@ -517,7 +517,7 @@ export default function PrivateConsultingPage() {
             </p>
             <h2
               className="text-3xl font-bold"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               What Happens After You Reach Out
             </h2>
@@ -527,7 +527,7 @@ export default function PrivateConsultingPage() {
               <div
                 key={step}
                 className="rounded-2xl border p-6"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <p
                   className="text-4xl font-black mb-4 tabular-nums"
@@ -535,14 +535,14 @@ export default function PrivateConsultingPage() {
                 >
                   {step}
                 </p>
-                <p className="text-sm font-bold mb-2" style={{ color: "#F9FAFB" }}>{title}</p>
+                <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{title}</p>
                 <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
               </div>
             ))}
           </div>
           <div className="flex items-center gap-2 mt-6 justify-center">
-            <Clock className="h-3.5 w-3.5" style={{ color: "#4B5563" }} />
-            <p className="text-xs" style={{ color: "#4B5563" }}>
+            <Clock className="h-3.5 w-3.5" style={{ color: "#6B7280" }} />
+            <p className="text-xs" style={{ color: "#6B7280" }}>
               First response within 4 business hours · Deliverables within 5–7 working days · Debrief call within 7–10 working days from first contact.
             </p>
           </div>
@@ -556,7 +556,7 @@ export default function PrivateConsultingPage() {
             </p>
             <h2
               className="text-3xl font-bold"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               What You Need to Know
             </h2>
@@ -566,10 +566,10 @@ export default function PrivateConsultingPage() {
               <div
                 key={q}
                 className="rounded-2xl border p-6"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
-                <p className="text-sm font-bold mb-2" style={{ color: "#F9FAFB" }}>{q}</p>
-                <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>{a}</p>
+                <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{q}</p>
+                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{a}</p>
               </div>
             ))}
           </div>
@@ -578,7 +578,7 @@ export default function PrivateConsultingPage() {
         {/* Final CTA */}
         <div
           className="rounded-3xl border p-8 sm:p-12 text-center relative overflow-hidden"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div
             className="absolute inset-0 pointer-events-none"
@@ -594,7 +594,7 @@ export default function PrivateConsultingPage() {
             </p>
             <h2
               className="text-3xl sm:text-4xl font-bold mb-4 leading-tight"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               One conversation.<br />
               <span style={{ color: "#8B5CF6" }}>Everything changes.</span>
@@ -625,12 +625,12 @@ export default function PrivateConsultingPage() {
               <Link
                 href="/clinics/digital-visibility-clinic"
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-semibold border transition-colors"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
               >
                 View the Cohort Clinic Instead
               </Link>
             </div>
-            <p className="text-xs mt-5" style={{ color: "#4B5563" }}>
+            <p className="text-xs mt-5" style={{ color: "#6B7280" }}>
               Know which package you want?{" "}
               <a href="#packages" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
                 Go to packages ↑

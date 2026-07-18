@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -102,7 +102,7 @@ export function SignInForm() {
       {/* Card */}
       <div
         className="rounded-2xl border p-8"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         {/* Logo */}
         <div className="flex justify-center mb-8">
@@ -113,11 +113,11 @@ export function SignInForm() {
         <div className="mb-6">
           <h1
             className="text-2xl font-bold mb-1"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Welcome back
           </h1>
-          <p className="text-sm" style={{ color: "#9CA3AF" }}>
+          <p className="text-sm" style={{ color: "#6B7280" }}>
             Sign in to your Researchvy account
           </p>
         </div>
@@ -133,9 +133,9 @@ export function SignInForm() {
               autoComplete="email"
               className={INPUT_BASE}
               style={{
-                backgroundColor: "#1E293B",
-                borderColor: errors.email ? "#EF4444" : "#334155",
-                color: "#F9FAFB",
+                backgroundColor: "#F8FAFC",
+                borderColor: errors.email ? "#EF4444" : "#E2E8F0",
+                color: "#111827",
               }}
               placeholder="you@institution.edu"
             />
@@ -150,9 +150,9 @@ export function SignInForm() {
                 autoComplete="current-password"
                 className={INPUT_BASE}
                 style={{
-                  backgroundColor: "#1E293B",
-                  borderColor: errors.password ? "#EF4444" : "#334155",
-                  color: "#F9FAFB",
+                  backgroundColor: "#F8FAFC",
+                  borderColor: errors.password ? "#EF4444" : "#E2E8F0",
+                  color: "#111827",
                   paddingRight: "44px",
                 }}
                 placeholder="••••••••"
@@ -195,7 +195,7 @@ export function SignInForm() {
                 style={{
                   backgroundColor: "rgba(239,68,68,0.08)",
                   border: "1px solid rgba(239,68,68,0.2)",
-                  color: "#FCA5A5",
+                  color: "#DC2626",
                 }}
               >
                 {authError}
@@ -230,11 +230,11 @@ export function SignInForm() {
         {/* Divider + signup link */}
         <div className="mt-6">
           <div className="flex items-center gap-3 mb-5">
-            <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+            <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
             <span className="text-xs" style={{ color: "#6B7280" }}>
               new here?
             </span>
-            <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+            <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
           </div>
           <p className="text-center text-sm" style={{ color: "#6B7280" }}>
             Don&apos;t have an account?{" "}
@@ -245,9 +245,9 @@ export function SignInForm() {
                   : "/signup"
               }
               className="font-semibold transition-colors"
-              style={{ color: "#F9FAFB" }}
+              style={{ color: "#111827" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#2563EB")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#F9FAFB")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#111827")}
             >
               Create one free
             </Link>

@@ -1,4 +1,4 @@
-import { generatePageMetadata } from "@/lib/seo/metadata";
+﻿import { generatePageMetadata } from "@/lib/seo/metadata";
 import { VisibilityScorecard } from "@/components/resources/VisibilityScorecard";
 
 export const metadata = generatePageMetadata({
@@ -9,7 +9,7 @@ export const metadata = generatePageMetadata({
 
 export default function ScorecardPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16">
         <VisibilityScorecard />
       </div>

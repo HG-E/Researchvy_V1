@@ -26,7 +26,7 @@ export default async function AcademyPage() {
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#8B5CF6" }}>
           Dashboard
         </p>
-        <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+        <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
           Academy
         </h1>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
@@ -45,7 +45,7 @@ export default async function AcademyPage() {
               <div
                 key={course.id}
                 className="rounded-2xl border overflow-hidden"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 {/* Color accent bar */}
                 <div className="h-1" style={{ backgroundColor: color }} />
@@ -70,7 +70,7 @@ export default async function AcademyPage() {
                           </span>
                         )}
                       </div>
-                      <h2 className="text-base font-bold leading-snug" style={{ color: "#F9FAFB" }}>
+                      <h2 className="text-base font-bold leading-snug" style={{ color: "#111827" }}>
                         {course.title}
                       </h2>
                       {course.subtitle && (
@@ -85,14 +85,14 @@ export default async function AcademyPage() {
                       <p className="text-2xl font-bold" style={{ color }}>
                         {stats.percent_complete}%
                       </p>
-                      <p className="text-[10px]" style={{ color: "#4B5563" }}>
+                      <p className="text-[10px]" style={{ color: "#6B7280" }}>
                         {stats.completed_lessons}/{stats.total_lessons} lessons
                       </p>
                     </div>
                   </div>
 
                   {/* Progress bar */}
-                  <div className="h-1.5 rounded-full overflow-hidden mb-4" style={{ backgroundColor: "#1E293B" }}>
+                  <div className="h-1.5 rounded-full overflow-hidden mb-4" style={{ backgroundColor: "#F1F5F9" }}>
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{ width: `${stats.percent_complete}%`, backgroundColor: color }}
@@ -125,7 +125,7 @@ export default async function AcademyPage() {
                     <Link
                       href={`/academy/courses/${course.slug}`}
                       className="text-xs transition-colors"
-                      style={{ color: "#4B5563" }}
+                      style={{ color: "#6B7280" }}
                     >
                       View curriculum →
                     </Link>
@@ -139,7 +139,7 @@ export default async function AcademyPage() {
         /* Empty state — not enrolled in any course */
         <div
           className="rounded-2xl border p-10 text-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div
             className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5"
@@ -147,7 +147,7 @@ export default async function AcademyPage() {
           >
             <BookOpen className="h-7 w-7" style={{ color: "#8B5CF6" }} />
           </div>
-          <h2 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>
+          <h2 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
             No courses yet
           </h2>
           <p className="text-sm mb-6 leading-relaxed max-w-sm mx-auto" style={{ color: "#6B7280" }}>
@@ -167,8 +167,8 @@ export default async function AcademyPage() {
               href={buildWhatsAppUrl("Researchvy Academy — course enrolment")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
             >
               <MessageCircle className="h-4 w-4" />
               Enroll via WhatsApp
@@ -180,12 +180,12 @@ export default async function AcademyPage() {
       {/* Browse catalog link — always visible when enrolled */}
       {entries.length > 0 && (
         <div className="flex items-center justify-between">
-          <p className="text-xs" style={{ color: "#4B5563" }}>
+          <p className="text-xs" style={{ color: "#6B7280" }}>
             {entries.length} course{entries.length !== 1 ? "s" : ""} enrolled
           </p>
           <Link
             href="/academy/courses"
-            className="text-xs font-semibold transition-colors hover:text-white"
+            className="text-xs font-semibold transition-colors hover:text-[#111827]"
             style={{ color: "#6B7280" }}
           >
             Browse all courses →
@@ -196,9 +196,9 @@ export default async function AcademyPage() {
       {/* Why the Academy */}
       <div
         className="rounded-2xl border p-6"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
-        <h3 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "#9CA3AF" }}>
+        <h3 className="text-sm font-semibold mb-4 flex items-center gap-2" style={{ color: "#6B7280" }}>
           <Star className="h-4 w-4" style={{ color: "#F59E0B" }} />
           Why researchers choose the Academy
         </h3>
@@ -219,10 +219,10 @@ export default async function AcademyPage() {
       </div>
 
       {/* Academy-only footer — no DVC cross-promotion inside the Academy journey */}
-      <div className="rounded-xl border p-4 text-center" style={{ borderColor: "#1E293B" }}>
+      <div className="rounded-xl border p-4 text-center" style={{ borderColor: "#E2E8F0" }}>
         <p className="text-xs" style={{ color: "#374151" }}>
           Researchvy Academy · Self-paced · Level 1 free ·{" "}
-          <Link href="/academy/courses" style={{ color: "#4B5563", textDecoration: "underline" }}>
+          <Link href="/academy/courses" style={{ color: "#6B7280", textDecoration: "underline" }}>
             Browse all courses
           </Link>
         </p>

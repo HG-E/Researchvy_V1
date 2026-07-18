@@ -45,7 +45,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
     : undefined;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema()) }}
@@ -83,14 +83,14 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
           </span>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             {clinic.name}
           </h1>
           <p className="text-lg leading-relaxed mb-3" style={{ color: "#6B7280" }}>
             {clinic.tagline}
           </p>
-          <p className="text-base leading-relaxed" style={{ color: "#4B5563" }}>
+          <p className="text-base leading-relaxed" style={{ color: "#6B7280" }}>
             Most researchers finish this clinic and say the same thing: they had no idea how
             invisible they were, and how fixable it was. In our sessions, you get a complete
             scholarly identity overhaul, a personal visibility strategy, and a verified certificate.
@@ -107,7 +107,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               <span
                 key={text}
                 className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium"
-                style={{ backgroundColor: "#1E293B", color: "#9CA3AF" }}
+                style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
               >
                 <Icon className="h-3.5 w-3.5" style={{ color: "#60A5FA" }} />
                 {text}
@@ -139,7 +139,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               style={{ backgroundColor: "rgba(16,185,129,0.05)", borderColor: "rgba(16,185,129,0.2)" }}
             >
               <div className="flex-1">
-                <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>
+                <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
                   Not sure if you need this programme?
                 </p>
                 <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
@@ -165,7 +165,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               </p>
               <h2
                 className="text-2xl font-bold mb-6"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
               >
                 Programme Outcomes
               </h2>
@@ -174,10 +174,10 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                   <div
                     key={i}
                     className="flex items-start gap-3 rounded-xl p-4"
-                    style={{ backgroundColor: "#0F172A", border: "1px solid #1E293B" }}
+                    style={{ backgroundColor: "#FFFFFF", border: "1px solid #1E293B" }}
                   >
                     <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: "#10B981" }} />
-                    <p className="text-sm leading-relaxed" style={{ color: "#D1D5DB" }}>{outcome}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: "#374151" }}>{outcome}</p>
                   </div>
                 ))}
               </div>
@@ -195,7 +195,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               </p>
               <h2
                 className="text-2xl font-bold mb-6"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
               >
                 5 Core Sessions
               </h2>
@@ -209,13 +209,13 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               </p>
               <h2
                 className="text-2xl font-bold mb-6"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
               >
                 Your Certificate
               </h2>
               <div
                 className="rounded-2xl border p-8"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <div className="flex items-start gap-5">
                   <div
@@ -225,7 +225,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                     <Award className="h-7 w-7" style={{ color: "#F59E0B" }} />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-1" style={{ color: "#F9FAFB" }}>
+                    <h3 className="font-bold text-lg mb-1" style={{ color: "#111827" }}>
                       {clinic.certificate.name}
                     </h3>
                     <p className="text-sm mb-5" style={{ color: "#6B7280" }}>
@@ -233,7 +233,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                     </p>
                     <div className="grid grid-cols-2 gap-2">
                       {clinic.certificate.features.map((feature) => (
-                        <div key={feature} className="flex items-center gap-2 text-xs" style={{ color: "#9CA3AF" }}>
+                        <div key={feature} className="flex items-center gap-2 text-xs" style={{ color: "#6B7280" }}>
                           <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#F59E0B" }} />
                           {feature}
                         </div>
@@ -251,7 +251,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               </p>
               <h2
                 className="text-2xl font-bold mb-6"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
               >
                 Post-Clinic Benefits
               </h2>
@@ -260,10 +260,10 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                   <div
                     key={benefit}
                     className="flex items-center gap-3 rounded-xl px-5 py-3.5"
-                    style={{ backgroundColor: "#0F172A", border: "1px solid #1E293B" }}
+                    style={{ backgroundColor: "#FFFFFF", border: "1px solid #1E293B" }}
                   >
                     <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: "#2563EB" }} />
-                    <p className="text-sm" style={{ color: "#D1D5DB" }}>{benefit}</p>
+                    <p className="text-sm" style={{ color: "#374151" }}>{benefit}</p>
                   </div>
                 ))}
               </div>
@@ -275,21 +275,21 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
                   Your Facilitator
                 </p>
-                <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+                <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
                   Who you&apos;ll be working with
                 </h2>
 
                 {FACILITATORS.map((f) => (
-                  <div key={f.id} className="rounded-2xl border p-6" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+                  <div key={f.id} className="rounded-2xl border p-6" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
                     <div className="flex items-start gap-5">
                       <div className="w-16 h-16 rounded-xl flex items-center justify-center text-xl font-bold flex-shrink-0" style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#60A5FA" }}>
                         {f.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-bold text-sm mb-0.5" style={{ color: "#F9FAFB" }}>{f.name}</p>
+                        <p className="font-bold text-sm mb-0.5" style={{ color: "#111827" }}>{f.name}</p>
                         <p className="text-xs mb-1" style={{ color: "#60A5FA" }}>{f.title}</p>
-                        <p className="text-xs mb-3" style={{ color: "#4B5563" }}>{f.affiliation} · {f.clinicsLed} cohorts · {f.researchersHelped}+ researchers guided</p>
-                        <p className="text-xs leading-relaxed mb-3 line-clamp-3" style={{ color: "#9CA3AF" }}>{f.bio}</p>
+                        <p className="text-xs mb-3" style={{ color: "#6B7280" }}>{f.affiliation} · {f.clinicsLed} cohorts · {f.researchersHelped}+ researchers guided</p>
+                        <p className="text-xs leading-relaxed mb-3 line-clamp-3" style={{ color: "#6B7280" }}>{f.bio}</p>
                         <a
                           href="/about"
                           className="inline-flex items-center gap-1 text-xs font-semibold"
@@ -311,7 +311,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               </p>
               <h2
                 className="text-2xl font-bold mb-6"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
               >
                 Frequently Asked Questions
               </h2>
@@ -325,13 +325,13 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               </p>
               <h2
                 className="text-2xl font-bold mb-6"
-                style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
               >
                 Pricing
               </h2>
               <div
                 className="rounded-2xl border p-6"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 {/* Early bird strip — only shown while deadline is active */}
                 {isEarlyBird && (
@@ -357,7 +357,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                         key={bundle.id}
                         className="rounded-xl border p-4"
                         style={{
-                          backgroundColor: "#080E1A",
+                          backgroundColor: "#FFFFFF",
                           borderColor: bundle.recommended ? `${accent}50` : "#1E293B",
                         }}
                       >
@@ -370,10 +370,10 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                           </span>
                         )}
                         <p className="text-xs font-semibold mb-0.5" style={{ color: accent }}>{bundle.name}</p>
-                        <p className="text-lg font-bold" style={{ color: "#F9FAFB" }}>
+                        <p className="text-lg font-bold" style={{ color: "#111827" }}>
                           ₦{(isEarlyBird ? bundle.ngn.earlyBird : bundle.ngn.regular).toLocaleString("en-NG")}
                         </p>
-                        <p className="text-xs" style={{ color: "#4B5563" }}>
+                        <p className="text-xs" style={{ color: "#6B7280" }}>
                           ${isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular} USD{isEarlyBird ? " · early bird" : ""}
                         </p>
                       </div>
@@ -394,7 +394,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
             {/* Private Consulting bridge */}
             <div
               className="rounded-2xl border overflow-hidden"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
             >
               <div className="h-0.5" style={{ background: "linear-gradient(90deg, #8B5CF6, #A78BFA)" }} />
               <div className="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
@@ -402,7 +402,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                   <p className="text-xs font-semibold tracking-widest uppercase mb-1.5" style={{ color: "#8B5CF6" }}>
                     Prefer 1-on-1?
                   </p>
-                  <p className="text-base font-bold mb-1.5" style={{ color: "#F9FAFB" }}>
+                  <p className="text-base font-bold mb-1.5" style={{ color: "#111827" }}>
                     Private Consulting — Built Around You
                   </p>
                   <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>

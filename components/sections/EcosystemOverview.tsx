@@ -8,13 +8,12 @@ import { MobileCarousel } from "@/components/ui/MobileCarousel";
 
 const ICONS = { BarChart2, GraduationCap, FileImage, Stethoscope, Network } as const;
 
-// Unique accent per division for visual richness
 const DIVISION_ACCENTS: Record<string, string> = {
   intelligence: "#2563EB",
-  academy:      "#A78BFA",
-  media:        "#FCD34D",
-  clinics:      "#34D399",
-  network:      "#F472B6",
+  academy:      "#7C3AED",
+  media:        "#D97706",
+  clinics:      "#10B981",
+  network:      "#EC4899",
 };
 
 const cardVariants = {
@@ -33,23 +32,22 @@ function DivisionCard({ division }: { division: (typeof siteConfig.divisions)[nu
   return (
     <div
       className="rounded-2xl p-6 border h-full flex flex-col"
-      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
     >
-      {/* Gradient icon container — unique per division */}
       <div
         className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-        style={{ background: `linear-gradient(135deg, ${accent}30 0%, ${accent}0D 100%)` }}
+        style={{ background: `linear-gradient(135deg, ${accent}20 0%, ${accent}08 100%)` }}
       >
         {Icon && <Icon className="h-6 w-6" style={{ color: accent }} />}
       </div>
 
-      <h3 className="text-lg font-bold mb-1" style={{ color: "#F9FAFB" }}>
+      <h3 className="text-lg font-bold mb-1" style={{ color: "#111827" }}>
         {division.name}
       </h3>
       <p className="text-xs font-medium mb-3" style={{ color: accent }}>
         {division.tagline}
       </p>
-      <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: "#9CA3AF" }}>
+      <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: "#6B7280" }}>
         {division.description}
       </p>
       <Link
@@ -65,7 +63,7 @@ function DivisionCard({ division }: { division: (typeof siteConfig.divisions)[nu
 
 export function EcosystemOverview() {
   return (
-    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
+    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#F8FAFC" }}>
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -79,17 +77,17 @@ export function EcosystemOverview() {
           </p>
           <h2
             className="text-4xl sm:text-5xl font-bold mb-4"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Five Divisions. One Mission.
           </h2>
-          <p className="text-base max-w-2xl mx-auto" style={{ color: "#9CA3AF" }}>
+          <p className="text-base max-w-2xl mx-auto" style={{ color: "#6B7280" }}>
             From intelligence and analytics to community and clinics, every dimension of scholarly
             visibility is covered.
           </p>
         </motion.div>
 
-        {/* Desktop: 3-column grid with per-division accent hover */}
+        {/* Desktop: 3-column grid */}
         <div className="hidden sm:grid grid-cols-2 lg:grid-cols-3 gap-6">
           {siteConfig.divisions.map((division, i) => {
             const accent = DIVISION_ACCENTS[division.id] ?? "#2563EB";
@@ -102,13 +100,13 @@ export function EcosystemOverview() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 className="group rounded-2xl border transition-all duration-300"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = accent;
                   e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "#1E293B";
+                  e.currentTarget.style.borderColor = "#E2E8F0";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
@@ -141,17 +139,17 @@ export function EcosystemOverview() {
             href="/ecosystem"
             className="inline-flex items-center gap-2 text-sm font-semibold rounded-lg px-6 py-3 border active:opacity-70"
             style={{
-              color: "#F9FAFB",
-              borderColor: "#1E293B",
+              color: "#374151",
+              borderColor: "#E2E8F0",
               transition: "border-color 150ms ease, color 150ms ease, opacity 100ms ease",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = "#2563EB";
-              e.currentTarget.style.color = "#60A5FA";
+              e.currentTarget.style.color = "#2563EB";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "#1E293B";
-              e.currentTarget.style.color = "#F9FAFB";
+              e.currentTarget.style.borderColor = "#E2E8F0";
+              e.currentTarget.style.color = "#374151";
             }}
           >
             View the Full Ecosystem <ArrowRight className="h-4 w-4" />

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -155,9 +155,9 @@ export function SocialAuthButtons({ next = "/dashboard", mode = "signin" }: Prop
 
       {/* Divider — only rendered when we actually showed buttons */}
       <div className="flex items-center gap-3 my-5">
-        <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+        <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
         <span className="text-xs" style={{ color: "#6B7280" }}>or continue with email</span>
-        <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+        <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
       </div>
     </>
   );

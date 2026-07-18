@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowRight, GraduationCap, Building2, BarChart2, CheckCircle2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 
@@ -65,7 +65,7 @@ const FREE_TOOLS = [
 
 export default function ResearchersHubPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Hero */}
@@ -75,7 +75,7 @@ export default function ResearchersHubPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Your research deserves to be found.
           </h1>
@@ -94,8 +94,8 @@ export default function ResearchersHubPage() {
               <Link
                 key={path.href}
                 href={path.href}
-                className="rounded-2xl border p-7 flex flex-col group transition-all duration-200 hover:border-[#334155]"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                className="rounded-2xl border p-7 flex flex-col group transition-all duration-200 hover:border-[#CBD5E1]"
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <div
                   className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
@@ -109,7 +109,7 @@ export default function ResearchersHubPage() {
                 </p>
                 <h2
                   className="text-xl font-bold mb-3"
-                  style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+                  style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
                 >
                   {path.label}
                 </h2>
@@ -141,14 +141,14 @@ export default function ResearchersHubPage() {
         {/* Free tools section */}
         <div
           className="rounded-2xl border p-7 mb-16"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
-          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
             Start here — both free
           </p>
           <h2
             className="text-xl font-bold mb-6"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Not sure where to begin?
           </h2>
@@ -159,8 +159,8 @@ export default function ResearchersHubPage() {
                 <Link
                   key={tool.href}
                   href={tool.href}
-                  className="flex items-start gap-4 rounded-xl border p-5 transition-all duration-200 hover:border-[#334155] group"
-                  style={{ borderColor: "#1E293B", backgroundColor: "#080E1A" }}
+                  className="flex items-start gap-4 rounded-xl border p-5 transition-all duration-200 hover:border-[#CBD5E1] group"
+                  style={{ borderColor: "#E2E8F0", backgroundColor: "#FFFFFF" }}
                 >
                   <div
                     className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -169,12 +169,12 @@ export default function ResearchersHubPage() {
                     <Icon className="h-4 w-4" style={{ color: tool.color }} />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-bold mb-1 group-hover:text-white transition-colors" style={{ color: "#F9FAFB" }}>
+                    <p className="text-sm font-bold mb-1 group-hover:text-[#111827] transition-colors" style={{ color: "#111827" }}>
                       {tool.label}
                     </p>
                     <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{tool.detail}</p>
                   </div>
-                  <ArrowRight className="h-4 w-4 flex-shrink-0 mt-0.5 ml-auto transition-transform group-hover:translate-x-0.5" style={{ color: "#4B5563" }} />
+                  <ArrowRight className="h-4 w-4 flex-shrink-0 mt-0.5 ml-auto transition-transform group-hover:translate-x-0.5" style={{ color: "#6B7280" }} />
                 </Link>
               );
             })}
@@ -192,7 +192,7 @@ export default function ResearchersHubPage() {
             </p>
             <h2
               className="text-xl font-bold mb-2"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               Digital Visibility Clinic
             </h2>
@@ -222,7 +222,7 @@ export default function ResearchersHubPage() {
             </p>
             <h2
               className="text-xl font-bold mb-2"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               Private Consulting
             </h2>

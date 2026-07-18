@@ -10,6 +10,7 @@ export const metadata = generatePageMetadata({
   title: "Search",
   description: "Search across all Researchvy content — events, opportunities, courses, and insights.",
   path: "/search",
+  noIndex: true,
 });
 
 export interface SearchHit {
@@ -63,8 +64,8 @@ async function searchAll(q: string): Promise<SearchHit[]> {
       .or(`full_name.ilike.%${safe}%,institutional_affiliation.ilike.%${safe}%,bio.ilike.%${safe}%`)
       .limit(5),
 
-    getCourses(),
-    getInsights({ limit: 200 }),
+    getCourses({ search: q, limit: 5 }),
+    getInsights({ search: q, limit: 5 }),
   ]);
 
   const eventHits: SearchHit[] = (eventsRes.data ?? []).map((e) => ({
@@ -100,41 +101,27 @@ async function searchAll(q: string): Promise<SearchHit[]> {
     meta:       (u.institutional_affiliation as string | null) ?? undefined,
   }));
 
-  const lq = q.toLowerCase();
-  const courseHits: SearchHit[] = courses
-    .filter((c) =>
-      c.title.toLowerCase().includes(lq) ||
-      (c.description ?? "").toLowerCase().includes(lq)
-    )
-    .slice(0, 5)
-    .map((c) => ({
-      type:       "course",
-      id:         c.id,
-      href:       `/academy/courses/${c.slug}`,
-      title:      c.title,
-      excerpt:    c.description ?? "",
-      badge:      `Level ${c.level}`,
-      badgeColor: "#8B5CF6",
-      meta:       "Academy",
-    }));
+  const courseHits: SearchHit[] = courses.map((c) => ({
+    type:       "course",
+    id:         c.id,
+    href:       `/academy/courses/${c.slug}`,
+    title:      c.title,
+    excerpt:    c.description ?? "",
+    badge:      `Level ${c.level}`,
+    badgeColor: "#8B5CF6",
+    meta:       "Academy",
+  }));
 
-  const insightHits: SearchHit[] = insights
-    .filter((i) =>
-      i.title.toLowerCase().includes(lq) ||
-      i.excerpt.toLowerCase().includes(lq) ||
-      i.tags.some((t) => t.toLowerCase().includes(lq))
-    )
-    .slice(0, 5)
-    .map((i) => ({
-      type:       "insight",
-      id:         i.id,
-      href:       `/insights/${i.slug}`,
-      title:      i.title,
-      excerpt:    i.excerpt,
-      badge:      i.category.replace(/-/g, " "),
-      badgeColor: "#F59E0B",
-      meta:       i.reading_time ? `${i.reading_time} min read` : undefined,
-    }));
+  const insightHits: SearchHit[] = insights.map((i) => ({
+    type:       "insight",
+    id:         i.id,
+    href:       `/insights/${i.slug}`,
+    title:      i.title,
+    excerpt:    i.excerpt,
+    badge:      i.category.replace(/-/g, " "),
+    badgeColor: "#F59E0B",
+    meta:       i.reading_time ? `${i.reading_time} min read` : undefined,
+  }));
 
   return [...eventHits, ...oppHits, ...researcherHits, ...courseHits, ...insightHits];
 }

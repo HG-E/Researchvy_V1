@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -44,7 +44,7 @@ function PasswordStrengthBar({ password }: { password: string }) {
           <div
             key={i}
             className="flex-1 h-1 rounded-full transition-all duration-400"
-            style={{ backgroundColor: i <= score ? bar.color : "#1E293B" }}
+            style={{ backgroundColor: i <= score ? bar.color : "#E2E8F0" }}
           />
         ))}
       </div>
@@ -116,7 +116,7 @@ export function SignUpForm() {
       <div className="w-full" style={{ maxWidth: "400px" }}>
         <div
           className="rounded-2xl border p-8 text-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div className="flex justify-center mb-6">
             <Logo variant="full" width={120} linkToHome />
@@ -129,14 +129,14 @@ export function SignUpForm() {
           </div>
           <h2
             className="text-xl font-bold mb-2"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Check your email
           </h2>
-          <p className="text-sm mb-2 leading-relaxed" style={{ color: "#9CA3AF" }}>
+          <p className="text-sm mb-2 leading-relaxed" style={{ color: "#6B7280" }}>
             We sent a verification link to your email. Click it to activate your account.
           </p>
-          <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
+          <p className="text-xs mb-6" style={{ color: "#6B7280" }}>
             Didn&apos;t receive it? Check your spam folder, or{" "}
             <a href="mailto:info@researchvy.com" className="underline" style={{ color: "#6B7280" }}>
               contact us
@@ -152,15 +152,15 @@ export function SignUpForm() {
           >
             Check My Score Free →
           </Link>
-          <p className="text-xs mt-2 text-center" style={{ color: "#4B5563" }}>
+          <p className="text-xs mt-2 text-center" style={{ color: "#6B7280" }}>
             While you wait — takes 4 minutes
           </p>
 
           {/* Secondary: back to sign in */}
-          <div className="mt-5 pt-5 border-t text-center" style={{ borderColor: "#1E293B" }}>
+          <div className="mt-5 pt-5 border-t text-center" style={{ borderColor: "#E2E8F0" }}>
             <Link
               href="/signin"
-              className="text-xs transition-colors hover:text-white"
+              className="text-xs transition-colors hover:text-[#111827]"
               style={{ color: "#6B7280" }}
             >
               Back to Sign In
@@ -175,7 +175,7 @@ export function SignUpForm() {
     <div className="w-full" style={{ maxWidth: "440px" }}>
       <div
         className="rounded-2xl border p-8"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         {/* Logo */}
         <div className="flex justify-center mb-8">
@@ -186,7 +186,7 @@ export function SignUpForm() {
         <div className="mb-6">
           <h1
             className="text-2xl font-bold mb-1"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             {fromClinic ? "One step to your spot" : "Create your account"}
           </h1>
@@ -206,7 +206,7 @@ export function SignUpForm() {
             <Stethoscope className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#60A5FA" }} />
             <p className="text-xs leading-relaxed" style={{ color: "#93C5FD" }}>
               You&apos;re enrolling in the{" "}
-              <span className="font-semibold" style={{ color: "#F9FAFB" }}>Digital Visibility Clinic</span>.
+              <span className="font-semibold" style={{ color: "#111827" }}>Digital Visibility Clinic</span>.
               Your account keeps your enrolment record, certificate, and session access in one place.
             </p>
           </div>
@@ -219,7 +219,7 @@ export function SignUpForm() {
           <div className="flex items-start gap-3 rounded-xl border px-4 py-3 mb-5"
             style={{ backgroundColor: "rgba(166,206,57,0.06)", borderColor: "rgba(166,206,57,0.25)" }}>
             <BadgeCheck className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#A6CE39" }} />
-            <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+            <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
               Your <span className="font-semibold" style={{ color: "#A6CE39" }}>ORCID iD</span> has
               been verified — it will be linked to your account automatically once you complete registration.
             </p>
@@ -241,9 +241,9 @@ export function SignUpForm() {
               autoComplete="name"
               className={INPUT_BASE}
               style={{
-                backgroundColor: "#1E293B",
-                borderColor: errors.full_name ? "#EF4444" : "#334155",
-                color: "#F9FAFB",
+                backgroundColor: "#F1F5F9",
+                borderColor: "#E2E8F0",
+                color: "#111827",
               }}
               placeholder="Dr. Jane Researcher"
             />
@@ -268,9 +268,9 @@ export function SignUpForm() {
               autoComplete="email"
               className={INPUT_BASE}
               style={{
-                backgroundColor: "#1E293B",
-                borderColor: errors.email ? "#EF4444" : "#334155",
-                color: "#F9FAFB",
+                backgroundColor: "#F1F5F9",
+                borderColor: "#E2E8F0",
+                color: "#111827",
               }}
               placeholder="you@institution.edu"
             />
@@ -297,9 +297,9 @@ export function SignUpForm() {
               type="text"
               className={INPUT_BASE}
               style={{
-                backgroundColor: "#1E293B",
-                borderColor: "#334155",
-                color: "#F9FAFB",
+                backgroundColor: "#F1F5F9",
+                borderColor: "#CBD5E1",
+                color: "#111827",
               }}
               placeholder="University of Lagos"
             />
@@ -320,9 +320,9 @@ export function SignUpForm() {
                 autoComplete="new-password"
                 className={INPUT_BASE}
                 style={{
-                  backgroundColor: "#1E293B",
-                  borderColor: errors.password ? "#EF4444" : "#334155",
-                  color: "#F9FAFB",
+                  backgroundColor: "#F1F5F9",
+                  borderColor: "#E2E8F0",
+                  color: "#111827",
                   paddingRight: "44px",
                 }}
                 placeholder="Min. 8 chars, 1 uppercase, 1 number"
@@ -362,9 +362,9 @@ export function SignUpForm() {
                 autoComplete="new-password"
                 className={INPUT_BASE}
                 style={{
-                  backgroundColor: "#1E293B",
-                  borderColor: errors.confirm_password ? "#EF4444" : "#334155",
-                  color: "#F9FAFB",
+                  backgroundColor: "#F1F5F9",
+                  borderColor: "#E2E8F0",
+                  color: "#111827",
                   paddingRight: "44px",
                 }}
                 placeholder="Repeat your password"
@@ -399,7 +399,7 @@ export function SignUpForm() {
                 style={{
                   backgroundColor: "rgba(239,68,68,0.08)",
                   border: "1px solid rgba(239,68,68,0.2)",
-                  color: "#FCA5A5",
+                  color: "#DC2626",
                 }}
               >
                 {authError}
@@ -445,20 +445,20 @@ export function SignUpForm() {
 
         {/* Sign in link */}
         <div className="mt-6 flex items-center gap-3">
-          <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+          <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
           <p className="text-sm text-center" style={{ color: "#6B7280" }}>
             Already have an account?{" "}
             <Link
               href={nextPath !== "/dashboard" ? `/signin?next=${encodeURIComponent(nextPath)}` : "/signin"}
               className="font-semibold transition-colors"
-              style={{ color: "#F9FAFB" }}
+              style={{ color: "#111827" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#2563EB")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#F9FAFB")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#111827")}
             >
               Sign in
             </Link>
           </p>
-          <div className="flex-1 h-px" style={{ backgroundColor: "#1E293B" }} />
+          <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
         </div>
       </div>
     </div>

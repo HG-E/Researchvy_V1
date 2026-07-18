@@ -1,4 +1,4 @@
-import { generatePageMetadata } from "@/lib/seo/metadata";
+﻿import { generatePageMetadata } from "@/lib/seo/metadata";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 
@@ -8,18 +8,18 @@ export const metadata = generatePageMetadata({
   path: "/terms",
 });
 
-const LAST_UPDATED = "24 May 2025";
+const LAST_UPDATED = "22 June 2026";
 
 const SECTION_STYLE: React.CSSProperties = {
-  backgroundColor: "#0F172A",
-  borderColor: "#1E293B",
+  backgroundColor: "#FFFFFF",
+  borderColor: "#E2E8F0",
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-2xl border p-6 sm:p-8" style={SECTION_STYLE}>
-      <h2 className="text-lg font-bold mb-4" style={{ color: "#F9FAFB" }}>{title}</h2>
-      <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+      <h2 className="text-lg font-bold mb-4" style={{ color: "#111827" }}>{title}</h2>
+      <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
         {children}
       </div>
     </div>
@@ -28,7 +28,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
@@ -38,11 +38,11 @@ export default function TermsPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Terms of Service
           </h1>
-          <p className="text-sm" style={{ color: "#4B5563" }}>Last updated: {LAST_UPDATED}</p>
+          <p className="text-sm" style={{ color: "#6B7280" }}>Last updated: {LAST_UPDATED}</p>
         </div>
 
         {/* Intro */}
@@ -50,7 +50,7 @@ export default function TermsPage() {
           className="rounded-2xl border p-6 mb-6"
           style={{ backgroundColor: "rgba(37,99,235,0.06)", borderColor: "rgba(37,99,235,0.2)" }}
         >
-          <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
             These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the Researchvy website
             at researchvy.com and all associated services, programmes, and content. By accessing or
             using Researchvy, you agree to be bound by these Terms. If you do not agree, do not use

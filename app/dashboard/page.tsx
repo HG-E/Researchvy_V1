@@ -10,7 +10,6 @@ import { getEnrolledCoursesWithProgress } from "@/lib/academy/courses";
 import { levelColor } from "@/constants/academy";
 import { UserAvatar } from "@/components/common/UserAvatar";
 import { siteConfig } from "@/config/site";
-import { ReferralWidget } from "@/components/dashboard/ReferralWidget";
 
 export const metadata = generatePageMetadata({ title: "Dashboard", noIndex: true });
 
@@ -37,7 +36,6 @@ export default async function DashboardPage() {
   async function fetchClinicCount() {
     if (!userId) return 0;
     try {
-      // Two enrollment paths: online checkout (orders) and dashboard interest button (clinic_enquiries)
       const [ordersRes, enquiriesRes] = await Promise.all([
         admin
           .from("orders")
@@ -70,7 +68,6 @@ export default async function DashboardPage() {
     } catch { return 0; }
   }
 
-  // Fetch all data in parallel
   const [profile, clinicCount, eventSaveCount, courseEntries, scorecardDone] = await Promise.all([
     fetchProfile(),
     fetchClinicCount(),
@@ -86,12 +83,10 @@ export default async function DashboardPage() {
   const activeCount     = courseEntries.length;
   const completedCount  = courseEntries.filter((e) => e.enrollment.completed_at).length;
 
-  // "Jump Back In" — most active incomplete course (highest % but not 100%)
   const jumpBackEntry = courseEntries.find((e) => !e.enrollment.completed_at && e.stats.completed_lessons > 0)
     ?? courseEntries.find((e) => !e.enrollment.completed_at)
     ?? null;
 
-  // Getting Started steps (wired to real data)
   const steps = [
     { label: "Take the free Visibility Scorecard", href: "/resources/visibility-scorecard", done: scorecardDone },
     { label: "Complete your scholar profile",      href: "/dashboard/profile",              done: profileDone },
@@ -116,10 +111,10 @@ export default async function DashboardPage() {
           <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
             Your Dashboard
           </p>
-          <h1 className="text-3xl font-bold leading-tight" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+          <h1 className="text-3xl font-bold leading-tight" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             Welcome, {displayName}
           </h1>
-          <p className="text-sm mt-1" style={{ color: "#9CA3AF" }}>
+          <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
             {fullName || user?.email} · Your scholarly visibility command centre
           </p>
         </div>
@@ -128,29 +123,29 @@ export default async function DashboardPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {STATS.map(({ label, value, Icon, color }) => (
-          <div key={label} className="rounded-2xl border p-5 flex items-center gap-4" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+          <div key={label} className="rounded-2xl border p-5 flex items-center gap-4" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
             <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${color}1A` }}>
               <Icon className="h-5 w-5" style={{ color }} />
             </div>
             <div>
-              <p className="text-2xl font-bold" style={{ color: "#F9FAFB" }}>{value}</p>
-              <p className="text-xs" style={{ color: "#9CA3AF" }}>{label}</p>
+              <p className="text-2xl font-bold" style={{ color: "#111827" }}>{value}</p>
+              <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Jump Back In — only shown when actively enrolled */}
+      {/* Jump Back In */}
       {jumpBackEntry && (() => {
         const { course, stats, nextLesson } = jumpBackEntry;
         const color = levelColor(course.level);
         return (
           <div
             className="rounded-2xl border overflow-hidden"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B", borderLeft: `3px solid ${color}` }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", borderLeft: `3px solid ${color}` }}
           >
             <div className="px-6 py-5">
-              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#4B5563" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#6B7280" }}>
                 Jump Back In
               </p>
               <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -158,7 +153,7 @@ export default async function DashboardPage() {
                   <p className="text-[10px] font-bold tracking-widest uppercase mb-0.5" style={{ color }}>
                     Level {course.level}
                   </p>
-                  <h2 className="text-base font-bold leading-snug mb-1" style={{ color: "#F9FAFB" }}>
+                  <h2 className="text-base font-bold leading-snug mb-1" style={{ color: "#111827" }}>
                     {course.title}
                   </h2>
                   {nextLesson && (
@@ -167,13 +162,12 @@ export default async function DashboardPage() {
                     </p>
                   )}
                 </div>
-                {/* Progress mini */}
                 <div className="flex items-center gap-3 flex-shrink-0">
                   <div>
                     <p className="text-lg font-bold text-right" style={{ color }}>
                       {stats.percent_complete}%
                     </p>
-                    <p className="text-[10px] text-right" style={{ color: "#4B5563" }}>
+                    <p className="text-[10px] text-right" style={{ color: "#9CA3AF" }}>
                       {stats.completed_lessons}/{stats.total_lessons} done
                     </p>
                   </div>
@@ -189,8 +183,7 @@ export default async function DashboardPage() {
                   )}
                 </div>
               </div>
-              {/* Progress bar */}
-              <div className="mt-4 h-1 rounded-full overflow-hidden" style={{ backgroundColor: "#1E293B" }}>
+              <div className="mt-4 h-1 rounded-full overflow-hidden" style={{ backgroundColor: "#E2E8F0" }}>
                 <div
                   className="h-full rounded-full"
                   style={{ width: `${stats.percent_complete}%`, backgroundColor: color }}
@@ -201,32 +194,30 @@ export default async function DashboardPage() {
         );
       })()}
 
-      {/* New-user nudge — show both products independently when user has neither */}
+      {/* New-user nudge */}
       {clinicCount === 0 && activeCount === 0 && (
         <div className="grid sm:grid-cols-2 gap-4">
-          {/* Academy — self-paced, free */}
           <div
             className="rounded-xl border p-4"
-            style={{ backgroundColor: "rgba(16,185,129,0.05)", borderColor: "rgba(16,185,129,0.2)" }}
+            style={{ backgroundColor: "rgba(16,185,129,0.05)", borderColor: "rgba(16,185,129,0.25)" }}
           >
             <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#10B981" }}>Researchvy Academy</p>
-            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>Self-paced learning — Level 1 free</p>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>Self-paced learning — Level 1 free</p>
             <p className="text-xs mb-3" style={{ color: "#6B7280" }}>36 lessons, 7 modules. No payment, no commitment. Work through at your own pace.</p>
             <Link href="/academy/courses" className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: "#10B981" }}>
               Start Level 1 free →
             </Link>
           </div>
-          {/* Clinics — DVC cohort or Private Consulting */}
           <div
             className="rounded-xl border p-4"
-            style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.2)" }}
+            style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.25)" }}
           >
-            <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#60A5FA" }}>Researchvy Clinics</p>
-            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>Cohort or 1-on-1 — Paid</p>
+            <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#2563EB" }}>Researchvy Clinics</p>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>Cohort or 1-on-1 — Paid</p>
             <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
               Join the Digital Visibility Clinic (live cohort, July 2026) or choose Private Consulting for done-for-you 1-on-1 delivery — from $209.
             </p>
-            <Link href="/clinics" className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: "#60A5FA" }}>
+            <Link href="/clinics" className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: "#2563EB" }}>
               View all options →
             </Link>
           </div>
@@ -234,16 +225,16 @@ export default async function DashboardPage() {
       )}
 
       {/* Getting Started */}
-      <div className="rounded-2xl border p-6" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+      <div className="rounded-2xl border p-6" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
         <div className="flex items-center justify-between mb-5">
           <div>
-            <h2 className="font-bold text-base" style={{ color: "#F9FAFB" }}>Getting Started</h2>
-            <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>Complete these steps to maximise your visibility</p>
+            <h2 className="font-bold text-base" style={{ color: "#111827" }}>Getting Started</h2>
+            <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>Complete these steps to maximise your visibility</p>
           </div>
           <span
             className="text-xs font-semibold px-2.5 py-1 rounded-full"
             style={{
-              backgroundColor: doneCount === steps.length ? "rgba(16,185,129,0.15)" : "#1E293B",
+              backgroundColor: doneCount === steps.length ? "rgba(16,185,129,0.12)" : "#F1F5F9",
               color: doneCount === steps.length ? "#10B981" : "#6B7280",
             }}
           >
@@ -257,19 +248,19 @@ export default async function DashboardPage() {
               href={step.href}
               className={`flex items-center gap-3 rounded-xl p-3.5 border transition-all duration-150 ${step.done ? "hover:border-[rgba(16,185,129,0.4)]" : "hover:border-[#2563EB]"}`}
               style={{
-                backgroundColor: step.done ? "rgba(16,185,129,0.05)" : "#1E293B",
-                borderColor: step.done ? "rgba(16,185,129,0.2)" : "#334155",
+                backgroundColor: step.done ? "rgba(16,185,129,0.04)" : "#F8FAFC",
+                borderColor: step.done ? "rgba(16,185,129,0.2)" : "#E2E8F0",
               }}
             >
               {step.done ? (
                 <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: "#10B981" }} />
               ) : (
-                <div className="w-5 h-5 rounded-full border-2 flex-shrink-0" style={{ borderColor: "#334155" }} />
+                <div className="w-5 h-5 rounded-full border-2 flex-shrink-0" style={{ borderColor: "#CBD5E1" }} />
               )}
-              <span className="text-sm flex-1" style={{ color: step.done ? "#6B7280" : "#D1D5DB", textDecoration: step.done ? "line-through" : "none" }}>
+              <span className="text-sm flex-1" style={{ color: step.done ? "#9CA3AF" : "#374151", textDecoration: step.done ? "line-through" : "none" }}>
                 {step.label}
               </span>
-              <ChevronRight className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} aria-hidden="true" />
+              <ChevronRight className="h-4 w-4 flex-shrink-0" style={{ color: "#9CA3AF" }} aria-hidden="true" />
             </Link>
           ))}
         </div>
@@ -277,23 +268,23 @@ export default async function DashboardPage() {
 
       {/* Quick Actions */}
       <div>
-        <h2 className="font-bold text-base mb-4" style={{ color: "#F9FAFB" }}>Quick Actions</h2>
+        <h2 className="font-bold text-base mb-4" style={{ color: "#111827" }}>Quick Actions</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {QUICK_ACTIONS.map(({ href, label, description, color }) => (
             <Link
               key={href}
               href={href}
               className="group flex items-center gap-4 rounded-2xl border p-5 transition-all duration-200 hover:border-[#2563EB]"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
             >
               <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
               <div className="flex-1">
-                <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>{label}</p>
-                <p className="text-xs mt-0.5" style={{ color: "#9CA3AF" }}>{description}</p>
+                <p className="text-sm font-semibold" style={{ color: "#111827" }}>{label}</p>
+                <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{description}</p>
               </div>
               <ArrowRight
                 className="h-4 w-4 flex-shrink-0 transition-transform group-hover:translate-x-1"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#9CA3AF" }}
                 aria-hidden="true"
               />
             </Link>
@@ -301,11 +292,8 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Referral — earn by sharing Researchvy */}
-      <ReferralWidget />
-
       {/* Framework reminder */}
-      <div className="rounded-2xl border p-6" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
+      <div className="rounded-2xl border p-6" style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}>
         <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
           Your Journey
         </p>
@@ -315,16 +303,16 @@ export default async function DashboardPage() {
               key={i}
               className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border"
               style={{
-                backgroundColor: "#0F172A",
-                borderColor: i === siteConfig.framework.length - 1 ? "#10B981" : "#1E293B",
-                color: i === siteConfig.framework.length - 1 ? "#10B981" : "#9CA3AF",
+                backgroundColor: "#FFFFFF",
+                borderColor: i === siteConfig.framework.length - 1 ? "#10B981" : "#E2E8F0",
+                color: i === siteConfig.framework.length - 1 ? "#10B981" : "#6B7280",
               }}
             >
               {step}
             </span>
           ))}
         </div>
-        <p className="text-xs mt-3" style={{ color: "#9CA3AF" }}>
+        <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
           Researchvy guides you from research creation to measurable societal impact.
         </p>
       </div>

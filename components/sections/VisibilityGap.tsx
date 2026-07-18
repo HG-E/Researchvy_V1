@@ -19,7 +19,7 @@ export function VisibilityGap() {
   const problems = copy.visibilityGap.problems;
 
   return (
-    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
+    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
@@ -35,11 +35,11 @@ export function VisibilityGap() {
             </p>
             <h2
               className="text-4xl sm:text-5xl font-bold mb-6 leading-tight"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               {copy.visibilityGap.title}
             </h2>
-            <p className="text-base leading-relaxed mb-8" style={{ color: "#9CA3AF" }}>
+            <p className="text-base leading-relaxed mb-8" style={{ color: "#6B7280" }}>
               {copy.visibilityGap.subtitle}
             </p>
             <div
@@ -49,11 +49,11 @@ export function VisibilityGap() {
                 borderColor: "rgba(16,185,129,0.28)",
               }}
             >
-              <p className="flex items-center gap-2 text-sm font-semibold mb-2" style={{ color: "#F9FAFB" }}>
+              <p className="flex items-center gap-2 text-sm font-semibold mb-2" style={{ color: "#111827" }}>
                 <ArrowRight className="h-4 w-4 flex-shrink-0" style={{ color: "#10B981" }} />
                 The Researchvy Framework bridges every gap:
               </p>
-              <p className="text-sm leading-relaxed pl-6" style={{ color: "#9CA3AF" }}>
+              <p className="text-sm leading-relaxed pl-6" style={{ color: "#6B7280" }}>
                 Research → Visibility → Discoverability → Connection → Communication → Application →{" "}
                 <span style={{ color: "#10B981" }}>Impact</span>
               </p>
@@ -62,7 +62,7 @@ export function VisibilityGap() {
 
           {/* Right — mobile: swipe carousel | desktop: staggered list */}
           <div>
-            {/* Mobile carousel — numbered + accent-striped cards */}
+            {/* Mobile carousel */}
             <MobileCarousel
               className="lg:hidden"
               dotColor="#EF4444"
@@ -70,7 +70,7 @@ export function VisibilityGap() {
                 <div
                   key={i}
                   className="relative flex items-start gap-4 rounded-xl p-5 border mx-0.5 overflow-hidden"
-                  style={{ backgroundColor: "#0F172A", borderColor: "#1E293B", minHeight: 90 }}
+                  style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", minHeight: 90 }}
                 >
                   {/* Left accent stripe */}
                   <div
@@ -80,19 +80,19 @@ export function VisibilityGap() {
                   {/* Problem number */}
                   <span
                     className="absolute top-3 right-3 text-xs font-bold tabular-nums"
-                    style={{ color: "#374151" }}
+                    style={{ color: "#CBD5E1" }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "#EF4444" }} />
-                  <span className="text-sm font-medium leading-relaxed pr-6" style={{ color: "#D1D5DB" }}>
+                  <span className="text-sm font-medium leading-relaxed pr-6" style={{ color: "#374151" }}>
                     {problem}
                   </span>
                 </div>
               ))}
             />
 
-            {/* Desktop animated list — with accent left border */}
+            {/* Desktop animated list */}
             <motion.ul
               variants={containerVariants}
               initial="hidden"
@@ -105,14 +105,14 @@ export function VisibilityGap() {
                   key={i}
                   variants={itemVariants}
                   className="relative flex items-start gap-4 rounded-xl p-5 border overflow-hidden"
-                  style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                  style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                 >
                   <div
                     className="absolute left-0 top-0 bottom-0 w-0.5"
                     style={{ backgroundColor: "#EF4444" }}
                   />
                   <AlertCircle className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "#EF4444" }} />
-                  <span className="text-sm font-medium leading-relaxed" style={{ color: "#D1D5DB" }}>
+                  <span className="text-sm font-medium leading-relaxed" style={{ color: "#374151" }}>
                     {problem}
                   </span>
                 </motion.li>

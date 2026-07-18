@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -26,20 +26,20 @@ function FooterSection({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b md:border-0" style={{ borderColor: "#1E293B" }}>
+    <div className="border-b md:border-0" style={{ borderColor: "#E2E8F0" }}>
       {/* Mobile toggle */}
       <button
         onClick={() => setOpen(!open)}
         className="md:hidden w-full flex items-center justify-between py-4 text-left"
         aria-expanded={open}
       >
-        <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#F9FAFB" }}>
+        <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#111827" }}>
           {title}
         </span>
         <ChevronDown
           className="h-4 w-4 transition-transform duration-200 flex-shrink-0"
           style={{
-            color: "#4B5563",
+            color: "#6B7280",
             transform: open ? "rotate(180deg)" : "rotate(0deg)",
           }}
         />
@@ -48,7 +48,7 @@ function FooterSection({
       {/* Desktop heading */}
       <h3
         className="hidden md:block text-xs font-semibold tracking-widest uppercase mb-4"
-        style={{ color: "#F9FAFB" }}
+        style={{ color: "#111827" }}
       >
         {title}
       </h3>
@@ -63,7 +63,7 @@ function FooterSection({
           <li key={item.href}>
             <Link
               href={item.href}
-              className="block text-sm transition-colors py-1 active:opacity-60 hover:text-[#9CA3AF]"
+              className="block text-sm transition-colors py-1 active:opacity-60 hover:text-[#374151]"
               style={{ color: "#6B7280" }}
             >
               {item.label}
@@ -78,7 +78,6 @@ function FooterSection({
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const pathname    = usePathname();
-  // Suppress footer scorecard strip on pages that already have an inline strip in the body
   const hidePreCta =
     pathname === "/resources/visibility-scorecard" ||
     pathname === "/events" ||
@@ -87,16 +86,16 @@ export function Footer() {
     pathname === "/academy/courses";
 
   return (
-    <footer className="border-t" style={{ backgroundColor: "#080E1A", borderColor: "#1E293B" }}>
+    <footer className="border-t" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
 
-        {/* Pre-footer CTA — hidden on the scorecard page itself */}
+        {/* Pre-footer CTA */}
         {!hidePreCta && <div
           className="rounded-2xl border p-6 sm:p-8 mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}
         >
           <div>
-            <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
               Not sure where your research visibility stands?
             </p>
             <p className="text-xs" style={{ color: "#6B7280" }}>
@@ -112,7 +111,7 @@ export function Footer() {
           </Link>
         </div>}
 
-        {/* Brand + socials — always full width on mobile, 2-col span on lg */}
+        {/* Brand + socials — mobile */}
         <div className="mb-8 md:mb-0 md:hidden">
           <Logo variant="full" width={130} linkToHome />
           <p className="mt-3 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
@@ -131,7 +130,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 aria-label={label}
                 className="w-10 h-10 rounded-lg flex items-center justify-center border transition-colors active:opacity-60"
-                style={{ borderColor: "#1E293B", color: "#6B7280" }}
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
               >
                 <Icon className="h-4 w-4" />
               </a>
@@ -160,7 +159,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   className="w-9 h-9 rounded-lg flex items-center justify-center border transition-all duration-200 hover:border-[#2563EB] hover:text-[#2563EB]"
-                  style={{ borderColor: "#1E293B", color: "#6B7280" }}
+                  style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -170,7 +169,7 @@ export function Footer() {
 
           {NAV_SECTIONS.map(({ title, links }) => (
             <div key={title}>
-              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#F9FAFB" }}>
+              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#111827" }}>
                 {title}
               </h3>
               <ul className="space-y-2.5">
@@ -178,7 +177,7 @@ export function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm transition-colors hover:text-[#9CA3AF]"
+                      className="text-sm transition-colors hover:text-[#374151]"
                       style={{ color: "#6B7280" }}
                     >
                       {item.label}
@@ -189,14 +188,14 @@ export function Footer() {
             </div>
           ))}
 
-          {/* Contact inline with Company on desktop */}
+          {/* Contact */}
           <div>
-            <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#F9FAFB" }}>
+            <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#111827" }}>
               Contact
             </h3>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="text-sm transition-colors hover:text-[#9CA3AF] block"
+              className="text-sm transition-colors hover:text-[#374151] block"
               style={{ color: "#6B7280" }}
             >
               {siteConfig.contact.email}
@@ -205,7 +204,7 @@ export function Footer() {
         </div>
 
         {/* Mobile accordion nav */}
-        <div className="md:hidden border-t" style={{ borderColor: "#1E293B" }}>
+        <div className="md:hidden border-t" style={{ borderColor: "#E2E8F0" }}>
           {NAV_SECTIONS.map(({ title, links }) => (
             <FooterSection key={title} title={title} links={links} />
           ))}
@@ -227,14 +226,14 @@ export function Footer() {
         {/* Bottom bar */}
         <div
           className="mt-8 md:mt-12 pt-6 md:pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-3 text-xs"
-          style={{ borderColor: "#1E293B", color: "#6B7280" }}
+          style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
         >
           <p>© {currentYear} Researchvy. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link href="/privacy" className="transition-colors hover:text-[#9CA3AF] active:opacity-60" style={{ color: "#6B7280" }}>
+            <Link href="/privacy" className="transition-colors hover:text-[#374151] active:opacity-60" style={{ color: "#6B7280" }}>
               Privacy Policy
             </Link>
-            <Link href="/terms" className="transition-colors hover:text-[#9CA3AF] active:opacity-60" style={{ color: "#6B7280" }}>
+            <Link href="/terms" className="transition-colors hover:text-[#374151] active:opacity-60" style={{ color: "#6B7280" }}>
               Terms of Service
             </Link>
           </div>

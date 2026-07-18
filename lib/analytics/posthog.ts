@@ -1,4 +1,5 @@
 import posthog from "posthog-js";
+import { EVENTS } from "./events";
 
 let initialized = false;
 
@@ -15,6 +16,12 @@ export function initPostHog() {
     autocapture:       true,
   });
   initialized = true;
+}
+
+/** Fire a cta_click event with label, section context, and destination. */
+export function trackCtaClick(cta_label: string, section: string, destination: string) {
+  if (typeof window === "undefined") return;
+  posthog.capture(EVENTS.CTA_CLICKED, { cta_label, section, destination });
 }
 
 export { posthog };

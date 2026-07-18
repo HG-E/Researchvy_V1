@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 
@@ -38,7 +38,7 @@ export function EarlyBirdCountdown({ deadline }: { deadline: string }) {
           <span className="tabular-nums font-bold" style={{ color: "#FCD34D" }}>
             {String(v).padStart(2, "0")}
           </span>
-          <span style={{ color: "#4B5563" }}>{l}</span>
+          <span style={{ color: "#6B7280" }}>{l}</span>
         </span>
       ))}
     </span>

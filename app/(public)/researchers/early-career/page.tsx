@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowRight, CheckCircle2, AlertTriangle, TrendingUp, Clock } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
@@ -47,7 +47,7 @@ const STAGES = [
 
 export default function EarlyCareerPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
@@ -57,7 +57,7 @@ export default function EarlyCareerPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             You&apos;re Publishing.<br />
             <span style={{ color: "#10B981" }}>Is Anyone Finding You?</span>
@@ -79,12 +79,12 @@ export default function EarlyCareerPage() {
             <Link
               href="/clinics/digital-visibility-clinic"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
             >
               Book a Clinic Session
             </Link>
           </div>
-          <p className="mt-4 text-sm" style={{ color: "#4B5563" }}>
+          <p className="mt-4 text-sm" style={{ color: "#6B7280" }}>
             Prefer 1-on-1?{" "}
             <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
               Private Consulting — from $209 →
@@ -96,17 +96,17 @@ export default function EarlyCareerPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 items-start">
           <div
             className="rounded-2xl border p-8"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <div className="flex items-center gap-2 mb-5">
               <AlertTriangle className="h-5 w-5" style={{ color: "#F59E0B" }} />
-              <h2 className="text-lg font-bold" style={{ color: "#F9FAFB" }}>
+              <h2 className="text-lg font-bold" style={{ color: "#111827" }}>
                 Sound familiar?
               </h2>
             </div>
             <ul className="space-y-4">
               {FEARS.map((f) => (
-                <li key={f} className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+                <li key={f} className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
                   <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "#F59E0B" }} />
                   {f}
                 </li>
@@ -116,9 +116,9 @@ export default function EarlyCareerPage() {
               className="mt-6 rounded-xl p-4"
               style={{ backgroundColor: "rgba(245,158,11,0.05)", border: "1px solid rgba(245,158,11,0.15)" }}
             >
-              <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
                 These aren&apos;t signs that your research isn&apos;t good enough. They&apos;re signs that
-                your <strong style={{ color: "#F9FAFB" }}>discovery infrastructure is broken</strong>,
+                your <strong style={{ color: "#111827" }}>discovery infrastructure is broken</strong>,
                 and nobody in academia ever taught you how to fix it.
               </p>
             </div>
@@ -132,7 +132,7 @@ export default function EarlyCareerPage() {
               <HoverCard key={metric} accentColor="#10B981" className="flex items-start gap-4 p-4">
                 <TrendingUp className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: "#10B981" }} />
                 <div>
-                  <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>{metric}</p>
+                  <p className="text-sm font-bold" style={{ color: "#111827" }}>{metric}</p>
                   <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
                 </div>
               </HoverCard>
@@ -147,7 +147,7 @@ export default function EarlyCareerPage() {
           </p>
           <h2
             className="text-3xl font-bold mb-8"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             The right actions at the right stage
           </h2>
@@ -159,12 +159,12 @@ export default function EarlyCareerPage() {
                   <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color }}>
                     {stage}
                   </p>
-                  <p className="text-sm font-semibold mb-4 leading-snug" style={{ color: "#F9FAFB" }}>
+                  <p className="text-sm font-semibold mb-4 leading-snug" style={{ color: "#111827" }}>
                     {urgency}
                   </p>
                   <ul className="space-y-2.5">
                     {actions.map((a) => (
-                      <li key={a} className="flex items-start gap-2.5 text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+                      <li key={a} className="flex items-start gap-2.5 text-xs leading-relaxed" style={{ color: "#6B7280" }}>
                         <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color }} />
                         {a}
                       </li>
@@ -179,7 +179,7 @@ export default function EarlyCareerPage() {
         {/* The window argument */}
         <div
           className="rounded-3xl border p-10 mb-16"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
@@ -190,7 +190,7 @@ export default function EarlyCareerPage() {
             </div>
             <h2
               className="text-2xl font-bold mb-4"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               The researcher who builds visibility at 35<br />
               doesn&apos;t catch up to the one who built it at 28.
@@ -203,7 +203,7 @@ export default function EarlyCareerPage() {
               that&apos;s a different funding bracket, a different promotion track, and a different
               level of international recognition.
             </p>
-            <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-semibold" style={{ color: "#111827" }}>
               The best time to fix your visibility was when you published your first paper.
               The second-best time is now.
             </p>
@@ -214,7 +214,7 @@ export default function EarlyCareerPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16">
           <div
             className="rounded-2xl border p-8"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <span
               className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold mb-4"
@@ -222,7 +222,7 @@ export default function EarlyCareerPage() {
             >
               Free · Start Here
             </span>
-            <h3 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>
+            <h3 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
               The Researcher Visibility Scorecard
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
@@ -243,7 +243,7 @@ export default function EarlyCareerPage() {
 
           <div
             className="rounded-2xl border p-8"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <span
               className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold mb-4"
@@ -251,7 +251,7 @@ export default function EarlyCareerPage() {
             >
               Live · 5 Core Sessions
             </span>
-            <h3 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>
+            <h3 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
               Digital Visibility Clinic
             </h3>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
@@ -266,7 +266,7 @@ export default function EarlyCareerPage() {
             >
               View the Clinic Programme <ArrowRight className="h-4 w-4" />
             </Link>
-            <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
+            <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
               Prefer 1-on-1?{" "}
               <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
                 Private Consulting — from $209
@@ -278,9 +278,9 @@ export default function EarlyCareerPage() {
         {/* Newsletter */}
         <div
           className="rounded-3xl border p-10 text-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
-          <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+          <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             Visibility intelligence, built for early-career researchers
           </h2>
           <p className="text-sm mb-8 max-w-lg mx-auto" style={{ color: "#6B7280" }}>

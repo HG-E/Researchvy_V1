@@ -4,11 +4,14 @@ import { Hero } from "@/components/sections/Hero";
 import { VisibilityGap } from "@/components/sections/VisibilityGap";
 import { ScorecardBridge } from "@/components/sections/ScorecardBridge";
 import { Framework } from "@/components/sections/Framework";
-import { ClinicFeature } from "@/components/sections/ClinicFeature";
+import { ClinicFeatureWithSpots } from "@/components/sections/ClinicFeatureWithSpots";
+import { ObjectionBuster } from "@/components/sections/ObjectionBuster";
 import { CaseStudy } from "@/components/sections/CaseStudy";
 import { EcosystemOverview } from "@/components/sections/EcosystemOverview";
 import { SocialProof } from "@/components/sections/SocialProof";
 import { CTA } from "@/components/sections/CTA";
+
+export const revalidate = 300; // refresh live spot count every 5 minutes
 
 export const metadata = generatePageMetadata({
   title: "Research Beyond Publication",
@@ -20,14 +23,14 @@ export const metadata = generatePageMetadata({
 function SectionFallback({ height = "400px" }: { height?: string }) {
   return (
     <div
-      style={{ minHeight: height, backgroundColor: "#080E1A" }}
+      style={{ minHeight: height, backgroundColor: "#F8FAFC" }}
       aria-hidden
       className="relative overflow-hidden"
     >
       <div
         className="absolute inset-0 animate-shimmer"
         style={{
-          background: "linear-gradient(90deg, transparent 0%, rgba(30,41,59,0.4) 50%, transparent 100%)",
+          background: "linear-gradient(90deg, transparent 0%, rgba(226,232,240,0.6) 50%, transparent 100%)",
         }}
       />
     </div>
@@ -45,6 +48,11 @@ export default function HomePage() {
         <VisibilityGap />
       </Suspense>
 
+      {/* Social proof at position 3 — validates pain before asking for a CTA */}
+      <Suspense fallback={<SectionFallback height="480px" />}>
+        <SocialProof />
+      </Suspense>
+
       <Suspense fallback={<SectionFallback height="320px" />}>
         <ScorecardBridge />
       </Suspense>
@@ -54,7 +62,11 @@ export default function HomePage() {
       </Suspense>
 
       <Suspense fallback={<SectionFallback height="520px" />}>
-        <ClinicFeature />
+        <ClinicFeatureWithSpots />
+      </Suspense>
+
+      <Suspense fallback={<SectionFallback height="380px" />}>
+        <ObjectionBuster />
       </Suspense>
 
       <Suspense fallback={<SectionFallback height="600px" />}>
@@ -63,10 +75,6 @@ export default function HomePage() {
 
       <Suspense fallback={<SectionFallback height="400px" />}>
         <EcosystemOverview />
-      </Suspense>
-
-      <Suspense fallback={<SectionFallback height="480px" />}>
-        <SocialProof />
       </Suspense>
 
       <Suspense fallback={<SectionFallback height="280px" />}>

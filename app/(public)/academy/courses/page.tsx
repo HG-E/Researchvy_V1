@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowRight, BookOpen, Clock, Lock, PlayCircle, Users } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getCourses, getUserEnrollments, getCourseEnrollmentCounts, formatDuration } from "@/lib/academy/courses";
@@ -32,12 +32,12 @@ function CourseCard({
     <Link
       href={`/academy/courses/${course.slug}`}
       className="group flex flex-col rounded-2xl border overflow-hidden transition-all duration-200 hover:-translate-y-0.5"
-      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
     >
       {/* Thumbnail / placeholder */}
       <div
         className="relative w-full"
-        style={{ aspectRatio: "16/9", backgroundColor: "#080E1A" }}
+        style={{ aspectRatio: "16/9", backgroundColor: "#FFFFFF" }}
       >
         {course.thumbnail_url ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -84,7 +84,7 @@ function CourseCard({
       </div>
 
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-sm font-bold mb-1 leading-snug group-hover:text-white transition-colors" style={{ color: "#F9FAFB" }}>
+        <h3 className="text-sm font-bold mb-1 leading-snug group-hover:text-[#111827] transition-colors" style={{ color: "#111827" }}>
           {course.title}
         </h3>
         {course.subtitle && (
@@ -92,15 +92,15 @@ function CourseCard({
             {course.subtitle}
           </p>
         )}
-        <div className="flex items-center gap-3 mt-auto pt-3 border-t" style={{ borderColor: "#1E293B" }}>
+        <div className="flex items-center gap-3 mt-auto pt-3 border-t" style={{ borderColor: "#E2E8F0" }}>
           {course.duration_minutes > 0 && (
-            <span className="flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
+            <span className="flex items-center gap-1 text-xs" style={{ color: "#6B7280" }}>
               <Clock className="h-3 w-3" />
               {formatDuration(course.duration_minutes * 60)}
             </span>
           )}
           {enrolledCount && enrolledCount >= 3 ? (
-            <span className="flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
+            <span className="flex items-center gap-1 text-xs" style={{ color: "#6B7280" }}>
               <Users className="h-3 w-3" />
               {enrolledCount}
             </span>
@@ -139,7 +139,7 @@ export default async function AcademyCoursesPage() {
   })).filter((g) => g.courses.length > 0);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
 
         {/* Header */}
@@ -149,7 +149,7 @@ export default async function AcademyCoursesPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             All Courses
           </h1>
@@ -167,8 +167,8 @@ export default async function AcademyCoursesPage() {
           className="rounded-xl border px-5 py-4 mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
           style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
         >
-          <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
-            <span className="font-semibold" style={{ color: "#F9FAFB" }}>Not sure which area to prioritise?</span>
+          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+            <span className="font-semibold" style={{ color: "#111827" }}>Not sure which area to prioritise?</span>
             {" "}The free Visibility Scorecard shows exactly where your research profile is weakest — so you know which modules matter most right now.
           </p>
           <Link
@@ -184,16 +184,16 @@ export default async function AcademyCoursesPage() {
           /* Empty state — no published courses yet */
           <div
             className="rounded-2xl border p-12 text-center max-w-xl mx-auto"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <BookOpen className="h-10 w-10 mx-auto mb-4" style={{ color: "#1E3A5F" }} />
-            <h2 className="text-xl font-bold mb-2" style={{ color: "#F9FAFB" }}>
+            <h2 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
               Courses launching soon
             </h2>
             <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
               Level 1 courses are live now. Levels 2–5 are in development — you&apos;ll get early access when they launch.
               <br /><br />
-              <strong style={{ color: "#D1D5DB" }}>Note:</strong> The <Link href="/clinics" style={{ color: "#60A5FA" }}>Digital Visibility Clinic</Link> is a separate, live, cohort-based paid programme — not part of the Academy. You can do both independently.
+              <strong style={{ color: "#374151" }}>Note:</strong> The <Link href="/clinics" style={{ color: "#60A5FA" }}>Digital Visibility Clinic</Link> is a separate, live, cohort-based paid programme — not part of the Academy. You can do both independently.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
@@ -208,7 +208,7 @@ export default async function AcademyCoursesPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border"
-                style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
               >
                 <MessageCircle className="h-4 w-4" />
                 Register Interest
@@ -237,7 +237,7 @@ export default async function AcademyCoursesPage() {
                         </span>
                       )}
                     </div>
-                    <h2 className="text-base font-bold" style={{ color: "#F9FAFB" }}>{label}</h2>
+                    <h2 className="text-base font-bold" style={{ color: "#111827" }}>{label}</h2>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">

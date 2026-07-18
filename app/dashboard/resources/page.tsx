@@ -36,7 +36,7 @@ export default async function ResourcesPage() {
         <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: "#2563EB" }}>
           Dashboard
         </p>
-        <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+        <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
           Resources
         </h1>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
@@ -47,7 +47,7 @@ export default async function ResourcesPage() {
       {/* Scorecard CTA — hero card */}
       <div
         className="rounded-3xl border overflow-hidden relative"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         <div className="absolute top-0 left-0 right-0 h-1" style={{ background: "linear-gradient(90deg, #10B981, #2563EB)" }} />
         <div className="p-8">
@@ -57,7 +57,7 @@ export default async function ResourcesPage() {
           >
             Free · Start Here
           </span>
-          <h2 className="text-2xl font-bold mb-2 leading-tight" style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}>
+          <h2 className="text-2xl font-bold mb-2 leading-tight" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             {featured.title}
           </h2>
           <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
@@ -75,7 +75,7 @@ export default async function ResourcesPage() {
             <Link
               href="/clinics/digital-visibility-clinic"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors"
-              style={{ backgroundColor: "#1E293B", color: "#9CA3AF", border: "1px solid #334155" }}
+              style={{ backgroundColor: "#F1F5F9", color: "#6B7280", border: "1px solid #334155" }}
             >
               Book a Clinic Session
             </Link>
@@ -83,7 +83,7 @@ export default async function ResourcesPage() {
           <p className="text-xs mt-4" style={{ color: "#374151" }}>
             Most researchers score between 25–45. Where do you rank?
           </p>
-          <p className="text-xs mt-2" style={{ color: "#4B5563" }}>
+          <p className="text-xs mt-2" style={{ color: "#6B7280" }}>
             Prefer done-for-you?{" "}
             <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
               Private Consulting — from $209 →
@@ -94,7 +94,7 @@ export default async function ResourcesPage() {
 
       {/* Free resources */}
       <div>
-        <h2 className="text-sm font-semibold mb-4" style={{ color: "#9CA3AF" }}>
+        <h2 className="text-sm font-semibold mb-4" style={{ color: "#6B7280" }}>
           Free Resources
         </h2>
         <div className="space-y-3">
@@ -115,7 +115,7 @@ export default async function ResourcesPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-4 rounded-2xl border p-4 transition-colors"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -124,7 +124,7 @@ export default async function ResourcesPage() {
                   <Icon className="h-5 w-5" style={{ color: resource.color }} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold truncate" style={{ color: "#F9FAFB" }}>
+                  <p className="text-sm font-semibold truncate" style={{ color: "#111827" }}>
                     {resource.title}
                   </p>
                   <p className="text-xs mt-0.5 line-clamp-1" style={{ color: "#6B7280" }}>
@@ -143,7 +143,7 @@ export default async function ResourcesPage() {
                 key={resource.id}
                 href={href}
                 className="group flex items-center gap-4 rounded-2xl border p-4 transition-colors"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -152,7 +152,7 @@ export default async function ResourcesPage() {
                   <Icon className="h-5 w-5" style={{ color: resource.color }} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold truncate" style={{ color: "#F9FAFB" }}>
+                  <p className="text-sm font-semibold truncate" style={{ color: "#111827" }}>
                     {resource.title}
                   </p>
                   <p className="text-xs mt-0.5 line-clamp-1" style={{ color: "#6B7280" }}>
@@ -175,7 +175,7 @@ export default async function ResourcesPage() {
       {recentInsights.length > 0 && (
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold" style={{ color: "#9CA3AF" }}>
+            <h2 className="text-sm font-semibold" style={{ color: "#6B7280" }}>
               Recommended Reading
             </h2>
             <Link
@@ -192,7 +192,7 @@ export default async function ResourcesPage() {
                 key={insight.slug}
                 href={`/insights/${insight.slug}`}
                 className="group flex items-start gap-4 rounded-2xl border p-4 transition-colors"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
@@ -201,14 +201,14 @@ export default async function ResourcesPage() {
                   <BookOpen className="h-5 w-5" style={{ color: "#2563EB" }} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold leading-snug mb-1" style={{ color: "#F9FAFB" }}>
+                  <p className="text-sm font-semibold leading-snug mb-1" style={{ color: "#111827" }}>
                     {insight.title}
                   </p>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs" style={{ color: "#4B5563" }}>
+                    <span className="text-xs" style={{ color: "#6B7280" }}>
                       {CATEGORY_LABELS[insight.category] ?? insight.category}
                     </span>
-                    <span className="flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
+                    <span className="flex items-center gap-1 text-xs" style={{ color: "#6B7280" }}>
                       <Clock className="h-3 w-3" />
                       {insight.reading_time} min
                     </span>
@@ -224,10 +224,10 @@ export default async function ResourcesPage() {
       {/* Browse more */}
       <div
         className="rounded-2xl border p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         <div>
-          <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Explore the full resource library</p>
+          <p className="text-sm font-semibold" style={{ color: "#111827" }}>Explore the full resource library</p>
           <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>Guides, checklists, templates, and workbooks, all free.</p>
         </div>
         <Link

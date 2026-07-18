@@ -1,4 +1,4 @@
-import { generatePageMetadata } from "@/lib/seo/metadata";
+﻿import { generatePageMetadata } from "@/lib/seo/metadata";
 import { siteConfig } from "@/config/site";
 
 export const metadata = generatePageMetadata({
@@ -7,18 +7,18 @@ export const metadata = generatePageMetadata({
   path: "/privacy",
 });
 
-const LAST_UPDATED = "24 May 2025";
+const LAST_UPDATED = "22 June 2026";
 
 const SECTION_STYLE: React.CSSProperties = {
-  backgroundColor: "#0F172A",
-  borderColor: "#1E293B",
+  backgroundColor: "#FFFFFF",
+  borderColor: "#E2E8F0",
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-2xl border p-6 sm:p-8" style={SECTION_STYLE}>
-      <h2 className="text-lg font-bold mb-4" style={{ color: "#F9FAFB" }}>{title}</h2>
-      <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+      <h2 className="text-lg font-bold mb-4" style={{ color: "#111827" }}>{title}</h2>
+      <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
         {children}
       </div>
     </div>
@@ -27,7 +27,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
@@ -37,11 +37,11 @@ export default function PrivacyPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Privacy Policy
           </h1>
-          <p className="text-sm" style={{ color: "#4B5563" }}>Last updated: {LAST_UPDATED}</p>
+          <p className="text-sm" style={{ color: "#6B7280" }}>Last updated: {LAST_UPDATED}</p>
         </div>
 
         {/* Intro */}
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
           className="rounded-2xl border p-6 mb-6"
           style={{ backgroundColor: "rgba(37,99,235,0.06)", borderColor: "rgba(37,99,235,0.2)" }}
         >
-          <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
             Researchvy (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) respects your privacy. This policy explains
             what personal data we collect when you use researchvy.com, how we use it, and your rights
             over that data. We keep this plain and direct.
@@ -69,18 +69,20 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="2. Data We Collect">
-            <p><strong style={{ color: "#D1D5DB" }}>Account data.</strong> When you create an account, we collect your email address
+            <p><strong style={{ color: "#374151" }}>Account data.</strong> When you create an account, we collect your email address
               and any profile information you choose to provide (full name, institutional affiliation,
               ORCID iD, Google Scholar URL, bio).</p>
-            <p><strong style={{ color: "#D1D5DB" }}>Enquiry data.</strong> When you submit a clinic, academy, or partnership enquiry, we
+            <p><strong style={{ color: "#374151" }}>Enquiry data.</strong> When you submit a clinic, academy, or partnership enquiry, we
               collect the details you provide in the form (name, email, institution, message).</p>
-            <p><strong style={{ color: "#D1D5DB" }}>Newsletter data.</strong> When you subscribe to our newsletter, we store your email
+            <p><strong style={{ color: "#374151" }}>Newsletter data.</strong> When you subscribe to our newsletter, we store your email
               address and the date of subscription.</p>
-            <p><strong style={{ color: "#D1D5DB" }}>Usage data.</strong> We collect anonymised analytics on how visitors use the site
+            <p><strong style={{ color: "#374151" }}>Usage data.</strong> We collect anonymised analytics on how visitors use the site
               (pages visited, session duration, browser type, country). This data is aggregated and
               cannot identify you individually.</p>
-            <p><strong style={{ color: "#D1D5DB" }}>Cookies.</strong> We use essential cookies required for authentication and one
-              analytics cookie (PostHog) that you can opt out of.</p>
+            <p><strong style={{ color: "#374151" }}>Cookies &amp; local storage.</strong> We use session cookies required for
+              authentication. Our analytics tool (PostHog) uses browser local storage — not cookies —
+              so no analytics cookie is set. Analytics tracking only activates after you give consent
+              via the banner shown on your first visit.</p>
           </Section>
 
           <Section title="3. How We Use Your Data">
@@ -108,12 +110,12 @@ export default function PrivacyPage() {
               {[
                 { name: "Supabase", purpose: "Database, authentication, and file storage. Data stored on Supabase EU servers." },
                 { name: "Resend",   purpose: "Transactional and newsletter email delivery." },
-                { name: "PostHog",  purpose: "Privacy-friendly website analytics. Anonymised and aggregated only." },
+                { name: "PostHog",  purpose: "Privacy-friendly website analytics using browser local storage (not cookies). Analytics only activates after you provide consent. You can opt out at any time by declining via the consent banner or clearing your browser's local storage." },
                 { name: "Cloudinary", purpose: "Image hosting for programme and content images." },
                 { name: "Vercel",   purpose: "Platform hosting and infrastructure." },
               ].map(({ name, purpose }) => (
                 <li key={name} className="flex items-start gap-2">
-                  <strong style={{ color: "#D1D5DB", minWidth: "90px", display: "inline-block" }}>{name}</strong>
+                  <strong style={{ color: "#374151", minWidth: "90px", display: "inline-block" }}>{name}</strong>
                   <span>{purpose}</span>
                 </li>
               ))}

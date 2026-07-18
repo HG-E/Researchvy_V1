@@ -47,7 +47,7 @@ export default async function CertificatesPage() {
         </p>
         <h1
           className="text-3xl font-bold"
-          style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+          style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
         >
           Certificates
         </h1>
@@ -61,7 +61,7 @@ export default async function CertificatesPage() {
           {/* Empty state */}
           <div
             className="rounded-2xl border p-12 flex flex-col items-center text-center"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
             <div
               className="w-20 h-20 rounded-2xl flex items-center justify-center mb-5"
@@ -69,7 +69,7 @@ export default async function CertificatesPage() {
             >
               <Award className="h-10 w-10" style={{ color: "#F59E0B" }} />
             </div>
-            <h2 className="text-lg font-bold mb-2" style={{ color: "#F9FAFB" }}>
+            <h2 className="text-lg font-bold mb-2" style={{ color: "#111827" }}>
               No certificates yet
             </h2>
             <p className="text-sm max-w-sm mb-8 leading-relaxed" style={{ color: "#6B7280" }}>
@@ -88,7 +88,7 @@ export default async function CertificatesPage() {
           {/* Certificate info */}
           <div
             className="rounded-2xl border p-6"
-            style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}
           >
             <div className="flex items-start gap-4">
               <div
@@ -98,7 +98,7 @@ export default async function CertificatesPage() {
                 <Shield className="h-5 w-5" style={{ color: "#2563EB" }} />
               </div>
               <div>
-                <h3 className="font-semibold text-sm mb-2" style={{ color: "#F9FAFB" }}>
+                <h3 className="font-semibold text-sm mb-2" style={{ color: "#111827" }}>
                   About Researchvy Certificates
                 </h3>
                 <ul className="space-y-1.5 text-xs" style={{ color: "#6B7280" }}>
@@ -114,7 +114,7 @@ export default async function CertificatesPage() {
       ) : (
         <div className="space-y-10">
           {certificates.map((cert) => (
-            <div key={cert.certificate_number} className="rounded-3xl border overflow-hidden" style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B" }}>
+            <div key={cert.certificate_number} className="rounded-3xl border overflow-hidden" style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}>
               <CertificateView cert={cert} />
               <div className="px-6 pb-8">
                 <CertShareButtons

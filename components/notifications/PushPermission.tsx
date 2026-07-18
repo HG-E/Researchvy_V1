@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { Bell, BellOff, Check, Loader2 } from "lucide-react";
@@ -90,7 +90,7 @@ export function PushPermission() {
       <div className="flex items-center gap-3 rounded-xl border px-4 py-3"
         style={{ backgroundColor: "rgba(239,68,68,0.05)", borderColor: "rgba(239,68,68,0.2)" }}>
         <BellOff className="h-4 w-4 flex-shrink-0" style={{ color: "#F87171" }} />
-        <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+        <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
           Notifications are blocked in your browser.
           Update permissions in your browser settings to enable push notifications.
         </p>
@@ -104,7 +104,7 @@ export function PushPermission() {
         style={{ backgroundColor: "rgba(16,185,129,0.05)", borderColor: "rgba(16,185,129,0.2)" }}>
         <div className="flex items-center gap-2">
           <Check className="h-4 w-4 flex-shrink-0" style={{ color: "#10B981" }} />
-          <p className="text-xs" style={{ color: "#9CA3AF" }}>
+          <p className="text-xs" style={{ color: "#6B7280" }}>
             Push notifications enabled — deadline reminders will arrive on this device.
           </p>
         </div>
@@ -122,10 +122,10 @@ export function PushPermission() {
 
   return (
     <div className="flex items-center justify-between gap-3 rounded-xl border px-4 py-3"
-      style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
+      style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
       <div className="flex items-center gap-2 min-w-0">
         <Bell className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} />
-        <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>
+        <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
           Enable push notifications to get deadline reminders even when Researchvy isn&apos;t open.
         </p>
       </div>

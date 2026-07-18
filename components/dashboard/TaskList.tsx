@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { CheckCircle2, Circle, Lock, ChevronDown, ChevronUp, Loader2, BookOpen, Zap, AlertCircle } from "lucide-react";
@@ -129,10 +129,10 @@ function SessionRow({
     return (
       <div
         className="rounded-2xl border p-5 flex items-center gap-4"
-        style={{ backgroundColor: "#0A0F1A", borderColor: "#1E293B", opacity: 0.6 }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", opacity: 0.6 }}
       >
-        <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#1E293B" }}>
-          <Lock className="h-4 w-4" style={{ color: "#4B5563" }} />
+        <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F1F5F9" }}>
+          <Lock className="h-4 w-4" style={{ color: "#6B7280" }} />
         </div>
         <div>
           <p className="text-sm font-semibold" style={{ color: "#6B7280" }}>
@@ -149,7 +149,7 @@ function SessionRow({
   return (
     <div
       className="rounded-2xl border overflow-hidden"
-      style={{ backgroundColor: "#0F172A", borderColor: allDone ? "rgba(16,185,129,0.3)" : "#1E293B" }}
+      style={{ backgroundColor: "#FFFFFF", borderColor: allDone ? "rgba(16,185,129,0.3)" : "#1E293B" }}
     >
       {/* Session header */}
       <button
@@ -167,7 +167,7 @@ function SessionRow({
             {allDone ? <CheckCircle2 className="h-4 w-4" /> : session.session_number}
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-semibold truncate" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-semibold truncate" style={{ color: "#111827" }}>
               Session {session.session_number}: {session.title}
             </p>
             <p className="text-xs mt-0.5" style={{ color: allDone ? "#10B981" : "#6B7280" }}>
@@ -177,7 +177,7 @@ function SessionRow({
           </div>
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
-          <div className="hidden sm:flex w-24 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "#1E293B" }}>
+          <div className="hidden sm:flex w-24 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "#F1F5F9" }}>
             <div
               className="h-full rounded-full transition-all"
               style={{
@@ -186,13 +186,13 @@ function SessionRow({
               }}
             />
           </div>
-          {open ? <ChevronUp className="h-4 w-4" style={{ color: "#4B5563" }} /> : <ChevronDown className="h-4 w-4" style={{ color: "#4B5563" }} />}
+          {open ? <ChevronUp className="h-4 w-4" style={{ color: "#6B7280" }} /> : <ChevronDown className="h-4 w-4" style={{ color: "#6B7280" }} />}
         </div>
       </button>
 
       {/* Task list */}
       {open && (
-        <div className="border-t" style={{ borderColor: "#1E293B" }}>
+        <div className="border-t" style={{ borderColor: "#E2E8F0" }}>
           {/* API error banner */}
           {apiError && (
             <div
@@ -208,7 +208,7 @@ function SessionRow({
             <div
               key={task.id}
               className="px-6 py-4 border-b last:border-0"
-              style={{ borderColor: "#1E293B" }}
+              style={{ borderColor: "#E2E8F0" }}
             >
               <div className="flex items-start gap-3">
                 {/* Type icon */}
@@ -226,7 +226,7 @@ function SessionRow({
                         {task.title}
                       </p>
                       {task.description && (
-                        <p className="text-xs mt-1 leading-relaxed" style={{ color: "#4B5563" }}>
+                        <p className="text-xs mt-1 leading-relaxed" style={{ color: "#6B7280" }}>
                           {task.description}
                         </p>
                       )}
@@ -243,7 +243,7 @@ function SessionRow({
                         title={task.is_completed ? "Mark as not done" : "Mark as done"}
                       >
                         {loading === task.id ? (
-                          <Loader2 className="h-5 w-5 animate-spin" style={{ color: "#4B5563" }} />
+                          <Loader2 className="h-5 w-5 animate-spin" style={{ color: "#6B7280" }} />
                         ) : task.is_completed ? (
                           <CheckCircle2 className="h-5 w-5" />
                         ) : (
@@ -274,7 +274,7 @@ function SessionRow({
                               onClick={() => clearReflection(task)}
                               disabled={loading === task.id}
                               className="text-[10px] transition-colors hover:text-[#9CA3AF] disabled:opacity-50"
-                              style={{ color: "#4B5563" }}
+                              style={{ color: "#6B7280" }}
                             >
                               {loading === task.id ? "Updating…" : "Edit"}
                             </button>
@@ -289,7 +289,7 @@ function SessionRow({
                             onChange={(e) => setReflections((prev) => ({ ...prev, [task.id]: e.target.value }))}
                             className="w-full rounded-xl border px-3 py-2.5 text-sm resize-none focus:ring-1 focus:ring-[#8B5CF6]"
                             style={{
-                              backgroundColor: "#0A0F1A",
+                              backgroundColor: "#FFFFFF",
                               borderColor:     "#1E293B",
                               color:           "#F9FAFB",
                               outline:         "none",
@@ -337,15 +337,15 @@ export function TaskList({ sessions, totalTasks, doneTasks }: Props) {
       {/* Overall progress */}
       <div
         className="rounded-2xl border p-5"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         <div className="flex items-center justify-between mb-2">
-          <p className="text-sm font-semibold" style={{ color: "#F9FAFB" }}>Overall Progress</p>
+          <p className="text-sm font-semibold" style={{ color: "#111827" }}>Overall Progress</p>
           <p className="text-sm font-bold" style={{ color: progressPct === 100 ? "#10B981" : "#60A5FA" }}>
             {liveCompleted}/{totalTasks} tasks · {progressPct}%
           </p>
         </div>
-        <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#1E293B" }}>
+        <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F1F5F9" }}>
           <div
             className="h-full rounded-full transition-all duration-500"
             style={{
@@ -354,7 +354,7 @@ export function TaskList({ sessions, totalTasks, doneTasks }: Props) {
             }}
           />
         </div>
-        <div className="flex items-center gap-4 mt-3 text-xs" style={{ color: "#4B5563" }}>
+        <div className="flex items-center gap-4 mt-3 text-xs" style={{ color: "#6B7280" }}>
           <span className="flex items-center gap-1.5">
             <Zap className="h-3 w-3" style={{ color: "#F59E0B" }} />Action tasks
           </span>

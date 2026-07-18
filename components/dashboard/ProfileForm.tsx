@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -13,7 +13,7 @@ import { EVENTS } from "@/lib/analytics/events";
 const LABEL_STYLE = "block text-xs font-semibold tracking-wide uppercase mb-2";
 const INPUT_STYLE =
   "w-full rounded-xl px-4 py-3 text-sm border outline-none transition-all duration-200 placeholder:text-[#4B5563]";
-const BASE_COLORS = { backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" };
+const BASE_COLORS = { backgroundColor: "#F1F5F9", borderColor: "#CBD5E1", color: "#111827" };
 const ERROR_COLORS = { borderColor: "#EF4444" };
 
 const ORCID_ENABLED = !!process.env.NEXT_PUBLIC_ORCID_ENABLED;
@@ -163,9 +163,9 @@ export function ProfileForm({
       {/* Identity */}
       <div
         className="rounded-2xl border p-6 space-y-5"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
-        <h2 className="text-sm font-bold" style={{ color: "#F9FAFB" }}>
+        <h2 className="text-sm font-bold" style={{ color: "#111827" }}>
           Scholar Identity
         </h2>
 
@@ -227,10 +227,10 @@ export function ProfileForm({
       {/* Scholar profiles */}
       <div
         className="rounded-2xl border p-6 space-y-5"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         <div>
-          <h2 className="text-sm font-bold" style={{ color: "#F9FAFB" }}>
+          <h2 className="text-sm font-bold" style={{ color: "#111827" }}>
             Scholar Profiles
           </h2>
           <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
@@ -277,7 +277,7 @@ export function ProfileForm({
           ) : (
             <div className="flex flex-col gap-2">
               {orcidId && !isOrcidVerified && (
-                <p className="text-xs rounded-lg border px-3 py-2 font-mono" style={{ color: "#9CA3AF", borderColor: "#1E293B", backgroundColor: "#0F172A" }}>
+                <p className="text-xs rounded-lg border px-3 py-2 font-mono" style={{ color: "#6B7280", borderColor: "#E2E8F0", backgroundColor: "#FFFFFF" }}>
                   {orcidId} — <span style={{ color: "#F59E0B" }}>unverified</span>
                 </p>
               )}
@@ -291,7 +291,7 @@ export function ProfileForm({
                   Connect ORCID iD
                 </a>
               ) : (
-                <div className="rounded-xl border px-4 py-3 text-sm" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B", color: "#6B7280" }}>
+                <div className="rounded-xl border px-4 py-3 text-sm" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", color: "#6B7280" }}>
                   ORCID verification coming soon — link your iD for trusted research identity.
                 </div>
               )}
@@ -327,10 +327,10 @@ export function ProfileForm({
       {/* Public profile */}
       <div
         className="rounded-2xl border p-6 space-y-5"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         <div>
-          <h2 className="text-sm font-bold" style={{ color: "#F9FAFB" }}>
+          <h2 className="text-sm font-bold" style={{ color: "#111827" }}>
             Public Profile
           </h2>
           <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
@@ -346,7 +346,7 @@ export function ProfileForm({
           <div className="relative">
             <div
               className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-sm"
-              style={{ color: "#4B5563" }}
+              style={{ color: "#6B7280" }}
             >
               researchvy.com/profile/
             </div>
@@ -399,7 +399,7 @@ export function ProfileForm({
             </p>
           )}
           {usernameState.status === "idle" && !errors.username && (
-            <p className="text-xs mt-1.5" style={{ color: "#4B5563" }}>
+            <p className="text-xs mt-1.5" style={{ color: "#6B7280" }}>
               3–20 characters. Lowercase letters, numbers, hyphens and underscores only.
             </p>
           )}
@@ -408,7 +408,7 @@ export function ProfileForm({
         {/* Profile public toggle */}
         <div className="flex items-center justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-sm font-medium" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-medium" style={{ color: "#111827" }}>
               {profilePublic ? (
                 <span className="flex items-center gap-1.5">
                   <Globe className="h-4 w-4" style={{ color: "#10B981" }} />
@@ -458,7 +458,7 @@ export function ProfileForm({
             View public profile →
           </a>
         ) : (
-          <p className="text-xs" style={{ color: "#4B5563" }}>
+          <p className="text-xs" style={{ color: "#6B7280" }}>
             Set a username above to get your shareable researcher URL.
           </p>
         )}
@@ -468,9 +468,9 @@ export function ProfileForm({
       {initialData.email && (
         <div
           className="rounded-2xl border p-6"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
-          <h2 className="text-sm font-bold mb-4" style={{ color: "#F9FAFB" }}>
+          <h2 className="text-sm font-bold mb-4" style={{ color: "#111827" }}>
             Account
           </h2>
           <div>
@@ -483,9 +483,9 @@ export function ProfileForm({
               readOnly
               className={INPUT_STYLE}
               style={{
-                backgroundColor: "#0A0F1A",
-                borderColor: "#1E293B",
-                color: "#4B5563",
+                backgroundColor: "#FFFFFF",
+                borderColor: "#E2E8F0",
+                color: "#6B7280",
                 cursor: "default",
               }}
             />

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -41,7 +41,7 @@ export function ResetPasswordForm() {
       <div className="w-full" style={{ maxWidth: "400px" }}>
         <div
           className="rounded-2xl border p-8 text-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div className="flex justify-center mb-6">
             <Logo variant="full" width={120} linkToHome />
@@ -54,14 +54,14 @@ export function ResetPasswordForm() {
           </div>
           <h2
             className="text-xl font-bold mb-2"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Check your inbox
           </h2>
-          <p className="text-sm mb-1 leading-relaxed" style={{ color: "#9CA3AF" }}>
+          <p className="text-sm mb-1 leading-relaxed" style={{ color: "#6B7280" }}>
             We sent a password reset link to
           </p>
-          <p className="text-sm font-semibold mb-6" style={{ color: "#F9FAFB" }}>
+          <p className="text-sm font-semibold mb-6" style={{ color: "#111827" }}>
             {submittedEmail}
           </p>
           <p className="text-xs mb-6" style={{ color: "#6B7280" }}>
@@ -94,7 +94,7 @@ export function ResetPasswordForm() {
     <div className="w-full" style={{ maxWidth: "400px" }}>
       <div
         className="rounded-2xl border p-8"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
         {/* Logo */}
         <div className="flex justify-center mb-8">
@@ -105,7 +105,7 @@ export function ResetPasswordForm() {
         <div className="mb-7">
           <h1
             className="text-2xl font-bold mb-1"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             Reset your password
           </h1>
@@ -128,9 +128,9 @@ export function ResetPasswordForm() {
               autoComplete="email"
               className="w-full rounded-xl px-4 py-3 text-sm border outline-none transition-all duration-200 placeholder:text-[#374151]"
               style={{
-                backgroundColor: "#1E293B",
-                borderColor: errors.email ? "#EF4444" : "#334155",
-                color: "#F9FAFB",
+                backgroundColor: "#F1F5F9",
+                borderColor: "#E2E8F0",
+                color: "#111827",
               }}
               placeholder="you@institution.edu"
             />
@@ -151,7 +151,7 @@ export function ResetPasswordForm() {
                 style={{
                   backgroundColor: "rgba(239,68,68,0.08)",
                   border: "1px solid rgba(239,68,68,0.2)",
-                  color: "#FCA5A5",
+                  color: "#DC2626",
                 }}
               >
                 {serverError}

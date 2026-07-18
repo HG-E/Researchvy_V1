@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -40,19 +40,19 @@ const TURNING_POINTS = [
     session: "Session 2",
     title:   "Digital Identity Systems",
     action:  "Claimed all 17 missing Google Scholar publications. Merged 2 Scopus author IDs into one verified profile.",
-    color:   "#60A5FA",
+    color:   "#2563EB",
   },
   {
     session: "Session 3",
     title:   "Discoverability Optimisation",
     action:  "Rewrote research keyword metadata across all platforms to match her field's actual search behaviour.",
-    color:   "#A78BFA",
+    color:   "#7C3AED",
   },
   {
     session: "Session 4",
     title:   "Citation Intelligence",
     action:  "Identified 9 high-impact papers that were uncited because they weren't indexed correctly. Fixed within 48 hours.",
-    color:   "#34D399",
+    color:   "#10B981",
   },
 ];
 
@@ -60,7 +60,7 @@ export function CaseStudy() {
   const [activeTab, setActiveTab] = useState<"before" | "after">("before");
 
   return (
-    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#080E1A" }}>
+    <section className="py-14 sm:py-24 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-6xl">
 
         {/* Header */}
@@ -76,7 +76,7 @@ export function CaseStudy() {
           </p>
           <h2
             className="text-4xl sm:text-5xl font-bold mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
           >
             8 Years Publishing.
             <br />
@@ -96,16 +96,16 @@ export function CaseStudy() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="rounded-2xl border p-5 mb-8 sm:mb-10 flex flex-wrap gap-4 sm:gap-6 items-center"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}
         >
           <div
             className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-base sm:text-lg font-bold flex-shrink-0"
-            style={{ backgroundColor: "rgba(37,99,235,0.15)", color: "#60A5FA" }}
+            style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#2563EB" }}
           >
             AO
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-base font-bold" style={{ color: "#F9FAFB" }}>Dr. Amara Osei</p>
+            <p className="text-base font-bold" style={{ color: "#111827" }}>Dr. Amara Osei</p>
             <p className="text-xs sm:text-sm" style={{ color: "#6B7280" }}>Senior Lecturer · Public Health · 8 years post-PhD</p>
           </div>
           <div className="flex gap-4 sm:gap-6">
@@ -115,8 +115,8 @@ export function CaseStudy() {
               { label: "Programme", value: "Clinic" },
             ].map(({ label, value }) => (
               <div key={label} className="text-center">
-                <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>{value}</p>
-                <p className="text-xs" style={{ color: "#4B5563" }}>{label}</p>
+                <p className="text-sm font-bold" style={{ color: "#111827" }}>{value}</p>
+                <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
               </div>
             ))}
           </div>
@@ -133,11 +133,11 @@ export function CaseStudy() {
         >
           <div className="flex items-center gap-3 mb-5">
             <AlertCircle className="h-5 w-5 flex-shrink-0" style={{ color: "#EF4444" }} />
-            <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>What the Visibility Audit Found</p>
+            <p className="text-sm font-bold" style={{ color: "#111827" }}>What the Visibility Audit Found</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {AUDIT_FINDINGS.map((finding, i) => (
-              <div key={i} className="flex items-start gap-3 text-sm" style={{ color: "#D1D5DB" }}>
+              <div key={i} className="flex items-start gap-3 text-sm" style={{ color: "#374151" }}>
                 <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "#EF4444" }} />
                 {finding}
               </div>
@@ -150,21 +150,21 @@ export function CaseStudy() {
           </p>
         </motion.div>
 
-        {/* Before / After — mobile: tab toggle | desktop: side-by-side */}
         {/* Mobile tab toggle */}
         <div className="lg:hidden mb-8">
           <div
             className="flex rounded-2xl overflow-hidden border mb-4"
-            style={{ borderColor: "#1E293B" }}
+            style={{ borderColor: "#E2E8F0" }}
           >
             <button
               type="button"
               className="flex-1 py-3.5 text-sm font-bold transition-all duration-200 min-h-[44px]"
               style={{
-                backgroundColor: activeTab === "before" ? "rgba(239,68,68,0.15)" : "#0F172A",
-                color:           activeTab === "before" ? "#EF4444" : "#4B5563",
-                borderRight:     "1px solid #1E293B",
+                backgroundColor: activeTab === "before" ? "rgba(239,68,68,0.10)" : "#FFFFFF",
+                color:           activeTab === "before" ? "#EF4444" : "#6B7280",
+                borderRight:     "1px solid #E2E8F0",
               }}
+              aria-pressed={activeTab === "before"}
               onClick={() => setActiveTab("before")}
             >
               Before, Week 1
@@ -173,9 +173,10 @@ export function CaseStudy() {
               type="button"
               className="flex-1 py-3.5 text-sm font-bold transition-all duration-200 min-h-[44px]"
               style={{
-                backgroundColor: activeTab === "after" ? "rgba(16,185,129,0.15)" : "#0F172A",
-                color:           activeTab === "after" ? "#10B981" : "#4B5563",
+                backgroundColor: activeTab === "after" ? "rgba(16,185,129,0.10)" : "#FFFFFF",
+                color:           activeTab === "after" ? "#10B981" : "#6B7280",
               }}
+              aria-pressed={activeTab === "after"}
               onClick={() => setActiveTab("after")}
             >
               After, 4 Months
@@ -191,7 +192,9 @@ export function CaseStudy() {
                 exit={{ opacity: 0, x: 16 }}
                 transition={{ duration: 0.2 }}
                 className="rounded-2xl border p-5"
-                style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
+                role="group"
+                aria-label="Before the clinic — Week 1 starting metrics"
               >
                 <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#EF4444" }}>
                   Before, Week 1
@@ -200,8 +203,8 @@ export function CaseStudy() {
                   {BEFORE_METRICS.map(({ label, value, note }) => (
                     <div key={label} className="flex items-start justify-between gap-4">
                       <div className="min-w-0">
-                        <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
-                        <p className="text-xs mt-0.5" style={{ color: "#374151" }}>{note}</p>
+                        <p className="text-xs" style={{ color: "#374151" }}>{label}</p>
+                        <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{note}</p>
                       </div>
                       <p className="text-sm font-bold flex-shrink-0" style={{ color: "#EF4444" }}>{value}</p>
                     </div>
@@ -216,7 +219,9 @@ export function CaseStudy() {
                 exit={{ opacity: 0, x: -16 }}
                 transition={{ duration: 0.2 }}
                 className="rounded-2xl border p-5"
-                style={{ backgroundColor: "#0F172A", borderColor: "rgba(16,185,129,0.3)" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "rgba(16,185,129,0.3)" }}
+                role="group"
+                aria-label="After the clinic — results at 4 months"
               >
                 <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#10B981" }}>
                   After, 4 Months
@@ -225,13 +230,13 @@ export function CaseStudy() {
                   {AFTER_METRICS.map(({ label, value, delta, note }) => (
                     <div key={label} className="flex items-start justify-between gap-4">
                       <div className="min-w-0">
-                        <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
-                        <p className="text-xs mt-0.5" style={{ color: "#374151" }}>{note}</p>
+                        <p className="text-xs" style={{ color: "#374151" }}>{label}</p>
+                        <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{note}</p>
                       </div>
                       <div className="flex items-center gap-2 flex-shrink-0">
                         <span
                           className="text-xs font-medium px-1.5 py-0.5 rounded"
-                          style={{ backgroundColor: "rgba(16,185,129,0.1)", color: "#10B981" }}
+                          style={{ backgroundColor: "rgba(16,185,129,0.10)", color: "#10B981" }}
                         >
                           {delta}
                         </span>
@@ -253,7 +258,9 @@ export function CaseStudy() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="rounded-2xl border p-6"
-            style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
+            role="group"
+            aria-label="Before the clinic — Week 1 starting metrics"
           >
             <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#EF4444" }}>
               Before, Week 1
@@ -262,8 +269,8 @@ export function CaseStudy() {
               {BEFORE_METRICS.map(({ label, value, note }) => (
                 <div key={label} className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
-                    <p className="text-xs mt-0.5" style={{ color: "#374151" }}>{note}</p>
+                    <p className="text-xs" style={{ color: "#374151" }}>{label}</p>
+                    <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{note}</p>
                   </div>
                   <p className="text-sm font-bold flex-shrink-0" style={{ color: "#EF4444" }}>{value}</p>
                 </div>
@@ -277,7 +284,9 @@ export function CaseStudy() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="rounded-2xl border p-6"
-            style={{ backgroundColor: "#0F172A", borderColor: "rgba(16,185,129,0.3)" }}
+            style={{ backgroundColor: "#FFFFFF", borderColor: "rgba(16,185,129,0.3)" }}
+            role="group"
+            aria-label="After the clinic — results at 4 months"
           >
             <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#10B981" }}>
               After, 4 Months
@@ -286,13 +295,13 @@ export function CaseStudy() {
               {AFTER_METRICS.map(({ label, value, delta, note }) => (
                 <div key={label} className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
-                    <p className="text-xs mt-0.5" style={{ color: "#374151" }}>{note}</p>
+                    <p className="text-xs" style={{ color: "#374151" }}>{label}</p>
+                    <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{note}</p>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <span
                       className="text-xs font-medium px-1.5 py-0.5 rounded"
-                      style={{ backgroundColor: "rgba(16,185,129,0.1)", color: "#10B981" }}
+                      style={{ backgroundColor: "rgba(16,185,129,0.10)", color: "#10B981" }}
                     >
                       {delta}
                     </span>
@@ -304,14 +313,14 @@ export function CaseStudy() {
           </motion.div>
         </div>
 
-        {/* The Turning Point — mobile: swipe carousel | desktop: 3-col grid */}
+        {/* The Turning Point */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="rounded-2xl border p-6 sm:p-8 mb-8 sm:mb-10"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}
         >
           <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#2563EB" }}>
             The Turning Point
@@ -323,11 +332,11 @@ export function CaseStudy() {
               <div
                 key={session}
                 className="rounded-xl p-4 border"
-                style={{ backgroundColor: "#1E293B", borderColor: "#334155" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <p className="text-xs font-semibold mb-0.5" style={{ color }}>{session}</p>
-                <p className="text-sm font-bold mb-2" style={{ color: "#F9FAFB" }}>{title}</p>
-                <p className="text-xs leading-relaxed" style={{ color: "#9CA3AF" }}>{action}</p>
+                <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{title}</p>
+                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{action}</p>
               </div>
             ))}
           </div>
@@ -339,11 +348,11 @@ export function CaseStudy() {
               <div
                 key={session}
                 className="rounded-xl p-4 border mx-0.5"
-                style={{ backgroundColor: "#1E293B", borderColor: "#334155" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <p className="text-xs font-semibold mb-1" style={{ color }}>{session}</p>
-                <p className="text-sm font-bold mb-2" style={{ color: "#F9FAFB" }}>{title}</p>
-                <p className="text-sm leading-relaxed" style={{ color: "#9CA3AF" }}>{action}</p>
+                <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{title}</p>
+                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{action}</p>
               </div>
             ))}
           />
@@ -359,7 +368,7 @@ export function CaseStudy() {
           style={{ backgroundColor: "rgba(37,99,235,0.04)", borderColor: "rgba(37,99,235,0.2)" }}
         >
           <Quote className="h-6 w-6 mb-5" style={{ color: "#2563EB" }} />
-          <p className="text-base sm:text-lg leading-relaxed mb-6" style={{ color: "#D1D5DB" }}>
+          <p className="text-base sm:text-lg leading-relaxed mb-6" style={{ color: "#374151" }}>
             &ldquo;I had published consistently for eight years and assumed my citation count was low
             because public health in my region isn&apos;t well represented in global databases.
             The audit showed me the real reason: my work wasn&apos;t discoverable. Half my publications
@@ -368,35 +377,34 @@ export function CaseStudy() {
             Four months later, my h-index has moved for the first time since I started publishing.&rdquo;
           </p>
           <div className="pt-5 border-t" style={{ borderColor: "rgba(37,99,235,0.15)" }}>
-            {/* Identity row — avatar + name + title always on one line */}
             <div className="flex items-center gap-3">
               <div
                 className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
-                style={{ backgroundColor: "rgba(37,99,235,0.15)", color: "#60A5FA" }}
+                style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#2563EB" }}
               >
                 AO
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold leading-snug" style={{ color: "#F9FAFB" }}>Dr. Amara Osei</p>
-                <p className="text-xs mt-0.5 leading-snug" style={{ color: "#4B5563" }}>
+                <p className="text-sm font-bold leading-snug" style={{ color: "#111827" }}>Dr. Amara Osei</p>
+                <p className="text-xs mt-0.5 leading-snug" style={{ color: "#6B7280" }}>
                   Senior Lecturer · Public Health
                 </p>
-                <p className="text-xs leading-snug" style={{ color: "#4B5563" }}>
+                <p className="text-xs leading-snug" style={{ color: "#6B7280" }}>
                   Digital Visibility Clinic alumna
                 </p>
               </div>
-              {/* Desktop only: cert badge inline */}
+              {/* Desktop: cert badge inline */}
               <div className="hidden sm:flex items-center gap-1.5 flex-shrink-0">
                 <CheckCircle2 className="h-4 w-4" style={{ color: "#10B981" }} />
                 <span className="text-xs font-medium" style={{ color: "#10B981" }}>Certificate Holder</span>
               </div>
             </div>
-            {/* Mobile only: cert badge as full-width pill below identity */}
+            {/* Mobile: cert badge pill */}
             <div
               className="sm:hidden flex items-center justify-center gap-2 rounded-xl py-2.5 mt-3 border"
               style={{
-                backgroundColor: "rgba(16,185,129,0.08)",
-                borderColor: "rgba(16,185,129,0.25)",
+                backgroundColor: "rgba(16,185,129,0.06)",
+                borderColor: "rgba(16,185,129,0.20)",
               }}
             >
               <CheckCircle2 className="h-4 w-4 flex-shrink-0" style={{ color: "#10B981" }} />
@@ -412,12 +420,12 @@ export function CaseStudy() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="rounded-2xl border p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
-          style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+          style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}
         >
           <div>
             <div className="flex items-center gap-2 mb-2">
               <TrendingUp className="h-4 w-4" style={{ color: "#10B981" }} />
-              <p className="text-sm font-bold" style={{ color: "#F9FAFB" }}>
+              <p className="text-sm font-bold" style={{ color: "#111827" }}>
                 h-index: 3 → 7 &nbsp;·&nbsp; Citations: 28 → 94 &nbsp;·&nbsp; 4 months.
               </p>
             </div>
@@ -431,15 +439,17 @@ export function CaseStudy() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white transition-colors active:opacity-90"
-              style={{ backgroundColor: "#25D366" }}
+              style={{ backgroundColor: "#2563EB" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
             >
               <MessageCircle className="h-4 w-4" />
               Claim My Spot
             </a>
             <Link
               href="/clinics/digital-visibility-clinic"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold border transition-colors active:bg-[#1E293B]"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold border transition-colors active:bg-[#F1F5F9]"
+              style={{ borderColor: "#E2E8F0", color: "#374151" }}
             >
               See the Full Programme <ArrowRight className="h-4 w-4" />
             </Link>

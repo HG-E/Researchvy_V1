@@ -7,14 +7,14 @@ export default function OfflinePage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4"
-      style={{ backgroundColor: "#080E1A" }}
+      style={{ backgroundColor: "#FFFFFF" }}
     >
       <div className="text-center max-w-md">
         <div
           className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
           style={{ backgroundColor: "rgba(37,99,235,0.1)", border: "1px solid rgba(37,99,235,0.2)" }}
         >
-          <WifiOff className="h-7 w-7" style={{ color: "#60A5FA" }} />
+          <WifiOff className="h-7 w-7" style={{ color: "#2563EB" }} />
         </div>
 
         <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
@@ -23,7 +23,7 @@ export default function OfflinePage() {
 
         <h1
           className="text-3xl sm:text-4xl font-bold mb-4 leading-tight"
-          style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+          style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
         >
           No Connection
         </h1>
@@ -44,8 +44,8 @@ export default function OfflinePage() {
           </button>
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-            style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+            className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
+            style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
           >
             <Home className="h-4 w-4" />
             Go Home

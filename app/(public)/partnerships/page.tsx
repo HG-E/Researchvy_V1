@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Building2, GraduationCap, BookOpen, Handshake, ArrowRight, MessageCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -49,7 +49,7 @@ const WHAT_WE_OFFER = [
 
 export default function PartnershipsPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Header */}
@@ -59,7 +59,7 @@ export default function PartnershipsPage() {
           </p>
           <h1
             className="text-4xl sm:text-5xl font-bold mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Make Research Visibility<br />
             <span style={{ color: "#60A5FA" }}>A Shared Institutional Asset.</span>
@@ -82,8 +82,8 @@ export default function PartnershipsPage() {
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-              style={{ borderColor: "#1E293B", color: "#9CA3AF" }}
+              className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
+              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
             >
               Send an Enquiry
             </Link>
@@ -100,7 +100,7 @@ export default function PartnershipsPage() {
               >
                 <Icon className="h-5 w-5" style={{ color }} />
               </div>
-              <h2 className="text-base font-bold mb-2" style={{ color: "#F9FAFB" }}>{title}</h2>
+              <h2 className="text-base font-bold mb-2" style={{ color: "#111827" }}>{title}</h2>
               <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
             </HoverCard>
           ))}
@@ -114,7 +114,7 @@ export default function PartnershipsPage() {
             </p>
             <h2
               className="text-3xl font-bold mb-6"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               What partners access
             </h2>
@@ -123,10 +123,10 @@ export default function PartnershipsPage() {
                 <div
                   key={item}
                   className="flex items-start gap-3 rounded-xl px-4 py-3"
-                  style={{ backgroundColor: "#0F172A", border: "1px solid #1E293B" }}
+                  style={{ backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
                 >
                   <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "#60A5FA" }} />
-                  <p className="text-sm" style={{ color: "#D1D5DB" }}>{item}</p>
+                  <p className="text-sm" style={{ color: "#374151" }}>{item}</p>
                 </div>
               ))}
             </div>
@@ -142,7 +142,7 @@ export default function PartnershipsPage() {
           style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.2)" }}
         >
           <div>
-            <p className="text-sm font-semibold mb-1" style={{ color: "#F9FAFB" }}>
+            <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
               Need institutional-level visibility data first?
             </p>
             <p className="text-sm" style={{ color: "#6B7280" }}>
@@ -152,7 +152,7 @@ export default function PartnershipsPage() {
           <Link
             href="/intelligence"
             className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold whitespace-nowrap transition-colors hover:bg-[#1D4ED8]"
-            style={{ backgroundColor: "#2563EB", color: "#F9FAFB" }}
+            style={{ backgroundColor: "#2563EB", color: "#111827" }}
           >
             View Intelligence <ArrowRight className="h-4 w-4" />
           </Link>

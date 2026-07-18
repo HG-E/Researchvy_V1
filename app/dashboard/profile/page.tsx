@@ -56,7 +56,7 @@ export default async function ProfilePage({
         </p>
         <h1
           className="text-3xl font-bold"
-          style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+          style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
         >
           {fullName || "My Profile"}
         </h1>
@@ -68,9 +68,9 @@ export default async function ProfilePage({
       {/* Avatar upload card */}
       <div
         className="rounded-2xl border p-6"
-        style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+        style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
       >
-        <h2 className="text-sm font-bold mb-5" style={{ color: "#F9FAFB" }}>
+        <h2 className="text-sm font-bold mb-5" style={{ color: "#111827" }}>
           Profile Photo
         </h2>
         <AvatarUpload name={fullName || null} email={userEmail} avatarUrl={avatarUrl} />

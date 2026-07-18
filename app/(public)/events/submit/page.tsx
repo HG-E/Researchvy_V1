@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+﻿import { redirect } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, CheckCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -17,12 +17,12 @@ export default async function SubmitEventPage() {
   if (!user) redirect("/signin?next=/events/submit");
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#080E1A" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         <div className="mb-8">
           <Link href="/events" className="flex items-center gap-1.5 text-xs font-semibold mb-6"
-            style={{ color: "#4B5563" }}>
+            style={{ color: "#6B7280" }}>
             <ChevronLeft className="h-3.5 w-3.5" />
             Back to Events
           </Link>
@@ -31,7 +31,7 @@ export default async function SubmitEventPage() {
           </p>
           <h1
             className="text-3xl sm:text-4xl font-bold mb-3"
-            style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB", letterSpacing: "-0.02em" }}
+            style={{ fontFamily: "var(--font-serif)", color: "#111827", letterSpacing: "-0.02em" }}
           >
             Submit Your Academic Event
           </h1>
@@ -41,8 +41,8 @@ export default async function SubmitEventPage() {
           </p>
 
           {/* What's accepted */}
-          <div className="rounded-xl border p-5 mb-8" style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}>
-            <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
+          <div className="rounded-xl border p-5 mb-8" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+            <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
               We accept submissions for
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -56,7 +56,7 @@ export default async function SubmitEventPage() {
                 "Panel discussions & roundtables",
                 "Grant writing & career events",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-2 text-xs" style={{ color: "#9CA3AF" }}>
+                <div key={item} className="flex items-center gap-2 text-xs" style={{ color: "#6B7280" }}>
                   <CheckCircle className="h-3 w-3 flex-shrink-0" style={{ color: "#10B981" }} />
                   {item}
                 </div>

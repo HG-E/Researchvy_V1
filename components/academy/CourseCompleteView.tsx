@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -120,7 +120,7 @@ export function CourseCompleteView({
   return (
     <div
       className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16 overflow-hidden"
-      style={{ backgroundColor: "#080E1A" }}
+      style={{ backgroundColor: "#FFFFFF" }}
     >
       <Confetti />
 
@@ -141,8 +141,8 @@ export function CourseCompleteView({
           <div
             className="rounded-3xl border p-10 mb-6 text-center"
             style={{
-              backgroundColor: "#0F172A",
-              borderColor: "#1E293B",
+              backgroundColor: "#FFFFFF",
+              borderColor: "#E2E8F0",
               borderTop: `3px solid ${levelColor}`,
             }}
           >
@@ -157,17 +157,17 @@ export function CourseCompleteView({
             <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
               Certificate of Completion
             </p>
-            <p className="text-sm mb-5" style={{ color: "#9CA3AF" }}>This certifies that</p>
+            <p className="text-sm mb-5" style={{ color: "#6B7280" }}>This certifies that</p>
 
             <h1
               className="text-3xl font-bold mb-2 leading-tight"
-              style={{ fontFamily: "var(--font-serif)", color: "#F9FAFB" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
             >
               {researcherName}
             </h1>
-            <p className="text-sm mb-5" style={{ color: "#9CA3AF" }}>has successfully completed</p>
+            <p className="text-sm mb-5" style={{ color: "#6B7280" }}>has successfully completed</p>
 
-            <h2 className="text-xl font-bold mb-4" style={{ color: "#F9FAFB" }}>
+            <h2 className="text-xl font-bold mb-4" style={{ color: "#111827" }}>
               {courseName}
             </h2>
 
@@ -182,7 +182,7 @@ export function CourseCompleteView({
               Level {courseLevel}
             </span>
 
-            <div className="border-t mt-6 mb-4" style={{ borderColor: "#1E293B" }} />
+            <div className="border-t mt-6 mb-4" style={{ borderColor: "#E2E8F0" }} />
 
             <div className="flex items-center justify-center gap-6 text-xs" style={{ color: "#6B7280" }}>
               <span className="flex items-center gap-1.5">
@@ -234,8 +234,8 @@ export function CourseCompleteView({
             {canNativeShare && (
               <button
                 onClick={handleNativeShare}
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#1E293B]"
-                style={{ borderColor: "#1E293B", color: shared ? "#10B981" : "#9CA3AF" }}
+                className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
+                style={{ borderColor: "#E2E8F0", color: shared ? "#10B981" : "#9CA3AF" }}
               >
                 <Share2 className="h-4 w-4" />
                 {shared ? "Shared!" : "Share"}
@@ -247,12 +247,12 @@ export function CourseCompleteView({
           {nextCourse ? (
             <div
               className="rounded-2xl border p-5 text-center"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
             >
               <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#6B7280" }}>
                 What&apos;s next
               </p>
-              <p className="text-sm font-bold mb-1" style={{ color: "#F9FAFB" }}>
+              <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
                 Level {nextCourse.level}: {nextCourse.title}
               </p>
               <p className="text-xs mb-4" style={{ color: "#6B7280" }}>
@@ -270,9 +270,9 @@ export function CourseCompleteView({
           ) : (
             <div
               className="rounded-2xl border p-5 text-center"
-              style={{ backgroundColor: "#0F172A", borderColor: "#1E293B" }}
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
             >
-              <p className="text-sm font-bold mb-2" style={{ color: "#F9FAFB" }}>
+              <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>
                 You&apos;ve reached the top 🏆
               </p>
               <p className="text-xs mb-4" style={{ color: "#6B7280" }}>
@@ -293,7 +293,7 @@ export function CourseCompleteView({
           <p className="text-center mt-6">
             <Link
               href={`/academy/courses/${courseSlug}`}
-              className="text-xs transition-colors hover:text-white"
+              className="text-xs transition-colors hover:text-[#111827]"
               style={{ color: "#6B7280" }}
             >
               ← Back to course

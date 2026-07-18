@@ -5,7 +5,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <div
       className="min-h-screen flex flex-col relative overflow-hidden"
-      style={{ backgroundColor: "#080E1A" }}
+      style={{ backgroundColor: "#FFFFFF" }}
     >
       {/* Background grid */}
       <div
@@ -17,7 +17,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       />
       {/* Radial glow */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full opacity-[0.07] blur-xl md:blur-3xl pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full opacity-[0.04] blur-xl md:blur-3xl pointer-events-none"
         style={{ backgroundColor: "#2563EB" }}
       />
 
@@ -25,12 +25,15 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <header className="relative z-10 flex items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors text-[#4B5563] hover:text-[#9CA3AF]"
+          className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
+          style={{ color: "#6B7280" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#374151")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to site
         </Link>
-        <span className="text-xs font-mono tracking-widest" style={{ color: "#1E293B" }}>
+        <span className="text-xs font-mono tracking-widest" style={{ color: "#9CA3AF" }}>
           researchvy.com
         </span>
       </header>
@@ -41,7 +44,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       </main>
 
       {/* Bottom bar */}
-      <footer className="relative z-10 text-center py-4 text-xs" style={{ color: "#1E293B" }}>
+      <footer className="relative z-10 text-center py-4 text-xs" style={{ color: "#9CA3AF" }}>
         © {new Date().getFullYear()} Researchvy · All rights reserved
       </footer>
     </div>

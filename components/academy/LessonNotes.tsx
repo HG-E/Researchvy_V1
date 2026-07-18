@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { BookOpen, Check, Loader2 } from "lucide-react";
@@ -56,7 +56,7 @@ export function LessonNotes({ lessonId, initialNote }: LessonNotesProps) {
   }, []);
 
   return (
-    <div className="border-t mt-10 pt-6" style={{ borderColor: "#1E293B" }}>
+    <div className="border-t mt-10 pt-6" style={{ borderColor: "#E2E8F0" }}>
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
@@ -79,7 +79,7 @@ export function LessonNotes({ lessonId, initialNote }: LessonNotesProps) {
             rows={6}
             className="w-full rounded-xl px-4 py-3 text-sm resize-none leading-relaxed"
             style={{
-              backgroundColor: "#0A0F1A",
+              backgroundColor: "#FFFFFF",
               border:          "1px solid #1E293B",
               color:           "#D1D5DB",
               outline:         "none",
