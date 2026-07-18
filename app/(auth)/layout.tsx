@@ -25,10 +25,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <header className="relative z-10 flex items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
-          style={{ color: "#6B7280" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#374151")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
+          className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors text-[#6B7280] hover:text-[#374151]"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to site

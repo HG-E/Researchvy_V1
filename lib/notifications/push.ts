@@ -1,11 +1,19 @@
 import webpush from "web-push";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 
-webpush.setVapidDetails(
-  `mailto:${process.env.RESEND_FROM_EMAIL ?? "hello@researchvy.com"}`,
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
-);
+let _vapidReady = false;
+function ensureVapid() {
+  if (_vapidReady) return;
+  const pub  = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+  const priv = process.env.VAPID_PRIVATE_KEY;
+  if (!pub || !priv) throw new Error("VAPID keys not configured");
+  webpush.setVapidDetails(
+    `mailto:${process.env.RESEND_FROM_EMAIL ?? "hello@researchvy.com"}`,
+    pub,
+    priv,
+  );
+  _vapidReady = true;
+}
 
 export interface PushPayload {
   title: string;
@@ -16,6 +24,7 @@ export interface PushPayload {
 }
 
 export async function sendPushToUser(userId: string, payload: PushPayload) {
+  ensureVapid();
   const admin = createSupabaseAdminClient();
   const { data: subs } = await admin
     .from("push_subscriptions")
@@ -55,6 +64,7 @@ export async function sendPushToUser(userId: string, payload: PushPayload) {
 }
 
 export async function sendPushToAll(payload: PushPayload) {
+  ensureVapid();
   const admin = createSupabaseAdminClient();
   const { data: subs } = await admin
     .from("push_subscriptions")

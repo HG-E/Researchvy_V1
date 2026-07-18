@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { BarChart2, ArrowRight } from "lucide-react";
 import { trackCtaClick } from "@/lib/analytics/posthog";
