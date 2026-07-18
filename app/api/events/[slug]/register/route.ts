@@ -50,12 +50,13 @@ export async function POST(
 
   // Fire-and-forget confirmation email
   if (user.email) {
-    const { data: profile } = await admin
-      .from("profiles")
-      .select("first_name")
+    const { data: userRow } = await admin
+      .from("users")
+      .select("full_name")
       .eq("id", user.id)
       .single();
-    const firstName = (profile?.first_name as string | null) ?? "Researcher";
+    const fullName  = (userRow?.full_name as string | null) ?? (user.user_metadata?.full_name as string | null) ?? "";
+    const firstName = fullName.split(" ")[0] || "Researcher";
     sendRSVPConfirmation(user.email, firstName, event.title as string, slug, status === "waitlisted")
       .catch(() => {});
   }
