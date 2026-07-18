@@ -236,27 +236,27 @@ export const digitalVisibilityClinic = {
   testimonials: [
     {
       name:        "Barnabas Folami-A",
-      institution: "Bingham University, Nigeria",
+      institution: "Nigeria",
       quote:       "I feel ready to launch out and position myself for global relevance now as a 21st century researcher.",
-      cohort:      "ASM Nigeria Cohort",
+      cohort:      "ASM Cohort",
     },
     {
       name:        "Chiemeziem Onyeka",
       institution: "Independent Researcher, Nigeria",
       quote:       "I can now present my research and profile to connect with the right audience and opportunities.",
-      cohort:      "ASM Nigeria Cohort",
+      cohort:      "ASM Cohort",
     },
     {
       name:        "Dr Olabowale Omolade",
-      institution: "Olabisi Onabanjo University, Nigeria",
+      institution: "Nigeria",
       quote:       "It is already impacting both my academic and professional work.",
-      cohort:      "ASM Nigeria Cohort",
+      cohort:      "ASM Cohort",
     },
     {
       name:        "Olamide Adeboye",
       institution: "Kwara State Polytechnic, Nigeria",
       quote:       "The clinic gave me a platform to start strong with my career as a microbiologist.",
-      cohort:      "ASM Nigeria Cohort",
+      cohort:      "ASM Cohort",
     },
     {
       name:        "Perpetua Nwachukwu",
@@ -268,13 +268,13 @@ export const digitalVisibilityClinic = {
       name:        "Temitope Adebayo",
       institution: "University of Ibadan, Nigeria",
       quote:       "Helping young and vibrant scientists to be more visible, exactly what we needed.",
-      cohort:      "ASM Nigeria Cohort",
+      cohort:      "ASM Cohort",
     },
     {
       name:        "Christiana Uzoagba",
       institution: "Chukwuemeka Odumegwu Ojukwu University",
       quote:       "Insightful and practical, offering valuable tips on personal branding and digital presence.",
-      cohort:      "ASM Nigeria Cohort",
+      cohort:      "ASM Cohort",
     },
   ],
 

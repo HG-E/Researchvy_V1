@@ -210,17 +210,16 @@ export function SocialProof() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             {[
-              "FUTO",
-              "Bingham University",
-              "Olabisi Onabanjo University",
-              "ASM Nigeria",
-            ].map((name) => (
+              { short: "FUTO", full: "Federal University of Technology, Owerri" },
+              { short: "ASM",  full: "American Society of Microbiology" },
+            ].map(({ short, full }) => (
               <span
-                key={name}
-                className="text-xs font-medium px-3.5 py-1.5 rounded-full border"
-                style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0", color: "#6B7280" }}
+                key={short}
+                title={full}
+                className="text-xs font-semibold px-3.5 py-1.5 rounded-full border cursor-default"
+                style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0", color: "#4B5563" }}
               >
-                {name}
+                {short}
               </span>
             ))}
             <span

@@ -65,10 +65,9 @@ export const FACILITATORS: Facilitator[] = [
   },
 ];
 
-/** Partner institutions that have previously hosted or co-delivered Researchvy programmes */
+/** Partner institutions that have hosted or co-delivered Researchvy programmes */
 export const PARTNER_INSTITUTIONS = [
-  { name: "ASM Nigeria",         logo: "" },
-  { name: "FUTO EHS Department", logo: "" },
-  { name: "Bingham University",  logo: "" },
+  { name: "American Society of Microbiology (ASM)", short: "ASM",  logo: "" },
+  { name: "Federal University of Technology, Owerri (FUTO)", short: "FUTO", logo: "" },
   // ← Add more as you get them
 ];
