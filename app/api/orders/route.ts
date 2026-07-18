@@ -40,35 +40,36 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid bundle or module" }, { status: 400 });
     }
 
-    // If a userId is submitted, verify it matches the authenticated session.
-    // This prevents guest requests from attaching orders to another user's account,
-    // and prevents authenticated users from claiming orders under a different user ID.
-    if (userId) {
-      const sessionUser = await getServerUser();
-      if (!sessionUser || sessionUser.id !== userId) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-      }
+    // All orders require an authenticated session — the checkout page always
+    // redirects guests to /signup first. Reject requests with no userId or a
+    // userId that doesn't match the server session to prevent order spoofing.
+    const sessionUser = await getServerUser();
+    if (!sessionUser) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    if (userId && sessionUser.id !== userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    // Always use the server-verified user ID, never trust the client-supplied value
+    const verifiedUserId = sessionUser.id;
 
     const admin = createSupabaseAdminClient();
 
-    if (userId) {
-      const { data: existing } = await admin
-        .from("orders")
-        .select("id, status, order_number")
-        .eq("user_id", userId)
-        .eq("clinic_slug", clinicSlug)
-        .eq("bundle_id", bundleId)
-        .eq("module_id", moduleId ?? null)
-        .neq("status", "cancelled")
-        .maybeSingle();
+    const { data: existing } = await admin
+      .from("orders")
+      .select("id, status, order_number")
+      .eq("user_id", verifiedUserId)
+      .eq("clinic_slug", clinicSlug)
+      .eq("bundle_id", bundleId)
+      .eq("module_id", moduleId ?? null)
+      .neq("status", "cancelled")
+      .maybeSingle();
 
-      if (existing) {
-        return NextResponse.json(
-          { error: `You already have an active order for this bundle (${existing.order_number}).`, orderId: existing.id },
-          { status: 409 },
-        );
-      }
+    if (existing) {
+      return NextResponse.json(
+        { error: `You already have an active order for this bundle (${existing.order_number}).`, orderId: existing.id },
+        { status: 409 },
+      );
     }
 
     const reference = generateOrderReference();
@@ -76,7 +77,7 @@ export async function POST(request: NextRequest) {
     const { data, error } = await admin
       .from("orders")
       .insert({
-        user_id:        userId ?? null,
+        user_id:        verifiedUserId,
         user_email:     userEmail,
         user_name:      userName.trim(),
         user_phone:     userPhone?.trim() || null,
