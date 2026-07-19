@@ -176,7 +176,7 @@ export default async function TasksPage() {
           My Tasks
         </h1>
         <p className="text-sm mt-1" style={{ color: "#6B7280" }}>
-          Digital Visibility Clinic · July 2026 Cohort
+          Digital Visibility Clinic · August 2026 Cohort
         </p>
       </div>
 
@@ -190,7 +190,7 @@ export default async function TasksPage() {
             Sessions open when your cohort begins
           </h2>
           <p className="text-sm mb-4" style={{ color: "#6B7280" }}>
-            Your July 2026 cohort hasn&apos;t started yet. Sessions will unlock one at a time
+            Your August 2026 cohort hasn&apos;t started yet. Sessions will unlock one at a time
             as the programme progresses — you&apos;ll get an email each time a new one opens.
           </p>
           <p className="text-xs mb-6" style={{ color: "#374151" }}>

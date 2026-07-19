@@ -159,7 +159,7 @@ export default async function ManageClinicsPage() {
               <div className="flex items-center gap-2 mb-4">
                 <BookOpen className="h-4 w-4" style={{ color: "#8B5CF6" }} />
                 <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#4B5563" }}>
-                  Session Unlocks: July 2026 Cohort
+                  Session Unlocks: August 2026 Cohort
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
