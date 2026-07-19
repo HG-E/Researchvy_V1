@@ -276,11 +276,11 @@ export default async function ClinicsPage() {
                   </span>
                   <span className="hidden sm:inline" style={{ color: "#6B7280" }}>·</span>
                   <span style={{ color: "#6B7280" }}>
-                    July cohort · limited spots remaining
+                    August cohort · limited spots remaining
                   </span>
                 </div>
                 <a
-                  href={buildWhatsAppUrl("Digital Visibility Clinic July 2026 early bird enrollment")}
+                  href={buildWhatsAppUrl("Digital Visibility Clinic August 2026 early bird enrollment")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs font-bold whitespace-nowrap flex-shrink-0"

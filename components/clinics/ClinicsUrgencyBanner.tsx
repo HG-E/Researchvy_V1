@@ -50,7 +50,7 @@ export async function ClinicsUrgencyBanner({
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-3 mb-5">
             <p className="text-base font-bold" style={{ color: "#111827" }}>
-              July 2026 Cohort: Now Open
+              August 2026 Cohort: Now Open
             </p>
             <span
               className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
@@ -115,14 +115,14 @@ export async function ClinicsUrgencyBanner({
         {!isFull && (
           <div className="shrink-0 flex flex-col items-start lg:items-end gap-2">
             <a
-              href={buildWhatsAppUrl("Digital Visibility Clinic July 2026 cohort")}
+              href={buildWhatsAppUrl("Digital Visibility Clinic August 2026 cohort")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold text-white whitespace-nowrap transition-opacity hover:opacity-90"
               style={{ backgroundColor: isClosingSoon ? "#D97706" : "#2563EB" }}
             >
               <MessageCircle className="h-4 w-4" />
-              {isClosingSoon ? "Reserve My Spot Now" : "Join July Cohort"}
+              {isClosingSoon ? "Reserve My Spot Now" : "Join August Cohort"}
             </a>
             <p className="text-xs" style={{ color: "#6B7280" }}>
               Choose your track after sign-up

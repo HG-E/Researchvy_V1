@@ -80,7 +80,7 @@ export function ClinicFeature({ spotsLeft }: { spotsLeft?: number | null }) {
                 {spotsLeft != null
                   ? spotsLeft <= 0
                     ? "This cohort is full — join the waitlist"
-                    : `${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} remaining in the July cohort`
+                    : `${spotsLeft} spot${spotsLeft === 1 ? "" : "s"} remaining in the August cohort`
                   : "Limited to 20 participants per cohort, spots fill fast"}
               </span>
             </div>

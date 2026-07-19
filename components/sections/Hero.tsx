@@ -236,7 +236,7 @@ export function Hero() {
             {[
               { value: "87%",  label: "Visibility increase",   accent: "#2563EB", bg: "rgba(37,99,235,0.07)"  },
               { value: "2.4×", label: "More citations",        accent: "#7C3AED", bg: "rgba(124,58,237,0.07)" },
-              { value: "100+", label: "Countries reached",     accent: "#10B981", bg: "rgba(16,185,129,0.07)" },
+              { value: "140+", label: "Researchers trained",    accent: "#10B981", bg: "rgba(16,185,129,0.07)" },
               { value: "10K+", label: "Researchers empowered", accent: "#D97706", bg: "rgba(217,119,6,0.07)"   },
             ].map(({ value, label, accent, bg }) => (
               <div

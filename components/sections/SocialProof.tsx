@@ -40,7 +40,7 @@ const TESTIMONIALS = [
 const STATS = [
   { value: "≤20",  label: "Researchers per cohort",  accent: "#2563EB" },
   { value: "5",    label: "Sessions per cohort",      accent: "#7C3AED" },
-  { value: "5",    label: "Ecosystem divisions",      accent: "#10B981" },
+  { value: "38+",  label: "Countries represented",    accent: "#10B981" },
   { value: "100%", label: "Certified on completion",  accent: "#F59E0B" },
 ];
 
