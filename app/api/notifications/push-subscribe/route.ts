@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 // POST { endpoint, keys: { p256dh, auth } } — store a Web Push subscription
 export async function POST(req: NextRequest) {
+  const { allowed } = await checkRateLimit(getRateLimitKey(req, "push-subscribe"), 5, 60 * 60 * 1000);
+  if (!allowed) return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+
   const supabase = await createSupabaseServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Not authenticated" }, { status: 401 });

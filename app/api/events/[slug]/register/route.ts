@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { sendRSVPConfirmation } from "@/lib/email";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 // POST /api/events/[slug]/register — RSVP to an internal event
 export async function POST(
   _req: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
+  const { allowed } = await checkRateLimit(getRateLimitKey(_req, "event-register"), 10, 60 * 60 * 1000);
+  if (!allowed) return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+
   const { slug } = await params;
   const user = await getServerUser();
   if (!user) return NextResponse.json({ error: "Sign in to register." }, { status: 401 });

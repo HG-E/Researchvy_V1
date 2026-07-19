@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient, createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 async function getUser() {
   const supabase = await createSupabaseServerClient();
@@ -28,6 +29,9 @@ export async function GET(req: NextRequest) {
 
 // PUT /api/academy/notes  { lesson_id, content }
 export async function PUT(req: NextRequest) {
+  const { allowed } = await checkRateLimit(getRateLimitKey(req, "notes-put"), 60, 60 * 60 * 1000);
+  if (!allowed) return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+
   const user = await getUser();
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 

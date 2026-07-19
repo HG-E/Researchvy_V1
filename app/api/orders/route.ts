@@ -2,8 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { generateOrderReference, isEarlyBird, resolveAmount } from "@/lib/orders";
 import { digitalVisibilityClinic } from "@/constants/clinics";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 export async function POST(request: NextRequest) {
+  const { allowed } = await checkRateLimit(getRateLimitKey(request, "order-create"), 3, 60 * 60 * 1000);
+  if (!allowed) return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+
   try {
     const body = await request.json();
     const { clinicSlug, bundleId, moduleId, currency, userEmail, userName, userPhone, userId } = body as {
