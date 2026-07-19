@@ -215,7 +215,7 @@ export default async function DashboardPage() {
             <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "#2563EB" }}>Researchvy Clinics</p>
             <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>Cohort or 1-on-1 — Paid</p>
             <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
-              Join the Digital Visibility Clinic (live cohort, July 2026) or choose Private Consulting for done-for-you 1-on-1 delivery — from $209.
+              Join the Digital Visibility Clinic (live cohort, August 2026) or choose Private Consulting for done-for-you 1-on-1 delivery — from $209.
             </p>
             <Link href="/clinics" className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: "#2563EB" }}>
               View all options →
