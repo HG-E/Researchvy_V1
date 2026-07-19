@@ -52,7 +52,7 @@ export function Hero() {
         {/* ══════════════════════════════════════════════
             LEFT — all text content
         ══════════════════════════════════════════════ */}
-        <div className="flex flex-col justify-center w-full lg:w-[48%] xl:w-[44%] flex-shrink-0 px-6 sm:px-10 lg:px-14 xl:px-20 py-14 lg:py-20">
+        <div className="flex flex-col justify-center w-full lg:w-[58%] xl:w-[55%] flex-shrink-0 px-6 sm:px-10 lg:px-14 xl:px-20 py-14 lg:py-20">
 
           {/* Eyebrow — minimal dot + label, no pill box */}
           <motion.div
@@ -88,14 +88,12 @@ export function Hero() {
             style={{
               fontFamily: "var(--font-serif)",
               color: "#0B1B3E",
-              fontSize: "clamp(2.4rem, 5.2vw, 4.6rem)",
+              fontSize: "clamp(2.6rem, 4.8vw, 5rem)",
               lineHeight: 1.09,
             }}
             aria-label="Great research deserves to be seen"
           >
-            Great research
-            <br />
-            deserves to be
+            Great research deserves to be
             <br />
             {/* Rotating word + animated underline accent */}
             <span className="relative inline-block">
