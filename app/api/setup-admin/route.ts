@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
 const SETUP_SECRET = process.env.SETUP_ADMIN_SECRET ?? "";
 
 // POST — accepts JSON body { secret, password } so credentials never appear in URLs/logs
 export async function POST(req: NextRequest) {
+  // 5 attempts per IP per hour — prevents brute-forcing SETUP_ADMIN_SECRET
+  const { allowed } = await checkRateLimit(getRateLimitKey(req, "setup-admin"), 5, 60 * 60 * 1000);
+  if (!allowed) return NextResponse.json({ error: "Too many requests." }, { status: 429 });
+
   try {
     const { secret, password } = await req.json();
 
