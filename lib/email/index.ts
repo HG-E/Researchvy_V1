@@ -532,7 +532,7 @@ export async function sendPaymentReceivedEmail(opts: {
     <table width="100%" cellpadding="0" cellspacing="0">
       ${[
         ["Order number",  opts.orderNumber],
-        ["Programme",     "Digital Visibility Clinic — July 2026"],
+        ["Programme",     "Digital Visibility Clinic — August 2026"],
         ["Bundle",        opts.bundleName],
         ["Amount",        amt],
         ["Your reference", opts.reference],
@@ -603,7 +603,7 @@ export async function sendOrderConfirmedEmail(opts: {
     to:      [opts.to],
     cc:      [ADMIN_CC],
     replyTo: REPLY_TO,
-    subject: `You're in — DVC July 2026 enrollment confirmed (${opts.orderNumber})`,
+    subject: `You're in — DVC August 2026 enrollment confirmed (${opts.orderNumber})`,
     html: `<!DOCTYPE html><html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#F3F4F6;">
@@ -613,13 +613,13 @@ export async function sendOrderConfirmedEmail(opts: {
     <div style="height:4px;background:linear-gradient(90deg,#2563EB,#10B981);"></div>
     <div style="padding:40px 32px;">
       <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#2563EB;">
-        Digital Visibility Clinic · July 2026
+        Digital Visibility Clinic · August 2026
       </p>
       <h1 style="margin:0 0 8px;font-size:26px;font-weight:700;line-height:1.3;color:#F9FAFB;">
         You're enrolled, ${firstName}.
       </h1>
       <p style="margin:0;font-size:15px;line-height:1.7;color:#9CA3AF;">
-        Payment confirmed. Your place in the July 2026 cohort is secured.
+        Payment confirmed. Your place in the August 2026 cohort is secured.
       </p>
     </div>
   </div>
@@ -633,7 +633,7 @@ export async function sendOrderConfirmedEmail(opts: {
         ["Order Number", opts.orderNumber],
         ["Programme",    "Digital Visibility Clinic"],
         ["Bundle",       bundleName],
-        ["Cohort",       "July 2026"],
+        ["Cohort",       "August 2026"],
         ["Amount paid",  amountStr],
       ].map(([label, value]) => `
       <tr>

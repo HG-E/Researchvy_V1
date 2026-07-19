@@ -151,7 +151,7 @@ export default async function MyClinicsPage() {
         {cohort.status !== "tba" && !hasRegistered && (
           <div className="rounded-xl border p-4 mb-5 space-y-3" style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}>
             <div className="flex items-center justify-between flex-wrap gap-2">
-              <p className="text-xs font-bold" style={{ color: "#111827" }}>July 2026 Cohort</p>
+              <p className="text-xs font-bold" style={{ color: "#111827" }}>August 2026 Cohort</p>
               <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: isFull ? "rgba(239,68,68,0.15)" : isClosingSoon ? "rgba(245,158,11,0.15)" : "rgba(16,185,129,0.12)", color: isFull ? "#F87171" : isClosingSoon ? "#FCD34D" : "#10B981" }}>
                 {isFull ? "Full" : `${spotsLeft} spots left`}
               </span>

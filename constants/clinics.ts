@@ -170,7 +170,7 @@ export const digitalVisibilityClinic = {
         savingsLabel: "",
         usd: { regular: 79, earlyBird: 45 },
         ngn: { regular: 42000, earlyBird: 24000 },
-        whatsappContext: "Single module enrollment, July 2026",
+        whatsappContext: "Single module enrollment, August 2026",
         cta: "Pick a Module",
         includes: [
           "1 live session + recording (30-day access)",
@@ -191,7 +191,7 @@ export const digitalVisibilityClinic = {
         savingsLabel: "Save 30%",
         usd: { regular: 149, earlyBird: 99 },
         ngn: { regular: 85000, earlyBird: 60000 },
-        whatsappContext: "DVC Core Bundle enrollment, July 2026",
+        whatsappContext: "DVC Core Bundle enrollment, August 2026",
         cta: "Secure Core Bundle",
         includes: [
           "3 live sessions + recordings (60-day access)",
@@ -215,7 +215,7 @@ export const digitalVisibilityClinic = {
         savingsLabel: "Save 42%",
         usd: { regular: 239, earlyBird: 149 },
         ngn: { regular: 130000, earlyBird: 85000 },
-        whatsappContext: "DVC Pro Bundle enrollment, July 2026",
+        whatsappContext: "DVC Pro Bundle enrollment, August 2026",
         cta: "Unlock Pro Bundle",
         includes: [
           "5 live sessions + recordings (90-day access)",
@@ -350,7 +350,7 @@ export const digitalVisibilityClinic = {
     {
       question: "What is the total time commitment?",
       answer:
-        "Core Bundle: 3 live sessions over 3 weeks (July 2026), each 2 hours, plus platform activities of roughly 1–2 hours per week. Pro Bundle: 5 live sessions over 5 weeks with the same weekly activity rhythm. Total: approximately 10–14 hours for Core, 16–20 hours for Pro.",
+        "Core Bundle: 3 live sessions over 3 weeks (August 2026), each 2 hours, plus platform activities of roughly 1–2 hours per week. Pro Bundle: 5 live sessions over 5 weeks with the same weekly activity rhythm. Total: approximately 10–14 hours for Core, 16–20 hours for Pro.",
     },
     {
       question: "What will I have when I complete the clinic?",
