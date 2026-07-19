@@ -18,10 +18,6 @@ const TRUST_POINTS = [
   "No fluff — measurable results",
 ];
 
-const PARTNERS = [
-  { short: "FUTO",  full: "Federal University of Technology, Owerri" },
-  { short: "ASM",   full: "American Society of Microbiology" },
-];
 
 export function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
@@ -311,33 +307,6 @@ export function Hero() {
 
         </div>
 
-        {/* ── Partner strip ── */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.72 }}
-          className="mt-12 pt-8 border-t"
-          style={{ borderColor: "#E5E7EB" }}
-        >
-          <p className="text-[10px] font-bold tracking-widest uppercase mb-4 text-center" style={{ color: "#9CA3AF" }}>
-            Delivered in partnership with
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {PARTNERS.map(({ short, full }) => (
-              <span
-                key={short}
-                title={full}
-                className="text-[11px] font-semibold px-4 py-1.5 rounded-full border cursor-default"
-                style={{ backgroundColor: "#F3F4F6", borderColor: "#E5E7EB", color: "#4B5563" }}
-              >
-                {short}
-              </span>
-            ))}
-          </div>
-          <p className="text-[10px] text-center mt-3" style={{ color: "#CBD5E1" }}>
-            Federal University of Technology, Owerri (FUTO) &nbsp;·&nbsp; American Society of Microbiology (ASM)
-          </p>
-        </motion.div>
 
       </div>
     </section>

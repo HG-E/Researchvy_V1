@@ -197,39 +197,6 @@ export function SocialProof() {
           ))}
         </motion.div>
 
-        {/* University partnership strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-8 text-center"
-        >
-          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#9CA3AF" }}>
-            Delivered in partnership with
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {[
-              { short: "FUTO", full: "Federal University of Technology, Owerri" },
-              { short: "ASM",  full: "American Society of Microbiology" },
-            ].map(({ short, full }) => (
-              <span
-                key={short}
-                title={full}
-                className="text-xs font-semibold px-3.5 py-1.5 rounded-full border cursor-default"
-                style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0", color: "#4B5563" }}
-              >
-                {short}
-              </span>
-            ))}
-            <span
-              className="text-xs font-medium px-3.5 py-1.5 rounded-full border"
-              style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0", color: "#9CA3AF" }}
-            >
-              + more institutions
-            </span>
-          </div>
-        </motion.div>
 
       </div>
     </section>
