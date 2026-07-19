@@ -1,10 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Disable Next.js font-optimization scan — next/font/google handles subsetting itself.
-  // Without this, Turbopack tries to download a dynamic font subset for characters like ₦
-  // that are outside the "latin" unicode range and fails with a 400 from Google Fonts.
-  optimizeFonts: false,
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 365,
