@@ -7,7 +7,7 @@ import { Framework } from "@/components/sections/Framework";
 import { ClinicFeatureWithSpots } from "@/components/sections/ClinicFeatureWithSpots";
 import { ObjectionBuster } from "@/components/sections/ObjectionBuster";
 import { CaseStudy } from "@/components/sections/CaseStudy";
-import { EcosystemOverview } from "@/components/sections/EcosystemOverview";
+
 import { SocialProof } from "@/components/sections/SocialProof";
 import { ImpactNumbers } from "@/components/sections/ImpactNumbers";
 import { CTA } from "@/components/sections/CTA";
@@ -76,10 +76,6 @@ export default function HomePage() {
 
       <Suspense fallback={<SectionFallback height="600px" />}>
         <CaseStudy />
-      </Suspense>
-
-      <Suspense fallback={<SectionFallback height="400px" />}>
-        <EcosystemOverview />
       </Suspense>
 
       <Suspense fallback={<SectionFallback height="280px" />}>
