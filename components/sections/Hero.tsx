@@ -87,7 +87,7 @@ export function Hero() {
             >
               Great research
               <br />
-              <span style={{ fontSize: "0.68em", lineHeight: 1.2 }}>
+              <span style={{ fontSize: "0.74em", lineHeight: 1.2 }}>
               deserves to be{" "}
               <span aria-hidden className="relative inline-block">
                 <AnimatePresence mode="wait">
