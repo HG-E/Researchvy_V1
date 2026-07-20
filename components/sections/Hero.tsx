@@ -87,6 +87,7 @@ export function Hero() {
             >
               Great research
               <br />
+              <span style={{ fontSize: "0.62em", lineHeight: 1.2 }}>
               deserves to be{" "}
               <span aria-hidden className="relative inline-block">
                 <AnimatePresence mode="wait">
@@ -102,6 +103,7 @@ export function Hero() {
                     {ROTATING_WORDS[wordIndex]}
                   </motion.span>
                 </AnimatePresence>
+              </span>
               </span>
             </motion.h1>
 
