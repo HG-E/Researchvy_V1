@@ -1,6 +1,6 @@
 /**
  * Digital Visibility Clinic — programme data.
- * July 2026 Cohort: 3 core modules + 2 bonus masterclasses.
+ * August 2026 Cohort: 3 core modules + 2 bonus masterclasses.
  *
  * ⚠  Do NOT change nextCohort.sessionTime, timezone, or track dates.
  */
@@ -382,26 +382,26 @@ export const digitalVisibilityClinic = {
   // ── Next cohort ─────────────────────────────────────────────────────────────
   // ⚠  Do NOT modify sessionTime, timezone, or track dates.
   nextCohort: {
-    id:                   "cohort-2026-july",
-    registrationDeadline: "2026-06-28",
-    earlyBirdDeadline:    "2026-06-20",
+    id:                   "cohort-2026-august",
+    registrationDeadline: "2026-07-26",
+    earlyBirdDeadline:    "2026-07-18",
     sessionTime:          "5:00–7:00 PM EST / 10:00 PM–12:00 AM WAT",
     timezone:             "EST (UTC−5) / WAT (UTC+1)",
     sessionDuration:      "2 hours",
     weeklyTaskHours:      1,
     totalCommitment:      "3 core sessions over 3 weeks (5 sessions for Pro Bundle)",
-    spotsAlreadyFilled:   8,
+    spotsAlreadyFilled:   4,
     status:               "open" as "open" | "closing-soon" | "full" | "tba",
     tracks: {
       wednesday: {
         label:     "Mid-week",
         day:       "Wednesday",
-        startDate: "2026-07-01",
+        startDate: "2026-07-29",
       },
       sunday: {
         label:     "Weekend",
         day:       "Sunday",
-        startDate: "2026-07-05",
+        startDate: "2026-08-02",
       },
     },
   },

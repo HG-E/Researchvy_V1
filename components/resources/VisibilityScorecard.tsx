@@ -999,11 +999,11 @@ export function VisibilityScorecard() {
               </div>
             </div>
 
-            {/* Urgency strip — July cohort */}
+            {/* Urgency strip — August cohort */}
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse" style={{ backgroundColor: "#EF4444" }} />
               <span className="text-xs font-medium" style={{ color: "#EF4444" }}>
-                July 2026 cohort · Limited to 20 researchers · Spots filling now
+                August 2026 cohort · Limited to 20 researchers · Spots filling now
               </span>
             </div>
 

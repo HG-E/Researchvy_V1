@@ -96,29 +96,70 @@ async function EventsResults({
             {regular.map((event) => <EventCard key={event.id} event={event} />)}
           </div>
         ) : featured.length === 0 ? (
-          <div className="rounded-2xl border p-16 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
-            <Calendar className="h-10 w-10 mx-auto mb-4" style={{ color: "#9CA3AF" }} />
-            <p className="text-base font-semibold mb-2" style={{ color: "#111827" }}>
-              {hasFilters ? "No events match your search" : "No events yet"}
-            </p>
-            <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
-              {hasFilters
-                ? "Try different keywords or clear the filters."
-                : "Be the first to promote your academic event to this community."}
-            </p>
-            <div className="flex justify-center gap-3">
-              {hasFilters && (
-                <Link href="/events" className="rounded-xl px-4 py-2 text-sm font-semibold border"
-                  style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
-                  Clear filters
-                </Link>
-              )}
-              <Link href="/events/submit" className="rounded-xl px-4 py-2 text-sm font-bold text-white"
-                style={{ backgroundColor: "#2563EB" }}>
-                Submit an Event
+          hasFilters ? (
+            <div className="rounded-2xl border p-14 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+              <Search className="h-10 w-10 mx-auto mb-4" style={{ color: "#9CA3AF" }} />
+              <p className="text-base font-semibold mb-2" style={{ color: "#111827" }}>No events match your search</p>
+              <p className="text-sm mb-6" style={{ color: "#6B7280" }}>Try different keywords or clear the filters.</p>
+              <Link href="/events" className="rounded-xl px-5 py-2.5 text-sm font-semibold border"
+                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
+                Clear filters
               </Link>
             </div>
-          </div>
+          ) : (
+            <div className="space-y-5">
+              {/* Hero empty state */}
+              <div
+                className="rounded-2xl border p-10 sm:p-14 text-center"
+                style={{ backgroundColor: "rgba(37,99,235,0.03)", borderColor: "rgba(37,99,235,0.15)" }}
+              >
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                  style={{ backgroundColor: "rgba(37,99,235,0.1)" }}
+                >
+                  <Calendar className="h-8 w-8" style={{ color: "#2563EB" }} />
+                </div>
+                <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
+                  Coming soon
+                </p>
+                <h2 className="text-xl sm:text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
+                  Academic events are being curated
+                </h2>
+                <p className="text-sm max-w-lg mx-auto mb-6 leading-relaxed" style={{ color: "#6B7280" }}>
+                  We're building a curated calendar of conferences, workshops, and seminars for
+                  research professionals. Be the first to list yours — free, reviewed within 2 business days.
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center gap-3">
+                  <Link href="/events/submit"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white"
+                    style={{ backgroundColor: "#2563EB" }}>
+                    <Plus className="h-4 w-4" />
+                    Submit Your Event — Free
+                  </Link>
+                  <Link href="/resources#newsletter"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border"
+                    style={{ borderColor: "#E2E8F0", color: "#374151" }}>
+                    Get notified when events go live
+                  </Link>
+                </div>
+              </div>
+
+              {/* Three benefit chips */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  { title: "Free to list", desc: "No cost to submit your event to this community.", color: "#10B981" },
+                  { title: "Reviewed in 48 hrs", desc: "Every submission is manually reviewed before publishing.", color: "#2563EB" },
+                  { title: "Global reach", desc: "Researchers from 38+ countries discover events here.", color: "#7C3AED" },
+                ].map(({ title, desc, color }) => (
+                  <div key={title} className="rounded-xl border p-5" style={{ borderColor: "#E2E8F0", backgroundColor: "#FAFBFC" }}>
+                    <div className="w-2 h-2 rounded-full mb-3" style={{ backgroundColor: color }} />
+                    <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>{title}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
         ) : null}
       </div>
     </>

@@ -80,16 +80,65 @@ async function OpportunitiesResults({
 
       {/* Grid */}
       {regular.length === 0 && featured.length === 0 ? (
-        <div className="rounded-2xl border p-16 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
-          <p className="text-sm mb-1" style={{ color: "#6B7280" }}>
-            {(category || q) ? "No opportunities match your filters." : "No opportunities yet — check back soon."}
-          </p>
-          {(category || q) && (
-            <Link href="/opportunities" className="text-xs mt-2 inline-block" style={{ color: "#2563EB" }}>
-              Clear filters
+        (category || q) ? (
+          <div className="rounded-2xl border p-14 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
+            <p className="text-sm mb-3" style={{ color: "#6B7280" }}>No opportunities match your filters.</p>
+            <Link href="/opportunities" className="text-xs font-semibold" style={{ color: "#2563EB" }}>
+              Clear filters →
             </Link>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="space-y-5">
+            <div
+              className="rounded-2xl border p-10 sm:p-14 text-center"
+              style={{ backgroundColor: "rgba(16,185,129,0.03)", borderColor: "rgba(16,185,129,0.18)" }}
+            >
+              <div
+                className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                style={{ backgroundColor: "rgba(16,185,129,0.1)" }}
+              >
+                <Plus className="h-8 w-8" style={{ color: "#10B981" }} />
+              </div>
+              <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "#10B981" }}>
+                Coming soon
+              </p>
+              <h2 className="text-xl sm:text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
+                Grants &amp; fellowships are being curated
+              </h2>
+              <p className="text-sm max-w-lg mx-auto mb-6 leading-relaxed" style={{ color: "#6B7280" }}>
+                We're building a comprehensive database of grants, fellowships, travel bursaries, and
+                calls for papers — curated specifically for African and global researchers. Know one? Submit it free.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center gap-3">
+                <Link href="/opportunities/submit"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white"
+                  style={{ backgroundColor: "#10B981" }}>
+                  <Plus className="h-4 w-4" />
+                  Submit an Opportunity — Free
+                </Link>
+                <Link href="/resources#newsletter"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border"
+                  style={{ borderColor: "#E2E8F0", color: "#374151" }}>
+                  Get weekly opportunities by email
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { title: "Free to submit", desc: "Share a grant, fellowship, or CFP with the community at no cost.", color: "#10B981" },
+                { title: "Published in 48 hrs", desc: "Every submission is manually reviewed and listed within 2 business days.", color: "#2563EB" },
+                { title: "Maximise applications", desc: "Take the visibility scorecard first — know your score before applying.", color: "#7C3AED" },
+              ].map(({ title, desc, color }) => (
+                <div key={title} className="rounded-xl border p-5" style={{ borderColor: "#E2E8F0", backgroundColor: "#FAFBFC" }}>
+                  <div className="w-2 h-2 rounded-full mb-3" style={{ backgroundColor: color }} />
+                  <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>{title}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {regular.map((opp) => (
