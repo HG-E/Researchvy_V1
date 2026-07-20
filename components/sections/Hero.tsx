@@ -9,7 +9,7 @@ import { trackCtaClick } from "@/lib/analytics/posthog";
 import { buildWhatsAppUrl } from "@/config/site";
 
 const ROTATE_INTERVAL = 2600;
-const ROTATING_WORDS = ["seen.", "cited.", "found.", "read.", "heard."];
+const ROTATING_WORDS = ["seen.", "cited.", "discovered.", "impactful."];
 
 const TRUST_POINTS = [
   "38+ countries",
@@ -18,482 +18,327 @@ const TRUST_POINTS = [
   "No fluff — measurable results",
 ];
 
-const STATS = [
-  { value: "87%",  label: "Visibility increase",  accent: "#4A78D0", bg: "rgba(74,120,208,0.08)"  },
-  { value: "2.4×", label: "More citations",        accent: "#7C3AED", bg: "rgba(124,58,237,0.08)" },
-  { value: "140+", label: "Researchers trained",   accent: "#10B981", bg: "rgba(16,185,129,0.08)" },
-  { value: "10K+", label: "Research community",    accent: "#D97706", bg: "rgba(217,119,6,0.08)"  },
+const PARTNERS = [
+  { short: "FUTO",  full: "Federal University of Technology, Owerri" },
+  { short: "ASM",   full: "American Society of Microbiology" },
 ];
-
-// ── Decorative SVG components ─────────────────────────────────────────────
-
-function SparkAccent() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 22 22"
-      width="18"
-      height="18"
-      fill="none"
-      className="absolute"
-      style={{ top: "-13px", right: "-9px" }}
-    >
-      <line x1="11" y1="2"  x2="11" y2="9"  stroke="#151E45" strokeWidth="2"   strokeLinecap="round" />
-      <line x1="18" y1="6"  x2="13" y2="10" stroke="#151E45" strokeWidth="2"   strokeLinecap="round" />
-      <line x1="4"  y1="6"  x2="9"  y2="10" stroke="#151E45" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function WavyUnderline({
-  color = "#4A78D0",
-  opacity = 0.65,
-  strokeWidth = 2.5,
-}: {
-  color?: string;
-  opacity?: number;
-  strokeWidth?: number;
-}) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 200 10"
-      preserveAspectRatio="none"
-      style={{
-        position: "absolute",
-        left: 0,
-        bottom: "-4px",
-        width: "100%",
-        height: "10px",
-        pointerEvents: "none",
-      }}
-    >
-      <path
-        d="M 0 6 Q 25 1 50 6 Q 75 11 100 6 Q 125 1 150 6 Q 175 11 200 6"
-        fill="none"
-        stroke={color}
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-        opacity={opacity}
-      />
-    </svg>
-  );
-}
-
-function CurvedArrow() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 55 65"
-      width="40"
-      height="50"
-      fill="none"
-      className="absolute"
-      style={{ bottom: "-52px", left: "-24px" }}
-    >
-      <path
-        d="M 44 6 C 30 16 10 32 18 56"
-        stroke="#151E45"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M 9 51 L 18 57 L 24 47"
-        stroke="#151E45"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function BlobShape() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 540 540"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <path
-        fill="#EDE6D8"
-        d="M270 30 C390 5 510 80 520 200 C530 322 488 438 380 480 C272 522 132 510 58 420 C-18 330 6 182 60 92 C112 18 188 52 270 30Z"
-      />
-    </svg>
-  );
-}
-
-// ── Main component ───────────────────────────────────────────────────────────
 
 export function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(
-      () => setWordIndex((i) => (i + 1) % ROTATING_WORDS.length),
-      ROTATE_INTERVAL,
-    );
+    const t = setInterval(() => {
+      setWordIndex((i) => (i + 1) % ROTATING_WORDS.length);
+    }, ROTATE_INTERVAL);
     return () => clearInterval(t);
   }, []);
 
   return (
     <section
-      className="relative overflow-x-hidden"
-      style={{ backgroundColor: "#F5F1E8", minHeight: "calc(100svh - 72px)" }}
+      className="relative overflow-hidden"
+      style={{ backgroundColor: "#FAFBFF" }}
     >
-      {/* Paper / canvas grain texture overlay */}
+      {/* Top-left radial glow */}
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-        }}
-      />
-
-      {/* Ambient blue glow — left side */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 55% 60% at 8% 52%, rgba(74,120,208,0.07) 0%, transparent 65%)",
+            "radial-gradient(ellipse 70% 55% at 30% -5%, rgba(37,99,235,0.07) 0%, transparent 65%)",
         }}
       />
 
-      {/* Two-column flex container */}
+      {/* Dot grid — right half only */}
       <div
-        className="relative z-10 max-w-[1280px] mx-auto flex flex-col lg:flex-row"
-        style={{ minHeight: "inherit" }}
-      >
-        {/* ══════════════════════════════════════════
-            LEFT — all text content
-        ══════════════════════════════════════════ */}
-        <div className="flex flex-col justify-center w-full lg:w-[52%] xl:w-[50%] flex-shrink-0 px-6 sm:px-10 lg:px-14 xl:px-20 py-14 lg:py-24">
+        aria-hidden
+        className="absolute top-0 right-0 w-1/2 h-full opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(#2563EB 1.5px, transparent 1.5px)",
+          backgroundSize: "24px 24px",
+        }}
+      />
 
-          {/* Eyebrow */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-            className="text-[11px] font-bold tracking-[0.22em] uppercase mb-6"
-            style={{ color: "#4A78D0" }}
-          >
-            Connect. Communicate. Collaborate.
-          </motion.p>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 pb-10 sm:pt-20 sm:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-          {/* Headline — Kalam 700, handwritten/display */}
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.08 }}
-            className="leading-[1.12] font-bold mb-7"
-            style={{
-              fontFamily: "var(--font-display)",
-              color: "#151E45",
-              fontSize: "clamp(2.25rem, 4.6vw, 3.75rem)",
-            }}
-            aria-label="Great research deserves to be seen"
-          >
-            Great{" "}
-            {/* Spark accent positioned above "research" */}
-            <span className="relative inline-block">
-              research
-              <SparkAccent />
-            </span>
-            <br />
-            deserves to be{" "}
-            {/* Rotating word + wavy underline */}
-            <span className="relative inline-block pb-2">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={wordIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.22 }}
-                  style={{ color: "#4A78D0" }}
-                  className="inline-block"
-                  aria-hidden
-                >
-                  {ROTATING_WORDS[wordIndex]}
-                </motion.span>
-              </AnimatePresence>
-              <WavyUnderline color="#4A78D0" opacity={0.65} strokeWidth={2.5} />
-            </span>
-          </motion.h1>
+          {/* ── LEFT: Text ── */}
+          <div className="text-center lg:text-left">
 
-          {/* Body copy */}
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.22 }}
-            className="text-[1.05rem] sm:text-[1.1rem] leading-[1.75] mb-10"
-            style={{ color: "#2B2B2B", maxWidth: "460px" }}
-          >
-            Researchvy helps researchers increase their visibility, reach the right
-            audience, and create{" "}
-            <span className="relative inline-block pb-1">
-              real-world impact.
-              <WavyUnderline color="#4A78D0" opacity={0.4} strokeWidth={2} />
-            </span>
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.34 }}
-            className="flex flex-wrap items-center gap-3 mb-9"
-          >
-            <a
-              href={buildWhatsAppUrl("Digital Visibility Clinic enrollment")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-2.5 rounded-xl px-7 py-3.5 text-[15px] font-semibold text-white active:scale-[0.97]"
+            {/* Eyebrow */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold tracking-widest uppercase border mb-7"
               style={{
-                backgroundColor: "#151E45",
-                transition: "background-color 150ms ease, transform 100ms",
+                color: "#2563EB",
+                borderColor: "rgba(37,99,235,0.2)",
+                backgroundColor: "rgba(37,99,235,0.05)",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#4A78D0")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#151E45")}
-              onFocus={(e) => (e.currentTarget.style.backgroundColor = "#4A78D0")}
-              onBlur={(e) => (e.currentTarget.style.backgroundColor = "#151E45")}
-              onClick={() => trackCtaClick("Join the Clinic", "hero", "/clinics")}
             >
-              <MessageCircle className="h-4 w-4 flex-shrink-0" />
-              Join the Clinic
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#10B981" }} />
+              Connect. Communicate. Collaborate.
+            </motion.p>
 
-            <Link
-              href="/resources/visibility-scorecard"
-              className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-[15px] font-semibold border active:scale-[0.97]"
-              style={{
-                color: "#151E45",
-                borderColor: "rgba(21,30,69,0.28)",
-                backgroundColor: "rgba(21,30,69,0.04)",
-                transition: "all 150ms ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(74,120,208,0.09)";
-                e.currentTarget.style.borderColor = "#4A78D0";
-                e.currentTarget.style.color = "#4A78D0";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(21,30,69,0.04)";
-                e.currentTarget.style.borderColor = "rgba(21,30,69,0.28)";
-                e.currentTarget.style.color = "#151E45";
-              }}
-              onClick={() => trackCtaClick("Take the FREE Scorecard", "hero", "/resources/visibility-scorecard")}
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-5"
+              style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
+              aria-label="Great research deserves to be seen, cited, discovered, impactful"
             >
-              Take the FREE Scorecard
-            </Link>
-          </motion.div>
-
-          {/* Trust micro-copy */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-9"
-          >
-            {TRUST_POINTS.map((pt) => (
-              <span
-                key={pt}
-                className="flex items-center gap-1.5 text-xs"
-                style={{ color: "#4A5568" }}
-              >
-                <CheckCircle2
-                  className="h-3.5 w-3.5 flex-shrink-0"
-                  style={{ color: "#10B981" }}
-                />
-                {pt}
+              Great research
+              <br />
+              deserves to be{" "}
+              <span aria-hidden className="relative inline-block">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={wordIndex}
+                    initial={{ opacity: 0, y: 22 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -22 }}
+                    transition={{ duration: 0.36 }}
+                    className="inline-block"
+                    style={{ color: "#2563EB" }}
+                  >
+                    {ROTATING_WORDS[wordIndex]}
+                  </motion.span>
+                </AnimatePresence>
               </span>
-            ))}
-          </motion.div>
+            </motion.h1>
 
-          {/* Impact stat pills — 2×2 grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="grid grid-cols-2 gap-3 max-w-[380px]"
-          >
-            {STATS.map(({ value, label, accent, bg }) => (
-              <div
-                key={label}
-                className="rounded-2xl border p-4 text-center"
-                style={{ backgroundColor: bg, borderColor: `${accent}22` }}
+            {/* Tagline */}
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-base sm:text-lg max-w-xl mx-auto lg:mx-0 mb-3 leading-relaxed"
+              style={{ color: "#4B5563" }}
+            >
+              Researchvy helps researchers increase their visibility, reach the
+              right audience, and create{" "}
+              <span className="font-semibold" style={{ color: "#111827" }}>
+                real-world impact.
+              </span>
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.28 }}
+              className="text-sm font-medium mb-9"
+              style={{ color: "#9CA3AF" }}
+            >
+              More visibility.&nbsp; More collaboration.&nbsp; More impact.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.32 }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 max-w-xs mx-auto sm:max-w-none lg:mx-0"
+            >
+              <a
+                href={buildWhatsAppUrl("Digital Visibility Clinic enrollment")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center gap-2.5 rounded-xl px-7 py-4 text-base font-semibold text-white active:scale-[0.97]"
+                style={{
+                  backgroundColor: "#2563EB",
+                  transition: "background-color 140ms ease, transform 100ms",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                onFocus={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
+                onBlur={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                onClick={() => trackCtaClick("Join the Clinic", "hero", "/clinics")}
               >
-                <p
-                  className="text-2xl font-bold tabular-nums mb-0.5"
-                  style={{ fontFamily: "var(--font-serif)", color: accent }}
+                <MessageCircle className="h-4 w-4 flex-shrink-0" />
+                Join the Clinic
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </a>
+
+              <Link
+                href="/resources/visibility-scorecard"
+                className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-4 text-base font-semibold border active:scale-[0.97]"
+                style={{
+                  color: "#374151",
+                  borderColor: "#D1D5DB",
+                  transition: "border-color 140ms ease, color 140ms ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "#10B981";
+                  e.currentTarget.style.color = "#059669";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "#D1D5DB";
+                  e.currentTarget.style.color = "#374151";
+                }}
+                onClick={() => trackCtaClick("Take the FREE Scorecard", "hero", "/resources/visibility-scorecard")}
+              >
+                Take the FREE Scorecard
+              </Link>
+            </motion.div>
+
+            {/* Trust micro-copy */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.48 }}
+              className="mt-7 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2"
+            >
+              {TRUST_POINTS.map((point) => (
+                <span
+                  key={point}
+                  className="flex items-center gap-1.5 text-xs"
+                  style={{ color: "#6B7280" }}
                 >
-                  {value}
+                  <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#10B981" }} />
+                  {point}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* Impact stat pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.58 }}
+              className="mt-9 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-3"
+            >
+              {[
+                { value: "87%",  label: "Visibility increase",   accent: "#2563EB", bg: "rgba(37,99,235,0.06)"  },
+                { value: "2.4×", label: "More citations",        accent: "#7C3AED", bg: "rgba(124,58,237,0.06)" },
+                { value: "100+", label: "Countries reached",     accent: "#10B981", bg: "rgba(16,185,129,0.06)" },
+                { value: "10K+", label: "Researchers empowered", accent: "#F59E0B", bg: "rgba(245,158,11,0.06)"  },
+              ].map(({ value, label, accent, bg }) => (
+                <div
+                  key={label}
+                  className="rounded-2xl border p-4 text-center"
+                  style={{ backgroundColor: bg, borderColor: `${accent}25` }}
+                >
+                  <p
+                    className="text-2xl font-bold tabular-nums mb-0.5"
+                    style={{ fontFamily: "var(--font-serif)", color: accent }}
+                  >
+                    {value}
+                  </p>
+                  <p className="text-xs leading-snug" style={{ color: "#6B7280" }}>{label}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* ── RIGHT: Researcher photo ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 32 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.15 }}
+            className="relative hidden lg:block"
+          >
+            {/* Main photo card */}
+            <div
+              className="relative rounded-3xl overflow-hidden shadow-2xl"
+              style={{ aspectRatio: "4/5", maxHeight: "580px" }}
+            >
+              {/* Gradient fallback shown before image loads */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 50%, #EDE9FE 100%)",
+                }}
+              />
+              <Image
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80&fit=crop&crop=faces,center"
+                alt="Researcher working at laptop — representing the Researchvy community"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 0px, 45vw"
+                priority
+              />
+              {/* Warm overlay to harmonise with brand palette */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(180deg, rgba(37,99,235,0.04) 0%, rgba(15,23,42,0.18) 100%)",
+                }}
+              />
+
+              {/* "Your research matters" badge — bottom-left */}
+              <div
+                className="absolute bottom-5 left-5 right-5 rounded-2xl p-4 backdrop-blur-sm"
+                style={{ backgroundColor: "rgba(15,23,42,0.78)", border: "1px solid rgba(255,255,255,0.12)" }}
+              >
+                <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: "#60A5FA" }}>
+                  Your research matters.
                 </p>
-                <p className="text-[11px] leading-snug" style={{ color: "#4A5568" }}>
-                  {label}
+                <p className="text-sm font-semibold leading-snug" style={{ color: "#F9FAFB" }}>
+                  &ldquo;Visibility is not luck. It&rsquo;s a strategy.&rdquo;
                 </p>
               </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* ══════════════════════════════════════════
-            RIGHT — blob + photo + annotation (desktop)
-        ══════════════════════════════════════════ */}
-        <motion.div
-          className="relative hidden lg:block flex-1"
-          initial={{ opacity: 0, x: 24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.12 }}
-          style={{ minHeight: "640px" }}
-        >
-          {/* Organic blob behind the photo */}
-          <div
-            aria-hidden
-            className="absolute z-0"
-            style={{ top: "4%", left: "4%", right: "0%", bottom: "4%" }}
-          >
-            <BlobShape />
-          </div>
-
-          {/* Photo — inset inside the blob */}
-          <div
-            className="absolute z-10"
-            style={{
-              top: "9%",
-              left: "13%",
-              right: "5%",
-              bottom: "9%",
-              borderRadius: "1.75rem",
-              overflow: "hidden",
-            }}
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=960&q=88&fit=crop&crop=faces,center"
-              alt="Researcher smiling while working at a laptop"
-              fill
-              className="object-cover object-center"
-              sizes="48vw"
-              priority
-            />
-            {/* Dark bottom fade for "Ry" badge legibility */}
-            <div
-              aria-hidden
-              className="absolute inset-x-0 bottom-0"
-              style={{
-                height: "35%",
-                background:
-                  "linear-gradient(to top, rgba(21,30,69,0.72) 0%, transparent 100%)",
-              }}
-            />
-          </div>
-
-          {/* Handwritten annotation — upper-right, overlapping photo edge */}
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.7 }}
-            className="absolute z-20"
-            style={{ top: "6%", right: "2%" }}
-          >
-            <div
-              className="relative inline-block text-right"
-              style={{
-                fontFamily: "var(--font-display)",
-                color: "#151E45",
-                fontSize: "1rem",
-                lineHeight: 1.65,
-              }}
-            >
-              More visibility,
-              <br />
-              More collaboration,
-              <br />
-              More impact.
-              <CurvedArrow />
             </div>
+
+            {/* Floating top-right accent card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="absolute -top-4 -right-4 rounded-2xl p-4 shadow-lg border"
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#E5E7EB", minWidth: "140px" }}
+            >
+              <p className="text-2xl font-bold mb-0.5" style={{ fontFamily: "var(--font-serif)", color: "#2563EB" }}>87%</p>
+              <p className="text-xs leading-snug" style={{ color: "#6B7280" }}>researchers report<br />increased visibility</p>
+            </motion.div>
+
+            {/* Floating bottom-right accent card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.85 }}
+              className="absolute -bottom-4 -right-6 rounded-2xl p-4 shadow-lg border"
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#E5E7EB" }}
+            >
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#10B981" }} />
+                <p className="text-xs font-semibold" style={{ color: "#111827" }}>Live cohort open</p>
+              </div>
+              <p className="text-xs" style={{ color: "#6B7280" }}>≤20 researchers per batch</p>
+            </motion.div>
           </motion.div>
 
-          {/* "Ry" monogram badge — bottom-right of photo */}
-          <div
-            className="absolute z-20 flex items-center justify-center rounded-full"
-            style={{
-              width: "56px",
-              height: "56px",
-              backgroundColor: "#151E45",
-              bottom: "10%",
-              right: "5.5%",
-              boxShadow: "0 4px 16px rgba(21,30,69,0.3)",
-            }}
-          >
-            <span
-              style={{
-                color: "#ffffff",
-                fontFamily: "var(--font-serif)",
-                fontSize: "1.1rem",
-                fontWeight: 700,
-                letterSpacing: "-0.02em",
-                lineHeight: 1,
-              }}
-            >
-              Ry
-            </span>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* ══════════════════════════════════════════
-          MOBILE — photo strip below text
-      ══════════════════════════════════════════ */}
-      <div
-        className="relative lg:hidden overflow-hidden"
-        style={{ height: "300px" }}
-      >
-        <Image
-          src="https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=800&q=80&fit=crop&crop=faces,top"
-          alt=""
-          fill
-          className="object-cover object-top"
-          sizes="100vw"
-          aria-hidden
-        />
-        {/* Top cream fade — blends into page background */}
-        <div
-          aria-hidden
-          className="absolute inset-x-0 top-0"
-          style={{
-            height: "38%",
-            background:
-              "linear-gradient(to bottom, #F5F1E8 0%, transparent 100%)",
-          }}
-        />
-        {/* Bottom dark fade */}
-        <div
-          aria-hidden
-          className="absolute inset-x-0 bottom-0"
-          style={{
-            height: "50%",
-            background:
-              "linear-gradient(to top, rgba(21,30,69,0.75) 0%, transparent 100%)",
-          }}
-        />
-        {/* Mobile annotation — compact single line */}
-        <div
-          className="absolute bottom-5 left-5 right-5"
-          style={{
-            fontFamily: "var(--font-display)",
-            color: "#ffffff",
-            fontSize: "0.95rem",
-            lineHeight: 1.5,
-          }}
-        >
-          More visibility · More collaboration · More impact.
         </div>
+
+        {/* ── Partner strip ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.72 }}
+          className="mt-12 pt-8 border-t"
+          style={{ borderColor: "#E5E7EB" }}
+        >
+          <p className="text-[10px] font-bold tracking-widest uppercase mb-4 text-center" style={{ color: "#9CA3AF" }}>
+            Delivered in partnership with
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {PARTNERS.map(({ short, full }) => (
+              <span
+                key={short}
+                title={full}
+                className="text-[11px] font-semibold px-4 py-1.5 rounded-full border cursor-default"
+                style={{ backgroundColor: "#F3F4F6", borderColor: "#E5E7EB", color: "#4B5563" }}
+              >
+                {short}
+              </span>
+            ))}
+          </div>
+          <p className="text-[10px] text-center mt-3" style={{ color: "#CBD5E1" }}>
+            Federal University of Technology, Owerri (FUTO) &nbsp;·&nbsp; American Society of Microbiology (ASM)
+          </p>
+        </motion.div>
+
       </div>
     </section>
   );
