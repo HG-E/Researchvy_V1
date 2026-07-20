@@ -1,4 +1,4 @@
-const CACHE_NAME = "researchvy-v1";
+const CACHE_NAME = "researchvy-v2";
 const OFFLINE_URL = "/offline";
 
 const PRECACHE = [
@@ -58,6 +58,11 @@ self.addEventListener("fetch", (event) => {
         return new Response("Network unavailable", { status: 503 });
       })
   );
+});
+
+// Allow the client to trigger immediate activation without waiting for all tabs to close
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "SKIP_WAITING") self.skipWaiting();
 });
 
 // ── Web Push ───────────────────────────────────────────────────────────────────
