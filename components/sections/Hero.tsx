@@ -9,7 +9,7 @@ import { trackCtaClick } from "@/lib/analytics/posthog";
 import { buildWhatsAppUrl } from "@/config/site";
 
 const ROTATE_INTERVAL = 2600;
-const ROTATING_WORDS = ["seen.", "read.", "cited.", "used.", "live."];
+const ROTATING_WORDS = ["seen.", "read.", "cited.", "used.", "lived.", "social.", "human."];
 
 const TRUST_POINTS = [
   "38+ countries",
@@ -83,7 +83,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-5"
               style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
-              aria-label="Great research deserves to be seen, read, cited, used, live"
+              aria-label="Great research deserves to be seen, read, cited, used, lived, social, human"
             >
               Great research
               <br />
