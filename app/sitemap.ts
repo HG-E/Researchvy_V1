@@ -8,7 +8,7 @@ import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 // Never use `new Date()` here: telling Google every page changed today on every
 // deploy causes crawlers to stop trusting the lastModified signal entirely.
 const SITE_LAUNCH    = "2025-11-01";
-const COHORT_UPDATED = "2026-05-01"; // July 2026 cohort info added
+const COHORT_UPDATED = "2026-07-01"; // August 2026 cohort info added
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url;
