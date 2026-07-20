@@ -20,9 +20,10 @@ test.describe("Clinics Page", () => {
   test("August 2026 cohort banner is visible (not July)", async ({ page }) => {
     const bodyText = await page.locator("body").textContent();
     expect(bodyText).toContain("August 2026");
-    // "29 July 2026" (Wednesday start) and "26 July 2026" (deadline) are legitimate dates
-    // — only reject cohort-label references to July 2026
-    expect(bodyText).not.toMatch(/July 2026 cohort|cohort.*July 2026/i);
+    // "29 July 2026" (Wednesday start) and "26 July 2026" (deadline) are legitimate dates;
+    // "per cohort" + registration date also legitimately appear together.
+    // Only reject the explicit cohort-label phrase.
+    expect(bodyText).not.toMatch(/July 2026 cohort/i);
   });
 
   test("pricing: Single Module price visible", async ({ page }) => {
