@@ -36,10 +36,18 @@
   --color-amber:          #F59E0B;
   --color-red:            #EF4444;
 
+  /* Hero section tokens */
+  --color-cream-bg:       #F5F1E8;
+  --color-cream-shape:    #EDE6D8;
+  --color-blue-accent:    #4A78D0;
+  --color-navy-brand:     #151E45;
+  --color-body-text:      #2B2B2B;
+
   /* Typography */
   --font-serif:           "Lora", "Georgia", serif;
   --font-sans:            "Inter", system-ui, sans-serif;
   --font-mono:            "JetBrains Mono", monospace;
+  --font-display:         "Kalam", cursive;
 
   /* Font Sizes */
   --text-xs:              0.75rem;

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Lora } from "next/font/google";
+import { Inter, Lora, Kalam } from "next/font/google";
 import "./globals.css";
 import "@/styles/animations.css";
 import { siteConfig } from "@/config/site";
@@ -21,6 +21,13 @@ const lora = Lora({
   display: "swap",
   weight: ["600", "700"],
   style: ["normal"],
+});
+
+const kalam = Kalam({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+  weight: ["700"],
 });
 
 export const metadata: Metadata = {
@@ -103,7 +110,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${lora.variable} h-full`}
+      className={`${inter.variable} ${lora.variable} ${kalam.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased">
         {/* Runtime env injection — runs before the JS bundle, overrides baked-in build values */}
