@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { Download, X } from "lucide-react";
@@ -59,7 +59,7 @@ export function InstallPrompt() {
         <p className="text-sm font-semibold" style={{ color: "#111827" }}>
           Install Researchvy
         </p>
-        <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#6B7280" }}>
+        <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#4B5563" }}>
           Add to your home screen for quick access, works offline too.
         </p>
         <button
@@ -75,7 +75,7 @@ export function InstallPrompt() {
         onClick={handleDismiss}
         className="flex-shrink-0 rounded-md p-1 transition-colors hover:bg-[#F1F5F9]"
         aria-label="Dismiss"
-        style={{ color: "#6B7280" }}
+        style={{ color: "#4B5563" }}
       >
         <X className="h-4 w-4" />
       </button>

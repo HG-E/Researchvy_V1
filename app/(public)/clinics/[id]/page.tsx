@@ -90,10 +90,10 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
           >
             {clinic.name}
           </h1>
-          <p className="text-lg leading-relaxed mb-3" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-3" style={{ color: "#4B5563" }}>
             {clinic.tagline}
           </p>
-          <p className="text-base leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-base leading-relaxed" style={{ color: "#4B5563" }}>
             Most researchers finish this clinic and say the same thing: they had no idea how
             invisible they were, and how fixable it was. In our sessions, you get a complete
             scholarly identity overhaul, a personal visibility strategy, and a verified certificate.
@@ -110,7 +110,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               <span
                 key={text}
                 className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium"
-                style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
+                style={{ backgroundColor: "#F1F5F9", color: "#4B5563" }}
               >
                 <Icon className="h-3.5 w-3.5" style={{ color: "#60A5FA" }} />
                 {text}
@@ -145,7 +145,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
                   Not sure if you need this programme?
                 </p>
-                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                   Take the free Researcher Visibility Scorecard first — 4–6 minutes, 12 checkpoints,
                   results shown instantly. Most researchers score 25–45 and use their score to decide
                   which modules matter most.
@@ -231,12 +231,12 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                     <h3 className="font-bold text-lg mb-1" style={{ color: "#111827" }}>
                       {clinic.certificate.name}
                     </h3>
-                    <p className="text-sm mb-5" style={{ color: "#6B7280" }}>
+                    <p className="text-sm mb-5" style={{ color: "#4B5563" }}>
                       {clinic.certificate.description}
                     </p>
                     <div className="grid grid-cols-2 gap-2">
                       {clinic.certificate.features.map((feature) => (
-                        <div key={feature} className="flex items-center gap-2 text-xs" style={{ color: "#6B7280" }}>
+                        <div key={feature} className="flex items-center gap-2 text-xs" style={{ color: "#4B5563" }}>
                           <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#F59E0B" }} />
                           {feature}
                         </div>
@@ -291,8 +291,8 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                       <div className="flex-1 min-w-0">
                         <p className="font-bold text-sm mb-0.5" style={{ color: "#111827" }}>{f.name}</p>
                         <p className="text-xs mb-1" style={{ color: "#60A5FA" }}>{f.title}</p>
-                        <p className="text-xs mb-3" style={{ color: "#6B7280" }}>{f.affiliation} · {f.clinicsLed} cohorts · {f.researchersHelped}+ researchers guided</p>
-                        <p className="text-xs leading-relaxed mb-3 line-clamp-3" style={{ color: "#6B7280" }}>{f.bio}</p>
+                        <p className="text-xs mb-3" style={{ color: "#4B5563" }}>{f.affiliation} · {f.clinicsLed} cohorts · {f.researchersHelped}+ researchers guided</p>
+                        <p className="text-xs leading-relaxed mb-3 line-clamp-3" style={{ color: "#4B5563" }}>{f.bio}</p>
                         <a
                           href="/about"
                           className="inline-flex items-center gap-1 text-xs font-semibold"
@@ -376,7 +376,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                         <p className="text-lg font-bold" style={{ color: "#111827" }}>
                           {formatNgn(usdToNgn(isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular, rate))}
                         </p>
-                        <p className="text-xs" style={{ color: "#6B7280" }}>
+                        <p className="text-xs" style={{ color: "#4B5563" }}>
                           ${isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular} USD{isEarlyBird ? " · early bird" : ""}
                         </p>
                       </div>
@@ -408,7 +408,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                   <p className="text-base font-bold mb-1.5" style={{ color: "#111827" }}>
                     Private Consulting — Built Around You
                   </p>
-                  <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                     Same expertise, applied exclusively to your profile. Written audit, optimised accounts,
                     and a live debrief call — no cohort schedule. Start anytime. From{" "}
                     <strong style={{ color: "#A78BFA" }}>$209 / {formatNgn(usdToNgn(209, rate))}</strong>.

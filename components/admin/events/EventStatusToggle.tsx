@@ -69,7 +69,7 @@ export function EventStatusToggle({ eventId, currentStatus, isFeatured }: Props)
           onClick={() => act("unfeature")}
           disabled={loading}
           className="text-[11px] font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap"
-          style={{ backgroundColor: "rgba(100,116,139,0.1)", color: "#6B7280" }}
+          style={{ backgroundColor: "rgba(100,116,139,0.1)", color: "#4B5563" }}
         >
           Unfeature
         </button>
@@ -108,7 +108,7 @@ export function EventStatusToggle({ eventId, currentStatus, isFeatured }: Props)
             <button
               onClick={() => setShowReject(false)}
               className="text-[11px] py-1.5 px-2 rounded-lg"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Cancel
             </button>

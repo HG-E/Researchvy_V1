@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 
@@ -32,7 +32,7 @@ export function TrustBar() {
               >
                 {pillar.number}
               </p>
-              <p className="text-sm" style={{ color: "#6B7280" }}>
+              <p className="text-sm" style={{ color: "#4B5563" }}>
                 {pillar.label}
               </p>
             </motion.div>

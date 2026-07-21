@@ -91,8 +91,8 @@ export function LessonRow({ lesson, isFirst, isLast, onMoveUp, onMoveDown }: Pro
 
         <button onClick={() => setOpen(o => !o)} className="flex-1 flex items-center gap-2 text-left min-w-0">
           {open
-            ? <ChevronDown className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />
-            : <ChevronRight className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />}
+            ? <ChevronDown className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#4B5563" }} />
+            : <ChevronRight className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#4B5563" }} />}
           {lesson.lesson_type === "video"
             ? <Video className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#60A5FA" }} />
             : <FileText className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#34D399" }} />}
@@ -101,7 +101,7 @@ export function LessonRow({ lesson, isFirst, isLast, onMoveUp, onMoveDown }: Pro
             <span className="text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#1d4ed8", color: "#bfdbfe" }}>preview</span>
           )}
           {!lesson.is_published && (
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#1E293B", color: "#6B7280" }}>draft</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0" style={{ backgroundColor: "#1E293B", color: "#4B5563" }}>draft</span>
           )}
         </button>
         <span className="text-[10px] font-mono flex-shrink-0" style={{ color: "#4B5563" }}>#{lesson.position}</span>
@@ -111,15 +111,15 @@ export function LessonRow({ lesson, isFirst, isLast, onMoveUp, onMoveDown }: Pro
         <div className="border-t px-3 py-3 space-y-3" style={{ borderColor: "#334155", backgroundColor: "#070B14" }}>
           <div className="grid grid-cols-2 gap-3">
             <div className="col-span-2">
-              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Title</label>
+              <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Title</label>
               <input className={inp} style={inpStyle} value={form.title} onChange={e => set("title", e.target.value)} />
             </div>
             <div>
-              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Slug</label>
+              <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Slug</label>
               <input className={`${inp} font-mono`} style={inpStyle} value={form.slug} onChange={e => set("slug", e.target.value)} />
             </div>
             <div>
-              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Type</label>
+              <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Type</label>
               <select className={inp} style={inpStyle} value={form.lesson_type} onChange={e => set("lesson_type", e.target.value)}>
                 <option value="video">Video</option>
                 <option value="article">Article</option>
@@ -129,14 +129,14 @@ export function LessonRow({ lesson, isFirst, isLast, onMoveUp, onMoveDown }: Pro
             {form.lesson_type === "video" && (
               <>
                 <div>
-                  <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Provider</label>
+                  <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Provider</label>
                   <select className={inp} style={inpStyle} value={form.video_provider} onChange={e => set("video_provider", e.target.value)}>
                     <option value="youtube">YouTube</option>
                     <option value="bunny">Bunny</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>
+                  <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>
                     {form.video_provider === "youtube" ? "YouTube Video ID" : "Bunny Video ID"}
                   </label>
                   <input className={`${inp} font-mono`} style={inpStyle} value={form.video_id}
@@ -147,7 +147,7 @@ export function LessonRow({ lesson, isFirst, isLast, onMoveUp, onMoveDown }: Pro
             )}
 
             <div>
-              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Duration (seconds)</label>
+              <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Duration (seconds)</label>
               <input className={inp} style={inpStyle} type="number" value={form.duration_seconds}
                 onChange={e => set("duration_seconds", e.target.value)}
                 placeholder="e.g. 900 for 15 min" />
@@ -165,7 +165,7 @@ export function LessonRow({ lesson, isFirst, isLast, onMoveUp, onMoveDown }: Pro
 
             {/* Lesson body content editor */}
             <div className="col-span-2">
-              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>
+              <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>
                 Lesson Content (Markdown)
                 <span className="ml-2 font-normal" style={{ color: "#4B5563" }}>optional — shown below the video</span>
               </label>
@@ -190,7 +190,7 @@ export function LessonRow({ lesson, isFirst, isLast, onMoveUp, onMoveDown }: Pro
             </button>
             <div className="flex gap-2">
               <button onClick={() => { setOpen(false); setConfirmDelete(false); }}
-                className="px-3 py-1.5 text-xs rounded-md" style={{ color: "#6B7280" }}>
+                className="px-3 py-1.5 text-xs rounded-md" style={{ color: "#4B5563" }}>
                 Cancel
               </button>
               <button onClick={save} disabled={saving}

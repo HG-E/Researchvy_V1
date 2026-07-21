@@ -1,4 +1,4 @@
-﻿import { generatePageMetadata } from "@/lib/seo/metadata";
+import { generatePageMetadata } from "@/lib/seo/metadata";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ContactSidebar } from "@/components/forms/ContactSidebar";
 
@@ -30,7 +30,7 @@ export default function ContactPage() {
           >
             Contact Us
           </h1>
-          <p className="text-lg" style={{ color: "#6B7280" }}>
+          <p className="text-lg" style={{ color: "#4B5563" }}>
             Questions, partnerships, or just curious about what we do, we&apos;d love to hear
             from you.
           </p>

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Calendar, ExternalLink, Banknote, Star, Plane } from "lucide-react";
 import type { ResearchOpportunity, OpportunityCategory } from "@/types/opportunity";
 
@@ -11,7 +11,7 @@ const CAT_META: Record<OpportunityCategory, { label: string; color: string; bg: 
   job:            { label: "Job / Position",           color: "#6366F1", bg: "rgba(99,102,241,0.1)"  },
   award:          { label: "Award",                    color: "#F97316", bg: "rgba(249,115,22,0.1)"  },
   "travel-grant": { label: "Travel Grant / Bursary",  color: "#22D3EE", bg: "rgba(34,211,238,0.1)"  },
-  other:          { label: "Other",                    color: "#6B7280", bg: "rgba(107,114,128,0.1)" },
+  other:          { label: "Other",                    color: "#4B5563", bg: "rgba(107,114,128,0.1)" },
 };
 
 const LEVEL_LABEL: Record<string, string> = {
@@ -89,7 +89,7 @@ export function OpportunityCard({ opp }: Props) {
 
         {/* Funder */}
         {opp.funder && (
-          <p className="text-xs mb-3" style={{ color: "#6B7280" }}>{opp.funder}</p>
+          <p className="text-xs mb-3" style={{ color: "#4B5563" }}>{opp.funder}</p>
         )}
 
         {/* Value */}
@@ -102,7 +102,7 @@ export function OpportunityCard({ opp }: Props) {
 
         {/* Excerpt */}
         {opp.body && (
-          <p className="text-xs leading-relaxed line-clamp-2 mb-4" style={{ color: "#6B7280" }}>
+          <p className="text-xs leading-relaxed line-clamp-2 mb-4" style={{ color: "#4B5563" }}>
             {opp.body.replace(/[#*_[\]()]/g, "").slice(0, 160)}
           </p>
         )}
@@ -118,17 +118,17 @@ export function OpportunityCard({ opp }: Props) {
                 {past ? "Closed" : expiring ? `${Math.ceil((new Date(opp.deadline).getTime() - Date.now()) / 86_400_000)}d left` : new Date(opp.deadline).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
               </span>
             ) : (
-              <span className="text-[11px]" style={{ color: "#6B7280" }}>Rolling deadline</span>
+              <span className="text-[11px]" style={{ color: "#4B5563" }}>Rolling deadline</span>
             )}
 
             {opp.target_level && opp.target_level !== "all" && (
-              <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}>
+              <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ backgroundColor: "#F1F5F9", color: "#4B5563" }}>
                 {LEVEL_LABEL[opp.target_level] ?? opp.target_level}
               </span>
             )}
           </div>
 
-          <span className="text-[11px] font-medium flex items-center gap-1" style={{ color: "#6B7280" }}>
+          <span className="text-[11px] font-medium flex items-center gap-1" style={{ color: "#4B5563" }}>
             {opp.apply_url.startsWith("http") ? (
               <><ExternalLink className="h-3 w-3" /> Details</>
             ) : "View →"}

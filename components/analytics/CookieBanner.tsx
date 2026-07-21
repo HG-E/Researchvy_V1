@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -60,7 +60,7 @@ export function CookieBanner() {
           <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
             We use privacy-friendly analytics
           </p>
-          <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
             We use PostHog to understand how visitors use Researchvy. No cookies are set — data is stored locally in your browser only.{" "}
             <Link href="/privacy" className="underline" style={{ color: "#60A5FA" }}>
               Privacy policy
@@ -71,7 +71,7 @@ export function CookieBanner() {
           <button
             onClick={decline}
             className="px-4 py-2 rounded-xl text-xs font-semibold border transition-colors"
-            style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+            style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
           >
             Decline
           </button>
@@ -85,7 +85,7 @@ export function CookieBanner() {
           <button
             onClick={() => setVisible(false)}
             className="p-1.5 rounded-lg transition-colors"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
             aria-label="Dismiss for now"
           >
             <X className="h-3.5 w-3.5" />

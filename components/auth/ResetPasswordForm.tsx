@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -58,18 +58,18 @@ export function ResetPasswordForm() {
           >
             Check your inbox
           </h2>
-          <p className="text-sm mb-1 leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-sm mb-1 leading-relaxed" style={{ color: "#4B5563" }}>
             We sent a password reset link to
           </p>
           <p className="text-sm font-semibold mb-6" style={{ color: "#111827" }}>
             {submittedEmail}
           </p>
-          <p className="text-xs mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
             Didn&apos;t receive it? Check your spam folder or{" "}
             <button
               onClick={() => setSent(false)}
               className="underline transition-colors"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               try again
             </button>
@@ -78,7 +78,7 @@ export function ResetPasswordForm() {
           <Link
             href="/signin"
             className="inline-flex items-center gap-2 text-sm font-medium transition-colors"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
           >
@@ -109,7 +109,7 @@ export function ResetPasswordForm() {
           >
             Reset your password
           </h1>
-          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
             Enter your account email and we&apos;ll send you a secure reset link.
           </p>
         </div>
@@ -118,7 +118,7 @@ export function ResetPasswordForm() {
           <div>
             <label
               className="block text-xs font-semibold tracking-wide uppercase mb-2"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Email Address
             </label>
@@ -186,7 +186,7 @@ export function ResetPasswordForm() {
           <Link
             href="/signin"
             className="inline-flex items-center gap-1.5 text-sm transition-colors"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
           >

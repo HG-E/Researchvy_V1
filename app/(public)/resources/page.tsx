@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { RESOURCES } from "@/constants/resources";
 import { FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers, ArrowRight, type LucideIcon } from "lucide-react";
@@ -38,7 +38,7 @@ export default function ResourceLibraryPage() {
             Tools for Scholarly<br />
             <span style={{ color: "#10B981" }}>Visibility</span>
           </h1>
-          <p className="text-base leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-base leading-relaxed" style={{ color: "#4B5563" }}>
             Free guides, checklists, templates, and workbooks to help you build a strategic,
             sustainable scholarly visibility system.
           </p>
@@ -65,13 +65,13 @@ export default function ResourceLibraryPage() {
               >
                 {featured.title}
               </h2>
-              <p className="text-base leading-relaxed mb-8" style={{ color: "#6B7280" }}>
+              <p className="text-base leading-relaxed mb-8" style={{ color: "#4B5563" }}>
                 {featured.description}
               </p>
               <div>
                 {featured.access === "free" ? (
                   <div>
-                    <p className="text-xs mb-4 leading-relaxed" style={{ color: "#6B7280" }}>
+                    <p className="text-xs mb-4 leading-relaxed" style={{ color: "#4B5563" }}>
                       Most researchers score between 25–45. Takes 4–6 minutes.
                       No email required — results are shown immediately.
                     </p>
@@ -83,13 +83,13 @@ export default function ResourceLibraryPage() {
                       Take the Scorecard Free
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
-                    <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
+                    <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
                       Free · No account needed · Results shown instantly
                     </p>
                   </div>
                 ) : (
                   <div>
-                    <p className="text-sm mb-1 font-medium" style={{ color: "#6B7280" }}>
+                    <p className="text-sm mb-1 font-medium" style={{ color: "#4B5563" }}>
                       Free, enter your email to access instantly:
                     </p>
                     <NewsletterForm
@@ -118,9 +118,9 @@ export default function ResourceLibraryPage() {
           {[
             { label: "Free via WhatsApp", color: "#25D366" },
             { label: "Free with email signup", color: "#2563EB" },
-            { label: "Clinic participants only", color: "#6B7280" },
+            { label: "Clinic participants only", color: "#4B5563" },
           ].map(({ label, color }) => (
-            <span key={label} className="flex items-center gap-2 text-xs" style={{ color: "#6B7280" }}>
+            <span key={label} className="flex items-center gap-2 text-xs" style={{ color: "#4B5563" }}>
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color }} />
               {label}
             </span>
@@ -148,14 +148,14 @@ export default function ResourceLibraryPage() {
           >
             Research Visibility Insights
           </h2>
-          <p className="text-sm mb-8 max-w-lg mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-sm mb-8 max-w-lg mx-auto" style={{ color: "#4B5563" }}>
             New resources, articles, and clinic announcements delivered to your inbox.
             No spam, scholarly intelligence only.
           </p>
           <div className="flex justify-center">
             <NewsletterForm variant="inline" />
           </div>
-          <p className="text-xs mt-4" style={{ color: "#6B7280" }}>
+          <p className="text-xs mt-4" style={{ color: "#4B5563" }}>
             Join researchers from universities and institutions worldwide.
           </p>
         </div>

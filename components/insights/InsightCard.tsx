@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -79,7 +79,7 @@ export function InsightCard({ insight }: { insight: InsightListItem }) {
         {/* Card body */}
         <div className="flex flex-col flex-1 p-5 gap-3">
           {/* Reading time */}
-          <span className="flex items-center gap-1 text-xs self-start" style={{ color: "#6B7280" }}>
+          <span className="flex items-center gap-1 text-xs self-start" style={{ color: "#4B5563" }}>
             <Clock className="h-3 w-3" />
             {insight.reading_time} min read
           </span>
@@ -96,7 +96,7 @@ export function InsightCard({ insight }: { insight: InsightListItem }) {
           </h2>
 
           {/* Excerpt — 2 lines */}
-          <p className="text-sm leading-relaxed line-clamp-2" style={{ color: "#6B7280" }}>
+          <p className="text-sm leading-relaxed line-clamp-2" style={{ color: "#4B5563" }}>
             {insight.excerpt}
           </p>
 
@@ -105,10 +105,10 @@ export function InsightCard({ insight }: { insight: InsightListItem }) {
             className="flex items-center justify-between pt-3 border-t"
             style={{ borderColor: "#E2E8F0" }}
           >
-            <span className="text-xs font-medium" style={{ color: "#6B7280" }}>
+            <span className="text-xs font-medium" style={{ color: "#4B5563" }}>
               {insight.author?.name ?? "Researchvy Editorial"}
             </span>
-            <span className="flex items-center gap-1 text-xs" style={{ color: "#6B7280" }}>
+            <span className="flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
               <Calendar className="h-3 w-3" />
               {format(new Date(insight.published_at), "MMM d, yyyy")}
             </span>

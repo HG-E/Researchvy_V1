@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Users, Globe, Award, Handshake, ArrowRight, MessageCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -63,7 +63,7 @@ export default function NetworkPage() {
             You Don&apos;t Have to<br />
             <span style={{ color: "#34D399" }}>Figure This Out Alone.</span>
           </h1>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-8" style={{ color: "#4B5563" }}>
             The researchers gaining ground fastest are the ones connected to others doing the
             same work, sharing what&apos;s working, holding each other accountable, and learning
             from strategies already proven to move the needle on visibility and impact.
@@ -82,7 +82,7 @@ export default function NetworkPage() {
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               Ask a Question
             </Link>
@@ -100,7 +100,7 @@ export default function NetworkPage() {
                 <Icon className="h-5 w-5" style={{ color }} />
               </div>
               <h2 className="text-base font-bold mb-2" style={{ color: "#111827" }}>{title}</h2>
-              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
             </HoverCard>
           ))}
         </div>
@@ -145,7 +145,7 @@ export default function NetworkPage() {
             >
               Join the Waitlist
             </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               The Network is being built deliberately: small, serious, and focused.
               Express your interest now to be among the first researchers invited when
               membership opens. Spots will be limited.
@@ -164,12 +164,12 @@ export default function NetworkPage() {
               <Link
                 href="/contact"
                 className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
-                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
               >
                 Send an Email
               </Link>
             </div>
-            <p className="text-xs text-center mt-4" style={{ color: "#6B7280" }}>
+            <p className="text-xs text-center mt-4" style={{ color: "#4B5563" }}>
               Typically respond within 24 hours
             </p>
           </div>
@@ -184,7 +184,7 @@ export default function NetworkPage() {
             <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
               Build your skills before joining the community
             </p>
-            <p className="text-sm" style={{ color: "#6B7280" }}>
+            <p className="text-sm" style={{ color: "#4B5563" }}>
               Academy programmes give you the foundation to get the most from the Network and contribute meaningfully.
             </p>
           </div>

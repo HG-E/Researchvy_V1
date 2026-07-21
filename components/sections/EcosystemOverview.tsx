@@ -47,7 +47,7 @@ function DivisionCard({ division }: { division: (typeof siteConfig.divisions)[nu
       <p className="text-xs font-medium mb-3" style={{ color: accent }}>
         {division.tagline}
       </p>
-      <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: "#6B7280" }}>
+      <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: "#4B5563" }}>
         {division.description}
       </p>
       <Link
@@ -81,7 +81,7 @@ export function EcosystemOverview() {
           >
             Five Divisions. One Mission.
           </h2>
-          <p className="text-base max-w-2xl mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-base max-w-2xl mx-auto" style={{ color: "#4B5563" }}>
             From intelligence and analytics to community and clinics, every dimension of scholarly
             visibility is covered.
           </p>

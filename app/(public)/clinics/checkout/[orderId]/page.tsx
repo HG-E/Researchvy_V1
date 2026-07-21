@@ -76,7 +76,7 @@ export default async function OrderPage({
         <Link
           href="/clinics/digital-visibility-clinic"
           className="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors"
-          style={{ color: "#6B7280" }}
+          style={{ color: "#4B5563" }}
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to Clinic

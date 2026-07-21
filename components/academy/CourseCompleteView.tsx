@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -133,7 +133,7 @@ export function CourseCompleteView({
         >
 
           {/* Top label */}
-          <p className="text-center text-xs font-bold tracking-widest uppercase mb-8" style={{ color: "#6B7280" }}>
+          <p className="text-center text-xs font-bold tracking-widest uppercase mb-8" style={{ color: "#4B5563" }}>
             Researchvy Academy
           </p>
 
@@ -154,10 +154,10 @@ export function CourseCompleteView({
 
             <div className="text-5xl mb-4">🎓</div>
 
-            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
               Certificate of Completion
             </p>
-            <p className="text-sm mb-5" style={{ color: "#6B7280" }}>This certifies that</p>
+            <p className="text-sm mb-5" style={{ color: "#4B5563" }}>This certifies that</p>
 
             <h1
               className="text-3xl font-bold mb-2 leading-tight"
@@ -165,7 +165,7 @@ export function CourseCompleteView({
             >
               {researcherName}
             </h1>
-            <p className="text-sm mb-5" style={{ color: "#6B7280" }}>has successfully completed</p>
+            <p className="text-sm mb-5" style={{ color: "#4B5563" }}>has successfully completed</p>
 
             <h2 className="text-xl font-bold mb-4" style={{ color: "#111827" }}>
               {courseName}
@@ -184,7 +184,7 @@ export function CourseCompleteView({
 
             <div className="border-t mt-6 mb-4" style={{ borderColor: "#E2E8F0" }} />
 
-            <div className="flex items-center justify-center gap-6 text-xs" style={{ color: "#6B7280" }}>
+            <div className="flex items-center justify-center gap-6 text-xs" style={{ color: "#4B5563" }}>
               <span className="flex items-center gap-1.5">
                 <CheckCircle className="h-3.5 w-3.5" style={{ color: "#10B981" }} />
                 {lessonsCount} lessons
@@ -193,7 +193,7 @@ export function CourseCompleteView({
             </div>
             <p
               className="text-[10px] mt-2 font-mono tracking-wider"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               {certId}
             </p>
@@ -249,13 +249,13 @@ export function CourseCompleteView({
               className="rounded-2xl border p-5 text-center"
               style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
             >
-              <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#6B7280" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "#4B5563" }}>
                 What&apos;s next
               </p>
               <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
                 Level {nextCourse.level}: {nextCourse.title}
               </p>
-              <p className="text-xs mb-4" style={{ color: "#6B7280" }}>
+              <p className="text-xs mb-4" style={{ color: "#4B5563" }}>
                 Continue building on what you&apos;ve mastered
               </p>
               <Link
@@ -275,7 +275,7 @@ export function CourseCompleteView({
               <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>
                 You&apos;ve reached the top 🏆
               </p>
-              <p className="text-xs mb-4" style={{ color: "#6B7280" }}>
+              <p className="text-xs mb-4" style={{ color: "#4B5563" }}>
                 Academy complete. Browse all courses or start over from any level.
               </p>
               <Link
@@ -294,7 +294,7 @@ export function CourseCompleteView({
             <Link
               href={`/academy/courses/${courseSlug}`}
               className="text-xs transition-colors hover:text-[#111827]"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               ← Back to course
             </Link>

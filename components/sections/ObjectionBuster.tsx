@@ -72,7 +72,7 @@ export function ObjectionBuster() {
                   &ldquo;{item.q}&rdquo;
                 </p>
               </div>
-              <p className="text-sm leading-relaxed pl-7" style={{ color: "#6B7280" }}>
+              <p className="text-sm leading-relaxed pl-7" style={{ color: "#4B5563" }}>
                 {item.a}
               </p>
             </motion.div>

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { ArrowRight, MessageCircle, CheckCircle, User, ArrowLeft, Clock, Zap, Star, Mail } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo/schemas";
@@ -191,7 +191,7 @@ export default async function PrivateConsultingPage() {
         <Link
           href="/clinics"
           className="inline-flex items-center gap-1.5 text-sm mb-10 transition-colors"
-          style={{ color: "#6B7280" }}
+          style={{ color: "#4B5563" }}
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           All Clinics
@@ -213,12 +213,12 @@ export default async function PrivateConsultingPage() {
             Your Gaps. Your Profile.<br />
             <span style={{ color: "#8B5CF6" }}>Done For You.</span>
           </h1>
-          <p className="text-base sm:text-lg leading-relaxed mb-4" style={{ color: "#6B7280" }}>
+          <p className="text-base sm:text-lg leading-relaxed mb-4" style={{ color: "#4B5563" }}>
             One-on-one consulting built around your specific research identity — not a cohort curriculum.
             We audit your profiles, fix what&apos;s broken, build your strategy, and hand you the deliverables.
             You leave with a fully optimised scholarly presence, not homework.
           </p>
-          <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-sm mb-6" style={{ color: "#4B5563" }}>
             Packages from{" "}
             <strong style={{ color: "#A78BFA" }}>$209 / {formatNgn(usdToNgn(209, rate))}</strong>
             {" "}· Written deliverables + debrief call · Start anytime
@@ -237,7 +237,7 @@ export default async function PrivateConsultingPage() {
             <a
               href="#packages"
               className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-colors"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               See Packages <ArrowRight className="h-4 w-4" />
             </a>
@@ -246,7 +246,7 @@ export default async function PrivateConsultingPage() {
 
         {/* Clinic vs Private Consulting — two-track comparison */}
         <div className="mb-20">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: "#4B5563" }}>
             Which track is right for you?
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -275,7 +275,7 @@ export default async function PrivateConsultingPage() {
                   </div>
                   <ul className="space-y-2.5 flex-1 mb-6">
                     {track.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2.5 text-sm" style={{ color: "#6B7280" }}>
+                      <li key={point} className="flex items-start gap-2.5 text-sm" style={{ color: "#4B5563" }}>
                         <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: track.color }} />
                         {point}
                       </li>
@@ -306,7 +306,7 @@ export default async function PrivateConsultingPage() {
             >
               Choose Your Level
             </h2>
-            <p className="text-sm max-w-xl mx-auto" style={{ color: "#6B7280" }}>
+            <p className="text-sm max-w-xl mx-auto" style={{ color: "#4B5563" }}>
               All packages are delivered as written documents + a live debrief call.
               Prices in USD and NGN. Start anytime — no cohort schedule.
             </p>
@@ -329,7 +329,7 @@ export default async function PrivateConsultingPage() {
               ].map((item) => (
                 <div key={item} className="flex items-start gap-2">
                   <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#8B5CF6" }} />
-                  <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{item}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{item}</p>
                 </div>
               ))}
             </div>
@@ -372,22 +372,22 @@ export default async function PrivateConsultingPage() {
 
                   {/* Pricing */}
                   <div className="rounded-xl p-4 mb-6" style={{ backgroundColor: "#F1F5F9" }}>
-                    <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: "#6B7280" }}>
+                    <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: "#4B5563" }}>
                       One-time investment
                     </p>
                     <div className="flex items-baseline gap-2">
                       <span className="text-3xl font-bold" style={{ color: "#111827" }}>
                         ${pkg.usd}
                       </span>
-                      <span className="text-base font-semibold" style={{ color: "#6B7280" }}>USD</span>
+                      <span className="text-base font-semibold" style={{ color: "#4B5563" }}>USD</span>
                     </div>
                     <p className="text-sm font-semibold mt-0.5" style={{ color: pkg.color }}>
                       {formatNgn(usdToNgn(pkg.usd, rate))} NGN
                     </p>
                     <div className="pt-3 mt-3 border-t" style={{ borderColor: "#CBD5E1" }}>
                       <div className="flex items-center gap-1.5">
-                        <Zap className="h-3 w-3" style={{ color: "#6B7280" }} />
-                        <p className="text-xs" style={{ color: "#6B7280" }}>Delivered within 5–7 working days</p>
+                        <Zap className="h-3 w-3" style={{ color: "#4B5563" }} />
+                        <p className="text-xs" style={{ color: "#4B5563" }}>Delivered within 5–7 working days</p>
                       </div>
                     </div>
                   </div>
@@ -403,7 +403,7 @@ export default async function PrivateConsultingPage() {
                   </ul>
 
                   {/* Ideal for */}
-                  <p className="text-[11px] leading-relaxed mb-5" style={{ color: "#6B7280" }}>
+                  <p className="text-[11px] leading-relaxed mb-5" style={{ color: "#4B5563" }}>
                     {pkg.ideal}
                   </p>
 
@@ -432,7 +432,7 @@ export default async function PrivateConsultingPage() {
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
               <div>
-                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#6B7280" }}>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
                   What the data shows
                 </p>
                 <div className="space-y-4">
@@ -448,13 +448,13 @@ export default async function PrivateConsultingPage() {
                       >
                         {stat}
                       </span>
-                      <p className="text-sm leading-relaxed pt-1" style={{ color: "#6B7280" }}>{label}</p>
+                      <p className="text-sm leading-relaxed pt-1" style={{ color: "#4B5563" }}>{label}</p>
                     </div>
                   ))}
                 </div>
               </div>
               <div>
-                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#6B7280" }}>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
                   Previously delivered to researchers at
                 </p>
                 <ul className="space-y-3">
@@ -466,11 +466,11 @@ export default async function PrivateConsultingPage() {
                   ].map((inst) => (
                     <li key={inst} className="flex items-start gap-2.5">
                       <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#8B5CF6" }} />
-                      <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{inst}</p>
+                      <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{inst}</p>
                     </li>
                   ))}
                 </ul>
-                <p className="text-xs mt-4 leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-xs mt-4 leading-relaxed" style={{ color: "#4B5563" }}>
                   Private Consulting brings the same expertise, applied exclusively to your profile, 1-on-1.
                 </p>
               </div>
@@ -501,7 +501,7 @@ export default async function PrivateConsultingPage() {
               </div>
               <div>
                 <p className="text-sm font-bold" style={{ color: "#111827" }}>Dr. Nkechi Adeleke</p>
-                <p className="text-xs" style={{ color: "#6B7280" }}>Lecturer · Biochemistry · Private Consulting client</p>
+                <p className="text-xs" style={{ color: "#4B5563" }}>Lecturer · Biochemistry · Private Consulting client</p>
               </div>
             </div>
           </div>
@@ -510,7 +510,7 @@ export default async function PrivateConsultingPage() {
         {/* How it works */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
               The Process
             </p>
             <h2
@@ -534,13 +534,13 @@ export default async function PrivateConsultingPage() {
                   {step}
                 </p>
                 <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{title}</p>
-                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+                <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
               </div>
             ))}
           </div>
           <div className="flex items-center gap-2 mt-6 justify-center">
-            <Clock className="h-3.5 w-3.5" style={{ color: "#6B7280" }} />
-            <p className="text-xs" style={{ color: "#6B7280" }}>
+            <Clock className="h-3.5 w-3.5" style={{ color: "#4B5563" }} />
+            <p className="text-xs" style={{ color: "#4B5563" }}>
               First response within 4 business hours · Deliverables within 5–7 working days · Debrief call within 7–10 working days from first contact.
             </p>
           </div>
@@ -549,7 +549,7 @@ export default async function PrivateConsultingPage() {
         {/* FAQ / Objections */}
         <div className="mb-20">
           <div className="text-center mb-10">
-            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
               Common questions
             </p>
             <h2
@@ -567,7 +567,7 @@ export default async function PrivateConsultingPage() {
                 style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
               >
                 <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{q}</p>
-                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{a}</p>
+                <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{a}</p>
               </div>
             ))}
           </div>
@@ -597,7 +597,7 @@ export default async function PrivateConsultingPage() {
               One conversation.<br />
               <span style={{ color: "#8B5CF6" }}>Everything changes.</span>
             </h2>
-            <p className="text-base max-w-xl mx-auto mb-8 leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-base max-w-xl mx-auto mb-8 leading-relaxed" style={{ color: "#4B5563" }}>
               Reach out via WhatsApp or email with your career stage, field, and which package interests you.
               We respond within 4 business hours on working days, confirm availability, and walk you through exactly what to expect.
             </p>
@@ -623,12 +623,12 @@ export default async function PrivateConsultingPage() {
               <Link
                 href="/clinics/digital-visibility-clinic"
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-semibold border transition-colors"
-                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
               >
                 View the Cohort Clinic Instead
               </Link>
             </div>
-            <p className="text-xs mt-5" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-5" style={{ color: "#4B5563" }}>
               Know which package you want?{" "}
               <a href="#packages" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
                 Go to packages ↑

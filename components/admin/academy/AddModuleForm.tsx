@@ -43,16 +43,16 @@ export function AddModuleForm({ courseId }: { courseId: string }) {
     <form onSubmit={submit} className="rounded-xl border p-4 space-y-3" style={{ backgroundColor: "#0F172A", borderColor: "#334155" }}>
       <p className="text-xs font-semibold" style={{ color: "#F9FAFB" }}>New Module</p>
       <div>
-        <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Title *</label>
+        <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Title *</label>
         <input className={inp} style={inpStyle} value={title} onChange={e => setTitle(e.target.value)} required />
       </div>
       <div>
-        <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Description (optional)</label>
+        <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Description (optional)</label>
         <input className={inp} style={inpStyle} value={description} onChange={e => setDescription(e.target.value)} />
       </div>
       {error && <p className="text-xs" style={{ color: "#F87171" }}>{error}</p>}
       <div className="flex gap-2 justify-end">
-        <button type="button" onClick={() => setOpen(false)} className="px-3 py-1.5 text-xs rounded-md" style={{ color: "#6B7280" }}>Cancel</button>
+        <button type="button" onClick={() => setOpen(false)} className="px-3 py-1.5 text-xs rounded-md" style={{ color: "#4B5563" }}>Cancel</button>
         <button type="submit" disabled={saving} className="px-3 py-1.5 text-xs rounded-md font-medium"
           style={{ backgroundColor: "#2563EB", color: "#fff" }}>
           {saving ? "Adding…" : "Add Module"}

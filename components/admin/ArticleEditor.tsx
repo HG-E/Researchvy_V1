@@ -150,7 +150,7 @@ export function ArticleEditor({
           <button
             onClick={handleReset}
             className="flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium border transition-colors hover:bg-[#1E293B]"
-            style={{ borderColor: "#1E293B", color: "#6B7280" }}
+            style={{ borderColor: "#1E293B", color: "#4B5563" }}
             title="Reset all fields to the original MDX file values"
           >
             <RotateCcw className="h-3.5 w-3.5" />

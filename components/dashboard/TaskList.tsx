@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { CheckCircle2, Circle, Lock, ChevronDown, ChevronUp, Loader2, BookOpen, Zap, AlertCircle } from "lucide-react";
@@ -132,10 +132,10 @@ function SessionRow({
         style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", opacity: 0.6 }}
       >
         <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#F1F5F9" }}>
-          <Lock className="h-4 w-4" style={{ color: "#6B7280" }} />
+          <Lock className="h-4 w-4" style={{ color: "#4B5563" }} />
         </div>
         <div>
-          <p className="text-sm font-semibold" style={{ color: "#6B7280" }}>
+          <p className="text-sm font-semibold" style={{ color: "#4B5563" }}>
             Session {session.session_number}: {session.title}
           </p>
           <p className="text-xs mt-0.5" style={{ color: "#374151" }}>
@@ -186,7 +186,7 @@ function SessionRow({
               }}
             />
           </div>
-          {open ? <ChevronUp className="h-4 w-4" style={{ color: "#6B7280" }} /> : <ChevronDown className="h-4 w-4" style={{ color: "#6B7280" }} />}
+          {open ? <ChevronUp className="h-4 w-4" style={{ color: "#4B5563" }} /> : <ChevronDown className="h-4 w-4" style={{ color: "#4B5563" }} />}
         </div>
       </button>
 
@@ -226,7 +226,7 @@ function SessionRow({
                         {task.title}
                       </p>
                       {task.description && (
-                        <p className="text-xs mt-1 leading-relaxed" style={{ color: "#6B7280" }}>
+                        <p className="text-xs mt-1 leading-relaxed" style={{ color: "#4B5563" }}>
                           {task.description}
                         </p>
                       )}
@@ -243,7 +243,7 @@ function SessionRow({
                         title={task.is_completed ? "Mark as not done" : "Mark as done"}
                       >
                         {loading === task.id ? (
-                          <Loader2 className="h-5 w-5 animate-spin" style={{ color: "#6B7280" }} />
+                          <Loader2 className="h-5 w-5 animate-spin" style={{ color: "#4B5563" }} />
                         ) : task.is_completed ? (
                           <CheckCircle2 className="h-5 w-5" />
                         ) : (
@@ -274,7 +274,7 @@ function SessionRow({
                               onClick={() => clearReflection(task)}
                               disabled={loading === task.id}
                               className="text-[10px] transition-colors hover:text-[#9CA3AF] disabled:opacity-50"
-                              style={{ color: "#6B7280" }}
+                              style={{ color: "#4B5563" }}
                             >
                               {loading === task.id ? "Updating…" : "Edit"}
                             </button>
@@ -354,7 +354,7 @@ export function TaskList({ sessions, totalTasks, doneTasks }: Props) {
             }}
           />
         </div>
-        <div className="flex items-center gap-4 mt-3 text-xs" style={{ color: "#6B7280" }}>
+        <div className="flex items-center gap-4 mt-3 text-xs" style={{ color: "#4B5563" }}>
           <span className="flex items-center gap-1.5">
             <Zap className="h-3 w-3" style={{ color: "#F59E0B" }} />Action tasks
           </span>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { Printer, Share2, CheckCircle2, Check } from "lucide-react";
@@ -185,7 +185,7 @@ export function CertificateView({ cert }: { cert: Certificate }) {
               </div>
               <p
                 className="cert-type-label text-xs font-bold tracking-[0.22em] uppercase"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
               >
                 {prog.certificateType}
               </p>
@@ -206,7 +206,7 @@ export function CertificateView({ cert }: { cert: Certificate }) {
 
             {/* Core certification statement */}
             <div className="text-center mb-10">
-              <p className="cert-label text-sm mb-5 tracking-wide" style={{ color: "#6B7280" }}>
+              <p className="cert-label text-sm mb-5 tracking-wide" style={{ color: "#4B5563" }}>
                 This certifies that
               </p>
               <h1
@@ -219,7 +219,7 @@ export function CertificateView({ cert }: { cert: Certificate }) {
               >
                 {cert.recipient_name}
               </h1>
-              <p className="cert-label text-sm mb-4" style={{ color: "#6B7280" }}>
+              <p className="cert-label text-sm mb-4" style={{ color: "#4B5563" }}>
                 has successfully completed the
               </p>
               <p
@@ -249,26 +249,26 @@ export function CertificateView({ cert }: { cert: Certificate }) {
               {/* Left — certificate meta */}
               <div className="space-y-4 text-center sm:text-left">
                 <div>
-                  <p className="cert-meta-label text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#6B7280" }}>
+                  <p className="cert-meta-label text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#4B5563" }}>
                     Certificate Number
                   </p>
-                  <p className="cert-number font-mono text-sm font-bold" style={{ color: "#6B7280" }}>
+                  <p className="cert-number font-mono text-sm font-bold" style={{ color: "#4B5563" }}>
                     {cert.certificate_number}
                   </p>
                 </div>
                 <div>
-                  <p className="cert-meta-label text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#6B7280" }}>
+                  <p className="cert-meta-label text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#4B5563" }}>
                     Date of Issue
                   </p>
-                  <p className="cert-meta-value text-sm" style={{ color: "#6B7280" }}>
+                  <p className="cert-meta-value text-sm" style={{ color: "#4B5563" }}>
                     {formatDate(cert.issued_at)}
                   </p>
                 </div>
                 <div>
-                  <p className="cert-meta-label text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#6B7280" }}>
+                  <p className="cert-meta-label text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "#4B5563" }}>
                     Verify at
                   </p>
-                  <p className="cert-verify text-xs font-mono" style={{ color: "#6B7280" }}>
+                  <p className="cert-verify text-xs font-mono" style={{ color: "#4B5563" }}>
                     researchvy.com/verify/{cert.certificate_number}
                   </p>
                 </div>
@@ -310,10 +310,10 @@ export function CertificateView({ cert }: { cert: Certificate }) {
                   </svg>
                 </div>
                 <div className="cert-sig-line border-t pt-2" style={{ borderColor: "#E2E8F0", width: "200px" }}>
-                  <p className="cert-sig-name text-sm font-semibold" style={{ color: "#6B7280" }}>
+                  <p className="cert-sig-name text-sm font-semibold" style={{ color: "#4B5563" }}>
                     {siteConfig.certificates.signatory.name}
                   </p>
-                  <p className="cert-sig-title text-xs mt-0.5" style={{ color: "#6B7280" }}>
+                  <p className="cert-sig-title text-xs mt-0.5" style={{ color: "#4B5563" }}>
                     {siteConfig.certificates.signatory.title}
                   </p>
                 </div>
@@ -370,7 +370,7 @@ export function CertificateView({ cert }: { cert: Certificate }) {
         style={{ backgroundColor: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.2)" }}
       >
         <CheckCircle2 className="h-4 w-4 flex-shrink-0" style={{ color: "#10B981" }} />
-        <p className="text-xs" style={{ color: "#6B7280" }}>
+        <p className="text-xs" style={{ color: "#4B5563" }}>
           Publicly verifiable at{" "}
           <a
             href={verifyUrl}

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Download } from "lucide-react";
 
@@ -21,7 +21,7 @@ export function DownloadPdfButton({ lessonTitle, courseTitle: _courseTitle }: Pr
       onClick={print}
       title={`Download "${lessonTitle}" as PDF`}
       className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium transition-colors min-h-[44px] hover:opacity-80 active:opacity-60 print:hidden"
-      style={{ color: "#6B7280", backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
+      style={{ color: "#4B5563", backgroundColor: "#FFFFFF", border: "1px solid #E2E8F0" }}
     >
       <Download className="h-3.5 w-3.5" />
       Save as PDF

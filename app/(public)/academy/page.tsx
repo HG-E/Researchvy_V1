@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import {
   ArrowRight, GraduationCap, MessageCircle, PlayCircle,
   CheckCircle, Globe, TrendingUp, Award, Users, BookOpen,
@@ -198,12 +198,12 @@ export default function AcademyPage() {
               <span style={{ color: "#A78BFA" }}>Found.</span>
             </h1>
 
-            <p className="text-lg sm:text-xl leading-relaxed mb-4" style={{ color: "#94A3B8" }}>
+            <p className="text-lg sm:text-xl leading-relaxed mb-4" style={{ color: "#4B5563" }}>
               Researchvy Academy is the only professional development platform built specifically
               for researchers who want their work to be discovered, cited, funded, and recognised —
               on every platform that matters.
             </p>
-            <p className="text-base leading-relaxed mb-10" style={{ color: "#6B7280" }}>
+            <p className="text-base leading-relaxed mb-10" style={{ color: "#4B5563" }}>
               Five structured levels. Self-paced. Built for researchers in Nigeria, Africa,
               the USA, Europe, and beyond. Start free — no payment, no commitment.
             </p>
@@ -221,7 +221,7 @@ export default function AcademyPage() {
               <Link
                 href="/academy/courses"
                 className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
-                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
               >
                 <GraduationCap className="h-4 w-4" />
                 Browse All Courses
@@ -229,7 +229,7 @@ export default function AcademyPage() {
             </div>
 
             {/* Trust line */}
-            <p className="mt-6 text-xs" style={{ color: "#6B7280" }}>
+            <p className="mt-6 text-xs" style={{ color: "#4B5563" }}>
               Free preview lessons available on every module. No credit card required.
             </p>
 
@@ -238,7 +238,7 @@ export default function AcademyPage() {
               className="mt-5 p-4 rounded-xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
               style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
             >
-              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+              <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                 <span className="font-semibold" style={{ color: "#111827" }}>Not sure where your gaps are?</span>
                 {" "}Take the free Visibility Scorecard first — 4 minutes, 12 checkpoints, score out of 100.
               </p>
@@ -257,7 +257,7 @@ export default function AcademyPage() {
       {/* ── THE PROBLEM ────────────────────────────────────────────────────── */}
       <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#4B5563" }}>
             The Gap Nobody Talks About
           </p>
           <h2
@@ -266,7 +266,7 @@ export default function AcademyPage() {
           >
             The System Is Running Your Career.<br />Most Researchers Don&apos;t Know How.
           </h2>
-          <p className="text-sm text-center mb-14 max-w-2xl mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-sm text-center mb-14 max-w-2xl mx-auto" style={{ color: "#4B5563" }}>
             Three truths about academic careers that your institution never told you — and that this Academy exists to fix.
           </p>
 
@@ -281,7 +281,7 @@ export default function AcademyPage() {
                 <h3 className="text-sm font-bold mb-3 leading-snug" style={{ color: "#111827" }}>
                   {p.headline}
                 </h3>
-                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                   {p.body}
                 </p>
               </div>
@@ -317,7 +317,7 @@ export default function AcademyPage() {
                 Research Identity:<br />
                 <span style={{ color: "#2563EB" }}>Be Found Where It Counts</span>
               </h2>
-              <p className="text-base leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+              <p className="text-base leading-relaxed mb-6" style={{ color: "#4B5563" }}>
                 Seven modules. 36 lessons. Everything you need to build a verified, cross-platform
                 scholarly identity that the systems running your career can find — and act on.
               </p>
@@ -335,7 +335,7 @@ export default function AcademyPage() {
                     style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                   >
                     <p className="text-2xl font-bold mb-0.5" style={{ color: "#2563EB" }}>{s.value}</p>
-                    <p className="text-xs" style={{ color: "#6B7280" }}>{s.label}</p>
+                    <p className="text-xs" style={{ color: "#4B5563" }}>{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -388,7 +388,7 @@ export default function AcademyPage() {
                     <p className="text-xs font-medium leading-snug" style={{ color: "#374151" }}>
                       {m.title}
                     </p>
-                    <p className="text-[10px] mt-0.5" style={{ color: "#6B7280" }}>
+                    <p className="text-[10px] mt-0.5" style={{ color: "#4B5563" }}>
                       {m.lessons} lessons · Free
                     </p>
                   </div>
@@ -403,7 +403,7 @@ export default function AcademyPage() {
       {/* ── 5-LEVEL PATHWAY ────────────────────────────────────────────────── */}
       <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#4B5563" }}>
             The Complete Journey
           </p>
           <h2
@@ -412,7 +412,7 @@ export default function AcademyPage() {
           >
             Five Levels. One Career Transformation.
           </h2>
-          <p className="text-sm text-center mb-14 max-w-xl mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-sm text-center mb-14 max-w-xl mx-auto" style={{ color: "#4B5563" }}>
             Each level builds on the last. You move from invisible to discoverable, from confused
             by metrics to strategic about them, from locally known to globally positioned.
           </p>
@@ -456,18 +456,18 @@ export default function AcademyPage() {
                           ) : (
                             <span
                               className="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
-                              style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
+                              style={{ backgroundColor: "#F1F5F9", color: "#4B5563" }}
                             >
                               Coming 2026
                             </span>
                           )}
-                          <span className="text-[10px]" style={{ color: "#6B7280" }}>
+                          <span className="text-[10px]" style={{ color: "#4B5563" }}>
                             {lvl.lessonCount} lessons
                           </span>
                         </div>
                       </div>
 
-                      <p className="text-xs leading-relaxed mb-4" style={{ color: "#6B7280" }}>
+                      <p className="text-xs leading-relaxed mb-4" style={{ color: "#4B5563" }}>
                         {lvl.description}
                       </p>
 
@@ -476,7 +476,7 @@ export default function AcademyPage() {
                         {lvl.outcomes.map((o) => (
                           <div key={o} className="flex items-start gap-2">
                             <ChevronRight className="h-3 w-3 flex-shrink-0 mt-0.5" style={{ color }} />
-                            <span className="text-xs" style={{ color: "#6B7280" }}>{o}</span>
+                            <span className="text-xs" style={{ color: "#4B5563" }}>{o}</span>
                           </div>
                         ))}
                       </div>
@@ -506,7 +506,7 @@ export default function AcademyPage() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Globe className="h-4 w-4" style={{ color: "#A78BFA" }} />
-            <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#4B5563" }}>
               Built for Researchers Everywhere
             </p>
           </div>
@@ -516,7 +516,7 @@ export default function AcademyPage() {
           >
             The Stakes Are Real — Wherever You Are
           </h2>
-          <p className="text-sm text-center mb-14 max-w-xl mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-sm text-center mb-14 max-w-xl mx-auto" style={{ color: "#4B5563" }}>
             The platforms that run academic careers are global. But the consequences of ignoring
             them are felt locally — in promotions denied, grants not awarded, and collaborations
             that never happened.
@@ -536,7 +536,7 @@ export default function AcademyPage() {
                 <p className="text-xs font-semibold mb-2 leading-snug" style={{ color: "#374151" }}>
                   &ldquo;{a.pain}&rdquo;
                 </p>
-                <p className="text-xs leading-relaxed mb-4" style={{ color: "#6B7280" }}>
+                <p className="text-xs leading-relaxed mb-4" style={{ color: "#4B5563" }}>
                   {a.stakes}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -544,7 +544,7 @@ export default function AcademyPage() {
                     <span
                       key={k}
                       className="text-[10px] px-2 py-0.5 rounded-md"
-                      style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
+                      style={{ backgroundColor: "#F1F5F9", color: "#4B5563" }}
                     >
                       {k}
                     </span>
@@ -559,7 +559,7 @@ export default function AcademyPage() {
       {/* ── WHY RESEARCHVY ─────────────────────────────────────────────────── */}
       <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3 text-center" style={{ color: "#4B5563" }}>
             Why Researchvy Academy
           </p>
           <h2
@@ -622,7 +622,7 @@ export default function AcademyPage() {
                 <h3 className="text-sm font-bold mb-2 leading-snug" style={{ color: "#111827" }}>
                   {f.title}
                 </h3>
-                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                   {f.body}
                 </p>
               </div>
@@ -641,7 +641,7 @@ export default function AcademyPage() {
                 Researchvy Academy
               </p>
               <p className="text-sm font-semibold mb-2" style={{ color: "#111827" }}>Self-paced · Level 1 free</p>
-              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+              <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                 Five structured levels. Work at your own pace. No deadline, no cohort, no facilitator required.
                 Designed for researchers who want to build visibility independently.
               </p>
@@ -652,7 +652,7 @@ export default function AcademyPage() {
                 Digital Visibility Clinic — Separate Product
               </p>
               <p className="text-sm font-semibold mb-2" style={{ color: "#111827" }}>Live · Paid · Cohort-based</p>
-              <p className="text-xs leading-relaxed mb-3" style={{ color: "#6B7280" }}>
+              <p className="text-xs leading-relaxed mb-3" style={{ color: "#4B5563" }}>
                 An entirely separate Researchvy programme. Small groups, expert facilitator, real-time profile review.
                 Neither depends on the other — you choose which fits your situation.
               </p>
@@ -671,7 +671,7 @@ export default function AcademyPage() {
       {/* ── FINAL CTA ─────────────────────────────────────────────────────── */}
       <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-24 text-center">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
             Your Next Step
           </p>
           <h2
@@ -681,7 +681,7 @@ export default function AcademyPage() {
             The Researchers Getting Found<br />
             Started Exactly Here.
           </h2>
-          <p className="text-base leading-relaxed mb-10" style={{ color: "#6B7280" }}>
+          <p className="text-base leading-relaxed mb-10" style={{ color: "#4B5563" }}>
             Level 1 is live. The first lesson of every module is free.
             You can begin right now — no payment, no registration, no commitment.
             Spend 15 minutes on the first lesson and decide whether this changes how you think
@@ -710,12 +710,12 @@ export default function AcademyPage() {
             </a>
           </div>
 
-          <p className="mt-6 text-xs" style={{ color: "#6B7280" }}>
+          <p className="mt-6 text-xs" style={{ color: "#4B5563" }}>
             Questions? WhatsApp us — we respond within 24 hours, usually much sooner.
           </p>
 
           <div className="mt-8 pt-8 border-t" style={{ borderColor: "#E2E8F0" }}>
-            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
+            <p className="text-xs mb-3" style={{ color: "#4B5563" }}>
               Prefer live, expert-facilitated learning with a small group?
             </p>
             <Link

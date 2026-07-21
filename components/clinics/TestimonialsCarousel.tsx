@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { Quote } from "lucide-react";
@@ -21,7 +21,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         <p className="text-sm font-semibold" style={{ color: "#111827" }}>
           {t.name}
         </p>
-        <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+        <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
           {t.institution}
         </p>
         <span

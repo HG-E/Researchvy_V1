@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { Loader2, CheckCircle2 } from "lucide-react";
@@ -26,7 +26,7 @@ function Toggle({ label, description, checked, onChange, disabled }: ToggleProps
     <div className="flex items-center justify-between gap-4 py-3 border-b last:border-b-0" style={{ borderColor: "#E2E8F0" }}>
       <div className="min-w-0">
         <p className="text-sm font-medium" style={{ color: "#111827" }}>{label}</p>
-        <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{description}</p>
+        <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{description}</p>
       </div>
       <button
         type="button"
@@ -111,7 +111,7 @@ export function NotificationPreferences() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <Loader2 className="h-5 w-5 animate-spin" style={{ color: "#6B7280" }} />
+        <Loader2 className="h-5 w-5 animate-spin" style={{ color: "#4B5563" }} />
       </div>
     );
   }
@@ -124,7 +124,7 @@ export function NotificationPreferences() {
         <div key={section.title} className="rounded-2xl border p-5" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
           <div className="flex items-center justify-between mb-1">
             <h3 className="text-sm font-bold" style={{ color: "#111827" }}>{section.title}</h3>
-            {saving && <Loader2 className="h-3.5 w-3.5 animate-spin" style={{ color: "#6B7280" }} />}
+            {saving && <Loader2 className="h-3.5 w-3.5 animate-spin" style={{ color: "#4B5563" }} />}
             {saved  && !saving && <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "#10B981" }} />}
           </div>
           <div>

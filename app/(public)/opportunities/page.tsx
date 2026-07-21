@@ -69,7 +69,7 @@ async function OpportunitiesResults({
 
       {/* Results count */}
       <div className="flex items-center justify-between mb-5">
-        <p className="text-xs" style={{ color: "#6B7280" }}>
+        <p className="text-xs" style={{ color: "#4B5563" }}>
           {opps.length} {opps.length === 1 ? "opportunity" : "opportunities"}
           {(category || q) && " matching your filters"}
         </p>
@@ -82,7 +82,7 @@ async function OpportunitiesResults({
       {regular.length === 0 && featured.length === 0 ? (
         (category || q) ? (
           <div className="rounded-2xl border p-14 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
-            <p className="text-sm mb-3" style={{ color: "#6B7280" }}>No opportunities match your filters.</p>
+            <p className="text-sm mb-3" style={{ color: "#4B5563" }}>No opportunities match your filters.</p>
             <Link href="/opportunities" className="text-xs font-semibold" style={{ color: "#2563EB" }}>
               Clear filters →
             </Link>
@@ -105,7 +105,7 @@ async function OpportunitiesResults({
               <h2 className="text-xl sm:text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
                 Grants &amp; fellowships are being curated
               </h2>
-              <p className="text-sm max-w-lg mx-auto mb-6 leading-relaxed" style={{ color: "#6B7280" }}>
+              <p className="text-sm max-w-lg mx-auto mb-6 leading-relaxed" style={{ color: "#4B5563" }}>
                 We're building a comprehensive database of grants, fellowships, travel bursaries, and
                 calls for papers — curated specifically for African and global researchers. Know one? Submit it free.
               </p>
@@ -133,7 +133,7 @@ async function OpportunitiesResults({
                 <div key={title} className="rounded-xl border p-5" style={{ borderColor: "#E2E8F0", backgroundColor: "#FAFBFC" }}>
                   <div className="w-2 h-2 rounded-full mb-3" style={{ backgroundColor: color }} />
                   <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>{title}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
                 </div>
               ))}
             </div>
@@ -187,7 +187,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
                 style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
                 Grants, Fellowships &amp;<br />Calls for Papers
               </h1>
-              <p className="text-base max-w-xl" style={{ color: "#6B7280" }}>
+              <p className="text-base max-w-xl" style={{ color: "#4B5563" }}>
                 Curated opportunities for researchers at every career stage — from travel bursaries to major research grants.
               </p>
             </div>
@@ -210,7 +210,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
           className="rounded-xl border px-5 py-4 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
           style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
         >
-          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
             <span className="font-semibold" style={{ color: "#111827" }}>Maximise your application success</span>
             {" "}— know your visibility score across Scholar Identity, Discoverability, and Citation Health before you apply.
           </p>
@@ -228,7 +228,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
           <form method="GET" className="flex-1 relative">
             {category && <input type="hidden" name="category" value={category} />}
             {level    && <input type="hidden" name="level"    value={level}    />}
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "#6B7280" }} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "#4B5563" }} />
             <input
               name="q"
               defaultValue={q}
@@ -279,7 +279,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
             <p className="text-sm font-semibold mb-0.5" style={{ color: "#111827" }}>
               Get new grants &amp; calls delivered weekly — free
             </p>
-            <p className="text-xs" style={{ color: "#6B7280" }}>
+            <p className="text-xs" style={{ color: "#4B5563" }}>
               Fellowships, travel bursaries, and CFPs curated for African researchers, every Monday.
             </p>
           </div>
@@ -300,7 +300,7 @@ export default async function OpportunitiesPage({ searchParams }: Props) {
           <h3 className="text-xl font-bold mb-2" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             Help the Community
           </h3>
-          <p className="text-sm max-w-md mx-auto mb-5" style={{ color: "#6B7280" }}>
+          <p className="text-sm max-w-md mx-auto mb-5" style={{ color: "#4B5563" }}>
             Submit a grant, fellowship, travel bursary, or CFP and we will review and publish it within 48 hours.
           </p>
           <Link

@@ -54,12 +54,12 @@ function LessonRow({
         className="flex items-center gap-3 px-4 py-3 rounded-xl opacity-60"
         style={{ backgroundColor: "#FFFFFF" }}
       >
-        <Lock className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} />
-        <span className="text-sm flex-1 truncate" style={{ color: "#6B7280" }}>
+        <Lock className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
+        <span className="text-sm flex-1 truncate" style={{ color: "#4B5563" }}>
           {lesson.title}
         </span>
         {lesson.duration_seconds > 0 && (
-          <span className="text-xs flex-shrink-0" style={{ color: "#6B7280" }}>
+          <span className="text-xs flex-shrink-0" style={{ color: "#4B5563" }}>
             {formatDuration(lesson.duration_seconds)}
           </span>
         )}
@@ -94,7 +94,7 @@ function LessonRow({
           </span>
         )}
         {lesson.duration_seconds > 0 && (
-          <span className="text-xs" style={{ color: "#6B7280" }}>
+          <span className="text-xs" style={{ color: "#4B5563" }}>
             {formatDuration(lesson.duration_seconds)}
           </span>
         )}
@@ -132,10 +132,10 @@ function ModuleAccordion({
         <div className="flex-1 min-w-0">
           <h3 className="text-sm font-bold" style={{ color: "#111827" }}>{mod.title}</h3>
           {mod.description && (
-            <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{mod.description}</p>
+            <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{mod.description}</p>
           )}
         </div>
-        <div className="flex items-center gap-3 text-xs flex-shrink-0" style={{ color: "#6B7280" }}>
+        <div className="flex items-center gap-3 text-xs flex-shrink-0" style={{ color: "#4B5563" }}>
           {enrolled && (
             <span>{completed}/{publishedLessons.length} done</span>
           )}
@@ -267,14 +267,14 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
             {course.title}
           </h1>
           {course.subtitle && (
-            <p className="text-lg mb-4" style={{ color: "#6B7280" }}>{course.subtitle}</p>
+            <p className="text-lg mb-4" style={{ color: "#4B5563" }}>{course.subtitle}</p>
           )}
           {course.description && (
-            <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "#6B7280" }}>{course.description}</p>
+            <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "#4B5563" }}>{course.description}</p>
           )}
 
           {/* Meta row */}
-          <div className="flex flex-wrap gap-4 mt-5 text-xs" style={{ color: "#6B7280" }}>
+          <div className="flex flex-wrap gap-4 mt-5 text-xs" style={{ color: "#4B5563" }}>
             <span className="flex items-center gap-1.5">
               <BookOpen className="h-3.5 w-3.5" />
               {course.modules.length} module{course.modules.length !== 1 ? "s" : ""} · {allLessons.length} lesson{allLessons.length !== 1 ? "s" : ""}
@@ -295,7 +295,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
           {/* Progress bar (enrolled only) */}
           {enrolled && stats && (
             <div className="mt-5 max-w-sm">
-              <div className="flex items-center justify-between text-xs mb-1.5" style={{ color: "#6B7280" }}>
+              <div className="flex items-center justify-between text-xs mb-1.5" style={{ color: "#4B5563" }}>
                 <span>{stats.completed_lessons} of {stats.total_lessons} complete</span>
                 <span style={{ color }}>{stats.percent_complete}%</span>
               </div>
@@ -306,7 +306,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
                 />
               </div>
               {stats.percent_complete < 100 && stats.total_lessons > 0 && (
-                <p className="text-xs mt-1.5" style={{ color: "#6B7280" }}>
+                <p className="text-xs mt-1.5" style={{ color: "#4B5563" }}>
                   {stats.total_lessons - stats.completed_lessons} lesson{stats.total_lessons - stats.completed_lessons !== 1 ? "s" : ""} remaining
                 </p>
               )}
@@ -358,7 +358,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
 
           {/* Enroll nudge for non-enrolled with free previews exhausted — compact reminder */}
           {!enrolled && !course.is_free && (
-            <p className="mt-3 text-xs" style={{ color: "#6B7280" }}>
+            <p className="mt-3 text-xs" style={{ color: "#4B5563" }}>
               Full access · Completion certificate · Enroll in under 2 minutes via WhatsApp
             </p>
           )}
@@ -375,7 +375,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
               {course.modules.map((mod) => (
                 <div key={mod.id} className="flex items-start gap-2.5">
                   <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0" style={{ color: color }} />
-                  <span className="text-sm leading-snug" style={{ color: "#6B7280" }}>{mod.title}</span>
+                  <span className="text-sm leading-snug" style={{ color: "#4B5563" }}>{mod.title}</span>
                 </div>
               ))}
             </div>
@@ -408,7 +408,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
               <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
                 Ready to get found?
               </p>
-              <p className="text-xs mb-5" style={{ color: "#6B7280" }}>
+              <p className="text-xs mb-5" style={{ color: "#4B5563" }}>
                 Enroll in {course.title} and start building real scholarly visibility — certificate included.
               </p>
               <a
@@ -432,7 +432,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
             >
               <div>
                 <p className="text-xs font-semibold mb-1" style={{ color: "#60A5FA" }}>Prefer live, facilitated learning?</p>
-                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                   The Digital Visibility Clinic covers this and more — live sessions with an expert, small cohort, real-time profile review.
                 </p>
               </div>

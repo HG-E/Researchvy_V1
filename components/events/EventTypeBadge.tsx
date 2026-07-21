@@ -9,7 +9,7 @@ const TYPE_CONFIG: Record<EventType, { label: string; color: string; bg: string 
   lecture:     { label: "Lecture",     color: "#FBBF24", bg: "rgba(251,191,36,0.12)"  },
   panel:       { label: "Panel",       color: "#F472B6", bg: "rgba(244,114,182,0.12)" },
   hackathon:   { label: "Hackathon",   color: "#4ADE80", bg: "rgba(74,222,128,0.12)"  },
-  other:       { label: "Other",       color: "#94A3B8", bg: "rgba(148,163,184,0.12)" },
+  other:       { label: "Other",       color: "#4B5563", bg: "rgba(148,163,184,0.12)" },
 };
 
 const FORMAT_CONFIG: Record<EventFormat, { label: string }> = {

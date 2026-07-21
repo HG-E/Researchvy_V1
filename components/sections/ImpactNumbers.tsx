@@ -131,7 +131,7 @@ export function ImpactNumbers() {
             <br />
             <span style={{ color: "#2563EB" }}>change lives.</span>
           </h2>
-          <p className="text-base max-w-2xl mx-auto leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-base max-w-2xl mx-auto leading-relaxed" style={{ color: "#4B5563" }}>
             The gap between a published paper and real-world impact is <strong style={{ color: "#374151" }}>visibility</strong>.
             When your research is found, it doesn&rsquo;t just advance your career — it reaches the people whose lives depend on it.
           </p>
@@ -167,7 +167,7 @@ export function ImpactNumbers() {
 
               <div>
                 <p className="text-sm font-bold mb-1.5" style={{ color: "#111827" }}>{label}</p>
-                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+                <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
               </div>
 
               {/* Connector arrow — shown on desktop between steps */}
@@ -194,7 +194,7 @@ export function ImpactNumbers() {
             Invisible research can&rsquo;t save lives.{" "}
             <span style={{ color: "#FCD34D" }}>Visible research can.</span>
           </p>
-          <p className="text-sm" style={{ color: "#94A3B8" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             Here&rsquo;s who benefits when your work breaks out of the journal and into the world.
           </p>
         </motion.div>
@@ -218,7 +218,7 @@ export function ImpactNumbers() {
                 <Icon className="h-5 w-5" style={{ color }} />
               </div>
               <p className="text-sm font-bold leading-snug" style={{ color: "#111827" }}>{title}</p>
-              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+              <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
               <div className="w-8 h-0.5 rounded-full mt-auto" style={{ backgroundColor: color }} />
             </motion.div>
           ))}
@@ -252,7 +252,7 @@ export function ImpactNumbers() {
                 >
                   {value}
                 </p>
-                <p className="text-xs leading-snug" style={{ color: "#6B7280" }}>{label}</p>
+                <p className="text-xs leading-snug" style={{ color: "#4B5563" }}>{label}</p>
               </motion.div>
             ))}
           </div>
@@ -266,7 +266,7 @@ export function ImpactNumbers() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <p className="text-sm mb-4" style={{ color: "#6B7280" }}>
+          <p className="text-sm mb-4" style={{ color: "#4B5563" }}>
             Your research can reach the people who need it.{" "}
             <span className="font-semibold" style={{ color: "#111827" }}>Start with visibility.</span>
           </p>

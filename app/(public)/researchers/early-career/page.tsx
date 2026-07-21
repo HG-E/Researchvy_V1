@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { ArrowRight, CheckCircle2, AlertTriangle, TrendingUp, Clock } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
@@ -62,7 +62,7 @@ export default function EarlyCareerPage() {
             You&apos;re Publishing.<br />
             <span style={{ color: "#10B981" }}>Is Anyone Finding You?</span>
           </h1>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-8" style={{ color: "#4B5563" }}>
             The early career window is the highest-leverage moment for building scholarly visibility.
             The researchers who establish strong discovery profiles now will outperform peers with
             equivalent output for the rest of their careers, in citations, funding success, and
@@ -79,12 +79,12 @@ export default function EarlyCareerPage() {
             <Link
               href="/clinics/digital-visibility-clinic"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               Book a Clinic Session
             </Link>
           </div>
-          <p className="mt-4 text-sm" style={{ color: "#6B7280" }}>
+          <p className="mt-4 text-sm" style={{ color: "#4B5563" }}>
             Prefer 1-on-1?{" "}
             <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
               Private Consulting — from $209 →
@@ -106,7 +106,7 @@ export default function EarlyCareerPage() {
             </div>
             <ul className="space-y-4">
               {FEARS.map((f) => (
-                <li key={f} className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                <li key={f} className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                   <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "#F59E0B" }} />
                   {f}
                 </li>
@@ -116,7 +116,7 @@ export default function EarlyCareerPage() {
               className="mt-6 rounded-xl p-4"
               style={{ backgroundColor: "rgba(245,158,11,0.05)", border: "1px solid rgba(245,158,11,0.15)" }}
             >
-              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                 These aren&apos;t signs that your research isn&apos;t good enough. They&apos;re signs that
                 your <strong style={{ color: "#111827" }}>discovery infrastructure is broken</strong>,
                 and nobody in academia ever taught you how to fix it.
@@ -125,7 +125,7 @@ export default function EarlyCareerPage() {
           </div>
 
           <div className="space-y-4">
-            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
               What fixing it looks like
             </p>
             {WINS.map(({ metric, detail }) => (
@@ -133,7 +133,7 @@ export default function EarlyCareerPage() {
                 <TrendingUp className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: "#10B981" }} />
                 <div>
                   <p className="text-sm font-bold" style={{ color: "#111827" }}>{metric}</p>
-                  <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
+                  <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#4B5563" }}>{detail}</p>
                 </div>
               </HoverCard>
             ))}
@@ -142,7 +142,7 @@ export default function EarlyCareerPage() {
 
         {/* Stage-specific advice */}
         <div className="mb-16">
-          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
             Where you are in your career
           </p>
           <h2
@@ -164,7 +164,7 @@ export default function EarlyCareerPage() {
                   </p>
                   <ul className="space-y-2.5">
                     {actions.map((a) => (
-                      <li key={a} className="flex items-start gap-2.5 text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                      <li key={a} className="flex items-start gap-2.5 text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                         <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color }} />
                         {a}
                       </li>
@@ -195,7 +195,7 @@ export default function EarlyCareerPage() {
               The researcher who builds visibility at 35<br />
               doesn&apos;t catch up to the one who built it at 28.
             </h2>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               Citation compounding is real. A researcher who fixes their discovery infrastructure
               early sees citations accumulate faster, and those citations attract more citations.
               The h-index gap between a researcher with optimal visibility and one with equivalent
@@ -225,7 +225,7 @@ export default function EarlyCareerPage() {
             <h3 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
               The Researcher Visibility Scorecard
             </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               12 questions. 4 minutes. A score out of 100 that shows you exactly where your
               visibility is strong, where it&apos;s broken, and what each gap is costing your career.
             </p>
@@ -236,7 +236,7 @@ export default function EarlyCareerPage() {
             >
               Take the Free Scorecard <ArrowRight className="h-4 w-4" />
             </Link>
-            <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
               Most early-career researchers score between 18–42. See where you stand.
             </p>
           </div>
@@ -254,7 +254,7 @@ export default function EarlyCareerPage() {
             <h3 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
               Digital Visibility Clinic
             </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               Five expert-guided sessions that fix your entire visibility system from the ground up.
               Profiles, disambiguation, citations, communication, strategy, all covered.
               Designed specifically for researchers at a critical career stage.
@@ -266,7 +266,7 @@ export default function EarlyCareerPage() {
             >
               View the Clinic Programme <ArrowRight className="h-4 w-4" />
             </Link>
-            <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
               Prefer 1-on-1?{" "}
               <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
                 Private Consulting — from $209
@@ -283,7 +283,7 @@ export default function EarlyCareerPage() {
           <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             Visibility intelligence, built for early-career researchers
           </h2>
-          <p className="text-sm mb-8 max-w-lg mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-sm mb-8 max-w-lg mx-auto" style={{ color: "#4B5563" }}>
             Weekly insights on building strategic scholarly presence at every stage. Free.
           </p>
           <div className="flex justify-center">

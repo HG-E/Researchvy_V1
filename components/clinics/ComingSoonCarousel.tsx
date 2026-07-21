@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Bell } from "lucide-react";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
@@ -38,7 +38,7 @@ export function ComingSoonCarousel() {
           >
             <p className="text-2xl mb-3">{icon}</p>
             <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>{name}</p>
-            <p className="text-xs leading-relaxed mb-4" style={{ color: "#6B7280" }}>{tagline}</p>
+            <p className="text-xs leading-relaxed mb-4" style={{ color: "#4B5563" }}>{tagline}</p>
             <a
               href={buildWhatsAppUrl(`${name}, register interest`)}
               target="_blank"
@@ -73,7 +73,7 @@ export function ComingSoonCarousel() {
               {icon}
             </div>
             <p className="text-sm font-semibold mb-1.5" style={{ color: "#111827" }}>{name}</p>
-            <p className="text-xs leading-relaxed mb-5" style={{ color: "#6B7280" }}>{tagline}</p>
+            <p className="text-xs leading-relaxed mb-5" style={{ color: "#4B5563" }}>{tagline}</p>
             <a
               href={buildWhatsAppUrl(`${name}, register interest`)}
               target="_blank"

@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Shield, Globe, TrendingUp, ExternalLink, BookOpen, CheckCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -93,7 +93,7 @@ export default function AboutPage() {
             Built for Researchers<br />
             <span style={{ color: "#2563EB" }}>Who Refuse to Stay Invisible.</span>
           </h1>
-          <p className="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#4B5563" }}>
             Researchvy exists because great research deserves to be found, not buried in
             platforms nobody searches, cited by no one, reaching no one. We are the system
             that changes that.
@@ -142,7 +142,7 @@ export default function AboutPage() {
                   style={{ backgroundColor: "rgba(37,99,235,0.35)" }}
                   aria-hidden="true"
                 />
-                <div className="pl-4 lg:pl-0 space-y-4 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                <div className="pl-4 lg:pl-0 space-y-4 text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                   <p>
                     You spent years learning how to produce rigorous research. Nobody taught you how
                     to make it findable. That gap between what researchers produce and what the world
@@ -202,7 +202,7 @@ export default function AboutPage() {
             >
               Five Specialised Divisions
             </h2>
-            <p className="text-sm max-w-xl mx-auto leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-sm max-w-xl mx-auto leading-relaxed" style={{ color: "#4B5563" }}>
               Each division addresses a distinct dimension of scholarly visibility,
               from intelligence and training to storytelling, community, and real-world impact.
             </p>
@@ -245,7 +245,7 @@ export default function AboutPage() {
                 <h3 className="font-bold text-base mb-2" style={{ color: "#111827" }}>
                   {title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                   {description}
                 </p>
               </div>
@@ -280,7 +280,7 @@ export default function AboutPage() {
             Your Research Deserves<br />
             <span style={{ color: "#10B981" }}>to Be Found.</span>
           </h2>
-          <p className="text-base mb-8 leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-base mb-8 leading-relaxed" style={{ color: "#4B5563" }}>
             Join the Digital Visibility Clinic for a cohort experience with live sessions and a
             verified certificate, or choose Private Consulting for 1-on-1 done-for-you delivery.
             Either way, you leave with a measurable, optimised scholarly presence.
@@ -296,7 +296,7 @@ export default function AboutPage() {
             <Link
               href="/clinics"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold border transition-all duration-200 hover:border-[#2563EB] hover:text-[#111827] active:scale-[0.97]"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               Join a Clinic
             </Link>
@@ -335,15 +335,15 @@ export default function AboutPage() {
                   <div className="flex-1 min-w-0">
                     <h3 className="text-xl font-bold mb-1" style={{ color: "#111827" }}>{f.name}</h3>
                     <p className="text-sm mb-0.5" style={{ color: "#60A5FA" }}>{f.title}</p>
-                    <p className="text-xs mb-4" style={{ color: "#6B7280" }}>{f.affiliation}</p>
-                    <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>{f.bio}</p>
+                    <p className="text-xs mb-4" style={{ color: "#4B5563" }}>{f.affiliation}</p>
+                    <p className="text-sm leading-relaxed mb-5" style={{ color: "#4B5563" }}>{f.bio}</p>
 
                     {f.credentials.length > 0 && (
                       <div className="mb-4">
-                        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#6B7280" }}>Credentials</p>
+                        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#4B5563" }}>Credentials</p>
                         <ul className="space-y-1">
                           {f.credentials.map((c) => (
-                            <li key={c} className="text-xs flex items-start gap-2" style={{ color: "#6B7280" }}>
+                            <li key={c} className="text-xs flex items-start gap-2" style={{ color: "#4B5563" }}>
                               <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#2563EB" }} />
                               {c}
                             </li>
@@ -368,12 +368,12 @@ export default function AboutPage() {
 
                 {f.publications.length > 0 && (
                   <div className="mt-8 pt-6 border-t" style={{ borderColor: "#E2E8F0" }}>
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-3 flex items-center gap-2" style={{ color: "#6B7280" }}>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-3 flex items-center gap-2" style={{ color: "#4B5563" }}>
                       <BookOpen className="h-3.5 w-3.5" /> Selected Publications
                     </p>
                     <ul className="space-y-2">
                       {f.publications.map((pub) => (
-                        <li key={pub.title} className="text-xs" style={{ color: "#6B7280" }}>
+                        <li key={pub.title} className="text-xs" style={{ color: "#4B5563" }}>
                           <span style={{ color: "#374151" }}>{pub.title}</span> · {pub.journal}, {pub.year}
                           {pub.url && <a href={pub.url} target="_blank" rel="noopener noreferrer" className="ml-2 inline-flex items-center gap-1" style={{ color: "#60A5FA" }}>View <ExternalLink className="h-2.5 w-2.5" /></a>}
                         </li>
@@ -386,11 +386,11 @@ export default function AboutPage() {
                 <div className="mt-8 pt-6 border-t grid grid-cols-2 sm:grid-cols-2 gap-4" style={{ borderColor: "#E2E8F0" }}>
                   <div className="rounded-xl p-4 text-center" style={{ backgroundColor: "rgba(37,99,235,0.06)" }}>
                     <p className="text-2xl font-bold mb-1" style={{ color: "#111827" }}>{f.clinicsLed}</p>
-                    <p className="text-xs" style={{ color: "#6B7280" }}>Cohorts facilitated</p>
+                    <p className="text-xs" style={{ color: "#4B5563" }}>Cohorts facilitated</p>
                   </div>
                   <div className="rounded-xl p-4 text-center" style={{ backgroundColor: "rgba(16,185,129,0.06)" }}>
                     <p className="text-2xl font-bold mb-1" style={{ color: "#111827" }}>{f.researchersHelped}+</p>
-                    <p className="text-xs" style={{ color: "#6B7280" }}>Researchers guided</p>
+                    <p className="text-xs" style={{ color: "#4B5563" }}>Researchers guided</p>
                   </div>
                 </div>
               </div>
@@ -403,12 +403,12 @@ export default function AboutPage() {
       {PARTNER_INSTITUTIONS.length > 0 && (
         <section className="border-t" style={{ borderColor: "#E2E8F0" }}>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
-            <p className="text-xs font-semibold tracking-widest uppercase mb-6 text-center" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-6 text-center" style={{ color: "#4B5563" }}>
               Previously Delivered In Partnership With
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               {PARTNER_INSTITUTIONS.map(({ name }) => (
-                <div key={name} className="rounded-xl border px-5 py-2.5 text-sm font-medium" style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
+                <div key={name} className="rounded-xl border px-5 py-2.5 text-sm font-medium" style={{ borderColor: "#E2E8F0", color: "#4B5563" }}>
                   {name}
                 </div>
               ))}

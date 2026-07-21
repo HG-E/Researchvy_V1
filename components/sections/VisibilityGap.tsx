@@ -69,7 +69,7 @@ export function VisibilityGap() {
             <br />
             <span style={{ color: "#2563EB" }}>gets ignored.</span>
           </h2>
-          <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed" style={{ color: "#4B5563" }}>
             It&rsquo;s not always about the quality.
             <br />
             It&rsquo;s about the <span className="font-semibold" style={{ color: "#374151" }}>visibility.</span>
@@ -105,7 +105,7 @@ export function VisibilityGap() {
               </p>
 
               {/* Description */}
-              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+              <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                 {desc}
               </p>
 

@@ -104,7 +104,7 @@ export function OppStatusPanel({ oppId, isPublished, isFeatured, submissionStatu
           onClick={() => act("unfeature")}
           disabled={!!loading}
           className="w-full flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold disabled:opacity-60"
-          style={{ backgroundColor: "rgba(107,114,128,0.1)", color: "#6B7280" }}
+          style={{ backgroundColor: "rgba(107,114,128,0.1)", color: "#4B5563" }}
         >
           {loading === "unfeature" ? <Loader2 className="h-4 w-4 animate-spin" /> : <Star className="h-4 w-4" />}
           Unfeature
@@ -132,7 +132,7 @@ export function OppStatusPanel({ oppId, isPublished, isFeatured, submissionStatu
               <button
                 onClick={() => { setRejectOpen(false); setRejectNote(""); }}
                 className="flex-1 rounded-xl px-3 py-2 text-xs font-medium"
-                style={{ backgroundColor: "#1E293B", color: "#6B7280" }}
+                style={{ backgroundColor: "#1E293B", color: "#4B5563" }}
               >
                 Cancel
               </button>

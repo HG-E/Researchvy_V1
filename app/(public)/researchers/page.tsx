@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { ArrowRight, GraduationCap, Building2, BarChart2, CheckCircle2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
@@ -81,7 +81,7 @@ export default async function ResearchersHubPage() {
           >
             Your research deserves to be found.
           </h1>
-          <p className="text-lg leading-relaxed" style={{ color: "#94A3B8" }}>
+          <p className="text-lg leading-relaxed" style={{ color: "#4B5563" }}>
             Millions of researchers publish every year. Most are never found, rarely cited,
             and invisible in the databases and networks that shape careers.
             Researchvy exists to fix that — for researchers at every stage and every institution.
@@ -115,7 +115,7 @@ export default async function ResearchersHubPage() {
                 >
                   {path.label}
                 </h2>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>
+                <p className="text-sm leading-relaxed mb-5" style={{ color: "#4B5563" }}>
                   {path.description}
                 </p>
 
@@ -123,7 +123,7 @@ export default async function ResearchersHubPage() {
                   {path.bullets.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
                       <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: path.color }} />
-                      <span className="text-sm" style={{ color: "#94A3B8" }}>{b}</span>
+                      <span className="text-sm" style={{ color: "#4B5563" }}>{b}</span>
                     </li>
                   ))}
                 </ul>
@@ -145,7 +145,7 @@ export default async function ResearchersHubPage() {
           className="rounded-2xl border p-7 mb-16"
           style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
-          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
             Start here — both free
           </p>
           <h2
@@ -174,9 +174,9 @@ export default async function ResearchersHubPage() {
                     <p className="text-sm font-bold mb-1 group-hover:text-[#111827] transition-colors" style={{ color: "#111827" }}>
                       {tool.label}
                     </p>
-                    <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{tool.detail}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{tool.detail}</p>
                   </div>
-                  <ArrowRight className="h-4 w-4 flex-shrink-0 mt-0.5 ml-auto transition-transform group-hover:translate-x-0.5" style={{ color: "#6B7280" }} />
+                  <ArrowRight className="h-4 w-4 flex-shrink-0 mt-0.5 ml-auto transition-transform group-hover:translate-x-0.5" style={{ color: "#4B5563" }} />
                 </Link>
               );
             })}
@@ -198,7 +198,7 @@ export default async function ResearchersHubPage() {
             >
               Digital Visibility Clinic
             </h2>
-            <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
               5 core sessions. Up to 20 researchers per cohort. Leave with a fully optimised scholarly identity,
               a personal visibility strategy, and a verified Researchvy certificate.
             </p>
@@ -228,7 +228,7 @@ export default async function ResearchersHubPage() {
             >
               Private Consulting
             </h2>
-            <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
               The same expertise as the Clinic, applied exclusively to your profile. Written audit,
               optimised accounts, and a strategy document — delivered 1-on-1, on your schedule.
               Starts at{" "}

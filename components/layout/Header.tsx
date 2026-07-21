@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
@@ -141,7 +141,7 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
                           >
                             <span className="block text-sm font-semibold">{child.label}</span>
                             {child.description && (
-                              <span className="block text-xs mt-0.5" style={{ color: "#6B7280" }}>
+                              <span className="block text-xs mt-0.5" style={{ color: "#4B5563" }}>
                                 {child.description}
                               </span>
                             )}
@@ -179,14 +179,14 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
             <Link
               href="/search"
               className="flex items-center gap-2 rounded-lg border px-3 py-1.5 transition-colors hover:border-[#CBD5E1] hover:bg-[#F8FAFC]"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
               aria-label="Search"
             >
               <Search className="h-3.5 w-3.5 flex-shrink-0" />
-              <span className="hidden lg:inline text-xs font-medium" style={{ color: "#6B7280" }}>Search…</span>
+              <span className="hidden lg:inline text-xs font-medium" style={{ color: "#4B5563" }}>Search…</span>
               <kbd
                 className="hidden lg:inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] font-mono leading-none"
-                style={{ borderColor: "#CBD5E1", color: "#6B7280", backgroundColor: "#F8FAFC" }}
+                style={{ borderColor: "#CBD5E1", color: "#4B5563", backgroundColor: "#F8FAFC" }}
               >
                 ⌘K
               </kbd>
@@ -219,7 +219,7 @@ export function Header({ serverUser }: { serverUser?: HeaderUser | null }) {
           {/* Mobile toggle */}
           <button
             className="md:hidden flex items-center justify-center w-11 h-11 rounded-lg -mr-1.5 active:bg-[#F1F5F9] transition-colors"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}

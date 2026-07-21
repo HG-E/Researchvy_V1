@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Search, Eye, Compass, Share2, MessageSquare, Zap, TrendingUp } from "lucide-react";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
@@ -112,7 +112,7 @@ export function FrameworkCarousel() {
                 style={{ background: `linear-gradient(90deg, transparent, ${color}40, transparent)` }}
               />
               <div className="p-5 text-center" style={{ backgroundColor: "#F1F5F9" }}>
-                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
                   Step {i + 1} of {steps.length}
                 </p>
                 <p
@@ -121,7 +121,7 @@ export function FrameworkCarousel() {
                 >
                   {step}
                 </p>
-                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                   {STEP_DESCRIPTIONS[step] ?? ""}
                 </p>
               </div>

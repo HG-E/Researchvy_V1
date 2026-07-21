@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -83,7 +83,7 @@ export function UserButton({ user }: { user: HeaderUser }) {
                 {user.name}
               </p>
             )}
-            <p className="text-xs truncate" style={{ color: "#6B7280" }}>
+            <p className="text-xs truncate" style={{ color: "#4B5563" }}>
               {user.email}
             </p>
           </div>
@@ -112,7 +112,7 @@ export function UserButton({ user }: { user: HeaderUser }) {
         <button
           onClick={handleSignOut}
           className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-[#F1F5F9]"
-          style={{ color: "#6B7280" }}
+          style={{ color: "#4B5563" }}
           role="menuitem"
         >
           <LogOut className="h-4 w-4 flex-shrink-0" />

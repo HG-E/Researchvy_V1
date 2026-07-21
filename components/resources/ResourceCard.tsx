@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { GraduationCap, ArrowRight, FileText, CheckSquare, Layout, BarChart2, BookOpen, Layers, type LucideIcon } from "lucide-react";
@@ -40,7 +40,7 @@ export function ResourceCard({ resource }: { resource: StaticResource }) {
           </div>
           <span
             className="text-xs font-medium px-2.5 py-1 rounded-full"
-            style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
+            style={{ backgroundColor: "#F1F5F9", color: "#4B5563" }}
           >
             {CATEGORY_LABELS[resource.category]}
           </span>
@@ -51,7 +51,7 @@ export function ResourceCard({ resource }: { resource: StaticResource }) {
           <h3 className="text-sm font-bold mb-2 leading-snug" style={{ color: "#111827" }}>
             {resource.title}
           </h3>
-          <p className="text-xs leading-relaxed line-clamp-3" style={{ color: "#6B7280" }}>
+          <p className="text-xs leading-relaxed line-clamp-3" style={{ color: "#4B5563" }}>
             {resource.description}
           </p>
         </div>
@@ -59,7 +59,7 @@ export function ResourceCard({ resource }: { resource: StaticResource }) {
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5">
           {resource.tags.slice(0, 3).map((tag) => (
-            <span key={tag} className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}>
+            <span key={tag} className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: "#F1F5F9", color: "#4B5563" }}>
               {tag}
             </span>
           ))}
@@ -70,7 +70,7 @@ export function ResourceCard({ resource }: { resource: StaticResource }) {
           <Link
             href="/clinics"
             className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all duration-200 border"
-            style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+            style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
           >
             <GraduationCap className="h-3.5 w-3.5" />
             Clinic Participants Only
@@ -104,7 +104,7 @@ export function ResourceCard({ resource }: { resource: StaticResource }) {
       {/* Inline newsletter form */}
       {resource.access === "newsletter" && expanded && (
         <div className="px-6 pb-6 border-t pt-4" style={{ borderColor: "#E2E8F0" }}>
-          <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
+          <p className="text-xs mb-3" style={{ color: "#4B5563" }}>
             Enter your email and we&apos;ll send this resource within 24 hours.
           </p>
           <NewsletterForm variant="inline" resourceTitle={resource.title} />

@@ -67,7 +67,7 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
               <button
                 onClick={close}
                 className="flex items-center justify-center w-10 h-10 rounded-lg active:bg-[#F1F5F9] transition-colors"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
                 aria-label="Close menu"
               >
                 <X className="h-5 w-5" />
@@ -87,7 +87,7 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
                       {displayName}
                     </p>
                   )}
-                  <p className="text-xs truncate" style={{ color: "#6B7280" }}>
+                  <p className="text-xs truncate" style={{ color: "#4B5563" }}>
                     {serverUser.email}
                   </p>
                 </div>
@@ -98,7 +98,7 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
             <nav className="flex-1 overflow-y-auto scroll-contain px-4 py-5 space-y-1" aria-label="Mobile navigation">
               <Link href="/search" onClick={close}
                 className="flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors active:bg-[#F1F5F9]"
-                style={{ color: "#6B7280" }}>
+                style={{ color: "#4B5563" }}>
                 <Search className="h-4 w-4 flex-shrink-0" />
                 Search
               </Link>
@@ -139,7 +139,7 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
                                   <div>
                                     <p className="text-sm font-semibold" style={{ color: "#111827" }}>{child.label}</p>
                                     {child.description && (
-                                      <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{child.description}</p>
+                                      <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{child.description}</p>
                                     )}
                                   </div>
                                 </Link>
@@ -194,7 +194,7 @@ export function MobileDrawer({ open, onClose, serverUser }: Props) {
                 <button
                   onClick={handleSignOut}
                   className="flex items-center justify-center gap-2 w-full rounded-xl px-4 py-3.5 text-sm font-semibold border transition-colors active:bg-[#F1F5F9]"
-                  style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                  style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
                 >
                   <LogOut className="h-4 w-4" />
                   Sign out

@@ -83,7 +83,7 @@ export function ModuleSection({ mod, isFirst, isLast, onMoveUp, onMoveDown }: Pr
     <div className="rounded-xl border overflow-hidden" style={{ borderColor: "#1E293B" }}>
       {/* Module header */}
       <div className="flex items-center gap-2 px-4 py-3" style={{ backgroundColor: "#0F172A" }}>
-        <button onClick={() => setOpen(o => !o)} className="flex-shrink-0 p-0.5" style={{ color: "#6B7280" }}>
+        <button onClick={() => setOpen(o => !o)} className="flex-shrink-0 p-0.5" style={{ color: "#4B5563" }}>
           {open ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
         </button>
 
@@ -108,21 +108,21 @@ export function ModuleSection({ mod, isFirst, isLast, onMoveUp, onMoveDown }: Pr
           {!editing && onMoveUp && (
             <button onClick={onMoveUp} disabled={isFirst}
               className="flex items-center justify-center w-6 h-6 rounded disabled:opacity-20"
-              style={{ color: "#6B7280" }} title="Move up">
+              style={{ color: "#4B5563" }} title="Move up">
               <ChevronUp className="h-3.5 w-3.5" />
             </button>
           )}
           {!editing && onMoveDown && (
             <button onClick={onMoveDown} disabled={isLast}
               className="flex items-center justify-center w-6 h-6 rounded disabled:opacity-20"
-              style={{ color: "#6B7280" }} title="Move down">
+              style={{ color: "#4B5563" }} title="Move down">
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
           )}
 
           {editing ? (
             <>
-              <button onClick={() => setEditing(false)} className="text-xs px-2 py-1 rounded" style={{ color: "#6B7280" }}>Cancel</button>
+              <button onClick={() => setEditing(false)} className="text-xs px-2 py-1 rounded" style={{ color: "#4B5563" }}>Cancel</button>
               <button onClick={save} disabled={saving} className="text-xs px-2.5 py-1 rounded font-medium"
                 style={{ backgroundColor: "#2563EB", color: "#fff" }}>
                 {saving ? "…" : "Save"}
@@ -132,7 +132,7 @@ export function ModuleSection({ mod, isFirst, isLast, onMoveUp, onMoveDown }: Pr
             <>
               <button onClick={() => setEditing(true)}
                 className="flex items-center justify-center w-7 h-7 rounded hover:bg-[#1E293B]"
-                style={{ color: "#6B7280" }}>
+                style={{ color: "#4B5563" }}>
                 <Pencil className="h-3.5 w-3.5" />
               </button>
               <button onClick={del} disabled={deleting}
@@ -150,14 +150,14 @@ export function ModuleSection({ mod, isFirst, isLast, onMoveUp, onMoveDown }: Pr
         <div className="px-4 py-3 space-y-2" style={{ backgroundColor: "#070B14" }}>
           {editing && (
             <div className="mb-3">
-              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Description</label>
+              <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Description</label>
               <input value={description} onChange={e => setDescription(e.target.value)}
                 className="w-full rounded-md px-3 py-2 text-sm border"
                 style={{ backgroundColor: "#1E293B", borderColor: "#334155", color: "#F9FAFB" }} />
             </div>
           )}
           {!editing && mod.description && (
-            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>{mod.description}</p>
+            <p className="text-xs mb-3" style={{ color: "#4B5563" }}>{mod.description}</p>
           )}
 
           {confirmDelete && (
@@ -166,7 +166,7 @@ export function ModuleSection({ mod, isFirst, isLast, onMoveUp, onMoveDown }: Pr
               <span className="text-xs flex-1" style={{ color: "#F87171" }}>
                 Delete module + {lessons.length} lesson{lessons.length !== 1 ? "s" : ""}?
               </span>
-              <button onClick={() => setConfirmDelete(false)} className="text-xs px-2 py-1" style={{ color: "#6B7280" }}>Cancel</button>
+              <button onClick={() => setConfirmDelete(false)} className="text-xs px-2 py-1" style={{ color: "#4B5563" }}>Cancel</button>
               <button onClick={del} disabled={deleting} className="text-xs px-2.5 py-1 rounded font-medium"
                 style={{ backgroundColor: "#7f1d1d", color: "#FCA5A5" }}>
                 {deleting ? "Deleting…" : "Confirm"}

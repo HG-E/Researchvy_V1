@@ -51,7 +51,7 @@ export function CTA() {
           </h2>
           <p
             className="text-base max-w-2xl mx-auto mb-10 leading-relaxed"
-            style={{ color: "#94A3B8" }}
+            style={{ color: "#4B5563" }}
           >
             {copy.cta.body}
           </p>

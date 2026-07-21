@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { MessageSquare, Mail } from "lucide-react";
 import { siteConfig, buildWhatsAppUrl } from "@/config/site";
@@ -25,13 +25,13 @@ export function ContactSidebar() {
             <a
               href={`mailto:${siteConfig.contact.email}`}
               className="text-sm transition-colors"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#F9FAFB")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "#9CA3AF")}
             >
               {siteConfig.contact.email}
             </a>
-            <p className="text-xs mt-1" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-1" style={{ color: "#4B5563" }}>
               Response within 1–2 business days
             </p>
           </div>
@@ -54,7 +54,7 @@ export function ContactSidebar() {
             <h3 className="font-semibold text-sm mb-1" style={{ color: "#111827" }}>
               WhatsApp
             </h3>
-            <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
+            <p className="text-xs mb-3" style={{ color: "#4B5563" }}>
               For urgent enquiries, clinic pricing, or Private Consulting availability.
             </p>
             <a
@@ -84,7 +84,7 @@ export function ContactSidebar() {
         >
           Before You Write
         </p>
-        <ul className="space-y-2 text-xs" style={{ color: "#6B7280" }}>
+        <ul className="space-y-2 text-xs" style={{ color: "#4B5563" }}>
           <li>• Clinic or Private Consulting pricing → use WhatsApp for fastest response</li>
           <li>• Partnership enquiries → email is best</li>
           <li>• Technical issues → include your browser and OS</li>

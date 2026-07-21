@@ -99,7 +99,7 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
         </div>
         <div>
           <p className="text-sm font-semibold" style={{ color: "#111827" }}>{t.name}</p>
-          <p className="text-xs" style={{ color: "#6B7280" }}>{t.role}</p>
+          <p className="text-xs" style={{ color: "#4B5563" }}>{t.role}</p>
         </div>
       </div>
     </div>
@@ -130,7 +130,7 @@ export function SocialProof() {
             <br />
             <span style={{ color: "#10B981" }}>When You Get Found.</span>
           </h2>
-          <p className="text-base max-w-xl mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-base max-w-xl mx-auto" style={{ color: "#4B5563" }}>
             Researchers across disciplines and continents, from postdocs to research directors,
             on what shifted after working with Researchvy.
           </p>
@@ -192,7 +192,7 @@ export function SocialProof() {
               >
                 {stat.value}
               </p>
-              <p className="text-xs leading-snug" style={{ color: "#6B7280" }}>{stat.label}</p>
+              <p className="text-xs leading-snug" style={{ color: "#4B5563" }}>{stat.label}</p>
             </div>
           ))}
         </motion.div>

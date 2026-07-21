@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef, useEffect } from "react";
 import { Plus } from "lucide-react";
@@ -82,7 +82,7 @@ function AccordionItem({
         }}
       >
         <div ref={bodyRef} className="px-5 pb-5 pl-[3.75rem]">
-          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
             {item.answer}
           </p>
         </div>

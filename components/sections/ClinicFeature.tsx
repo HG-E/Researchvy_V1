@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -44,7 +44,7 @@ export function ClinicFeature({ spotsLeft, usdNgnRate = 1620 }: { spotsLeft?: nu
             >
               {copy.clinic.name}
             </h2>
-            <p className="text-base mb-8" style={{ color: "#6B7280" }}>
+            <p className="text-base mb-8" style={{ color: "#4B5563" }}>
               {copy.clinic.tagline}
             </p>
 
@@ -129,7 +129,7 @@ export function ClinicFeature({ spotsLeft, usdNgnRate = 1620 }: { spotsLeft?: nu
               <a
                 href={`mailto:${siteConfig.contact.email}?subject=Clinic%20Enquiry`}
                 className="font-medium transition-colors"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#2563EB")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
               >
@@ -140,13 +140,13 @@ export function ClinicFeature({ spotsLeft, usdNgnRate = 1620 }: { spotsLeft?: nu
             {/* Risk reversal */}
             <div className="flex items-center gap-2 mt-4">
               <ShieldCheck className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#10B981" }} />
-              <p className="text-xs" style={{ color: "#6B7280" }}>
+              <p className="text-xs" style={{ color: "#4B5563" }}>
                 Full refund guaranteed on cancellations 7+ days before cohort start.
               </p>
             </div>
 
             {/* Free strategy call */}
-            <p className="mt-3 text-xs" style={{ color: "#6B7280" }}>
+            <p className="mt-3 text-xs" style={{ color: "#4B5563" }}>
               Not sure yet?{" "}
               <Link
                 href="/consultation"
@@ -162,7 +162,7 @@ export function ClinicFeature({ spotsLeft, usdNgnRate = 1620 }: { spotsLeft?: nu
 
             {/* Enrollment steps */}
             <div className="mt-8 pt-6 border-t" style={{ borderColor: "#E2E8F0" }}>
-              <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
+              <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
                 How enrollment works
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -180,7 +180,7 @@ export function ClinicFeature({ spotsLeft, usdNgnRate = 1620 }: { spotsLeft?: nu
                     </div>
                     <div>
                       <p className="text-xs font-semibold" style={{ color: "#374151" }}>{label}</p>
-                      <p className="text-[11px] leading-relaxed mt-0.5" style={{ color: "#6B7280" }}>{detail}</p>
+                      <p className="text-[11px] leading-relaxed mt-0.5" style={{ color: "#4B5563" }}>{detail}</p>
                     </div>
                   </div>
                 ))}
@@ -237,7 +237,7 @@ export function ClinicFeature({ spotsLeft, usdNgnRate = 1620 }: { spotsLeft?: nu
                     <p className="font-semibold text-sm mb-0.5" style={{ color: "#111827" }}>
                       {item.label}
                     </p>
-                    <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                    <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                       {item.description}
                     </p>
                   </div>
@@ -245,7 +245,7 @@ export function ClinicFeature({ spotsLeft, usdNgnRate = 1620 }: { spotsLeft?: nu
               ))}
 
               <div className="mt-6 pt-6 border-t" style={{ borderColor: "#E2E8F0" }}>
-                <p className="text-xs mb-2" style={{ color: "#6B7280" }}>
+                <p className="text-xs mb-2" style={{ color: "#4B5563" }}>
                   From{" "}
                   <strong style={{ color: "#111827" }}>${usdPrice} USD</strong>
                   {" / "}

@@ -62,7 +62,7 @@ export function AdminMobileNav({ email, submittedOrderCount = 0 }: { email: stri
         <button
           onClick={() => setOpen(true)}
           className="flex items-center justify-center w-11 h-11 rounded-xl active:bg-[#1E293B] transition-colors"
-          style={{ color: "#6B7280" }}
+          style={{ color: "#4B5563" }}
           aria-label="Open admin navigation"
         >
           <Menu className="h-5 w-5" />
@@ -101,7 +101,7 @@ export function AdminMobileNav({ email, submittedOrderCount = 0 }: { email: stri
           <button
             onClick={() => setOpen(false)}
             className="flex items-center justify-center w-10 h-10 rounded-xl active:bg-[#1E293B] transition-colors"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
             aria-label="Close navigation"
           >
             <X className="h-5 w-5" />

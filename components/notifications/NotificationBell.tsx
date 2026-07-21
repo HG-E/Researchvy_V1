@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Bell, X, CheckCheck, Clock, CalendarDays, Briefcase, Info } from "lucide-react";
@@ -157,7 +157,7 @@ export function NotificationBell({ userId }: { userId: string }) {
                 <button
                   onClick={() => markRead()}
                   className="flex items-center gap-1.5 text-xs font-medium transition-opacity hover:opacity-70"
-                  style={{ color: "#6B7280" }}
+                  style={{ color: "#4B5563" }}
                 >
                   <CheckCheck className="h-3.5 w-3.5" />
                   Mark all read
@@ -166,7 +166,7 @@ export function NotificationBell({ userId }: { userId: string }) {
               <button
                 onClick={() => setOpen(false)}
                 className="flex items-center justify-center w-6 h-6 rounded hover:bg-[#F1F5F9] transition-colors"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
                 aria-label="Close"
               >
                 <X className="h-3.5 w-3.5" />
@@ -182,9 +182,9 @@ export function NotificationBell({ userId }: { userId: string }) {
               </div>
             ) : notifications.length === 0 ? (
               <div className="px-4 py-10 text-center">
-                <Bell className="h-8 w-8 mx-auto mb-3 opacity-20" style={{ color: "#6B7280" }} />
-                <p className="text-sm" style={{ color: "#6B7280" }}>No notifications yet</p>
-                <p className="text-xs mt-1" style={{ color: "#6B7280" }}>Deadline reminders will appear here</p>
+                <Bell className="h-8 w-8 mx-auto mb-3 opacity-20" style={{ color: "#4B5563" }} />
+                <p className="text-sm" style={{ color: "#4B5563" }}>No notifications yet</p>
+                <p className="text-xs mt-1" style={{ color: "#4B5563" }}>Deadline reminders will appear here</p>
               </div>
             ) : (
               notifications.map((n) => {
@@ -205,10 +205,10 @@ export function NotificationBell({ userId }: { userId: string }) {
                       <p className="text-sm font-medium leading-snug" style={{ color: n.read ? "#9CA3AF" : "#F9FAFB" }}>
                         {n.title}
                       </p>
-                      <p className="text-xs mt-0.5 leading-relaxed line-clamp-2" style={{ color: "#6B7280" }}>
+                      <p className="text-xs mt-0.5 leading-relaxed line-clamp-2" style={{ color: "#4B5563" }}>
                         {n.body}
                       </p>
-                      <p className="text-[10px] mt-1" style={{ color: "#6B7280" }}>
+                      <p className="text-[10px] mt-1" style={{ color: "#4B5563" }}>
                         {timeAgo(n.created_at)}
                       </p>
                     </div>
@@ -234,7 +234,7 @@ export function NotificationBell({ userId }: { userId: string }) {
             <Link
               href="/dashboard/notifications"
               className="text-xs font-medium transition-colors hover:text-[#111827] block text-center"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
               onClick={() => setOpen(false)}
             >
               View all notifications

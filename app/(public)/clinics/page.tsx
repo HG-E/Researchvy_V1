@@ -1,4 +1,4 @@
-﻿import { Suspense } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowRight, MessageCircle, CheckCircle, GraduationCap, Calendar, Clock, Users, TrendingUp, Award, FileText, User } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -76,7 +76,7 @@ export default async function ClinicsPage() {
             Stop Being Invisible.<br />
             <span style={{ color: "#10B981" }}>Start Getting Cited.</span>
           </h1>
-          <p className="text-base sm:text-lg leading-relaxed max-w-2xl mb-4" style={{ color: "#6B7280" }}>
+          <p className="text-base sm:text-lg leading-relaxed max-w-2xl mb-4" style={{ color: "#4B5563" }}>
             Live, structured clinics that take researchers from overlooked to globally discoverable,
             with a personal strategy, a verified certificate, and results you can measure.
           </p>
@@ -85,7 +85,7 @@ export default async function ClinicsPage() {
             className="rounded-xl border-l-4 px-5 py-4 max-w-2xl"
             style={{ backgroundColor: "rgba(16,185,129,0.04)", borderLeftColor: "#10B981" }}
           >
-            <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
               <strong style={{ color: "#111827" }}>Every promotion cycle evaluates your Scopus profile, h-index, and citation record.</strong>{" "}
               Most researchers publish without ever optimising how that work is found, attributed, or cited.
               Nobody taught you the system. This clinic does — across 5 core sessions, with your actual profile.
@@ -126,7 +126,7 @@ export default async function ClinicsPage() {
                 >
                   {digitalVisibilityClinic.name}
                 </h2>
-                <p className="text-base mb-8" style={{ color: "#6B7280" }}>
+                <p className="text-base mb-8" style={{ color: "#4B5563" }}>
                   {digitalVisibilityClinic.description}
                 </p>
 
@@ -139,7 +139,7 @@ export default async function ClinicsPage() {
                   ].map(({ label, value }) => (
                     <div key={label} className="text-center">
                       <p className="text-sm font-bold" style={{ color: "#111827" }}>{value}</p>
-                      <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{label}</p>
+                      <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{label}</p>
                     </div>
                   ))}
                 </div>
@@ -177,7 +177,7 @@ export default async function ClinicsPage() {
                   <a
                     href={`mailto:${siteConfig.contact.email}?subject=Digital%20Visibility%20Clinic%20Enquiry`}
                     className="font-medium hover:underline"
-                    style={{ color: "#6B7280" }}
+                    style={{ color: "#4B5563" }}
                   >
                     Email {siteConfig.contact.email} →
                   </a>
@@ -186,7 +186,7 @@ export default async function ClinicsPage() {
 
               {/* Right — sessions preview */}
               <div>
-                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#6B7280" }}>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
                   5 Core Sessions
                 </p>
                 <Suspense fallback={<div className="h-64 rounded-2xl animate-pulse" style={{ backgroundColor: "#FFFFFF" }} />}>
@@ -197,7 +197,7 @@ export default async function ClinicsPage() {
                   className="mt-5 rounded-xl p-4 border"
                   style={{ backgroundColor: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.2)" }}
                 >
-                  <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                  <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                     🏆 Earn the <strong style={{ color: "#111827" }}>Certificate of Scholarly Visibility Practice</strong> upon
                     successful completion, downloadable, shareable on LinkedIn, and verifiable.
                   </p>
@@ -273,8 +273,8 @@ export default async function ClinicsPage() {
                   <span className="font-bold" style={{ color: "#111827" }}>
                     Early bird pricing ends {earlyBirdDate}
                   </span>
-                  <span className="hidden sm:inline" style={{ color: "#6B7280" }}>·</span>
-                  <span style={{ color: "#6B7280" }}>
+                  <span className="hidden sm:inline" style={{ color: "#4B5563" }}>·</span>
+                  <span style={{ color: "#4B5563" }}>
                     August cohort · limited spots remaining
                   </span>
                 </div>
@@ -289,7 +289,7 @@ export default async function ClinicsPage() {
                 </a>
               </div>
               <div className="mt-3 pt-3 border-t flex items-center gap-3" style={{ borderColor: "rgba(245,158,11,0.15)" }}>
-                <span className="text-xs" style={{ color: "#6B7280" }}>Early bird closes in:</span>
+                <span className="text-xs" style={{ color: "#4B5563" }}>Early bird closes in:</span>
                 <EarlyBirdCountdown deadline={digitalVisibilityClinic.pricing.earlyBirdDeadline} />
               </div>
             </div>
@@ -306,7 +306,7 @@ export default async function ClinicsPage() {
             >
               Choose Your Transformation
             </h2>
-            <p className="text-sm max-w-xl mx-auto" style={{ color: "#6B7280" }}>
+            <p className="text-sm max-w-xl mx-auto" style={{ color: "#4B5563" }}>
               All prices shown in USD and NGN equivalent.{isEarlyBird && ` Early bird saves up to $90 / ${formatNgn(usdToNgn(90, rate))} on the Pro Bundle — closes ${earlyBirdDate}.`}
             </p>
           </div>
@@ -366,7 +366,7 @@ export default async function ClinicsPage() {
                           <span className="text-3xl font-bold" style={{ color: "#111827" }}>
                             {bundle.isSolo ? "from " : ""}{formatUSD(isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular)}
                           </span>
-                          <span className="text-base font-semibold" style={{ color: "#6B7280" }}>
+                          <span className="text-base font-semibold" style={{ color: "#4B5563" }}>
                             USD
                           </span>
                         </div>
@@ -378,14 +378,14 @@ export default async function ClinicsPage() {
                       {/* Regular price / savings */}
                       <div className="pt-3 border-t" style={{ borderColor: "#CBD5E1" }}>
                         {bundle.isSolo ? (
-                          <p className="text-xs" style={{ color: "#6B7280" }}>
+                          <p className="text-xs" style={{ color: "#4B5563" }}>
                             Prices vary per module · see FAQ
                           </p>
                         ) : isEarlyBird ? (
                           <>
-                            <p className="text-xs" style={{ color: "#6B7280" }}>
+                            <p className="text-xs" style={{ color: "#4B5563" }}>
                               After {earlyBirdDate}:{" "}
-                              <span style={{ textDecoration: "line-through", color: "#6B7280" }}>
+                              <span style={{ textDecoration: "line-through", color: "#4B5563" }}>
                                 {formatUSD(bundle.usd.regular)} / {formatNgn(usdToNgn(bundle.usd.regular, rate))}
                               </span>
                             </p>
@@ -394,7 +394,7 @@ export default async function ClinicsPage() {
                             </p>
                           </>
                         ) : (
-                          <p className="text-xs" style={{ color: "#6B7280" }}>
+                          <p className="text-xs" style={{ color: "#4B5563" }}>
                             Regular price applies
                           </p>
                         )}
@@ -440,7 +440,7 @@ export default async function ClinicsPage() {
             className="rounded-2xl border p-7"
             style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
-            <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
               Not sure which bundle is right for you?
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -467,7 +467,7 @@ export default async function ClinicsPage() {
                   className="rounded-xl border p-4"
                   style={{ backgroundColor: "#FFFFFF", borderColor: `${color}25` }}
                 >
-                  <p className="text-xs leading-relaxed mb-3" style={{ color: "#6B7280" }}>
+                  <p className="text-xs leading-relaxed mb-3" style={{ color: "#4B5563" }}>
                     {signal}
                   </p>
                   <div className="flex items-center gap-2 flex-wrap">
@@ -488,14 +488,14 @@ export default async function ClinicsPage() {
             {/* Group discount strip */}
             <div className="mt-5 pt-5 border-t flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6" style={{ borderColor: "#E2E8F0" }}>
               <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} />
-                <span className="text-xs font-semibold" style={{ color: "#6B7280" }}>Group discounts:</span>
+                <Users className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
+                <span className="text-xs font-semibold" style={{ color: "#4B5563" }}>Group discounts:</span>
               </div>
-              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-1.5 sm:gap-x-4 sm:gap-y-1 text-xs" style={{ color: "#6B7280" }}>
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-1.5 sm:gap-x-4 sm:gap-y-1 text-xs" style={{ color: "#4B5563" }}>
                 <span>3–10 researchers → <strong style={{ color: "#111827" }}>15% off</strong></span>
-                <span className="hidden sm:inline" style={{ color: "#6B7280" }}>·</span>
+                <span className="hidden sm:inline" style={{ color: "#4B5563" }}>·</span>
                 <span>11–20 researchers → <strong style={{ color: "#111827" }}>25% off</strong></span>
-                <span className="hidden sm:inline" style={{ color: "#6B7280" }}>·</span>
+                <span className="hidden sm:inline" style={{ color: "#4B5563" }}>·</span>
                 <span>Institutional → <a href={buildWhatsAppUrl("institutional group enrollment for Digital Visibility Clinic")} target="_blank" rel="noopener noreferrer" style={{ color: "#2563EB" }}>enquire via WhatsApp</a></span>
               </div>
             </div>
@@ -533,7 +533,7 @@ export default async function ClinicsPage() {
             >
               Book Your Department&apos;s Seats
             </h2>
-            <p className="text-base max-w-2xl leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-base max-w-2xl leading-relaxed" style={{ color: "#4B5563" }}>
               HODs, DVCs Research, and department coordinators: we make institutional booking
               straightforward. One group investment improves your department&apos;s collective
               research metrics, staff confidence, and institutional visibility profile.
@@ -545,7 +545,7 @@ export default async function ClinicsPage() {
             className="rounded-2xl border px-6 py-5 mb-8"
             style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
-            <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
+            <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
               Previously delivered in partnership with
             </p>
             <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
@@ -557,7 +557,7 @@ export default async function ClinicsPage() {
               ].map(({ name, sub }) => (
                 <div key={name}>
                   <p className="text-sm font-bold" style={{ color: "#111827" }}>{name}</p>
-                  <p className="text-[10px]" style={{ color: "#6B7280" }}>{sub}</p>
+                  <p className="text-[10px]" style={{ color: "#4B5563" }}>{sub}</p>
                 </div>
               ))}
             </div>
@@ -597,7 +597,7 @@ export default async function ClinicsPage() {
                   <Icon className="h-5 w-5" style={{ color }} />
                 </div>
                 <h3 className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{title}</h3>
-                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{body}</p>
+                <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{body}</p>
               </div>
             ))}
           </div>
@@ -623,7 +623,7 @@ export default async function ClinicsPage() {
                     >
                       <div>
                         <p className="text-sm font-semibold" style={{ color: "#111827" }}>{range}</p>
-                        <p className="text-[11px]" style={{ color: "#6B7280" }}>{example}</p>
+                        <p className="text-[11px]" style={{ color: "#4B5563" }}>{example}</p>
                       </div>
                       <span
                         className="text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap"
@@ -652,12 +652,12 @@ export default async function ClinicsPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-semibold border"
-                  style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                  style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
                 >
                   <FileText className="h-4 w-4" />
                   Request Institutional Letter
                 </a>
-                <p className="text-[11px] text-center" style={{ color: "#6B7280" }}>
+                <p className="text-[11px] text-center" style={{ color: "#4B5563" }}>
                   Letter issued within 24 hours · Formatted for HOD or finance office
                 </p>
               </div>
@@ -668,7 +668,7 @@ export default async function ClinicsPage() {
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
         <div className="mb-20">
           <div className="text-center mb-10">
-            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
               Common questions
             </p>
             <h2
@@ -702,7 +702,7 @@ export default async function ClinicsPage() {
                 >
                   Private Consulting — Built Around You, Not a Cohort
                 </h2>
-                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                   If you want bespoke 1-on-1 work on your specific profile — no fixed schedule,
                   no group sessions, just your gaps fixed and your strategy written for you —
                   our Private Consulting track starts at <strong style={{ color: "#111827" }}>$209 / {formatNgn(usdToNgn(209, rate))}</strong>.
@@ -722,7 +722,7 @@ export default async function ClinicsPage() {
 
         {/* Coming soon */}
         <div>
-          <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: "#4B5563" }}>
             More Clinics Launching, Register Interest Now
           </p>
           <Suspense fallback={<div className="h-48 rounded-2xl animate-pulse" style={{ backgroundColor: "#FFFFFF" }} />}>

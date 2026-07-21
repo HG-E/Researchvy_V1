@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -62,7 +62,7 @@ export function NewPasswordForm() {
           >
             Password updated
           </h2>
-          <p className="text-sm" style={{ color: "#6B7280" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             Your password has been changed successfully. Redirecting to your dashboard…
           </p>
         </div>
@@ -87,7 +87,7 @@ export function NewPasswordForm() {
           >
             Set new password
           </h1>
-          <p className="text-sm" style={{ color: "#6B7280" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             Choose a strong password for your account.
           </p>
         </div>
@@ -96,7 +96,7 @@ export function NewPasswordForm() {
           <div>
             <label
               className="block text-xs font-semibold tracking-wide uppercase mb-2"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               New Password
             </label>
@@ -117,7 +117,7 @@ export function NewPasswordForm() {
                 type="button"
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -133,7 +133,7 @@ export function NewPasswordForm() {
           <div>
             <label
               className="block text-xs font-semibold tracking-wide uppercase mb-2"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Confirm Password
             </label>
@@ -154,7 +154,7 @@ export function NewPasswordForm() {
                 type="button"
                 aria-label={showConfirm ? "Hide confirm password" : "Show confirm password"}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
                 onClick={() => setShowConfirm(!showConfirm)}
               >
                 {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -212,7 +212,7 @@ export function NewPasswordForm() {
           <Link
             href="/signin"
             className="text-sm transition-colors"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "#4B5563")}
           >

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -27,7 +27,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-wide uppercase mb-2" style={{ color: "#6B7280" }}>
+      <label className="block text-xs font-semibold tracking-wide uppercase mb-2" style={{ color: "#4B5563" }}>
         {label}
       </label>
       {children}
@@ -117,7 +117,7 @@ export function SignInForm() {
           >
             Welcome back
           </h1>
-          <p className="text-sm" style={{ color: "#6B7280" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             Sign in to your Researchvy account
           </p>
         </div>
@@ -161,7 +161,7 @@ export function SignInForm() {
                 type="button"
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
                 onClick={() => setShowPassword(!showPassword)}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
@@ -231,12 +231,12 @@ export function SignInForm() {
         <div className="mt-6">
           <div className="flex items-center gap-3 mb-5">
             <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
-            <span className="text-xs" style={{ color: "#6B7280" }}>
+            <span className="text-xs" style={{ color: "#4B5563" }}>
               new here?
             </span>
             <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
           </div>
-          <p className="text-center text-sm" style={{ color: "#6B7280" }}>
+          <p className="text-center text-sm" style={{ color: "#4B5563" }}>
             Don&apos;t have an account?{" "}
             <Link
               href={

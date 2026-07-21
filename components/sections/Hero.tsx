@@ -192,7 +192,7 @@ export function Hero() {
                 <span
                   key={point}
                   className="flex items-center gap-1.5 text-xs"
-                  style={{ color: "#6B7280" }}
+                  style={{ color: "#4B5563" }}
                 >
                   <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#10B981" }} />
                   {point}
@@ -224,7 +224,7 @@ export function Hero() {
                   >
                     {value}
                   </p>
-                  <p className="text-xs leading-snug" style={{ color: "#6B7280" }}>{label}</p>
+                  <p className="text-xs leading-snug" style={{ color: "#4B5563" }}>{label}</p>
                 </div>
               ))}
             </motion.div>
@@ -288,7 +288,7 @@ export function Hero() {
               style={{ backgroundColor: "#FFFFFF", borderColor: "#E5E7EB", minWidth: "140px" }}
             >
               <p className="text-2xl font-bold mb-0.5" style={{ fontFamily: "var(--font-serif)", color: "#2563EB" }}>87%</p>
-              <p className="text-xs leading-snug" style={{ color: "#6B7280" }}>researchers report<br />increased visibility</p>
+              <p className="text-xs leading-snug" style={{ color: "#4B5563" }}>researchers report<br />increased visibility</p>
             </motion.div>
 
             {/* Floating bottom-right accent card */}
@@ -303,7 +303,7 @@ export function Hero() {
                 <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#10B981" }} />
                 <p className="text-xs font-semibold" style={{ color: "#111827" }}>Live cohort open</p>
               </div>
-              <p className="text-xs" style={{ color: "#6B7280" }}>≤20 researchers per batch</p>
+              <p className="text-xs" style={{ color: "#4B5563" }}>≤20 researchers per batch</p>
             </motion.div>
           </motion.div>
 

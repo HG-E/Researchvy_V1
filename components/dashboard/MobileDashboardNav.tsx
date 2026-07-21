@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -50,7 +50,7 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
         <button
           onClick={() => setOpen(true)}
           className="flex items-center justify-center w-11 h-11 rounded-xl active:bg-[#F1F5F9] transition-colors"
-          style={{ color: "#6B7280" }}
+          style={{ color: "#4B5563" }}
           aria-label="Open navigation"
           aria-expanded={open}
         >
@@ -88,7 +88,7 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
           <button
             onClick={() => setOpen(false)}
             className="flex items-center justify-center w-10 h-10 rounded-xl active:bg-[#F1F5F9] transition-colors"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
             aria-label="Close navigation"
           >
             <X className="h-5 w-5" />
@@ -107,7 +107,7 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
             <p className="text-sm font-semibold truncate" style={{ color: "#111827" }}>
               {displayName}
             </p>
-            <p className="text-xs truncate" style={{ color: "#6B7280" }}>
+            <p className="text-xs truncate" style={{ color: "#4B5563" }}>
               {user.email}
             </p>
           </div>
@@ -160,7 +160,7 @@ export function MobileDashboardNav({ user }: { user: DashUser }) {
           <button
             onClick={handleSignOut}
             className="flex items-center gap-3 w-full rounded-xl px-4 py-3.5 text-sm font-medium transition-colors active:bg-[#F1F5F9]"
-            style={{ color: "#6B7280", minHeight: "48px" }}
+            style={{ color: "#4B5563", minHeight: "48px" }}
           >
             <LogOut className="h-4 w-4 flex-shrink-0" />
             Sign out

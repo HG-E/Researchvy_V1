@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Building2, GraduationCap, BookOpen, Handshake, ArrowRight, MessageCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -64,7 +64,7 @@ export default function PartnershipsPage() {
             Make Research Visibility<br />
             <span style={{ color: "#60A5FA" }}>A Shared Institutional Asset.</span>
           </h1>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-8" style={{ color: "#4B5563" }}>
             Individual researchers can&apos;t build visibility infrastructure alone, but institutions can.
             We partner with universities, learned societies, and publishers to embed
             scholarly visibility training, audits, and intelligence into the workflows your researchers already use.
@@ -83,7 +83,7 @@ export default function PartnershipsPage() {
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               Send an Enquiry
             </Link>
@@ -101,7 +101,7 @@ export default function PartnershipsPage() {
                 <Icon className="h-5 w-5" style={{ color }} />
               </div>
               <h2 className="text-base font-bold mb-2" style={{ color: "#111827" }}>{title}</h2>
-              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
             </HoverCard>
           ))}
         </div>
@@ -145,7 +145,7 @@ export default function PartnershipsPage() {
             <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
               Need institutional-level visibility data first?
             </p>
-            <p className="text-sm" style={{ color: "#6B7280" }}>
+            <p className="text-sm" style={{ color: "#4B5563" }}>
               Our Intelligence team conducts full-scale institutional audits before or alongside a partnership engagement.
             </p>
           </div>

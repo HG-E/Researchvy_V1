@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -14,10 +14,10 @@ interface LessonSidebarProps {
 }
 
 function lessonIcon(lesson: LessonListItem, completed: boolean, locked: boolean) {
-  if (locked)     return <Lock       className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />;
+  if (locked)     return <Lock       className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#4B5563" }} />;
   if (completed)  return <CheckCircle className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#10B981" }} />;
-  if (lesson.lesson_type === "article") return <FileText className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />;
-  return <PlayCircle className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#6B7280" }} />;
+  if (lesson.lesson_type === "article") return <FileText className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#4B5563" }} />;
+  return <PlayCircle className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#4B5563" }} />;
 }
 
 export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, progress }: LessonSidebarProps) {
@@ -55,7 +55,7 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
           <button
             onClick={() => setOpen(false)}
             className="lg:hidden flex-shrink-0 p-1 rounded"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
             aria-label="Close sidebar"
           >
             <X className="h-4 w-4" />
@@ -63,7 +63,7 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
         </div>
         {enrolled && allPublished.length > 0 && (
           <div>
-            <div className="flex items-center justify-between text-[10px] mb-1" style={{ color: "#6B7280" }}>
+            <div className="flex items-center justify-between text-[10px] mb-1" style={{ color: "#4B5563" }}>
               <span>{completedCount}/{allPublished.length} lessons</span>
               <span style={{ color: pct === 100 ? "#10B981" : "#2563EB" }}>{pct}%</span>
             </div>
@@ -94,13 +94,13 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
                   <p className="text-[11px] font-bold leading-snug truncate" style={{ color: "#111827" }}>
                     {mod.title}
                   </p>
-                  <p className="text-[10px] mt-0.5" style={{ color: "#6B7280" }}>
+                  <p className="text-[10px] mt-0.5" style={{ color: "#4B5563" }}>
                     {completedCount}/{publishedLessons.length} lessons
                   </p>
                 </div>
                 <ChevronDown
                   className="h-3.5 w-3.5 flex-shrink-0 transition-transform duration-200"
-                  style={{ color: "#6B7280", transform: isCollapsed ? "rotate(-90deg)" : "rotate(0deg)" }}
+                  style={{ color: "#4B5563", transform: isCollapsed ? "rotate(-90deg)" : "rotate(0deg)" }}
                 />
               </button>
 
@@ -118,7 +118,7 @@ export function LessonSidebar({ course, currentLessonId, courseSlug, enrolled, p
                           className="flex items-center gap-2.5 px-4 py-2 opacity-50"
                         >
                           {lessonIcon(lesson, completed, true)}
-                          <span className="text-xs truncate" style={{ color: "#6B7280" }}>
+                          <span className="text-xs truncate" style={{ color: "#4B5563" }}>
                             {lesson.title}
                           </span>
                         </div>

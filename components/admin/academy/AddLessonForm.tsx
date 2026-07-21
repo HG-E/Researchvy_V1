@@ -68,20 +68,20 @@ export function AddLessonForm({ moduleId }: { moduleId: string }) {
 
   return (
     <form onSubmit={submit} className="border-t pt-3 mt-2 space-y-3" style={{ borderColor: "#334155" }}>
-      <p className="text-xs font-medium" style={{ color: "#94A3B8" }}>New Lesson</p>
+      <p className="text-xs font-medium" style={{ color: "#4B5563" }}>New Lesson</p>
       <div className="grid grid-cols-2 gap-3">
         <div className="col-span-2">
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Title *</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Title *</label>
           <input className={inp} style={inpStyle} value={form.title}
             onChange={e => set("title", e.target.value)} required />
         </div>
         <div>
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Slug *</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Slug *</label>
           <input className={`${inp} font-mono`} style={inpStyle} value={form.slug}
             onChange={e => set("slug", toSlug(e.target.value))} required />
         </div>
         <div>
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Type</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Type</label>
           <select className={inp} style={inpStyle} value={form.lesson_type}
             onChange={e => set("lesson_type", e.target.value)}>
             <option value="video">Video</option>
@@ -91,7 +91,7 @@ export function AddLessonForm({ moduleId }: { moduleId: string }) {
         {form.lesson_type === "video" && (
           <>
             <div>
-              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Provider</label>
+              <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Provider</label>
               <select className={inp} style={inpStyle} value={form.video_provider}
                 onChange={e => set("video_provider", e.target.value)}>
                 <option value="youtube">YouTube</option>
@@ -99,14 +99,14 @@ export function AddLessonForm({ moduleId }: { moduleId: string }) {
               </select>
             </div>
             <div>
-              <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Video ID</label>
+              <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Video ID</label>
               <input className={`${inp} font-mono`} style={inpStyle} value={form.video_id}
                 onChange={e => set("video_id", e.target.value)} placeholder="dQw4w9WgXcQ" />
             </div>
           </>
         )}
         <div>
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Duration (seconds)</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Duration (seconds)</label>
           <input className={inp} style={inpStyle} type="number" value={form.duration_seconds}
             onChange={e => set("duration_seconds", e.target.value)} />
         </div>
@@ -120,7 +120,7 @@ export function AddLessonForm({ moduleId }: { moduleId: string }) {
       </div>
       {error && <p className="text-xs" style={{ color: "#F87171" }}>{error}</p>}
       <div className="flex gap-2 justify-end">
-        <button type="button" onClick={() => setOpen(false)} className="px-3 py-1.5 text-xs rounded-md" style={{ color: "#6B7280" }}>Cancel</button>
+        <button type="button" onClick={() => setOpen(false)} className="px-3 py-1.5 text-xs rounded-md" style={{ color: "#4B5563" }}>Cancel</button>
         <button type="submit" disabled={saving} className="px-3 py-1.5 text-xs rounded-md font-medium"
           style={{ backgroundColor: "#2563EB", color: "#fff" }}>
           {saving ? "Adding…" : "Add Lesson"}

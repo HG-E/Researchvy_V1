@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -82,7 +82,7 @@ export function CaseStudy() {
             <br />
             <span style={{ color: "#EF4444" }}>Almost Nobody Was Finding Her.</span>
           </h2>
-          <p className="text-base max-w-2xl leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-base max-w-2xl leading-relaxed" style={{ color: "#4B5563" }}>
             Dr. Amara Osei had 51 peer-reviewed publications and an h-index of 3.
             She assumed citations were slow because her field was small. The audit
             told a different story entirely.
@@ -106,7 +106,7 @@ export function CaseStudy() {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-base font-bold" style={{ color: "#111827" }}>Dr. Amara Osei</p>
-            <p className="text-xs sm:text-sm" style={{ color: "#6B7280" }}>Senior Lecturer · Public Health · 8 years post-PhD</p>
+            <p className="text-xs sm:text-sm" style={{ color: "#4B5563" }}>Senior Lecturer · Public Health · 8 years post-PhD</p>
           </div>
           <div className="flex gap-4 sm:gap-6">
             {[
@@ -116,7 +116,7 @@ export function CaseStudy() {
             ].map(({ label, value }) => (
               <div key={label} className="text-center">
                 <p className="text-sm font-bold" style={{ color: "#111827" }}>{value}</p>
-                <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
+                <p className="text-xs" style={{ color: "#4B5563" }}>{label}</p>
               </div>
             ))}
           </div>
@@ -143,7 +143,7 @@ export function CaseStudy() {
               </div>
             ))}
           </div>
-          <p className="text-sm mt-6 pt-5 border-t leading-relaxed" style={{ borderColor: "rgba(239,68,68,0.15)", color: "#6B7280" }}>
+          <p className="text-sm mt-6 pt-5 border-t leading-relaxed" style={{ borderColor: "rgba(239,68,68,0.15)", color: "#4B5563" }}>
             The problem wasn&apos;t her research quality. It was that the discovery systems her field
             uses couldn&apos;t find her, because her identity across platforms was fragmented,
             incomplete, and unverified. None of this was visible to her until the audit.
@@ -204,7 +204,7 @@ export function CaseStudy() {
                     <div key={label} className="flex items-start justify-between gap-4">
                       <div className="min-w-0">
                         <p className="text-xs" style={{ color: "#374151" }}>{label}</p>
-                        <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{note}</p>
+                        <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{note}</p>
                       </div>
                       <p className="text-sm font-bold flex-shrink-0" style={{ color: "#EF4444" }}>{value}</p>
                     </div>
@@ -231,7 +231,7 @@ export function CaseStudy() {
                     <div key={label} className="flex items-start justify-between gap-4">
                       <div className="min-w-0">
                         <p className="text-xs" style={{ color: "#374151" }}>{label}</p>
-                        <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{note}</p>
+                        <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{note}</p>
                       </div>
                       <div className="flex items-center gap-2 flex-shrink-0">
                         <span
@@ -270,7 +270,7 @@ export function CaseStudy() {
                 <div key={label} className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <p className="text-xs" style={{ color: "#374151" }}>{label}</p>
-                    <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{note}</p>
+                    <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{note}</p>
                   </div>
                   <p className="text-sm font-bold flex-shrink-0" style={{ color: "#EF4444" }}>{value}</p>
                 </div>
@@ -296,7 +296,7 @@ export function CaseStudy() {
                 <div key={label} className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <p className="text-xs" style={{ color: "#374151" }}>{label}</p>
-                    <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{note}</p>
+                    <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{note}</p>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <span
@@ -336,7 +336,7 @@ export function CaseStudy() {
               >
                 <p className="text-xs font-semibold mb-0.5" style={{ color }}>{session}</p>
                 <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{title}</p>
-                <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{action}</p>
+                <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{action}</p>
               </div>
             ))}
           </div>
@@ -352,7 +352,7 @@ export function CaseStudy() {
               >
                 <p className="text-xs font-semibold mb-1" style={{ color }}>{session}</p>
                 <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{title}</p>
-                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{action}</p>
+                <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{action}</p>
               </div>
             ))}
           />
@@ -386,10 +386,10 @@ export function CaseStudy() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-bold leading-snug" style={{ color: "#111827" }}>Dr. Amara Osei</p>
-                <p className="text-xs mt-0.5 leading-snug" style={{ color: "#6B7280" }}>
+                <p className="text-xs mt-0.5 leading-snug" style={{ color: "#4B5563" }}>
                   Senior Lecturer · Public Health
                 </p>
-                <p className="text-xs leading-snug" style={{ color: "#6B7280" }}>
+                <p className="text-xs leading-snug" style={{ color: "#4B5563" }}>
                   Digital Visibility Clinic alumna
                 </p>
               </div>
@@ -429,7 +429,7 @@ export function CaseStudy() {
                 h-index: 3 → 7 &nbsp;·&nbsp; Citations: 28 → 94 &nbsp;·&nbsp; 4 months.
               </p>
             </div>
-            <p className="text-sm" style={{ color: "#6B7280" }}>
+            <p className="text-sm" style={{ color: "#4B5563" }}>
               This is what visibility looks like when the gaps are closed. Your numbers are waiting for the same thing.
             </p>
           </div>

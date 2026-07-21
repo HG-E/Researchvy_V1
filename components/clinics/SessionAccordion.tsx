@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -43,7 +43,7 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
                 </span>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <p className="text-xs font-medium" style={{ color: "#6B7280" }}>
+                    <p className="text-xs font-medium" style={{ color: "#4B5563" }}>
                       {`Module ${session.number}`}
                     </p>
                   </div>
@@ -51,7 +51,7 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
                     {session.title}
                   </p>
                   {session.subtitle && (
-                    <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+                    <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
                       {session.subtitle}
                     </p>
                   )}
@@ -59,18 +59,18 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
               </div>
               <ChevronDown
                 className="h-4 w-4 flex-shrink-0 transition-transform duration-200"
-                style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#6B7280" }}
+                style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#4B5563" }}
               />
             </button>
 
             {isOpen && (
               <div className="px-5 pb-5 border-t" style={{ borderColor: "#E2E8F0" }}>
-                <p className="text-sm mt-4 mb-4 leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-sm mt-4 mb-4 leading-relaxed" style={{ color: "#4B5563" }}>
                   {session.description}
                 </p>
                 <ul className="space-y-2">
                   {session.topics.map((topic) => (
-                    <li key={topic} className="flex items-start gap-2.5 text-sm" style={{ color: "#6B7280" }}>
+                    <li key={topic} className="flex items-start gap-2.5 text-sm" style={{ color: "#4B5563" }}>
                       <span
                         className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
                         style={{ backgroundColor: accent }}

@@ -148,11 +148,11 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             >
               {CATEGORY_LABELS[insight.category]}
             </span>
-            <span className="flex items-center gap-1 text-xs" style={{ color: "#6B7280" }}>
+            <span className="flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
               <Clock className="h-3 w-3" />
               {insight.reading_time} min read
             </span>
-            <span className="flex items-center gap-1 text-xs" style={{ color: "#6B7280" }}>
+            <span className="flex items-center gap-1 text-xs" style={{ color: "#4B5563" }}>
               <Calendar className="h-3 w-3" />
               <time dateTime={insight.published_at}>
                 {format(new Date(insight.published_at), "MMMM d, yyyy")}
@@ -167,7 +167,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
             {insight.title}
           </h1>
 
-          <p className="text-lg leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-6" style={{ color: "#4B5563" }}>
             {insight.excerpt}
           </p>
 
@@ -183,7 +183,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
               <p className="text-sm font-semibold" rel="author" style={{ color: "#111827" }}>
                 {insight.author?.name ?? "Researchvy Editorial"}
               </p>
-              <p className="text-xs" style={{ color: "#6B7280" }}>Researchvy</p>
+              <p className="text-xs" style={{ color: "#4B5563" }}>Researchvy</p>
             </div>
           </address>
         </header>
@@ -219,7 +219,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
                   <span
                     key={tag}
                     className="rounded-full px-3 py-1 text-xs font-medium"
-                    style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
+                    style={{ backgroundColor: "#F1F5F9", color: "#4B5563" }}
                   >
                     {tag}
                   </span>
@@ -257,7 +257,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
                   >
                     Turn this insight into measurable visibility.
                   </p>
-                  <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>
+                  <p className="text-sm leading-relaxed mb-5" style={{ color: "#4B5563" }}>
                     The Digital Visibility Clinic works through your actual profile — your ORCID, Google Scholar, Scopus —
                     across 5 live sessions. You leave with a strategy, a certificate, and results you can track.
                   </p>
@@ -273,12 +273,12 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
                     <Link
                       href="/resources/visibility-scorecard"
                       className="inline-flex items-center gap-2 rounded-xl border px-5 py-2.5 text-sm font-semibold transition-colors"
-                      style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                      style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
                     >
                       Check My Visibility Score First
                     </Link>
                   </div>
-                  <p className="text-xs mt-3" style={{ color: "#6B7280" }}>
+                  <p className="text-xs mt-3" style={{ color: "#4B5563" }}>
                     Need 1-on-1 support?{" "}
                     <Link href="/clinics/private-consulting" className="font-semibold hover:underline" style={{ color: "#A78BFA" }}>
                       Private Consulting — from $209 →

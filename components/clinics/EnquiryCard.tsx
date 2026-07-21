@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { MessageCircle, Clock, Monitor, Users, Award, Zap } from "lucide-react";
@@ -41,7 +41,7 @@ export function EnquiryCard({ clinicName, duration, format, capacity, earlyBirdF
         <Link
           href="/clinics#pricing"
           className="inline-block text-xs mt-1 transition-colors hover:text-[#60A5FA]"
-          style={{ color: "#6B7280" }}
+          style={{ color: "#4B5563" }}
         >
           View all tiers &amp; pricing →
         </Link>
@@ -63,7 +63,7 @@ export function EnquiryCard({ clinicName, duration, format, capacity, earlyBirdF
               <Icon className="h-4 w-4" style={{ color: "#60A5FA" }} />
             </div>
             <div>
-              <p className="text-xs" style={{ color: "#6B7280" }}>{label}</p>
+              <p className="text-xs" style={{ color: "#4B5563" }}>{label}</p>
               <p className="text-sm font-medium" style={{ color: "#111827" }}>{value}</p>
             </div>
           </div>
@@ -88,7 +88,7 @@ export function EnquiryCard({ clinicName, duration, format, capacity, earlyBirdF
       <a
         href="mailto:info@researchvy.com?subject=Clinic%20Pricing%20Enquiry"
         className="flex items-center justify-center gap-2 w-full rounded-xl py-2.5 text-xs font-medium border transition-colors hover:bg-[#F1F5F9]"
-        style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+        style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
       >
         Or email info@researchvy.com
       </a>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { ArrowRight, CheckCircle, Loader2 } from "lucide-react";
@@ -52,13 +52,13 @@ export function LeadCaptureWidget({ articleTitle }: LeadCaptureWidgetProps) {
             <h3 className="text-base font-bold" style={{ color: "#111827" }}>
               Check your inbox, {firstName}.
             </h3>
-            <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
               Your Researcher Visibility Guide is on its way.
             </p>
           </div>
         </div>
         <div className="pt-4 border-t" style={{ borderColor: "#E2E8F0" }}>
-          <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
+          <p className="text-xs mb-3" style={{ color: "#4B5563" }}>
             While you wait — find out your exact visibility score:
           </p>
           <a
@@ -88,7 +88,7 @@ export function LeadCaptureWidget({ articleTitle }: LeadCaptureWidgetProps) {
         >
           Get the Researcher Visibility Guide
         </h3>
-        <p className="text-sm mb-6 leading-relaxed" style={{ color: "#6B7280" }}>
+        <p className="text-sm mb-6 leading-relaxed" style={{ color: "#4B5563" }}>
           The 5 levers every cited, globally-discovered researcher uses — delivered free to your inbox.
         </p>
 

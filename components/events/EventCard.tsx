@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Calendar, MapPin, Users, ExternalLink, Star, Plane, Lock } from "lucide-react";
 import { EventTypeBadge, EventFormatBadge } from "./EventTypeBadge";
 import type { AcademicEvent } from "@/types/event";
@@ -80,24 +80,24 @@ export function EventCard({ event }: { event: AcademicEvent }) {
 
         {/* Short description */}
         {event.short_description && (
-          <p className="text-xs leading-relaxed mb-3 line-clamp-2" style={{ color: "#6B7280" }}>
+          <p className="text-xs leading-relaxed mb-3 line-clamp-2" style={{ color: "#4B5563" }}>
             {event.short_description}
           </p>
         )}
 
         {/* Meta info */}
         <div className="space-y-1.5 mb-4">
-          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#6B7280" }}>
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#4B5563" }}>
             <Calendar className="h-3 w-3 flex-shrink-0" />
             <span>{formatEventDate(event.start_date, event.end_date)}</span>
           </div>
           {event.location && (
-            <div className="flex items-center gap-1.5 text-xs" style={{ color: "#6B7280" }}>
+            <div className="flex items-center gap-1.5 text-xs" style={{ color: "#4B5563" }}>
               <MapPin className="h-3 w-3 flex-shrink-0" />
               <span className="truncate">{event.location}</span>
             </div>
           )}
-          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#6B7280" }}>
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#4B5563" }}>
             <Users className="h-3 w-3 flex-shrink-0" />
             <span>{event.organizer_name}</span>
           </div>

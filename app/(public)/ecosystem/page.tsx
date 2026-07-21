@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { BarChart2, GraduationCap, FileImage, Stethoscope, Network, ArrowRight, Clock } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { siteConfig } from "@/config/site";
@@ -185,7 +185,7 @@ export default async function EcosystemPage() {
             Every Dimension of Visibility.<br />
             <span style={{ color: "#2563EB" }}>One Ecosystem.</span>
           </h1>
-          <p className="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-base sm:text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: "#4B5563" }}>
             Most researchers address one piece of the visibility problem. Researchvy addresses
             all of it, five specialised divisions working together so nothing gets left behind.
           </p>
@@ -267,7 +267,7 @@ export default async function EcosystemPage() {
                   <p className="text-sm font-semibold mb-5" style={{ color: isLive ? accent : "#9CA3AF" }}>
                     {division.tagline}
                   </p>
-                  <p className="text-base leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+                  <p className="text-base leading-relaxed mb-6" style={{ color: "#4B5563" }}>
                     {division.description}
                   </p>
 
@@ -299,7 +299,7 @@ export default async function EcosystemPage() {
                       <Link
                         href={`/contact?inquiry=${division.slug}`}
                         className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-all duration-150 hover:border-[#D97706] hover:text-[#D97706] active:scale-[0.97]"
-                        style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                        style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
                       >
                         Register Interest
                         <ArrowRight className="h-4 w-4" />
@@ -366,7 +366,7 @@ export default async function EcosystemPage() {
                             borderColor:     isLive ? `${accent}20` : "#E2E8F0",
                           }}
                         >
-                          <span className="text-xs font-medium" style={{ color: "#6B7280" }}>{label}</span>
+                          <span className="text-xs font-medium" style={{ color: "#4B5563" }}>{label}</span>
                           <span
                             className="text-xs font-bold"
                             style={{ color: isLive ? accent : "#9CA3AF" }}
@@ -442,7 +442,7 @@ export default async function EcosystemPage() {
               ))}
             </div>
           </div>
-          <p className="text-sm mt-5" style={{ color: "#6B7280" }}>
+          <p className="text-sm mt-5" style={{ color: "#4B5563" }}>
             Every Researchvy division serves at least one step in this journey.
           </p>
 
@@ -458,7 +458,7 @@ export default async function EcosystemPage() {
             <Link
               href="/about"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold border transition-all duration-200 hover:border-[#2563EB] hover:text-[#111827] active:scale-[0.97]"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               About Researchvy
             </Link>

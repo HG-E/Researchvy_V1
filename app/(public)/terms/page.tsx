@@ -1,4 +1,4 @@
-﻿import { generatePageMetadata } from "@/lib/seo/metadata";
+import { generatePageMetadata } from "@/lib/seo/metadata";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <div className="rounded-2xl border p-6 sm:p-8" style={SECTION_STYLE}>
       <h2 className="text-lg font-bold mb-4" style={{ color: "#111827" }}>{title}</h2>
-      <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+      <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#4B5563" }}>
         {children}
       </div>
     </div>
@@ -42,7 +42,7 @@ export default function TermsPage() {
           >
             Terms of Service
           </h1>
-          <p className="text-sm" style={{ color: "#6B7280" }}>Last updated: {LAST_UPDATED}</p>
+          <p className="text-sm" style={{ color: "#4B5563" }}>Last updated: {LAST_UPDATED}</p>
         </div>
 
         {/* Intro */}
@@ -50,7 +50,7 @@ export default function TermsPage() {
           className="rounded-2xl border p-6 mb-6"
           style={{ backgroundColor: "rgba(37,99,235,0.06)", borderColor: "rgba(37,99,235,0.2)" }}
         >
-          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
             These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of the Researchvy website
             at researchvy.com and all associated services, programmes, and content. By accessing or
             using Researchvy, you agree to be bound by these Terms. If you do not agree, do not use

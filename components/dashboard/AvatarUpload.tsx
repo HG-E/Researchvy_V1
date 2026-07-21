@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -111,7 +111,7 @@ export function AvatarUpload({
         <p className="text-sm font-semibold mb-0.5" style={{ color: "#111827" }}>
           Profile Photo
         </p>
-        <p className="text-xs mb-3" style={{ color: "#6B7280" }}>
+        <p className="text-xs mb-3" style={{ color: "#4B5563" }}>
           JPG, PNG or WebP · max 2 MB
         </p>
 
@@ -132,7 +132,7 @@ export function AvatarUpload({
               onClick={handleCancel}
               disabled={loading}
               className="rounded-lg px-3 py-1.5 text-xs font-medium transition-colors"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Cancel
             </button>
@@ -142,7 +142,7 @@ export function AvatarUpload({
             type="button"
             onClick={() => inputRef.current?.click()}
             className="rounded-lg px-3 py-1.5 text-xs font-semibold border transition-colors hover:border-[#2563EB] hover:text-[#111827]"
-            style={{ borderColor: "#CBD5E1", color: "#6B7280" }}
+            style={{ borderColor: "#CBD5E1", color: "#4B5563" }}
           >
             {avatarUrl ? "Change photo" : "Upload photo"}
           </button>

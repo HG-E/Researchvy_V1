@@ -85,9 +85,9 @@ async function EventsResults({
       {/* All events */}
       <div>
         {(featured.length > 0 || searchQuery) && (
-          <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-5" style={{ color: "#4B5563" }}>
             {searchQuery ? `Results for "${searchQuery}"` : hasFilters ? "Filtered Results" : "All Events"}
-            {events.length > 0 && <span style={{ color: "#6B7280" }}> · {events.length} events</span>}
+            {events.length > 0 && <span style={{ color: "#4B5563" }}> · {events.length} events</span>}
           </p>
         )}
 
@@ -100,9 +100,9 @@ async function EventsResults({
             <div className="rounded-2xl border p-14 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
               <Search className="h-10 w-10 mx-auto mb-4" style={{ color: "#9CA3AF" }} />
               <p className="text-base font-semibold mb-2" style={{ color: "#111827" }}>No events match your search</p>
-              <p className="text-sm mb-6" style={{ color: "#6B7280" }}>Try different keywords or clear the filters.</p>
+              <p className="text-sm mb-6" style={{ color: "#4B5563" }}>Try different keywords or clear the filters.</p>
               <Link href="/events" className="rounded-xl px-5 py-2.5 text-sm font-semibold border"
-                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}>
+                style={{ borderColor: "#E2E8F0", color: "#4B5563" }}>
                 Clear filters
               </Link>
             </div>
@@ -125,7 +125,7 @@ async function EventsResults({
                 <h2 className="text-xl sm:text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
                   Academic events are being curated
                 </h2>
-                <p className="text-sm max-w-lg mx-auto mb-6 leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-sm max-w-lg mx-auto mb-6 leading-relaxed" style={{ color: "#4B5563" }}>
                   We're building a curated calendar of conferences, workshops, and seminars for
                   research professionals. Be the first to list yours — free, reviewed within 2 business days.
                 </p>
@@ -154,7 +154,7 @@ async function EventsResults({
                   <div key={title} className="rounded-xl border p-5" style={{ borderColor: "#E2E8F0", backgroundColor: "#FAFBFC" }}>
                     <div className="w-2 h-2 rounded-full mb-3" style={{ backgroundColor: color }} />
                     <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>{title}</p>
-                    <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
                   </div>
                 ))}
               </div>
@@ -228,7 +228,7 @@ export default async function EventsPage({
             Academic Events for<br />
             <span style={{ color: "#10B981" }}>Research Professionals</span>
           </h1>
-          <p className="text-base sm:text-lg leading-relaxed max-w-2xl mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-base sm:text-lg leading-relaxed max-w-2xl mb-6" style={{ color: "#4B5563" }}>
             Conferences, workshops, seminars, and more — curated for researchers who want to stay
             connected, collaborate, and advance their academic careers.
           </p>
@@ -255,7 +255,7 @@ export default async function EventsPage({
             <Link
               href="/events/submit"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold border"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               <Plus className="h-4 w-4" />
               Submit an Event
@@ -268,7 +268,7 @@ export default async function EventsPage({
           className="rounded-xl border px-5 py-4 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
           style={{ backgroundColor: "rgba(16,185,129,0.04)", borderColor: "rgba(16,185,129,0.15)" }}
         >
-          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
             <span className="font-semibold" style={{ color: "#111827" }}>Know your research visibility score</span>
             {" "}— before you submit to conferences or apply for funding.
           </p>
@@ -287,7 +287,7 @@ export default async function EventsPage({
           {activeFormat  && <input type="hidden" name="format"   value={activeFormat} />}
           {upcomingOnly  && <input type="hidden" name="upcoming" value="true"         />}
           <label htmlFor="events-search" className="sr-only">Search events</label>
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none" aria-hidden="true" style={{ color: "#6B7280" }} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none" aria-hidden="true" style={{ color: "#4B5563" }} />
           <input
             id="events-search"
             name="q"
@@ -362,7 +362,7 @@ export default async function EventsPage({
             <p className="text-sm font-semibold mb-0.5" style={{ color: "#111827" }}>
               Get new events &amp; calls for papers weekly — free
             </p>
-            <p className="text-xs" style={{ color: "#6B7280" }}>
+            <p className="text-xs" style={{ color: "#4B5563" }}>
               Conferences, workshops, and deadlines worth attending, curated for research professionals.
             </p>
           </div>
@@ -377,13 +377,13 @@ export default async function EventsPage({
 
         {/* Community CTA */}
         <div className="mt-8 rounded-2xl border p-8 text-center" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
-          <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#6B7280" }}>
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
             Organising an Academic Event?
           </p>
           <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             Reach researchers who take visibility seriously
           </h2>
-          <p className="text-sm max-w-xl mx-auto mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-sm max-w-xl mx-auto mb-6" style={{ color: "#4B5563" }}>
             Submit your conference, seminar, or workshop — free to list, reviewed within 2 business days,
             and visible to every researcher in this community.
           </p>

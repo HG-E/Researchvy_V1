@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { BarChart2, Search, FileSearch, Building2, ArrowRight, MessageCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -63,7 +63,7 @@ export default function IntelligencePage() {
             You Can&apos;t Fix What<br />
             <span style={{ color: "#60A5FA" }}>You Can&apos;t Measure.</span>
           </h1>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-8" style={{ color: "#4B5563" }}>
             Most researchers have never seen an honest, complete picture of their scholarly
             visibility. They don&apos;t know their score across platforms, why citations are lagging,
             or which discovery systems are missing them entirely. One audit changes all of that.
@@ -82,7 +82,7 @@ export default function IntelligencePage() {
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               I Have a Question
             </Link>
@@ -100,7 +100,7 @@ export default function IntelligencePage() {
                 <Icon className="h-5 w-5" style={{ color }} />
               </div>
               <h2 className="text-base font-bold mb-2" style={{ color: "#111827" }}>{title}</h2>
-              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
             </HoverCard>
           ))}
         </div>
@@ -145,7 +145,7 @@ export default function IntelligencePage() {
             >
               Request Your Visibility Audit
             </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               Researchers who&apos;ve had a visibility audit consistently report the same thing:
               they had no idea how much they were missing. Pricing is contextual, based on your
               scope and whether individual or institutional. Reach out and we&apos;ll tell you exactly
@@ -165,12 +165,12 @@ export default function IntelligencePage() {
               <Link
                 href="/contact"
                 className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
-                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
               >
                 Send an Email
               </Link>
             </div>
-            <p className="text-xs text-center mt-4" style={{ color: "#6B7280" }}>
+            <p className="text-xs text-center mt-4" style={{ color: "#4B5563" }}>
               Typically respond within 24 hours
             </p>
           </div>
@@ -185,7 +185,7 @@ export default function IntelligencePage() {
             <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
               Want hands-on training too?
             </p>
-            <p className="text-sm" style={{ color: "#6B7280" }}>
+            <p className="text-sm" style={{ color: "#4B5563" }}>
               The Digital Visibility Clinic teaches you to interpret and act on research intelligence yourself.
             </p>
           </div>

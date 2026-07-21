@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -277,7 +277,7 @@ function ShareScorecard({ score, tierDisplay }: { score: number; tierDisplay: st
       className="rounded-2xl border p-5"
       style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
     >
-      <p className="text-xs font-semibold mb-3" style={{ color: "#6B7280" }}>
+      <p className="text-xs font-semibold mb-3" style={{ color: "#4B5563" }}>
         Know a researcher who needs to see this?
       </p>
       <div className="flex flex-wrap gap-2">
@@ -383,7 +383,7 @@ function EmailCapture({ leadId, score, answers, dimensionScores, utmSource }: Em
           <Check className="h-5 w-5" style={{ color: "#10B981" }} />
         </div>
         <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>Roadmap on its way</p>
-        <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+        <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
           Check your inbox — your personalised visibility roadmap and booking link are there.
         </p>
       </div>
@@ -406,7 +406,7 @@ function EmailCapture({ leadId, score, answers, dimensionScores, utmSource }: Em
           <p className="text-sm font-bold" style={{ color: "#111827" }}>
             Get your personalised roadmap
           </p>
-          <p className="text-xs leading-relaxed mt-1" style={{ color: "#6B7280" }}>
+          <p className="text-xs leading-relaxed mt-1" style={{ color: "#4B5563" }}>
             We&apos;ll email your score breakdown, your exact gaps ranked by impact, and a link to
             book a free 20-minute strategy call — no spam, no obligation.
           </p>
@@ -461,7 +461,7 @@ function EmailCapture({ leadId, score, answers, dimensionScores, utmSource }: Em
             type="button"
             onClick={() => setSkipped(true)}
             className="text-xs transition-colors hover:text-[#111827]"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
           >
             Skip
           </button>
@@ -634,11 +634,11 @@ export function VisibilityScorecard() {
           The Researcher<br />
           <span style={{ color: "#10B981" }}>Visibility Scorecard</span>
         </h1>
-        <p className="text-base leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+        <p className="text-base leading-relaxed mb-6" style={{ color: "#4B5563" }}>
           12 checkpoints. 4 dimensions. Your exact visibility score, and a precise account
           of what every gap is costing your career right now.
         </p>
-        <div className="flex flex-wrap gap-4 text-sm" style={{ color: "#6B7280" }}>
+        <div className="flex flex-wrap gap-4 text-sm" style={{ color: "#4B5563" }}>
           {[
             "Takes 4–6 minutes",
             "12 scored checkpoints",
@@ -665,7 +665,7 @@ export function VisibilityScorecard() {
           <button
             onClick={retake}
             className="text-xs whitespace-nowrap flex-shrink-0 transition-colors hover:text-[#111827]"
-            style={{ color: "#6B7280" }}
+            style={{ color: "#4B5563" }}
           >
             Start over
           </button>
@@ -679,12 +679,12 @@ export function VisibilityScorecard() {
           style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-semibold" style={{ color: "#6B7280" }}>
+            <span className="text-xs font-semibold" style={{ color: "#4B5563" }}>
               Your score, {answered}/{totalQ} checkpoints answered
             </span>
             <span className="text-2xl font-bold" style={{ color: "#111827" }}>
               {totalScore}
-              <span className="text-sm font-normal ml-1" style={{ color: "#6B7280" }}>/ {TOTAL_MAX}</span>
+              <span className="text-sm font-normal ml-1" style={{ color: "#4B5563" }}>/ {TOTAL_MAX}</span>
             </span>
           </div>
           <ScoreBar score={totalScore} max={TOTAL_MAX} color="#10B981" />
@@ -727,7 +727,7 @@ export function VisibilityScorecard() {
                 </div>
                 <div>
                   <p className="text-sm font-bold" style={{ color: "#111827" }}>{dim.label}</p>
-                  <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+                  <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
                     {dim.answeredCount}/{dim.checkpoints.length} answered
                   </p>
                 </div>
@@ -737,8 +737,8 @@ export function VisibilityScorecard() {
                   <ScoreBar score={dim.score} max={dim.maxPoints} color={dim.color} />
                 </div>
                 {expanded[dim.id]
-                  ? <ChevronUp className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} />
-                  : <ChevronDown className="h-4 w-4 flex-shrink-0" style={{ color: "#6B7280" }} />
+                  ? <ChevronUp className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
+                  : <ChevronDown className="h-4 w-4 flex-shrink-0" style={{ color: "#4B5563" }} />
                 }
               </div>
             </button>
@@ -746,7 +746,7 @@ export function VisibilityScorecard() {
             {/* Checkpoints */}
             {expanded[dim.id] && (
               <div className="px-6 pb-6 space-y-6 border-t" style={{ borderColor: "#E2E8F0" }}>
-                <p className="text-xs pt-4 leading-relaxed" style={{ color: "#6B7280" }}>{dim.description}</p>
+                <p className="text-xs pt-4 leading-relaxed" style={{ color: "#4B5563" }}>{dim.description}</p>
 
                 {dim.checkpoints.map((cp, i) => {
                   const selected = answers[cp.id];
@@ -809,7 +809,7 @@ export function VisibilityScorecard() {
                           <p className="text-xs font-semibold mb-1.5 flex items-center gap-1.5" style={{ color: "#F87171" }}>
                             <AlertTriangle className="h-3 w-3" /> What this gap is costing you
                           </p>
-                          <p className="text-xs leading-relaxed mb-2" style={{ color: "#6B7280" }}>{cp.cost}</p>
+                          <p className="text-xs leading-relaxed mb-2" style={{ color: "#4B5563" }}>{cp.cost}</p>
                           <p className="text-xs font-medium" style={{ color: "#60A5FA" }}>
                             Quick fix: {cp.fix}
                           </p>
@@ -844,7 +844,7 @@ export function VisibilityScorecard() {
             <button
               onClick={retake}
               className="text-xs transition-colors hover:text-[#111827]"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               ↺ Start over / Retake
             </button>
@@ -864,10 +864,10 @@ export function VisibilityScorecard() {
             <div className="text-lg font-semibold mb-4" style={{ color: interp.color }}>
               {interp.label}
             </div>
-            <p className="text-sm leading-relaxed max-w-xl mx-auto mb-4" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed max-w-xl mx-auto mb-4" style={{ color: "#4B5563" }}>
               {interp.summary}
             </p>
-            <p className="text-sm leading-relaxed max-w-xl mx-auto" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed max-w-xl mx-auto" style={{ color: "#4B5563" }}>
               {interp.gap}
             </p>
           </div>
@@ -884,7 +884,7 @@ export function VisibilityScorecard() {
                 return (
                   <div key={d.id}>
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-xs font-medium" style={{ color: "#6B7280" }}>{d.label}</span>
+                      <span className="text-xs font-medium" style={{ color: "#4B5563" }}>{d.label}</span>
                       <span className="text-xs font-bold" style={{ color: d.color }}>{d.score}/{d.maxPoints}, {pct}%</span>
                     </div>
                     <ScoreBar score={d.score} max={d.maxPoints} color={d.color} />
@@ -906,7 +906,7 @@ export function VisibilityScorecard() {
               <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>
                 {weakest.label}, your lowest-scoring dimension
               </p>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: "#6B7280" }}>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: "#4B5563" }}>
                 This is where the fastest gains are. Improving this single dimension will
                 create a chain reaction across your other scores within 3–6 months.
               </p>
@@ -916,7 +916,7 @@ export function VisibilityScorecard() {
                   .map((c) => (
                     <div key={c.id} className="flex items-start gap-2">
                       <ArrowRight className="h-3.5 w-3.5 mt-0.5 flex-shrink-0" style={{ color: weakest.color }} />
-                      <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                      <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                         <strong style={{ color: "#374151" }}>{c.title}:</strong> {c.fix}
                       </p>
                     </div>
@@ -936,7 +936,7 @@ export function VisibilityScorecard() {
             </p>
             <div className="space-y-3">
               {[
-                { label: "Global researcher average", score: 34, color: "#6B7280" },
+                { label: "Global researcher average", score: 34, color: "#4B5563" },
                 { label: "Your score", score: totalScore, color: interp.color, highlight: true },
                 { label: "Digital Visibility Clinic exit average", score: 79, color: "#10B981" },
                 { label: "Visibility Leader threshold", score: 85, color: "#2563EB" },
@@ -973,7 +973,7 @@ export function VisibilityScorecard() {
             >
               {interp.clinicTitle}
             </h2>
-            <p className="text-sm leading-relaxed mb-2" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-2" style={{ color: "#4B5563" }}>
               {interp.clinicBody}
             </p>
 
@@ -992,7 +992,7 @@ export function VisibilityScorecard() {
                   ["Session 4", "Bibliometrics and h-index strategy for promotion and grant applications"],
                   ["Session 5", "Research communication for policy, media, and global audiences"],
                 ].map(([s, d]) => (
-                  <p key={s} className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+                  <p key={s} className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
                     <strong style={{ color: "#BFDBFE" }}>{s}:</strong> {d}
                   </p>
                 ))}
@@ -1025,7 +1025,7 @@ export function VisibilityScorecard() {
                   <Link
                     href="/clinics/digital-visibility-clinic"
                     className="inline-flex items-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold transition-all duration-200 hover:border-[#2563EB] hover:text-[#111827]"
-                    style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                    style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
                   >
                     View the Clinic
                   </Link>
@@ -1053,8 +1053,8 @@ export function VisibilityScorecard() {
 
             <div className="flex items-center justify-between gap-4 mt-4 flex-wrap">
               <div className="flex items-center gap-2">
-                <Award className="h-4 w-4" style={{ color: "#6B7280" }} />
-                <p className="text-xs" style={{ color: "#6B7280" }}>
+                <Award className="h-4 w-4" style={{ color: "#4B5563" }} />
+                <p className="text-xs" style={{ color: "#4B5563" }}>
                   Verified Certificate on completion · ≤20 researchers per cohort
                 </p>
               </div>
@@ -1091,7 +1091,7 @@ export function VisibilityScorecard() {
           className="rounded-2xl border p-5 text-center"
           style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
         >
-          <p className="text-sm" style={{ color: "#6B7280" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             {totalQ - answered} more {totalQ - answered === 1 ? "checkpoint" : "checkpoints"} to reveal your full score and personalised action plan.
           </p>
         </div>

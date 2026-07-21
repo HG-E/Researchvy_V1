@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -22,7 +22,7 @@ export function InsightGrid({ insights }: Props) {
   return (
     <div>
       {/* Count */}
-      <p className="text-xs mb-6" style={{ color: "#6B7280" }}>
+      <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
         Showing {shown.length} of {insights.length}{" "}
         {insights.length === 1 ? "article" : "articles"}
       </p>
@@ -52,7 +52,7 @@ export function InsightGrid({ insights }: Props) {
                 Show more
                 <span
                   className="ml-1 rounded-full px-2 py-0.5 text-xs font-medium"
-                  style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}
+                  style={{ backgroundColor: "#F1F5F9", color: "#4B5563" }}
                 >
                   {remaining} left
                 </span>
@@ -68,7 +68,7 @@ export function InsightGrid({ insights }: Props) {
           <p className="text-2xl mb-3" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             No articles yet
           </p>
-          <p className="text-sm" style={{ color: "#6B7280" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             Articles in this category are coming soon.
           </p>
         </div>

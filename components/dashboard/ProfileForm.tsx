@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -171,7 +171,7 @@ export function ProfileForm({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="sm:col-span-2">
-            <label className={LABEL_STYLE} style={{ color: "#6B7280" }}>
+            <label className={LABEL_STYLE} style={{ color: "#4B5563" }}>
               Full Name
             </label>
             <input
@@ -189,7 +189,7 @@ export function ProfileForm({
           </div>
 
           <div className="sm:col-span-2">
-            <label className={LABEL_STYLE} style={{ color: "#6B7280" }}>
+            <label className={LABEL_STYLE} style={{ color: "#4B5563" }}>
               Institution
             </label>
             <input
@@ -203,9 +203,9 @@ export function ProfileForm({
         </div>
 
         <div>
-          <label className={LABEL_STYLE} style={{ color: "#6B7280" }}>
+          <label className={LABEL_STYLE} style={{ color: "#4B5563" }}>
             Bio{" "}
-            <span className="normal-case font-normal" style={{ color: "#6B7280" }}>
+            <span className="normal-case font-normal" style={{ color: "#4B5563" }}>
               (optional, max 500 characters)
             </span>
           </label>
@@ -233,14 +233,14 @@ export function ProfileForm({
           <h2 className="text-sm font-bold" style={{ color: "#111827" }}>
             Scholar Profiles
           </h2>
-          <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+          <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
             Link your academic identifiers to improve discoverability
           </p>
         </div>
 
         {/* ORCID iD */}
         <div>
-          <label className={LABEL_STYLE} style={{ color: "#6B7280" }}>
+          <label className={LABEL_STYLE} style={{ color: "#4B5563" }}>
             ORCID iD
           </label>
 
@@ -268,7 +268,7 @@ export function ProfileForm({
                 onClick={handleOrcidDisconnect}
                 disabled={disconnecting}
                 className="flex items-center gap-1.5 text-xs font-medium flex-shrink-0 transition-opacity hover:opacity-70"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
               >
                 <Link2Off className="h-3.5 w-3.5" />
                 {disconnecting ? "Removing…" : "Disconnect"}
@@ -277,7 +277,7 @@ export function ProfileForm({
           ) : (
             <div className="flex flex-col gap-2">
               {orcidId && !isOrcidVerified && (
-                <p className="text-xs rounded-lg border px-3 py-2 font-mono" style={{ color: "#6B7280", borderColor: "#E2E8F0", backgroundColor: "#FFFFFF" }}>
+                <p className="text-xs rounded-lg border px-3 py-2 font-mono" style={{ color: "#4B5563", borderColor: "#E2E8F0", backgroundColor: "#FFFFFF" }}>
                   {orcidId} — <span style={{ color: "#F59E0B" }}>unverified</span>
                 </p>
               )}
@@ -291,11 +291,11 @@ export function ProfileForm({
                   Connect ORCID iD
                 </a>
               ) : (
-                <div className="rounded-xl border px-4 py-3 text-sm" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", color: "#6B7280" }}>
+                <div className="rounded-xl border px-4 py-3 text-sm" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", color: "#4B5563" }}>
                   ORCID verification coming soon — link your iD for trusted research identity.
                 </div>
               )}
-              <p className="text-xs" style={{ color: "#6B7280" }}>
+              <p className="text-xs" style={{ color: "#4B5563" }}>
                 Connecting your ORCID iD confirms your researcher identity and improves discoverability.
               </p>
             </div>
@@ -303,9 +303,9 @@ export function ProfileForm({
         </div>
 
         <div>
-          <label className={LABEL_STYLE} style={{ color: "#6B7280" }}>
+          <label className={LABEL_STYLE} style={{ color: "#4B5563" }}>
             Google Scholar URL{" "}
-            <span className="normal-case font-normal" style={{ color: "#6B7280" }}>
+            <span className="normal-case font-normal" style={{ color: "#4B5563" }}>
               (optional)
             </span>
           </label>
@@ -333,20 +333,20 @@ export function ProfileForm({
           <h2 className="text-sm font-bold" style={{ color: "#111827" }}>
             Public Profile
           </h2>
-          <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+          <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
             Your shareable researcher URL — visible to anyone on the web
           </p>
         </div>
 
         {/* Username */}
         <div>
-          <label className={LABEL_STYLE} style={{ color: "#6B7280" }}>
+          <label className={LABEL_STYLE} style={{ color: "#4B5563" }}>
             Username
           </label>
           <div className="relative">
             <div
               className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-sm"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               researchvy.com/profile/
             </div>
@@ -371,7 +371,7 @@ export function ProfileForm({
             {/* Status indicator */}
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
               {usernameState.status === "checking" && (
-                <Loader2 className="h-4 w-4 animate-spin" style={{ color: "#6B7280" }} />
+                <Loader2 className="h-4 w-4 animate-spin" style={{ color: "#4B5563" }} />
               )}
               {usernameState.status === "available" && (
                 <Check className="h-4 w-4" style={{ color: "#10B981" }} />
@@ -399,7 +399,7 @@ export function ProfileForm({
             </p>
           )}
           {usernameState.status === "idle" && !errors.username && (
-            <p className="text-xs mt-1.5" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-1.5" style={{ color: "#4B5563" }}>
               3–20 characters. Lowercase letters, numbers, hyphens and underscores only.
             </p>
           )}
@@ -416,12 +416,12 @@ export function ProfileForm({
                 </span>
               ) : (
                 <span className="flex items-center gap-1.5">
-                  <EyeOff className="h-4 w-4" style={{ color: "#6B7280" }} />
+                  <EyeOff className="h-4 w-4" style={{ color: "#4B5563" }} />
                   Profile is hidden
                 </span>
               )}
             </p>
-            <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
               {profilePublic
                 ? "Anyone with your profile URL can view your public page"
                 : "Your profile URL returns a 404 — only you can see your dashboard"}
@@ -458,7 +458,7 @@ export function ProfileForm({
             View public profile →
           </a>
         ) : (
-          <p className="text-xs" style={{ color: "#6B7280" }}>
+          <p className="text-xs" style={{ color: "#4B5563" }}>
             Set a username above to get your shareable researcher URL.
           </p>
         )}
@@ -474,7 +474,7 @@ export function ProfileForm({
             Account
           </h2>
           <div>
-            <label className={LABEL_STYLE} style={{ color: "#6B7280" }}>
+            <label className={LABEL_STYLE} style={{ color: "#4B5563" }}>
               Email Address
             </label>
             <input
@@ -485,11 +485,11 @@ export function ProfileForm({
               style={{
                 backgroundColor: "#FFFFFF",
                 borderColor: "#E2E8F0",
-                color: "#6B7280",
+                color: "#4B5563",
                 cursor: "default",
               }}
             />
-            <p className="text-xs mt-1.5" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-1.5" style={{ color: "#4B5563" }}>
               Email cannot be changed here. Contact support if needed.
             </p>
           </div>

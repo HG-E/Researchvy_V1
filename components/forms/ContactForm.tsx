@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -68,7 +68,7 @@ export function ContactForm() {
         <h3 className="text-xl font-bold mb-2" style={{ color: "#111827" }}>
           Message Received
         </h3>
-        <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+        <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
           Thank you for reaching out. We respond within 1–2 business days. For urgent
           enquiries, please use the WhatsApp button below.
         </p>

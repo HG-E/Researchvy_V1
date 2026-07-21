@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -95,7 +95,7 @@ export function DashboardSidebar({ user }: { user: DashUser }) {
             <p className="text-xs font-semibold truncate" style={{ color: "#111827" }}>
               {displayName}
             </p>
-            <p className="text-[10px] truncate" style={{ color: "#6B7280" }}>
+            <p className="text-[10px] truncate" style={{ color: "#4B5563" }}>
               {user.email}
             </p>
           </div>
@@ -103,7 +103,7 @@ export function DashboardSidebar({ user }: { user: DashUser }) {
         <button
           onClick={handleSignOut}
           className="flex items-center gap-3 w-full rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150"
-          style={{ color: "#6B7280" }}
+          style={{ color: "#4B5563" }}
           onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FEF2F2"; e.currentTarget.style.color = "#EF4444"; }}
           onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "#6B7280"; }}
         >

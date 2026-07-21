@@ -163,7 +163,7 @@ export function UsersTable({ users, currentUserId, callerIsSuper }: Props) {
                       )}
                     </div>
                     {user.full_name && (
-                      <p className="text-xs truncate" style={{ color: "#6B7280" }}>
+                      <p className="text-xs truncate" style={{ color: "#4B5563" }}>
                         {user.email}
                       </p>
                     )}
@@ -231,7 +231,7 @@ export function UsersTable({ users, currentUserId, callerIsSuper }: Props) {
                   </span>
 
                   {/* Joined */}
-                  <span className="text-xs whitespace-nowrap" style={{ color: "#6B7280" }}>
+                  <span className="text-xs whitespace-nowrap" style={{ color: "#4B5563" }}>
                     {format(new Date(user.created_at), "MMM d, yyyy")}
                   </span>
 

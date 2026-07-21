@@ -113,7 +113,7 @@ export function UserActionsMenu({
       <button
         onClick={() => { setOpen((v) => !v); setConfirm(null); }}
         className="flex items-center justify-center w-8 h-8 rounded-lg transition-colors hover:bg-[#1E293B]"
-        style={{ color: "#6B7280" }}
+        style={{ color: "#4B5563" }}
         aria-label="User actions"
         disabled={busy}
       >

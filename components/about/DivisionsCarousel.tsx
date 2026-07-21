@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { BarChart2, GraduationCap, FileImage, Stethoscope, Network } from "lucide-react";
 import { MobileCarousel } from "@/components/ui/MobileCarousel";
@@ -47,7 +47,7 @@ export function DivisionsCarousel() {
               <p className="text-xs mb-3 font-medium" style={{ color: accent }}>
                 {division.tagline}
               </p>
-              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                 {division.description}
               </p>
             </div>
@@ -94,7 +94,7 @@ export function DivisionsCarousel() {
                 style={{ background: `linear-gradient(90deg, ${accent}30, transparent)` }}
               />
               <div className="px-5 py-4">
-                <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                   {division.description}
                 </p>
               </div>

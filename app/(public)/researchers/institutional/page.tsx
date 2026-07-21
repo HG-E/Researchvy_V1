@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { ArrowRight, BarChart2, Building2, Users, TrendingUp, CheckCircle2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -89,7 +89,7 @@ export default function InstitutionalPage() {
             Your Researchers Are Publishing.<br />
             <span style={{ color: "#60A5FA" }}>Is Anyone Finding Their Work?</span>
           </h1>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-8" style={{ color: "#4B5563" }}>
             Publication output has never been higher. Discovery rates haven&apos;t kept pace.
             If your institution&apos;s research isn&apos;t visible in the systems that funding bodies,
             ranking agencies, and international collaborators rely on, it isn&apos;t driving the
@@ -108,7 +108,7 @@ export default function InstitutionalPage() {
             <Link
               href="/partnerships"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               View Partnership Options <ArrowRight className="h-4 w-4" />
             </Link>
@@ -121,7 +121,7 @@ export default function InstitutionalPage() {
             <HoverCard key={label} accentColor={color} className="p-6">
               <p className="text-4xl font-bold mb-2" style={{ color }}>{stat}</p>
               <p className="text-sm font-semibold mb-3" style={{ color: "#111827" }}>{label}</p>
-              <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
+              <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{detail}</p>
             </HoverCard>
           ))}
         </div>
@@ -129,7 +129,7 @@ export default function InstitutionalPage() {
         {/* Audit scope */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16 items-start">
           <div>
-            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
               What a visibility audit covers
             </p>
             <h2
@@ -138,14 +138,14 @@ export default function InstitutionalPage() {
             >
               You can&apos;t fix what<br />you haven&apos;t measured.
             </h2>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               The Researchvy Institutional Visibility Audit produces a full baseline across every
               dimension of your research discovery infrastructure, benchmarked against comparable
               institutions and broken down by department, career stage, and discipline.
             </p>
             <ul className="space-y-2.5">
               {AUDIT_DIMENSIONS.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "#6B7280" }}>
+                <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "#4B5563" }}>
                   <CheckCircle2 className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#60A5FA" }} />
                   {item}
                 </li>
@@ -170,7 +170,7 @@ export default function InstitutionalPage() {
               ].map(([title, desc]) => (
                 <div key={String(title)} className="border-b pb-4 last:border-0 last:pb-0" style={{ borderColor: "#E2E8F0" }}>
                   <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>{title}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
                 </div>
               ))}
             </div>
@@ -195,7 +195,7 @@ export default function InstitutionalPage() {
                   <Icon className="h-5 w-5" style={{ color }} />
                 </div>
                 <h3 className="text-base font-bold mb-2" style={{ color: "#111827" }}>{title}</h3>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: "#6B7280" }}>{desc}</p>
+                <p className="text-sm leading-relaxed mb-5" style={{ color: "#4B5563" }}>{desc}</p>
                 <a
                   href={buildWhatsAppUrl(title)}
                   target="_blank"
@@ -226,13 +226,13 @@ export default function InstitutionalPage() {
               Every citation your researchers lose to poor visibility<br />
               is a ranking point, a funding argument, or a collaboration that never happened.
             </h2>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: "#4B5563" }}>
               QS, Times Higher Education, and ARWU all use citation-based metrics that depend
               directly on the quality of your researchers&apos; visibility infrastructure. An institution
               with 200 academics each recovering an average of 15 lost citations produces 3,000
               additional attributed citations, enough to move measurably in most ranking bands.
             </p>
-            <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
               This is infrastructure investment, not training spend. The effect compounds
               every year as newly attributed publications continue to accrue citations.
             </p>
@@ -248,7 +248,7 @@ export default function InstitutionalPage() {
             <h3 className="text-xl font-bold mb-3" style={{ color: "#111827" }}>
               Start with a conversation
             </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               Tell us about your institution: researcher count, current challenges, and where
               you&apos;d like to be in 18 months. We&apos;ll tell you exactly what a partnership would deliver.
             </p>
@@ -269,7 +269,7 @@ export default function InstitutionalPage() {
             <h3 className="text-xl font-bold mb-3" style={{ color: "#111827" }}>
               See the intelligence layer first
             </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               Researchvy Intelligence provides institutional bibliometric audits, researcher
               profile assessments, and department-level visibility benchmarking, as a
               standalone service or as the first phase of a full partnership.

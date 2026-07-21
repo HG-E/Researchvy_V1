@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { Link2, Check } from "lucide-react";
@@ -21,7 +21,7 @@ export function ProfileShareButton({ url, name }: { url: string; name: string })
       type="button"
       onClick={copy}
       className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full transition-opacity hover:opacity-80"
-      style={{ backgroundColor: "rgba(107,114,128,0.12)", color: "#6B7280" }}
+      style={{ backgroundColor: "rgba(107,114,128,0.12)", color: "#4B5563" }}
       aria-label={`Copy ${name}'s profile link`}
     >
       {copied ? (

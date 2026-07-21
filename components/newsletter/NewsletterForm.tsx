@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { Loader2, CheckCircle2, Mail } from "lucide-react";
@@ -73,7 +73,7 @@ export function NewsletterForm({ variant = "inline", resourceTitle, redirectTo }
           </div>
           <div>
             <p className="text-sm font-bold" style={{ color: "#111827" }}>Free Resources by Email</p>
-            <p className="text-xs" style={{ color: "#6B7280" }}>No spam, scholarly visibility insights only</p>
+            <p className="text-xs" style={{ color: "#4B5563" }}>No spam, scholarly visibility insights only</p>
           </div>
         </div>
         <form onSubmit={handleSubmit} className="flex gap-2">

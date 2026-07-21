@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -133,12 +133,12 @@ export function SignUpForm() {
           >
             Check your email
           </h2>
-          <p className="text-sm mb-2 leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-sm mb-2 leading-relaxed" style={{ color: "#4B5563" }}>
             We sent a verification link to your email. Click it to activate your account.
           </p>
-          <p className="text-xs mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-xs mb-6" style={{ color: "#4B5563" }}>
             Didn&apos;t receive it? Check your spam folder, or{" "}
-            <a href="mailto:info@researchvy.com" className="underline" style={{ color: "#6B7280" }}>
+            <a href="mailto:info@researchvy.com" className="underline" style={{ color: "#4B5563" }}>
               contact us
             </a>
             .
@@ -152,7 +152,7 @@ export function SignUpForm() {
           >
             Check My Score Free →
           </Link>
-          <p className="text-xs mt-2 text-center" style={{ color: "#6B7280" }}>
+          <p className="text-xs mt-2 text-center" style={{ color: "#4B5563" }}>
             While you wait — takes 4 minutes
           </p>
 
@@ -161,7 +161,7 @@ export function SignUpForm() {
             <Link
               href="/signin"
               className="text-xs transition-colors hover:text-[#111827]"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Back to Sign In
             </Link>
@@ -190,7 +190,7 @@ export function SignUpForm() {
           >
             {fromClinic ? "One step to your spot" : "Create your account"}
           </h1>
-          <p className="text-sm" style={{ color: "#6B7280" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             {fromClinic
               ? "Create your free account to complete enrollment in the Digital Visibility Clinic."
               : "Join the scholarly visibility ecosystem"}
@@ -219,7 +219,7 @@ export function SignUpForm() {
           <div className="flex items-start gap-3 rounded-xl border px-4 py-3 mb-5"
             style={{ backgroundColor: "rgba(166,206,57,0.06)", borderColor: "rgba(166,206,57,0.25)" }}>
             <BadgeCheck className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#A6CE39" }} />
-            <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
               Your <span className="font-semibold" style={{ color: "#A6CE39" }}>ORCID iD</span> has
               been verified — it will be linked to your account automatically once you complete registration.
             </p>
@@ -231,7 +231,7 @@ export function SignUpForm() {
           <div>
             <label
               className="block text-xs font-semibold tracking-wide uppercase mb-2"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Full Name
             </label>
@@ -258,7 +258,7 @@ export function SignUpForm() {
           <div>
             <label
               className="block text-xs font-semibold tracking-wide uppercase mb-2"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Email Address
             </label>
@@ -285,10 +285,10 @@ export function SignUpForm() {
           <div>
             <label
               className="block text-xs font-semibold tracking-wide uppercase mb-2"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Institution{" "}
-              <span className="normal-case font-normal" style={{ color: "#6B7280" }}>
+              <span className="normal-case font-normal" style={{ color: "#4B5563" }}>
                 (optional)
               </span>
             </label>
@@ -309,7 +309,7 @@ export function SignUpForm() {
           <div>
             <label
               className="block text-xs font-semibold tracking-wide uppercase mb-2"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Password
             </label>
@@ -331,7 +331,7 @@ export function SignUpForm() {
                 type="button"
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
                 onClick={() => setShowPassword(!showPassword)}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
@@ -351,7 +351,7 @@ export function SignUpForm() {
           <div>
             <label
               className="block text-xs font-semibold tracking-wide uppercase mb-2"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Confirm Password
             </label>
@@ -373,7 +373,7 @@ export function SignUpForm() {
                 type="button"
                 aria-label={showConfirm ? "Hide confirm password" : "Show confirm password"}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
-                style={{ color: "#6B7280" }}
+                style={{ color: "#4B5563" }}
                 onClick={() => setShowConfirm(!showConfirm)}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#9CA3AF")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#6B7280")}
@@ -430,13 +430,13 @@ export function SignUpForm() {
             )}
           </button>
 
-          <p className="text-center text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-center text-xs leading-relaxed" style={{ color: "#4B5563" }}>
             By creating an account you agree to our{" "}
-            <Link href="/terms" style={{ color: "#6B7280" }}>
+            <Link href="/terms" style={{ color: "#4B5563" }}>
               Terms of Service
             </Link>{" "}
             and{" "}
-            <Link href="/privacy" style={{ color: "#6B7280" }}>
+            <Link href="/privacy" style={{ color: "#4B5563" }}>
               Privacy Policy
             </Link>
             .
@@ -446,7 +446,7 @@ export function SignUpForm() {
         {/* Sign in link */}
         <div className="mt-6 flex items-center gap-3">
           <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
-          <p className="text-sm text-center" style={{ color: "#6B7280" }}>
+          <p className="text-sm text-center" style={{ color: "#4B5563" }}>
             Already have an account?{" "}
             <Link
               href={nextPath !== "/dashboard" ? `/signin?next=${encodeURIComponent(nextPath)}` : "/signin"}

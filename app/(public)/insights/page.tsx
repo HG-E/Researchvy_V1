@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Suspense } from "react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { getInsights } from "@/lib/cms/mdx";
@@ -49,7 +49,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
             Research Intelligence<br />
             <span style={{ color: "#60A5FA" }}>&amp; Visibility</span>
           </h1>
-          <p className="relative text-base leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+          <p className="relative text-base leading-relaxed mb-6" style={{ color: "#4B5563" }}>
             Institutional-grade articles on scholarly visibility, bibliometrics, research communication,
             and the systems that shape academic impact.
           </p>
@@ -66,7 +66,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
                 style={{ backgroundColor: "rgba(15,23,42,0.6)", borderColor: "#E2E8F0" }}
               >
                 <span className="font-bold" style={{ color: "#60A5FA" }}>{value}</span>
-                <span style={{ color: "#6B7280" }}>{label}</span>
+                <span style={{ color: "#4B5563" }}>{label}</span>
               </div>
             ))}
           </div>
@@ -97,7 +97,7 @@ export default async function InsightsPage({ searchParams }: PageProps) {
             >
               Know where you actually stand.
             </h2>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               The Researcher Visibility Scorecard gives you an exact score across Scholar Identity,
               Discoverability, Citation Health, and Research Communication — and shows you precisely
               what every gap is costing your h-index and career right now.
@@ -114,12 +114,12 @@ export default async function InsightsPage({ searchParams }: PageProps) {
               <Link
                 href="/consultation"
                 className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border transition-all duration-200 hover:border-[#2563EB] hover:text-[#111827]"
-                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
               >
                 Book a Free Strategy Call
               </Link>
             </div>
-            <p className="text-xs mt-4" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-4" style={{ color: "#4B5563" }}>
               4–6 minutes · 12 checkpoints · Results shown immediately
             </p>
           </div>

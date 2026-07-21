@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { copy } from "@/constants/copy";
@@ -55,7 +55,7 @@ export function Framework() {
           >
             {copy.framework.title}
           </h2>
-          <p className="text-base max-w-2xl mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-base max-w-2xl mx-auto" style={{ color: "#4B5563" }}>
             {copy.framework.subtitle}
           </p>
         </motion.div>
@@ -91,7 +91,7 @@ export function Framework() {
                 <p className="text-sm font-semibold mb-1" style={{ color }}>
                   {step.label}
                 </p>
-                <p className="text-xs leading-snug px-1" style={{ color: "#6B7280" }}>
+                <p className="text-xs leading-snug px-1" style={{ color: "#4B5563" }}>
                   {step.description}
                 </p>
               </motion.div>
@@ -156,7 +156,7 @@ export function Framework() {
 
                 {/* Content */}
                 <div className="p-5 flex flex-col items-center flex-1">
-                  <p className="text-xs font-semibold mb-3 tracking-widest uppercase" style={{ color: "#6B7280" }}>
+                  <p className="text-xs font-semibold mb-3 tracking-widest uppercase" style={{ color: "#4B5563" }}>
                     Step {i + 1} of {steps.length}
                   </p>
                   <p
@@ -165,7 +165,7 @@ export function Framework() {
                   >
                     {step.label}
                   </p>
-                  <p className="text-sm leading-relaxed mb-4" style={{ color: "#6B7280" }}>
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: "#4B5563" }}>
                     {step.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5 justify-center mt-auto">

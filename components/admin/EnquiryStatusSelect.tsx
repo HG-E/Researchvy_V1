@@ -42,7 +42,7 @@ export function EnquiryStatusSelect({ id, table, current }: Props) {
 
   return (
     <div className="relative inline-flex items-center gap-1.5">
-      {loading && <Loader2 className="h-3 w-3 animate-spin" style={{ color: "#6B7280" }} />}
+      {loading && <Loader2 className="h-3 w-3 animate-spin" style={{ color: "#4B5563" }} />}
       <select
         value={status}
         onChange={(e) => handleChange(e.target.value as Status)}

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef, useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
@@ -214,7 +214,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
                   {loading ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
-                    <CheckCircle className="h-4 w-4" style={{ color: "#6B7280" }} />
+                    <CheckCircle className="h-4 w-4" style={{ color: "#4B5563" }} />
                   )}
                   Mark as complete
                 </button>
@@ -235,7 +235,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
                 <h3 className="text-base font-bold mb-2 leading-snug" style={{ color: "#111827" }}>
                   Ready to unlock the full course?
                 </h3>
-                <p className="text-sm mb-5 leading-relaxed" style={{ color: "#6B7280" }}>
+                <p className="text-sm mb-5 leading-relaxed" style={{ color: "#4B5563" }}>
                   <strong style={{ color: "#374151" }}>{courseName}</strong> includes all lessons,
                   a completion certificate, and a direct path to global scholarly visibility.
                   Enroll via WhatsApp — it takes under 2 minutes.
@@ -253,7 +253,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
                   <Link
                     href={`/academy/courses/${courseSlug}`}
                     className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium border transition-colors hover:bg-[#F1F5F9]"
-                    style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                    style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
                   >
                     View full curriculum
                   </Link>
@@ -290,7 +290,7 @@ export function LessonPlayer({ lesson, courseSlug, courseName, prevLesson, nextL
               <Link
                 href={`/academy/courses/${courseSlug}/lessons/${prevLesson.id}`}
                 className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium border transition-colors hover:bg-[#F1F5F9] max-w-[45%]"
-                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
               >
                 <ArrowLeft className="h-4 w-4 flex-shrink-0" />
                 <span className="truncate">{prevLesson.title}</span>

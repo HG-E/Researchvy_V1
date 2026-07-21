@@ -1,4 +1,4 @@
-﻿import { generatePageMetadata } from "@/lib/seo/metadata";
+import { generatePageMetadata } from "@/lib/seo/metadata";
 import { PrintButton } from "@/components/resources/PrintButton";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
@@ -30,7 +30,7 @@ export default async function InstitutionalLetterPage() {
             >
               Professional Development Support Letter
             </h1>
-            <p className="text-sm mt-2" style={{ color: "#6B7280" }}>
+            <p className="text-sm mt-2" style={{ color: "#4B5563" }}>
               Present this letter to your head of department, faculty office, or finance officer
               to request institutional funding for your place in the {cohortMonth} cohort.
             </p>
@@ -55,24 +55,24 @@ export default async function InstitutionalLetterPage() {
                 <p className="text-2xl font-bold mb-1" style={{ color: "#111827", fontFamily: "var(--font-serif)" }}>
                   Researchvy
                 </p>
-                <p className="text-xs" style={{ color: "#6B7280" }}>
+                <p className="text-xs" style={{ color: "#4B5563" }}>
                   Research Beyond Publication
                 </p>
-                <div className="mt-3 space-y-0.5 text-xs" style={{ color: "#6B7280" }}>
+                <div className="mt-3 space-y-0.5 text-xs" style={{ color: "#4B5563" }}>
                   <p>Lagos, Nigeria · New York, USA</p>
                   <p>info@researchvy.com · researchvy@gmail.com</p>
                   <p>+234 703 051 5183</p>
                   <p>researchvy.com</p>
                 </div>
               </div>
-              <div className="text-xs text-right" style={{ color: "#6B7280" }}>
+              <div className="text-xs text-right" style={{ color: "#4B5563" }}>
                 <p>Ref: DVC-JUL2026-PD</p>
                 <p className="mt-1">May 2026</p>
               </div>
             </div>
 
             {/* Addressee block */}
-            <div className="mb-8 text-sm" style={{ color: "#6B7280" }}>
+            <div className="mb-8 text-sm" style={{ color: "#4B5563" }}>
               <p className="font-semibold" style={{ color: "#111827" }}>To:</p>
               <p>The Head of Department / Faculty / Finance Officer</p>
               <p>[Researcher&apos;s Institution Name]</p>
@@ -85,7 +85,7 @@ export default async function InstitutionalLetterPage() {
             </p>
 
             {/* Body */}
-            <div className="space-y-5 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+            <div className="space-y-5 text-sm leading-relaxed" style={{ color: "#4B5563" }}>
               <p>Dear Head of Department / Finance Officer,</p>
 
               <p>
@@ -103,7 +103,7 @@ export default async function InstitutionalLetterPage() {
                 <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "#2563EB" }}>
                   Programme Overview
                 </p>
-                <div className="space-y-2 text-xs" style={{ color: "#6B7280" }}>
+                <div className="space-y-2 text-xs" style={{ color: "#4B5563" }}>
                   <p><strong style={{ color: "#374151" }}>Programme name:</strong> Digital Visibility Clinic™</p>
                   <p><strong style={{ color: "#374151" }}>Facilitating organisation:</strong> Researchvy</p>
                   <p><strong style={{ color: "#374151" }}>Cohort dates:</strong> July 1 – 28, 2026</p>
@@ -154,7 +154,7 @@ export default async function InstitutionalLetterPage() {
                 <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: "#10B981" }}>
                   Investment
                 </p>
-                <div className="space-y-1.5 text-xs" style={{ color: "#6B7280" }}>
+                <div className="space-y-1.5 text-xs" style={{ color: "#4B5563" }}>
                   <p>
                     <strong style={{ color: "#374151" }}>Single Module (per session):</strong>{" "}
                     $79 USD / {formatNgn(usdToNgn(79, rate))} NGN
@@ -193,9 +193,9 @@ export default async function InstitutionalLetterPage() {
                 proposals are available upon request.
               </p>
 
-              <p style={{ color: "#6B7280" }}>
+              <p style={{ color: "#4B5563" }}>
                 Contact:{" "}
-                <span style={{ color: "#6B7280" }}>info@researchvy.com · researchvy@gmail.com · +234 703 051 5183</span>
+                <span style={{ color: "#4B5563" }}>info@researchvy.com · researchvy@gmail.com · +234 703 051 5183</span>
               </p>
 
               <p>Yours sincerely,</p>
@@ -208,13 +208,13 @@ export default async function InstitutionalLetterPage() {
                 style={{ background: "linear-gradient(90deg, #2563EB, #10B981)" }}
               />
               <p className="text-sm font-bold" style={{ color: "#111827" }}>Ekene Hillary</p>
-              <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+              <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
                 Founder & Director, Researchvy
               </p>
-              <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+              <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
                 Lagos, Nigeria · New York, USA
               </p>
-              <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>
+              <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
                 info@researchvy.com · +234 703 051 5183
               </p>
             </div>
@@ -222,7 +222,7 @@ export default async function InstitutionalLetterPage() {
             {/* Footer note */}
             <div
               className="mt-10 rounded-xl p-4 text-xs"
-              style={{ backgroundColor: "#FFFFFF", color: "#6B7280" }}
+              style={{ backgroundColor: "#FFFFFF", color: "#4B5563" }}
             >
               This letter is issued by Researchvy in support of a professional development funding application.
               For verification or additional documentation, contact info@researchvy.com or via WhatsApp at +234 703 051 5183.
@@ -235,9 +235,9 @@ export default async function InstitutionalLetterPage() {
         {/* Instructions */}
         <div
           className="mt-6 rounded-xl border p-5 text-xs print:hidden"
-          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", color: "#6B7280" }}
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0", color: "#4B5563" }}
         >
-          <p className="font-semibold mb-1" style={{ color: "#6B7280" }}>How to use this letter</p>
+          <p className="font-semibold mb-1" style={{ color: "#4B5563" }}>How to use this letter</p>
           <p>
             Click <strong style={{ color: "#111827" }}>Print / Save PDF</strong> above (or press Ctrl+P / Cmd+P) to save as a PDF.
             Fill in your name, department, and institution before printing or sending.

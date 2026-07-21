@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
@@ -123,7 +123,7 @@ export function CheckoutForm({
         <Link
           href="/clinics/digital-visibility-clinic"
           className="inline-flex items-center gap-1.5 text-sm mb-8 transition-colors"
-          style={{ color: "#6B7280" }}
+          style={{ color: "#4B5563" }}
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to Clinic
@@ -142,7 +142,7 @@ export function CheckoutForm({
           <div className="rounded-2xl border overflow-hidden" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
             <div className="h-1" style={{ background: "linear-gradient(90deg,#2563EB,#10B981)" }} />
             <div className="p-6">
-              <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
                 Your Order
               </p>
 
@@ -150,7 +150,7 @@ export function CheckoutForm({
               <div className="flex items-start justify-between gap-3 mb-4">
                 <div>
                   <p className="text-sm font-bold" style={{ color: "#111827" }}>{bundle.name}</p>
-                  <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{bundle.tagline}</p>
+                  <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{bundle.tagline}</p>
                 </div>
                 {isEarlyBird && savings > 0 && (
                   <span className="flex-shrink-0 flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(245,158,11,0.12)", color: "#F59E0B" }}>
@@ -163,7 +163,7 @@ export function CheckoutForm({
               {/* Solo module selector */}
               {bundle.isSolo && (
                 <div className="mb-4">
-                  <label className="block text-xs font-semibold mb-2" style={{ color: "#6B7280" }}>
+                  <label className="block text-xs font-semibold mb-2" style={{ color: "#4B5563" }}>
                     Which module?
                   </label>
                   <select
@@ -204,7 +204,7 @@ export function CheckoutForm({
                     {bundle.isSolo && !selModule && "from "}{fmt(amount, currency)}
                   </span>
                   {savings > 0 && (
-                    <span className="text-xs line-through" style={{ color: "#6B7280" }}>
+                    <span className="text-xs line-through" style={{ color: "#4B5563" }}>
                       {fmt(regular, currency)}
                     </span>
                   )}
@@ -219,7 +219,7 @@ export function CheckoutForm({
               {/* What's included */}
               <ul className="mt-4 space-y-1.5">
                 {bundle.includes.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs" style={{ color: "#6B7280" }}>
+                  <li key={i} className="flex items-start gap-2 text-xs" style={{ color: "#4B5563" }}>
                     <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#2563EB" }} />
                     {item}
                   </li>
@@ -230,12 +230,12 @@ export function CheckoutForm({
 
           {/* Your details */}
           <div className="rounded-2xl border p-6" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
-            <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
               Your Details
             </p>
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>Full name *</label>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: "#4B5563" }}>Full name *</label>
                 <input
                   type="text"
                   value={name}
@@ -247,20 +247,20 @@ export function CheckoutForm({
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>Email</label>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: "#4B5563" }}>Email</label>
                 <input
                   type="email"
                   value={userEmail}
                   readOnly
                   className="w-full rounded-xl px-4 py-2.5 text-sm border"
-                  style={{ backgroundColor: "#0A1120", borderColor: "#E2E8F0", color: "#6B7280" }}
+                  style={{ backgroundColor: "#0A1120", borderColor: "#E2E8F0", color: "#4B5563" }}
                 />
-                <p className="text-[11px] mt-1" style={{ color: "#6B7280" }}>
+                <p className="text-[11px] mt-1" style={{ color: "#4B5563" }}>
                   From your account · receipt will be sent here
                 </p>
               </div>
               <div>
-                <label className="block text-xs font-medium mb-1.5" style={{ color: "#6B7280" }}>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: "#4B5563" }}>
                   WhatsApp / phone (optional)
                 </label>
                 <input
@@ -277,7 +277,7 @@ export function CheckoutForm({
 
           {/* Payment method */}
           <div className="rounded-2xl border p-6" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
-            <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
               Payment Method
             </p>
 
@@ -297,7 +297,7 @@ export function CheckoutForm({
                     Recommended
                   </span>
                 </div>
-                <p className="text-xs mt-1" style={{ color: "#6B7280" }}>
+                <p className="text-xs mt-1" style={{ color: "#4B5563" }}>
                   Transfer directly to our account. Your order reference is used as the narration.
                   Confirmed within 2 business hours.
                 </p>
@@ -312,13 +312,13 @@ export function CheckoutForm({
               <div className="w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5" style={{ borderColor: "#6B7280" }} />
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <CreditCard className="h-4 w-4" style={{ color: "#6B7280" }} />
-                  <p className="text-sm font-semibold" style={{ color: "#6B7280" }}>OPay</p>
-                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ backgroundColor: "#F1F5F9", color: "#6B7280" }}>
+                  <CreditCard className="h-4 w-4" style={{ color: "#4B5563" }} />
+                  <p className="text-sm font-semibold" style={{ color: "#4B5563" }}>OPay</p>
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ backgroundColor: "#F1F5F9", color: "#4B5563" }}>
                     Coming soon
                   </span>
                 </div>
-                <p className="text-xs mt-1" style={{ color: "#6B7280" }}>Pay via OPay app</p>
+                <p className="text-xs mt-1" style={{ color: "#4B5563" }}>Pay via OPay app</p>
               </div>
             </div>
           </div>
@@ -352,7 +352,7 @@ export function CheckoutForm({
             )}
           </button>
 
-          <p className="text-center text-xs" style={{ color: "#6B7280" }}>
+          <p className="text-center text-xs" style={{ color: "#4B5563" }}>
             Enrollment is confirmed only after payment is verified by our team.
           </p>
         </form>

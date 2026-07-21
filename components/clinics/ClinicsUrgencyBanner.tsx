@@ -81,13 +81,13 @@ export async function ClinicsUrgencyBanner({
                   className="rounded-xl border px-4 py-3.5"
                   style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
                 >
-                  <p className="text-[10px] font-bold tracking-widest uppercase mb-1.5" style={{ color: "#6B7280" }}>
+                  <p className="text-[10px] font-bold tracking-widest uppercase mb-1.5" style={{ color: "#4B5563" }}>
                     {track.label} Track
                   </p>
                   <p className="text-sm font-semibold" style={{ color: "#111827" }}>
                     {track.day}s · {cohort.sessionTime}
                   </p>
-                  <p className="text-xs mt-1" style={{ color: "#6B7280" }}>
+                  <p className="text-xs mt-1" style={{ color: "#4B5563" }}>
                     Starts {formatCohortDate(track.startDate)}
                   </p>
                 </div>
@@ -95,7 +95,7 @@ export async function ClinicsUrgencyBanner({
             })}
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs" style={{ color: "#6B7280" }}>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs" style={{ color: "#4B5563" }}>
             <span className="flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5 flex-shrink-0" />
               2 hrs/session · platform activities between sessions
@@ -124,7 +124,7 @@ export async function ClinicsUrgencyBanner({
               <MessageCircle className="h-4 w-4" />
               {isClosingSoon ? "Reserve My Spot Now" : "Join August Cohort"}
             </a>
-            <p className="text-xs" style={{ color: "#6B7280" }}>
+            <p className="text-xs" style={{ color: "#4B5563" }}>
               Choose your track after sign-up
             </p>
           </div>

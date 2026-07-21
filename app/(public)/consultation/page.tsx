@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { CheckCircle2, MessageCircle, Mail, Clock, ArrowRight, Target, Zap, Shield } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -73,7 +73,7 @@ export default async function ConsultationPage() {
           >
             Book a Free Researcher Visibility Strategy Call
           </h1>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: "#94A3B8" }}>
+          <p className="text-lg leading-relaxed mb-8" style={{ color: "#4B5563" }}>
             Whether you&apos;ve taken the Visibility Scorecard or you&apos;re starting from scratch, 20 minutes with a
             Researchvy expert will give you a precise read on where your research profile stands, your top three
             priorities, and a clear written action plan. Free. No obligation.
@@ -84,7 +84,7 @@ export default async function ConsultationPage() {
             className="rounded-2xl border p-6 sm:p-8 mb-6"
             style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
           >
-            <p className="text-sm font-semibold mb-4" style={{ color: "#6B7280" }}>
+            <p className="text-sm font-semibold mb-4" style={{ color: "#4B5563" }}>
               Book your call — choose how you&apos;d like to connect:
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -107,13 +107,13 @@ export default async function ConsultationPage() {
                 Book via Email
               </a>
             </div>
-            <p className="text-xs mt-4" style={{ color: "#6B7280" }}>
+            <p className="text-xs mt-4" style={{ color: "#4B5563" }}>
               We respond within 4 business hours · Calls available Mon–Fri, 9am–6pm WAT
             </p>
           </div>
 
           {/* Secondary CTA — not yet taken scorecard */}
-          <p className="text-sm" style={{ color: "#6B7280" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             Haven&apos;t taken the scorecard yet?{" "}
             <Link
               href="/resources/visibility-scorecard"
@@ -148,7 +148,7 @@ export default async function ConsultationPage() {
                 </div>
                 <div>
                   <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>{label}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{detail}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{detail}</p>
                 </div>
               </div>
             ))}
@@ -176,7 +176,7 @@ export default async function ConsultationPage() {
                 </div>
                 <div>
                   <p className="text-sm font-bold mb-1.5" style={{ color: "#111827" }}>{item.label}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{item.detail}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{item.detail}</p>
                 </div>
               </div>
             ))}
@@ -196,7 +196,7 @@ export default async function ConsultationPage() {
               {GOOD_FIT.map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <CheckCircle2 className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#10B981" }} />
-                  <span className="text-sm leading-relaxed" style={{ color: "#94A3B8" }}>{item}</span>
+                  <span className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{item}</span>
                 </li>
               ))}
             </ul>
@@ -218,7 +218,7 @@ export default async function ConsultationPage() {
                   >
                     ✕
                   </span>
-                  <span className="text-sm leading-relaxed" style={{ color: "#94A3B8" }}>{item}</span>
+                  <span className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{item}</span>
                 </li>
               ))}
             </ul>
@@ -234,7 +234,7 @@ export default async function ConsultationPage() {
             <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
               Want the work done for you, not explained to you?
             </p>
-            <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
               Private Consulting delivers a written audit, optimised profiles, and your strategy — 1-on-1, bespoke to your gaps. Starts at $209 / {formatNgn(usdToNgn(209, rate))}.
             </p>
           </div>
@@ -281,7 +281,7 @@ export default async function ConsultationPage() {
                   >
                     {item.label}
                   </p>
-                  <p className="text-xs mt-0.5" style={{ color: "#6B7280" }}>{item.sub}</p>
+                  <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>{item.sub}</p>
                 </Link>
                 {i < 2 && (
                   <ArrowRight
@@ -302,7 +302,7 @@ export default async function ConsultationPage() {
           >
             Ready to talk?
           </h2>
-          <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-sm mb-6" style={{ color: "#4B5563" }}>
             Pick a channel below. We respond within 4 business hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

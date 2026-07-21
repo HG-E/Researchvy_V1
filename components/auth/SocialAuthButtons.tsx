@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -136,7 +136,7 @@ export function SocialAuthButtons({ next = "/dashboard", mode = "signin" }: Prop
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = cfg.bg; }}
             >
               {isLoading
-                ? <Loader2 className="h-4 w-4 animate-spin" style={{ color: "#6B7280" }} />
+                ? <Loader2 className="h-4 w-4 animate-spin" style={{ color: "#4B5563" }} />
                 : cfg.icon}
               {isLoading
                 ? (mode === "signin" ? "Signing in…" : "Signing up…")
@@ -156,7 +156,7 @@ export function SocialAuthButtons({ next = "/dashboard", mode = "signin" }: Prop
       {/* Divider — only rendered when we actually showed buttons */}
       <div className="flex items-center gap-3 my-5">
         <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
-        <span className="text-xs" style={{ color: "#6B7280" }}>or continue with email</span>
+        <span className="text-xs" style={{ color: "#4B5563" }}>or continue with email</span>
         <div className="flex-1 h-px" style={{ backgroundColor: "#F1F5F9" }} />
       </div>
     </>

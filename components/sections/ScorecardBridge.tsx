@@ -83,7 +83,7 @@ export function ScorecardBridge() {
           >
             Three steps to research that gets found
           </h2>
-          <p className="text-sm sm:text-base max-w-xl mx-auto" style={{ color: "#6B7280" }}>
+          <p className="text-sm sm:text-base max-w-xl mx-auto" style={{ color: "#4B5563" }}>
             Start free, go deeper at your own pace. Each step builds on the last.
           </p>
         </div>
@@ -201,7 +201,7 @@ export function ScorecardBridge() {
             <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
               Not sure how bad your visibility gap actually is?
             </p>
-            <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
               The free Visibility Scorecard gives you a score out of 100 in 4 minutes, showing
               exactly what each gap is costing your citations, h-index, and career.
             </p>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -39,7 +39,7 @@ function FooterSection({
         <ChevronDown
           className="h-4 w-4 transition-transform duration-200 flex-shrink-0"
           style={{
-            color: "#6B7280",
+            color: "#4B5563",
             transform: open ? "rotate(180deg)" : "rotate(0deg)",
           }}
         />
@@ -64,7 +64,7 @@ function FooterSection({
             <Link
               href={item.href}
               className="block text-sm transition-colors py-1 active:opacity-60 hover:text-[#374151]"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               {item.label}
             </Link>
@@ -98,7 +98,7 @@ export function Footer() {
             <p className="text-sm font-bold mb-1" style={{ color: "#111827" }}>
               Not sure where your research visibility stands?
             </p>
-            <p className="text-xs" style={{ color: "#6B7280" }}>
+            <p className="text-xs" style={{ color: "#4B5563" }}>
               4–6 minutes · 12 checkpoints · Score out of 100 · Free
             </p>
           </div>
@@ -114,7 +114,7 @@ export function Footer() {
         {/* Brand + socials — mobile */}
         <div className="mb-8 md:mb-0 md:hidden">
           <Logo variant="full" width={130} linkToHome />
-          <p className="mt-3 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="mt-3 text-sm leading-relaxed" style={{ color: "#4B5563" }}>
             {siteConfig.description}
           </p>
           <div className="mt-5 flex gap-3">
@@ -130,7 +130,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 aria-label={label}
                 className="w-10 h-10 rounded-lg flex items-center justify-center border transition-colors active:opacity-60"
-                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
               >
                 <Icon className="h-4 w-4" />
               </a>
@@ -143,7 +143,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2">
             <Logo variant="full" width={140} linkToHome />
-            <p className="mt-4 text-sm leading-relaxed max-w-xs" style={{ color: "#6B7280" }}>
+            <p className="mt-4 text-sm leading-relaxed max-w-xs" style={{ color: "#4B5563" }}>
               {siteConfig.description}
             </p>
             <div className="mt-6 flex gap-3">
@@ -159,7 +159,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   className="w-9 h-9 rounded-lg flex items-center justify-center border transition-all duration-200 hover:border-[#2563EB] hover:text-[#2563EB]"
-                  style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                  style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -178,7 +178,7 @@ export function Footer() {
                     <Link
                       href={item.href}
                       className="text-sm transition-colors hover:text-[#374151]"
-                      style={{ color: "#6B7280" }}
+                      style={{ color: "#4B5563" }}
                     >
                       {item.label}
                     </Link>
@@ -196,7 +196,7 @@ export function Footer() {
             <a
               href={`mailto:${siteConfig.contact.email}`}
               className="text-sm transition-colors hover:text-[#374151] block"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               {siteConfig.contact.email}
             </a>
@@ -210,13 +210,13 @@ export function Footer() {
           ))}
           {/* Contact row */}
           <div className="py-4">
-            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#6B7280" }}>
+            <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#4B5563" }}>
               Contact
             </p>
             <a
               href={`mailto:${siteConfig.contact.email}`}
               className="text-sm active:opacity-60"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               {siteConfig.contact.email}
             </a>
@@ -226,14 +226,14 @@ export function Footer() {
         {/* Bottom bar */}
         <div
           className="mt-8 md:mt-12 pt-6 md:pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-3 text-xs"
-          style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+          style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
         >
           <p>© {currentYear} Researchvy. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link href="/privacy" className="transition-colors hover:text-[#374151] active:opacity-60" style={{ color: "#6B7280" }}>
+            <Link href="/privacy" className="transition-colors hover:text-[#374151] active:opacity-60" style={{ color: "#4B5563" }}>
               Privacy Policy
             </Link>
-            <Link href="/terms" className="transition-colors hover:text-[#374151] active:opacity-60" style={{ color: "#6B7280" }}>
+            <Link href="/terms" className="transition-colors hover:text-[#374151] active:opacity-60" style={{ color: "#4B5563" }}>
               Terms of Service
             </Link>
           </div>

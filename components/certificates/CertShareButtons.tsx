@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { Linkedin, Copy, Check, ExternalLink } from "lucide-react";
@@ -58,7 +58,7 @@ export function CertShareButtons({ certificateNumber, recipientName, programme, 
 
   return (
     <div className="mt-6 space-y-3">
-      <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#6B7280" }}>
+      <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#4B5563" }}>
         Add to your profiles
       </p>
 
@@ -101,7 +101,7 @@ export function CertShareButtons({ certificateNumber, recipientName, programme, 
             <p className="text-xs font-semibold mb-1" style={{ color: "#A6D139" }}>
               How to add to ORCID
             </p>
-            <ol className="text-xs space-y-1.5 list-decimal list-inside" style={{ color: "#6B7280" }}>
+            <ol className="text-xs space-y-1.5 list-decimal list-inside" style={{ color: "#4B5563" }}>
               <li>Go to <a href="https://orcid.org" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "#60A5FA" }}>orcid.org</a> and sign in</li>
               <li>Click <strong style={{ color: "#374151" }}>Add Works</strong> → <strong style={{ color: "#374151" }}>Add manually</strong></li>
               <li>Choose work type <strong style={{ color: "#374151" }}>Qualification</strong></li>
@@ -113,7 +113,7 @@ export function CertShareButtons({ certificateNumber, recipientName, programme, 
           <div className="relative">
             <pre
               className="text-xs rounded-xl p-4 leading-relaxed whitespace-pre-wrap overflow-x-auto"
-              style={{ backgroundColor: "#FFFFFF", color: "#6B7280", border: "1px solid #E2E8F0" }}
+              style={{ backgroundColor: "#FFFFFF", color: "#4B5563", border: "1px solid #E2E8F0" }}
             >
               {orcidText}
             </pre>

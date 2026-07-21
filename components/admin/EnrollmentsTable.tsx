@@ -135,7 +135,7 @@ export function EnrollmentsTable({ rows, courseOptions }: Props) {
             <button
               onClick={() => downloadCsv(filtered)}
               className="flex items-center gap-1.5 text-xs px-3 py-2 rounded-xl border transition-colors hover:bg-[#1E293B]"
-              style={{ borderColor: "#1E293B", color: "#6B7280" }}
+              style={{ borderColor: "#1E293B", color: "#4B5563" }}
               title="Export filtered rows as CSV"
             >
               <Download className="h-3.5 w-3.5" />
@@ -200,7 +200,7 @@ export function EnrollmentsTable({ rows, courseOptions }: Props) {
                         {row.user_name}
                       </p>
                     )}
-                    <p className="text-xs truncate" style={{ color: "#6B7280" }}>
+                    <p className="text-xs truncate" style={{ color: "#4B5563" }}>
                       {row.user_email || row.user_id}
                     </p>
                   </div>
@@ -246,7 +246,7 @@ export function EnrollmentsTable({ rows, courseOptions }: Props) {
                   </div>
 
                   {/* Enrolled at */}
-                  <span className="text-xs whitespace-nowrap" style={{ color: "#6B7280" }}>
+                  <span className="text-xs whitespace-nowrap" style={{ color: "#4B5563" }}>
                     {format(new Date(row.enrolled_at), "MMM d, yyyy")}
                   </span>
 

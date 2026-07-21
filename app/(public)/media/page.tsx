@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Mic, Video, BookOpen, PenTool, ArrowRight, MessageCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -63,7 +63,7 @@ export default function MediaPage() {
             Your Research Is Published.<br />
             <span style={{ color: "#F472B6" }}>The World Still Can&apos;t Read It.</span>
           </h1>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: "#6B7280" }}>
+          <p className="text-lg leading-relaxed mb-8" style={{ color: "#4B5563" }}>
             Journals reach other researchers. The policymakers, practitioners, and public who
             could act on your findings read something else entirely. We translate your research
             into formats that actually reach the people who need it.
@@ -82,7 +82,7 @@ export default function MediaPage() {
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
-              style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+              style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
             >
               Send an Enquiry
             </Link>
@@ -100,7 +100,7 @@ export default function MediaPage() {
                 <Icon className="h-5 w-5" style={{ color }} />
               </div>
               <h2 className="text-base font-bold mb-2" style={{ color: "#111827" }}>{title}</h2>
-              <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>{desc}</p>
+              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{desc}</p>
             </HoverCard>
           ))}
         </div>
@@ -145,7 +145,7 @@ export default function MediaPage() {
             >
               Start a Media Project
             </h3>
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "#4B5563" }}>
               Your research took years to produce. It deserves more than a PDF that nobody
               outside your field will open. Tell us what you&apos;ve published and who should
               be reading it, we&apos;ll build the content that gets it there.
@@ -164,12 +164,12 @@ export default function MediaPage() {
               <Link
                 href="/contact"
                 className="flex items-center justify-center gap-2 w-full rounded-xl py-3 text-sm font-semibold border transition-colors hover:bg-[#F1F5F9]"
-                style={{ borderColor: "#E2E8F0", color: "#6B7280" }}
+                style={{ borderColor: "#E2E8F0", color: "#4B5563" }}
               >
                 Send an Email
               </Link>
             </div>
-            <p className="text-xs text-center mt-4" style={{ color: "#6B7280" }}>
+            <p className="text-xs text-center mt-4" style={{ color: "#4B5563" }}>
               Typically respond within 24 hours
             </p>
           </div>
@@ -184,7 +184,7 @@ export default function MediaPage() {
             <p className="text-sm font-semibold mb-1" style={{ color: "#111827" }}>
               Want to learn to communicate your research yourself?
             </p>
-            <p className="text-sm" style={{ color: "#6B7280" }}>
+            <p className="text-sm" style={{ color: "#4B5563" }}>
               Our Insights hub covers scholarly communication, visibility strategy, and research storytelling.
             </p>
           </div>

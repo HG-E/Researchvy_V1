@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -32,7 +32,7 @@ function SessionRow({
         <p className="text-sm font-semibold" style={{ color: "#111827" }}>
           {session.title}
         </p>
-        <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#6B7280" }}>
+        <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#4B5563" }}>
           {session.description.split(".")[0]}.
         </p>
       </div>
@@ -56,7 +56,7 @@ function SessionCard({
     >
       <div className="h-1" style={{ background: `linear-gradient(90deg, ${color}, #10B981)` }} />
       <div className="p-5" style={{ backgroundColor: "#F1F5F9" }}>
-        <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#6B7280" }}>
+        <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "#4B5563" }}>
           {`Module ${session.number} of ${total}`}
         </p>
         <div className="flex items-center gap-3 mb-3">
@@ -77,12 +77,12 @@ function SessionCard({
             {session.title}
           </p>
         </div>
-        <p className="text-sm leading-relaxed mb-4" style={{ color: "#6B7280" }}>
+        <p className="text-sm leading-relaxed mb-4" style={{ color: "#4B5563" }}>
           {session.description}
         </p>
         <ul className="space-y-1.5">
           {session.topics.map((topic) => (
-            <li key={topic} className="flex items-start gap-2 text-xs" style={{ color: "#6B7280" }}>
+            <li key={topic} className="flex items-start gap-2 text-xs" style={{ color: "#4B5563" }}>
               <span
                 className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
                 style={{ backgroundColor: color }}

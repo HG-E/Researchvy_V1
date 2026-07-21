@@ -84,15 +84,15 @@ export function CourseMetaForm({ course }: { course: Course }) {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Title *</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Title *</label>
           <input className={inp} style={inpStyle} value={form.title} onChange={e => set("title", e.target.value)} />
         </div>
         <div>
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Slug *</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Slug *</label>
           <input className={`${inp} font-mono`} style={inpStyle} value={form.slug} onChange={e => set("slug", e.target.value)} />
         </div>
         <div>
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Level</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Level</label>
           <select className={inp} style={inpStyle} value={form.level} onChange={e => set("level", e.target.value)}>
             <option value="1">1 — Foundations</option>
             <option value="2">2 — Intermediate</option>
@@ -102,26 +102,26 @@ export function CourseMetaForm({ course }: { course: Course }) {
           </select>
         </div>
         <div>
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Duration (minutes)</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Duration (minutes)</label>
           <input className={inp} style={inpStyle} type="number" value={form.duration_minutes}
             onChange={e => set("duration_minutes", e.target.value)} placeholder="e.g. 120" />
         </div>
         <div className="sm:col-span-2">
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Subtitle</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Subtitle</label>
           <input className={inp} style={inpStyle} value={form.subtitle} onChange={e => set("subtitle", e.target.value)} />
         </div>
         <div className="sm:col-span-2">
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Description</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Description</label>
           <textarea className={`${inp} resize-none`} style={inpStyle} rows={4}
             value={form.description} onChange={e => set("description", e.target.value)} />
         </div>
         <div>
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Thumbnail URL</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Thumbnail URL</label>
           <input className={inp} style={inpStyle} value={form.thumbnail_url}
             onChange={e => set("thumbnail_url", e.target.value)} placeholder="https://…" />
         </div>
         <div>
-          <label className="block text-xs mb-1" style={{ color: "#6B7280" }}>Trailer URL</label>
+          <label className="block text-xs mb-1" style={{ color: "#4B5563" }}>Trailer URL</label>
           <input className={inp} style={inpStyle} value={form.trailer_url}
             onChange={e => set("trailer_url", e.target.value)} placeholder="https://…" />
         </div>
@@ -149,7 +149,7 @@ export function CourseMetaForm({ course }: { course: Course }) {
             {confirmDelete ? "Click again to confirm" : "Delete course"}
           </button>
           {confirmDelete && (
-            <button onClick={() => setConfirmDelete(false)} className="text-xs px-2 py-1" style={{ color: "#6B7280" }}>
+            <button onClick={() => setConfirmDelete(false)} className="text-xs px-2 py-1" style={{ color: "#4B5563" }}>
               Cancel
             </button>
           )}

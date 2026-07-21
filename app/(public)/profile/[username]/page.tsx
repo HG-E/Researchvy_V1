@@ -110,7 +110,7 @@ const ROLE_BADGE: Record<string, { label: string; color: string; bg: string }> =
   researcher: { label: "Researcher", color: "#10B981", bg: "rgba(16,185,129,0.12)" },
   partner:    { label: "Partner",    color: "#8B5CF6", bg: "rgba(139,92,246,0.12)" },
   admin:      { label: "Team",       color: "#2563EB", bg: "rgba(37,99,235,0.12)"  },
-  user:       { label: "Community",  color: "#6B7280", bg: "rgba(107,114,128,0.1)" },
+  user:       { label: "Community",  color: "#4B5563", bg: "rgba(107,114,128,0.1)" },
 };
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -182,7 +182,7 @@ export default async function PublicProfilePage({
               </div>
 
               {profile.institutional_affiliation && (
-                <p className="text-sm mb-4" style={{ color: "#6B7280" }}>
+                <p className="text-sm mb-4" style={{ color: "#4B5563" }}>
                   {profile.institutional_affiliation}
                 </p>
               )}
@@ -226,7 +226,7 @@ export default async function PublicProfilePage({
           {profile.bio && (
             <p
               className="mt-6 text-sm leading-relaxed border-t pt-6"
-              style={{ color: "#6B7280", borderColor: "#E2E8F0" }}
+              style={{ color: "#4B5563", borderColor: "#E2E8F0" }}
             >
               {profile.bio}
             </p>
@@ -238,7 +238,7 @@ export default async function PublicProfilePage({
           <section>
             <h2
               className="text-xs font-semibold tracking-widest uppercase mb-4"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Certificates
             </h2>
@@ -262,13 +262,13 @@ export default async function PublicProfilePage({
                     </p>
                     <p
                       className="text-xs mt-0.5 font-mono"
-                      style={{ color: "#6B7280" }}
+                      style={{ color: "#4B5563" }}
                     >
                       {cert.certificate_number}
                     </p>
                     <p
                       className="text-xs mt-1 flex items-center gap-1"
-                      style={{ color: "#6B7280" }}
+                      style={{ color: "#4B5563" }}
                     >
                       <Calendar className="h-3 w-3" />
                       {new Date(cert.issued_at).toLocaleDateString("en-GB", {
@@ -289,7 +289,7 @@ export default async function PublicProfilePage({
           <section>
             <h2
               className="text-xs font-semibold tracking-widest uppercase mb-4"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Submitted Opportunities
             </h2>
@@ -306,7 +306,7 @@ export default async function PublicProfilePage({
           <section>
             <h2
               className="text-xs font-semibold tracking-widest uppercase mb-4"
-              style={{ color: "#6B7280" }}
+              style={{ color: "#4B5563" }}
             >
               Submitted Events
             </h2>
@@ -320,7 +320,7 @@ export default async function PublicProfilePage({
 
         {/* ── Empty state ────────────────────────────────────────────── */}
         {certificates.length === 0 && opportunities.length === 0 && events.length === 0 && (
-          <p className="text-sm text-center py-8" style={{ color: "#6B7280" }}>
+          <p className="text-sm text-center py-8" style={{ color: "#4B5563" }}>
             This researcher hasn&apos;t published any contributions yet.
           </p>
         )}

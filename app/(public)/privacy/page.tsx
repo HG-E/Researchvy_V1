@@ -1,4 +1,4 @@
-﻿import { generatePageMetadata } from "@/lib/seo/metadata";
+import { generatePageMetadata } from "@/lib/seo/metadata";
 import { siteConfig } from "@/config/site";
 
 export const metadata = generatePageMetadata({
@@ -18,7 +18,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <div className="rounded-2xl border p-6 sm:p-8" style={SECTION_STYLE}>
       <h2 className="text-lg font-bold mb-4" style={{ color: "#111827" }}>{title}</h2>
-      <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+      <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#4B5563" }}>
         {children}
       </div>
     </div>
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
           >
             Privacy Policy
           </h1>
-          <p className="text-sm" style={{ color: "#6B7280" }}>Last updated: {LAST_UPDATED}</p>
+          <p className="text-sm" style={{ color: "#4B5563" }}>Last updated: {LAST_UPDATED}</p>
         </div>
 
         {/* Intro */}
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
           className="rounded-2xl border p-6 mb-6"
           style={{ backgroundColor: "rgba(37,99,235,0.06)", borderColor: "rgba(37,99,235,0.2)" }}
         >
-          <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
             Researchvy (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) respects your privacy. This policy explains
             what personal data we collect when you use researchvy.com, how we use it, and your rights
             over that data. We keep this plain and direct.

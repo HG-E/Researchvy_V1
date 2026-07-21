@@ -1,4 +1,4 @@
-﻿import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, CheckCircle } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
@@ -22,7 +22,7 @@ export default async function SubmitEventPage() {
 
         <div className="mb-8">
           <Link href="/events" className="flex items-center gap-1.5 text-xs font-semibold mb-6"
-            style={{ color: "#6B7280" }}>
+            style={{ color: "#4B5563" }}>
             <ChevronLeft className="h-3.5 w-3.5" />
             Back to Events
           </Link>
@@ -35,14 +35,14 @@ export default async function SubmitEventPage() {
           >
             Submit Your Academic Event
           </h1>
-          <p className="text-base leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+          <p className="text-base leading-relaxed mb-6" style={{ color: "#4B5563" }}>
             Promote your conference, seminar, workshop, webinar, or other academic event to thousands of researchers.
             Free to list. Reviewed within 2 business days.
           </p>
 
           {/* What's accepted */}
           <div className="rounded-xl border p-5 mb-8" style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}>
-            <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#6B7280" }}>
+            <p className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#4B5563" }}>
               We accept submissions for
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -56,7 +56,7 @@ export default async function SubmitEventPage() {
                 "Panel discussions & roundtables",
                 "Grant writing & career events",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-2 text-xs" style={{ color: "#6B7280" }}>
+                <div key={item} className="flex items-center gap-2 text-xs" style={{ color: "#4B5563" }}>
                   <CheckCircle className="h-3 w-3 flex-shrink-0" style={{ color: "#10B981" }} />
                   {item}
                 </div>
