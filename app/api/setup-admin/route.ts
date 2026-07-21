@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { timingSafeEqual } from "crypto";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { checkRateLimit, getRateLimitKey } from "@/lib/rate-limit";
 
@@ -17,7 +18,11 @@ export async function POST(req: NextRequest) {
     if (!SETUP_SECRET) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
-    if (secret !== SETUP_SECRET) {
+    try {
+      if (!timingSafeEqual(Buffer.from(secret, "utf8"), Buffer.from(SETUP_SECRET, "utf8"))) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      }
+    } catch {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

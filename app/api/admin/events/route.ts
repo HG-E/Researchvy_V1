@@ -47,16 +47,28 @@ export async function POST(req: NextRequest) {
   const { count } = await admin.from("events").select("id", { count: "exact", head: true }).eq("slug", slug);
   if (count) slug = `${slug}-${Date.now()}`;
 
+  const ALLOWED_FIELDS = new Set([
+    "title","description","short_description","event_type","format","location","venue",
+    "timezone","start_date","end_date","registration_deadline","featured_image","website_url",
+    "registration_url","registration_type","capacity","is_free","fee_amount","fee_currency",
+    "call_for_papers_url","call_for_papers_deadline","organizer_name","organizer_email",
+    "organizer_type","target_audience","disciplines","tags","has_travel_funding",
+    "funding_description","funding_url","is_competitive_admission","application_url",
+  ]);
+  const safeBody = Object.fromEntries(
+    Object.entries(body).filter(([k]) => ALLOWED_FIELDS.has(k))
+  );
+
   const { data, error } = await admin
     .from("events")
     .insert({
-      ...body,
+      ...safeBody,
       slug,
       status: "published",
       submitted_by: user.id,
       reviewed_by: user.id,
       reviewed_at: new Date().toISOString(),
-      organizer_type: body.organizer_type ?? "researchvy",
+      organizer_type: safeBody.organizer_type ?? "researchvy",
     })
     .select("id,slug,title")
     .single();

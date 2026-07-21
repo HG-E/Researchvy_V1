@@ -7,6 +7,7 @@ import {
   academyDripDay3,
   academyDripDay7,
 } from "@/lib/email/templates";
+import { isCronAuthorized } from "@/lib/auth/cronAuth";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -15,13 +16,6 @@ function getSupabaseAdmin() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   );
-}
-
-function isAuthorized(req: NextRequest): boolean {
-  const secret = process.env.CRON_SECRET;
-  if (!secret) return false;
-  const token = (req.headers.get("authorization") ?? "").replace("Bearer ", "");
-  return token === secret;
 }
 
 function dayWindow(daysAgo: number): { start: string; end: string } {
@@ -62,7 +56,7 @@ async function sendDrip(
 }
 
 export async function GET(req: NextRequest) {
-  if (!isAuthorized(req)) {
+  if (!isCronAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

@@ -1,6 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { isCronAuthorized } from "@/lib/auth/cronAuth";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  if (!isCronAuthorized(req)) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
   const supabaseUrl  = process.env.NEXT_PUBLIC_SUPABASE_URL  ?? "";
   const supabaseAnon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
   const serviceRole  = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";

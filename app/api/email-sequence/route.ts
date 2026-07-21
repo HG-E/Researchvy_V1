@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 import { day3Email, day7Email } from "@/lib/email/templates";
+import { isCronAuthorized } from "@/lib/auth/cronAuth";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -12,15 +13,8 @@ function getSupabaseAdmin() {
   );
 }
 
-function isAuthorized(req: NextRequest): boolean {
-  const secret = process.env.CRON_SECRET;
-  if (!secret) return false;
-  const token = (req.headers.get("authorization") ?? "").replace("Bearer ", "");
-  return token === secret;
-}
-
 export async function GET(req: NextRequest) {
-  if (!isAuthorized(req)) {
+  if (!isCronAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
