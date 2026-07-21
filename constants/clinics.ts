@@ -45,7 +45,7 @@ export const digitalVisibilityClinic = {
       isBonus: false,
       soloPrice: {
         usd: { regular: 65, earlyBird: 45 },
-        ngn: { regular: 35000, earlyBird: 24000 },
+        ngn: { regular: 84500, earlyBird: 58500 },
       },
     },
     {
@@ -67,7 +67,7 @@ export const digitalVisibilityClinic = {
       isBonus: false,
       soloPrice: {
         usd: { regular: 65, earlyBird: 45 },
-        ngn: { regular: 35000, earlyBird: 24000 },
+        ngn: { regular: 84500, earlyBird: 58500 },
       },
     },
     {
@@ -89,7 +89,7 @@ export const digitalVisibilityClinic = {
       isBonus: false,
       soloPrice: {
         usd: { regular: 79, earlyBird: 55 },
-        ngn: { regular: 42000, earlyBird: 30000 },
+        ngn: { regular: 102700, earlyBird: 71500 },
       },
     },
     {
@@ -111,7 +111,7 @@ export const digitalVisibilityClinic = {
       isBonus: false,
       soloPrice: {
         usd: { regular: 55, earlyBird: 38 },
-        ngn: { regular: 28000, earlyBird: 20000 },
+        ngn: { regular: 71500, earlyBird: 49400 },
       },
     },
     {
@@ -133,7 +133,7 @@ export const digitalVisibilityClinic = {
       isBonus: false,
       soloPrice: {
         usd: { regular: 55, earlyBird: 38 },
-        ngn: { regular: 28000, earlyBird: 20000 },
+        ngn: { regular: 71500, earlyBird: 49400 },
       },
     },
   ],
@@ -169,7 +169,7 @@ export const digitalVisibilityClinic = {
         isSolo:      true,
         savingsLabel: "",
         usd: { regular: 79, earlyBird: 45 },
-        ngn: { regular: 42000, earlyBird: 24000 },
+        ngn: { regular: 102700, earlyBird: 58500 },
         whatsappContext: "Single module enrollment, August 2026",
         cta: "Pick a Module",
         includes: [
@@ -190,7 +190,7 @@ export const digitalVisibilityClinic = {
         isSolo:      false,
         savingsLabel: "Save 30%",
         usd: { regular: 149, earlyBird: 99 },
-        ngn: { regular: 85000, earlyBird: 60000 },
+        ngn: { regular: 193700, earlyBird: 128700 },
         whatsappContext: "DVC Core Bundle enrollment, August 2026",
         cta: "Secure Core Bundle",
         includes: [
@@ -214,7 +214,7 @@ export const digitalVisibilityClinic = {
         isSolo:      false,
         savingsLabel: "Save 42%",
         usd: { regular: 239, earlyBird: 149 },
-        ngn: { regular: 130000, earlyBird: 85000 },
+        ngn: { regular: 310700, earlyBird: 193700 },
         whatsappContext: "DVC Pro Bundle enrollment, August 2026",
         cta: "Unlock Pro Bundle",
         includes: [

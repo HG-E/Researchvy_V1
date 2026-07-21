@@ -4,7 +4,7 @@
 // within a single render and the ISR revalidate on the consuming page
 // controls how often this actually runs.
 
-const FALLBACK_RATE = 1620; // approximate mid-2026 rate
+const FALLBACK_RATE = 1300; // flat default rate: ₦1,300 per $1
 
 export async function getUsdNgnRate(): Promise<number> {
   try {

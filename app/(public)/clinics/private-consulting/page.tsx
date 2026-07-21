@@ -4,6 +4,7 @@ import { generatePageMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/config/site";
 import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
+import { ClinicFAQ } from "@/components/clinics/ClinicFAQ";
 
 export const metadata = generatePageMetadata({
   title: "Private Consulting — Researchvy",
@@ -559,17 +560,8 @@ export default async function PrivateConsultingPage() {
               What You Need to Know
             </h2>
           </div>
-          <div className="max-w-3xl mx-auto space-y-4">
-            {OBJECTIONS.map(({ q, a }) => (
-              <div
-                key={q}
-                className="rounded-2xl border p-6"
-                style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
-              >
-                <p className="text-sm font-bold mb-2" style={{ color: "#111827" }}>{q}</p>
-                <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{a}</p>
-              </div>
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <ClinicFAQ items={OBJECTIONS.map((o) => ({ question: o.q, answer: o.a }))} />
           </div>
         </div>
 

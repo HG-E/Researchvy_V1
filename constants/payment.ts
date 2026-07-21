@@ -22,5 +22,5 @@ export const PAYMENT_CONFIG = {
     callbackUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://researchvy.com"}/api/webhooks/opay`,
   },
 
-  earlyBirdDeadline: "2026-09-30",
+  earlyBirdDeadline: "2026-06-20",
 } as const;
