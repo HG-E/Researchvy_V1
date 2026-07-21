@@ -128,28 +128,17 @@ export default async function ManageClinicsPage() {
                   Modules ({clinic.sessions.length})
                 </p>
                 <div className="space-y-1.5">
-                  {clinic.sessions.map((s) => {
-                    const isBonus = (s as { isBonus?: boolean }).isBonus;
-                    return (
-                      <div key={s.number} className="flex items-center gap-2 text-xs" style={{ color: "#9CA3AF" }}>
-                        <span
-                          className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold"
-                          style={{
-                            backgroundColor: isBonus ? "rgba(245,158,11,0.12)" : "#1E293B",
-                            color: isBonus ? "#F59E0B" : "#60A5FA",
-                          }}
-                        >
-                          {s.number}
-                        </span>
-                        <span className="truncate">{s.name}</span>
-                        {isBonus && (
-                          <span className="text-[9px] font-bold px-1 py-0.5 rounded" style={{ backgroundColor: "rgba(245,158,11,0.12)", color: "#F59E0B" }}>
-                            Bonus
-                          </span>
-                        )}
-                      </div>
-                    );
-                  })}
+                  {clinic.sessions.map((s) => (
+                    <div key={s.number} className="flex items-center gap-2 text-xs" style={{ color: "#9CA3AF" }}>
+                      <span
+                        className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold"
+                        style={{ backgroundColor: "#1E293B", color: "#60A5FA" }}
+                      >
+                        {s.number}
+                      </span>
+                      <span className="truncate">{s.name}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -163,9 +152,7 @@ export default async function ManageClinicsPage() {
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {clinic.sessions.map((s) => {
-                  const isBonus = (s as { isBonus?: boolean }).isBonus;
-                  return (
+                {clinic.sessions.map((s) => (
                     <div
                       key={s.number}
                       className="flex items-center justify-between gap-3 rounded-xl border px-4 py-3"
@@ -175,8 +162,8 @@ export default async function ManageClinicsPage() {
                       }}
                     >
                       <div className="min-w-0">
-                        <p className="text-[10px] font-semibold uppercase tracking-wider mb-0.5" style={{ color: isBonus ? "#F59E0B" : "#4B5563" }}>
-                          {isBonus ? "Bonus Masterclass" : `Module ${s.number}`}
+                        <p className="text-[10px] font-semibold uppercase tracking-wider mb-0.5" style={{ color: "#4B5563" }}>
+                          {`Module ${s.number}`}
                         </p>
                         <p className="text-xs font-semibold truncate" style={{ color: "#F9FAFB" }}>
                           {s.name}
@@ -189,8 +176,7 @@ export default async function ManageClinicsPage() {
                         isUnlocked={unlockedSessions.has(s.number)}
                       />
                     </div>
-                  );
-                })}
+                ))}
               </div>
             </div>
 

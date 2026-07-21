@@ -9,7 +9,6 @@ type Session = {
   subtitle?:   string;
   description: string;
   topics:      readonly string[];
-  isBonus?:    boolean;
 };
 
 export function SessionAccordion({ sessions }: { sessions: readonly Session[] }) {
@@ -18,10 +17,9 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
   return (
     <div className="space-y-3">
       {sessions.map((session) => {
-        const isOpen    = open === session.number;
-        const isBonus   = !!session.isBonus;
-        const accent    = isBonus ? "#F59E0B" : "#2563EB";
-        const accentBg  = isBonus ? "rgba(245,158,11,0.12)" : "rgba(37,99,235,0.12)";
+        const isOpen   = open === session.number;
+        const accent   = "#2563EB";
+        const accentBg = "rgba(37,99,235,0.12)";
 
         return (
           <div
@@ -46,16 +44,8 @@ export function SessionAccordion({ sessions }: { sessions: readonly Session[] })
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
                     <p className="text-xs font-medium" style={{ color: "#6B7280" }}>
-                      {isBonus ? "Bonus Masterclass" : `Module ${session.number}`}
+                      {`Module ${session.number}`}
                     </p>
-                    {isBonus && (
-                      <span
-                        className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
-                        style={{ backgroundColor: accentBg, color: accent }}
-                      >
-                        Bonus
-                      </span>
-                    )}
                   </div>
                   <p className="text-sm font-semibold mt-0.5" style={{ color: "#111827" }}>
                     {session.title}

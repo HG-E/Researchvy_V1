@@ -1,6 +1,6 @@
 /**
  * Digital Visibility Clinic — programme data.
- * August 2026 Cohort: 3 core modules + 2 bonus masterclasses.
+ * August 2026 Cohort: 5 core modules.
  *
  * ⚠  Do NOT change nextCohort.sessionTime, timezone, or track dates.
  */
@@ -108,7 +108,7 @@ export const digitalVisibilityClinic = {
         "h-index, i10-index, and CiteScore: what they mean and what they genuinely don't",
         "Open access strategy for maximum indexing reach and citation counts",
       ] as const,
-      isBonus: true,
+      isBonus: false,
       soloPrice: {
         usd: { regular: 55, earlyBird: 38 },
         ngn: { regular: 28000, earlyBird: 20000 },
@@ -130,7 +130,7 @@ export const digitalVisibilityClinic = {
         "AfricArXiv and African scholarly infrastructure you should already be using",
         "Building a 12-month publication pipeline with realistic, achievable targets",
       ] as const,
-      isBonus: true,
+      isBonus: false,
       soloPrice: {
         usd: { regular: 55, earlyBird: 38 },
         ngn: { regular: 28000, earlyBird: 20000 },
@@ -209,7 +209,7 @@ export const digitalVisibilityClinic = {
         shortName:   "Pro Bundle",
         tagline:     "Core + Indexing + Publishing Strategy",
         description:
-          "Everything in the Core Bundle, plus two bonus masterclasses: a deep-dive into citation databases (Google Scholar, Scopus, WoS) and a publishing strategy session built for Nigerian and African researchers.",
+          "Everything in the Core Bundle, plus two advanced masterclasses: a deep-dive into citation databases (Google Scholar, Scopus, WoS) and a publishing strategy session built for Nigerian and African researchers.",
         recommended: false,
         isSolo:      false,
         savingsLabel: "Save 42%",
@@ -310,7 +310,7 @@ export const digitalVisibilityClinic = {
     {
       question: "What is the difference between a module and a bundle?",
       answer:
-        "A module is a single 2-hour live workshop focused on one specific tool — ORCID, LinkedIn, or WordPress. A bundle is a package of multiple modules sold together at a significant discount. The Core Bundle includes all three core modules (ORCID + LinkedIn + WordPress). The Pro Bundle adds two bonus masterclasses on top.",
+        "A module is a single 2-hour live workshop focused on one specific tool or topic. A bundle is a package of multiple modules sold together at a significant discount. The Core Bundle includes the three foundational modules (ORCID + LinkedIn + WordPress). The Pro Bundle adds two advanced masterclasses on top.",
     },
     {
       question: "Can I buy just one module?",
@@ -325,7 +325,7 @@ export const digitalVisibilityClinic = {
     {
       question: "What does the Pro Bundle add on top of the Core?",
       answer:
-        "The Pro Bundle adds two bonus masterclasses: Indexing (a deep-dive into Google Scholar, Scopus, and Web of Science optimisation) and Publishing Strategy (a frank session on navigating the global publishing system as a Nigerian and African researcher). It also adds a Full Scholarly Intelligence Report, a private strategy call, 90-day post-clinic WhatsApp mentorship, and a premium mailed certificate.",
+        "The Pro Bundle adds two advanced masterclasses: Indexing (a deep-dive into Google Scholar, Scopus, and Web of Science optimisation) and Publishing Strategy (a frank session on navigating the global publishing system as a Nigerian and African researcher). It also adds a Full Scholarly Intelligence Report, a private strategy call, 90-day post-clinic WhatsApp mentorship, and a premium mailed certificate.",
     },
     {
       question: "Is this relevant to my field of research?",
