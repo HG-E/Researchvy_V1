@@ -390,7 +390,7 @@ export const digitalVisibilityClinic = {
     sessionDuration:      "2 hours",
     weeklyTaskHours:      1,
     totalCommitment:      "3 core sessions over 3 weeks (5 sessions for Pro Bundle)",
-    spotsAlreadyFilled:   4,
+    spotsAlreadyFilled:   0,
     status:               "open" as "open" | "closing-soon" | "full" | "tba",
     tracks: {
       wednesday: {
