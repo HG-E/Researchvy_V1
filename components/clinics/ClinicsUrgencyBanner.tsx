@@ -1,4 +1,5 @@
-import { MessageCircle, Clock, Users, Calendar, AlertTriangle } from "lucide-react";
+import Link from "next/link";
+import { MessageCircle, Clock, Users, Calendar, AlertTriangle, ArrowRight } from "lucide-react";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -133,6 +134,27 @@ export async function ClinicsUrgencyBanner({
         {/* Right — CTA or Waitlist */}
         {isFull ? (
           <WaitlistForm clinicSlug={digitalVisibilityClinic.slug} />
+        ) : isDeadlineClose ? (
+          <div className="shrink-0 flex flex-col items-start lg:items-end gap-2">
+            <Link
+              href="/clinics/checkout?bundle=core"
+              className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold text-white whitespace-nowrap transition-opacity hover:opacity-90"
+              style={{ backgroundColor: "#DC2626" }}
+            >
+              Enroll Before Registration Closes
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a
+              href={buildWhatsAppUrl("Digital Visibility Clinic August 2026 cohort")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium transition-opacity hover:opacity-75"
+              style={{ color: "#4B5563" }}
+            >
+              <MessageCircle className="h-3.5 w-3.5" />
+              or message us on WhatsApp
+            </a>
+          </div>
         ) : (
           <div className="shrink-0 flex flex-col items-start lg:items-end gap-2">
             <a
@@ -140,17 +162,13 @@ export async function ClinicsUrgencyBanner({
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold text-white whitespace-nowrap transition-opacity hover:opacity-90"
-              style={{ backgroundColor: isDeadlineClose ? "#DC2626" : isClosingSoon ? "#D97706" : "#2563EB" }}
+              style={{ backgroundColor: isClosingSoon ? "#D97706" : "#2563EB" }}
             >
               <MessageCircle className="h-4 w-4" />
-              {isDeadlineClose
-                ? `Register Before ${formatCohortDate(cohort.registrationDeadline)}`
-                : isClosingSoon
-                ? "Reserve My Spot Now"
-                : "Join August Cohort"}
+              {isClosingSoon ? "Reserve My Spot Now" : "Join August Cohort"}
             </a>
             <p className="text-xs" style={{ color: "#4B5563" }}>
-              {isDeadlineClose ? "Registration closes in less than a week" : "Choose your track after sign-up"}
+              Choose your track after sign-up
             </p>
           </div>
         )}
