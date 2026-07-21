@@ -360,7 +360,7 @@ export const digitalVisibilityClinic = {
     {
       question: "How much does the clinic cost?",
       answer:
-        "Individual modules start from $79 USD (₦42,000 NGN) per module. The Core Bundle (ORCID + LinkedIn + WordPress — 3 sessions) is $149 USD (₦85,000 NGN). The Pro Bundle (all 5 core sessions) is $239 USD (₦130,000 NGN). Group discounts apply for 3 or more researchers from the same institution.",
+        "Individual modules start from $79 USD per module. The Core Bundle (ORCID + LinkedIn + WordPress — 3 sessions) is $149 USD. The Pro Bundle (all 5 core sessions) is $239 USD. NGN-equivalent prices are shown at the live exchange rate on the pricing page. Group discounts apply for 3 or more researchers from the same institution.",
     },
     {
       question: "Can my institution or department fund my place?",

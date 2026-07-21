@@ -1,6 +1,7 @@
 ﻿import { generatePageMetadata } from "@/lib/seo/metadata";
 import { PrintButton } from "@/components/resources/PrintButton";
 import { digitalVisibilityClinic } from "@/constants/clinics";
+import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
 
 const cohort = digitalVisibilityClinic.nextCohort;
 const cohortMonth = new Date(cohort.tracks.wednesday.startDate).toLocaleString("en-GB", { month: "long", year: "numeric" });
@@ -11,7 +12,8 @@ export const metadata = generatePageMetadata({
   path: "/resources/institutional-letter",
 });
 
-export default function InstitutionalLetterPage() {
+export default async function InstitutionalLetterPage() {
+  const rate = await getUsdNgnRate();
   return (
     <div className="min-h-screen py-14 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-4xl">
@@ -155,19 +157,19 @@ export default function InstitutionalLetterPage() {
                 <div className="space-y-1.5 text-xs" style={{ color: "#6B7280" }}>
                   <p>
                     <strong style={{ color: "#374151" }}>Single Module (per session):</strong>{" "}
-                    $79 USD / ₦42,000 NGN
+                    $79 USD / {formatNgn(usdToNgn(79, rate))} NGN
                   </p>
                   <p>
                     <strong style={{ color: "#374151" }}>DVC Core Bundle</strong>{" "}
                     <span style={{ color: "#10B981" }}>(most popular — 3 core sessions)</span>
                     <strong style={{ color: "#374151" }}>:</strong>{" "}
-                    $149 USD / ₦85,000 NGN
+                    $149 USD / {formatNgn(usdToNgn(149, rate))} NGN
                   </p>
                   <p>
                     <strong style={{ color: "#374151" }}>DVC Pro Bundle</strong>{" "}
                     <span>(5 core sessions total)</span>
                     <strong style={{ color: "#374151" }}>:</strong>{" "}
-                    $239 USD / ₦130,000 NGN
+                    $239 USD / {formatNgn(usdToNgn(239, rate))} NGN
                   </p>
                   <p className="mt-2 pt-2 border-t" style={{ borderColor: "#E2E8F0" }}>
                     Group enrolments of 3–10 researchers receive a 15% institutional discount.

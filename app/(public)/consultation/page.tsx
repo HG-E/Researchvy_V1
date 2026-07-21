@@ -3,6 +3,7 @@ import { CheckCircle2, MessageCircle, Mail, Clock, ArrowRight, Target, Zap, Shie
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { buildWhatsAppUrl } from "@/config/site";
 import { siteConfig } from "@/config/site";
+import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
 
 export const metadata = generatePageMetadata({
   title: "Book a Free Strategy Call — Researchvy",
@@ -55,7 +56,8 @@ const WHAT_YOU_GET = [
   { icon: Clock,   label: "20 minutes maximum",   detail: "Focused, structured, and respectful of your time" },
 ];
 
-export default function ConsultationPage() {
+export default async function ConsultationPage() {
+  const rate = await getUsdNgnRate();
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
@@ -233,7 +235,7 @@ export default function ConsultationPage() {
               Want the work done for you, not explained to you?
             </p>
             <p className="text-xs leading-relaxed" style={{ color: "#6B7280" }}>
-              Private Consulting delivers a written audit, optimised profiles, and your strategy — 1-on-1, bespoke to your gaps. Starts at $209 / ₦205,000.
+              Private Consulting delivers a written audit, optimised profiles, and your strategy — 1-on-1, bespoke to your gaps. Starts at $209 / {formatNgn(usdToNgn(209, rate))}.
             </p>
           </div>
           <Link

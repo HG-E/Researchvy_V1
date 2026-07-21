@@ -1,6 +1,7 @@
 ﻿import Link from "next/link";
 import { ArrowRight, GraduationCap, Building2, BarChart2, CheckCircle2 } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
 
 export const metadata = generatePageMetadata({
   title: "For Researchers — Researchvy",
@@ -63,7 +64,8 @@ const FREE_TOOLS = [
   },
 ];
 
-export default function ResearchersHubPage() {
+export default async function ResearchersHubPage() {
+  const rate = await getUsdNgnRate();
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
@@ -230,7 +232,7 @@ export default function ResearchersHubPage() {
               The same expertise as the Clinic, applied exclusively to your profile. Written audit,
               optimised accounts, and a strategy document — delivered 1-on-1, on your schedule.
               Starts at{" "}
-              <strong style={{ color: "#A78BFA" }}>$209 / ₦205,000</strong>.
+              <strong style={{ color: "#A78BFA" }}>$209 / {formatNgn(usdToNgn(209, rate))}</strong>.
             </p>
           </div>
           <Link

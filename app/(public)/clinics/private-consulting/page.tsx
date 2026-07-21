@@ -3,6 +3,7 @@ import { ArrowRight, MessageCircle, CheckCircle, User, ArrowLeft, Clock, Zap, St
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/config/site";
+import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
 
 export const metadata = generatePageMetadata({
   title: "Private Consulting — Researchvy",
@@ -17,7 +18,6 @@ const PACKAGES = [
     name:     "Visibility Starter",
     tagline:  "Fix the foundations",
     usd:      209,
-    ngn:      205_000,
     color:    "#10B981",
     recommended: false,
     deliverables: [
@@ -27,7 +27,6 @@ const PACKAGES = [
       "Written gap report with prioritised action list",
       "30-min debrief call — walk through findings together",
     ],
-    whatsappMessage: "Hi, I'd like to start with the Visibility Starter package ($209 / ₦205,000) from Researchvy Private Consulting. What are the next steps and current availability?",
     cta: "Start with Starter",
     ideal: "Best for researchers who need their core discovery profiles fixed fast.",
   },
@@ -36,7 +35,6 @@ const PACKAGES = [
     name:     "Visibility Growth",
     tagline:  "Build the system",
     usd:      309,
-    ngn:      305_000,
     color:    "#2563EB",
     recommended: true,
     deliverables: [
@@ -46,7 +44,6 @@ const PACKAGES = [
       "Platform-by-platform reach plan (Mendeley, SSRN, preprints, open-access repos)",
       "60-min strategy call — implementation roadmap, questions, priorities",
     ],
-    whatsappMessage: "Hi, I'd like to start with the Visibility Growth package ($309 / ₦305,000) from Researchvy Private Consulting. What are the next steps and current availability?",
     cta: "Start with Growth",
     ideal: "Best for researchers publishing consistently but not reaching outside their immediate circle.",
   },
@@ -55,7 +52,6 @@ const PACKAGES = [
     name:     "Visibility Authority",
     tagline:  "Lead your field",
     usd:      509,
-    ngn:      505_000,
     color:    "#8B5CF6",
     recommended: false,
     deliverables: [
@@ -65,41 +61,11 @@ const PACKAGES = [
       "Citation growth roadmap — strategic, ethical citation-building over 12 months",
       "Ongoing advisory — one monthly 30-min check-in call for 3 months after delivery",
     ],
-    whatsappMessage: "Hi, I'd like to start with the Visibility Authority package ($509 / ₦505,000) from Researchvy Private Consulting. What are the next steps and current availability?",
     cta: "Start with Authority",
     ideal: "Best for researchers aiming for global recognition, keynote invitations, and career-defining impact.",
   },
 ];
 
-const HOW_DIFFERENT = [
-  {
-    label: "Cohort Clinic",
-    href:  "/clinics/digital-visibility-clinic",
-    color: "#10B981",
-    points: [
-      "Up to 20 researchers per cohort",
-      "Fixed 5-session live curriculum",
-      "Group discussions and shared learning",
-      "Scheduled start dates — join the next cohort",
-      "₦85,000 – ₦130,000",
-    ],
-    cta: "View the Clinic",
-  },
-  {
-    label: "Private Consulting",
-    href:  "#packages",
-    color: "#8B5CF6",
-    points: [
-      "1-on-1 — only you, only your gaps",
-      "Bespoke to your profile, field, and career stage",
-      "Deliverables-based — you receive a written strategy, not just sessions",
-      "Start anytime — no cohort schedule to join",
-      "₦205,000 – ₦505,000",
-    ],
-    cta: "See Packages",
-    current: true,
-  },
-];
 
 const PROCESS_STEPS = [
   {
@@ -163,7 +129,39 @@ const OBJECTIONS = [
   },
 ];
 
-export default function PrivateConsultingPage() {
+export default async function PrivateConsultingPage() {
+  const rate = await getUsdNgnRate();
+
+  const HOW_DIFFERENT = [
+    {
+      label: "Cohort Clinic",
+      href:  "/clinics/digital-visibility-clinic",
+      color: "#10B981",
+      points: [
+        "Up to 20 researchers per cohort",
+        "Fixed 5-session live curriculum",
+        "Group discussions and shared learning",
+        "Scheduled start dates — join the next cohort",
+        `${formatNgn(usdToNgn(149, rate))} – ${formatNgn(usdToNgn(239, rate))}`,
+      ],
+      cta: "View the Clinic",
+    },
+    {
+      label: "Private Consulting",
+      href:  "#packages",
+      color: "#8B5CF6",
+      points: [
+        "1-on-1 — only you, only your gaps",
+        "Bespoke to your profile, field, and career stage",
+        "Deliverables-based — you receive a written strategy, not just sessions",
+        "Start anytime — no cohort schedule to join",
+        `${formatNgn(usdToNgn(209, rate))} – ${formatNgn(usdToNgn(509, rate))}`,
+      ],
+      cta: "See Packages",
+      current: true,
+    },
+  ];
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <script
@@ -222,7 +220,7 @@ export default function PrivateConsultingPage() {
           </p>
           <p className="text-sm mb-6" style={{ color: "#6B7280" }}>
             Packages from{" "}
-            <strong style={{ color: "#A78BFA" }}>$209 / ₦205,000</strong>
+            <strong style={{ color: "#A78BFA" }}>$209 / {formatNgn(usdToNgn(209, rate))}</strong>
             {" "}· Written deliverables + debrief call · Start anytime
           </p>
           <div className="flex flex-wrap gap-3">
@@ -384,7 +382,7 @@ export default function PrivateConsultingPage() {
                       <span className="text-base font-semibold" style={{ color: "#6B7280" }}>USD</span>
                     </div>
                     <p className="text-sm font-semibold mt-0.5" style={{ color: pkg.color }}>
-                      ₦{pkg.ngn.toLocaleString("en-NG")} NGN
+                      {formatNgn(usdToNgn(pkg.usd, rate))} NGN
                     </p>
                     <div className="pt-3 mt-3 border-t" style={{ borderColor: "#CBD5E1" }}>
                       <div className="flex items-center gap-1.5">
@@ -411,7 +409,7 @@ export default function PrivateConsultingPage() {
 
                   {/* CTA */}
                   <a
-                    href={`https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(pkg.whatsappMessage)}`}
+                    href={`https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(`Hi, I'd like to start with the ${pkg.name} package ($${pkg.usd} / ${formatNgn(usdToNgn(pkg.usd, rate))}) from Researchvy Private Consulting. What are the next steps and current availability?`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white"

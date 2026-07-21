@@ -1,10 +1,12 @@
 import { ImageResponse } from "next/og";
+import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
 
 export const size         = { width: 1200, height: 630 };
 export const contentType  = "image/png";
 export const alt          = "Private Consulting — Researchvy";
 
-export default function Image() {
+export default async function Image() {
+  const rate        = await getUsdNgnRate();
   const accentColor = "#8B5CF6";
 
   return new ImageResponse(
@@ -102,7 +104,7 @@ export default function Image() {
             { label: "Packages",   value: "3 tiers" },
             { label: "Format",     value: "1-on-1" },
             { label: "Delivery",   value: "5–7 working days" },
-            { label: "Starting",   value: "$209 / ₦205,000" },
+            { label: "Starting",   value: `$209 / ${formatNgn(usdToNgn(209, rate))}` },
           ].map(({ label, value }) => (
             <div key={label} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               <span style={{ color: "#4B5563", fontSize: "11px", fontWeight: "600", fontFamily: "Arial, sans-serif", textTransform: "uppercase", letterSpacing: "0.08em" }}>

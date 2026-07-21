@@ -2,6 +2,7 @@
 import { BarChart2, GraduationCap, FileImage, Stethoscope, Network, ArrowRight, Clock } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { siteConfig } from "@/config/site";
+import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
 
 export const metadata = generatePageMetadata({
   title: "The Researchvy Ecosystem",
@@ -109,7 +110,7 @@ const DIVISION_DETAILS: DivisionDetail[] = [
     cardStats: [
       { label: "Cohort size",    value: "≤20 researchers" },
       { label: "Sessions",       value: "5 live sessions" },
-      { label: "Starting from",  value: "$79 USD · ₦75,000 NGN" },
+      { label: "Starting from",  value: "$79 USD" },
     ],
   },
   {
@@ -132,7 +133,20 @@ const DIVISION_DETAILS: DivisionDetail[] = [
   },
 ];
 
-export default function EcosystemPage() {
+export default async function EcosystemPage() {
+  const rate = await getUsdNgnRate();
+  const divisions = DIVISION_DETAILS.map((d) =>
+    d.id === "clinics"
+      ? {
+          ...d,
+          cardStats: d.cardStats.map((s) =>
+            s.label === "Starting from"
+              ? { ...s, value: `$79 USD · ${formatNgn(usdToNgn(79, rate))} NGN` }
+              : s
+          ),
+        }
+      : d
+  );
   return (
     <div style={{ backgroundColor: "#FFFFFF", color: "#111827" }}>
 
@@ -216,7 +230,7 @@ export default function EcosystemPage() {
       {/* ── Divisions — alternating layout ─────────────────── */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl space-y-20 sm:space-y-28">
-          {DIVISION_DETAILS.map((division, i) => {
+          {divisions.map((division, i) => {
             const accent = DIVISION_ACCENTS[division.id] ?? "#2563EB";
             const Icon   = DIVISION_ICONS[division.id] ?? BarChart2;
             const isLive = LIVE_DIVISIONS.has(division.id);
