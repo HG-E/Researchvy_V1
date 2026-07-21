@@ -42,11 +42,23 @@ const components = {
   ),
 };
 
+// Escape { } outside fenced and inline code blocks so MDX never evaluates
+// {expression} patterns — prevents env var exfiltration if DB content is tampered with.
+function sanitizeMdxSource(source: string): string {
+  const parts = source.split(/(```[\s\S]*?```|`[^`\n]+`)/g);
+  return parts
+    .map((part, i) =>
+      i % 2 === 1 ? part : part.replace(/\{/g, "&#123;").replace(/\}/g, "&#125;")
+    )
+    .join("");
+}
+
 export async function MdxContent({ source }: { source: string }) {
+  const safeSource = sanitizeMdxSource(source);
   return (
     <div className="mdx-prose">
       <MDXRemote
-        source={source}
+        source={safeSource}
         options={{
           mdxOptions: {
             remarkPlugins: [remarkGfm],

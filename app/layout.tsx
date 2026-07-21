@@ -4,6 +4,7 @@ import "./globals.css";
 import "@/styles/animations.css";
 import { siteConfig } from "@/config/site";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
+import { safeJsonLd } from "@/lib/seo/safeJsonLd";
 import { PostHogProvider } from "@/components/analytics/PostHogProvider";
 import { CookieBanner } from "@/components/analytics/CookieBanner";
 import { ServiceWorkerRegistration } from "@/components/pwa/ServiceWorkerRegistration";
@@ -109,16 +110,16 @@ export default function RootLayout({
         {/* Runtime env injection — runs before the JS bundle, overrides baked-in build values */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.__ENV__=${JSON.stringify(runtimeEnv)};`,
+            __html: `window.__ENV__=${safeJsonLd(runtimeEnv)};`,
           }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(organizationSchema()) }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema()) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteSchema()) }}
         />
         <PostHogProvider>
           <ServiceWorkerRegistration />

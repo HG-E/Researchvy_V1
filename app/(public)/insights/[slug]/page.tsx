@@ -15,6 +15,7 @@ import { ArticleViewTracker } from "@/components/insights/ArticleViewTracker";
 import { ScrollTriggerLeadCapture } from "@/components/insights/ScrollTriggerLeadCapture";
 import { siteConfig } from "@/config/site";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo/schemas";
+import { safeJsonLd } from "@/lib/seo/safeJsonLd";
 import type { InsightCategory } from "@/types";
 
 // Revalidate every hour; admin saves also trigger on-demand revalidation
@@ -114,11 +115,11 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
     <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema(insight)) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(articleSchema(insight)) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema([
           { name: "Home",     url: siteConfig.url },
           { name: "Insights", url: `${siteConfig.url}/insights` },
           { name: insight.title, url: `${siteConfig.url}/insights/${slug}` },

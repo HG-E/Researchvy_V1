@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createSupabaseAdminClient, getServerUser } from "@/lib/auth/supabase";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { opportunitySchema, breadcrumbSchema } from "@/lib/seo/schemas";
+import { safeJsonLd } from "@/lib/seo/safeJsonLd";
 import { siteConfig } from "@/config/site";
 import { Calendar, ExternalLink, Banknote, ArrowLeft, Plane, Globe, Users } from "lucide-react";
 import { SaveOpportunityButton } from "@/components/opportunities/SaveOpportunityButton";
@@ -18,7 +19,8 @@ function renderBody(raw: string): { __html: string } {
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     .replace(/`([^`]+)`/g, "<code>$1</code>")
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, text, url) => {
-      const safe = /^https?:\/\//i.test(url) ? url : "#";
+      // Encode " in URL to prevent attribute injection (href="..." breakout)
+      const safe = /^https?:\/\//i.test(url) ? url.replace(/"/g, "&quot;") : "#";
       return `<a href="${safe}" target="_blank" rel="noopener noreferrer" style="color:#60A5FA;text-decoration:underline;">${text}</a>`;
     })
     .replace(/^[-*+]\s+(.+)$/gm, "• $1")
@@ -132,8 +134,8 @@ export default async function OpportunityDetailPage({ params }: Props) {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldOpp) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldBreadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(ldOpp) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(ldBreadcrumb) }} />
     <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12">
         {/* Back */}

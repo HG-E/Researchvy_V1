@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle, Award, Users, Monitor, Clock, Zap } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { courseSchema, breadcrumbSchema, faqSchema } from "@/lib/seo/schemas";
+import { safeJsonLd } from "@/lib/seo/safeJsonLd";
 import { siteConfig } from "@/config/site";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { SessionAccordion } from "@/components/clinics/SessionAccordion";
@@ -48,15 +49,15 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
     <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema()) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(courseSchema()) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(clinic.faq)) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqSchema(clinic.faq)) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema([
           { name: "Home",    url: siteConfig.url },
           { name: "Clinics", url: `${siteConfig.url}/clinics` },
           { name: clinic.name, url: `${siteConfig.url}/clinics/${id}` },

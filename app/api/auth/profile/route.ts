@@ -24,6 +24,18 @@ export async function PUT(req: NextRequest) {
     const safeGs   = cap(google_scholar, 200);
     const safeAff  = cap(institutional_affiliation, 200);
 
+    // Server-side URL validation — client-side Zod is easily bypassed via direct API calls
+    if (safeGs) {
+      try {
+        const u = new URL(safeGs);
+        if (!["http:", "https:"].includes(u.protocol)) {
+          return NextResponse.json({ error: "Google Scholar URL must use http or https" }, { status: 400 });
+        }
+      } catch {
+        return NextResponse.json({ error: "Google Scholar URL is not valid" }, { status: 400 });
+      }
+    }
+
     // Validate username if provided
     let safeUsername: string | null | undefined;
     if (username !== undefined) {
