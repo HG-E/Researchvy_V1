@@ -1,5 +1,6 @@
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { digitalVisibilityClinic } from "@/constants/clinics";
+import { getUsdNgnRate } from "@/lib/currency/usdNgn";
 import { ClinicFeature } from "./ClinicFeature";
 
 async function getSpotsTaken(): Promise<number> {
@@ -17,7 +18,10 @@ async function getSpotsTaken(): Promise<number> {
 }
 
 export async function ClinicFeatureWithSpots() {
-  const spotsTaken = await getSpotsTaken();
-  const spotsLeft  = Math.max(0, digitalVisibilityClinic.capacity - spotsTaken);
-  return <ClinicFeature spotsLeft={spotsLeft} />;
+  const [spotsTaken, usdNgnRate] = await Promise.all([
+    getSpotsTaken(),
+    getUsdNgnRate(),
+  ]);
+  const spotsLeft = Math.max(0, digitalVisibilityClinic.capacity - spotsTaken);
+  return <ClinicFeature spotsLeft={spotsLeft} usdNgnRate={usdNgnRate} />;
 }

@@ -7,12 +7,13 @@ import { copy } from "@/constants/copy";
 import { siteConfig, buildWhatsAppUrl } from "@/config/site";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { trackCtaClick } from "@/lib/analytics/posthog";
+import { usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
 
-export function ClinicFeature({ spotsLeft }: { spotsLeft?: number | null }) {
+export function ClinicFeature({ spotsLeft, usdNgnRate = 1620 }: { spotsLeft?: number | null; usdNgnRate?: number }) {
   const soloBundle = digitalVisibilityClinic.pricing.bundles[0];
   const isEarlyBird = new Date() < new Date(digitalVisibilityClinic.pricing.earlyBirdDeadline + "T23:59:59");
-  const ngnPrice = isEarlyBird ? soloBundle.ngn.earlyBird : soloBundle.ngn.regular;
   const usdPrice = isEarlyBird ? soloBundle.usd.earlyBird : soloBundle.usd.regular;
+  const ngnPrice = usdToNgn(usdPrice, usdNgnRate);
 
   const urgencyColor =
     spotsLeft == null ? "#F59E0B" :
@@ -248,7 +249,7 @@ export function ClinicFeature({ spotsLeft }: { spotsLeft?: number | null }) {
                   From{" "}
                   <strong style={{ color: "#111827" }}>${usdPrice} USD</strong>
                   {" / "}
-                  <strong style={{ color: "#10B981" }}>₦{ngnPrice.toLocaleString("en-NG")} NGN</strong>
+                  <strong style={{ color: "#10B981" }}>{formatNgn(ngnPrice)} NGN</strong>
                   {isEarlyBird ? " · Early bird pricing." : " per module."}
                 </p>
                 {/* ROI anchor — Item 14 */}

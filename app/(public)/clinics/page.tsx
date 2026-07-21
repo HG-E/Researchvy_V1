@@ -11,6 +11,7 @@ import { TestimonialsCarousel } from "@/components/clinics/TestimonialsCarousel"
 import { ClinicFAQ } from "@/components/clinics/ClinicFAQ";
 import { EarlyBirdCountdown } from "@/components/clinics/EarlyBirdCountdown";
 import { ClinicsUrgencyBanner } from "@/components/clinics/ClinicsUrgencyBanner";
+import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
 
 export const revalidate = 300; // Revalidate every 5 min so spot counts stay fresh
 
@@ -24,10 +25,6 @@ function formatCohortDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 }
 
-function formatNGN(amount: number) {
-  return `₦${amount.toLocaleString("en-NG")}`;
-}
-
 function formatUSD(amount: number) {
   return `$${amount}`;
 }
@@ -36,6 +33,8 @@ export default async function ClinicsPage() {
   const cohort        = digitalVisibilityClinic.nextCohort;
   const isEarlyBird   = new Date() < new Date(cohort.earlyBirdDeadline + "T23:59:59");
   const earlyBirdDate = formatCohortDate(cohort.earlyBirdDeadline);
+
+  const rate = await getUsdNgnRate();
 
   const { bundles } = digitalVisibilityClinic.pricing;
 
@@ -308,7 +307,7 @@ export default async function ClinicsPage() {
               Choose Your Transformation
             </h2>
             <p className="text-sm max-w-xl mx-auto" style={{ color: "#6B7280" }}>
-              All prices shown in USD and NGN.{isEarlyBird && ` Early bird saves up to $90 / ₦45,000 on the Pro Bundle — closes ${earlyBirdDate}.`}
+              All prices shown in USD and NGN equivalent.{isEarlyBird && ` Early bird saves up to $90 / ${formatNgn(usdToNgn(90, rate))} on the Pro Bundle — closes ${earlyBirdDate}.`}
             </p>
           </div>
 
@@ -317,7 +316,7 @@ export default async function ClinicsPage() {
             {bundles.map((bundle) => {
               const accent  = BUNDLE_ACCENTS[bundle.id] ?? "#2563EB";
               const usdSave = bundle.usd.regular - bundle.usd.earlyBird;
-              const ngnSave = bundle.ngn.regular - bundle.ngn.earlyBird;
+              const ngnSave = usdToNgn(usdSave, rate);
 
               return (
                 <div
@@ -372,7 +371,7 @@ export default async function ClinicsPage() {
                           </span>
                         </div>
                         <p className="text-sm font-semibold mt-0.5" style={{ color: accent }}>
-                          {bundle.isSolo ? "from " : ""}{formatNGN(isEarlyBird ? bundle.ngn.earlyBird : bundle.ngn.regular)} NGN
+                          {bundle.isSolo ? "from " : ""}{formatNgn(usdToNgn(isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular, rate))} NGN
                         </p>
                       </div>
 
@@ -387,11 +386,11 @@ export default async function ClinicsPage() {
                             <p className="text-xs" style={{ color: "#6B7280" }}>
                               After {earlyBirdDate}:{" "}
                               <span style={{ textDecoration: "line-through", color: "#6B7280" }}>
-                                {formatUSD(bundle.usd.regular)} / {formatNGN(bundle.ngn.regular)}
+                                {formatUSD(bundle.usd.regular)} / {formatNgn(usdToNgn(bundle.usd.regular, rate))}
                               </span>
                             </p>
                             <p className="text-xs font-semibold mt-0.5" style={{ color: "#10B981" }}>
-                              {bundle.savingsLabel} · Save {formatUSD(usdSave)} · {formatNGN(ngnSave)}
+                              {bundle.savingsLabel} · Save {formatUSD(usdSave)} · {formatNgn(ngnSave)}
                             </p>
                           </>
                         ) : (
@@ -613,8 +612,8 @@ export default async function ClinicsPage() {
                 <p className="text-sm font-bold mb-4" style={{ color: "#111827" }}>Group pricing — per seat</p>
                 <div className="space-y-3">
                   {[
-                    { range: "3–10 researchers",  saving: "15% off every seat",  example: `Core Bundle: ${formatNGN(Math.round(85000 * 0.85))} / seat` },
-                    { range: "11–20 researchers", saving: "25% off every seat",  example: `Core Bundle: ${formatNGN(Math.round(85000 * 0.75))} / seat` },
+                    { range: "3–10 researchers",  saving: "15% off every seat",  example: `Core Bundle: ${formatNgn(Math.round(usdToNgn(149, rate) * 0.85))} / seat` },
+                    { range: "11–20 researchers", saving: "25% off every seat",  example: `Core Bundle: ${formatNgn(Math.round(usdToNgn(149, rate) * 0.75))} / seat` },
                     { range: "20+ / full dept",   saving: "Custom institutional rate", example: "Contact us for a tailored quote" },
                   ].map(({ range, saving, example }) => (
                     <div
@@ -706,7 +705,7 @@ export default async function ClinicsPage() {
                 <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
                   If you want bespoke 1-on-1 work on your specific profile — no fixed schedule,
                   no group sessions, just your gaps fixed and your strategy written for you —
-                  our Private Consulting track starts at <strong style={{ color: "#111827" }}>$209 / ₦205,000</strong>.
+                  our Private Consulting track starts at <strong style={{ color: "#111827" }}>$209 / {formatNgn(usdToNgn(209, rate))}</strong>.
                 </p>
               </div>
               <Link
