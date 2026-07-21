@@ -194,7 +194,7 @@ export function ImpactNumbers() {
             Invisible research can&rsquo;t save lives.{" "}
             <span style={{ color: "#FCD34D" }}>Visible research can.</span>
           </p>
-          <p className="text-sm" style={{ color: "#4B5563" }}>
+          <p className="text-sm" style={{ color: "#9CA3AF" }}>
             Here&rsquo;s who benefits when your work breaks out of the journal and into the world.
           </p>
         </motion.div>

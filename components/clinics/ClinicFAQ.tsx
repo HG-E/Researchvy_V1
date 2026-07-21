@@ -45,7 +45,7 @@ function AccordionItem({
           className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-colors duration-200"
           style={{
             backgroundColor: isOpen ? "rgba(37,99,235,0.2)" : "#1E293B",
-            color: isOpen ? "#60A5FA" : "#4B5563",
+            color: isOpen ? "#60A5FA" : "#CBD5E1",
             border: isOpen ? "1px solid rgba(37,99,235,0.4)" : "1px solid #283548",
           }}
         >
@@ -54,7 +54,7 @@ function AccordionItem({
 
         <span
           className="flex-1 text-sm font-semibold leading-snug"
-          style={{ color: isOpen ? "#F9FAFB" : "#D1D5DB" }}
+          style={{ color: "#111827" }}
         >
           {item.question}
         </span>
@@ -65,7 +65,7 @@ function AccordionItem({
           style={{
             transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
             backgroundColor: isOpen ? "rgba(37,99,235,0.15)" : "#1E293B",
-            color: isOpen ? "#60A5FA" : "#4B5563",
+            color: isOpen ? "#60A5FA" : "#CBD5E1",
           }}
           aria-hidden="true"
         >
