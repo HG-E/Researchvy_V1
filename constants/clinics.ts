@@ -383,7 +383,7 @@ export const digitalVisibilityClinic = {
   // ⚠  Do NOT modify sessionTime, timezone, or track dates.
   nextCohort: {
     id:                   "cohort-2026-august",
-    registrationDeadline: "2026-07-26",
+    registrationDeadline: "2026-07-30",
     earlyBirdDeadline:    "2026-07-18",
     sessionTime:          "5:00–7:00 PM EST / 10:00 PM–12:00 AM WAT",
     timezone:             "EST (UTC−5) / WAT (UTC+1)",
