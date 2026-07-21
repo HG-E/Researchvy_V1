@@ -101,6 +101,7 @@ export function CheckoutForm({
       });
       const data = await res.json();
       if (res.status === 409 && data.orderId) {
+        setSubmitted(true);
         router.replace(`/clinics/checkout/${data.orderId}`);
         return;
       }
@@ -253,7 +254,7 @@ export function CheckoutForm({
                   value={userEmail}
                   readOnly
                   className="w-full rounded-xl px-4 py-2.5 text-sm border"
-                  style={{ backgroundColor: "#0A1120", borderColor: "#E2E8F0", color: "#4B5563" }}
+                  style={{ backgroundColor: "#F1F5F9", borderColor: "#E2E8F0", color: "#6B7280", cursor: "default" }}
                 />
                 <p className="text-[11px] mt-1" style={{ color: "#4B5563" }}>
                   From your account · receipt will be sent here

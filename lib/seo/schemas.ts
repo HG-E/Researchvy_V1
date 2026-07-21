@@ -81,7 +81,10 @@ export function articleSchema(insight: Insight) {
     },
     publisher:         { "@id": `${base}/#organization` },
     mainEntityOfPage:  { "@type": "WebPage", "@id": `${base}/insights/${insight.slug}` },
-    keywords:          insight.tags.join(", "),
+    keywords:          [
+      ...(insight.seo_keywords ? insight.seo_keywords.split(",").map((k: string) => k.trim()) : []),
+      ...insight.tags,
+    ].filter((v, i, arr) => v && arr.indexOf(v) === i).join(", "),
     articleSection:    insight.category.replace(/-/g, " "),
     inLanguage:        "en-US",
   };

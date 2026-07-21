@@ -18,6 +18,7 @@ import {
   Award,
   ClipboardCheck,
   Target,
+  Bell,
 } from "lucide-react";
 
 const NAV = [
@@ -27,6 +28,7 @@ const NAV = [
   { label: "Orders",          href: "/admin/orders",              icon: ShoppingBag,     exact: false },
   { label: "Events",        href: "/admin/events",               icon: CalendarDays,    exact: false },
   { label: "Enquiries",     href: "/admin/enquiries",            icon: Inbox,           exact: false },
+  { label: "Waitlist",      href: "/admin/waitlist",             icon: Bell,            exact: false },
   { label: "Partnerships",  href: "/admin/partnerships",         icon: Handshake,       exact: false },
   { label: "Opportunities", href: "/admin/opportunities",        icon: Globe,           exact: false },
   { label: "Content",       href: "/admin/content",              icon: FileText,        exact: false },

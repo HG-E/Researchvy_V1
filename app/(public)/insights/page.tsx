@@ -5,6 +5,8 @@ import { getInsights } from "@/lib/cms/mdx";
 import { InsightGrid } from "@/components/insights/InsightGrid";
 import { CategoryFilter } from "@/components/insights/CategoryFilter";
 import { ArrowRight } from "lucide-react";
+import { siteConfig } from "@/config/site";
+import { safeJsonLd } from "@/lib/seo/safeJsonLd";
 import type { InsightCategory } from "@/types";
 
 export const revalidate = 3600;
@@ -27,8 +29,32 @@ export default async function InsightsPage({ searchParams }: PageProps) {
     limit: 100,
   });
 
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type":    "CollectionPage",
+    "@id":      `${siteConfig.url}/insights`,
+    name:       "Researchvy Insights",
+    description: "Institutional-grade articles on scholarly visibility, bibliometrics, research communication, and the systems that shape academic impact.",
+    url:        `${siteConfig.url}/insights`,
+    publisher:  { "@id": `${siteConfig.url}/#organization` },
+    mainEntity: {
+      "@type":            "ItemList",
+      itemListElement:    insights.map((insight, index) => ({
+        "@type":    "ListItem",
+        position:   index + 1,
+        url:        `${siteConfig.url}/insights/${insight.slug}`,
+        name:       insight.title,
+        description: insight.excerpt,
+      })),
+    },
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFFFFF" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(collectionSchema) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
         {/* Page header */}

@@ -6,3 +6,5 @@ Disallow: /dashboard/
 Disallow: /api/
 
 Allow: /
+
+Sitemap: https://researchvy.com/sitemap.xml

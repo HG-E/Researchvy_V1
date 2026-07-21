@@ -2,6 +2,7 @@ import { MessageCircle, Clock, Users, Calendar, AlertTriangle } from "lucide-rea
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { buildWhatsAppUrl } from "@/config/site";
+import { WaitlistForm } from "@/components/clinics/WaitlistForm";
 
 function formatCohortDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
@@ -53,7 +54,7 @@ export async function ClinicsUrgencyBanner({
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-3 mb-5">
             <p className="text-base font-bold" style={{ color: "#111827" }}>
-              August 2026 Cohort: Now Open
+              {isFull ? "August 2026 Cohort: Registration Closed" : "August 2026 Cohort: Now Open"}
             </p>
             <span
               className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
@@ -129,8 +130,10 @@ export async function ClinicsUrgencyBanner({
           </div>
         </div>
 
-        {/* Right — CTA */}
-        {!isFull && (
+        {/* Right — CTA or Waitlist */}
+        {isFull ? (
+          <WaitlistForm clinicSlug={digitalVisibilityClinic.slug} />
+        ) : (
           <div className="shrink-0 flex flex-col items-start lg:items-end gap-2">
             <a
               href={buildWhatsAppUrl("Digital Visibility Clinic August 2026 cohort")}

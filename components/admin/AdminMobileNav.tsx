@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   Menu, X, LayoutDashboard, Inbox, Handshake,
   FileText, BookOpen, Users, BarChart2, LogOut, Shield, GraduationCap, Layers,
-  CalendarDays, Globe, Award, ClipboardCheck, Target, ShoppingBag,
+  CalendarDays, Globe, Award, ClipboardCheck, Target, ShoppingBag, Bell,
 } from "lucide-react";
 import { Logo } from "@/components/common/Logo";
 
@@ -18,6 +18,7 @@ const NAV = [
   { label: "Events",           href: "/admin/events",       Icon: CalendarDays,     exact: false },
   { label: "Opportunities", href: "/admin/opportunities", Icon: Globe,           exact: false },
   { label: "Enquiries",     href: "/admin/enquiries",     Icon: Inbox,           exact: false },
+  { label: "Waitlist",      href: "/admin/waitlist",      Icon: Bell,            exact: false },
   { label: "Partnerships", href: "/admin/partnerships", Icon: Handshake,       exact: false },
   { label: "Content",      href: "/admin/content",      Icon: FileText,        exact: false },
   { label: "Clinics",      href: "/admin/clinics",      Icon: BookOpen,        exact: false },

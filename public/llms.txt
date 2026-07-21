@@ -34,6 +34,120 @@
 - Research Intelligence: https://researchvy.com/intelligence
 - Contact: https://researchvy.com/contact
 
+## Insights Articles
+
+The following articles cover scholarly visibility, bibliometrics, research communication, and academic discoverability. All are free to read.
+
+### Scholarly Visibility
+
+- Understanding Research Visibility: Why Most Researchers Are Invisible and What to Do About It
+  URL: https://researchvy.com/insights/understanding-research-visibility
+  Summary: Most researchers are invisible online — not because their work is weak, but because they have never been taught how scholarly discovery systems actually work. This article explains the core visibility gap and the systematic approach to closing it.
+
+- Google Scholar Profile Optimisation: The Complete Researcher's Guide
+  URL: https://researchvy.com/insights/google-scholar-profile-optimisation
+  Summary: Your Google Scholar profile is often the first thing a funder, collaborator, or journalist sees. Most researchers leave it broken. Step-by-step guide to fixing it completely — photo, name, affiliations, keyword research interests, publications, and citation alerts.
+
+- ORCID and the Architecture of Scholarly Identity
+  URL: https://researchvy.com/insights/orcid-and-scholarly-identity
+  Summary: ORCID is not just a profile — it is the backbone of your permanent scholarly identity. Covers account creation, visibility settings, trusted-source imports, institutional connection, and the quarterly maintenance habit every researcher needs.
+
+- Open Access and Research Discoverability: What Every Researcher Needs to Know
+  URL: https://researchvy.com/insights/open-access-and-research-discoverability
+  Summary: Open Access is one of the most powerful visibility levers available to any researcher. Explains green vs gold OA, preprint strategy, institutional repositories, and how to use OA mandates to your advantage.
+
+- Academic Digital Identity: Building a Coherent Online Scholarly Presence
+  URL: https://researchvy.com/insights/academic-digital-identity
+  Summary: Scattered profiles, inconsistent names, and unconnected accounts create a fragmented identity that costs you citations and credibility. How to build a coherent academic digital presence across ORCID, Google Scholar, ResearchGate, LinkedIn, and institutional profiles.
+
+### Research Intelligence
+
+- Bibliometrics and Citation Intelligence: What Every Researcher Must Know
+  URL: https://researchvy.com/insights/bibliometrics-and-citation-intelligence
+  Summary: Citation counts are just the surface. Bibliometrics is the science beneath — h-index, impact factor, i10-index, and citation network analysis. Covers strategic positioning and the limitations of metrics that still govern academic careers.
+
+- How to Grow Your h-index: Legitimate Strategies That Actually Work
+  URL: https://researchvy.com/insights/how-to-grow-your-h-index
+  Summary: Your h-index is not a fixed number — it is a metric you can systematically improve. How researchers have raised theirs by 3–6 points through strategic visibility work, without gaming the system.
+
+- Scopus Author Profile Optimisation: How to Fix, Verify, and Leverage Your Profile
+  URL: https://researchvy.com/insights/scopus-author-profile-optimisation
+  Summary: Your Scopus profile is used in hiring panels, grant evaluations, and institutional reporting. If it is wrong — and most are — it is actively damaging your career. How to find, merge, verify, and optimise your Scopus author profile.
+
+- Altmetrics and the New Landscape of Research Impact
+  URL: https://researchvy.com/insights/altmetrics-and-research-impact
+  Summary: Citations measure how scholars engage with your work. Altmetrics measure how everyone else does. What altmetrics are, how the Altmetric score works, and how researchers can use them to demonstrate real-world influence to funders and institutions.
+
+- Citation Network Analysis: How to Map Your Research Influence and Identify Strategic Opportunities
+  URL: https://researchvy.com/insights/citation-network-analysis
+  Summary: Your citations are a map of intellectual influence. How to use VOSviewer, Scopus, and OpenAlex to perform co-citation analysis, identify strategic collaboration opportunities, and understand your field's knowledge structure.
+
+### Scholarly Communication
+
+- Writing Visual Abstracts: How to Make Your Research Impossible to Ignore
+  URL: https://researchvy.com/insights/writing-visual-abstracts
+  Summary: A visual abstract is not a summary — it is a doorway. Researchers who create them see dramatically higher engagement. Covers format, design principles, tools, and how to adapt for different disciplines and journals.
+
+- How to Write a Lay Summary That Actually Reaches the Public
+  URL: https://researchvy.com/insights/writing-lay-summaries
+  Summary: Most researchers write lay summaries that only other researchers can understand. Practical guide to writing one that reaches practitioners, policymakers, and the public who need your findings.
+
+- Policy Briefs for Researchers: Getting Your Findings Into Decisions That Matter
+  URL: https://researchvy.com/insights/policy-briefs-for-researchers
+  Summary: Your research could change policy. Most of it never will — not because it isn't good enough, but because researchers have never learned how to write for decision-makers. Structure, length, language, and distribution for effective policy briefs.
+
+- Social Media for Researchers: A Platform-by-Platform Strategy That Actually Works
+  URL: https://researchvy.com/insights/social-media-for-researchers
+  Summary: Most researchers treat social media as a broadcast channel. Platform-by-platform guide — LinkedIn, Twitter/X, ResearchGate — on how to use it as a discovery and connection tool without it consuming your time.
+
+- Knowledge Translation: How to Bridge the Gap Between Research and Real-World Impact
+  URL: https://researchvy.com/insights/knowledge-translation-for-researchers
+  Summary: Research that never changes practice is research that failed the second half of its job. Knowledge translation frameworks, dissemination strategies, and how to ensure findings reach the people and systems they were meant to serve.
+
+### Modern Scholarly Systems
+
+- How AI Is Reshaping Academic Research Discovery, And What It Means for Your Visibility
+  URL: https://researchvy.com/insights/ai-and-research-discovery
+  Summary: AI-powered discovery tools — Semantic Scholar, OpenAlex, Elicit, Consensus — are changing how research is found, synthesised, and cited. How researchers can optimise their work for semantic search and the next generation of AI-driven discovery systems.
+
+- Research Data Management and Scholarly Visibility: The Connection Most Researchers Miss
+  URL: https://researchvy.com/insights/research-data-management-and-visibility
+  Summary: Your datasets are citable, discoverable, and increasingly evaluated by funders and institutions. How FAIR data principles, data repositories (Zenodo, Figshare, Dryad), and data citations build scholarly visibility beyond publications.
+
+- Open Science Infrastructure: The Platforms and Systems Every Researcher Should Know
+  URL: https://researchvy.com/insights/open-science-infrastructure
+  Summary: Open Science is a set of platforms, protocols, and identifiers that form the backbone of modern scholarly communication. Practical map of ORCID, DOI/Crossref, open repositories, preprint servers, and discovery systems.
+
+- Preprint Servers and the Changing Pace of Knowledge Dissemination
+  URL: https://researchvy.com/insights/preprint-servers-and-knowledge-dissemination
+  Summary: Peer review takes months. Preprint servers have changed the pace of scientific communication. Which servers matter for which disciplines (arXiv, bioRxiv, SSRN, PsyArXiv, AfricArXiv), and how strategic preprint deposition builds visibility before and after peer review.
+
+- DOIs, Crossref, and the Infrastructure of Scholarly Attribution
+  URL: https://researchvy.com/insights/dois-and-scholarly-attribution
+  Summary: Every citation that counts, counts because of a DOI. How DOIs, Crossref metadata, DataCite, and persistent identifiers form the backbone of scholarly attribution — and what researchers need to know to ensure every citation is tracked and credited.
+
+### Institutional Positioning
+
+- Institutional Research Visibility Strategy: How Universities Can Stop Leaving Impact on the Table
+  URL: https://researchvy.com/insights/institutional-research-visibility-strategy
+  Summary: Most institutions invest millions in research and almost nothing in making that research visible. How universities and research offices can build a strategic visibility programme that improves rankings, policy influence, and global scholarly standing.
+
+- Research Visibility for Early-Career Researchers: Building Your Profile from Day One
+  URL: https://researchvy.com/insights/early-career-researcher-visibility
+  Summary: The visibility decisions you make in your first three years compound for the rest of your career. What PhD students, postdocs, and early-career researchers should do — and avoid — to build a strong profile from day one.
+
+- Departmental Bibliometrics: How to Read and Improve Your Department's Research Performance
+  URL: https://researchvy.com/insights/departmental-bibliometrics
+  Summary: Your department's bibliometric profile affects your funding, recruitment, and career prospects. How to interpret departmental citation data, identify performance gaps, and develop strategies to improve scholarly visibility at the department level.
+
+- Research Excellence Frameworks and Institutional Positioning: What Researchers Must Understand
+  URL: https://researchvy.com/insights/research-excellence-frameworks
+  Summary: National research assessment exercises — REF (UK), ERA (Australia), PBRF (New Zealand) — determine funding allocations worth billions. How they work, how visibility infrastructure shapes output evaluation, and what individual researchers can do to contribute.
+
+- Collaborative Research Networks and Institutional Impact: How to Build the Partnerships That Matter
+  URL: https://researchvy.com/insights/collaborative-research-networks
+  Summary: Research impact is increasingly a team sport. How institutions and researchers build strategic collaborative networks — co-authorship, international partnerships, interdisciplinary collaboration — that systematically improve citation impact and global relevance.
+
 ## Contact
 
 - General: info@researchvy.com

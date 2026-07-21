@@ -1426,6 +1426,87 @@ export async function sendScorecardLeadEmail(opts: {
   });
 }
 
+// ── Clinic waitlist confirmation ──────────────────────────────────────────────
+
+export async function sendWaitlistConfirmationEmail(opts: {
+  to:        string;
+  firstName: string;
+}) {
+  const clinicUrl = `${SITE_URL}/clinics/digital-visibility-clinic`;
+  const waText    = encodeURIComponent("Hi, I just joined the waitlist for the Digital Visibility Clinic. I'd love to know when the next cohort opens.");
+  const waUrl     = `https://wa.me/${siteConfig.whatsapp.number}?text=${waText}`;
+
+  const r = await resend();
+  await Promise.all([
+    r.emails.send({
+      from:    FROM_TEAM,
+      to:      [opts.to],
+      replyTo: REPLY_TO,
+      subject: `You're on the waitlist — Digital Visibility Clinic`,
+      html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">
+    Researchvy
+  </p>
+
+  <div style="background:#0F172A;border:1px solid #1E293B;border-top:3px solid #2563EB;border-radius:20px;padding:40px;margin-bottom:24px">
+    <p style="color:#93C5FD;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">
+      Waitlist Confirmed
+    </p>
+    <h1 style="color:#F9FAFB;font-size:24px;font-weight:700;margin:0 0 16px;line-height:1.3">
+      You're on the list, ${opts.firstName}.
+    </h1>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">
+      The current cohort is full. We'll email you as soon as registration opens for the next Digital Visibility Clinic cohort — you'll be among the first to know.
+    </p>
+
+    <div style="background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.2);border-radius:12px;padding:18px;margin-bottom:28px">
+      <p style="color:#93C5FD;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px">
+        What happens next
+      </p>
+      <ul style="color:#9CA3AF;font-size:14px;line-height:2;margin:0;padding-left:18px">
+        <li>You'll get a priority email the moment the next cohort opens</li>
+        <li>Waitlist members get first access — before the general public</li>
+        <li>No payment required until you choose to enroll</li>
+      </ul>
+    </div>
+
+    <a href="${waUrl}" target="_blank"
+       style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:14px 28px;border-radius:12px;margin-bottom:12px">
+      Message us on WhatsApp →
+    </a>
+    <br>
+    <a href="${clinicUrl}"
+       style="display:inline-block;color:#6B7280;text-decoration:none;font-size:13px;padding:8px 0">
+      Learn more about the clinic →
+    </a>
+  </div>
+
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0;line-height:1.7">
+      Researchvy · Making researchers discoverable, globally.<br>
+      <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">researchvy.com</a>
+      &nbsp;·&nbsp;
+      <a href="${clinicUrl}" style="color:#4B5563;text-decoration:none">Digital Visibility Clinic</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>`,
+    }),
+    r.emails.send({
+      from:    FROM_TEAM,
+      to:      [ADMIN_CC],
+      subject: `New waitlist signup: ${opts.firstName} <${opts.to}>`,
+      html:    `<p>New waitlist signup:<br><strong>${opts.firstName}</strong> — ${opts.to}</p><p>Digital Visibility Clinic</p>`,
+    }),
+  ]);
+}
+
 // ── Scorecard admin alert (to researchvy@gmail.com) ───────────────────────────
 
 export async function sendScorecardAdminAlert(opts: {

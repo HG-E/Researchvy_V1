@@ -425,6 +425,77 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
               </div>
             </div>
 
+            {/* From Our Research */}
+            <section>
+              <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#2563EB" }}>
+                From Our Research
+              </p>
+              <h2
+                className="text-2xl font-bold mb-6"
+                style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
+              >
+                Read Before You Decide
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  {
+                    href:    "/insights/understanding-research-visibility",
+                    label:   "Scholarly Visibility",
+                    title:   "Why Most Researchers Are Invisible",
+                    excerpt: "The structural reasons your work isn't reaching the people who should cite it — and the systematic approach to fixing it.",
+                  },
+                  {
+                    href:    "/insights/google-scholar-profile-optimisation",
+                    label:   "Profile Optimisation",
+                    title:   "Google Scholar: The Complete Guide",
+                    excerpt: "Every element of your Google Scholar profile and how to get each one right, from photo to research interests to publication management.",
+                  },
+                  {
+                    href:    "/insights/orcid-and-scholarly-identity",
+                    label:   "Scholarly Identity",
+                    title:   "ORCID and Your Permanent Research Identity",
+                    excerpt: "How to build and maintain the identifier that anchors your entire scholarly output across every database and institution.",
+                  },
+                  {
+                    href:    "/insights/how-to-grow-your-h-index",
+                    label:   "Research Metrics",
+                    title:   "How to Grow Your h-index Legitimately",
+                    excerpt: "Proven, ethical strategies to systematically improve your h-index through better visibility — without gaming the system.",
+                  },
+                ].map(({ href, label, title, excerpt }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="group rounded-2xl border p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
+                  >
+                    <span
+                      className="inline-block text-[10px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full mb-3"
+                      style={{ backgroundColor: "rgba(37,99,235,0.08)", color: "#2563EB" }}
+                    >
+                      {label}
+                    </span>
+                    <p
+                      className="text-sm font-bold mb-1.5 group-hover:text-[#2563EB] transition-colors"
+                      style={{ fontFamily: "var(--font-serif)", color: "#111827" }}
+                    >
+                      {title}
+                    </p>
+                    <p className="text-xs leading-relaxed" style={{ color: "#4B5563" }}>
+                      {excerpt}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+              <Link
+                href="/insights"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold mt-5 transition-colors hover:text-[#1D4ED8]"
+                style={{ color: "#2563EB" }}
+              >
+                Browse all 25 articles <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </section>
+
           </div>
 
           {/* Sticky enquiry sidebar — desktop only */}
