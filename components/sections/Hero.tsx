@@ -7,25 +7,47 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, MessageCircle, CheckCircle2 } from "lucide-react";
 import { trackCtaClick } from "@/lib/analytics/posthog";
 import { buildWhatsAppUrl } from "@/config/site";
+import { digitalVisibilityClinic } from "@/constants/clinics";
 
 const ROTATE_INTERVAL = 2600;
 const ROTATING_WORDS = ["seen.", "read.", "cited.", "used.", "lived.", "social.", "human."];
 
-const TRUST_POINTS = [
-  "38+ countries",
-  "Certified on completion",
-  "Live cohort · ≤20 researchers",
-  "No fluff — measurable results",
-];
+const cohort        = digitalVisibilityClinic.nextCohort;
+const cohortIsOpen  = cohort.status === "open";
+const deadlineMs    = new Date(cohort.registrationDeadline + "T23:59:59").getTime();
+
+function getDaysLeft() {
+  return Math.max(0, Math.ceil((deadlineMs - Date.now()) / (1000 * 60 * 60 * 24)));
+}
+
+const TRUST_POINTS = cohortIsOpen
+  ? [
+      "August 2026 cohort",
+      "Certified on completion",
+      "Live cohort · ≤20 researchers",
+      `Registration closes ${new Date(cohort.registrationDeadline).toLocaleDateString("en-GB", { day: "numeric", month: "long" })}`,
+    ]
+  : [
+      "38+ countries",
+      "Certified on completion",
+      "Live cohort · ≤20 researchers",
+      "No fluff — measurable results",
+    ];
 
 
 export function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
+  const [daysLeft,  setDaysLeft]  = useState(getDaysLeft);
 
   useEffect(() => {
     const t = setInterval(() => {
       setWordIndex((i) => (i + 1) % ROTATING_WORDS.length);
     }, ROTATE_INTERVAL);
+    return () => clearInterval(t);
+  }, []);
+
+  useEffect(() => {
+    const t = setInterval(() => setDaysLeft(getDaysLeft()), 60_000);
     return () => clearInterval(t);
   }, []);
 
@@ -67,13 +89,15 @@ export function Hero() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold tracking-widest uppercase border mb-7"
               style={{
-                color: "#2563EB",
-                borderColor: "rgba(37,99,235,0.2)",
-                backgroundColor: "rgba(37,99,235,0.05)",
+                color: cohortIsOpen ? "#DC2626" : "#2563EB",
+                borderColor: cohortIsOpen ? "rgba(220,38,38,0.25)" : "rgba(37,99,235,0.2)",
+                backgroundColor: cohortIsOpen ? "rgba(220,38,38,0.05)" : "rgba(37,99,235,0.05)",
               }}
             >
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#10B981" }} />
-              Connect. Communicate. Collaborate.
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: cohortIsOpen ? "#DC2626" : "#10B981" }} />
+              {cohortIsOpen
+                ? `August 2026 Cohort · ${daysLeft} day${daysLeft === 1 ? "" : "s"} to enrol`
+                : "Connect. Communicate. Collaborate."}
             </motion.p>
 
             {/* Headline */}
@@ -139,25 +163,38 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.32 }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 max-w-xs mx-auto sm:max-w-none lg:mx-0"
             >
-              <a
-                href={buildWhatsAppUrl("Digital Visibility Clinic enrollment")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2.5 rounded-xl px-7 py-4 text-base font-semibold text-white active:scale-[0.97]"
-                style={{
-                  backgroundColor: "#2563EB",
-                  transition: "background-color 140ms ease, transform 100ms",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
-                onFocus={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
-                onBlur={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
-                onClick={() => trackCtaClick("Join the Clinic", "hero", "/clinics")}
-              >
-                <MessageCircle className="h-4 w-4 flex-shrink-0" />
-                Join the Clinic
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              {cohortIsOpen ? (
+                <Link
+                  href="/clinics/checkout?bundle=core"
+                  className="group inline-flex items-center justify-center gap-2.5 rounded-xl px-7 py-4 text-base font-semibold text-white active:scale-[0.97]"
+                  style={{ backgroundColor: "#2563EB", transition: "background-color 140ms ease, transform 100ms" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                  onFocus={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
+                  onBlur={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                  onClick={() => trackCtaClick("Enrol in August Cohort", "hero", "/clinics/checkout")}
+                >
+                  Enrol in August Cohort
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              ) : (
+                <a
+                  href={buildWhatsAppUrl("Digital Visibility Clinic enrollment")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center gap-2.5 rounded-xl px-7 py-4 text-base font-semibold text-white active:scale-[0.97]"
+                  style={{ backgroundColor: "#2563EB", transition: "background-color 140ms ease, transform 100ms" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                  onFocus={(e) => (e.currentTarget.style.backgroundColor = "#1D4ED8")}
+                  onBlur={(e) => (e.currentTarget.style.backgroundColor = "#2563EB")}
+                  onClick={() => trackCtaClick("Join the Clinic", "hero", "/clinics")}
+                >
+                  <MessageCircle className="h-4 w-4 flex-shrink-0" />
+                  Join the Clinic
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+              )}
 
               <Link
                 href="/resources/visibility-scorecard"
@@ -300,10 +337,14 @@ export function Hero() {
               style={{ backgroundColor: "#FFFFFF", borderColor: "#E5E7EB" }}
             >
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#10B981" }} />
-                <p className="text-xs font-semibold" style={{ color: "#111827" }}>Live cohort open</p>
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: cohortIsOpen ? "#DC2626" : "#10B981" }} />
+                <p className="text-xs font-semibold" style={{ color: "#111827" }}>
+                  {cohortIsOpen ? "August 2026 · Closes July 30" : "Live cohort open"}
+                </p>
               </div>
-              <p className="text-xs" style={{ color: "#4B5563" }}>≤20 researchers per batch</p>
+              <p className="text-xs" style={{ color: "#4B5563" }}>
+                {cohortIsOpen ? `${daysLeft} day${daysLeft === 1 ? "" : "s"} remaining · ≤20 spots` : "≤20 researchers per batch"}
+              </p>
             </motion.div>
           </motion.div>
 
