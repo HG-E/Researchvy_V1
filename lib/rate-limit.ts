@@ -45,6 +45,9 @@ export function getRateLimitKey(req: Request, prefix: string): string {
   const headers   = req.headers as unknown as Headers;
   const forwarded = headers.get("x-forwarded-for");
   const realIp    = headers.get("x-real-ip");
-  const ip        = forwarded?.split(",")[0]?.trim() ?? realIp ?? "unknown";
+  // x-real-ip is set by Vercel/Nginx and cannot be spoofed by clients.
+  // Fall back to the RIGHTMOST XFF entry (added by the outermost trusted proxy),
+  // never the leftmost which is attacker-controlled.
+  const ip        = realIp ?? forwarded?.split(",").at(-1)?.trim() ?? "unknown";
   return `${prefix}:${ip}`;
 }

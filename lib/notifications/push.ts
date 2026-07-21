@@ -66,9 +66,21 @@ export async function sendPushToUser(userId: string, payload: PushPayload) {
 export async function sendPushToAll(payload: PushPayload) {
   ensureVapid();
   const admin = createSupabaseAdminClient();
-  const { data: subs } = await admin
-    .from("push_subscriptions")
-    .select("id, user_id, endpoint, p256dh, auth_key");
+  // Paginate to avoid loading unbounded rows into memory
+  type Sub = { id: string; user_id: string; endpoint: string; p256dh: string; auth_key: string };
+  const PAGE_SIZE = 500;
+  let from = 0;
+  const subs: Sub[] = [];
+  while (true) {
+    const { data: page } = await admin
+      .from("push_subscriptions")
+      .select("id, user_id, endpoint, p256dh, auth_key")
+      .range(from, from + PAGE_SIZE - 1);
+    if (!page?.length) break;
+    subs.push(...(page as Sub[]));
+    if (page.length < PAGE_SIZE) break;
+    from += PAGE_SIZE;
+  }
 
   if (!subs?.length) return;
 

@@ -54,7 +54,14 @@ export async function updateSession(request: NextRequest) {
 
   if (user && isAuthPage) {
     const next = request.nextUrl.searchParams.get("next");
-    const dest  = next && next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard";
+    // Decode before validating so %2F%2F (encoded //) can't bypass the check
+    let dest = "/dashboard";
+    if (next) {
+      try {
+        const decoded = decodeURIComponent(next);
+        if (decoded.startsWith("/") && !decoded.startsWith("//")) dest = decoded;
+      } catch { /* malformed encoding — keep default */ }
+    }
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = dest;
     redirectUrl.search   = "";

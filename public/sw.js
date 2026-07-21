@@ -1,4 +1,4 @@
-const CACHE_NAME = "researchvy-v2";
+const CACHE_NAME = "researchvy-v3";
 const OFFLINE_URL = "/offline";
 
 const PRECACHE = [
@@ -32,10 +32,12 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(event.request.url);
 
-  // Skip cross-origin, API routes, and Next.js internals
+  // Skip cross-origin, API routes, Next.js internals, and authenticated areas
   if (url.origin !== self.location.origin) return;
   if (url.pathname.startsWith("/api/")) return;
   if (url.pathname.startsWith("/_next/")) return;
+  // Never cache dashboard/admin — always serve fresh to avoid stale auth state
+  if (url.pathname.startsWith("/dashboard") || url.pathname.startsWith("/admin")) return;
 
   event.respondWith(
     fetch(event.request)
@@ -60,8 +62,10 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
-// Allow the client to trigger immediate activation without waiting for all tabs to close
+// Allow the client to trigger immediate activation without waiting for all tabs to close.
+// Origin check prevents cross-origin windows from forcing unexpected SW updates.
 self.addEventListener("message", (event) => {
+  if (event.origin !== self.location.origin) return;
   if (event.data?.type === "SKIP_WAITING") self.skipWaiting();
 });
 

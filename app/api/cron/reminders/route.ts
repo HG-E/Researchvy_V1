@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { isCronAuthorized } from "@/lib/auth/cronAuth";
 import { sendPushToUser } from "@/lib/notifications/push";
-
-function isAuthorized(req: NextRequest): boolean {
-  const secret = process.env.CRON_SECRET;
-  if (!secret) return false; // Block all requests when secret is not configured
-  return (req.headers.get("authorization") ?? "").replace("Bearer ", "") === secret;
-}
 
 function dayWindow(daysFromNow: number): { start: string; end: string } {
   const start = new Date();
@@ -23,7 +18,7 @@ interface EventRow    { id: string; title: string; slug: string | null; start_da
 interface EventPref   { user_id: string; email_events: boolean; push_events: boolean; inapp_events: boolean; }
 
 export async function GET(req: NextRequest) {
-  if (!isAuthorized(req)) {
+  if (!isCronAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

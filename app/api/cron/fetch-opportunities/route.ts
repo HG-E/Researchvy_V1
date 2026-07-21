@@ -13,14 +13,9 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { isCronAuthorized } from "@/lib/auth/cronAuth";
 import { FEED_SOURCES, RELEVANCE_KEYWORDS, SKIP_KEYWORDS } from "@/lib/feeds/sources";
 import type { FeedSource } from "@/lib/feeds/sources";
-
-function isAuthorized(req: NextRequest): boolean {
-  const secret = process.env.CRON_SECRET;
-  if (!secret) return false; // Block all requests when secret is not configured
-  return (req.headers.get("authorization") ?? "").replace("Bearer ", "") === secret;
-}
 
 // ── RSS parser (zero external dependency fallback using fetch + regex) ──────────
 // We use rss-parser if available; if import fails we fall back to basic parsing.
@@ -39,8 +34,15 @@ function isSafeFeedUrl(url: string): boolean {
     const { protocol, hostname } = new URL(url);
     if (!["http:", "https:"].includes(protocol)) return false;
     // Block internal/metadata IPs (SSRF protection)
-    const blocked = ["localhost","127.0.0.1","0.0.0.0","169.254.169.254","metadata.google.internal"];
-    if (blocked.some((b) => hostname === b || hostname.startsWith("192.168.") || hostname.startsWith("10."))) return false;
+    const blocked = ["localhost","127.0.0.1","::1","0.0.0.0","169.254.169.254","metadata.google.internal"];
+    if (blocked.some((b) => hostname === b)) return false;
+    // Block private IPv4 ranges (RFC 1918 + link-local)
+    if (
+      hostname.startsWith("192.168.") ||
+      hostname.startsWith("10.") ||
+      hostname.startsWith("169.254.") ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(hostname)
+    ) return false;
     return true;
   } catch { return false; }
 }
@@ -105,7 +107,7 @@ function extractDeadline(text: string): string | null {
 export const maxDuration = 60;
 
 export async function GET(req: NextRequest) {
-  if (!isAuthorized(req)) {
+  if (!isCronAuthorized(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

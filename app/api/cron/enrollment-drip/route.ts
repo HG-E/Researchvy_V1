@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
+import { isCronAuthorized } from "@/lib/auth/cronAuth";
 import { buildWhatsAppUrl } from "@/config/site";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import {
@@ -8,12 +9,6 @@ import {
   sendSession1ReminderEmail,
   sendWhatToPrepareEmail,
 } from "@/lib/email/index";
-
-function isAuthorized(req: NextRequest): boolean {
-  const secret = process.env.CRON_SECRET;
-  if (!secret) return false; // Block all requests when secret is not configured
-  return (req.headers.get("authorization") ?? "").replace("Bearer ", "") === secret;
-}
 
 const COHORT     = digitalVisibilityClinic.nextCohort;
 const COHORT_START_WED = new Date(COHORT.tracks.wednesday.startDate);
@@ -33,7 +28,7 @@ function sessionTime(track: string) {
 }
 
 export async function GET(req: NextRequest) {
-  if (!isAuthorized(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!isCronAuthorized(req)) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const admin   = createSupabaseAdminClient();
   const now     = new Date();
