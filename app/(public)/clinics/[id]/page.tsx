@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, CheckCircle, Award, Users, Monitor, Clock, Zap }
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { courseSchema, breadcrumbSchema, faqSchema } from "@/lib/seo/schemas";
 import { safeJsonLd } from "@/lib/seo/safeJsonLd";
+import { getUsdNgnRate, usdToNgn, formatNgn } from "@/lib/currency/usdNgn";
 import { siteConfig } from "@/config/site";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { SessionAccordion } from "@/components/clinics/SessionAccordion";
@@ -41,8 +42,9 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
 
   const isEarlyBird = new Date() < new Date(clinic.pricing.earlyBirdDeadline + "T23:59:59");
   const firstBundle = clinic.pricing.bundles[0];
+  const rate = await getUsdNgnRate();
   const earlyBirdLabel = isEarlyBird
-    ? `From ₦${firstBundle.ngn.earlyBird.toLocaleString("en-NG")} / $${firstBundle.usd.earlyBird} · early bird`
+    ? `From ${formatNgn(usdToNgn(firstBundle.usd.earlyBird, rate))} / $${firstBundle.usd.earlyBird} · early bird`
     : undefined;
 
   return (
@@ -372,7 +374,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                         )}
                         <p className="text-xs font-semibold mb-0.5" style={{ color: accent }}>{bundle.name}</p>
                         <p className="text-lg font-bold" style={{ color: "#111827" }}>
-                          ₦{(isEarlyBird ? bundle.ngn.earlyBird : bundle.ngn.regular).toLocaleString("en-NG")}
+                          {formatNgn(usdToNgn(isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular, rate))}
                         </p>
                         <p className="text-xs" style={{ color: "#6B7280" }}>
                           ${isEarlyBird ? bundle.usd.earlyBird : bundle.usd.regular} USD{isEarlyBird ? " · early bird" : ""}
@@ -409,7 +411,7 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                   <p className="text-sm leading-relaxed" style={{ color: "#6B7280" }}>
                     Same expertise, applied exclusively to your profile. Written audit, optimised accounts,
                     and a live debrief call — no cohort schedule. Start anytime. From{" "}
-                    <strong style={{ color: "#A78BFA" }}>$209 / ₦205,000</strong>.
+                    <strong style={{ color: "#A78BFA" }}>$209 / {formatNgn(usdToNgn(209, rate))}</strong>.
                   </p>
                 </div>
                 <Link
