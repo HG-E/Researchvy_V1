@@ -46,6 +46,19 @@ async function getSubmittedOrderCount(): Promise<number> {
   }
 }
 
+async function getPendingParticipantsCount(): Promise<number> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const { count } = await admin
+      .from("clinic_participants")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "pending");
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
 export default async function AdminLayout({
   children,
 }: {
@@ -57,16 +70,17 @@ export default async function AdminLayout({
   const { allowed } = await requireRole(user.id, "admin");
   if (!allowed) redirect("/dashboard");
 
-  const [pendingCount, newScorecardCount, submittedOrderCount] = await Promise.all([
+  const [pendingCount, newScorecardCount, submittedOrderCount, pendingParticipantsCount] = await Promise.all([
     getPendingCount(),
     getNewScorecardCount(),
     getSubmittedOrderCount(),
+    getPendingParticipantsCount(),
   ]);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row" style={{ backgroundColor: "#080E1A" }}>
       {/* Mobile top bar + drawer */}
-      <AdminMobileNav email={user.email ?? ""} submittedOrderCount={submittedOrderCount} />
+      <AdminMobileNav email={user.email ?? ""} submittedOrderCount={submittedOrderCount} pendingParticipantsCount={pendingParticipantsCount} />
 
       {/* Desktop sidebar */}
       <aside
@@ -82,7 +96,7 @@ export default async function AdminLayout({
           </div>
         </div>
 
-        <AdminNav pendingCount={pendingCount} newScorecardCount={newScorecardCount} submittedOrderCount={submittedOrderCount} />
+        <AdminNav pendingCount={pendingCount} newScorecardCount={newScorecardCount} submittedOrderCount={submittedOrderCount} pendingParticipantsCount={pendingParticipantsCount} />
 
         {/* Footer: identity + sign out */}
         <div className="px-4 py-3 border-t space-y-1" style={{ borderColor: "#1E293B" }}>

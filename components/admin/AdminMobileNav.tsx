@@ -29,7 +29,7 @@ const NAV = [
   { label: "Analytics",    href: "/admin/analytics",    Icon: BarChart2,       exact: false },
 ];
 
-export function AdminMobileNav({ email, submittedOrderCount = 0 }: { email: string; submittedOrderCount?: number }) {
+export function AdminMobileNav({ email, submittedOrderCount = 0, pendingParticipantsCount = 0 }: { email: string; submittedOrderCount?: number; pendingParticipantsCount?: number }) {
   const [open, setOpen] = useState(false);
   const pathname        = usePathname();
   const router          = useRouter();
@@ -114,6 +114,7 @@ export function AdminMobileNav({ email, submittedOrderCount = 0 }: { email: stri
           {NAV.map(({ label, href, Icon, exact }) => {
             const active    = exact ? pathname === href : pathname.startsWith(href);
             const isOrders  = href === "/admin/orders";
+            const isClinics = href === "/admin/clinics";
             return (
               <Link
                 key={href}
@@ -131,6 +132,14 @@ export function AdminMobileNav({ email, submittedOrderCount = 0 }: { email: stri
                 )}
                 <Icon className="h-4 w-4 flex-shrink-0" style={{ color: active ? "#60A5FA" : "#4B5563" }} />
                 <span className="flex-1">{label}</span>
+                {isClinics && pendingParticipantsCount > 0 && (
+                  <span
+                    className="text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none"
+                    style={{ backgroundColor: "rgba(245,158,11,0.2)", color: "#FCD34D" }}
+                  >
+                    {pendingParticipantsCount}
+                  </span>
+                )}
                 {isOrders && submittedOrderCount > 0 && (
                   <span
                     className="text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none"

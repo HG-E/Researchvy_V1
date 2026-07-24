@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ExternalLink, Clock, Monitor, Users, CheckCircle, Award, BookOpen } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink, Clock, Monitor, Users, CheckCircle, Award, BookOpen, UserCheck } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { digitalVisibilityClinic } from "@/constants/clinics";
 import { buildWhatsAppUrl } from "@/config/site";
@@ -180,14 +181,11 @@ export default async function ManageClinicsPage() {
               </div>
             </div>
 
-            {/* Enquiry link */}
+            {/* Footer: enquiry + participants */}
             <div
-              className="px-6 py-3 border-t flex items-center justify-between"
+              className="px-6 py-3 border-t flex items-center justify-between gap-4 flex-wrap"
               style={{ borderColor: "#1E293B", backgroundColor: "#080E1A" }}
             >
-              <p className="text-xs" style={{ color: "#4B5563" }}>
-                Pricing: enquiry-only via WhatsApp
-              </p>
               <a
                 href={buildWhatsAppUrl(clinic.name)}
                 target="_blank"
@@ -197,6 +195,14 @@ export default async function ManageClinicsPage() {
               >
                 Open WhatsApp →
               </a>
+              <Link
+                href="/admin/clinics/participants"
+                className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors"
+                style={{ backgroundColor: "rgba(37,99,235,0.12)", color: "#60A5FA" }}
+              >
+                <UserCheck className="h-3.5 w-3.5" />
+                Manage Participants
+              </Link>
             </div>
           </div>
         ))}

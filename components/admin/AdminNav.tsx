@@ -41,12 +41,13 @@ const NAV = [
 ];
 
 interface Props {
-  pendingCount?:          number;
-  newScorecardCount?:     number;
-  submittedOrderCount?:   number;
+  pendingCount?:             number;
+  newScorecardCount?:        number;
+  submittedOrderCount?:      number;
+  pendingParticipantsCount?: number;
 }
 
-export function AdminNav({ pendingCount = 0, newScorecardCount = 0, submittedOrderCount = 0 }: Props) {
+export function AdminNav({ pendingCount = 0, newScorecardCount = 0, submittedOrderCount = 0, pendingParticipantsCount = 0 }: Props) {
   const pathname = usePathname();
 
   return (
@@ -56,6 +57,7 @@ export function AdminNav({ pendingCount = 0, newScorecardCount = 0, submittedOrd
         const isReviewQueue = href === "/admin/review";
         const isScorecard   = href === "/admin/scorecard";
         const isOrders      = href === "/admin/orders";
+        const isClinics     = href === "/admin/clinics";
         return (
           <Link
             key={href}
@@ -93,6 +95,14 @@ export function AdminNav({ pendingCount = 0, newScorecardCount = 0, submittedOrd
                 style={{ backgroundColor: "rgba(99,102,241,0.25)", color: "#A5B4FC" }}
               >
                 {submittedOrderCount}
+              </span>
+            )}
+            {isClinics && pendingParticipantsCount > 0 && (
+              <span
+                className="text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none"
+                style={{ backgroundColor: "rgba(245,158,11,0.2)", color: "#FCD34D" }}
+              >
+                {pendingParticipantsCount}
               </span>
             )}
           </Link>
