@@ -94,7 +94,7 @@ export default async function AdminCertificatesPage() {
                     <td className="px-5 py-4 whitespace-nowrap">
                       <div className="flex items-center gap-3">
                         <Link
-                          href={`/verify/${cert.id}`}
+                          href={`/verify/${cert.certificate_number}`}
                           target="_blank"
                           className="inline-flex items-center gap-1 text-[11px] font-medium"
                           style={{ color: "#4B5563" }}

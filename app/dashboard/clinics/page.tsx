@@ -70,6 +70,19 @@ async function getUnlockedSessions(): Promise<Set<number>> {
   }
 }
 
+async function getTaskProgress(userId: string): Promise<{ total: number; done: number }> {
+  try {
+    const admin = createSupabaseAdminClient();
+    const [{ count: total }, { count: done }] = await Promise.all([
+      admin.from("clinic_session_tasks").select("*", { count: "exact", head: true }).eq("clinic_slug", CLINIC_SLUG),
+      admin.from("participant_task_progress").select("*", { count: "exact", head: true }).eq("user_id", userId),
+    ]);
+    return { total: total ?? 0, done: done ?? 0 };
+  } catch {
+    return { total: 0, done: 0 };
+  }
+}
+
 async function getEnquiryStatus(userId: string): Promise<"pending" | "contacted" | "enrolled" | null> {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase
@@ -110,11 +123,13 @@ function EnrolledPortal({
   unlockedSessions,
   sessions,
   cohort,
+  taskProgress,
 }: {
   participant:      ClinicParticipant;
   unlockedSessions: Set<number>;
   sessions:         typeof digitalVisibilityClinic.sessions;
   cohort:           typeof digitalVisibilityClinic.nextCohort;
+  taskProgress:     { total: number; done: number };
 }) {
   const bundleColor = BUNDLE_COLORS[participant.bundle] ?? "#2563EB";
   const track       = participant.track ? cohort.tracks[participant.track as "wednesday" | "sunday"] : null;
@@ -251,6 +266,38 @@ function EnrolledPortal({
         </Link>
       </div>
 
+      {/* Progress bar */}
+      {taskProgress.total > 0 && (
+        <div
+          className="rounded-2xl border p-4"
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E2E8F0" }}
+        >
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-xs font-semibold" style={{ color: "#111827" }}>Overall Progress</p>
+            <p className="text-xs font-bold tabular-nums" style={{ color: "#2563EB" }}>
+              {taskProgress.done} / {taskProgress.total} tasks
+            </p>
+          </div>
+          <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F1F5F9" }}>
+            <div
+              className="h-full rounded-full transition-all"
+              style={{
+                width: `${taskProgress.total > 0 ? Math.round((taskProgress.done / taskProgress.total) * 100) : 0}%`,
+                backgroundColor: "#2563EB",
+              }}
+            />
+          </div>
+          <div className="flex items-center justify-between mt-2">
+            <p className="text-[11px]" style={{ color: "#9CA3AF" }}>
+              {unlockedSessions.size} of {sessions.length} sessions unlocked
+            </p>
+            <p className="text-[11px]" style={{ color: "#9CA3AF" }}>
+              {taskProgress.total > 0 ? Math.round((taskProgress.done / taskProgress.total) * 100) : 0}% complete
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Sessions */}
       <div>
         <div className="flex items-center gap-2 mb-4">
@@ -383,12 +430,14 @@ export default async function MyClinicsPage() {
 
   // Active participant → full portal
   if (participant?.status === "active") {
+    const taskProgress = await getTaskProgress(user.id);
     return (
       <EnrolledPortal
         participant={participant}
         unlockedSessions={unlockedSessions}
         sessions={digitalVisibilityClinic.sessions}
         cohort={digitalVisibilityClinic.nextCohort}
+        taskProgress={taskProgress}
       />
     );
   }

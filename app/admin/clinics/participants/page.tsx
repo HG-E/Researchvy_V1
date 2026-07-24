@@ -11,12 +11,26 @@ export const metadata = generatePageMetadata({ title: "Clinic Participants — A
 async function getParticipants(): Promise<{ rows: ParticipantRow[]; error: boolean }> {
   try {
     const admin = createSupabaseAdminClient();
-    const { data, error } = await admin
-      .from("clinic_participants")
-      .select("*")
-      .order("created_at", { ascending: false });
+
+    const [{ data: participants, error }, { data: certs }] = await Promise.all([
+      admin.from("clinic_participants").select("*").order("created_at", { ascending: false }),
+      admin.from("certificates").select("recipient_email, certificate_number").eq("clinic_slug", "digital-visibility-clinic"),
+    ]);
+
     if (error) throw error;
-    return { rows: (data ?? []) as ParticipantRow[], error: false };
+
+    // Build email → cert_number lookup
+    const certMap: Record<string, string> = {};
+    for (const c of certs ?? []) {
+      certMap[(c.recipient_email as string).toLowerCase()] = c.certificate_number as string;
+    }
+
+    const rows: ParticipantRow[] = (participants ?? []).map((p: Record<string, unknown>) => ({
+      ...(p as Omit<ParticipantRow, "cert_number">),
+      cert_number: certMap[(p.email as string).toLowerCase()] ?? null,
+    }));
+
+    return { rows, error: false };
   } catch {
     return { rows: [], error: true };
   }

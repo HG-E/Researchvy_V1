@@ -32,7 +32,7 @@ export function ClinicParticipantsClient({ initial }: { initial: ParticipantRow[
 
       {/* Add form */}
       <AddClinicParticipantForm
-        onAdded={(row) => setRows((prev) => [row, ...prev])}
+        onAdded={(row) => setRows((prev) => [{ ...row, cert_number: null }, ...prev])}
       />
 
       {/* Table */}

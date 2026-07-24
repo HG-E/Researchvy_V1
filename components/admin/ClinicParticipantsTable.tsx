@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ClinicParticipantActions, type ParticipantStatus } from "./ClinicParticipantActions";
+import { IssueCertButton } from "./IssueCertButton";
 
 export interface ParticipantRow {
   id:                 string;
@@ -18,6 +19,7 @@ export interface ParticipantRow {
   approved_at:        string | null;
   approved_by:        string | null;
   notes:              string | null;
+  cert_number:        string | null;
 }
 
 const BUNDLE_COLORS: Record<string, string> = {
@@ -126,13 +128,23 @@ export function ClinicParticipantsTable({ rows: initial }: { rows: ParticipantRo
                 <td className="px-4 py-4" style={{ color: "#6B7280" }}>{fmt(p.created_at)}</td>
 
                 {/* Actions */}
-                <td className="px-4 py-4 min-w-[220px]">
+                <td className="px-4 py-4 min-w-[240px]">
                   <ClinicParticipantActions
                     id={p.id}
                     currentStatus={p.status}
                     whatsappGroupUrl={p.whatsapp_group_url}
                     onStatusChange={handleStatusChange}
                   />
+                  {p.status === "active" && (
+                    <div className="mt-2 pt-2 border-t" style={{ borderColor: "#1E293B" }}>
+                      <IssueCertButton
+                        fullName={p.full_name}
+                        email={p.email}
+                        clinicSlug="digital-visibility-clinic"
+                        initialCertNum={p.cert_number}
+                      />
+                    </div>
+                  )}
                   {p.notes && (
                     <p className="mt-2 text-[10px] italic" style={{ color: "#4B5563" }}>{p.notes}</p>
                   )}
