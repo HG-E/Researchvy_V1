@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Link from "next/link";
 import { ExternalLink, Clock, Monitor, Users, CheckCircle, Award, BookOpen, UserCheck } from "lucide-react";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import { digitalVisibilityClinic } from "@/constants/clinics";
