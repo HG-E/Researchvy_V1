@@ -15,6 +15,7 @@ import { EnquiryCard } from "@/components/clinics/EnquiryCard";
 import { CaseStudy } from "@/components/sections/CaseStudy";
 import { ClinicFAQ } from "@/components/clinics/ClinicFAQ";
 import { EarlyBirdCountdown } from "@/components/clinics/EarlyBirdCountdown";
+import { VisibilityJourneySection } from "@/components/clinics/VisibilityJourneySection";
 
 const CLINICS: Record<string, typeof digitalVisibilityClinic> = {
   [digitalVisibilityClinic.slug]: digitalVisibilityClinic,
@@ -185,6 +186,9 @@ export default async function ClinicDetailPage({ params }: { params: Promise<{ i
                 ))}
               </div>
             </section>
+
+            {/* Before / After Scorecard — measurable impact section */}
+            <VisibilityJourneySection />
 
             {/* Case study — full width, breaks out of the content column */}
             <div className="-mx-4 sm:-mx-6 lg:mx-0">

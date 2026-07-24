@@ -146,6 +146,7 @@ export const digitalVisibilityClinic = {
     "Understand how major indexing databases work and how to maximise your presence in them",
     "Navigate the global publishing landscape strategically as a Nigerian and African researcher",
     "Leave with a coherent, connected digital scholarly identity across all key platforms",
+    "Measure your exact improvement — free Visibility Scorecard before and after training",
   ],
 
   // ── Pricing ────────────────────────────────────────────────────────────────
@@ -196,6 +197,8 @@ export const digitalVisibilityClinic = {
         includes: [
           "3 live sessions + recordings (60-day access)",
           "Session workbook for each module",
+          "FREE Visibility Scorecard before training (your baseline)",
+          "FREE Visibility Scorecard after training (your proof)",
           "WhatsApp community access throughout the cohort",
           "Pre-session profile audit before Module 1",
           "Priority Q&A during all sessions",
@@ -220,6 +223,8 @@ export const digitalVisibilityClinic = {
         includes: [
           "5 live sessions + recordings (90-day access)",
           "Session workbook for each module",
+          "FREE Visibility Scorecard before training (your baseline)",
+          "FREE Visibility Scorecard after training (your proof)",
           "WhatsApp community (during cohort + 90 days post-clinic)",
           "Pre-session profile audit + Full Scholarly Intelligence Report",
           "Priority Q&A during all sessions",
@@ -293,6 +298,7 @@ export const digitalVisibilityClinic = {
 
   // ── Post-clinic benefits ────────────────────────────────────────────────────
   postClinicBenefits: [
+    "Post-training Visibility Scorecard showing your before vs. after score improvement",
     "Access to all session recordings (Core: 60 days · Pro: 90 days)",
     "Researchvy Alumni Network membership",
     "Exclusive post-clinic resource library and template pack",
