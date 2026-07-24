@@ -36,18 +36,28 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "1024x1024" }],
     shortcut: "/icon.png",
   },
+  applicationName: siteConfig.name,
   keywords: [
     "research visibility",
     "scholarly visibility",
     "research intelligence",
     "bibliometrics",
-    "discoverability",
+    "research discoverability",
     "research impact",
     "citation intelligence",
     "scholarly communication",
     "ORCID",
     "Scopus",
     "Google Scholar",
+    "h-index",
+    "academic digital identity",
+    "research profile optimisation",
+    "African researchers",
+    "Nigerian researchers",
+    "global researcher visibility",
+    "scholarly identity",
+    "open access",
+    "knowledge translation",
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
@@ -106,6 +116,16 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${lora.variable} h-full`}
     >
+      <head>
+        {/* RSS autodiscovery — research readers + AI crawlers */}
+        <link rel="alternate" type="application/rss+xml" title="Researchvy Insights" href="/feed.xml" />
+        {/* Social profile ownership — strengthens entity authority for AI/LLM attribution */}
+        <link rel="me" href="https://twitter.com/researchvy" />
+        <link rel="me" href="https://linkedin.com/company/researchvy" />
+        <link rel="me" href="https://youtube.com/@researchvy" />
+        {/* LLM content declaration */}
+        <meta name="llms-txt" content="/llms.txt" />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         {/* Runtime env injection — runs before the JS bundle, overrides baked-in build values */}
         <script

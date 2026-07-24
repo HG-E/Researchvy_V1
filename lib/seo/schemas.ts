@@ -18,27 +18,49 @@ function stripMd(text: string): string {
 
 export function organizationSchema() {
   return {
-    "@context": "https://schema.org",
-    "@type":    "Organization",
-    "@id":      `${base}/#organization`,
-    name:       siteConfig.name,
-    url:        base,
+    "@context":    "https://schema.org",
+    "@type":       "Organization",
+    "@id":         `${base}/#organization`,
+    name:          siteConfig.name,
+    alternateName: ["Researchvy Platform", "Researchvy Clinics", "Researchvy Intelligence"],
+    url:           base,
     logo: {
-      "@type":       "ImageObject",
-      url:           `${base}/images/brand/logo-icon.png`,
-      width:         512,
-      height:        512,
+      "@type":  "ImageObject",
+      url:      `${base}/images/brand/logo-icon.png`,
+      width:    512,
+      height:   512,
     },
-    description: siteConfig.description,
+    description:  siteConfig.description,
+    foundingDate: "2024",
+    areaServed: [
+      { "@type": "Place", name: "Africa" },
+      { "@type": "Place", name: "Worldwide" },
+    ],
+    knowsAbout: [
+      "Scholarly visibility",
+      "Research discoverability",
+      "Bibliometrics",
+      "Citation intelligence",
+      "ORCID",
+      "Google Scholar optimisation",
+      "Scopus author profiles",
+      "h-index improvement",
+      "Research impact",
+      "Scholarly communication",
+      "Open access publishing",
+      "Academic digital identity",
+      "Research data management",
+      "Knowledge translation",
+    ],
     sameAs: [
       siteConfig.social.twitter,
       siteConfig.social.linkedin,
       siteConfig.social.youtube,
     ],
     contactPoint: {
-      "@type":       "ContactPoint",
-      contactType:   "customer service",
-      email:         siteConfig.contact.email,
+      "@type":           "ContactPoint",
+      contactType:       "customer service",
+      email:             siteConfig.contact.email,
       availableLanguage: "English",
     },
   };
@@ -86,7 +108,17 @@ export function articleSchema(insight: Insight) {
       ...insight.tags,
     ].filter((v, i, arr) => v && arr.indexOf(v) === i).join(", "),
     articleSection:    insight.category.replace(/-/g, " "),
+    wordCount:         Math.round(insight.content.split(/\s+/).length),
     inLanguage:        "en-US",
+    speakable: {
+      "@type":      "SpeakableSpecification",
+      xpath:        ["/html/head/title", "/html/head/meta[@name='description']/@content"],
+    },
+    isAccessibleForFree: true,
+    isPartOf: {
+      "@type": "WebSite",
+      "@id":   `${base}/#website`,
+    },
   };
 }
 

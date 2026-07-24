@@ -51,7 +51,7 @@ export default function Image() {
           fontFamily: "Arial, sans-serif",
           maxWidth: "780px",
         }}>
-          Grants, fellowships, events, and learning — all in one platform built for researchers.
+          Helping researchers become globally visible, citable, and discoverable — through intelligence, training, and strategic visibility.
         </p>
       </div>
 

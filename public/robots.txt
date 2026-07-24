@@ -8,3 +8,7 @@ Disallow: /api/
 Allow: /
 
 Sitemap: https://researchvy.com/sitemap.xml
+
+# AI/LLM content manifest
+# llms.txt: https://researchvy.com/llms.txt
+# RSS feed: https://researchvy.com/feed.xml
