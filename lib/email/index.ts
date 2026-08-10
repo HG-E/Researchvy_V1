@@ -3,7 +3,8 @@
 // await these in critical paths; they must never break user-facing flows.
 
 import { digitalVisibilityClinic } from "@/constants/clinics";
-import { siteConfig } from "@/config/site";
+import { PRE_CLINIC_SESSIONS } from "@/constants/preClinic";
+import { siteConfig, buildWhatsAppUrl } from "@/config/site";
 
 const FROM_ACADEMY = "Researchvy Academy <info@researchvy.com>";
 const FROM_TEAM    = "Researchvy Team <info@researchvy.com>";
@@ -1157,6 +1158,97 @@ export async function sendRSVPConfirmation(
       &nbsp;·&nbsp;
       <a href="${SITE_URL}/events" style="color:#4B5563;text-decoration:none">Browse Events</a>
     </p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
+
+// ── Pre-Clinic Registration Confirmation ────────────────────────────────────
+
+export async function sendPreClinicConfirmation(opts: {
+  to:        string;
+  firstName: string;
+  session:   string; // 'saturday' | 'sunday' | 'both'
+}) {
+  const r      = await resend();
+  const picked = PRE_CLINIC_SESSIONS.find(s => s.id === opts.session) ?? PRE_CLINIC_SESSIONS[0];
+  const waUrl  = buildWhatsAppUrl("Free ORCID Pre-Clinic");
+
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [opts.to],
+    replyTo: REPLY_TO,
+    subject: `You're registered — Researchvy Free Pre-Clinic (ORCID)`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:600px;margin:0 auto;padding:48px 24px">
+  <p style="color:#4B5563;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 40px;text-align:center">
+    Researchvy Free Pre-Clinic
+  </p>
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
+    <p style="color:#10B981;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">You're Registered</p>
+    <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 16px;line-height:1.3">Hi ${opts.firstName} — your free spot is confirmed.</h1>
+    <div style="background:#1E293B;border-radius:12px;padding:18px;margin-bottom:24px">
+      <p style="color:#9CA3AF;font-size:12px;margin:0 0 4px;text-transform:uppercase;letter-spacing:2px">ORCID: Your Permanent Researcher Identity</p>
+      <p style="color:#F9FAFB;font-size:16px;font-weight:600;margin:0">${picked.date} · ${picked.time}</p>
+    </div>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 12px">This session is virtual — come with your laptop so you can create or fix your ORCID iD live alongside us.</p>
+    <p style="color:#9CA3AF;font-size:15px;line-height:1.8;margin:0 0 24px">We'll send your join link by email and WhatsApp closer to the date.</p>
+    <a href="${waUrl}" target="_blank"
+       style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:13px 24px;border-radius:10px">
+      Questions? Message us on WhatsApp →
+    </a>
+  </div>
+  <div style="text-align:center;padding-top:24px;border-top:1px solid #1E293B">
+    <p style="color:#374151;font-size:12px;margin:0">
+      <a href="${SITE_URL}" style="color:#4B5563;text-decoration:none">Researchvy</a>
+      &nbsp;·&nbsp;
+      <a href="${SITE_URL}/clinics" style="color:#4B5563;text-decoration:none">Explore the full Clinic</a>
+    </p>
+  </div>
+</div>
+</body></html>`,
+  });
+}
+
+export async function sendPreClinicAdminAlert(opts: {
+  name:            string;
+  email:           string;
+  phone:           string;
+  session:         string;
+  careerStage:     string;
+  fieldOfResearch: string;
+  institution:     string | null;
+}) {
+  const r = await resend();
+  await r.emails.send({
+    from:    FROM_TEAM,
+    to:      [ADMIN_CC],
+    replyTo: REPLY_TO,
+    subject: `New Pre-Clinic registration: ${opts.name}`,
+    html: `<!DOCTYPE html><html lang="en">
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#080E1A;font-family:system-ui,-apple-system,sans-serif">
+<div style="max-width:560px;margin:0 auto;padding:32px 24px">
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:28px">
+    <p style="color:#4B5563;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 16px">New Free Pre-Clinic Registration</p>
+    <table style="width:100%;border-collapse:collapse">
+      ${[
+        ["Name", opts.name],
+        ["Email", opts.email],
+        ["Phone", opts.phone],
+        ["Session", opts.session],
+        ["Career stage", opts.careerStage],
+        ["Field of research", opts.fieldOfResearch],
+        ["Institution", opts.institution ?? "—"],
+      ].map(([label, value]) => `
+        <tr>
+          <td style="padding:6px 0;color:#6B7280;font-size:12px;width:140px">${label}</td>
+          <td style="padding:6px 0;color:#F9FAFB;font-size:13px;font-weight:600">${value}</td>
+        </tr>`).join("")}
+    </table>
   </div>
 </div>
 </body></html>`,

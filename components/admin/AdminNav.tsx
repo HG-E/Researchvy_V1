@@ -19,12 +19,14 @@ import {
   ClipboardCheck,
   Target,
   Bell,
+  Sparkles,
 } from "lucide-react";
 
 const NAV = [
   { label: "Overview",        href: "/admin",                     icon: LayoutDashboard, exact: true  },
   { label: "Review Queue",    href: "/admin/review",              icon: ClipboardCheck,  exact: false },
   { label: "Scorecard Leads", href: "/admin/scorecard",           icon: Target,          exact: false },
+  { label: "Pre-Clinic",      href: "/admin/pre-clinic",          icon: Sparkles,        exact: false },
   { label: "Orders",          href: "/admin/orders",              icon: ShoppingBag,     exact: false },
   { label: "Events",        href: "/admin/events",               icon: CalendarDays,    exact: false },
   { label: "Enquiries",     href: "/admin/enquiries",            icon: Inbox,           exact: false },
@@ -45,9 +47,10 @@ interface Props {
   newScorecardCount?:        number;
   submittedOrderCount?:      number;
   pendingParticipantsCount?: number;
+  newPreClinicCount?:        number;
 }
 
-export function AdminNav({ pendingCount = 0, newScorecardCount = 0, submittedOrderCount = 0, pendingParticipantsCount = 0 }: Props) {
+export function AdminNav({ pendingCount = 0, newScorecardCount = 0, submittedOrderCount = 0, pendingParticipantsCount = 0, newPreClinicCount = 0 }: Props) {
   const pathname = usePathname();
 
   return (
@@ -58,6 +61,7 @@ export function AdminNav({ pendingCount = 0, newScorecardCount = 0, submittedOrd
         const isScorecard   = href === "/admin/scorecard";
         const isOrders      = href === "/admin/orders";
         const isClinics     = href === "/admin/clinics";
+        const isPreClinic   = href === "/admin/pre-clinic";
         return (
           <Link
             key={href}
@@ -103,6 +107,14 @@ export function AdminNav({ pendingCount = 0, newScorecardCount = 0, submittedOrd
                 style={{ backgroundColor: "rgba(245,158,11,0.2)", color: "#FCD34D" }}
               >
                 {pendingParticipantsCount}
+              </span>
+            )}
+            {isPreClinic && newPreClinicCount > 0 && (
+              <span
+                className="text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none"
+                style={{ backgroundColor: "rgba(16,185,129,0.2)", color: "#34D399" }}
+              >
+                {newPreClinicCount}
               </span>
             )}
           </Link>
