@@ -6,7 +6,9 @@ import { PRE_CLINIC_SESSIONS, CAREER_STAGES } from "@/constants/preClinic";
 const VALID_SESSIONS = PRE_CLINIC_SESSIONS.map(s => s.id);
 const VALID_STAGES   = CAREER_STAGES.map(s => s.id);
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Excludes "?" in addition to whitespace/"@" — an email containing "?" would let a
+// registrant inject extra headers (e.g. "?cc=") into the admin's mailto: follow-up link.
+const EMAIL_RE = /^[^\s@?]+@[^\s@?]+\.[^\s@?]+$/;
 
 export async function POST(req: NextRequest) {
   // 5 registrations per hour per IP — generous for legitimate use
@@ -32,13 +34,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const fullName        = typeof body.fullName === "string" ? body.fullName.trim() : "";
+  // Strip embedded newlines from free-text fields before they can reach an email
+  // subject line (defense in depth against header injection) or a stored record.
+  const stripNewlines = (s: string) => s.replace(/[\r\n]+/g, " ").trim();
+
+  const fullName        = typeof body.fullName === "string" ? stripNewlines(body.fullName) : "";
   const email            = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
   const phone            = typeof body.phone === "string" ? body.phone.trim() : "";
   const session           = typeof body.session === "string" ? body.session : "";
   const careerStage       = typeof body.careerStage === "string" ? body.careerStage : "";
-  const fieldOfResearch  = typeof body.fieldOfResearch === "string" ? body.fieldOfResearch.trim() : "";
-  const institution       = typeof body.institution === "string" ? body.institution.trim() || null : null;
+  const fieldOfResearch  = typeof body.fieldOfResearch === "string" ? stripNewlines(body.fieldOfResearch) : "";
+  const institution       = typeof body.institution === "string" ? stripNewlines(body.institution) || null : null;
 
   if (fullName.length < 2) {
     return NextResponse.json({ error: "Please enter your full name" }, { status: 400 });

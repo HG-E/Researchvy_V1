@@ -5,6 +5,7 @@ import { breadcrumbSchema } from "@/lib/seo/schemas";
 import { siteConfig } from "@/config/site";
 import { preClinic, PRE_CLINIC_SESSIONS } from "@/constants/preClinic";
 import { PreClinicRegisterForm } from "@/components/pre-clinic/PreClinicRegisterForm";
+import { PreClinicSectionNav } from "@/components/pre-clinic/PreClinicSectionNav";
 import { WhatsAppButton } from "@/components/common/WhatsAppButton";
 
 export const metadata = generatePageMetadata({
@@ -30,7 +31,7 @@ export default function PreClinicPage() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
 
         {/* Hero */}
-        <div className="max-w-3xl mb-12">
+        <div id="overview" className="max-w-3xl mb-10 scroll-mt-32">
           <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "#2563EB" }}>
             {preClinic.title} · FREE
           </p>
@@ -40,22 +41,24 @@ export default function PreClinicPage() {
           >
             {preClinic.tagline}
           </h1>
-          <p className="text-base sm:text-lg leading-relaxed max-w-2xl mb-4" style={{ color: "#4B5563" }}>
+          <p className="text-base sm:text-lg leading-relaxed max-w-2xl mb-4" style={{ color: "#1F2937" }}>
             {preClinic.subtitle}
           </p>
           <div
             className="rounded-xl border-l-4 px-5 py-4 max-w-2xl"
             style={{ backgroundColor: "rgba(16,185,129,0.04)", borderLeftColor: "#10B981" }}
           >
-            <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "#1F2937" }}>
               <strong style={{ color: "#111827" }}>Don't skip this step.</strong>{" "}
               {preClinic.keyMessage}
             </p>
           </div>
         </div>
 
+        <PreClinicSectionNav />
+
         {/* Session cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+        <div id="sessions" className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6 scroll-mt-32">
           {DAY_SESSIONS.map((s) => (
             <div
               key={s.id}
@@ -71,7 +74,7 @@ export default function PreClinicPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4" style={{ color: "#6B7280" }} />
-                <span className="text-sm" style={{ color: "#4B5563" }}>{s.time}</span>
+                <span className="text-sm" style={{ color: "#1F2937" }}>{s.time}</span>
               </div>
             </div>
           ))}
@@ -79,7 +82,7 @@ export default function PreClinicPage() {
 
         <div className="flex items-start gap-2 mb-14 max-w-2xl">
           <Laptop className="h-4 w-4 mt-0.5 shrink-0" style={{ color: "#6B7280" }} />
-          <p className="text-sm" style={{ color: "#4B5563" }}>
+          <p className="text-sm" style={{ color: "#1F2937" }}>
             Attend either session — or both. This is a <strong style={{ color: "#111827" }}>virtual</strong> session:
             come with your laptop so you can create or fix your ORCID iD live. Your join link is sent by email and
             WhatsApp closer to the date. Free — limited seats per session.
@@ -87,7 +90,7 @@ export default function PreClinicPage() {
         </div>
 
         {/* Agenda */}
-        <div className="mb-14">
+        <div id="agenda" className="mb-14 scroll-mt-32">
           <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
             What we'll cover
           </h2>
@@ -95,14 +98,14 @@ export default function PreClinicPage() {
             {preClinic.agenda.map((item) => (
               <li key={item} className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" style={{ color: "#10B981" }} />
-                <span className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>{item}</span>
+                <span className="text-sm leading-relaxed" style={{ color: "#1F2937" }}>{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
         {/* Registration form */}
-        <div id="register" className="mb-14 scroll-mt-20">
+        <div id="register" className="mb-14 scroll-mt-32">
           <div
             className="rounded-2xl border p-6 sm:p-10"
             style={{ backgroundColor: "#F8FAFC", borderColor: "#E2E8F0" }}
@@ -110,7 +113,7 @@ export default function PreClinicPage() {
             <h2 className="text-2xl font-bold mb-2" style={{ fontFamily: "var(--font-serif)", color: "#111827" }}>
               Reserve your free spot
             </h2>
-            <p className="text-sm mb-8" style={{ color: "#4B5563" }}>
+            <p className="text-sm mb-8" style={{ color: "#1F2937" }}>
               Takes less than a minute. No payment, no card required.
             </p>
             <PreClinicRegisterForm />

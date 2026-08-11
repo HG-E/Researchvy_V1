@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { createSupabaseAdminClient } from "@/lib/auth/supabase";
 import { Users, Calendar, TrendingUp, Award, ChevronRight } from "lucide-react";
-import { CAREER_STAGES } from "@/constants/preClinic";
+import { CAREER_STAGES, PRE_CLINIC_SESSIONS } from "@/constants/preClinic";
 
 export const dynamic = "force-dynamic";
 
@@ -21,11 +21,9 @@ const STATUS_LABELS: Record<string, string> = {
   converted: "Converted",
 };
 
-const SESSION_LABELS: Record<string, string> = {
-  saturday: "Saturday",
-  sunday:   "Sunday",
-  both:     "Both",
-};
+const SESSION_LABELS: Record<string, string> = Object.fromEntries(
+  PRE_CLINIC_SESSIONS.map(s => [s.id, s.label])
+);
 
 const STAGE_LABELS: Record<string, string> = Object.fromEntries(
   CAREER_STAGES.map(s => [s.id, s.label])
@@ -86,10 +84,10 @@ export default async function AdminPreClinicPage() {
       {/* KPI row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Total Registrations", value: total,                     icon: Users,      color: "#60A5FA" },
-          { label: "Saturday",            value: sessionCounts.saturday,    icon: Calendar,   color: "#34D399" },
-          { label: "Sunday",              value: sessionCounts.sunday,      icon: Calendar,   color: "#FBBF24" },
-          { label: "Last 7 Days",         value: recentCount,               icon: TrendingUp, color: "#A78BFA" },
+          { label: "Total Registrations", value: total,                                          icon: Users,      color: "#60A5FA" },
+          { label: "Attending Saturday",  value: sessionCounts.saturday + sessionCounts.both,     icon: Calendar,   color: "#34D399" },
+          { label: "Attending Sunday",    value: sessionCounts.sunday + sessionCounts.both,       icon: Calendar,   color: "#FBBF24" },
+          { label: "Last 7 Days",         value: recentCount,                                     icon: TrendingUp, color: "#A78BFA" },
         ].map(({ label, value, icon: Icon, color }) => (
           <div
             key={label}

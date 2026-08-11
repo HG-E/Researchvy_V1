@@ -17,6 +17,16 @@ async function resend() {
   return new Resend(process.env.RESEND_API_KEY);
 }
 
+/** Escape user-supplied text before interpolating into an HTML email body. */
+function escapeHtml(input: string): string {
+  return input
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 // ── Welcome (on signup) ───────────────────────────────────────────────────────
 
 export async function sendWelcomeEmail(opts: {
@@ -1171,9 +1181,10 @@ export async function sendPreClinicConfirmation(opts: {
   firstName: string;
   session:   string; // 'saturday' | 'sunday' | 'both'
 }) {
-  const r      = await resend();
-  const picked = PRE_CLINIC_SESSIONS.find(s => s.id === opts.session) ?? PRE_CLINIC_SESSIONS[0];
-  const waUrl  = buildWhatsAppUrl("Free ORCID Pre-Clinic");
+  const r         = await resend();
+  const picked    = PRE_CLINIC_SESSIONS.find(s => s.id === opts.session) ?? PRE_CLINIC_SESSIONS[0];
+  const waUrl     = buildWhatsAppUrl("Free ORCID Pre-Clinic");
+  const firstName = escapeHtml(opts.firstName);
 
   await r.emails.send({
     from:    FROM_TEAM,
@@ -1189,7 +1200,7 @@ export async function sendPreClinicConfirmation(opts: {
   </p>
   <div style="background:#0F172A;border:1px solid #1E293B;border-radius:20px;padding:40px;margin-bottom:32px">
     <p style="color:#10B981;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin:0 0 16px">You're Registered</p>
-    <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 16px;line-height:1.3">Hi ${opts.firstName} — your free spot is confirmed.</h1>
+    <h1 style="color:#F9FAFB;font-size:22px;font-weight:700;margin:0 0 16px;line-height:1.3">Hi ${firstName} — your free spot is confirmed.</h1>
     <div style="background:#1E293B;border-radius:12px;padding:18px;margin-bottom:24px">
       <p style="color:#9CA3AF;font-size:12px;margin:0 0 4px;text-transform:uppercase;letter-spacing:2px">ORCID: Your Permanent Researcher Identity</p>
       <p style="color:#F9FAFB;font-size:16px;font-weight:600;margin:0">${picked.date} · ${picked.time}</p>
@@ -1222,7 +1233,8 @@ export async function sendPreClinicAdminAlert(opts: {
   fieldOfResearch: string;
   institution:     string | null;
 }) {
-  const r = await resend();
+  const r    = await resend();
+  const name = escapeHtml(opts.name);
   await r.emails.send({
     from:    FROM_TEAM,
     to:      [ADMIN_CC],
@@ -1236,13 +1248,13 @@ export async function sendPreClinicAdminAlert(opts: {
     <p style="color:#4B5563;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 16px">New Free Pre-Clinic Registration</p>
     <table style="width:100%;border-collapse:collapse">
       ${[
-        ["Name", opts.name],
-        ["Email", opts.email],
-        ["Phone", opts.phone],
-        ["Session", opts.session],
-        ["Career stage", opts.careerStage],
-        ["Field of research", opts.fieldOfResearch],
-        ["Institution", opts.institution ?? "—"],
+        ["Name", name],
+        ["Email", escapeHtml(opts.email)],
+        ["Phone", escapeHtml(opts.phone)],
+        ["Session", escapeHtml(opts.session)],
+        ["Career stage", escapeHtml(opts.careerStage)],
+        ["Field of research", escapeHtml(opts.fieldOfResearch)],
+        ["Institution", opts.institution ? escapeHtml(opts.institution) : "—"],
       ].map(([label, value]) => `
         <tr>
           <td style="padding:6px 0;color:#6B7280;font-size:12px;width:140px">${label}</td>
