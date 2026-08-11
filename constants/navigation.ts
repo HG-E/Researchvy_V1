@@ -2,36 +2,28 @@ import type { NavigationItem } from "@/types";
 
 export const mainNav: NavigationItem[] = [
   {
-    label: "Ecosystem",
-    href: "/ecosystem",
-    children: [
-      { label: "Intelligence", href: "/intelligence", description: "Research analytics & visibility insights" },
-      { label: "Academy",      href: "/academy",      description: "Learning programs & certifications" },
-      { label: "Media",        href: "/media",        description: "Scholarly communication & visuals" },
-      { label: "Network",      href: "/network",      description: "Community, fellows & partnerships" },
-    ],
-  },
-  {
     label: "Clinics",
     href:  "/clinics",
     children: [
       { label: "Digital Visibility Clinic", href: "/clinics/digital-visibility-clinic", description: "5-session cohort programme · from $79" },
       { label: "Private Consulting",        href: "/clinics/private-consulting",        description: "1-on-1 done-for-you · from $209"        },
+      { label: "Academy",                   href: "/academy",                           description: "Learning programs & certifications"     },
     ],
   },
-  { label: "Events",         href: "/events" },
-  { label: "Opportunities",  href: "/opportunities" },
-  { label: "Insights",       href: "/insights" },
   {
-    label: "Resources",
+    label: "Free Tools",
     href:  "/resources",
     children: [
-      { label: "Visibility Scorecard",     href: "/resources/visibility-scorecard",    description: "Free 12-checkpoint research audit" },
-      { label: "Institutional Letter",     href: "/resources/institutional-letter",    description: "Request a sponsor letter for your clinic" },
-      { label: "Free Strategy Call",       href: "/consultation",                      description: "20-min free call with our team" },
+      { label: "Visibility Scorecard",     href: "/resources/visibility-scorecard",    description: "Free 12-checkpoint research audit"          },
+      { label: "Free Pre-Clinic",          href: "/pre-clinic",                        description: "Free live ORCID workshop · 15–16 August"    },
+      { label: "Free Strategy Call",       href: "/consultation",                      description: "20-min free call with our team"             },
+      { label: "Institutional Letter",     href: "/resources/institutional-letter",    description: "Request a sponsor letter for your clinic"   },
     ],
   },
+  { label: "Opportunities",  href: "/opportunities" },
+  { label: "Insights",       href: "/insights" },
   { label: "About",          href: "/about" },
+  { label: "Contact",        href: "/contact" },
 ];
 
 export const footerNav = {
